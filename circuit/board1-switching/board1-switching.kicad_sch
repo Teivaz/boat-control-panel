@@ -9334,6 +9334,10 @@
 		(uuid "bf485e07-c9da-4bf0-80bf-5f4efb6816bc")
 	)
 	(no_connect
+		(at 468.63 243.84)
+		(uuid "c4fe30c2-9a9b-483f-ab99-0d25a58c2e3b")
+	)
+	(no_connect
 		(at 237.49 317.5)
 		(uuid "c747f560-f25f-4367-8b1a-2a9069ecfa92")
 	)
@@ -11282,6 +11286,16 @@
 			(type default)
 		)
 		(uuid "074ea09d-5708-45ed-a696-87176589601b")
+	)
+	(wire
+		(pts
+			(xy 468.63 247.65) (xy 468.63 246.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0807abc4-8d6e-43cf-ae0d-6e6cb3f80f48")
 	)
 	(bus
 		(pts
@@ -16632,16 +16646,6 @@
 			(type default)
 		)
 		(uuid "8c76305c-5c19-46f0-a0c9-dd33011377e3")
-	)
-	(wire
-		(pts
-			(xy 468.63 243.84) (xy 468.63 246.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8d7d40b1-4dfd-44c4-82ca-d8e2ee3169c4")
 	)
 	(wire
 		(pts
@@ -28792,7 +28796,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 468.63 246.38 0)
+		(at 468.63 247.65 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -28801,7 +28805,7 @@
 		(fields_autoplaced yes)
 		(uuid "5d908cbc-7c49-499c-863f-740642a8ef0b")
 		(property "Reference" "#PWR053"
-			(at 468.63 252.73 0)
+			(at 468.63 254 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28810,7 +28814,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 468.63 251.46 0)
+			(at 468.63 252.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28819,7 +28823,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 468.63 246.38 0)
+			(at 468.63 247.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28828,7 +28832,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 468.63 246.38 0)
+			(at 468.63 247.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28837,7 +28841,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 468.63 246.38 0)
+			(at 468.63 247.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32348,7 +32352,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x05_Socket")
+		(lib_id "Connector:Conn_01x06_Socket")
 		(at 463.55 238.76 0)
 		(mirror y)
 		(unit 1)
@@ -32376,7 +32380,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_Molex:Molex_Pico-Lock_504050-0591_1x05-1MP_P1.50mm_Horizontal"
+		(property "Footprint" "Connector_Molex:Molex_Pico-Lock_504050-0691_1x06-1MP_P1.50mm_Horizontal"
 			(at 463.55 238.76 0)
 			(effects
 				(font
@@ -32394,7 +32398,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x05, script generated"
+		(property "Description" "Generic connector, single row, 01x06, script generated"
 			(at 463.55 238.76 0)
 			(effects
 				(font
@@ -32425,6 +32429,9 @@
 		)
 		(pin "3"
 			(uuid "8251141c-0ddd-49e3-8520-25c510a7d21d")
+		)
+		(pin "6"
+			(uuid "3285f525-a921-49d6-b179-5f9a76388b39")
 		)
 		(instances
 			(project "board1-switching"
