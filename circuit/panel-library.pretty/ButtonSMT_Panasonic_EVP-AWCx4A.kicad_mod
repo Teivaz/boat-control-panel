@@ -1,0 +1,247 @@
+(footprint "ButtonSMT_Panasonic_EVP-AWCx4A"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -6 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "399c618f-bfa4-4687-8b9d-69a455298099")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.16)
+			)
+		)
+	)
+	(property "Value" "Untitled"
+		(at 0 -4.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "2de890c6-284e-4c05-b3bb-603d545f90b6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b13783a5-cb13-49df-aa4d-9028bda215d3")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e416b61a-96f7-440f-a576-59251c7ed001")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -1.7 -1.1)
+		(end 1.7 -1.1)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "35d2993c-2f68-424d-8db4-98cb72a6afeb")
+	)
+	(fp_line
+		(start -1.7 -1)
+		(end -1.7 -1.1)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "836bbdcd-d633-453b-87b2-aca3b46c2551")
+	)
+	(fp_line
+		(start -1.7 1.1)
+		(end -1.7 1)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "e7ceba96-1aea-47d2-9fbd-bc8e42d26be8")
+	)
+	(fp_line
+		(start 1.7 -1.1)
+		(end 1.7 -1)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "34b42c6b-9e74-4bf4-a945-5644afb60fea")
+	)
+	(fp_line
+		(start 1.7 1)
+		(end 1.7 1.1)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "56b78b8f-dd0d-4b33-a67f-af130284a1d7")
+	)
+	(fp_line
+		(start 1.7 1.1)
+		(end -1.7 1.1)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "9b8a68cb-59ab-4f55-88a8-878d69157965")
+	)
+	(fp_line
+		(start -1.25 0.125)
+		(end -0.5 0.125)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "0f423139-928d-4126-8817-d53b25d6d1c4")
+	)
+	(fp_line
+		(start -0.75 -0.375)
+		(end 0.75 -0.375)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "cacdea08-3246-428d-bd4e-a668575cf841")
+	)
+	(fp_line
+		(start 0 -0.375)
+		(end 0 -0.625)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "044eecc3-0f81-460d-af06-a305b561c5f8")
+	)
+	(fp_line
+		(start 0.5 0.125)
+		(end 1.25 0.125)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "cda7d54d-bb22-40de-8d83-8d1f77f2247d")
+	)
+	(fp_rect
+		(start -1.65 -1)
+		(end 1.65 1)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "f76d62ab-4583-47ee-9069-9775ddab7cac")
+	)
+	(fp_circle
+		(center -0.5 0.125)
+		(end -0.5 0.25)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.Fab")
+		(uuid "854f6b84-9d3e-453d-9696-1175267e382d")
+	)
+	(fp_circle
+		(center 0.5 0.125)
+		(end 0.5 0.25)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.Fab")
+		(uuid "51e358bd-fc61-4789-a2f2-0f577c41a036")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 -3 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "8440e47b-2fc9-49dd-8571-c01c772abf93")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -1.625 0)
+		(size 0.55 1.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "047228a4-877d-4159-9676-7a46ca664947")
+	)
+	(pad "2" smd rect
+		(at 1.625 0)
+		(size 0.55 1.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "0c68295b-ac5e-43ed-b318-580bd4ef1d2d")
+	)
+	(zone
+		(net 0)
+		(net_name "")
+		(layer "F.Fab")
+		(uuid "9ee9d3ec-60a6-414a-9578-41d07b6b4c79")
+		(hatch edge 0.5)
+		(connect_pads
+			(clearance 0)
+		)
+		(min_thickness 0.25)
+		(filled_areas_thickness no)
+		(keepout
+			(tracks allowed)
+			(vias not_allowed)
+			(pads allowed)
+			(copperpour allowed)
+			(footprints allowed)
+		)
+		(placement
+			(enabled no)
+			(sheetname "")
+		)
+		(fill
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+		)
+		(polygon
+			(pts
+				(xy -0.95 -1) (xy -0.95 1) (xy 0.95 1) (xy 0.95 -1)
+			)
+		)
+	)
+	(embedded_fonts no)
+)
