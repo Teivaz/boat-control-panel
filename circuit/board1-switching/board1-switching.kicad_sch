@@ -5985,6 +5985,12 @@
 		(uuid "1a37e712-e780-46cd-9249-f6a55a62645b")
 	)
 	(junction
+		(at 92.71 34.29)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1a42d53b-708b-4b78-98f9-a5e22723bed0")
+	)
+	(junction
 		(at 171.45 58.42)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6007,6 +6013,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1ec4a8a4-8860-4b6e-a2e6-a83411a5e3c1")
+	)
+	(junction
+		(at 95.25 34.29)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "206e772e-e2bb-40e6-918f-bb7dbf70d06a")
 	)
 	(junction
 		(at 394.97 100.33)
@@ -6921,6 +6933,12 @@
 		(uuid "d249d93c-6f02-47e3-aa72-9450cf0f973d")
 	)
 	(junction
+		(at 90.17 34.29)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d458f07f-771a-4aac-b65b-2c64c9fad93d")
+	)
+	(junction
 		(at 214.63 85.09)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7319,6 +7337,15 @@
 		(uuid "07735375-1ab1-4a49-baa6-864674452c97")
 	)
 	(bus_entry
+		(at 92.71 59.69)
+		(size -2.54 -2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08c96443-2079-4d7c-b805-f4efedfb50e8")
+	)
+	(bus_entry
 		(at 337.82 106.68)
 		(size 2.54 -2.54)
 		(stroke
@@ -7427,6 +7454,15 @@
 		(uuid "169ca411-9fb4-469c-8b03-f598ab2226e3")
 	)
 	(bus_entry
+		(at 97.79 59.69)
+		(size -2.54 -2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "18f4c9dd-7d53-47ca-926e-c75ab7c8bbe4")
+	)
+	(bus_entry
 		(at 143.51 281.94)
 		(size 2.54 2.54)
 		(stroke
@@ -7461,6 +7497,15 @@
 			(type default)
 		)
 		(uuid "1ec8e129-ec7e-4dcc-8ee6-2c5676d6c494")
+	)
+	(bus_entry
+		(at 95.25 59.69)
+		(size -2.54 -2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f09cfdc-3ca2-424b-8947-0567f754212d")
 	)
 	(bus_entry
 		(at 39.37 69.85)
@@ -10740,6 +10785,16 @@
 			(type default)
 		)
 		(uuid "2f960c20-6f9e-4d03-b148-22d7ec6f27f5")
+	)
+	(wire
+		(pts
+			(xy 90.17 34.29) (xy 90.17 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2fbb0563-93b7-4eda-8999-eec6060706bc")
 	)
 	(wire
 		(pts
@@ -17261,6 +17316,16 @@
 		)
 		(uuid "d310b955-89a8-4429-896d-49d5921788ae")
 	)
+	(bus
+		(pts
+			(xy 97.79 59.69) (xy 135.89 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d343a8cf-c3b5-487e-becb-1398d1eebfba")
+	)
 	(wire
 		(pts
 			(xy 318.77 96.52) (xy 318.77 100.33)
@@ -17520,6 +17585,16 @@
 			(type default)
 		)
 		(uuid "db4630ef-5ff2-43f7-bf0e-fd3e7290c434")
+	)
+	(wire
+		(pts
+			(xy 92.71 34.29) (xy 92.71 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "db534f1f-5208-4510-9930-d6d82222f3cb")
 	)
 	(wire
 		(pts
@@ -18121,6 +18196,16 @@
 		)
 		(uuid "ef0da511-cf5c-4bfb-a7b7-f4572e966097")
 	)
+	(bus
+		(pts
+			(xy 92.71 59.69) (xy 95.25 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ef483a1f-a574-4377-9b8e-e5ecc3784f6b")
+	)
 	(wire
 		(pts
 			(xy 280.67 66.04) (xy 280.67 67.31)
@@ -18140,6 +18225,16 @@
 			(type default)
 		)
 		(uuid "ef635d66-afec-4acd-b397-c4eff0bd56ed")
+	)
+	(wire
+		(pts
+			(xy 95.25 57.15) (xy 95.25 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f0648e2e-3e36-426d-b598-50e1aad2027a")
 	)
 	(wire
 		(pts
@@ -18310,6 +18405,16 @@
 			(type default)
 		)
 		(uuid "f51eb43c-8c0f-4763-a8a2-66f896afecfc")
+	)
+	(bus
+		(pts
+			(xy 95.25 59.69) (xy 97.79 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f5c09f15-7190-4716-880e-ae2d69ff1589")
 	)
 	(bus
 		(pts
@@ -18573,7 +18678,7 @@
 	)
 	(bus
 		(pts
-			(xy 90.17 59.69) (xy 135.89 59.69)
+			(xy 90.17 59.69) (xy 92.71 59.69)
 		)
 		(stroke
 			(width 0)
@@ -18921,6 +19026,16 @@
 		)
 		(uuid "3a63865c-f390-4f2d-b7c1-2159c4204c29")
 	)
+	(label "GND"
+		(at 95.25 57.15 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3b0b25a3-ced8-44fd-b3e4-8486bfd8b7d1")
+	)
 	(label "status14"
 		(at 146.05 317.5 0)
 		(effects
@@ -19120,6 +19235,16 @@
 			(justify left bottom)
 		)
 		(uuid "5ccd3d84-e3a7-4dbf-aea0-c5c80bfd78cd")
+	)
+	(label "12V"
+		(at 90.17 57.15 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5fda7e92-5e62-4567-b9c3-e083c8ec291f")
 	)
 	(label "status1"
 		(at 187.96 104.14 180)
@@ -19970,6 +20095,16 @@
 			(justify left bottom)
 		)
 		(uuid "cee9dbec-8065-4161-a938-aed0610a2882")
+	)
+	(label "12V"
+		(at 92.71 57.15 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cf344093-89bc-4fde-89c2-2690ca61c3ad")
 	)
 	(label "inverter"
 		(at 485.14 52.07 0)
@@ -21006,7 +21141,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x05_Socket"
+		(property "Value" "~"
 			(at 370.84 349.2499 0)
 			(effects
 				(font
@@ -21016,7 +21151,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_Molex:Molex_Pico-Lock_504050-0591_1x05-1MP_P1.50mm_Horizontal"
+		(property "Footprint" "panel-library:Molex_Pico-Lock_504050-0591_1x05-1MP_P1.50mm_Horizontal"
 			(at 369.57 347.98 0)
 			(effects
 				(font
@@ -21455,7 +21590,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_02x08_Top_Bottom"
+		(property "Value" "~"
 			(at 55.118 47.498 0)
 			(effects
 				(font
@@ -24673,7 +24808,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_02x08_Top_Bottom"
+		(property "Value" "~"
 			(at 76.708 47.498 0)
 			(effects
 				(font
@@ -25587,7 +25722,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Package_SO:Texas_DYY0016A_TSOT-23-16_2x4.2mm_P0.5mm"
+		(property "Footprint" "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm"
 			(at 167.64 314.706 0)
 			(effects
 				(font
@@ -27984,7 +28119,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_02x08_Top_Bottom"
+		(property "Value" "~"
 			(at 32.258 47.498 0)
 			(effects
 				(font
@@ -29911,7 +30046,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x05_Socket"
+		(property "Value" "~"
 			(at 455.93 238.7599 0)
 			(effects
 				(font
@@ -29921,7 +30056,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_Molex:Molex_Pico-Lock_504050-0791_1x07-1MP_P1.50mm_Horizontal"
+		(property "Footprint" "panel-library:Molex_Pico-Lock_504050-0791_1x07-1MP_P1.50mm_Horizontal"
 			(at 454.66 237.49 0)
 			(effects
 				(font
@@ -32676,7 +32811,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x05_Socket"
+		(property "Value" "~"
 			(at 370.84 313.6899 0)
 			(effects
 				(font
@@ -32686,7 +32821,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_Molex:Molex_Pico-Lock_504050-0591_1x05-1MP_P1.50mm_Horizontal"
+		(property "Footprint" "panel-library:Molex_Pico-Lock_504050-0591_1x05-1MP_P1.50mm_Horizontal"
 			(at 369.57 312.42 0)
 			(effects
 				(font
@@ -33426,7 +33561,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Package_SO:Texas_DYY0016A_TSOT-23-16_2x4.2mm_P0.5mm"
+		(property "Footprint" "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm"
 			(at 167.64 279.146 0)
 			(effects
 				(font
@@ -34823,7 +34958,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x05_Socket"
+		(property "Value" "~"
 			(at 359.41 278.1299 0)
 			(effects
 				(font
@@ -35362,7 +35497,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_01x02_Socket"
+		(property "Value" "~"
 			(at 123.825 119.38 0)
 			(effects
 				(font
@@ -35736,7 +35871,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:SSOP-5.3mm"
+		(property "Footprint" "panel-library:SSOP-28-5.3mm"
 			(at 217.17 297.18 0)
 			(effects
 				(font
@@ -36096,7 +36231,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_02x08_Top_Bottom"
+		(property "Value" "~"
 			(at 65.532 78.232 0)
 			(effects
 				(font
@@ -37362,7 +37497,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x05_Socket"
+		(property "Value" "~"
 			(at 370.84 332.7399 0)
 			(effects
 				(font
@@ -37372,7 +37507,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_Molex:Molex_Pico-Lock_504050-0591_1x05-1MP_P1.50mm_Horizontal"
+		(property "Footprint" "panel-library:Molex_Pico-Lock_504050-0591_1x05-1MP_P1.50mm_Horizontal"
 			(at 369.57 331.47 0)
 			(effects
 				(font
@@ -37513,7 +37648,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_02x08_Top_Bottom"
+		(property "Value" "~"
 			(at 42.672 78.232 0)
 			(effects
 				(font
@@ -37822,7 +37957,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_02x08_Top_Bottom"
+		(property "Value" "~"
 			(at 111.252 78.232 0)
 			(effects
 				(font
@@ -38331,7 +38466,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_02x08_Top_Bottom"
+		(property "Value" "~"
 			(at 88.392 78.232 0)
 			(effects
 				(font
@@ -38511,7 +38646,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x05_Socket"
+		(property "Value" "~"
 			(at 370.84 297.1799 0)
 			(effects
 				(font
@@ -38521,7 +38656,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_Molex:Molex_Pico-Lock_504050-0591_1x05-1MP_P1.50mm_Horizontal"
+		(property "Footprint" "panel-library:Molex_Pico-Lock_504050-0591_1x05-1MP_P1.50mm_Horizontal"
 			(at 369.57 295.91 0)
 			(effects
 				(font

@@ -1,4 +1,4 @@
-(footprint "SSOP-5.3mm"
+(footprint "SSOP-28-5.3mm"
 	(version 20241229)
 	(generator "pcbnew")
 	(generator_version "9.0")
@@ -15,7 +15,7 @@
 			)
 		)
 	)
-	(property "Value" ""
+	(property "Value" "PIC18F26Q84-I/SS"
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
@@ -27,7 +27,7 @@
 			)
 		)
 	)
-	(property "Datasheet" ""
+	(property "Datasheet" "https://www.mouser.es/datasheet/3/282/1/PIC18F26-46-56Q84-Data-Sheet-DS40002259.pdf"
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
@@ -357,4 +357,15 @@
 		(uuid "9c118203-aaeb-441d-87f8-0057511add9f")
 	)
 	(embedded_fonts no)
+	(model "${KICAD9_3DMODEL_DIR}/Package_SO.3dshapes/HTSSOP-28-1EP_4.4x9.7mm_P0.65mm_EP3.4x9.5mm.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -90)
+		)
+	)
 )
