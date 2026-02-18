@@ -3027,155 +3027,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Diode:BZV55C5V1"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "D"
-				(at 0 2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "BZV55C5V1"
-				(at 0 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "Diode_SMD:D_MiniMELF"
-				(at 0 -4.445 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/BZV55_SER.pdf"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "5.1V, 500mW, 5%, Zener diode, MiniMELF"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "zener diode"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "D*MiniMELF*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "BZV55C5V1_0_1"
-				(polyline
-					(pts
-						(xy -1.27 -1.27) (xy -1.27 1.27) (xy -0.762 1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 0) (xy -1.27 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "BZV55C5V1_1_1"
-				(pin passive line
-					(at -3.81 0 0)
-					(length 2.54)
-					(name "K"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 3.81 0 180)
-					(length 2.54)
-					(name "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Regulator_Linear:NCP1117-5.0_SOT223"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -6483,16 +6334,15 @@
 	(bus_alias "In"
 		(members "s_autopilot" "s_bow_light" "s_stern_light" "s_steaming_light"
 			"s_anchor_light" "s_tricolor" "s_fresh_water_pump" "s_fridge" "s_inverter"
-			"s_aux[1..2]" "s_USB" "s_cabin_lights" "s_instruments" "s_bilge_pump"
-			"bilge_float" "shore_power" "fuel_tank" "fresh_water_tank" "12V" "GND"
-			"ac_power"
+			"s_aux[1..3]" "s_USB" "s_cabin_lights" "s_instruments" "bilge_float" "shore_power"
+			"fuel_tank" "fresh_water_tank" "12V" "GND" "ac_power"
 		)
 	)
 	(bus_alias "Out"
 		(members "autopilot" "bow_light" "stern_light" "steaming_light" "anchor_light"
 			"tricolor" "fresh_water_pump" "fridge" "inverter" "aux[1..3]" "USB" "cabin_light[1..2]"
 			"cockpit_light" "chartplotter" "VHF" "deck_light" "depth_meter" "aux_instrument[1..3]"
-			"panel_main[1..6]" "main[1..3]" "bilge_pump"
+			"panel_main[1..6]" "main[1..3]"
 		)
 	)
 	(junction
@@ -6628,12 +6478,6 @@
 		(uuid "1a37e712-e780-46cd-9249-f6a55a62645b")
 	)
 	(junction
-		(at 91.44 34.29)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1a42d53b-708b-4b78-98f9-a5e22723bed0")
-	)
-	(junction
 		(at 60.96 91.44)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6650,12 +6494,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1ec4a8a4-8860-4b6e-a2e6-a83411a5e3c1")
-	)
-	(junction
-		(at 93.98 34.29)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "206e772e-e2bb-40e6-918f-bb7dbf70d06a")
 	)
 	(junction
 		(at 393.7 80.01)
@@ -6902,12 +6740,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4257f168-6573-4ba6-b08c-fb09f1bf66f3")
-	)
-	(junction
-		(at 521.97 298.45)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4384a3ec-0ee1-4cc9-a6ed-c0066b9b19f1")
 	)
 	(junction
 		(at 538.48 283.21)
@@ -7300,6 +7132,12 @@
 		(uuid "87e154ee-23d8-4788-a39c-61c8298d3ed4")
 	)
 	(junction
+		(at 426.72 195.58)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "884c6167-1f66-4809-9aff-554e5fb362ad")
+	)
+	(junction
 		(at 355.6 80.01)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7424,12 +7262,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "98129f50-691c-42f4-9373-b3139ad1ca77")
-	)
-	(junction
-		(at 86.36 34.29)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "99a39409-4c9b-4b96-9737-5315679a5a3a")
 	)
 	(junction
 		(at 471.17 46.99)
@@ -7790,12 +7622,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d249d93c-6f02-47e3-aa72-9450cf0f973d")
-	)
-	(junction
-		(at 88.9 34.29)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d458f07f-771a-4aac-b65b-2c64c9fad93d")
 	)
 	(junction
 		(at 213.36 64.77)
@@ -8247,15 +8073,6 @@
 		(uuid "07735375-1ab1-4a49-baa6-864674452c97")
 	)
 	(bus_entry
-		(at 91.44 59.69)
-		(size -2.54 -2.54)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "08c96443-2079-4d7c-b805-f4efedfb50e8")
-	)
-	(bus_entry
 		(at 391.16 116.84)
 		(size 2.54 2.54)
 		(stroke
@@ -8355,15 +8172,6 @@
 		(uuid "169ca411-9fb4-469c-8b03-f598ab2226e3")
 	)
 	(bus_entry
-		(at 96.52 59.69)
-		(size -2.54 -2.54)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "18f4c9dd-7d53-47ca-926e-c75ab7c8bbe4")
-	)
-	(bus_entry
 		(at 135.89 287.02)
 		(size 2.54 2.54)
 		(stroke
@@ -8400,16 +8208,7 @@
 		(uuid "1ec8e129-ec7e-4dcc-8ee6-2c5676d6c494")
 	)
 	(bus_entry
-		(at 93.98 59.69)
-		(size -2.54 -2.54)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1f09cfdc-3ca2-424b-8947-0567f754212d")
-	)
-	(bus_entry
-		(at 38.1 69.85)
+		(at 48.26 69.85)
 		(size -2.54 2.54)
 		(stroke
 			(width 0)
@@ -8526,7 +8325,7 @@
 		(uuid "35237fe7-ad74-46a0-a1ca-89d1f5bc31a8")
 	)
 	(bus_entry
-		(at 43.18 69.85)
+		(at 27.94 69.85)
 		(size -2.54 2.54)
 		(stroke
 			(width 0)
@@ -8616,7 +8415,7 @@
 		(uuid "42aca19f-6ae4-4940-ad36-7b96152160d5")
 	)
 	(bus_entry
-		(at 48.26 69.85)
+		(at 30.48 69.85)
 		(size -2.54 2.54)
 		(stroke
 			(width 0)
@@ -8850,7 +8649,7 @@
 		(uuid "6fb8c145-9238-461a-88d1-e368d91db8dc")
 	)
 	(bus_entry
-		(at 25.4 69.85)
+		(at 33.02 69.85)
 		(size -2.54 2.54)
 		(stroke
 			(width 0)
@@ -8911,6 +8710,15 @@
 			(type default)
 		)
 		(uuid "829562a0-b5f8-4b9b-bfdc-5c961a2e88cc")
+	)
+	(bus_entry
+		(at 457.2 195.58)
+		(size 2.54 -2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "84467250-8c1f-46f4-9826-4c9f09a54d02")
 	)
 	(bus_entry
 		(at 303.53 189.23)
@@ -9003,7 +8811,7 @@
 		(uuid "92fa5144-c09c-45b6-a9a5-381d6b3bb6ed")
 	)
 	(bus_entry
-		(at 27.94 69.85)
+		(at 35.56 69.85)
 		(size -2.54 2.54)
 		(stroke
 			(width 0)
@@ -9264,7 +9072,7 @@
 		(uuid "c30272e9-c8da-43e9-a2ff-97069db13049")
 	)
 	(bus_entry
-		(at 35.56 69.85)
+		(at 43.18 69.85)
 		(size -2.54 2.54)
 		(stroke
 			(width 0)
@@ -9300,7 +9108,7 @@
 		(uuid "cc28e02f-a6c8-4718-a342-8832c4b15e1e")
 	)
 	(bus_entry
-		(at 40.64 69.85)
+		(at 25.4 69.85)
 		(size -2.54 2.54)
 		(stroke
 			(width 0)
@@ -9316,15 +9124,6 @@
 			(type default)
 		)
 		(uuid "d084d709-adff-4c88-b0d3-3f96a4da8d89")
-	)
-	(bus_entry
-		(at 88.9 59.69)
-		(size -2.54 -2.54)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d13d2005-e6b5-49d5-b621-7496572fd1ea")
 	)
 	(bus_entry
 		(at 78.74 69.85)
@@ -9345,7 +9144,7 @@
 		(uuid "d4d07863-4ce2-4f68-b0d9-3cdf45c6c27d")
 	)
 	(bus_entry
-		(at 33.02 69.85)
+		(at 40.64 69.85)
 		(size -2.54 2.54)
 		(stroke
 			(width 0)
@@ -9471,7 +9270,7 @@
 		(uuid "e7ec817b-6851-41b4-90fe-cd43560c6f2c")
 	)
 	(bus_entry
-		(at 30.48 69.85)
+		(at 38.1 69.85)
 		(size -2.54 2.54)
 		(stroke
 			(width 0)
@@ -9935,16 +9734,6 @@
 	)
 	(wire
 		(pts
-			(xy 521.97 298.45) (xy 538.48 298.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "085bc962-4d4e-4a96-97b9-bbe2b8ab092e")
-	)
-	(wire
-		(pts
 			(xy 312.42 281.94) (xy 307.34 281.94)
 		)
 		(stroke
@@ -10142,16 +9931,6 @@
 			(type default)
 		)
 		(uuid "0c73b18a-3b16-4b9e-8ed2-d322a700e400")
-	)
-	(wire
-		(pts
-			(xy 538.48 293.37) (xy 538.48 298.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0c88e579-b39d-4094-8d7e-5287da9dfa60")
 	)
 	(wire
 		(pts
@@ -10793,6 +10572,16 @@
 		)
 		(uuid "1f3302b7-954c-4c47-9ff8-b06d8a3852a7")
 	)
+	(bus
+		(pts
+			(xy 33.02 69.85) (xy 35.56 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f90504d-65a7-4512-985b-6f81f9633ee4")
+	)
 	(wire
 		(pts
 			(xy 27.94 91.44) (xy 27.94 104.14)
@@ -10925,16 +10714,6 @@
 	)
 	(bus
 		(pts
-			(xy 426.72 195.58) (xy 393.7 195.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "239cbe4a-50bb-4a3a-b982-e0aaea493762")
-	)
-	(bus
-		(pts
 			(xy 135.89 69.85) (xy 135.89 116.84)
 		)
 		(stroke
@@ -10983,6 +10762,16 @@
 		)
 		(uuid "23e603a7-96c7-41e2-8be6-4a4bb15273b1")
 	)
+	(bus
+		(pts
+			(xy 25.4 69.85) (xy 27.94 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "243f271e-ff13-4c89-a92f-50fb3715f367")
+	)
 	(wire
 		(pts
 			(xy 403.86 64.77) (xy 411.48 64.77)
@@ -10992,16 +10781,6 @@
 			(type default)
 		)
 		(uuid "24830aad-ebd8-442a-95ad-4bd85069482d")
-	)
-	(bus
-		(pts
-			(xy 33.02 69.85) (xy 30.48 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "24d09dec-ec5d-447f-95ee-b6f59596274c")
 	)
 	(wire
 		(pts
@@ -11515,16 +11294,6 @@
 	)
 	(wire
 		(pts
-			(xy 88.9 34.29) (xy 88.9 57.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2fbb0563-93b7-4eda-8999-eec6060706bc")
-	)
-	(wire
-		(pts
 			(xy 175.26 152.4) (xy 175.26 193.04)
 		)
 		(stroke
@@ -11625,7 +11394,7 @@
 	)
 	(bus
 		(pts
-			(xy 48.26 69.85) (xy 43.18 69.85)
+			(xy 30.48 69.85) (xy 27.94 69.85)
 		)
 		(stroke
 			(width 0)
@@ -13053,6 +12822,16 @@
 		)
 		(uuid "57af25a2-ac86-40aa-971e-30ddc80868e3")
 	)
+	(bus
+		(pts
+			(xy 457.2 195.58) (xy 426.72 195.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "57b2d695-897a-4f4b-a895-43727c869b58")
+	)
 	(wire
 		(pts
 			(xy 311.15 171.45) (xy 320.04 171.45)
@@ -13075,7 +12854,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 72.39) (xy 27.94 91.44)
+			(xy 35.56 72.39) (xy 35.56 91.44)
 		)
 		(stroke
 			(width 0)
@@ -13213,16 +12992,6 @@
 		)
 		(uuid "59582300-1d9d-4687-9fd7-39a3f53d2d7d")
 	)
-	(bus
-		(pts
-			(xy 25.4 69.85) (xy 27.94 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5958876e-b25f-4f65-b873-621b3e63d3b0")
-	)
 	(wire
 		(pts
 			(xy 309.88 259.08) (xy 309.88 276.86)
@@ -13325,7 +13094,7 @@
 	)
 	(wire
 		(pts
-			(xy 459.74 156.21) (xy 459.74 160.02)
+			(xy 459.74 156.21) (xy 459.74 193.04)
 		)
 		(stroke
 			(width 0)
@@ -13355,7 +13124,7 @@
 	)
 	(wire
 		(pts
-			(xy 22.86 72.39) (xy 22.86 91.44)
+			(xy 30.48 72.39) (xy 30.48 91.44)
 		)
 		(stroke
 			(width 0)
@@ -13473,9 +13242,19 @@
 		)
 		(uuid "61951410-ac79-4505-8550-d66a607459dd")
 	)
+	(bus
+		(pts
+			(xy 48.26 69.85) (xy 50.8 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "61975cbd-f369-4f6c-9a75-9fbc91ecfe18")
+	)
 	(wire
 		(pts
-			(xy 25.4 72.39) (xy 25.4 91.44)
+			(xy 33.02 72.39) (xy 33.02 91.44)
 		)
 		(stroke
 			(width 0)
@@ -13743,16 +13522,6 @@
 		)
 		(uuid "67740b0d-76b1-4f11-9998-07600078aa6d")
 	)
-	(bus
-		(pts
-			(xy 33.02 69.85) (xy 35.56 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6795ce6c-c3c8-4e64-bf5a-a5b096a68d14")
-	)
 	(wire
 		(pts
 			(xy 220.98 38.1) (xy 215.9 38.1)
@@ -13815,7 +13584,7 @@
 	)
 	(wire
 		(pts
-			(xy 33.02 72.39) (xy 33.02 91.44)
+			(xy 40.64 72.39) (xy 40.64 91.44)
 		)
 		(stroke
 			(width 0)
@@ -14075,7 +13844,7 @@
 	)
 	(bus
 		(pts
-			(xy 86.36 59.69) (xy 88.9 59.69)
+			(xy 86.36 59.69) (xy 127 59.69)
 		)
 		(stroke
 			(width 0)
@@ -14092,6 +13861,16 @@
 			(type default)
 		)
 		(uuid "6f49c3d4-f5a3-44a1-abe7-e72f128de2fb")
+	)
+	(bus
+		(pts
+			(xy 40.64 69.85) (xy 38.1 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6f4af452-47cc-4a57-b90e-7908e173261c")
 	)
 	(wire
 		(pts
@@ -14595,7 +14374,7 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 72.39) (xy 45.72 91.44)
+			(xy 27.94 72.39) (xy 27.94 91.44)
 		)
 		(stroke
 			(width 0)
@@ -14685,7 +14464,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 72.39) (xy 30.48 91.44)
+			(xy 38.1 72.39) (xy 38.1 91.44)
 		)
 		(stroke
 			(width 0)
@@ -14722,16 +14501,6 @@
 			(type default)
 		)
 		(uuid "808d7ef5-c260-412c-bd78-fa6148479b41")
-	)
-	(wire
-		(pts
-			(xy 86.36 34.29) (xy 86.36 57.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "80dc954c-59de-4291-96e4-7fc8a5bf8bd2")
 	)
 	(wire
 		(pts
@@ -15175,7 +14944,7 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 72.39) (xy 38.1 91.44)
+			(xy 22.86 72.39) (xy 22.86 91.44)
 		)
 		(stroke
 			(width 0)
@@ -15272,16 +15041,6 @@
 			(type default)
 		)
 		(uuid "8d539e44-81d9-41a6-8ffb-26b961968be6")
-	)
-	(bus
-		(pts
-			(xy 40.64 69.85) (xy 43.18 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8db24c85-3d81-44e1-8bb0-0b4b8d2cfd59")
 	)
 	(wire
 		(pts
@@ -15432,16 +15191,6 @@
 			(type default)
 		)
 		(uuid "918b26e4-0e89-4050-88c9-3f2dba03a0a2")
-	)
-	(bus
-		(pts
-			(xy 48.26 69.85) (xy 50.8 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "91edee21-f520-4254-87ae-a3a536846f06")
 	)
 	(wire
 		(pts
@@ -15635,7 +15384,7 @@
 	)
 	(bus
 		(pts
-			(xy 27.94 69.85) (xy 30.48 69.85)
+			(xy 35.56 69.85) (xy 38.1 69.85)
 		)
 		(stroke
 			(width 0)
@@ -15855,7 +15604,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 72.39) (xy 40.64 91.44)
+			(xy 25.4 72.39) (xy 25.4 91.44)
 		)
 		(stroke
 			(width 0)
@@ -15922,16 +15671,6 @@
 			(type default)
 		)
 		(uuid "9d271d49-4ffe-413c-bbb0-275a0207fa9e")
-	)
-	(wire
-		(pts
-			(xy 538.48 285.75) (xy 538.48 283.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9d2e4a83-88c7-4a44-876f-3fd72c8c69dc")
 	)
 	(wire
 		(pts
@@ -16032,16 +15771,6 @@
 			(type default)
 		)
 		(uuid "9fb93c32-f722-48fc-b37b-6b32b3355a1e")
-	)
-	(bus
-		(pts
-			(xy 38.1 69.85) (xy 40.64 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9fc7ff37-5f2e-4d37-a63b-aaf57a9da51b")
 	)
 	(bus
 		(pts
@@ -16452,16 +16181,6 @@
 			(type default)
 		)
 		(uuid "a7a7a5db-0e04-44c1-b1da-e3ea3ff8977f")
-	)
-	(bus
-		(pts
-			(xy 35.56 69.85) (xy 38.1 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a7ab36be-6a40-45e5-b565-252bdcd4ffae")
 	)
 	(wire
 		(pts
@@ -18175,6 +17894,16 @@
 	)
 	(bus
 		(pts
+			(xy 40.64 69.85) (xy 43.18 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d1919235-6130-4673-bc4a-4e583948c2f7")
+	)
+	(bus
+		(pts
 			(xy 415.29 116.84) (xy 421.64 116.84)
 		)
 		(stroke
@@ -18212,16 +17941,6 @@
 			(type default)
 		)
 		(uuid "d310b955-89a8-4429-896d-49d5921788ae")
-	)
-	(bus
-		(pts
-			(xy 96.52 59.69) (xy 127 59.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d343a8cf-c3b5-487e-becb-1398d1eebfba")
 	)
 	(wire
 		(pts
@@ -18595,16 +18314,6 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 34.29) (xy 91.44 57.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "db534f1f-5208-4510-9930-d6d82222f3cb")
-	)
-	(wire
-		(pts
 			(xy 327.66 137.16) (xy 332.74 137.16)
 		)
 		(stroke
@@ -18875,7 +18584,7 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 72.39) (xy 35.56 91.44)
+			(xy 45.72 72.39) (xy 45.72 91.44)
 		)
 		(stroke
 			(width 0)
@@ -18922,6 +18631,16 @@
 			(type default)
 		)
 		(uuid "e22aa713-4581-4d49-8541-de7e4aa4a800")
+	)
+	(bus
+		(pts
+			(xy 43.18 69.85) (xy 48.26 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e245886d-92d2-4ec9-b8a7-b0a05dfb1c60")
 	)
 	(wire
 		(pts
@@ -19075,6 +18794,16 @@
 	)
 	(bus
 		(pts
+			(xy 33.02 69.85) (xy 30.48 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e91a823e-faa4-447c-8ae5-d409ce55a5cb")
+	)
+	(bus
+		(pts
 			(xy 327.66 29.21) (xy 365.76 29.21)
 		)
 		(stroke
@@ -19112,6 +18841,16 @@
 			(type default)
 		)
 		(uuid "e9ef5258-7713-4383-88e4-8e2661415512")
+	)
+	(bus
+		(pts
+			(xy 426.72 195.58) (xy 393.7 195.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ea8541bc-4448-4ff2-a50a-af7925068d4a")
 	)
 	(wire
 		(pts
@@ -19303,16 +19042,6 @@
 		)
 		(uuid "ef0da511-cf5c-4bfb-a7b7-f4572e966097")
 	)
-	(bus
-		(pts
-			(xy 91.44 59.69) (xy 93.98 59.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ef483a1f-a574-4377-9b8e-e5ecc3784f6b")
-	)
 	(wire
 		(pts
 			(xy 279.4 45.72) (xy 279.4 46.99)
@@ -19342,16 +19071,6 @@
 			(type default)
 		)
 		(uuid "f054736c-3f1a-40f6-bcfb-3631898a64e3")
-	)
-	(wire
-		(pts
-			(xy 93.98 57.15) (xy 93.98 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f0648e2e-3e36-426d-b598-50e1aad2027a")
 	)
 	(wire
 		(pts
@@ -19512,16 +19231,6 @@
 			(type default)
 		)
 		(uuid "f4e1dbac-ac7d-4ec0-a944-6dfdf905bbbd")
-	)
-	(bus
-		(pts
-			(xy 93.98 59.69) (xy 96.52 59.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f5c09f15-7190-4716-880e-ae2d69ff1589")
 	)
 	(bus
 		(pts
@@ -19883,16 +19592,6 @@
 		)
 		(uuid "fe9bcaf8-e85a-456d-acbb-100865727f78")
 	)
-	(bus
-		(pts
-			(xy 88.9 59.69) (xy 91.44 59.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ffdced22-c2e9-4345-863b-03d8debfa573")
-	)
 	(wire
 		(pts
 			(xy 191.77 276.86) (xy 184.15 276.86)
@@ -19944,7 +19643,7 @@
 		(uuid "07c2de95-55c3-4a8f-bed3-7a8445165c2f")
 	)
 	(label "steaming_light"
-		(at 138.43 238.76 0)
+		(at 138.43 226.06 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20024,7 +19723,7 @@
 		(uuid "1304d2ef-389a-4eca-8dba-885e1c7e7d6f")
 	)
 	(label "panel_main5"
-		(at 33.02 72.39 270)
+		(at 40.64 72.39 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20044,7 +19743,7 @@
 		(uuid "1b59e36a-9ed0-4775-914b-279340c4e587")
 	)
 	(label "en15"
-		(at 364.49 289.56 180)
+		(at 364.49 232.41 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20073,7 +19772,7 @@
 		)
 		(uuid "221d3b45-cd17-40cc-a90a-063559a0707a")
 	)
-	(label "bilge_pump"
+	(label "USB"
 		(at 81.28 72.39 270)
 		(effects
 			(font
@@ -20083,7 +19782,7 @@
 		)
 		(uuid "25556170-a758-4493-8ee9-902989eff99e")
 	)
-	(label "USB"
+	(label "aux3"
 		(at 78.74 72.39 270)
 		(effects
 			(font
@@ -20154,7 +19853,7 @@
 		(uuid "314df0f0-0b86-44d2-b644-40383f62ebe0")
 	)
 	(label "en14"
-		(at 364.49 287.02 180)
+		(at 364.49 271.78 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20164,7 +19863,7 @@
 		(uuid "32feaad1-9871-469c-b7e8-085ed999a740")
 	)
 	(label "en2"
-		(at 364.49 237.49 180)
+		(at 364.49 240.03 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20174,7 +19873,7 @@
 		(uuid "33cb0b1e-f914-4009-92a4-a3c4e0bdb40d")
 	)
 	(label "en11"
-		(at 364.49 279.4 180)
+		(at 364.49 287.02 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20194,7 +19893,7 @@
 		(uuid "35efccd4-66b3-4da7-b6b4-ba65680eb40d")
 	)
 	(label "en3"
-		(at 364.49 240.03 180)
+		(at 364.49 242.57 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20222,16 +19921,6 @@
 			(justify left bottom)
 		)
 		(uuid "3a63865c-f390-4f2d-b7c1-2159c4204c29")
-	)
-	(label "GND"
-		(at 93.98 57.15 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3b0b25a3-ced8-44fd-b3e4-8486bfd8b7d1")
 	)
 	(label "s_bow_light"
 		(at 213.36 93.98 0)
@@ -20294,7 +19983,7 @@
 		(uuid "47a09309-bb63-4ee4-950b-b7130a2b8631")
 	)
 	(label "panel_main1"
-		(at 22.86 72.39 270)
+		(at 30.48 72.39 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20304,7 +19993,7 @@
 		(uuid "47d4ee73-5361-4f86-8235-e16ec9e6645c")
 	)
 	(label "main1"
-		(at 38.1 72.39 270)
+		(at 22.86 72.39 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20364,7 +20053,7 @@
 		(uuid "4c9b3e7f-6348-42b6-867d-6ee4cba7d02f")
 	)
 	(label "USB"
-		(at 138.43 355.6 0)
+		(at 138.43 317.5 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20374,7 +20063,7 @@
 		(uuid "4d213294-15a4-492a-a7f6-61fe27a23a27")
 	)
 	(label "chartplotter"
-		(at 138.43 381 0)
+		(at 138.43 342.9 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20382,6 +20071,16 @@
 			(justify left bottom)
 		)
 		(uuid "521ccd15-e85d-474a-9c82-fdd6b3926373")
+	)
+	(label "12V"
+		(at 459.74 193.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "57d60c09-7535-4e41-a0bf-45b2d4d952ce")
 	)
 	(label "s_aux1"
 		(at 175.26 193.04 0)
@@ -20393,7 +20092,7 @@
 		)
 		(uuid "5a5c6e0a-e11c-4ee7-882b-1800a378fd4a")
 	)
-	(label "bilge_pump"
+	(label "aux3"
 		(at 254 119.38 0)
 		(effects
 			(font
@@ -20412,16 +20111,6 @@
 			(justify left bottom)
 		)
 		(uuid "5ccd3d84-e3a7-4dbf-aea0-c5c80bfd78cd")
-	)
-	(label "12V"
-		(at 88.9 57.15 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5fda7e92-5e62-4567-b9c3-e083c8ec291f")
 	)
 	(label "GND"
 		(at 518.16 99.06 0)
@@ -20444,7 +20133,7 @@
 		(uuid "62477a98-4366-414a-a8a2-39b7451e2e25")
 	)
 	(label "aux1"
-		(at 138.43 317.5 0)
+		(at 138.43 381 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20494,7 +20183,7 @@
 		(uuid "664a59f2-c99b-42f8-8773-01fdd0e5e5cb")
 	)
 	(label "en5"
-		(at 364.49 245.11 180)
+		(at 364.49 247.65 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20504,7 +20193,7 @@
 		(uuid "6890887a-ecc8-4ca0-9927-4c1d27a0beb5")
 	)
 	(label "aux2"
-		(at 138.43 330.2 0)
+		(at 138.43 355.6 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20514,7 +20203,7 @@
 		(uuid "68a46c2a-1fb3-4ae3-920e-9a6d4a53c75d")
 	)
 	(label "en4"
-		(at 364.49 242.57 180)
+		(at 364.49 245.11 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20533,7 +20222,7 @@
 		)
 		(uuid "6c191fa2-16a6-4063-887f-61cecd15ebe5")
 	)
-	(label "s_bilge_pump"
+	(label "s_aux3"
 		(at 251.46 193.04 0)
 		(effects
 			(font
@@ -20594,7 +20283,7 @@
 		(uuid "734ac2bc-c4b1-4e0a-91cc-7bb3a87ee7c9")
 	)
 	(label "stern_light"
-		(at 138.43 226.06 0)
+		(at 138.43 251.46 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20624,7 +20313,7 @@
 		(uuid "78002496-a679-4eb4-b04b-9dfd459222bc")
 	)
 	(label "en0"
-		(at 364.49 232.41 180)
+		(at 364.49 234.95 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20634,7 +20323,7 @@
 		(uuid "79ddbf35-c6b3-4d44-a621-5673653baa1c")
 	)
 	(label "cabin_light1"
-		(at 138.43 368.3 0)
+		(at 138.43 304.8 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20644,7 +20333,7 @@
 		(uuid "7dfe332c-0cc7-4121-9224-0dc3ba7aa57b")
 	)
 	(label "en10"
-		(at 364.49 276.86 180)
+		(at 364.49 284.48 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20663,8 +20352,8 @@
 		)
 		(uuid "7f19e73f-dcd1-4332-99d9-e50bcd4f7989")
 	)
-	(label "bilge_pump"
-		(at 138.43 342.9 0)
+	(label "aux3"
+		(at 138.43 330.2 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20744,7 +20433,7 @@
 		(uuid "8bffb116-dfb4-4791-8523-ac6fb8ec87d4")
 	)
 	(label "panel_main3"
-		(at 27.94 72.39 270)
+		(at 35.56 72.39 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20754,7 +20443,7 @@
 		(uuid "8c9a4071-83b5-43c7-b95e-7647012ba231")
 	)
 	(label "main3"
-		(at 45.72 72.39 270)
+		(at 27.94 72.39 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20793,18 +20482,8 @@
 		)
 		(uuid "97e3b208-d625-439c-95a3-788c29f59080")
 	)
-	(label "s_instruments"
-		(at 86.36 57.15 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "985c563f-a618-48de-b120-9703acbeaed7")
-	)
 	(label "bow_light"
-		(at 138.43 213.36 0)
+		(at 138.43 276.86 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20814,7 +20493,7 @@
 		(uuid "9bfc5480-bb5b-4a48-a581-3b5791a502cb")
 	)
 	(label "en1"
-		(at 364.49 234.95 180)
+		(at 364.49 237.49 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20824,7 +20503,7 @@
 		(uuid "9c733302-b46f-4489-a62d-dd9f7b4d8d52")
 	)
 	(label "fridge"
-		(at 138.43 289.56 0)
+		(at 138.43 368.3 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20834,7 +20513,7 @@
 		(uuid "9ce939a3-ef13-43e7-934f-32ecb9ef6126")
 	)
 	(label "en8"
-		(at 364.49 271.78 180)
+		(at 364.49 279.4 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20844,7 +20523,7 @@
 		(uuid "9de41517-ce29-4c02-b74f-f9f114cbff33")
 	)
 	(label "panel_main2"
-		(at 25.4 72.39 270)
+		(at 33.02 72.39 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20874,7 +20553,7 @@
 		(uuid "a3e7b005-1251-4a2f-8c2c-966de9647a74")
 	)
 	(label "en6"
-		(at 364.49 247.65 180)
+		(at 364.49 250.19 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20954,7 +20633,7 @@
 		(uuid "af4e5510-a991-4eda-a7c8-39c924867fde")
 	)
 	(label "tricolor"
-		(at 138.43 264.16 0)
+		(at 138.43 200.66 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21004,7 +20683,7 @@
 		(uuid "b89ed50d-c47a-46b3-8e76-f6a961af193e")
 	)
 	(label "en9"
-		(at 364.49 274.32 180)
+		(at 364.49 281.94 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21063,7 +20742,7 @@
 		)
 		(uuid "bb38f4ee-d930-4a03-b9ee-0b83997e55da")
 	)
-	(label "s_cabin_lights"
+	(label "s_instruments"
 		(at 83.82 57.15 90)
 		(effects
 			(font
@@ -21074,7 +20753,7 @@
 		(uuid "bebf527d-6073-4395-9df1-00056063bd17")
 	)
 	(label "panel_main6"
-		(at 35.56 72.39 270)
+		(at 45.72 72.39 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21084,7 +20763,7 @@
 		(uuid "c0e0687a-1d17-41b8-a954-a998710ec1fd")
 	)
 	(label "anchor_light"
-		(at 138.43 251.46 0)
+		(at 138.43 213.36 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21104,7 +20783,7 @@
 		(uuid "c5864e53-3065-43cd-aecb-19d75a5b62d0")
 	)
 	(label "panel_main4"
-		(at 30.48 72.39 270)
+		(at 38.1 72.39 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21113,7 +20792,7 @@
 		)
 		(uuid "c6cddcb4-b9dc-4318-b169-d93067aa70dd")
 	)
-	(label "s_bilge_pump"
+	(label "s_USB"
 		(at 78.74 57.15 90)
 		(effects
 			(font
@@ -21124,7 +20803,7 @@
 		(uuid "c786a1af-a2ed-4c06-9d02-9c5ac9a213e4")
 	)
 	(label "autopilot"
-		(at 138.43 200.66 0)
+		(at 138.43 289.56 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21153,7 +20832,7 @@
 		)
 		(uuid "caf4cbd6-21af-4203-98bc-a77cb416c0d9")
 	)
-	(label "s_USB"
+	(label "s_aux3"
 		(at 76.2 57.15 90)
 		(effects
 			(font
@@ -21162,16 +20841,6 @@
 			(justify left bottom)
 		)
 		(uuid "cd27257c-f0e0-4a36-89dd-90dd89815451")
-	)
-	(label "12V"
-		(at 91.44 57.15 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "cf344093-89bc-4fde-89c2-2690ca61c3ad")
 	)
 	(label "inverter"
 		(at 483.87 31.75 0)
@@ -21244,7 +20913,7 @@
 		(uuid "d91c2c44-c3c3-49b8-8222-74b70c4d2a40")
 	)
 	(label "en13"
-		(at 364.49 284.48 180)
+		(at 364.49 274.32 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21263,7 +20932,7 @@
 		)
 		(uuid "d98dfb2d-970d-43d6-a2a3-087ff663c027")
 	)
-	(label "s_bilge_pump"
+	(label "s_cabin_lights"
 		(at 81.28 57.15 90)
 		(effects
 			(font
@@ -21304,7 +20973,7 @@
 		(uuid "ddd6638e-54fd-4c9c-b95c-14023cc1f673")
 	)
 	(label "en12"
-		(at 364.49 281.94 180)
+		(at 364.49 289.56 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21324,7 +20993,7 @@
 		(uuid "e21a1831-8107-429d-9816-196d48db720b")
 	)
 	(label "inverter"
-		(at 138.43 304.8 0)
+		(at 138.43 393.7 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21344,7 +21013,7 @@
 		(uuid "e3a226d6-4c0f-4903-8675-84e73d567194")
 	)
 	(label "main2"
-		(at 40.64 72.39 270)
+		(at 25.4 72.39 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21354,7 +21023,7 @@
 		(uuid "e4a7731e-6af6-490c-a41b-3a779de68b6e")
 	)
 	(label "fresh_water_pump"
-		(at 138.43 276.86 0)
+		(at 138.43 238.76 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21514,7 +21183,7 @@
 		(uuid "f8ab6c10-b17d-4f11-83ba-00576de3833d")
 	)
 	(label "en7"
-		(at 364.49 250.19 180)
+		(at 364.49 276.86 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21524,7 +21193,7 @@
 		(uuid "fa3f3497-ba15-4101-8d74-4015402e0f70")
 	)
 	(label "panel_main1"
-		(at 138.43 393.7 0)
+		(at 138.43 264.16 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21618,8 +21287,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 368.3 90)
+		(property "Value" "100k"
+			(at 172.466 368.3 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21840,7 +21509,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 393.7 90)
 			(effects
 				(font
@@ -22054,7 +21723,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 395.986 0)
 			(effects
 				(font
@@ -22267,7 +21936,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 291.846 0)
 			(effects
 				(font
@@ -22403,7 +22072,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 368.3 90)
 			(effects
 				(font
@@ -22540,7 +22209,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 215.646 0)
 			(effects
 				(font
@@ -22609,7 +22278,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 200.66 90)
 			(effects
 				(font
@@ -22993,8 +22662,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 381 90)
+		(property "Value" "100k"
+			(at 172.466 381 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23714,7 +23383,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 226.06 90)
 			(effects
 				(font
@@ -23868,7 +23537,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 161.925 143.51 0)
 			(effects
 				(font
@@ -24236,7 +23905,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 228.346 0)
 			(effects
 				(font
@@ -24297,7 +23966,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "28aceecf-3da8-4f61-b529-85e3664a0782")
-		(property "Reference" "D27"
+		(property "Reference" "D26"
 			(at 162.56 292.0999 90)
 			(effects
 				(font
@@ -24306,7 +23975,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 294.6399 90)
 			(effects
 				(font
@@ -24315,7 +23984,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 293.37 0)
 			(effects
 				(font
@@ -24351,7 +24020,7 @@
 		(instances
 			(project "board1-switching"
 				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43"
-					(reference "D27")
+					(reference "D26")
 					(unit 1)
 				)
 			)
@@ -24376,7 +24045,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 279.146 0)
 			(effects
 				(font
@@ -24445,7 +24114,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 213.36 90)
 			(effects
 				(font
@@ -25048,7 +24717,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 330.2 90)
 			(effects
 				(font
@@ -25117,7 +24786,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 381 90)
 			(effects
 				(font
@@ -25388,7 +25057,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "33879ddd-2bd5-4134-a277-a00e21536633")
-		(property "Reference" "D35"
+		(property "Reference" "D34"
 			(at 162.56 396.2399 90)
 			(effects
 				(font
@@ -25397,7 +25066,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 398.7799 90)
 			(effects
 				(font
@@ -25406,7 +25075,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 397.51 0)
 			(effects
 				(font
@@ -25442,7 +25111,7 @@
 		(instances
 			(project "board1-switching"
 				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43"
-					(reference "D35")
+					(reference "D34")
 					(unit 1)
 				)
 			)
@@ -25476,7 +25145,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 276.225 55.88 0)
 			(effects
 				(font
@@ -25768,7 +25437,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "372d9f10-6d97-48f1-b522-d8620b556a6f")
-		(property "Reference" "D34"
+		(property "Reference" "D33"
 			(at 162.56 383.5399 90)
 			(effects
 				(font
@@ -25777,7 +25446,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 386.0799 90)
 			(effects
 				(font
@@ -25786,7 +25455,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 384.81 0)
 			(effects
 				(font
@@ -25822,7 +25491,7 @@
 		(instances
 			(project "board1-switching"
 				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43"
-					(reference "D34")
+					(reference "D33")
 					(unit 1)
 				)
 			)
@@ -25903,7 +25572,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3a9e0ee9-1f4a-4156-a39b-7171f65b4fbb")
-		(property "Reference" "D28"
+		(property "Reference" "D27"
 			(at 162.56 307.3399 90)
 			(effects
 				(font
@@ -25912,7 +25581,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 309.8799 90)
 			(effects
 				(font
@@ -25921,7 +25590,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 308.61 0)
 			(effects
 				(font
@@ -25957,7 +25626,7 @@
 		(instances
 			(project "board1-switching"
 				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43"
-					(reference "D28")
+					(reference "D27")
 					(unit 1)
 				)
 			)
@@ -26226,8 +25895,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 330.2 90)
+		(property "Value" "100k"
+			(at 172.72 330.2 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26900,7 +26569,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 241.046 0)
 			(effects
 				(font
@@ -27425,7 +27094,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Package_SO:Texas_DYY0016A_TSOT-23-16_2x4.2mm_P0.5mm"
+		(property "Footprint" "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm"
 			(at 208.28 357.886 0)
 			(effects
 				(font
@@ -27528,7 +27197,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 256.5399 90)
 			(effects
 				(font
@@ -27537,7 +27206,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 255.27 0)
 			(effects
 				(font
@@ -27607,7 +27276,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 390.525 55.88 0)
 			(effects
 				(font
@@ -27825,7 +27494,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 446.405 147.32 0)
 			(effects
 				(font
@@ -28331,7 +28000,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 370.586 0)
 			(effects
 				(font
@@ -28400,7 +28069,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 238.76 90)
 			(effects
 				(font
@@ -28539,7 +28208,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 205.7399 90)
 			(effects
 				(font
@@ -28548,7 +28217,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 204.47 0)
 			(effects
 				(font
@@ -29020,7 +28689,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 382.905 147.32 0)
 			(effects
 				(font
@@ -29098,7 +28767,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 264.16 90)
 			(effects
 				(font
@@ -29255,7 +28924,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 352.425 55.88 0)
 			(effects
 				(font
@@ -29398,7 +29067,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 355.6 90)
 			(effects
 				(font
@@ -29592,7 +29261,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "64f3d722-7c7c-4f8f-8b8e-d2c6a9affe50")
-		(property "Reference" "D26"
+		(property "Reference" "D25"
 			(at 459.74 290.83 90)
 			(effects
 				(font
@@ -29642,75 +29311,6 @@
 		)
 		(pin "2"
 			(uuid "9ec08163-5234-4be8-9eb0-37dd3b845587")
-		)
-		(instances
-			(project "board1-switching"
-				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43"
-					(reference "D26")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Diode:BZV55C5V1")
-		(at 538.48 289.56 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "64faf7a9-c216-4a9c-9393-72c371093acb")
-		(property "Reference" "D25"
-			(at 538.226 287.02 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "BZV55C5V1"
-			(at 540.766 289.56 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Diode_SMD:D_MiniMELF"
-			(at 534.035 289.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/BZV55_SER.pdf"
-			(at 538.48 289.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "5.1V, 500mW, 5%, Zener diode, MiniMELF"
-			(at 538.48 289.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "d1d337d0-1331-4781-8a07-fb347cc8671d")
-		)
-		(pin "1"
-			(uuid "c4a614e4-6746-4bec-9d75-d2632269bde7")
 		)
 		(instances
 			(project "board1-switching"
@@ -29952,7 +29552,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 238.125 55.88 0)
 			(effects
 				(font
@@ -30702,7 +30302,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 276.86 90)
 			(effects
 				(font
@@ -30781,7 +30381,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 316.865 147.32 0)
 			(effects
 				(font
@@ -30937,7 +30537,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 266.446 0)
 			(effects
 				(font
@@ -31007,7 +30607,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 332.486 0)
 			(effects
 				(font
@@ -31387,7 +30987,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 238.125 143.51 0)
 			(effects
 				(font
@@ -31526,7 +31126,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7725a2d4-d432-4845-911b-23cb0e5b73fb")
-		(property "Reference" "D29"
+		(property "Reference" "D28"
 			(at 162.56 320.0399 90)
 			(effects
 				(font
@@ -31535,7 +31135,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 322.5799 90)
 			(effects
 				(font
@@ -31544,7 +31144,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 321.31 0)
 			(effects
 				(font
@@ -31580,7 +31180,7 @@
 		(instances
 			(project "board1-switching"
 				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43"
-					(reference "D29")
+					(reference "D28")
 					(unit 1)
 				)
 			)
@@ -31605,7 +31205,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 253.746 0)
 			(effects
 				(font
@@ -31817,7 +31417,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 289.56 90)
 			(effects
 				(font
@@ -32844,7 +32444,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 200.025 55.88 0)
 			(effects
 				(font
@@ -32932,7 +32532,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 161.925 55.88 0)
 			(effects
 				(font
@@ -33238,7 +32838,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 200.025 143.51 0)
 			(effects
 				(font
@@ -33613,7 +33213,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 428.625 55.88 0)
 			(effects
 				(font
@@ -33829,8 +33429,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 317.5 90)
+		(property "Value" "100k"
+			(at 172.466 317.5 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33963,8 +33563,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 238.76 90)
+		(property "Value" "100k"
+			(at 172.72 238.76 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34307,7 +33907,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 251.46 90)
 			(effects
 				(font
@@ -34443,8 +34043,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 200.66 90)
+		(property "Value" "100k"
+			(at 172.466 200.66 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34934,8 +34534,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 226.06 90)
+		(property "Value" "100k"
+			(at 172.72 226.06 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35347,8 +34947,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 393.7 90)
+		(property "Value" "100k"
+			(at 172.466 393.7 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35856,7 +35456,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 281.9399 90)
 			(effects
 				(font
@@ -35865,7 +35465,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 280.67 0)
 			(effects
 				(font
@@ -35993,7 +35593,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 307.086 0)
 			(effects
 				(font
@@ -36421,71 +36021,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+12V")
-		(at 459.74 160.02 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "a4684d48-701e-49b5-8aca-f9cbea145e2d")
-		(property "Reference" "#PWR030"
-			(at 459.74 156.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+12V"
-			(at 459.994 163.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 459.74 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 459.74 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+12V\""
-			(at 459.74 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0104169f-efe8-4827-a182-c063b32fb2f3")
-		)
-		(instances
-			(project "board1-switching"
-				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43"
-					(reference "#PWR030")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 184.15 372.11 180)
 		(unit 1)
@@ -36717,8 +36252,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 264.16 90)
+		(property "Value" "100k"
+			(at 172.466 264.16 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36796,7 +36331,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Package_SO:Texas_DYY0016A_TSOT-23-16_2x4.2mm_P0.5mm"
+		(property "Footprint" "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm"
 			(at 208.28 253.746 0)
 			(effects
 				(font
@@ -37036,7 +36571,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 383.286 0)
 			(effects
 				(font
@@ -37395,8 +36930,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 342.9 90)
+		(property "Value" "100k"
+			(at 172.72 342.9 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37768,7 +37303,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 231.1399 90)
 			(effects
 				(font
@@ -37777,7 +37312,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 229.87 0)
 			(effects
 				(font
@@ -37837,8 +37372,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 355.6 90)
+		(property "Value" "100k"
+			(at 172.72 355.6 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37965,7 +37500,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b6ef5142-3312-4efe-8c98-bf5405db2a1f")
-		(property "Reference" "D30"
+		(property "Reference" "D29"
 			(at 162.56 332.7399 90)
 			(effects
 				(font
@@ -37974,7 +37509,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 335.2799 90)
 			(effects
 				(font
@@ -37983,7 +37518,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 334.01 0)
 			(effects
 				(font
@@ -38019,7 +37554,7 @@
 		(instances
 			(project "board1-switching"
 				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43"
-					(reference "D30")
+					(reference "D29")
 					(unit 1)
 				)
 			)
@@ -38044,7 +37579,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 218.4399 90)
 			(effects
 				(font
@@ -38053,7 +37588,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 217.17 0)
 			(effects
 				(font
@@ -38192,7 +37727,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 467.995 55.88 0)
 			(effects
 				(font
@@ -38271,7 +37806,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 345.186 0)
 			(effects
 				(font
@@ -38566,7 +38101,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 243.8399 90)
 			(effects
 				(font
@@ -38575,7 +38110,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 242.57 0)
 			(effects
 				(font
@@ -38627,7 +38162,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c55ccf01-bf34-4b00-a6bc-7d6b76aa3423")
-		(property "Reference" "D32"
+		(property "Reference" "D31"
 			(at 162.56 358.1399 90)
 			(effects
 				(font
@@ -38636,7 +38171,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 360.6799 90)
 			(effects
 				(font
@@ -38645,7 +38180,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 359.41 0)
 			(effects
 				(font
@@ -38681,7 +38216,7 @@
 		(instances
 			(project "board1-switching"
 				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43"
-					(reference "D32")
+					(reference "D31")
 					(unit 1)
 				)
 			)
@@ -38705,7 +38240,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 317.5 90)
 			(effects
 				(font
@@ -38775,7 +38310,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 269.2399 90)
 			(effects
 				(font
@@ -38784,7 +38319,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 267.97 0)
 			(effects
 				(font
@@ -38854,7 +38389,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 276.225 143.51 0)
 			(effects
 				(font
@@ -38999,7 +38534,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 342.9 90)
 			(effects
 				(font
@@ -40781,8 +40316,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 213.36 90)
+		(property "Value" "100k"
+			(at 172.466 213.36 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40928,8 +40463,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 289.56 90)
+		(property "Value" "100k"
+			(at 172.466 289.56 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40997,8 +40532,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 276.86 90)
+		(property "Value" "100k"
+			(at 172.466 276.86 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41134,7 +40669,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 357.886 0)
 			(effects
 				(font
@@ -41423,7 +40958,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dc99975d-2342-4a6f-9986-1b21c779e7d2")
-		(property "Reference" "D33"
+		(property "Reference" "D32"
 			(at 162.56 370.8399 90)
 			(effects
 				(font
@@ -41432,7 +40967,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 373.3799 90)
 			(effects
 				(font
@@ -41441,7 +40976,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 372.11 0)
 			(effects
 				(font
@@ -41477,7 +41012,7 @@
 		(instances
 			(project "board1-switching"
 				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43"
-					(reference "D33")
+					(reference "D32")
 					(unit 1)
 				)
 			)
@@ -41651,8 +41186,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 251.46 90)
+		(property "Value" "100k"
+			(at 172.466 251.46 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41720,8 +41255,8 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 171.958 304.8 90)
+		(property "Value" "100k"
+			(at 172.466 304.8 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41942,7 +41477,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 202.946 0)
 			(effects
 				(font
@@ -42965,7 +42500,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "33k"
 			(at 162.052 304.8 90)
 			(effects
 				(font
@@ -43348,7 +42883,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "6k8"
+		(property "Value" "33k"
 			(at 176.784 319.786 0)
 			(effects
 				(font
@@ -43514,7 +43049,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-323"
+		(property "Footprint" "panel-library:D_SOD-323"
 			(at 314.325 55.88 0)
 			(effects
 				(font
@@ -44501,7 +44036,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fbc36594-ff12-46f6-95c1-804f04bae301")
-		(property "Reference" "D31"
+		(property "Reference" "D30"
 			(at 162.56 345.4399 90)
 			(effects
 				(font
@@ -44510,7 +44045,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VTVS8V5ASMF"
+		(property "Value" "DF2S16FS"
 			(at 162.56 347.9799 90)
 			(effects
 				(font
@@ -44519,7 +44054,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMF"
+		(property "Footprint" "panel-library:D_SOD-923"
 			(at 165.1 346.71 0)
 			(effects
 				(font
@@ -44555,7 +44090,7 @@
 		(instances
 			(project "board1-switching"
 				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43"
-					(reference "D31")
+					(reference "D30")
 					(unit 1)
 				)
 			)
