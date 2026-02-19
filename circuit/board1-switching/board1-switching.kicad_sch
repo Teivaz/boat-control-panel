@@ -1276,6 +1276,322 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Connector_Generic:Conn_02x04_Top_Bottom"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 1.27 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_02x04_Top_Bottom"
+				(at 1.27 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, double row, 02x04, top/bottom pin numbering scheme (row 1: 1...pins_per_row, row2: pins_per_row+1 ... num_pins), script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_2x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_02x04_Top_Bottom_1_1"
+				(rectangle
+					(start -1.27 3.81)
+					(end 3.81 -6.35)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start -1.27 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -4.953)
+					(end 0 -5.207)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 2.667)
+					(end 2.54 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 0.127)
+					(end 2.54 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 -2.413)
+					(end 2.54 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 -4.953)
+					(end 2.54 -5.207)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 2.54 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -5.08 0)
+					(length 3.81)
+					(name "Pin_4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 2.54 180)
+					(length 3.81)
+					(name "Pin_5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 0 180)
+					(length 3.81)
+					(name "Pin_6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 -2.54 180)
+					(length 3.81)
+					(name "Pin_7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 -5.08 180)
+					(length 3.81)
+					(name "Pin_8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector_Generic:Conn_02x08_Top_Bottom"
 			(pin_names
 				(offset 1.016)
@@ -9474,16 +9790,6 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 21.59) (xy 93.98 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "012e0b60-3c1b-4fec-8d96-57d24ff13157")
-	)
-	(wire
-		(pts
 			(xy 36.83 34.29) (xy 36.83 57.15)
 		)
 		(stroke
@@ -11134,16 +11440,6 @@
 	)
 	(wire
 		(pts
-			(xy 86.36 21.59) (xy 86.36 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2d5d5d1c-6646-4818-8dea-bd3258d33180")
-	)
-	(wire
-		(pts
 			(xy 233.68 59.69) (xy 233.68 64.77)
 		)
 		(stroke
@@ -12524,16 +12820,6 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 21.59) (xy 91.44 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "50909315-5ac4-4a87-bbe4-024607263ad7")
-	)
-	(wire
-		(pts
 			(xy 278.13 264.16) (xy 304.8 264.16)
 		)
 		(stroke
@@ -13601,16 +13887,6 @@
 			(type default)
 		)
 		(uuid "68e12259-5ea5-4d74-b0b7-fe3b0ef7f140")
-	)
-	(wire
-		(pts
-			(xy 88.9 21.59) (xy 88.9 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "69514630-507f-4652-ab40-fcd1bb4cc359")
 	)
 	(wire
 		(pts
@@ -23537,7 +23813,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 161.925 143.51 0)
 			(effects
 				(font
@@ -25145,7 +25421,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 276.225 55.88 0)
 			(effects
 				(font
@@ -26229,116 +26505,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic:Conn_02x08_Top_Bottom")
-		(at 86.36 26.67 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4410e984-5eda-4b84-8103-c6ce7fb7f749")
-		(property "Reference" "J3"
-			(at 86.36 19.558 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "~"
-			(at 75.438 47.498 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "panel-library:Con-Amphenol-QT08CDP"
-			(at 86.36 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 86.36 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, double row, 02x08, top/bottom pin numbering scheme (row 1: 1...pins_per_row, row2: pins_per_row+1 ... num_pins), script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 86.36 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "4"
-			(uuid "13c0b48c-f5f7-49f2-aba4-303c1e3c413e")
-		)
-		(pin "7"
-			(uuid "57f58470-d445-496c-acc0-1e6f43eacdaa")
-		)
-		(pin "5"
-			(uuid "6c7c855f-f04a-4368-b07a-cec36a9c0436")
-		)
-		(pin "8"
-			(uuid "7e8cf020-25d3-40e9-b511-895341d721ca")
-		)
-		(pin "2"
-			(uuid "5c9f9c7e-729d-4d80-93c2-1016e12ad2d0")
-		)
-		(pin "1"
-			(uuid "10840ca9-6b3e-4ee7-98dd-82633214ff1b")
-		)
-		(pin "3"
-			(uuid "e42c3244-bbf1-49d5-8d50-668a8dd4a157")
-		)
-		(pin "6"
-			(uuid "83098ef6-eb83-4146-9928-74f930910c7c")
-		)
-		(pin "9"
-			(uuid "21cc90bc-dc7b-4946-91ad-88158e76270d")
-		)
-		(pin "16"
-			(uuid "a3d600a9-0883-4ab6-aca6-40f12d63a607")
-		)
-		(pin "12"
-			(uuid "05d47058-083d-4b6d-bfe9-3a5aa1b257a2")
-		)
-		(pin "14"
-			(uuid "77eb5a52-cb10-4ffd-b80e-180ac2ad8ea9")
-		)
-		(pin "13"
-			(uuid "21ff5ca1-9c0e-427e-be4e-0d23251ef3d7")
-		)
-		(pin "15"
-			(uuid "f6f8fa6a-8a5b-410a-939c-e1a8a213c34d")
-		)
-		(pin "10"
-			(uuid "c4794230-75be-44f6-9d7b-5674bfaf6b2c")
-		)
-		(pin "11"
-			(uuid "f05bda95-3ace-4ab1-9ab7-218be35c1ee1")
-		)
-		(instances
-			(project "board1-switching"
-				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43"
-					(reference "J3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "panel-library:Relay_SPDT")
 		(at 208.28 55.88 0)
 		(unit 1)
@@ -27276,7 +27442,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 390.525 55.88 0)
 			(effects
 				(font
@@ -27494,7 +27660,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 446.405 147.32 0)
 			(effects
 				(font
@@ -28689,7 +28855,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 382.905 147.32 0)
 			(effects
 				(font
@@ -28924,7 +29090,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 352.425 55.88 0)
 			(effects
 				(font
@@ -29552,7 +29718,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 238.125 55.88 0)
 			(effects
 				(font
@@ -30381,7 +30547,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 316.865 147.32 0)
 			(effects
 				(font
@@ -30987,7 +31153,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 238.125 143.51 0)
 			(effects
 				(font
@@ -32444,7 +32610,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 200.025 55.88 0)
 			(effects
 				(font
@@ -32532,7 +32698,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 161.925 55.88 0)
 			(effects
 				(font
@@ -32838,7 +33004,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 200.025 143.51 0)
 			(effects
 				(font
@@ -33213,7 +33379,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 428.625 55.88 0)
 			(effects
 				(font
@@ -37727,7 +37893,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 467.995 55.88 0)
 			(effects
 				(font
@@ -38083,6 +38249,92 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector_Generic:Conn_02x04_Top_Bottom")
+		(at 81.28 26.67 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "be4fdfad-4e54-4c6d-801e-edf5c8f7b295")
+		(property "Reference" "J15"
+			(at 81.28 19.558 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "~"
+			(at 70.358 47.498 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "panel-library:Con-Amphenol-QT04CDP"
+			(at 81.28 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 81.28 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, double row, 02x04, top/bottom pin numbering scheme (row 1: 1...pins_per_row, row2: pins_per_row+1 ... num_pins), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 81.28 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "4"
+			(uuid "7ee3c449-bddc-49a1-ab33-22e544469ab9")
+		)
+		(pin "7"
+			(uuid "f55e1172-d541-4340-b8f7-a64903adb121")
+		)
+		(pin "5"
+			(uuid "32fb2ae3-481d-40c7-92a4-2f11b2d9573b")
+		)
+		(pin "8"
+			(uuid "5bafd1c4-6882-4a18-8cef-04485696887e")
+		)
+		(pin "2"
+			(uuid "134c0ae8-1104-42de-b320-e3fccd1095ee")
+		)
+		(pin "1"
+			(uuid "20f9b0ad-425c-41bb-a14f-19abc52d30df")
+		)
+		(pin "3"
+			(uuid "0cd0c122-d4c0-4acb-9c0f-d6efe2037f4d")
+		)
+		(pin "6"
+			(uuid "56e6199c-76f1-4a1d-b484-f9a5149b5118")
+		)
+		(instances
+			(project "board1-switching"
+				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43"
+					(reference "J15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:D_Zener")
 		(at 165.1 242.57 90)
 		(mirror x)
@@ -38389,7 +38641,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 276.225 143.51 0)
 			(effects
 				(font
@@ -43049,7 +43301,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:D_SOD-323"
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
 			(at 314.325 55.88 0)
 			(effects
 				(font
