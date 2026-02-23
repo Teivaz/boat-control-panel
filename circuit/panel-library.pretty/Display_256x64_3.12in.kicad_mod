@@ -54,9 +54,65 @@
 		)
 	)
 	(attr smd)
+	(fp_rect
+		(start -41.5 12.5)
+		(end -35.5 17.25)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "B.CrtYd")
+		(uuid "661b6ed2-0143-4ada-a2f4-9f7a986ac949")
+	)
+	(fp_rect
+		(start -41 -14.5)
+		(end -35 -10)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "B.CrtYd")
+		(uuid "c9a1dc3b-6b4a-4a24-822a-b26f8710cdac")
+	)
+	(fp_rect
+		(start -3 -14.5)
+		(end 3 -10)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "B.CrtYd")
+		(uuid "b048c9d5-3627-431f-99ce-bfafb9b5f92a")
+	)
+	(fp_rect
+		(start 35 -14.5)
+		(end 41 -10)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "B.CrtYd")
+		(uuid "cfeb9335-321c-47f4-89a5-ebe1cf583dbd")
+	)
+	(fp_rect
+		(start 35.75 12.5)
+		(end 41.5 17.25)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "B.CrtYd")
+		(uuid "6c414dc5-2582-4560-a564-55139708c903")
+	)
 	(fp_poly
 		(pts
-			(xy -11.5 5) (xy -11.5 -2) (xy -8 -2) (xy -8 -3) (xy 8 -3) (xy 8 -2) (xy 11.5 -2) (xy 11.5 5)
+			(xy -32 18.75) (xy -32 16.75) (xy -11.5 4.5) (xy -11.5 -2) (xy -8 -2) (xy -8 -3) (xy 8 -3) (xy 8 -2)
+			(xy 11.5 -2) (xy 11.5 4.5) (xy 32 16.75) (xy 32 18.75)
 		)
 		(stroke
 			(width 0.05)
@@ -465,6 +521,36 @@
 		(size 2.35 2.75)
 		(layers "B.Cu" "B.Mask" "B.Paste")
 		(uuid "683c70d1-10da-42ec-9be9-dc7d2c41b360")
+	)
+	(pad "N" smd oval
+		(at -38.5 13.8)
+		(size 5.5 2)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(uuid "4ff261d8-ee22-44aa-8b0f-62a41caefd78")
+	)
+	(pad "N" smd oval
+		(at -38 -11.2)
+		(size 5.5 2)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(uuid "22542197-768f-4497-812b-2b6039fbd71f")
+	)
+	(pad "N" smd oval
+		(at 0 -11.2)
+		(size 5.5 2)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(uuid "6428b4c0-ac41-440c-afee-207581165868")
+	)
+	(pad "N" smd oval
+		(at 38 -11.2)
+		(size 5.5 2)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(uuid "7855ce75-637c-4292-b8c4-1898a15ad5b4")
+	)
+	(pad "N" smd oval
+		(at 38.6 13.8)
+		(size 5.5 2)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(uuid "939f1161-53dd-4ca4-a44e-793df07459cb")
 	)
 	(embedded_fonts no)
 	(embedded_files
