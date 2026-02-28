@@ -53,7 +53,7 @@
 			)
 		)
 	)
-	(attr smd)
+	(attr through_hole)
 	(fp_rect
 		(start -10.8 -8.2)
 		(end 10.8 8.2)
@@ -197,4 +197,15 @@
 		(uuid "0e2f8270-d700-4cad-9a3e-208155f11e91")
 	)
 	(embedded_fonts no)
+	(model "${KIPRJMOD}/../3dmodels/Con-Molex-38710-6302.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
 )
