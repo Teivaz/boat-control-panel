@@ -1388,6 +1388,156 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Switch:SW_Push"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "SW"
+				(at 1.27 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "SW_Push"
+				(at 0 -1.524 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Push button switch, generic, two pins"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "switch normally-open pushbutton push-button"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "SW_Push_0_1"
+				(circle
+					(center -2.032 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 1.27) (xy 0 3.048)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.032 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 1.27) (xy -2.54 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.54)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "panel-library:PIC18F26Q84_ISS"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1946,195 +2096,6 @@
 						)
 					)
 					(number "18"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "panel-library:SW_Push4"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "SW1"
-				(at 0 7.62 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "SW_Push4"
-				(at 0 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Push button switch, generic, two pins"
-				(at 0 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "switch normally-open pushbutton push-button"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "SW_Push4_0_1"
-				(circle
-					(center -2.032 0)
-					(radius 0.508)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 1.27) (xy 0 3.048)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 2.032 0)
-					(radius 0.508)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.54 1.27) (xy -2.54 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at -5.08 0 0)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 0 180)
-					(length 2.54)
-					(name "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "SW_Push4_1_1"
-				(pin passive line
-					(at -5.08 0 0)
-					(length 2.54)
-					(hide yes)
-					(name "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 0 180)
-					(length 2.54)
-					(hide yes)
-					(name "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4048,7 +4009,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 212.09 15.24 0)
+		(at 267.97 19.05 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -4057,7 +4018,7 @@
 		(fields_autoplaced yes)
 		(uuid "089775f2-cea4-4f86-a5e0-06678fb081cd")
 		(property "Reference" "H1"
-			(at 214.63 13.9699 0)
+			(at 270.51 17.7799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4067,7 +4028,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 214.63 16.5099 0)
+			(at 270.51 20.3199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4076,8 +4037,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3mm_Pad_Via"
-			(at 212.09 15.24 0)
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+			(at 267.97 19.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4086,7 +4047,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 212.09 15.24 0)
+			(at 267.97 19.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4095,7 +4056,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 212.09 15.24 0)
+			(at 267.97 19.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4113,8 +4074,8 @@
 		)
 	)
 	(symbol
-		(lib_id "panel-library:SW_Push4")
-		(at 86.36 82.55 0)
+		(lib_id "Switch:SW_Push")
+		(at 187.96 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4123,7 +4084,7 @@
 		(fields_autoplaced yes)
 		(uuid "0d4b34b7-afdc-4788-84d6-69e889aaa5b7")
 		(property "Reference" "SW3"
-			(at 86.36 74.93 0)
+			(at 187.96 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4131,15 +4092,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 86.36 77.47 0)
+			(at 187.96 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "panel-library:ButtonSMT_CnK_KSC2_J"
-			(at 86.36 77.47 0)
+		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
+			(at 187.96 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4148,7 +4109,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 86.36 77.47 0)
+			(at 187.96 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4157,7 +4118,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 86.36 85.09 0)
+			(at 187.96 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4170,12 +4131,6 @@
 		)
 		(pin "1"
 			(uuid "e5106545-82ed-4816-9f57-33bbf72df749")
-		)
-		(pin "4"
-			(uuid "45402a58-c436-4a1d-88e0-1625e57dcb9f")
-		)
-		(pin "3"
-			(uuid "3f6b4bff-f427-4542-8ed4-4034176ab19d")
 		)
 		(instances
 			(project "board2-buttons"
@@ -4796,7 +4751,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 212.09 45.72 0)
+		(at 267.97 49.53 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -4805,7 +4760,7 @@
 		(fields_autoplaced yes)
 		(uuid "24304663-f66d-47e1-9da8-59213905134a")
 		(property "Reference" "H8"
-			(at 214.63 44.4499 0)
+			(at 270.51 48.2599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4815,7 +4770,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 214.63 46.9899 0)
+			(at 270.51 50.7999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4824,8 +4779,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3mm_Pad_Via"
-			(at 212.09 45.72 0)
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+			(at 267.97 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4834,7 +4789,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 212.09 45.72 0)
+			(at 267.97 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4843,7 +4798,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 212.09 45.72 0)
+			(at 267.97 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4996,7 +4951,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 212.09 20.32 0)
+		(at 267.97 24.13 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -5005,7 +4960,7 @@
 		(fields_autoplaced yes)
 		(uuid "2d05dcc1-4e6e-4077-a713-1b31ef74d079")
 		(property "Reference" "H3"
-			(at 214.63 19.0499 0)
+			(at 270.51 22.8599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5015,7 +4970,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 214.63 21.5899 0)
+			(at 270.51 25.3999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5024,8 +4979,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3mm_Pad_Via"
-			(at 212.09 20.32 0)
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+			(at 267.97 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5034,7 +4989,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 212.09 20.32 0)
+			(at 267.97 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5043,7 +4998,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 212.09 20.32 0)
+			(at 267.97 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5338,8 +5293,8 @@
 		)
 	)
 	(symbol
-		(lib_id "panel-library:SW_Push4")
-		(at 106.68 82.55 0)
+		(lib_id "Switch:SW_Push")
+		(at 168.91 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5348,7 +5303,7 @@
 		(fields_autoplaced yes)
 		(uuid "487b02d5-017e-4517-9314-a732b6d8eb5d")
 		(property "Reference" "SW4"
-			(at 106.68 74.93 0)
+			(at 168.91 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5356,15 +5311,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 106.68 77.47 0)
+			(at 168.91 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "panel-library:ButtonSMT_CnK_KSC2_J"
-			(at 106.68 77.47 0)
+		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
+			(at 168.91 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5373,7 +5328,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 106.68 77.47 0)
+			(at 168.91 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5382,7 +5337,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 106.68 85.09 0)
+			(at 168.91 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5395,12 +5350,6 @@
 		)
 		(pin "1"
 			(uuid "694d9483-3230-4ac3-8892-d576a3327c49")
-		)
-		(pin "3"
-			(uuid "87d306f8-e61a-4648-afea-b43b1f26f017")
-		)
-		(pin "4"
-			(uuid "026c5387-a05a-400c-969b-87f1d17d9092")
 		)
 		(instances
 			(project "board2-buttons"
@@ -6996,7 +6945,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 212.09 25.4 0)
+		(at 267.97 29.21 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -7005,7 +6954,7 @@
 		(fields_autoplaced yes)
 		(uuid "72a5b725-18b6-41bc-bc38-936323621f50")
 		(property "Reference" "H4"
-			(at 214.63 24.1299 0)
+			(at 270.51 27.9399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7015,7 +6964,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 214.63 26.6699 0)
+			(at 270.51 30.4799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7024,8 +6973,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3mm_Pad_Via"
-			(at 212.09 25.4 0)
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+			(at 267.97 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7034,7 +6983,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 212.09 25.4 0)
+			(at 267.97 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7043,7 +6992,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 212.09 25.4 0)
+			(at 267.97 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7062,7 +7011,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 212.09 50.8 0)
+		(at 267.97 54.61 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -7071,7 +7020,7 @@
 		(fields_autoplaced yes)
 		(uuid "75dcc800-a245-4b77-bf9b-71877f8573ff")
 		(property "Reference" "H9"
-			(at 214.63 49.5299 0)
+			(at 270.51 53.3399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7081,7 +7030,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 214.63 52.0699 0)
+			(at 270.51 55.8799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7090,8 +7039,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3mm_Pad_Via"
-			(at 212.09 50.8 0)
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+			(at 267.97 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7100,7 +7049,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 212.09 50.8 0)
+			(at 267.97 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7109,7 +7058,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 212.09 50.8 0)
+			(at 267.97 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7194,8 +7143,8 @@
 		)
 	)
 	(symbol
-		(lib_id "panel-library:SW_Push4")
-		(at 128.27 82.55 0)
+		(lib_id "Switch:SW_Push")
+		(at 148.59 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7204,7 +7153,7 @@
 		(fields_autoplaced yes)
 		(uuid "7c9f8f68-64d2-4712-8dd6-b1f2c356dd0f")
 		(property "Reference" "SW5"
-			(at 128.27 74.93 0)
+			(at 148.59 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7212,15 +7161,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 128.27 77.47 0)
+			(at 148.59 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "panel-library:ButtonSMT_CnK_KSC2_J"
-			(at 128.27 77.47 0)
+		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
+			(at 148.59 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7229,7 +7178,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 128.27 77.47 0)
+			(at 148.59 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7238,7 +7187,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 128.27 85.09 0)
+			(at 148.59 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7251,12 +7200,6 @@
 		)
 		(pin "1"
 			(uuid "59db4e7e-2333-46c1-810e-1bb34417750b")
-		)
-		(pin "3"
-			(uuid "a58727ca-c284-4431-9187-23a91d746661")
-		)
-		(pin "4"
-			(uuid "b63f80e6-5cb5-4283-be3c-620116676770")
 		)
 		(instances
 			(project "board2-buttons"
@@ -7401,7 +7344,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 212.09 30.48 0)
+		(at 267.97 34.29 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -7410,7 +7353,7 @@
 		(fields_autoplaced yes)
 		(uuid "81d59657-39b4-4aeb-94ba-879df6559d74")
 		(property "Reference" "H5"
-			(at 214.63 29.2099 0)
+			(at 270.51 33.0199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7420,7 +7363,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 214.63 31.7499 0)
+			(at 270.51 35.5599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7429,8 +7372,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3mm_Pad_Via"
-			(at 212.09 30.48 0)
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+			(at 267.97 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7439,7 +7382,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 212.09 30.48 0)
+			(at 267.97 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7448,7 +7391,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 212.09 30.48 0)
+			(at 267.97 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8014,7 +7957,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 212.09 40.64 0)
+		(at 267.97 44.45 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -8023,7 +7966,7 @@
 		(fields_autoplaced yes)
 		(uuid "9478d54e-7f6f-4df9-99c7-22183892a503")
 		(property "Reference" "H7"
-			(at 214.63 39.3699 0)
+			(at 270.51 43.1799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8033,7 +7976,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 214.63 41.9099 0)
+			(at 270.51 45.7199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8042,8 +7985,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3mm_Pad_Via"
-			(at 212.09 40.64 0)
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+			(at 267.97 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8052,7 +7995,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 212.09 40.64 0)
+			(at 267.97 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8061,7 +8004,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 212.09 40.64 0)
+			(at 267.97 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9193,8 +9136,8 @@
 		)
 	)
 	(symbol
-		(lib_id "panel-library:SW_Push4")
-		(at 187.96 82.55 0)
+		(lib_id "Switch:SW_Push")
+		(at 86.36 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9203,7 +9146,7 @@
 		(fields_autoplaced yes)
 		(uuid "be52cd63-6d41-4fe6-97a3-97c1eafc6ebd")
 		(property "Reference" "SW8"
-			(at 187.96 74.93 0)
+			(at 86.36 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9211,15 +9154,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 187.96 77.47 0)
+			(at 86.36 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "panel-library:ButtonSMT_CnK_KSC2_J"
-			(at 187.96 77.47 0)
+		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
+			(at 86.36 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9228,7 +9171,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 187.96 77.47 0)
+			(at 86.36 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9237,7 +9180,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 187.96 85.09 0)
+			(at 86.36 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9251,12 +9194,6 @@
 		(pin "1"
 			(uuid "ba7c0161-2712-4b4a-a0c6-49b01ad0aff1")
 		)
-		(pin "4"
-			(uuid "08320bd0-4581-462a-8ed4-03897efa8b29")
-		)
-		(pin "3"
-			(uuid "de5e2b8a-65c9-4877-92ed-136c02fe7baa")
-		)
 		(instances
 			(project "board2-buttons"
 				(path "/310dd08e-694c-4f28-98ee-443d480825f0"
@@ -9267,7 +9204,7 @@
 		)
 	)
 	(symbol
-		(lib_id "panel-library:SW_Push4")
+		(lib_id "Switch:SW_Push")
 		(at 66.04 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -9292,7 +9229,7 @@
 				)
 			)
 		)
-		(property "Footprint" "panel-library:ButtonSMT_CnK_KSC2_J"
+		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
 			(at 66.04 77.47 0)
 			(effects
 				(font
@@ -9311,7 +9248,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 66.04 85.09 0)
+			(at 66.04 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9324,12 +9261,6 @@
 		)
 		(pin "1"
 			(uuid "1da5b221-2640-4896-a5d8-1edbd522af4b")
-		)
-		(pin "4"
-			(uuid "7e554834-2ae1-44c1-a518-c8953d64a64d")
-		)
-		(pin "3"
-			(uuid "daa2cccc-cc09-4c7d-8c44-eabcc10812f4")
 		)
 		(instances
 			(project "board2-buttons"
@@ -10170,7 +10101,7 @@
 		)
 	)
 	(symbol
-		(lib_id "panel-library:SW_Push4")
+		(lib_id "Switch:SW_Push")
 		(at 44.45 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10195,7 +10126,7 @@
 				)
 			)
 		)
-		(property "Footprint" "panel-library:ButtonSMT_CnK_KSC2_J"
+		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
 			(at 44.45 77.47 0)
 			(effects
 				(font
@@ -10214,7 +10145,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 44.45 85.09 0)
+			(at 44.45 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10228,12 +10159,6 @@
 		(pin "1"
 			(uuid "2c9e62ae-1e28-45ad-b33e-90bcde234986")
 		)
-		(pin "4"
-			(uuid "2d20ba1b-22b0-448f-bfa8-b67fb63a09b8")
-		)
-		(pin "3"
-			(uuid "771978a9-11ab-42c0-8c8c-af99332ad3a3")
-		)
 		(instances
 			(project "board2-buttons"
 				(path "/310dd08e-694c-4f28-98ee-443d480825f0"
@@ -10244,8 +10169,8 @@
 		)
 	)
 	(symbol
-		(lib_id "panel-library:SW_Push4")
-		(at 168.91 82.55 0)
+		(lib_id "Switch:SW_Push")
+		(at 106.68 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10254,7 +10179,7 @@
 		(fields_autoplaced yes)
 		(uuid "db135be3-e634-4af6-8883-f05a860364bb")
 		(property "Reference" "SW7"
-			(at 168.91 74.93 0)
+			(at 106.68 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10262,15 +10187,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 168.91 77.47 0)
+			(at 106.68 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "panel-library:ButtonSMT_CnK_KSC2_J"
-			(at 168.91 77.47 0)
+		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
+			(at 106.68 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10279,7 +10204,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 168.91 77.47 0)
+			(at 106.68 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10288,7 +10213,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 168.91 85.09 0)
+			(at 106.68 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10301,12 +10226,6 @@
 		)
 		(pin "1"
 			(uuid "6a8266ce-8724-41bc-a0b3-86f389f103e1")
-		)
-		(pin "4"
-			(uuid "18f620e1-8ec5-46a3-af5f-5459f642c65c")
-		)
-		(pin "3"
-			(uuid "74ca5a72-b95d-476d-b2f5-5289f18d57c9")
 		)
 		(instances
 			(project "board2-buttons"
@@ -10609,7 +10528,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 233.68 15.24 0)
+		(at 267.97 59.69 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -10618,7 +10537,7 @@
 		(fields_autoplaced yes)
 		(uuid "de891c0a-ec04-4f7d-a17a-eab47b0a188c")
 		(property "Reference" "H2"
-			(at 236.22 13.9699 0)
+			(at 270.51 58.4199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10628,7 +10547,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 236.22 16.5099 0)
+			(at 270.51 60.9599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10637,8 +10556,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3mm_Pad_Via"
-			(at 233.68 15.24 0)
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+			(at 267.97 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10647,7 +10566,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 233.68 15.24 0)
+			(at 267.97 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10656,7 +10575,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 233.68 15.24 0)
+			(at 267.97 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10952,8 +10871,8 @@
 		)
 	)
 	(symbol
-		(lib_id "panel-library:SW_Push4")
-		(at 148.59 82.55 0)
+		(lib_id "Switch:SW_Push")
+		(at 128.27 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10962,7 +10881,7 @@
 		(fields_autoplaced yes)
 		(uuid "ed05528a-aed5-4d37-95b3-338558d0fa82")
 		(property "Reference" "SW6"
-			(at 148.59 74.93 0)
+			(at 128.27 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10970,15 +10889,15 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 148.59 77.47 0)
+			(at 128.27 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "panel-library:ButtonSMT_CnK_KSC2_J"
-			(at 148.59 77.47 0)
+		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
+			(at 128.27 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10987,7 +10906,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 148.59 77.47 0)
+			(at 128.27 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10996,7 +10915,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 148.59 85.09 0)
+			(at 128.27 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11009,12 +10928,6 @@
 		)
 		(pin "1"
 			(uuid "f312c197-b92a-49a2-8ecc-8b2aab4ffec3")
-		)
-		(pin "4"
-			(uuid "4021cea8-552b-4657-83d8-ff6be9eac062")
-		)
-		(pin "3"
-			(uuid "261441b5-f006-48b6-94ca-86c623899c05")
 		)
 		(instances
 			(project "board2-buttons"
@@ -11565,7 +11478,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 212.09 35.56 0)
+		(at 267.97 39.37 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -11574,7 +11487,7 @@
 		(fields_autoplaced yes)
 		(uuid "f7998ddd-a853-4918-bf71-dcb5fc330815")
 		(property "Reference" "H6"
-			(at 214.63 34.2899 0)
+			(at 270.51 38.0999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11584,7 +11497,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 214.63 36.8299 0)
+			(at 270.51 40.6399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11593,8 +11506,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_3mm_Pad_Via"
-			(at 212.09 35.56 0)
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+			(at 267.97 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11603,7 +11516,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 212.09 35.56 0)
+			(at 267.97 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11612,7 +11525,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 212.09 35.56 0)
+			(at 267.97 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)

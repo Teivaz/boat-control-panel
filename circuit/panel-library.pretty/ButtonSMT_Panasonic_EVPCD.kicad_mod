@@ -1,0 +1,187 @@
+(footprint "ButtonSMT_Panasonic_EVPCD"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -4.2 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "399c618f-bfa4-4687-8b9d-69a455298099")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.16)
+			)
+		)
+	)
+	(property "Value" "Untitled"
+		(at 0 -2.2 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2de890c6-284e-4c05-b3bb-603d545f90b6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.mouser.com/catalog/specsheets/Panasonic_2-10-2023_Switch%20(EVP-BD,%20EVP-0B,%20EVP-CD%20Series).pdf"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b13783a5-cb13-49df-aa4d-9028bda215d3")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e416b61a-96f7-440f-a576-59251c7ed001")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -3.1 -3.1)
+		(end 3.1 -3.1)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "69d762e2-c087-4454-a2f4-e23bb04b1297")
+	)
+	(fp_line
+		(start -3.1 -1.2)
+		(end -3.1 -3.1)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "abe68af4-d9b0-4e04-b8d5-9a42b7e9d0a7")
+	)
+	(fp_line
+		(start -3.1 3.1)
+		(end -3.1 1.2)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "8f8fe8be-38f2-4f24-ae09-e12033172e72")
+	)
+	(fp_line
+		(start 3.1 -3.1)
+		(end 3.1 -1.2)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "806bda72-56f3-4ee3-8e67-b700cb0d9288")
+	)
+	(fp_line
+		(start 3.1 1.2)
+		(end 3.1 3.1)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "fae4c987-2d86-480c-b59a-c89bb2a57c3e")
+	)
+	(fp_line
+		(start 3.1 3.1)
+		(end -3.1 3.1)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "ef27b3cb-9757-4e18-bc50-fea5f9a3e649")
+	)
+	(fp_rect
+		(start -3.3 -3.3)
+		(end 3.3 3.3)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "c824ed1a-c084-46e7-92d5-3dc92319b731")
+	)
+	(fp_rect
+		(start -3 -3)
+		(end 3 3)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "826e0d12-6cfc-4680-a8f0-f688c3906474")
+	)
+	(fp_circle
+		(center 0 0)
+		(end 1.45 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "50e24ce7-4f70-495c-86bb-f0dee301fa08")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 4.25 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "8440e47b-2fc9-49dd-8571-c01c772abf93")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -3 0)
+		(size 2 2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "047228a4-877d-4159-9676-7a46ca664947")
+	)
+	(pad "2" smd rect
+		(at 3 0)
+		(size 2 2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "0c68295b-ac5e-43ed-b318-580bd4ef1d2d")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/../3dmodels/Button-EVPCD.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)
