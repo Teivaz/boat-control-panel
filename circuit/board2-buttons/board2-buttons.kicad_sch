@@ -4,6 +4,13 @@
 	(generator_version "9.0")
 	(uuid "310dd08e-694c-4f28-98ee-443d480825f0")
 	(paper "A4")
+	(title_block
+		(title "Board1 - Buttons")
+		(date "2026-03-01")
+		(rev "1")
+		(company "Teivaz")
+		(comment 1 "Project: ${PROJECT}")
+	)
 	(lib_symbols
 		(symbol "Connector:Conn_01x05_Socket"
 			(pin_names
@@ -2458,6 +2465,16 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "9 x 3x10x7"
+		(exclude_from_sim no)
+		(at 36.068 176.53 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "3b7f9357-8ac9-405d-a3fb-9d8ed0b41b41")
+	)
 	(junction
 		(at 198.12 59.69)
 		(diameter 0)
@@ -2505,6 +2522,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "48b551c2-0875-417b-8f9b-ac236f329002")
+	)
+	(junction
+		(at 223.52 78.74)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5638484d-4f10-4961-88c1-c6e5132d91b1")
 	)
 	(junction
 		(at 64.77 44.45)
@@ -2589,12 +2612,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dad50644-8034-4fac-8c3e-dec541ceae38")
-	)
-	(junction
-		(at 207.01 78.74)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e92e27a9-c415-4773-9060-c51e5bd10ace")
 	)
 	(no_connect
 		(at 245.11 142.24)
@@ -2786,7 +2803,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 106.68) (xy 204.47 106.68)
+			(xy 91.44 106.68) (xy 204.47 106.68)
 		)
 		(stroke
 			(width 0)
@@ -2846,7 +2863,7 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 25.4) (xy 44.45 27.94)
+			(xy 44.45 26.67) (xy 44.45 27.94)
 		)
 		(stroke
 			(width 0)
@@ -2856,7 +2873,7 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 116.84) (xy 204.47 116.84)
+			(xy 172.72 116.84) (xy 204.47 116.84)
 		)
 		(stroke
 			(width 0)
@@ -2946,7 +2963,7 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 119.38) (xy 204.47 119.38)
+			(xy 191.77 119.38) (xy 204.47 119.38)
 		)
 		(stroke
 			(width 0)
@@ -3026,7 +3043,7 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 82.55) (xy 111.76 116.84)
+			(xy 172.72 82.55) (xy 172.72 116.84)
 		)
 		(stroke
 			(width 0)
@@ -3086,7 +3103,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 114.3) (xy 204.47 114.3)
+			(xy 152.4 114.3) (xy 204.47 114.3)
 		)
 		(stroke
 			(width 0)
@@ -3103,6 +3120,16 @@
 			(type default)
 		)
 		(uuid "5c7c92d9-97e4-42a2-aee3-28bb8118f6ba")
+	)
+	(wire
+		(pts
+			(xy 223.52 78.74) (xy 267.97 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5fdae2ef-7715-4f02-8d9c-511b7e6c3b52")
 	)
 	(wire
 		(pts
@@ -3216,16 +3243,6 @@
 	)
 	(wire
 		(pts
-			(xy 207.01 78.74) (xy 267.97 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7c8dcd58-01b6-435a-b17b-7b3e6fcbf982")
-	)
-	(wire
-		(pts
 			(xy 160.02 59.69) (xy 154.94 59.69)
 		)
 		(stroke
@@ -3236,7 +3253,7 @@
 	)
 	(wire
 		(pts
-			(xy 153.67 111.76) (xy 204.47 111.76)
+			(xy 132.08 111.76) (xy 204.47 111.76)
 		)
 		(stroke
 			(width 0)
@@ -3386,7 +3403,7 @@
 	)
 	(wire
 		(pts
-			(xy 201.93 78.74) (xy 207.01 78.74)
+			(xy 201.93 78.74) (xy 223.52 78.74)
 		)
 		(stroke
 			(width 0)
@@ -3406,7 +3423,7 @@
 	)
 	(wire
 		(pts
-			(xy 173.99 109.22) (xy 204.47 109.22)
+			(xy 111.76 109.22) (xy 204.47 109.22)
 		)
 		(stroke
 			(width 0)
@@ -3546,7 +3563,7 @@
 	)
 	(wire
 		(pts
-			(xy 153.67 82.55) (xy 153.67 111.76)
+			(xy 132.08 82.55) (xy 132.08 111.76)
 		)
 		(stroke
 			(width 0)
@@ -3596,7 +3613,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 106.68) (xy 193.04 82.55)
+			(xy 91.44 106.68) (xy 91.44 82.55)
 		)
 		(stroke
 			(width 0)
@@ -3626,7 +3643,7 @@
 	)
 	(wire
 		(pts
-			(xy 173.99 82.55) (xy 173.99 109.22)
+			(xy 111.76 82.55) (xy 111.76 109.22)
 		)
 		(stroke
 			(width 0)
@@ -3646,7 +3663,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 82.55) (xy 133.35 114.3)
+			(xy 152.4 82.55) (xy 152.4 114.3)
 		)
 		(stroke
 			(width 0)
@@ -3706,7 +3723,17 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 82.55) (xy 91.44 119.38)
+			(xy 223.52 77.47) (xy 223.52 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f24c5824-4c4e-4cb0-9594-32ab440f5643")
+	)
+	(wire
+		(pts
+			(xy 191.77 82.55) (xy 191.77 119.38)
 		)
 		(stroke
 			(width 0)
@@ -3938,7 +3965,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x05_Socket"
+		(property "Value" "PicoLock"
 			(at 273.05 133.3499 0)
 			(effects
 				(font
@@ -4009,7 +4036,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 267.97 19.05 0)
+		(at 35.56 130.81 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -4018,7 +4045,7 @@
 		(fields_autoplaced yes)
 		(uuid "089775f2-cea4-4f86-a5e0-06678fb081cd")
 		(property "Reference" "H1"
-			(at 270.51 17.7799 0)
+			(at 38.1 129.5399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4027,8 +4054,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "MountingHole"
-			(at 270.51 20.3199 0)
+		(property "Value" "3X10X7"
+			(at 38.1 132.0799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4038,7 +4065,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
-			(at 267.97 19.05 0)
+			(at 35.56 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4046,8 +4073,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 267.97 19.05 0)
+		(property "Datasheet" ""
+			(at 35.56 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4056,7 +4083,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 267.97 19.05 0)
+			(at 35.56 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4075,7 +4102,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 187.96 82.55 0)
+		(at 86.36 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4084,15 +4111,15 @@
 		(fields_autoplaced yes)
 		(uuid "0d4b34b7-afdc-4788-84d6-69e889aaa5b7")
 		(property "Reference" "SW3"
-			(at 187.96 74.93 0)
+			(at 86.36 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "SW_Push"
-			(at 187.96 77.47 0)
+		(property "Value" "EVPCD"
+			(at 86.36 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4100,7 +4127,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
-			(at 187.96 77.47 0)
+			(at 86.36 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4109,7 +4136,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 187.96 77.47 0)
+			(at 86.36 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4118,7 +4145,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 187.96 82.55 0)
+			(at 86.36 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4143,7 +4170,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 182.88 82.55 0)
+		(at 81.28 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4152,7 +4179,7 @@
 		(fields_autoplaced yes)
 		(uuid "0d50fc58-683a-4cdd-b191-35d1b2e3ce23")
 		(property "Reference" "#PWR043"
-			(at 182.88 88.9 0)
+			(at 81.28 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4161,7 +4188,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 182.88 87.63 0)
+			(at 81.28 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4170,7 +4197,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 182.88 82.55 0)
+			(at 81.28 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4179,7 +4206,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 182.88 82.55 0)
+			(at 81.28 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4188,7 +4215,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 182.88 82.55 0)
+			(at 81.28 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4413,7 +4440,7 @@
 	)
 	(symbol
 		(lib_id "power:VDD")
-		(at 207.01 71.12 0)
+		(at 223.52 69.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4421,7 +4448,7 @@
 		(dnp no)
 		(uuid "139d1b45-d2e6-42fd-94f3-a148033903e2")
 		(property "Reference" "#PWR034"
-			(at 207.01 74.93 0)
+			(at 223.52 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4430,7 +4457,7 @@
 			)
 		)
 		(property "Value" "VDD"
-			(at 207.01 67.31 0)
+			(at 223.52 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4438,7 +4465,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 207.01 71.12 0)
+			(at 223.52 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4447,7 +4474,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 207.01 71.12 0)
+			(at 223.52 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4456,7 +4483,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VDD\""
-			(at 207.01 71.12 0)
+			(at 223.52 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4751,7 +4778,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 267.97 49.53 0)
+		(at 35.56 166.37 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -4760,7 +4787,7 @@
 		(fields_autoplaced yes)
 		(uuid "24304663-f66d-47e1-9da8-59213905134a")
 		(property "Reference" "H8"
-			(at 270.51 48.2599 0)
+			(at 38.1 165.0999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4769,8 +4796,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "MountingHole"
-			(at 270.51 50.7999 0)
+		(property "Value" "3X10X7"
+			(at 38.1 167.6399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4780,7 +4807,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
-			(at 267.97 49.53 0)
+			(at 35.56 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4788,8 +4815,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 267.97 49.53 0)
+		(property "Datasheet" ""
+			(at 35.56 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4798,7 +4825,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 267.97 49.53 0)
+			(at 35.56 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4951,7 +4978,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 267.97 24.13 0)
+		(at 35.56 140.97 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -4960,7 +4987,7 @@
 		(fields_autoplaced yes)
 		(uuid "2d05dcc1-4e6e-4077-a713-1b31ef74d079")
 		(property "Reference" "H3"
-			(at 270.51 22.8599 0)
+			(at 38.1 139.6999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4969,8 +4996,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "MountingHole"
-			(at 270.51 25.3999 0)
+		(property "Value" "3X10X7"
+			(at 38.1 142.2399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4980,7 +5007,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
-			(at 267.97 24.13 0)
+			(at 35.56 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4988,8 +5015,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 267.97 24.13 0)
+		(property "Datasheet" ""
+			(at 35.56 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4998,7 +5025,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 267.97 24.13 0)
+			(at 35.56 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5228,7 +5255,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 44.45 25.4 0)
+		(at 44.45 26.67 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5237,7 +5264,7 @@
 		(dnp no)
 		(uuid "481693a2-d6d0-4284-a219-f2db578d1b46")
 		(property "Reference" "#PWR01"
-			(at 44.45 29.21 0)
+			(at 44.45 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5246,7 +5273,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 47.498 23.876 0)
+			(at 47.498 25.146 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5254,7 +5281,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 44.45 25.4 0)
+			(at 44.45 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5263,7 +5290,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 44.45 25.4 0)
+			(at 44.45 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5272,7 +5299,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 44.45 25.4 0)
+			(at 44.45 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5294,7 +5321,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 168.91 82.55 0)
+		(at 106.68 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5303,15 +5330,15 @@
 		(fields_autoplaced yes)
 		(uuid "487b02d5-017e-4517-9314-a732b6d8eb5d")
 		(property "Reference" "SW4"
-			(at 168.91 74.93 0)
+			(at 106.68 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "SW_Push"
-			(at 168.91 77.47 0)
+		(property "Value" "EVPCD"
+			(at 106.68 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5319,7 +5346,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
-			(at 168.91 77.47 0)
+			(at 106.68 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5328,7 +5355,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 168.91 77.47 0)
+			(at 106.68 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5337,7 +5364,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 168.91 82.55 0)
+			(at 106.68 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5849,7 +5876,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 81.28 82.55 0)
+		(at 181.61 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5858,7 +5885,7 @@
 		(fields_autoplaced yes)
 		(uuid "586840b0-faa4-41d1-82da-9114d0330bf2")
 		(property "Reference" "#PWR038"
-			(at 81.28 88.9 0)
+			(at 181.61 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5867,7 +5894,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 81.28 87.63 0)
+			(at 181.61 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5876,7 +5903,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 81.28 82.55 0)
+			(at 181.61 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5885,7 +5912,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 81.28 82.55 0)
+			(at 181.61 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5894,7 +5921,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 81.28 82.55 0)
+			(at 181.61 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5932,7 +5959,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0R"
+		(property "Value" "0r"
 			(at 260.604 109.22 0)
 			(effects
 				(font
@@ -6493,7 +6520,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "0R"
+		(property "Value" "0r"
 			(at 268.224 106.68 0)
 			(effects
 				(font
@@ -6562,7 +6589,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x05_Socket"
+		(property "Value" "PicoLock"
 			(at 273.05 151.1299 0)
 			(effects
 				(font
@@ -6649,7 +6676,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x05_Socket"
+		(property "Value" "1x5x2.54"
 			(at 274.32 85.0899 0)
 			(effects
 				(font
@@ -6945,7 +6972,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 267.97 29.21 0)
+		(at 35.56 146.05 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -6954,7 +6981,7 @@
 		(fields_autoplaced yes)
 		(uuid "72a5b725-18b6-41bc-bc38-936323621f50")
 		(property "Reference" "H4"
-			(at 270.51 27.9399 0)
+			(at 38.1 144.7799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6963,8 +6990,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "MountingHole"
-			(at 270.51 30.4799 0)
+		(property "Value" "3X10X7"
+			(at 38.1 147.3199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6974,7 +7001,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
-			(at 267.97 29.21 0)
+			(at 35.56 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6982,8 +7009,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 267.97 29.21 0)
+		(property "Datasheet" ""
+			(at 35.56 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6992,7 +7019,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 267.97 29.21 0)
+			(at 35.56 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7011,7 +7038,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 267.97 54.61 0)
+		(at 35.56 171.45 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -7020,7 +7047,7 @@
 		(fields_autoplaced yes)
 		(uuid "75dcc800-a245-4b77-bf9b-71877f8573ff")
 		(property "Reference" "H9"
-			(at 270.51 53.3399 0)
+			(at 38.1 170.1799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7029,8 +7056,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "MountingHole"
-			(at 270.51 55.8799 0)
+		(property "Value" "3X10X7"
+			(at 38.1 172.7199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7040,7 +7067,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
-			(at 267.97 54.61 0)
+			(at 35.56 171.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7048,8 +7075,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 267.97 54.61 0)
+		(property "Datasheet" ""
+			(at 35.56 171.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7058,7 +7085,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 267.97 54.61 0)
+			(at 35.56 171.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7077,7 +7104,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 123.19 82.55 0)
+		(at 142.24 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7086,7 +7113,7 @@
 		(fields_autoplaced yes)
 		(uuid "79804c57-102c-4d46-9327-df74979aa159")
 		(property "Reference" "#PWR040"
-			(at 123.19 88.9 0)
+			(at 142.24 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7095,7 +7122,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 123.19 87.63 0)
+			(at 142.24 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7104,7 +7131,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 123.19 82.55 0)
+			(at 142.24 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7113,7 +7140,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 123.19 82.55 0)
+			(at 142.24 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7122,7 +7149,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 123.19 82.55 0)
+			(at 142.24 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7144,7 +7171,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 148.59 82.55 0)
+		(at 127 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7153,15 +7180,15 @@
 		(fields_autoplaced yes)
 		(uuid "7c9f8f68-64d2-4712-8dd6-b1f2c356dd0f")
 		(property "Reference" "SW5"
-			(at 148.59 74.93 0)
+			(at 127 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "SW_Push"
-			(at 148.59 77.47 0)
+		(property "Value" "EVPCD"
+			(at 127 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7169,7 +7196,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
-			(at 148.59 77.47 0)
+			(at 127 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7178,7 +7205,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 148.59 77.47 0)
+			(at 127 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7187,7 +7214,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 148.59 82.55 0)
+			(at 127 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7344,7 +7371,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 267.97 34.29 0)
+		(at 35.56 151.13 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -7353,7 +7380,7 @@
 		(fields_autoplaced yes)
 		(uuid "81d59657-39b4-4aeb-94ba-879df6559d74")
 		(property "Reference" "H5"
-			(at 270.51 33.0199 0)
+			(at 38.1 149.8599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7362,8 +7389,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "MountingHole"
-			(at 270.51 35.5599 0)
+		(property "Value" "3X10X7"
+			(at 38.1 152.3999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7373,7 +7400,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
-			(at 267.97 34.29 0)
+			(at 35.56 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7381,8 +7408,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 267.97 34.29 0)
+		(property "Datasheet" ""
+			(at 35.56 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7391,7 +7418,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 267.97 34.29 0)
+			(at 35.56 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7476,7 +7503,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 101.6 82.55 0)
+		(at 162.56 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7485,7 +7512,7 @@
 		(fields_autoplaced yes)
 		(uuid "830d544e-abbb-4d18-aaa8-495f71afbc3c")
 		(property "Reference" "#PWR039"
-			(at 101.6 88.9 0)
+			(at 162.56 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7494,7 +7521,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 101.6 87.63 0)
+			(at 162.56 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7503,7 +7530,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 101.6 82.55 0)
+			(at 162.56 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7512,7 +7539,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 101.6 82.55 0)
+			(at 162.56 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7521,7 +7548,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 101.6 82.55 0)
+			(at 162.56 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7957,7 +7984,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 267.97 44.45 0)
+		(at 35.56 161.29 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -7966,7 +7993,7 @@
 		(fields_autoplaced yes)
 		(uuid "9478d54e-7f6f-4df9-99c7-22183892a503")
 		(property "Reference" "H7"
-			(at 270.51 43.1799 0)
+			(at 38.1 160.0199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7975,8 +8002,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "MountingHole"
-			(at 270.51 45.7199 0)
+		(property "Value" "3X10X7"
+			(at 38.1 162.5599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7986,7 +8013,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
-			(at 267.97 44.45 0)
+			(at 35.56 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7994,8 +8021,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 267.97 44.45 0)
+		(property "Datasheet" ""
+			(at 35.56 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8004,7 +8031,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 267.97 44.45 0)
+			(at 35.56 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8927,7 +8954,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 143.51 82.55 0)
+		(at 121.92 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8936,7 +8963,7 @@
 		(fields_autoplaced yes)
 		(uuid "b93398fa-f073-4aa2-b30b-d9ae1add81f6")
 		(property "Reference" "#PWR041"
-			(at 143.51 88.9 0)
+			(at 121.92 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8945,7 +8972,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 143.51 87.63 0)
+			(at 121.92 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8954,7 +8981,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 143.51 82.55 0)
+			(at 121.92 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8963,7 +8990,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 143.51 82.55 0)
+			(at 121.92 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8972,7 +8999,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 143.51 82.55 0)
+			(at 121.92 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9137,7 +9164,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 86.36 82.55 0)
+		(at 186.69 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9146,15 +9173,15 @@
 		(fields_autoplaced yes)
 		(uuid "be52cd63-6d41-4fe6-97a3-97c1eafc6ebd")
 		(property "Reference" "SW8"
-			(at 86.36 74.93 0)
+			(at 186.69 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "SW_Push"
-			(at 86.36 77.47 0)
+		(property "Value" "EVPCD"
+			(at 186.69 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9162,7 +9189,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
-			(at 86.36 77.47 0)
+			(at 186.69 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9171,7 +9198,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 86.36 77.47 0)
+			(at 186.69 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9180,7 +9207,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 86.36 82.55 0)
+			(at 186.69 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9221,7 +9248,7 @@
 				)
 			)
 		)
-		(property "Value" "SW_Push"
+		(property "Value" "EVPCD"
 			(at 66.04 77.47 0)
 			(effects
 				(font
@@ -10033,7 +10060,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 207.01 74.93 0)
+		(at 223.52 73.66 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10041,7 +10068,7 @@
 		(dnp no)
 		(uuid "d3767f46-acf9-4288-aacd-4540e459d978")
 		(property "Reference" "R2"
-			(at 208.534 73.66 0)
+			(at 225.044 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10050,7 +10077,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 208.534 76.2 0)
+			(at 225.044 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10059,7 +10086,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 205.232 74.93 90)
+			(at 221.742 73.66 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10068,7 +10095,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 207.01 74.93 0)
+			(at 223.52 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10077,7 +10104,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 207.01 74.93 0)
+			(at 223.52 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10118,7 +10145,7 @@
 				)
 			)
 		)
-		(property "Value" "SW_Push"
+		(property "Value" "EVPCD"
 			(at 44.45 77.47 0)
 			(effects
 				(font
@@ -10170,7 +10197,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 106.68 82.55 0)
+		(at 167.64 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10179,15 +10206,15 @@
 		(fields_autoplaced yes)
 		(uuid "db135be3-e634-4af6-8883-f05a860364bb")
 		(property "Reference" "SW7"
-			(at 106.68 74.93 0)
+			(at 167.64 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "SW_Push"
-			(at 106.68 77.47 0)
+		(property "Value" "EVPCD"
+			(at 167.64 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10195,7 +10222,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
-			(at 106.68 77.47 0)
+			(at 167.64 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10204,7 +10231,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 106.68 77.47 0)
+			(at 167.64 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10213,7 +10240,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 106.68 82.55 0)
+			(at 167.64 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10528,7 +10555,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 267.97 59.69 0)
+		(at 35.56 135.89 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -10537,7 +10564,7 @@
 		(fields_autoplaced yes)
 		(uuid "de891c0a-ec04-4f7d-a17a-eab47b0a188c")
 		(property "Reference" "H2"
-			(at 270.51 58.4199 0)
+			(at 38.1 134.6199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10546,8 +10573,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "MountingHole"
-			(at 270.51 60.9599 0)
+		(property "Value" "3X10X7"
+			(at 38.1 137.1599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10557,7 +10584,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
-			(at 267.97 59.69 0)
+			(at 35.56 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10565,8 +10592,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 267.97 59.69 0)
+		(property "Datasheet" ""
+			(at 35.56 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10575,7 +10602,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 267.97 59.69 0)
+			(at 35.56 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10872,7 +10899,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 128.27 82.55 0)
+		(at 147.32 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10881,15 +10908,15 @@
 		(fields_autoplaced yes)
 		(uuid "ed05528a-aed5-4d37-95b3-338558d0fa82")
 		(property "Reference" "SW6"
-			(at 128.27 74.93 0)
+			(at 147.32 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "SW_Push"
-			(at 128.27 77.47 0)
+		(property "Value" "EVPCD"
+			(at 147.32 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10897,7 +10924,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
-			(at 128.27 77.47 0)
+			(at 147.32 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10906,7 +10933,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 128.27 77.47 0)
+			(at 147.32 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10915,7 +10942,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 128.27 82.55 0)
+			(at 147.32 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11141,7 +11168,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 163.83 82.55 0)
+		(at 101.6 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11150,7 +11177,7 @@
 		(fields_autoplaced yes)
 		(uuid "f3358035-fc54-4177-acf9-f622daf64cb6")
 		(property "Reference" "#PWR042"
-			(at 163.83 88.9 0)
+			(at 101.6 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11159,7 +11186,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 163.83 87.63 0)
+			(at 101.6 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11168,7 +11195,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 163.83 82.55 0)
+			(at 101.6 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11177,7 +11204,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 163.83 82.55 0)
+			(at 101.6 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11186,7 +11213,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 163.83 82.55 0)
+			(at 101.6 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11478,7 +11505,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 267.97 39.37 0)
+		(at 35.56 156.21 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -11487,7 +11514,7 @@
 		(fields_autoplaced yes)
 		(uuid "f7998ddd-a853-4918-bf71-dcb5fc330815")
 		(property "Reference" "H6"
-			(at 270.51 38.0999 0)
+			(at 38.1 154.9399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11496,8 +11523,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "MountingHole"
-			(at 270.51 40.6399 0)
+		(property "Value" "3X10X7"
+			(at 38.1 157.4799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11507,7 +11534,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
-			(at 267.97 39.37 0)
+			(at 35.56 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11515,8 +11542,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 267.97 39.37 0)
+		(property "Datasheet" ""
+			(at 35.56 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11525,7 +11552,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 267.97 39.37 0)
+			(at 35.56 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
