@@ -1,0 +1,145 @@
+(footprint "ledpipe_5x5"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -0.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "6bfb038d-c1af-4ade-9ce2-8cabfaac3ca9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "Untitled"
+		(at 0 1 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "23012d7e-454e-4342-b1a6-ad57ded7b143")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c6667623-390c-47e1-b65f-f2c36029d427")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fa06edc1-bd4c-4e38-bf54-52c8aa884ef2")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole board_only exclude_from_pos_files exclude_from_bom)
+	(fp_arc
+		(start -3.1 -1.9)
+		(mid 0 -5)
+		(end 3.1 -1.9)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "ec39283a-bacc-4255-94d6-0e7f5f7d00ed")
+	)
+	(fp_arc
+		(start 3.1 1.9)
+		(mid 0 5)
+		(end -3.1 1.9)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "5b9750a3-c073-4961-84cf-4aaaf53e9470")
+	)
+	(fp_poly
+		(pts
+			(xy -2.6 0) (xy -2.6 -2.6) (xy 2.6 -2.6) (xy 2.6 2.6) (xy -2.6 2.6) (xy -2.6 0) (xy -3.1 0) (xy -3.1 3.2)
+			(xy -1.3 5) (xy 1.3 5) (xy 3.1 3.2) (xy 3.1 -3.2) (xy 1.3 -5) (xy -1.3 -5) (xy -3.1 -3.2) (xy -3.1 0)
+		)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "17288d3a-afd1-4862-9cba-96b3ebde6fc5")
+	)
+	(fp_rect
+		(start -2.6 -2.6)
+		(end 2.6 2.6)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "b8b44bfc-722f-4d34-8652-c975f604b7fe")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0.1 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "ced51a17-6d2b-45be-b264-a0507c9e3e5f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "N1" thru_hole circle
+		(at 0 3.8)
+		(size 1.8 1.8)
+		(drill 1.2)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "ebf9e776-725b-41b0-af96-41f13a88b216")
+	)
+	(pad "N2" thru_hole circle
+		(at -0.000001 -3.799999)
+		(size 1.8 1.8)
+		(drill 1.2)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "6c73891b-d60e-4cf6-a82f-0f270aa5099d")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/../3dmodels/Ledpipe-5x5.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)
