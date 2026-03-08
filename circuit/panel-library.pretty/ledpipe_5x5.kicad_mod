@@ -102,6 +102,17 @@
 		(layer "F.Fab")
 		(uuid "b8b44bfc-722f-4d34-8652-c975f604b7fe")
 	)
+	(fp_circle
+		(center 0 0)
+		(end 2 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "User.1")
+		(uuid "4953a47b-1753-4272-80f3-3912cba9c1e1")
+	)
 	(fp_text user "${REFERENCE}"
 		(at 0 0.1 0)
 		(unlocked yes)
@@ -114,21 +125,23 @@
 			)
 		)
 	)
-	(pad "N1" thru_hole circle
-		(at 0 3.8)
-		(size 1.8 1.8)
-		(drill 1.2)
-		(layers "*.Cu" "*.Mask")
-		(remove_unused_layers no)
-		(uuid "ebf9e776-725b-41b0-af96-41f13a88b216")
-	)
-	(pad "N2" thru_hole circle
+	(pad "1" thru_hole circle
 		(at -0.000001 -3.799999)
 		(size 1.8 1.8)
 		(drill 1.2)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
+		(zone_connect 2)
 		(uuid "6c73891b-d60e-4cf6-a82f-0f270aa5099d")
+	)
+	(pad "1" thru_hole circle
+		(at 0 3.8)
+		(size 1.8 1.8)
+		(drill 1.2)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(zone_connect 2)
+		(uuid "ebf9e776-725b-41b0-af96-41f13a88b216")
 	)
 	(embedded_fonts no)
 	(model "${KIPRJMOD}/../3dmodels/Ledpipe-5x5.step"

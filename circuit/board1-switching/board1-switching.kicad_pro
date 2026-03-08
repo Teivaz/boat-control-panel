@@ -76,7 +76,7 @@
         "duplicate_footprints": "warning",
         "extra_footprint": "warning",
         "footprint": "error",
-        "footprint_filters_mismatch": "ignore",
+        "footprint_filters_mismatch": "warning",
         "footprint_symbol_mismatch": "warning",
         "footprint_type_mismatch": "warning",
         "hole_clearance": "error",
@@ -680,5 +680,7 @@
       "meters"
     ]
   ],
-  "text_variables": {}
+  "text_variables": {
+    "PROJECT": "Control Panel 1"
+  }
 }
