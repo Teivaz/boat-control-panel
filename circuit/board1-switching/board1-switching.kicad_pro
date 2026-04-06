@@ -58,7 +58,12 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "courtyards_overlap|59155000|92805000|7a5f9310-212d-4a3c-80ed-44dd9ee3a303|b6c2adae-6b57-493a-bb5f-32afc64bcc43",
+          ""
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -620,7 +625,7 @@
       "include_excluded_from_bom": true,
       "name": "",
       "sort_asc": true,
-      "sort_field": "Reference"
+      "sort_field": "Value"
     },
     "connection_grid_size": 50.0,
     "drawing": {
