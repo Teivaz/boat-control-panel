@@ -2721,6 +2721,16 @@
 	)
 	(wire
 		(pts
+			(xy 184.15 120.65) (xy 184.15 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "562b43f6-2167-404f-9ea4-e08b243d239b")
+	)
+	(wire
+		(pts
 			(xy 199.39 60.96) (xy 199.39 33.02)
 		)
 		(stroke
@@ -2728,6 +2738,16 @@
 			(type default)
 		)
 		(uuid "5842e11d-2e49-44dd-b2fc-3fbad8789cd2")
+	)
+	(wire
+		(pts
+			(xy 168.91 120.65) (xy 168.91 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "595c1820-5a79-45fc-8660-7ce0f823c825")
 	)
 	(wire
 		(pts
@@ -3101,6 +3121,16 @@
 	)
 	(wire
 		(pts
+			(xy 76.2 81.28) (xy 76.2 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c05ffae4-3f92-4b56-98bf-ab918623b47e")
+	)
+	(wire
+		(pts
 			(xy 123.19 31.75) (xy 123.19 33.02)
 		)
 		(stroke
@@ -3288,6 +3318,16 @@
 			(type default)
 		)
 		(uuid "ee661b99-1fc6-4218-b060-98519d68093a")
+	)
+	(wire
+		(pts
+			(xy 63.5 81.28) (xy 63.5 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f2a69601-c809-4810-9425-20f36b20e02b")
 	)
 	(wire
 		(pts
@@ -3863,7 +3903,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 63.5 76.2 180)
+		(at 63.5 81.28 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3871,7 +3911,7 @@
 		(dnp no)
 		(uuid "0ce77736-d3c1-49df-b4b0-a99120dbdb07")
 		(property "Reference" "#PWR065"
-			(at 63.5 72.39 0)
+			(at 59.69 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3880,7 +3920,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 63.5 80.518 0)
+			(at 68.58 81.28 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3888,7 +3928,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 63.5 76.2 0)
+			(at 63.5 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3897,7 +3937,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 63.5 76.2 0)
+			(at 63.5 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3906,7 +3946,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 63.5 76.2 0)
+			(at 63.5 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6193,7 +6233,7 @@
 	)
 	(symbol
 		(lib_id "power:VDD")
-		(at 184.15 114.3 0)
+		(at 184.15 120.65 270)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -6202,7 +6242,7 @@
 		(dnp no)
 		(uuid "a10c0e20-1a63-4ce1-ad11-5b2a55070bbe")
 		(property "Reference" "#PWR077"
-			(at 184.15 110.49 0)
+			(at 180.34 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6211,7 +6251,7 @@
 			)
 		)
 		(property "Value" "VDD"
-			(at 184.15 118.872 90)
+			(at 188.722 120.904 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6219,7 +6259,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 184.15 114.3 0)
+			(at 184.15 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6228,7 +6268,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 184.15 114.3 0)
+			(at 184.15 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6237,7 +6277,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VDD\""
-			(at 184.15 114.3 0)
+			(at 184.15 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6395,7 +6435,7 @@
 	)
 	(symbol
 		(lib_id "power:VDD")
-		(at 76.2 76.2 0)
+		(at 76.2 81.28 270)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -6404,7 +6444,7 @@
 		(dnp no)
 		(uuid "af5cea22-13ac-4490-8b08-23cf5069dd52")
 		(property "Reference" "#PWR075"
-			(at 76.2 72.39 0)
+			(at 72.39 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6413,7 +6453,7 @@
 			)
 		)
 		(property "Value" "VDD"
-			(at 76.2 80.772 90)
+			(at 80.772 81.28 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6421,7 +6461,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 76.2 76.2 0)
+			(at 76.2 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6430,7 +6470,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 76.2 76.2 0)
+			(at 76.2 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6439,7 +6479,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VDD\""
-			(at 76.2 76.2 0)
+			(at 76.2 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6530,7 +6570,7 @@
 	)
 	(symbol
 		(lib_id "power:VDD")
-		(at 168.91 114.3 0)
+		(at 168.91 120.65 270)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -6539,7 +6579,7 @@
 		(dnp no)
 		(uuid "c0408c8a-fb01-40bb-8064-476888b6b42b")
 		(property "Reference" "#PWR076"
-			(at 168.91 110.49 0)
+			(at 165.1 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6548,7 +6588,7 @@
 			)
 		)
 		(property "Value" "VDD"
-			(at 168.91 118.872 90)
+			(at 173.482 120.65 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6556,7 +6596,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 168.91 114.3 0)
+			(at 168.91 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6565,7 +6605,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 168.91 114.3 0)
+			(at 168.91 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6574,7 +6614,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VDD\""
-			(at 168.91 114.3 0)
+			(at 168.91 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
