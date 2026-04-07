@@ -60,7 +60,7 @@
       ],
       "drc_exclusions": [
         [
-          "drill_out_of_range|107250000|63220000|f80f73cf-9a6e-48bd-9972-078df80492ac|00000000-0000-0000-0000-000000000000",
+          "drill_out_of_range|107250000|63220000|0aed999f-1360-4c41-b304-caf2ba848450|00000000-0000-0000-0000-000000000000",
           ""
         ],
         [
@@ -69,6 +69,46 @@
         ],
         [
           "silk_over_copper|104087535|118754804|76107b9d-85df-47ce-9da5-bea5b3cc64e4|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "silk_overlap|103690000|118000000|76107b9d-85df-47ce-9da5-bea5b3cc64e4|793fb090-cb84-4f7b-a1bb-d4b562793a03",
+          ""
+        ],
+        [
+          "silk_overlap|108855505|117766341|76107b9d-85df-47ce-9da5-bea5b3cc64e4|f827d0ac-2685-45c0-b26c-45884f3075f2",
+          ""
+        ],
+        [
+          "silk_overlap|111310000|118000000|76107b9d-85df-47ce-9da5-bea5b3cc64e4|36cc4966-0ed2-44c4-8440-7089f012aacd",
+          ""
+        ],
+        [
+          "silk_overlap|113313100|156642280|82b225d2-0207-45e1-9ec6-0f0c6a983eb6|e3d2ab23-238b-4ae4-a34b-e4816b94dd80",
+          ""
+        ],
+        [
+          "silk_overlap|115813100|113392280|a8166d96-40ae-4baf-9ce0-3c33c1adca78|db8ff109-c4ee-4c8d-9371-1cd538936116",
+          ""
+        ],
+        [
+          "silk_overlap|77000000|96100000|51a5eaf2-ec83-4674-9ddd-2bc84b9da990|5df2caeb-797a-4148-b641-7fb931e52117",
+          ""
+        ],
+        [
+          "silk_overlap|82000000|93600000|aa82dc0b-a3da-483d-b5b6-b5a32bf7fc75|f63db5bb-4516-40de-8197-3066a775b3dd",
+          ""
+        ],
+        [
+          "silk_overlap|84500000|106100000|66f21e60-9135-48d0-8cf1-5374ecd400ea|d355881d-de26-46bc-80ea-2e268912bb39",
+          ""
+        ],
+        [
+          "silk_overlap|87000000|96100000|a4fdc782-0b48-4922-8ee4-56a174ff0855|56c24022-c98f-40a7-8dcc-8ecd3b83b937",
+          ""
+        ],
+        [
+          "silk_overlap|94313100|113392280|0d43dc8c-120d-4cbd-bf04-2aaec338d3b1|177c56d2-516b-45e8-ac1a-2bcc3d505d18",
           ""
         ]
       ],
@@ -513,10 +553,10 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.2,
+        "clearance": 0.15,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2,
+        "diff_pair_width": 0.15,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.15,
@@ -711,6 +751,8 @@
     ]
   ],
   "text_variables": {
-    "PROJECT": "Control Panel 1"
+    "PROJECT": "Control Panel 1",
+    "REVISION": "1",
+    "URL": "https://github.com/Teivaz/boat-control-panel"
   }
 }

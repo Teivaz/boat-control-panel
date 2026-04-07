@@ -4,6 +4,14 @@
 	(generator_version "9.0")
 	(uuid "e04e5ce9-5abb-44a0-8f12-2d0c57c89589")
 	(paper "A4")
+	(title_block
+		(title "Board1a - Buttons Display")
+		(date "2026-04-07")
+		(rev "${REVISION}")
+		(company "Teivaz")
+		(comment 1 "Project: ${PROJECT}")
+		(comment 2 "URL: ${URL}")
+	)
 	(lib_symbols
 		(symbol "Connector:TestPoint"
 			(pin_numbers
@@ -4060,7 +4068,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "panel-library:Display_256x64_3.12in"
+		(property "Footprint" "panel-library:Display_256x64_3.12in_flip"
 			(at 231.14 83.82 0)
 			(effects
 				(font
