@@ -6,7 +6,7 @@
 	(descr "RGB addressable LED, 5x5mm body, 1.57mm height, https://optoelectronics.liteon.com/upload/download/DS35-2018-0092/LTST-E563CHEGBW-AW.PDF")
 	(tags "LED RGB 5050 PLCC-4")
 	(property "Reference" "REF**"
-		(at 0 -3.5 0)
+		(at 0 -4 0)
 		(layer "F.SilkS")
 		(uuid "29976fa0-918e-48c1-ba81-319324267df7")
 		(effects
@@ -76,7 +76,7 @@
 	)
 	(fp_poly
 		(pts
-			(xy -2.794 -2.373) (xy -2.794 -2.794) (xy -2.357 -2.794) (xy -2.778 -2.373)
+			(xy -2.5 -2.579) (xy -2.5 -3) (xy -2.063 -3) (xy -2.484 -2.579)
 		)
 		(stroke
 			(width 0.16)
@@ -170,29 +170,29 @@
 		)
 	)
 	(pad "1" smd roundrect
-		(at -2.25 -1.65)
-		(size 1.1 1)
+		(at -2.45 -1.65)
+		(size 1.5 1)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "303fa036-5e50-4d6d-bb86-5cdfd4b88a9f")
 	)
 	(pad "2" smd roundrect
-		(at -2.25 1.65)
-		(size 1.1 1)
+		(at -2.45 1.65)
+		(size 1.5 1)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "19ff1e90-56ef-461a-889c-61ffea674474")
 	)
 	(pad "3" smd roundrect
-		(at 2.25 -1.65)
-		(size 1.1 1)
+		(at 2.45 -1.65)
+		(size 1.5 1)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "e6e3b1bc-4064-4031-9b80-d1df61337d0a")
 	)
 	(pad "4" smd roundrect
-		(at 2.25 1.65)
-		(size 1.1 1)
+		(at 2.45 1.65)
+		(size 1.5 1)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
 		(uuid "abc776f0-6816-4443-a596-fad8645d4ac8")

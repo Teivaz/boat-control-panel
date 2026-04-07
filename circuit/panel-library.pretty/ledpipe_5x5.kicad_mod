@@ -57,9 +57,20 @@
 	)
 	(attr through_hole board_only exclude_from_pos_files exclude_from_bom)
 	(fp_arc
-		(start -3.1 -1.9)
-		(mid 0 -5)
-		(end 3.1 -1.9)
+		(start -3.299107 -2.48172)
+		(mid -2.15334 -4.466248)
+		(end -0.000001 -5.249999)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "a9c2f146-c64d-4849-81ec-243dc5c0dc17")
+	)
+	(fp_arc
+		(start 0 -5.25)
+		(mid 2.153339 -4.466249)
+		(end 3.299106 -2.481721)
 		(stroke
 			(width 0.2)
 			(type solid)
@@ -68,15 +79,26 @@
 		(uuid "ec39283a-bacc-4255-94d6-0e7f5f7d00ed")
 	)
 	(fp_arc
-		(start 3.1 1.9)
-		(mid 0 5)
-		(end -3.1 1.9)
+		(start 0 5.25)
+		(mid -2.153339 4.466248)
+		(end -3.299106 2.48172)
 		(stroke
 			(width 0.2)
 			(type solid)
 		)
 		(layer "F.SilkS")
 		(uuid "5b9750a3-c073-4961-84cf-4aaaf53e9470")
+	)
+	(fp_arc
+		(start 3.299106 2.48172)
+		(mid 2.153339 4.466248)
+		(end 0 5.25)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "9574424b-076d-401e-ac87-d1123f303d21")
 	)
 	(fp_poly
 		(pts
