@@ -4,6 +4,14 @@
 	(generator_version "9.0")
 	(uuid "ba579479-556d-4022-a7eb-39cbcaca631a")
 	(paper "A4")
+	(title_block
+		(title "Board1a - Switching Meters")
+		(date "2026-04-08")
+		(rev "${REVISION}")
+		(company "Teivaz")
+		(comment 1 "Project: ${PROJECT}")
+		(comment 2 "URL: ${URL}")
+	)
 	(lib_symbols
 		(symbol "Device:C"
 			(pin_numbers
@@ -1856,7 +1864,7 @@
 	)
 	(wire
 		(pts
-			(xy 67.31 115.57) (xy 72.39 115.57)
+			(xy 52.07 115.57) (xy 57.15 115.57)
 		)
 		(stroke
 			(width 0)
@@ -2046,7 +2054,7 @@
 	)
 	(wire
 		(pts
-			(xy 67.31 87.63) (xy 72.39 87.63)
+			(xy 52.07 87.63) (xy 58.42 87.63)
 		)
 		(stroke
 			(width 0)
@@ -2146,7 +2154,7 @@
 	)
 	(wire
 		(pts
-			(xy 67.31 146.05) (xy 71.12 146.05)
+			(xy 55.88 146.05) (xy 58.42 146.05)
 		)
 		(stroke
 			(width 0)
@@ -2406,6 +2414,16 @@
 	)
 	(wire
 		(pts
+			(xy 66.04 87.63) (xy 72.39 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "be87c58c-ce75-4184-b4c7-b887d894aea6")
+	)
+	(wire
+		(pts
 			(xy 198.12 127) (xy 204.47 127)
 		)
 		(stroke
@@ -2493,6 +2511,26 @@
 			(type default)
 		)
 		(uuid "d2c9ec4a-e794-46bf-8894-4ca26e1dfddd")
+	)
+	(wire
+		(pts
+			(xy 64.77 115.57) (xy 72.39 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d4269083-507c-4a82-a13c-def43bd4d3ba")
+	)
+	(wire
+		(pts
+			(xy 66.04 146.05) (xy 71.12 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d692cebb-3aeb-472b-bf9e-8ec7670a8739")
 	)
 	(wire
 		(pts
@@ -2728,7 +2766,7 @@
 	)
 	(hierarchical_label "bilge_float"
 		(shape input)
-		(at 67.31 87.63 180)
+		(at 52.07 87.63 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2794,7 +2832,7 @@
 	)
 	(hierarchical_label "ac_power"
 		(shape input)
-		(at 67.31 146.05 180)
+		(at 55.88 146.05 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2827,7 +2865,7 @@
 	)
 	(hierarchical_label "shore_power"
 		(shape input)
-		(at 67.31 115.57 180)
+		(at 52.07 115.57 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3795,6 +3833,142 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 60.96 115.57 90)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "46d71f4d-14ae-4c94-8748-22fb256b97b5")
+		(property "Reference" "R65"
+			(at 60.96 113.03 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "110r"
+			(at 60.96 118.364 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 60.96 113.792 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 60.96 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 60.96 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "a7403a84-b79a-42eb-ac4e-d1124f63ff19")
+		)
+		(pin "1"
+			(uuid "6290a654-576d-4953-a49e-a3bd699bde20")
+		)
+		(instances
+			(project "board1-switching"
+				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43/3f2026b7-6e39-4576-aa8e-028188c4f58e"
+					(reference "R65")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 62.23 87.63 90)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "601421f3-57b2-4b35-8e9e-613b6bd5d854")
+		(property "Reference" "R64"
+			(at 62.23 85.09 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "110r"
+			(at 62.23 90.424 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 62.23 85.852 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 62.23 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 62.23 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "aac65f0a-51df-4f8d-b02d-a1b7271541b5")
+		)
+		(pin "1"
+			(uuid "40a34874-e6ce-42ea-b4a7-959af6089046")
+		)
+		(instances
+			(project "board1-switching"
+				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43/3f2026b7-6e39-4576-aa8e-028188c4f58e"
+					(reference "R64")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Diode:1N4448WS")
 		(at 91.44 115.57 180)
 		(unit 1)
@@ -4148,6 +4322,74 @@
 			(project "board1-switching"
 				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43/3f2026b7-6e39-4576-aa8e-028188c4f58e"
 					(reference "R58")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 62.23 146.05 90)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7b9a1ed1-8b33-4e7a-8804-9adc424b8d84")
+		(property "Reference" "R66"
+			(at 62.23 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "110r"
+			(at 62.23 148.844 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 62.23 144.272 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 62.23 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 62.23 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "40d9164b-8300-4f3f-962e-cdf88c41d3e5")
+		)
+		(pin "1"
+			(uuid "576b0224-9cb1-4154-ac36-198b172cd954")
+		)
+		(instances
+			(project "board1-switching"
+				(path "/82628005-6474-49ec-bffd-cb8dd53b9e43/3f2026b7-6e39-4576-aa8e-028188c4f58e"
+					(reference "R66")
 					(unit 1)
 				)
 			)
