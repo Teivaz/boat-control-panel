@@ -32,6 +32,7 @@ CFLAGS = \
     -mwarn=-3 \
     -Wa,-a \
     -DXPRJ_$(CONF)=$(CONF) \
+    -DDEVICE_TYPE_INPUT \
     -msummary=-psect,-class,+mem,-hex,-file \
     -ginhx32 \
     -Wl,--data-init \
