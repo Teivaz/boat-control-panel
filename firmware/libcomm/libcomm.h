@@ -45,7 +45,7 @@ typedef union {
         uint8_t out6 : 4;  /* Output 6 (bits 24-27) */
         uint8_t out7 : 4;  /* Output 7 (bits 28-31) */
     };
-} CmdSetOutputState;
+} CmdOutputState;
 
 /**
  * Input state event structure
@@ -65,7 +65,7 @@ typedef struct {
     union {
         CmdEventInputState event_input_state;
         CmdGetInputState get_input_state;
-        CmdSetOutputState set_output_state;
+        CmdOutputState set_output_state;
     };
 } CmdMessage;
 

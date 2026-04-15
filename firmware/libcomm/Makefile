@@ -13,6 +13,8 @@ OBJS = $(addprefix $(OBJDIR)/,$(SRCS:.c=.p1))
 MKDIR = mkdir -p
 RM    = rm -f
 
+DEFS ?=
+
 CFLAGS = \
     -mcpu=$(MCU) \
     -mdfp="$(DFP_DIR)/xc8" \
@@ -25,7 +27,8 @@ CFLAGS = \
     -mno-default-config-bits \
     -std=c99 \
     -gdwarf-3 \
-    -mstack=compiled:auto:auto:auto
+    -mstack=compiled:auto:auto:auto \
+    $(DEFS)
 
 # ── Targets ───────────────────────────────────────────────────────────────────
 # dist just compiles sources to .p1 objects — XC8 .p1 files are pre-linked

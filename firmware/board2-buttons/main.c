@@ -2,7 +2,7 @@
 #include "input.h"
 #include "interrupt.h"
 #include "timer_update.h"
-#include "libcomm/i2c.h"
+#include "i2c.h"
 
 #include <xc.h>
 

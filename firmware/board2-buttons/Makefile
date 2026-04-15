@@ -21,6 +21,10 @@ MKDIR = mkdir -p
 RM    = rm -f
 
 # ── Flags ─────────────────────────────────────────────────────────────────────
+DEFS = \
+    -DXPRJ_$(CONF)=$(CONF) \
+    -DDEVICE_TYPE_INPUT
+
 CFLAGS = \
     -mcpu=$(MCU) \
     -mdfp="$(DFP_DIR)/xc8" \
@@ -31,8 +35,7 @@ CFLAGS = \
     -xassembler-with-cpp \
     -mwarn=-3 \
     -Wa,-a \
-    -DXPRJ_$(CONF)=$(CONF) \
-    -DDEVICE_TYPE_INPUT \
+    $(DEFS) \
     -msummary=-psect,-class,+mem,-hex,-file \
     -ginhx32 \
     -Wl,--data-init \
@@ -55,7 +58,7 @@ LDFLAGS = \
 dist: libcomm $(DISTDIR)/$(TARGET).production.hex
 
 libcomm:
-	$(MAKE) -C $(LIBCOMM_DIR) dist
+	$(MAKE) -C $(LIBCOMM_DIR) dist DEFS="$(DEFS)"
 
 # XC8 generates the .hex alongside the .elf as a side-effect of linking
 $(DISTDIR)/$(TARGET).production.hex: $(OBJS) $(LIBCOMM_OBJS)

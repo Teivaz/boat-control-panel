@@ -32,6 +32,8 @@ typedef enum
 
 void i2c_init(void);
 
+uint8_t i2c_write_bytes(uint16_t address, uint8_t* data, size_t data_length);
+
 void _i2c_event_handler(void);
 void _i2c_error_event_handler(void);
 uint8_t _i2c_interrupt_handler(I2cClientEvent clientEvent);

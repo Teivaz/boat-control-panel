@@ -9,17 +9,17 @@
 uint8_t cmd_address(void) {
 #ifdef DEVICE_TYPE_MAIN
     return CMD_ADDRESS_MAIN;
-#endif
-#ifdef DEVICE_TYPE_SWITCHING
+#elif defined DEVICE_TYPE_SWITCHING
     return CMD_ADDRESS_SWITCHING;
-#endif
-#ifdef DEVICE_TYPE_INPUT
+#elif defined DEVICE_TYPE_INPUT
     if (PORTBbits.RB0 == 0) {
         return CMD_ADDRESS_INPUT_L1;
     }
     else {
         return CMD_ADDRESS_INPUT_L1;
     }
+#else
+#error("Undefined device type. Should be one of DEVICE_TYPE_MAIN DEVICE_TYPE_SWITCHING DEVICE_TYPE_INPUT")
 #endif
 }
 
@@ -35,7 +35,7 @@ void cmd_send_event_input_state(uint8_t target_address,
             .value = current_value,
         },
     };
-    i2c_write_bytes(target_address, (uint8_t*)message, sizeof(CmdEventInputState) + 1);
+    i2c_write_bytes(target_address, (uint8_t*)&message, sizeof(CmdEventInputState) + 1);
 }
 
 void cmd_parse_event_input_state(const uint8_t *data, CmdEventInputState *event) {
@@ -55,7 +55,8 @@ int cmd_get_input_state(uint8_t slave_address, uint8_t *input_value)
     }
     
     /* Read 1 byte (the input_register value) from the device */
-    i2c_read_bytes(slave_address, input_value, 1);
+    // TODO: Implement
+    // i2c_read_bytes(slave_address, input_value, 1);
     
     return 0;
 }
@@ -158,7 +159,7 @@ int cmd_output_state_set_output(CmdOutputState *output_state, uint8_t output_ind
     return 0;
 }
 
-int cmd_output_state_get_output(const CmdSetOutputState *output_state, uint8_t output_index, uint8_t *value)
+int cmd_output_state_get_output(const CmdOutputState *output_state, uint8_t output_index, uint8_t *value)
 {
     if (output_state == NULL || output_index > 7 || value == NULL) {
         return -1;
