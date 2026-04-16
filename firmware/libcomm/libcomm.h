@@ -3,194 +3,295 @@
 
 #include <xc.h>
 
-#define CMD_ADDRESS_MAIN 0x40 // Main control board
-#define CMD_ADDRESS_SWITCHING 0x42 // Switching board
-#define CMD_ADDRESS_INPUT_L1 0x44 // input panel L
-#define CMD_ADDRESS_INPUT_L2 0x45 // input panel L2
-#define CMD_ADDRESS_INPUT_R1 0x46 // input panel R
-#define CMD_ADDRESS_INPUT_R2 0x47 // input panel R2
-#define CMD_ADDRESS_RTC 0x68 // RTC module (DS3231)
+/* ============================================================================
+ * Device Addresses
+ * ============================================================================ */
 
-/**
- * Message types enumeration
- */
+#define COMM_ADDRESS_MAIN              0x40
+#define COMM_ADDRESS_SWITCHING         0x42
+#define COMM_ADDRESS_BUTTON_BOARD_L    0x44
+#define COMM_ADDRESS_BUTTON_BOARD_L2   0x45
+#define COMM_ADDRESS_BUTTON_BOARD_R    0x46
+#define COMM_ADDRESS_BUTTON_BOARD_R2   0x47
+#define COMM_ADDRESS_RTC               0x68
+
+/* ============================================================================
+ * Command IDs
+ * ============================================================================ */
+
 typedef enum {
-    CMD_MESSAGE_NONE = 0x00,
-    CMD_MESSAGE_EVENT_INPUT_STATE = 0x01,
-    CMD_MESSAGE_GET_INPUT_STATE = 0x02,
-    CMD_MESSAGE_SET_OUTPUT_STATE = 0x03,
-} CmdMessageTypeIdentifier;
+    /* Write IDs: MSB clear (0x00–0x7F) */
+    COMM_BUTTON_EFFECT  = 0x01,  /* main -> button board */
+    COMM_BUTTON_CHANGED = 0x02,  /* button board -> main */
+    COMM_BUTTON_TRIGGER = 0x04,  /* main -> button board */
+    COMM_RELAY_STATE    = 0x05,  /* main -> switching    */
+    COMM_RELAY_CHANGED  = 0x06,  /* switching -> main    */
+    COMM_RELAY_MASK     = 0x07,  /* main -> switching    */
+    COMM_LEVEL_MODE     = 0x0A,  /* main -> switching    */
+
+    /* Read IDs: MSB set (0x80–0xFF); `write ID | 0x80` when a write form exists */
+    COMM_BUTTON_STATE_READ   = 0x83,                        /* main -> button board */
+    COMM_BUTTON_TRIGGER_READ = COMM_BUTTON_TRIGGER | 0x80,  /* 0x84 */
+    COMM_RELAY_STATE_READ    = COMM_RELAY_STATE    | 0x80,  /* 0x85 */
+    COMM_RELAY_MASK_READ     = COMM_RELAY_MASK     | 0x80,  /* 0x87 */
+    COMM_BATTERY_READ        = 0x88,                        /* main -> switching    */
+    COMM_LEVELS_READ         = 0x89,                        /* main -> switching    */
+    COMM_LEVEL_MODE_READ     = COMM_LEVEL_MODE     | 0x80,  /* 0x8A */
+    COMM_SENSORS_READ        = 0x8B,                        /* main -> switching    */
+} CommId;
+
+/* ============================================================================
+ * Button trigger mode (MM bits in MMEETTTT)
+ * ============================================================================ */
+
+typedef enum {
+    COMM_BUTTON_MODE_UNKNOWN = 0x00,
+    COMM_BUTTON_MODE_RELEASE = 0x01,  /* fire on release after >= t ms    */
+    COMM_BUTTON_MODE_HOLD    = 0x02,  /* fire once after held for >= t ms */
+    COMM_BUTTON_MODE_CHANGE  = 0x03,  /* fire on every state change       */
+} CommButtonMode;
+
+/* ============================================================================
+ * Level meter mode (each bit of level_mode)
+ * ============================================================================ */
+
+typedef enum {
+    COMM_METER_MODE_UNKNOWN = 0,
+    COMM_METER_MODE_240_33  = 1,
+    COMM_METER_MODE_0_190   = 2,
+} CommMeterMode;
+
+/* ============================================================================
+ * Message Payload Structs
+ * ============================================================================ */
 
 /**
- * Output state structure - represents 8 outputs (0-7)
- * Each output occupies 4 bits (a nibble), allowing states 0-15
+ * MMEETTTT byte — packed trigger parameters.
+ * t = TTTT x 10^EE ms.  TTTT=0 means immediate (t=0 ms).
+ */
+typedef struct {
+    uint8_t time_mantissa : 4;  /* TTTT [3:0] */
+    uint8_t time_exponent : 2;  /* EE   [5:4] */
+    uint8_t mode          : 2;  /* MM   [7:6] */
+} CommTriggerConfig;
+
+/**
+ * button_effect (0x01): 4 bytes
+ * Nibble-packed output states; high outputs transmitted first.
+ * Each nibble: 0x0 = off, 0x1 = on; 0x2-0xF reserved.
  */
 typedef union {
-    /* Register-based access */
     struct {
-        uint8_t state0;  /* Outputs 1 and 0 */
-        uint8_t state1;  /* Outputs 3 and 2 */
-        uint8_t state2;  /* Outputs 5 and 4 */
-        uint8_t state3;  /* Outputs 7 and 6 */
+        uint8_t outputs_76;  /* upper nibble = output 7, lower nibble = output 6 */
+        uint8_t outputs_54;  /* upper nibble = output 5, lower nibble = output 4 */
+        uint8_t outputs_32;  /* upper nibble = output 3, lower nibble = output 2 */
+        uint8_t outputs_10;  /* upper nibble = output 1, lower nibble = output 0 */
     };
-    
-    /* Bitfield access - individual nibbles */
     struct {
-        uint8_t out0 : 4;  /* Output 0 (bits 0-3) */
-        uint8_t out1 : 4;  /* Output 1 (bits 4-7) */
-        uint8_t out2 : 4;  /* Output 2 (bits 8-11) */
-        uint8_t out3 : 4;  /* Output 3 (bits 12-15) */
-        uint8_t out4 : 4;  /* Output 4 (bits 16-19) */
-        uint8_t out5 : 4;  /* Output 5 (bits 20-23) */
-        uint8_t out6 : 4;  /* Output 6 (bits 24-27) */
-        uint8_t out7 : 4;  /* Output 7 (bits 28-31) */
+        uint8_t out6 : 4;
+        uint8_t out7 : 4;
+        uint8_t out4 : 4;
+        uint8_t out5 : 4;
+        uint8_t out2 : 4;
+        uint8_t out3 : 4;
+        uint8_t out0 : 4;
+        uint8_t out1 : 4;
     };
-} CmdOutputState;
+} CommButtonEffect;
 
-/**
- * Input state event structure
- */
+/** button_changed (0x02): 3 bytes */
 typedef struct {
     uint8_t device_address;
-    uint8_t prev_value;
-    uint8_t value;
-} CmdEventInputState;
+    uint8_t prev_state;
+    uint8_t current_state;
+} CommButtonChanged;
 
+/** button_state_read (0x83) response: 1 byte */
 typedef struct {
-    uint8_t value;
-} CmdGetInputState;
+    uint8_t current_state;
+} CommButtonState;
 
+/** button_trigger (0x04) write payload: 2 bytes */
 typedef struct {
-    CmdMessageTypeIdentifier message_type;
+    uint8_t           button_id;  /* [7:3]=0, [2:0]=id */
+    CommTriggerConfig config;     /* MMEETTTT */
+} CommButtonTrigger;
+
+/**
+ * relay_state (0x05) write/response payload: 2 bytes
+ * Relay bitmask, little-endian: bit N = relay N; 1 = on.
+ */
+typedef struct {
+    uint16_t relays;
+} CommRelayState;
+
+/**
+ * relay_changed (0x06): 7 bytes
+ * Relay state is little-endian 16-bit: low byte first on the wire.
+ */
+typedef struct {
+    uint8_t  device_address;
+    uint16_t prev_relays;     /* bit N = relay N */
+    uint16_t current_relays;
+    uint8_t  prev_sensors;    /* [7:3]=0, [2] s2, [1] s1, [0] s0 */
+    uint8_t  current_sensors;
+} CommRelayChanged;
+
+/** relay_mask (0x07) write/response payload: 2 bytes */
+typedef struct {
+    uint16_t mask;  /* bit N = relay N; 1 = events enabled */
+} CommRelayMask;
+
+/** battery_read (0x88) response: 2 bytes */
+typedef struct {
+    uint16_t voltage;  /* little-endian unsigned */
+} CommBattery;
+
+/** levels_read (0x89) response: 2 bytes */
+typedef struct {
+    uint8_t level_0;
+    uint8_t level_1;
+} CommLevels;
+
+/** level_mode (0x0A) write/response payload: 1 byte
+ *  Two 2-bit fields, one per level meter. Each takes a CommMeterMode value. */
+typedef struct {
+    uint8_t mode_0 : 2;  /* level meter 0 */
+    uint8_t mode_1 : 2;  /* level meter 1 */
+} CommLevelMode;
+
+/** sensors_read (0x8B) response: 1 byte */
+typedef struct {
+    uint8_t sensors;  /* [7:3]=0, [2] s2, [1] s1, [0] s0 */
+} CommSensors;
+
+/* ============================================================================
+ * Universal Message Envelope
+ * ============================================================================ */
+
+/**
+ * Universal message: command byte followed by the payload union.
+ * Inspect id to determine which union member to access.
+ */
+typedef struct {
+    uint8_t id;  /* CommId */
     union {
-        CmdEventInputState event_input_state;
-        CmdGetInputState get_input_state;
-        CmdOutputState set_output_state;
+        CommButtonEffect  button_effect;   /* 0x01: 4 bytes */
+        CommButtonChanged button_changed;  /* 0x02: 3 bytes */
+        CommButtonState   button_state;    /* 0x83: 1 byte  */
+        CommButtonTrigger button_trigger;  /* 0x04: 2 bytes */
+        CommRelayState    relay_state;     /* 0x05: 2 bytes */
+        CommRelayChanged  relay_changed;   /* 0x06: 7 bytes */
+        CommRelayMask     relay_mask;      /* 0x07: 2 bytes */
+        CommBattery       battery;         /* 0x88: 2 bytes */
+        CommLevels        levels;          /* 0x89: 2 bytes */
+        CommLevelMode     level_mode;      /* 0x0A: 1 byte  */
+        CommSensors       sensors;         /* 0x8B: 1 byte  */
+        uint8_t           raw[7];
     };
-} CmdMessage;
-
-// Current device address
-uint8_t cmd_address(void);
+} CommMessage;
 
 /* ============================================================================
- * Event Input State - Send
+ * Device address
  * ============================================================================ */
 
-/**
- * Compose and send event_input_state message over I2C
- * 
- * This message is transmitted to notify that the input register has changed.
- * Message format:
- *   Byte 0: device_address - address of the sending device
- *   Byte 1: prev_value - previous value of input_register
- *   Byte 2: value - current value of input_register
- * 
- * @param target_address: I2C target address to send to
- * @param prev_value: Previous value of input_register
- * @param current_value: Current value of input_register
- */
-void cmd_send_event_input_state(uint8_t target_address, 
-                                uint8_t prev_value, 
-                                uint8_t current_value);
+/** Returns the I2C address of this device, selected by DEVICE_TYPE_* macro. */
+uint8_t comm_address(void);
 
 /* ============================================================================
- * Get Input State - Request/Response
+ * Outbound message builders
+ *
+ * Each builder fills *msg and returns the number of bytes (id + payload)
+ * the caller must transmit. The caller owns the I2C transaction.
  * ============================================================================ */
 
-/**
- * Request current input_register value from a device
- * 
- * This is a read operation to get the input_register value.
- * 
- * Response format:
- *   Byte 0: value - current value of input_register
- * 
- * @param slave_address: I2C slave address to query
- * @param input_value: Pointer to store the returned input_register value
- * @return: 0 on success, -1 on error
- */
-int cmd_get_input_state(uint8_t slave_address, uint8_t *input_value);
+/* button_effect (0x01) — main -> button board */
+uint8_t comm_build_button_effect(CommMessage *msg, const CommButtonEffect *effect);
 
-/**
- * Send response with current input_register value
- * 
- * This is called by the device to respond to a get_input_state request.
- * 
- * @param slave_address: I2C slave address to send to
- * @param input_value: Current value of input_register
- */
-void cmd_send_get_input_state_response(uint8_t slave_address, uint8_t input_value);
+/* button_changed (0x02) — button board -> main; device_address is filled from comm_address() */
+uint8_t comm_build_button_changed(CommMessage *msg, uint8_t prev_state, uint8_t current_state);
 
-/**
- * Parse get_input_state response
- * 
- * @param data: Pointer to 1-byte response buffer
- * @param input_value: Pointer to store the input_register value
- * @return: 0 on success, -1 on error
- */
-int cmd_parse_get_input_state_response(const uint8_t *data, uint8_t *input_value);
+/* button_state_read (0x83) — main -> button board */
+uint8_t comm_build_button_state_read(CommMessage *msg);
+
+/* button_trigger (0x04) — main -> button board */
+uint8_t comm_build_button_trigger(CommMessage *msg, uint8_t button_id, CommTriggerConfig config);
+
+/* button_trigger_read (0x84) — main -> button board */
+uint8_t comm_build_button_trigger_read(CommMessage *msg, uint8_t button_id);
+
+/* relay_state (0x05) — main -> switching board */
+uint8_t comm_build_relay_state(CommMessage *msg, uint16_t relays);
+
+/* relay_state_read (0x85) — main -> switching board */
+uint8_t comm_build_relay_state_read(CommMessage *msg);
+
+/* relay_changed (0x06) — switching board -> main; device_address is filled from comm_address() */
+uint8_t comm_build_relay_changed(CommMessage *msg,
+                                 uint16_t prev_relays, uint16_t current_relays,
+                                 uint8_t prev_sensors, uint8_t current_sensors);
+
+/* relay_mask (0x07) — main -> switching board */
+uint8_t comm_build_relay_mask(CommMessage *msg, uint16_t mask);
+
+/* relay_mask_read (0x87) — main -> switching board */
+uint8_t comm_build_relay_mask_read(CommMessage *msg);
+
+/* battery_read (0x88) — main -> switching board */
+uint8_t comm_build_battery_read(CommMessage *msg);
+
+/* levels_read (0x89) — main -> switching board */
+uint8_t comm_build_levels_read(CommMessage *msg);
+
+/* level_mode (0x0A) — main -> switching board */
+uint8_t comm_build_level_mode(CommMessage *msg, CommMeterMode mode_0, CommMeterMode mode_1);
+
+/* level_mode_read (0x8A) — main -> switching board */
+uint8_t comm_build_level_mode_read(CommMessage *msg);
+
+/* sensors_read (0x8B) — main -> switching board */
+uint8_t comm_build_sensors_read(CommMessage *msg);
 
 /* ============================================================================
- * Set Output State - Command
+ * Inbound payload parsers
+ *
+ * `data` points at the first payload byte (the cmd id is consumed by the
+ * caller's dispatch). Endianness conversion and reserved-bit masking happen here.
  * ============================================================================ */
 
-/**
- * Compose and send set_output_state message over I2C
- * 
- * This message configures the output states of 8 outputs (0-7).
- * Each output occupies 4 bits (a nibble), allowing states 0-15 per output.
- * 
- * Message format:
- *   Byte 0: state3 - outputs 7 (upper nibble) and 6 (lower nibble)
- *   Byte 1: state2 - outputs 5 (upper nibble) and 4 (lower nibble)
- *   Byte 2: state1 - outputs 3 (upper nibble) and 2 (lower nibble)
- *   Byte 3: state0 - outputs 1 (upper nibble) and 0 (lower nibble)
- * 
- * @param slave_address: I2C slave address to send to
- * @param output_state: Pointer to CmdOutputState structure with output values
- */
-void cmd_send_set_output_state(uint8_t slave_address, const CmdOutputState *output_state);
-
-/**
- * Parse set_output_state message from I2C data
- * 
- * @param data: Pointer to 4-byte message buffer
- * @param output_state: Pointer to CmdOutputState structure to populate
- * @return: 0 on success, -1 on error
- */
-int cmd_parse_set_output_state(const uint8_t *data, CmdOutputState *output_state);
+void comm_parse_button_effect(const uint8_t *data, CommButtonEffect *effect);
+void comm_parse_button_changed(const uint8_t *data, CommButtonChanged *event);
+void comm_parse_button_state_response(const uint8_t *data, CommButtonState *state);
+void comm_parse_button_trigger_write(const uint8_t *data, CommButtonTrigger *trigger);
+void comm_parse_button_trigger_response(const uint8_t *data, CommTriggerConfig *config);
+void comm_parse_relay_state_write(const uint8_t *data, CommRelayState *state);
+void comm_parse_relay_state_response(const uint8_t *data, CommRelayState *state);
+void comm_parse_relay_changed(const uint8_t *data, CommRelayChanged *event);
+void comm_parse_relay_mask_write(const uint8_t *data, CommRelayMask *mask);
+void comm_parse_relay_mask_response(const uint8_t *data, CommRelayMask *mask);
+void comm_parse_battery_response(const uint8_t *data, CommBattery *battery);
+void comm_parse_levels_response(const uint8_t *data, CommLevels *levels);
+void comm_parse_level_mode_write(const uint8_t *data, CommLevelMode *mode);
+void comm_parse_level_mode_response(const uint8_t *data, CommLevelMode *mode);
+void comm_parse_sensors_response(const uint8_t *data, CommSensors *sensors);
 
 /* ============================================================================
- * Helper Functions - Output State Manipulation
+ * button_effect helpers
  * ============================================================================ */
 
-/**
- * Initialize output_state structure with all outputs set to 0
- * 
- * @param output_state: Pointer to CmdOutputState to initialize
- */
-void cmd_output_state_init(CmdOutputState *output_state);
+void   comm_button_effect_init(CommButtonEffect *effect);
+int8_t comm_button_effect_set(CommButtonEffect *effect, uint8_t output_index, uint8_t value);
+int8_t comm_button_effect_get(const CommButtonEffect *effect, uint8_t output_index, uint8_t *value);
 
-/**
- * Set a single output value (0-7)
- * 
- * Each output can hold a value from 0-15 (4 bits).
- * 
- * @param output_state: Pointer to CmdOutputState structure
- * @param output_index: Output index (0-7)
- * @param value: Value to set (0-15)
- * @return: 0 on success, -1 on invalid parameters
- */
-int cmd_output_state_set_output(CmdOutputState *output_state, uint8_t output_index, uint8_t value);
+/* ============================================================================
+ * button_trigger helpers
+ * ============================================================================ */
 
-/**
- * Get a single output value (0-7)
- * 
- * @param output_state: Pointer to CmdOutputState structure
- * @param output_index: Output index (0-7)
- * @param value: Pointer to store the output value
- * @return: 0 on success, -1 on invalid parameters
- */
-int cmd_output_state_get_output(const CmdOutputState *output_state, uint8_t output_index, uint8_t *value);
+/** Decode TTTT x 10^EE into milliseconds. Max value: 15000. */
+uint16_t comm_button_trigger_time_ms(CommTriggerConfig config);
+
+/** Build a config from mode + time in ms. time_ms is clamped to 15000 and
+ *  encoded with the smallest EE that fits (finest available resolution). */
+CommTriggerConfig comm_button_trigger_make(CommButtonMode mode, uint16_t time_ms);
 
 #endif /* LIBCOMM_H */

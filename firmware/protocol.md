@@ -20,21 +20,25 @@ Signal lines are pulled up to 3.3V.
 
 ## Messages
 
-All write messages begin with a command byte (byte 0). Read messages use a write phase to send the command byte, followed by a repeated-start read phase.
+All write messages begin with a command byte (byte 0) with the MSB clear (0x00–0x7F). Read messages use a write phase to send the command byte with the MSB set (0x80–0xFF), followed by a repeated-start read phase. The read command ID equals the write command ID OR 0x80.
 
 | Command | Value | Direction |
 | --- | --- | --- |
 | `button_effect` | 0x01 | main → button board |
 | `button_changed` | 0x02 | button board → main |
-| `button_state` | 0x03 | main → button board (read) |
-| `button_trigger` | 0x04 | main → button board (read/write) |
-| `relay_state` | 0x05 | main → switching board (read/write) |
+| `button_state_read` | 0x83 | main → button board (read) |
+| `button_trigger` | 0x04 | main → button board (write) |
+| `button_trigger_read` | 0x84 | main → button board (read) |
+| `relay_state` | 0x05 | main → switching board (write) |
+| `relay_state_read` | 0x85 | main → switching board (read) |
 | `relay_changed` | 0x06 | switching board → main |
-| `relay_mask` | 0x07 | main → switching board (read/write) |
-| `battery` | 0x08 | main → switching board (read) |
-| `levels` | 0x09 | main → switching board (read) |
-| `level_mode` | 0x0A | main → switching board (read/write) |
-| `sensors` | 0x0B | main → switching board (read) |
+| `relay_mask` | 0x07 | main → switching board (write) |
+| `relay_mask_read` | 0x87 | main → switching board (read) |
+| `battery_read` | 0x88 | main → switching board (read) |
+| `levels_read` | 0x89 | main → switching board (read) |
+| `level_mode` | 0x0A | main → switching board (write) |
+| `level_mode_read` | 0x8A | main → switching board (read) |
+| `sensors_read` | 0x8B | main → switching board (read) |
 
 ### Main board (0x40)
 
@@ -62,10 +66,10 @@ Each button has an independent mode and timing configured via `button_trigger`:
 
 | Mode | Bits | Behaviour |
 |---|---|---|
-| `release` | `00` | Event fires when the button is released after being held for ≥ the configured time. No event if released early. Default mode. |
-| `hold`    | `01` | Event fires once when the button has been held for ≥ the configured time. |
-| `change`  | `10` | Event fires on every button state change. No time parameter. |
-| reserved  | `11` | — |
+| `unknown` | `00` | No trigger configured; no events fire. Default on power-on. |
+| `release` | `01` | Event fires when the button is released after being held for ≥ the configured time. No event if released early. |
+| `hold`    | `10` | Event fires once when the button has been held for ≥ the configured time. |
+| `change`  | `11` | Event fires on every button state change. No time parameter. |
 
 - button_effect - set the visual effect for each button output
   - write byte 0: command - 0x01
@@ -76,16 +80,16 @@ Each button has an independent mode and timing configured via `button_trigger`:
 
   Each nibble: `0x0` = off, `0x1` = on; values `0x2`–`0xF` reserved.
 
-- button_state - polled read; returns the current physical state of all buttons
-  - write byte 0: command - 0x03
+- button_state_read - polled read; returns the current physical state of all buttons
+  - write byte 0: command - 0x83
   - read byte 0: current_state - current value of the input register
 
-- button_trigger - read or write the trigger configuration for a single button
+- button_trigger - write the trigger configuration for a single button
   - write byte 0: command - 0x04
   - write byte 1: `[7:3]` = 0, `[2:0]` button_id
-  - write byte 2 (write only): `MM EE TTTT` — mode and timing for the button
+  - write byte 2: `MM EE TTTT` — mode and timing for the button
 
-  Read transaction: write phase sends bytes 0–1 only, followed by a repeated-start read that returns one byte: `MM EE TTTT` for the requested button. Default value on power-on is `0x00` (`release`, immediate).
+  Default value on power-on is `0x00` (`unknown`, no events).
 
   **Time encoding:** `t = TTTT × 10^EE ms`. TTTT=0 means immediate (t=0ms).
 
@@ -96,40 +100,57 @@ Each button has an independent mode and timing configured via `button_trigger`:
   | 2 | 100 ms | 100–1500 ms |
   | 3 | 1000 ms | 1–15 s |
 
+- button_trigger_read - read the trigger configuration for a single button
+  - write byte 0: command - 0x84
+  - write byte 1: `[7:3]` = 0, `[2:0]` button_id
+  - read byte 0: `MM EE TTTT` for the requested button
+
 ### Switching board (0x42)
 
 The switching board has 16 relay channels. Each relay has a target state (desired) and a physical state (actual). Physical state normally tracks target state with a small delay but may diverge due to external factors. Relay state is represented as a 2-byte bitmask transmitted low byte first: byte 0 = relays 0–7, byte 1 = relays 8–15 (bit N = relay N; 1 = on, 0 = off).
 
-- relay_state - read or write the target state of all 16 relays
+- relay_state - write the target state of all 16 relays
   - write byte 0: command - 0x05
-  - write byte 1 (write only): relays_lo - target state of relays 0–7
-  - write byte 2 (write only): relays_hi - target state of relays 8–15
+  - write byte 1: relays_lo - target state of relays 0–7
+  - write byte 2: relays_hi - target state of relays 8–15
 
-  Read transaction: write phase sends byte 0 only, followed by a repeated-start read that returns 2 bytes (relays_lo, relays_hi).
+- relay_state_read - read the target state of all 16 relays
+  - write byte 0: command - 0x85
+  - read byte 0: relays_lo
+  - read byte 1: relays_hi
 
-- relay_mask - read or write the event mask; only relays with their mask bit set trigger `relay_changed` messages
+- relay_mask - write the event mask; only relays with their mask bit set trigger `relay_changed` messages
   - write byte 0: command - 0x07
-  - write byte 1 (write only): mask_lo - event mask for relays 0–7
-  - write byte 2 (write only): mask_hi - event mask for relays 8–15
+  - write byte 1: mask_lo - event mask for relays 0–7
+  - write byte 2: mask_hi - event mask for relays 8–15
 
-  Read transaction: write phase sends byte 0 only, followed by a repeated-start read that returns 2 bytes (mask_lo, mask_hi). Default on power-on is 0x0000 (all events suppressed).
+  Default on power-on is 0x0000 (all events suppressed).
 
-- battery - polled read; returns battery voltage as an unsigned 16-bit value
-  - write byte 0: command - 0x08
+- relay_mask_read - read the event mask
+  - write byte 0: command - 0x87
+  - read byte 0: mask_lo
+  - read byte 1: mask_hi
+
+- battery_read - polled read; returns battery voltage as an unsigned 16-bit value
+  - write byte 0: command - 0x88
   - read byte 0: voltage_lo - low byte
   - read byte 1: voltage_hi - high byte
 
-- levels - polled read; returns both level meter values in a single message
-  - write byte 0: command - 0x09
+- levels_read - polled read; returns both level meter values in a single message
+  - write byte 0: command - 0x89
   - read byte 0: level_0 - unsigned 8-bit value of level meter 0
   - read byte 1: level_1 - unsigned 8-bit value of level meter 1
 
-- level_mode - read or write the operating mode of both level meters
+- level_mode - write the operating mode of both level meters
   - write byte 0: command - 0x0A
-  - write byte 1 (write only): `[7:2]` = 0, `[1]` mode_1, `[0]` mode_0 — 0 = mode A, 1 = mode B
+  - write byte 1: `[7:4]` = 0, `[3:2]` mode_1, `[1:0]` mode_0
 
-  Read transaction: write phase sends byte 0 only, followed by a repeated-start read that returns 1 byte.
+  Mode values: `00` = unknown (default on power-on), `01` = 240–33 Ω, `10` = 0–190 Ω, `11` reserved.
 
-- sensors - polled read; returns the state of all 3 on/off sensors
-  - write byte 0: command - 0x0B
+- level_mode_read - read the operating mode of both level meters
+  - write byte 0: command - 0x8A
+  - read byte 0: `[7:4]` = 0, `[3:2]` mode_1, `[1:0]` mode_0
+
+- sensors_read - polled read; returns the state of all 3 on/off sensors
+  - write byte 0: command - 0x8B
   - read byte 0: `[7:3]` = 0, `[2]` sensor_2, `[1]` sensor_1, `[0]` sensor_0 — 1 = on, 0 = off
