@@ -1,22 +1,29 @@
 #include "rgbled.h"
 #include "input.h"
 #include "interrupt.h"
-#include "timer_update.h"
 #include "i2c.h"
+#include "task.h"
 
 #include <xc.h>
 
 #define _XTAL_FREQ 64000000UL
 
-void on_update(void);
+enum { TASK_UPDATE };
+
+static TaskController ctrl;
+
+static void update_task(TaskId id, void *ctx);
 
 void init(void)
 {
     rgbled_init();
     input_init();
-    timer_update_init();
     i2c_init();
-    
+
+    task_controller_init(&ctrl);
+    task_controller_add(&ctrl, TASK_UPDATE, 10, update_task, 0);
+    task_controller_start(&ctrl);
+
     // Interrupts should be enabled last
     interrupt_init();
 }
@@ -29,7 +36,9 @@ uint8_t mode = 0;
 
 uint8_t i2c_data;
 
-void on_update(void) {
+static void update_task(TaskId id, void *ctx) {
+    (void)id;
+    (void)ctx;
     curr += step;
     RGBLedData d[7] = {0};
     uint8_t next_button_state = input_state_current().integer;
@@ -87,11 +96,8 @@ void on_update(void) {
 void main(void)
 {
     init();
-    timer_update_set_callback(&on_update);
-    timer_update_set_time(10); // 10 ms -> 100 Hz 
     while (1)
     {
-//        i2c_update();
-        __nop();
+        task_controller_poll(&ctrl);
     }
 }
