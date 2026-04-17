@@ -35,18 +35,27 @@ Only `build.sh`, `toolchain/`, `protocol.md`, `board2-buttons/`, and `libcomm/` 
 
 | Path | Description |
 |---|---|
-| `board2-buttons/` | C sources for the button board board |
-| `libcomm/` | Shared I2C communication library (linked into each board) |
+| `board2-buttons/` | C sources for the button board |
+| `libcomm/` | Shared protocol library (linked into each board) |
 | `toolchain/Dockerfile` | Docker build environment |
-| `protocol.md` | I2C multi-board communication protocol spec |
+| `protocol.md` | I2C multi-board protocol spec — source of truth for command IDs, addresses, and bit layouts |
 
 The `*.X/` directories are experimental MPLAB X projects used to prototype and verify chip capabilities. They will not make it to the final product but serve as reference for how specific hardware features were explored.
 
 ## Architecture
 
-### Execution model
+### Execution model (button board)
 
-`main.c` calls each module's `init()`, then `interrupt_init()` last (interrupts must be enabled after all peripherals are configured). The `while(1)` loop is idle (`__nop()`); all logic runs in a 100 Hz timer callback (`on_update`).
+`main.c` initializes peripherals, registers tasks on a file-scope `TaskController`, starts the 1 ms hardware tick via `task_controller_start(&ctrl)`, then calls `interrupt_init()` last (interrupts must be enabled after all peripherals are configured). The `while(1)` loop body is `task_controller_poll(&ctrl)` — every task callback runs in main context, never in ISR context.
+
+### Task scheduler (`task.c` / `task.h`)
+
+Central scheduling primitive for the button board. Design notes that matter for callers:
+
+- Deferred dispatch: the TMR0 ISR only decrements `remaining_ms` and sets `pending`; callbacks are fired from `task_controller_poll`.
+- Interval range 1..15000 ms. After a callback returns, `remaining_ms` is reloaded from the task's *current* `interval_ms` — so a callback may change its own interval via `task_controller_set_interval` and have the new value take effect on the next fire.
+- Removing a task (including the currently-executing one) from inside a callback is safe; the poll loop rechecks `id` and `pending` before the post-callback reload.
+- `task_controller_start` owns TMR0 setup (8-bit mode, Fosc/4 with /16384 prescaler, ~1 ms period) and registers its own ISR via `interrupt_set_handler_TMR0`. There is no longer a separate timer module — `timer_update.*` files exist empty and should be deleted when convenient.
 
 ### ISR wiring
 
@@ -56,34 +65,19 @@ All ISRs use `__interrupt(irq(...), base(8))` with IVT locked to `0x0008`. The `
 
 `libcomm/` is a shared library compiled to `.p1` (XC8 pre-linked LLVM bitcode) objects and linked directly into each board project — it cannot be archived with `xc8-ar`. The board's `Makefile` compiles libcomm via `make -C ../libcomm dist` and links the resulting `.p1` objects.
 
-`cmd_address()` returns the device's I2C address at runtime, selected by a compile-time `DEVICE_TYPE_*` macro (`DEVICE_TYPE_INPUT`, `DEVICE_TYPE_MAIN`, `DEVICE_TYPE_SWITCHING`) set in the board's Makefile via `-DDEVICE_TYPE_INPUT`.
+libcomm is **transport-agnostic** — it contains no I2C code. The API splits cleanly into:
 
-### I2C (client mode)
+- **Builders** (`comm_build_*`): fill a caller-provided `CommMessage` (tagged union: `id` byte + payload union) and return the total byte count to transmit.
+- **Parsers** (`comm_parse_*`): read a raw payload byte array (no `id` byte) into a typed struct.
 
-`libcomm/i2c.c` implements an interrupt-driven I2C client on I2C1 (pins RC3/RC4). The hardware ISR dispatches `I2cClientEvent` values to `_i2c_interrupt_handler`. Clock stretching (`CSTR`) is released at the end of every ISR to avoid bus stalls. The client address is hardcoded to `0x22` in `i2c_init` — `cmd_address()` is used for outbound messages, not the peripheral register.
+Command IDs follow a fixed pattern: write form `0x0X`, read form `0x8X = write | 0x80`. Bitfield structs (`CommTriggerConfig` `MMEETTTT`, `CommLevelMode`, etc.) rely on XC8's LSB-first allocation to match the wire format directly — some parsers write to a bitfield via `*(uint8_t *)&field = data[0]` and assume this layout.
 
-### Multi-Board Protocol
+`comm_address()` returns the device's I2C address at runtime, selected by a compile-time `DEVICE_TYPE_*` macro (`DEVICE_TYPE_INPUT`, `DEVICE_TYPE_MAIN`, `DEVICE_TYPE_SWITCHING`) set in the board's Makefile via `-DDEVICE_TYPE_INPUT`. For `DEVICE_TYPE_INPUT` boards the address further depends on `PORTB.RB0` (L vs R variant).
 
-Boards communicate over I2C in multi-master mode. All messages begin with a command byte. See `protocol.md` for the full specification.
+### I2C (client mode, button board)
 
-**Button board messages**
+`board2-buttons/i2c.c` implements an interrupt-driven I2C client on I2C1 (pins RC3/RC4). The hardware ISR dispatches `I2cClientEvent` values to `_i2c_interrupt_handler`. Clock stretching (`CSTR`) is released at the end of every ISR to avoid bus stalls. The client address is hardcoded in `i2c_init` — `comm_address()` is used for outbound messages, not for the peripheral match register.
 
-| Message | Direction | Summary |
-|---|---|---|
-| `button_effect` | main → button board (write) | 8 outputs × 4-bit nibbles (on/off per output) |
-| `button_changed` | button board → main | sender address, prev state, current state (bitmasks) |
-| `button_state` | main → input (read) | current physical button state (1 byte bitmask) |
-| `button_trigger` | main → input (read/write) | per-button mode and timing (`MMEETTTT` format) |
+### Multi-board protocol
 
-**Switching board messages**
-
-| Message | Direction | Summary |
-|---|---|---|
-| `relay_changed` | switching → main | sender address, prev/current channel states (2 × 2-byte bitmasks), prev/current sensor states (2 × 1-byte bitmasks) |
-| `relay_state` | main → switching (read/write) | target state of all 16 relays (2-byte bitmask) |
-| `relay_mask` | main → switching (read/write) | event mask for physical state change events (2-byte bitmask) |
-| `battery` | main → switching (read) | battery voltage (uint16) |
-| `levels` | main → switching (read) | both level meter values (2 × uint8) |
-| `level_mode` | main → switching (read/write) | operating mode for each level meter (1 byte) |
-| `sensors` | main → switching (read) | state of 3 on/off sensors (1 byte bitmask) |
-
+Boards communicate over I2C in multi-master mode. Every message begins with a command byte; MSB clear (`0x00–0x7F`) is a write, MSB set (`0x80–0xFF`) is a read (write phase sends the command, repeated-start read phase returns the payload). See `protocol.md` for addresses, the full command set, and per-byte bit layouts.

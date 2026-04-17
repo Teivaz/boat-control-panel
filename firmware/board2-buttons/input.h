@@ -26,8 +26,14 @@ typedef union
     uint8_t integer;
 } InputState;
 
+typedef void (*InputChangeHandler)(uint8_t prev, uint8_t curr);
+
 void input_init(void);
 InputState input_state_current(void);
+
+/* Register a listener invoked from the IOC ISR after each state change.
+ * Receives the input-byte values before and after the update. */
+void input_set_change_handler(InputChangeHandler handler);
 
 void _input_state_init(InputState *state);
 void _input_state_interrupt_handler();

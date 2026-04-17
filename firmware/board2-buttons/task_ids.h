@@ -1,0 +1,16 @@
+#ifndef TASK_IDS_H
+#define TASK_IDS_H
+
+enum {
+    TASK_UPDATE,
+    TASK_BUTTON_0,
+    TASK_BUTTON_1,
+    TASK_BUTTON_2,
+    TASK_BUTTON_3,
+    TASK_BUTTON_4,
+    TASK_BUTTON_5,
+    TASK_BUTTON_6,
+    TASK_BUTTON_7,
+};
+
+#endif /* TASK_IDS_H */

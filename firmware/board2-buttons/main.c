@@ -3,16 +3,19 @@
 #include "interrupt.h"
 #include "i2c.h"
 #include "task.h"
+#include "task_ids.h"
+#include "button.h"
+#include "libcomm.h"
 
 #include <xc.h>
 
 #define _XTAL_FREQ 64000000UL
 
-enum { TASK_UPDATE };
-
 static TaskController ctrl;
 
 static void update_task(TaskId id, void *ctx);
+static void tick_isr   (void);
+static void tick_init  (void);
 
 void init(void)
 {
@@ -21,11 +24,23 @@ void init(void)
     i2c_init();
 
     task_controller_init(&ctrl);
+    button_init(&ctrl);
     task_controller_add(&ctrl, TASK_UPDATE, 10, update_task, 0);
-    task_controller_start(&ctrl);
+    tick_init();
 
     // Interrupts should be enabled last
     interrupt_init();
+}
+
+void send_button_event(uint8_t button_id)
+{
+    CommMessage msg;
+    uint8_t cur  = input_state_current().integer;
+    uint8_t prev = cur ^ (uint8_t)(1u << button_id);
+    uint8_t len  = comm_build_button_changed(&msg, prev, cur);
+    // TODO: transmit msg[0..len] to COMM_ADDRESS_MAIN once master-mode I2C is wired up
+    (void)msg;
+    (void)len;
 }
 
 uint8_t curr = 0;
@@ -92,6 +107,28 @@ static void update_task(TaskId id, void *ctx) {
     rgbled_set(d, 7);
 }
 
+/* TMR0 in 8-bit mode clocked from Fosc/4 with /16384 prescaler gives
+ * 16 MHz / 16384 ≈ 976.56 Hz (~1.024 ms per count). Match value 1 in
+ * TMR0H yields a ~1 ms period interrupt. */
+static void tick_isr(void) {
+    task_controller_tick(&ctrl);
+}
+
+static void tick_init(void) {
+    T0CON0bits.EN   = 0;
+    T0CON1bits.CS   = 0b010;
+    T0CON1bits.CKPS = 0b1110;
+    interrupt_set_handler_TMR0(tick_isr);
+    PIE3bits.TMR0IE = 1;
+
+    const uint8_t gie_save = GIE;
+    GIE = 0;
+    PIR3bits.TMR0IF = 0;
+    TMR0L = 0;
+    TMR0H = 1;
+    T0CON0bits.EN = 1;
+    GIE = gie_save;
+}
 
 void main(void)
 {

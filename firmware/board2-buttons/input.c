@@ -10,7 +10,8 @@
 #define _INPUT_6 PORTAbits.RA4
 #define _INPUT_7 PORTAbits.RA5
 
-static InputState _global_input_state;
+static InputState          _global_input_state;
+static InputChangeHandler  _change_handler;
 
 void input_init(void)
 {
@@ -38,6 +39,11 @@ InputState input_state_current(void)
     return result;
 }
 
+void input_set_change_handler(InputChangeHandler handler)
+{
+    _change_handler = handler;
+}
+
 void _input_state_init(InputState *state)
 {
     state->integer = 0x00;
@@ -46,7 +52,12 @@ void _input_state_init(InputState *state)
 void _input_state_interrupt_handler(void)
 {
     IOCAF = 0x00;
+    const uint8_t prev = _global_input_state.integer;
     _input_state_update(&_global_input_state);
+    const uint8_t curr = _global_input_state.integer;
+    if (curr != prev && _change_handler) {
+        _change_handler(prev, curr);
+    }
 }
 
 void _input_state_update(InputState *state)
