@@ -7,7 +7,7 @@
 	(title_block
 		(title "Board1 - Buttons")
 		(date "2026-04-06")
-		(rev "2")
+		(rev "3")
 		(company "Teivaz")
 		(comment 1 "Project: ${PROJECT}")
 		(comment 2 "Revision: ${REVISION}")
@@ -3142,7 +3142,7 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 124.46) (xy 190.5 124.46)
+			(xy 179.07 124.46) (xy 190.5 124.46)
 		)
 		(stroke
 			(width 0)
@@ -3182,7 +3182,7 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 106.68) (xy 190.5 106.68)
+			(xy 140.97 106.68) (xy 190.5 106.68)
 		)
 		(stroke
 			(width 0)
@@ -3282,7 +3282,7 @@
 	)
 	(wire
 		(pts
-			(xy 161.29 116.84) (xy 190.5 116.84)
+			(xy 58.42 116.84) (xy 190.5 116.84)
 		)
 		(stroke
 			(width 0)
@@ -3432,7 +3432,7 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 119.38) (xy 190.5 119.38)
+			(xy 38.1 119.38) (xy 190.5 119.38)
 		)
 		(stroke
 			(width 0)
@@ -3552,7 +3552,7 @@
 	)
 	(wire
 		(pts
-			(xy 161.29 82.55) (xy 161.29 116.84)
+			(xy 58.42 81.28) (xy 58.42 116.84)
 		)
 		(stroke
 			(width 0)
@@ -3582,7 +3582,7 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 82.55) (xy 38.1 124.46)
+			(xy 179.07 81.28) (xy 179.07 124.46)
 		)
 		(stroke
 			(width 0)
@@ -3612,7 +3612,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 114.3) (xy 190.5 114.3)
+			(xy 78.74 114.3) (xy 190.5 114.3)
 		)
 		(stroke
 			(width 0)
@@ -3622,7 +3622,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 82.55) (xy 59.69 121.92)
+			(xy 160.02 81.28) (xy 160.02 121.92)
 		)
 		(stroke
 			(width 0)
@@ -3772,7 +3772,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 121.92) (xy 190.5 121.92)
+			(xy 160.02 121.92) (xy 190.5 121.92)
 		)
 		(stroke
 			(width 0)
@@ -3812,7 +3812,7 @@
 	)
 	(wire
 		(pts
-			(xy 120.65 111.76) (xy 190.5 111.76)
+			(xy 100.33 111.76) (xy 190.5 111.76)
 		)
 		(stroke
 			(width 0)
@@ -4072,7 +4072,7 @@
 	)
 	(wire
 		(pts
-			(xy 100.33 109.22) (xy 190.5 109.22)
+			(xy 120.65 109.22) (xy 190.5 109.22)
 		)
 		(stroke
 			(width 0)
@@ -4262,7 +4262,7 @@
 	)
 	(wire
 		(pts
-			(xy 120.65 82.55) (xy 120.65 111.76)
+			(xy 100.33 81.28) (xy 100.33 111.76)
 		)
 		(stroke
 			(width 0)
@@ -4312,7 +4312,7 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 106.68) (xy 80.01 82.55)
+			(xy 140.97 106.68) (xy 140.97 81.28)
 		)
 		(stroke
 			(width 0)
@@ -4342,7 +4342,7 @@
 	)
 	(wire
 		(pts
-			(xy 100.33 82.55) (xy 100.33 109.22)
+			(xy 120.65 81.28) (xy 120.65 109.22)
 		)
 		(stroke
 			(width 0)
@@ -4382,7 +4382,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 82.55) (xy 140.97 114.3)
+			(xy 78.74 81.28) (xy 78.74 114.3)
 		)
 		(stroke
 			(width 0)
@@ -4492,7 +4492,7 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 82.55) (xy 180.34 119.38)
+			(xy 38.1 81.28) (xy 38.1 119.38)
 		)
 		(stroke
 			(width 0)
@@ -4903,7 +4903,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via_oval"
 			(at 29.21 130.81 0)
 			(effects
 				(font
@@ -5013,15 +5013,15 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 74.93 82.55 0)
+		(at 135.89 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "0d4b34b7-afdc-4788-84d6-69e889aaa5b7")
-		(property "Reference" "SW6"
-			(at 74.93 77.978 0)
+		(property "Reference" "SW3"
+			(at 135.89 76.708 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5029,7 +5029,7 @@
 			)
 		)
 		(property "Value" "EVPCD"
-			(at 74.93 77.47 0)
+			(at 135.89 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5038,7 +5038,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
-			(at 74.93 77.47 0)
+			(at 135.89 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5047,7 +5047,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 74.93 77.47 0)
+			(at 135.89 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5056,7 +5056,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 74.93 82.55 0)
+			(at 135.89 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5073,7 +5073,7 @@
 		(instances
 			(project "board2-buttons"
 				(path "/310dd08e-694c-4f28-98ee-443d480825f0"
-					(reference "SW6")
+					(reference "SW3")
 					(unit 1)
 				)
 			)
@@ -5081,7 +5081,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 69.85 82.55 0)
+		(at 130.81 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5090,7 +5090,7 @@
 		(fields_autoplaced yes)
 		(uuid "0d50fc58-683a-4cdd-b191-35d1b2e3ce23")
 		(property "Reference" "#PWR043"
-			(at 69.85 88.9 0)
+			(at 130.81 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5099,7 +5099,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 69.85 87.63 0)
+			(at 130.81 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5108,7 +5108,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 69.85 82.55 0)
+			(at 130.81 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5117,7 +5117,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 69.85 82.55 0)
+			(at 130.81 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5126,7 +5126,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 69.85 82.55 0)
+			(at 130.81 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5786,7 +5786,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via_oval"
 			(at 29.21 161.29 0)
 			(effects
 				(font
@@ -6056,7 +6056,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via_oval"
 			(at 24.13 140.97 0)
 			(effects
 				(font
@@ -6579,15 +6579,15 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 95.25 82.55 0)
+		(at 115.57 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "487b02d5-017e-4517-9314-a732b6d8eb5d")
-		(property "Reference" "SW5"
-			(at 95.25 77.978 0)
+		(property "Reference" "SW4"
+			(at 115.57 76.708 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6595,7 +6595,7 @@
 			)
 		)
 		(property "Value" "EVPCD"
-			(at 95.25 77.47 0)
+			(at 115.57 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6604,7 +6604,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
-			(at 95.25 77.47 0)
+			(at 115.57 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6613,7 +6613,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 95.25 77.47 0)
+			(at 115.57 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6622,7 +6622,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 95.25 82.55 0)
+			(at 115.57 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6639,7 +6639,7 @@
 		(instances
 			(project "board2-buttons"
 				(path "/310dd08e-694c-4f28-98ee-443d480825f0"
-					(reference "SW5")
+					(reference "SW4")
 					(unit 1)
 				)
 			)
@@ -7270,7 +7270,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 170.18 82.55 0)
+		(at 27.94 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7279,7 +7279,7 @@
 		(fields_autoplaced yes)
 		(uuid "586840b0-faa4-41d1-82da-9114d0330bf2")
 		(property "Reference" "#PWR038"
-			(at 170.18 88.9 0)
+			(at 27.94 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7288,7 +7288,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 170.18 87.63 0)
+			(at 27.94 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7297,7 +7297,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 170.18 82.55 0)
+			(at 27.94 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7306,7 +7306,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 170.18 82.55 0)
+			(at 27.94 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7315,7 +7315,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 170.18 82.55 0)
+			(at 27.94 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8608,7 +8608,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via_oval"
 			(at 29.21 140.97 0)
 			(effects
 				(font
@@ -8742,7 +8742,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via_oval"
 			(at 24.13 171.45 0)
 			(effects
 				(font
@@ -8850,7 +8850,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 130.81 82.55 0)
+		(at 68.58 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8859,7 +8859,7 @@
 		(fields_autoplaced yes)
 		(uuid "79804c57-102c-4d46-9327-df74979aa159")
 		(property "Reference" "#PWR040"
-			(at 130.81 88.9 0)
+			(at 68.58 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8868,7 +8868,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 130.81 87.63 0)
+			(at 68.58 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8877,7 +8877,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 130.81 82.55 0)
+			(at 68.58 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8886,7 +8886,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 130.81 82.55 0)
+			(at 68.58 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8895,7 +8895,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 130.81 82.55 0)
+			(at 68.58 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8917,15 +8917,15 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 115.57 82.55 0)
+		(at 95.25 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "7c9f8f68-64d2-4712-8dd6-b1f2c356dd0f")
-		(property "Reference" "SW4"
-			(at 115.57 77.978 0)
+		(property "Reference" "SW5"
+			(at 95.25 76.708 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8933,7 +8933,7 @@
 			)
 		)
 		(property "Value" "EVPCD"
-			(at 115.57 77.47 0)
+			(at 95.25 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8942,7 +8942,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
-			(at 115.57 77.47 0)
+			(at 95.25 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8951,7 +8951,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 115.57 77.47 0)
+			(at 95.25 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8960,7 +8960,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 115.57 82.55 0)
+			(at 95.25 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8977,7 +8977,7 @@
 		(instances
 			(project "board2-buttons"
 				(path "/310dd08e-694c-4f28-98ee-443d480825f0"
-					(reference "SW4")
+					(reference "SW5")
 					(unit 1)
 				)
 			)
@@ -9214,7 +9214,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via_oval"
 			(at 24.13 151.13 0)
 			(effects
 				(font
@@ -9321,7 +9321,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 151.13 82.55 0)
+		(at 48.26 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9330,7 +9330,7 @@
 		(fields_autoplaced yes)
 		(uuid "830d544e-abbb-4d18-aaa8-495f71afbc3c")
 		(property "Reference" "#PWR039"
-			(at 151.13 88.9 0)
+			(at 48.26 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9339,7 +9339,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 151.13 87.63 0)
+			(at 48.26 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9348,7 +9348,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 151.13 82.55 0)
+			(at 48.26 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9357,7 +9357,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 151.13 82.55 0)
+			(at 48.26 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9366,7 +9366,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 151.13 82.55 0)
+			(at 48.26 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10031,7 +10031,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via_oval"
 			(at 24.13 161.29 0)
 			(effects
 				(font
@@ -10072,7 +10072,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 27.94 82.55 0)
+		(at 168.91 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10081,7 +10081,7 @@
 		(fields_autoplaced yes)
 		(uuid "975ba287-50e8-413c-a1b8-99d3c5843d70")
 		(property "Reference" "#PWR036"
-			(at 27.94 88.9 0)
+			(at 168.91 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10090,7 +10090,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 27.94 87.63 0)
+			(at 168.91 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10099,7 +10099,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 27.94 82.55 0)
+			(at 168.91 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10108,7 +10108,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 27.94 82.55 0)
+			(at 168.91 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10117,7 +10117,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 27.94 82.55 0)
+			(at 168.91 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11246,7 +11246,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 110.49 82.55 0)
+		(at 90.17 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11255,7 +11255,7 @@
 		(fields_autoplaced yes)
 		(uuid "b93398fa-f073-4aa2-b30b-d9ae1add81f6")
 		(property "Reference" "#PWR041"
-			(at 110.49 88.9 0)
+			(at 90.17 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11264,7 +11264,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 110.49 87.63 0)
+			(at 90.17 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11273,7 +11273,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 110.49 82.55 0)
+			(at 90.17 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11282,7 +11282,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 110.49 82.55 0)
+			(at 90.17 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11291,7 +11291,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 110.49 82.55 0)
+			(at 90.17 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11525,15 +11525,15 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 175.26 82.55 0)
+		(at 33.02 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "be52cd63-6d41-4fe6-97a3-97c1eafc6ebd")
-		(property "Reference" "SW1"
-			(at 175.26 77.978 0)
+		(property "Reference" "SW8"
+			(at 33.02 76.708 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11541,7 +11541,7 @@
 			)
 		)
 		(property "Value" "EVPCD"
-			(at 175.26 77.47 0)
+			(at 33.02 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11550,7 +11550,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
-			(at 175.26 77.47 0)
+			(at 33.02 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11559,7 +11559,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 175.26 77.47 0)
+			(at 33.02 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11568,7 +11568,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 175.26 82.55 0)
+			(at 33.02 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11585,7 +11585,7 @@
 		(instances
 			(project "board2-buttons"
 				(path "/310dd08e-694c-4f28-98ee-443d480825f0"
-					(reference "SW1")
+					(reference "SW8")
 					(unit 1)
 				)
 			)
@@ -11593,15 +11593,15 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 54.61 82.55 0)
+		(at 154.94 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "c04e212d-c819-48da-8047-32db292aa0f1")
-		(property "Reference" "SW7"
-			(at 54.61 77.978 0)
+		(property "Reference" "SW2"
+			(at 154.94 76.708 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11609,7 +11609,7 @@
 			)
 		)
 		(property "Value" "EVPCD"
-			(at 54.61 77.47 0)
+			(at 154.94 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11618,7 +11618,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
-			(at 54.61 77.47 0)
+			(at 154.94 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11627,7 +11627,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 54.61 77.47 0)
+			(at 154.94 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11636,7 +11636,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 54.61 82.55 0)
+			(at 154.94 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11653,7 +11653,7 @@
 		(instances
 			(project "board2-buttons"
 				(path "/310dd08e-694c-4f28-98ee-443d480825f0"
-					(reference "SW7")
+					(reference "SW2")
 					(unit 1)
 				)
 			)
@@ -12762,15 +12762,15 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 33.02 82.55 0)
+		(at 173.99 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "d729c78e-c70a-4a7b-a89b-a343c0239931")
-		(property "Reference" "SW8"
-			(at 33.02 77.978 0)
+		(property "Reference" "SW1"
+			(at 173.99 76.708 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12778,7 +12778,7 @@
 			)
 		)
 		(property "Value" "EVPCD"
-			(at 33.02 77.47 0)
+			(at 173.99 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12787,7 +12787,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
-			(at 33.02 77.47 0)
+			(at 173.99 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12796,7 +12796,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 33.02 77.47 0)
+			(at 173.99 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12805,7 +12805,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 33.02 82.55 0)
+			(at 173.99 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12822,7 +12822,7 @@
 		(instances
 			(project "board2-buttons"
 				(path "/310dd08e-694c-4f28-98ee-443d480825f0"
-					(reference "SW8")
+					(reference "SW1")
 					(unit 1)
 				)
 			)
@@ -12962,15 +12962,15 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 156.21 82.55 0)
+		(at 53.34 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "db135be3-e634-4af6-8883-f05a860364bb")
-		(property "Reference" "SW2"
-			(at 156.21 77.978 0)
+		(property "Reference" "SW7"
+			(at 53.34 76.708 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12978,7 +12978,7 @@
 			)
 		)
 		(property "Value" "EVPCD"
-			(at 156.21 77.47 0)
+			(at 53.34 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12987,7 +12987,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
-			(at 156.21 77.47 0)
+			(at 53.34 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12996,7 +12996,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 156.21 77.47 0)
+			(at 53.34 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13005,7 +13005,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 156.21 82.55 0)
+			(at 53.34 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13022,7 +13022,7 @@
 		(instances
 			(project "board2-buttons"
 				(path "/310dd08e-694c-4f28-98ee-443d480825f0"
-					(reference "SW2")
+					(reference "SW7")
 					(unit 1)
 				)
 			)
@@ -13348,7 +13348,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via_oval"
 			(at 24.13 130.81 0)
 			(effects
 				(font
@@ -13734,15 +13734,15 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 135.89 82.55 0)
+		(at 73.66 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "ed05528a-aed5-4d37-95b3-338558d0fa82")
-		(property "Reference" "SW3"
-			(at 135.89 77.978 0)
+		(property "Reference" "SW6"
+			(at 73.66 76.708 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13750,7 +13750,7 @@
 			)
 		)
 		(property "Value" "EVPCD"
-			(at 135.89 77.47 0)
+			(at 73.66 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13759,7 +13759,7 @@
 			)
 		)
 		(property "Footprint" "panel-library:ButtonSMT_Panasonic_EVPCD"
-			(at 135.89 77.47 0)
+			(at 73.66 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13768,7 +13768,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 135.89 77.47 0)
+			(at 73.66 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13777,7 +13777,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 135.89 82.55 0)
+			(at 73.66 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13794,7 +13794,7 @@
 		(instances
 			(project "board2-buttons"
 				(path "/310dd08e-694c-4f28-98ee-443d480825f0"
-					(reference "SW3")
+					(reference "SW6")
 					(unit 1)
 				)
 			)
@@ -14002,7 +14002,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 90.17 82.55 0)
+		(at 110.49 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14011,7 +14011,7 @@
 		(fields_autoplaced yes)
 		(uuid "f3358035-fc54-4177-acf9-f622daf64cb6")
 		(property "Reference" "#PWR042"
-			(at 90.17 88.9 0)
+			(at 110.49 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14020,7 +14020,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 90.17 87.63 0)
+			(at 110.49 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14029,7 +14029,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 90.17 82.55 0)
+			(at 110.49 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14038,7 +14038,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 90.17 82.55 0)
+			(at 110.49 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14047,7 +14047,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 90.17 82.55 0)
+			(at 110.49 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14204,7 +14204,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 49.53 82.55 0)
+		(at 149.86 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14213,7 +14213,7 @@
 		(fields_autoplaced yes)
 		(uuid "f5ffd762-0715-45c2-babe-7bf9e63eb408")
 		(property "Reference" "#PWR037"
-			(at 49.53 88.9 0)
+			(at 149.86 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14222,7 +14222,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 49.53 87.63 0)
+			(at 149.86 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14231,7 +14231,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 49.53 82.55 0)
+			(at 149.86 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14240,7 +14240,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 49.53 82.55 0)
+			(at 149.86 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14249,7 +14249,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 49.53 82.55 0)
+			(at 149.86 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14367,7 +14367,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via"
+		(property "Footprint" "panel-library:MountingHole_3.2mm_M3_Pad_Via_oval"
 			(at 29.21 151.13 0)
 			(effects
 				(font
