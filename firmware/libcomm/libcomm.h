@@ -31,6 +31,8 @@ typedef enum {
     COMM_RELAY_CHANGED  = 0x06,  /* switching -> main    */
     COMM_RELAY_MASK     = 0x07,  /* main -> switching    */
     COMM_LEVEL_MODE     = 0x0A,  /* main -> switching    */
+    COMM_CONFIG         = 0x0E,  /* main -> any          */
+    COMM_RESET          = 0x0F,  /* main -> any          */
 
     /* Read IDs: MSB set (0x80–0xFF); `write ID | 0x80` when a write form exists */
     COMM_BUTTON_STATE_READ   = 0x83,                        /* main -> button board */
@@ -41,7 +43,20 @@ typedef enum {
     COMM_LEVELS_READ         = 0x89,                        /* main -> switching    */
     COMM_LEVEL_MODE_READ     = COMM_LEVEL_MODE     | 0x80,  /* 0x8A */
     COMM_SENSORS_READ        = 0x8B,                        /* main -> switching    */
+    COMM_CONFIG_READ         = COMM_CONFIG         | 0x80,  /* 0x8E */
 } CommId;
+
+/* ============================================================================
+ * Universal config addresses
+ *
+ * Present on every device; read-only. Device-specific fields start at 0x10.
+ * ============================================================================ */
+
+typedef enum {
+    COMM_CONFIG_DEVICE_ID   = 0x00,  /* matches the device's I2C address */
+    COMM_CONFIG_HW_REVISION = 0x01,
+    COMM_CONFIG_SW_REVISION = 0x02,
+} CommConfigAddress;
 
 /* ============================================================================
  * Button trigger mode (MM bits in MMEETTTT)
@@ -187,6 +202,14 @@ typedef struct {
     uint8_t sensors;  /* [7:3]=0, [2] s2, [1] s1, [0] s0 */
 } CommSensors;
 
+/** config (0x0E) write payload: 2 bytes.
+ *  Also carries the address in the config_read (0x8E) write phase — in that
+ *  case only `.address` is transmitted. */
+typedef struct {
+    uint8_t address;
+    uint8_t value;
+} CommConfig;
+
 /* ============================================================================
  * Universal Message Envelope
  * ============================================================================ */
@@ -209,6 +232,7 @@ typedef struct {
         CommLevels        levels;          /* 0x89: 2 bytes */
         CommLevelMode     level_mode;      /* 0x0A: 1 byte  */
         CommSensors       sensors;         /* 0x8B: 1 byte  */
+        CommConfig        config;          /* 0x0E: 2 bytes */
         uint8_t           raw[7];
     };
 } CommMessage;
@@ -274,6 +298,15 @@ uint8_t comm_build_level_mode_read(CommMessage *msg);
 /* sensors_read (0x8B) — main -> switching board */
 uint8_t comm_build_sensors_read(CommMessage *msg);
 
+/* reset (0x0F) — main -> any */
+uint8_t comm_build_reset(CommMessage *msg);
+
+/* config (0x0E) — main -> any */
+uint8_t comm_build_config(CommMessage *msg, uint8_t address, uint8_t value);
+
+/* config_read (0x8E) — main -> any; write phase carries the address byte */
+uint8_t comm_build_config_read(CommMessage *msg, uint8_t address);
+
 /* ============================================================================
  * Inbound payload parsers
  *
@@ -296,6 +329,9 @@ void comm_parse_levels_response(const uint8_t *data, CommLevels *levels);
 void comm_parse_level_mode_write(const uint8_t *data, CommLevelMode *mode);
 void comm_parse_level_mode_response(const uint8_t *data, CommLevelMode *mode);
 void comm_parse_sensors_response(const uint8_t *data, CommSensors *sensors);
+void comm_parse_config_write(const uint8_t *data, CommConfig *config);
+void comm_parse_config_read_request(const uint8_t *data, uint8_t *address);
+void comm_parse_config_response(const uint8_t *data, uint8_t *value);
 
 /* ============================================================================
  * button_effect helpers

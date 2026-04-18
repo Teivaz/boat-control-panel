@@ -239,6 +239,41 @@ void comm_parse_sensors_response(const uint8_t *data, CommSensors *sensors) {
 }
 
 /* ============================================================================
+ * reset (0x0F) / config (0x0E / 0x8E)
+ * ============================================================================ */
+
+uint8_t comm_build_reset(CommMessage *msg) {
+    msg->id = COMM_RESET;
+    return 1;
+}
+
+uint8_t comm_build_config(CommMessage *msg, uint8_t address, uint8_t value) {
+    msg->id             = COMM_CONFIG;
+    msg->config.address = address;
+    msg->config.value   = value;
+    return 1 + sizeof(CommConfig);
+}
+
+uint8_t comm_build_config_read(CommMessage *msg, uint8_t address) {
+    msg->id             = COMM_CONFIG_READ;
+    msg->config.address = address;
+    return 1 + 1;
+}
+
+void comm_parse_config_write(const uint8_t *data, CommConfig *config) {
+    config->address = data[0];
+    config->value   = data[1];
+}
+
+void comm_parse_config_read_request(const uint8_t *data, uint8_t *address) {
+    *address = data[0];
+}
+
+void comm_parse_config_response(const uint8_t *data, uint8_t *value) {
+    *value = data[0];
+}
+
+/* ============================================================================
  * button_effect helpers
  * ============================================================================ */
 
