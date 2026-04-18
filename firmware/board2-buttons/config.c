@@ -27,20 +27,20 @@
 #define OFF_EFFECTS       (OFF_BUTTONS + BUTTON_COUNT * sizeof(CommTriggerConfig))
 #define OFF_NONE          0xFF
 
-static uint8_t eeprom_read       (uint8_t offset);
-static void    eeprom_write      (uint8_t offset, uint8_t value);
+static uint8_t nvm_read       (uint8_t offset);
+static void    nvm_write      (uint8_t offset, uint8_t value);
 static uint8_t eeprom_offset_for (uint8_t address);
 static uint8_t effect_byte_index (uint8_t led_id);
 
 void config_init(void) {
-    if (eeprom_read(OFF_MAGIC_LO) == CONFIG_MAGIC_LO &&
-        eeprom_read(OFF_MAGIC_HI) == CONFIG_MAGIC_HI) return;
+    if (nvm_read(OFF_MAGIC_LO) == CONFIG_MAGIC_LO &&
+        nvm_read(OFF_MAGIC_HI) == CONFIG_MAGIC_HI) return;
 
-    for (uint8_t i = 0; i < BUTTON_COUNT * sizeof(CommTriggerConfig); i++) eeprom_write(OFF_BUTTONS + i, 0);
-    for (uint8_t i = 0; i < sizeof(CommButtonEffect);                 i++) eeprom_write(OFF_EFFECTS + i, 0);
+    for (uint8_t i = 0; i < BUTTON_COUNT * sizeof(CommTriggerConfig); i++) nvm_write(OFF_BUTTONS + i, 0);
+    for (uint8_t i = 0; i < sizeof(CommButtonEffect);                 i++) nvm_write(OFF_EFFECTS + i, 0);
     /* Magic written last so a reset mid-init re-triggers seeding. */
-    eeprom_write(OFF_MAGIC_LO, CONFIG_MAGIC_LO);
-    eeprom_write(OFF_MAGIC_HI, CONFIG_MAGIC_HI);
+    nvm_write(OFF_MAGIC_LO, CONFIG_MAGIC_LO);
+    nvm_write(OFF_MAGIC_HI, CONFIG_MAGIC_HI);
 }
 
 uint8_t config_read_byte(uint8_t address) {
@@ -50,12 +50,12 @@ uint8_t config_read_byte(uint8_t address) {
         case COMM_CONFIG_SW_REVISION: return SW_REVISION;
     }
     uint8_t offset = eeprom_offset_for(address);
-    return offset == OFF_NONE ? 0xFF : eeprom_read(offset);
+    return offset == OFF_NONE ? 0xFF : nvm_read(offset);
 }
 
 void config_write_byte(uint8_t address, uint8_t value) {
     uint8_t offset = eeprom_offset_for(address);
-    if (offset != OFF_NONE) eeprom_write(offset, value);
+    if (offset != OFF_NONE) nvm_write(offset, value);
 }
 
 CommTriggerConfig config_get_button(uint8_t button_id) {
@@ -109,7 +109,7 @@ static uint8_t eeprom_offset_for(uint8_t address) {
     return OFF_NONE;
 }
 
-static uint8_t eeprom_read(uint8_t offset) {
+static uint8_t nvm_read(uint8_t offset) {
     NVMADRU = EEPROM_ADDR_U;
     NVMADRH = 0x00;
     NVMADRL = offset;
@@ -121,8 +121,8 @@ static uint8_t eeprom_read(uint8_t offset) {
 
 /* Byte write requires the NVMLOCK unlock sequence to be atomic with GO=1;
  * any interrupt between the two unlock writes aborts the operation. */
-static void eeprom_write(uint8_t offset, uint8_t value) {
-    if (eeprom_read(offset) == value) return;
+static void nvm_write(uint8_t offset, uint8_t value) {
+    if (nvm_read(offset) == value) return;
 
     NVMADRU = EEPROM_ADDR_U;
     NVMADRH = 0x00;

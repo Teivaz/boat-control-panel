@@ -6,6 +6,7 @@
 #include "task_ids.h"
 #include "button.h"
 #include "led_effect.h"
+#include "comm.h"
 #include "libcomm.h"
 
 #include <xc.h>
@@ -26,23 +27,18 @@ void init(void)
     task_controller_init(&ctrl);
     button_init(&ctrl);
     led_effect_init(&ctrl);
+    comm_init();
     tick_init();
 
     // Interrupts should be enabled last
     interrupt_init();
 }
 
-uint8_t i2c_data;
-
 void send_button_event(uint8_t button_id)
 {
-    CommMessage msg;
     uint8_t cur  = input_state_current().integer;
     uint8_t prev = cur ^ (uint8_t)(1u << button_id);
-    uint8_t len  = comm_build_button_changed(&msg, prev, cur);
-    // TODO: transmit msg[0..len] to COMM_ADDRESS_MAIN once master-mode I2C is wired up
-    (void)msg;
-    (void)len;
+    comm_send_button_changed(prev, cur);
 
     CommButtonOutputEffect eff = led_effect_get(button_id);
     eff.mode = (eff.mode + 1) & 0x03;

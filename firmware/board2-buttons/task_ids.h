@@ -4,6 +4,8 @@
 enum {
     TASK_UPDATE,
     TASK_LED_EFFECT,
+    TASK_COMM_RETRY,
+    TASK_CONFIG_FLUSH,
     TASK_BUTTON_0,
     TASK_BUTTON_1,
     TASK_BUTTON_2,
@@ -11,7 +13,6 @@ enum {
     TASK_BUTTON_4,
     TASK_BUTTON_5,
     TASK_BUTTON_6,
-    TASK_BUTTON_7,
 };
 
 #endif /* TASK_IDS_H */

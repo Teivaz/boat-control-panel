@@ -8,34 +8,35 @@
 #ifndef I2C_H
 #define I2C_H
 
+#include <stdint.h>
 #include <xc.h>
 
-typedef enum
-{
-    I2C_CLIENT_ERROR_NONE = 0, /**< Indicates no error */
-    I2C_CLIENT_ERROR_BUS_COLLISION, /**< Indicates an error caused due to bus collision */
-    I2C_CLIENT_ERROR_WRITE_COLLISION, /**< Indicates an error caused due to write collision */
-    I2C_CLIENT_ERROR_RECEIVE_OVERFLOW, /**< Indicates an error due to a receive buffer overflow */
-    I2C_CLIENT_ERROR_TRANSMIT_UNDERFLOW, /**< Indicates an error caused due to transmit buffer underflow */
-    I2C_CLIENT_ERROR_READ_UNDERFLOW, /**< Indicates an error caused due to receive buffer underflow */
-} I2cClientError;
+typedef enum {
+    I2C_RESULT_OK = 0,
+    I2C_RESULT_BUSY,        /* bus held by another host                */
+    I2C_RESULT_COLLISION,   /* arbitration lost mid-transaction        */
+    I2C_RESULT_NACK,        /* addressed target did not ACK            */
+    I2C_RESULT_TIMEOUT,     /* peripheral stalled                      */
+} I2cResult;
 
-typedef enum
-{
-    I2C_CLIENT_EVENT_NONE = 0,          /**< Event indicating that the I2C bus is in an idle state */
-    I2C_CLIENT_EVENT_ADDR_MATCH,        /**< Event indicating that the I2C client has received a matching address */
-    I2C_CLIENT_EVENT_RX_READY ,         /**< Event indicating that the I2C client is prepared to receive data from the host */
-    I2C_CLIENT_EVENT_TX_READY,          /**< Event indicating that the I2C client is ready to transmit data to the host */
-    I2C_CLIENT_EVENT_STOP_BIT_RECEIVED, /**< Event indicating that the I2C client has received a stop bit */
-    I2C_CLIENT_EVENT_ERROR,             /**< Event indicating an error occurred on the I2C bus */
-} I2cClientEvent;
+/* RX handler: complete write-message body (cmd byte at [0] + payload). */
+typedef void (*I2cRxHandler)(const uint8_t *data, uint8_t len);
 
-void i2c_init(void);
+/* Read handler: build the response for an incoming read request. `request`
+ * is the write-phase payload (cmd + params); write up to `response_max`
+ * bytes to `response` and return the count. Return 0 to decline the read
+ * (a dummy 0x00 byte will be transmitted). Runs in ISR context — must be
+ * non-blocking. */
+typedef uint8_t (*I2cReadHandler)(const uint8_t *request, uint8_t request_len,
+                                  uint8_t *response, uint8_t response_max);
 
-uint8_t i2c_write_bytes(uint16_t address, uint8_t* data, size_t data_length);
+void      i2c_init             (void);
+void      i2c_set_rx_handler   (I2cRxHandler   h);
+void      i2c_set_read_handler (I2cReadHandler h);
 
-void _i2c_event_handler(void);
-void _i2c_error_event_handler(void);
-uint8_t _i2c_interrupt_handler(I2cClientEvent clientEvent);
+/* Host-mode blocking transmit. Temporarily switches the peripheral to host,
+ * transmits `len` bytes, then restores client mode. Safe to call from main
+ * context only. BUSY / COLLISION are retryable. */
+I2cResult i2c_transmit(uint8_t address, const uint8_t *data, uint8_t len);
 
 #endif /* I2C_H */

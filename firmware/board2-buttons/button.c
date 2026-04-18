@@ -32,7 +32,7 @@ static ButtonState     buttons[BUTTON_COUNT];
 
 static const TaskId button_task_ids[BUTTON_COUNT] = {
     TASK_BUTTON_0, TASK_BUTTON_1, TASK_BUTTON_2, TASK_BUTTON_3,
-    TASK_BUTTON_4, TASK_BUTTON_5, TASK_BUTTON_6, TASK_BUTTON_7,
+    TASK_BUTTON_4, TASK_BUTTON_5, TASK_BUTTON_6,
 };
 
 static void button_timer_cb   (TaskId id, void *context);
