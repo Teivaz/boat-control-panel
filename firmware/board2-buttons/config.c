@@ -31,13 +31,12 @@ static uint8_t nvm_read       (uint8_t offset);
 static void    nvm_write      (uint8_t offset, uint8_t value);
 static uint8_t eeprom_offset_for (uint8_t address);
 static uint8_t effect_byte_index (uint8_t led_id);
+static void write_default_config(void);
 
 void config_init(void) {
     if (nvm_read(OFF_MAGIC_LO) == CONFIG_MAGIC_LO &&
         nvm_read(OFF_MAGIC_HI) == CONFIG_MAGIC_HI) return;
-
-    for (uint8_t i = 0; i < BUTTON_COUNT * sizeof(CommTriggerConfig); i++) nvm_write(OFF_BUTTONS + i, 0);
-    for (uint8_t i = 0; i < sizeof(CommButtonEffect);                 i++) nvm_write(OFF_EFFECTS + i, 0);
+    write_default_config();
     /* Magic written last so a reset mid-init re-triggers seeding. */
     nvm_write(OFF_MAGIC_LO, CONFIG_MAGIC_LO);
     nvm_write(OFF_MAGIC_HI, CONFIG_MAGIC_HI);
@@ -137,4 +136,29 @@ static void nvm_write(uint8_t offset, uint8_t value) {
     INTERRUPT_POP;
 
     while (NVMCON0bits.GO);
+}
+
+void write_default_config(void) {
+    // Default mode is 1ms hold time
+    CommTriggerConfig default_trigger = comm_button_trigger_make(COMM_BUTTON_MODE_HOLD, 1);
+    if (comm_address() == COMM_ADDRESS_BUTTON_BOARD_L) {
+        // Button 0 on the left board has 1.5s hold time
+        CommTriggerConfig trigger = comm_button_trigger_make(COMM_BUTTON_MODE_HOLD, 1500);
+        config_write_byte(OFF_BUTTONS + 0, *(uint8_t*)&trigger);
+    } else {
+        config_write_byte(OFF_BUTTONS + 0, *(uint8_t*)&default_trigger);
+    }
+    config_write_byte(OFF_BUTTONS + 1, *(uint8_t*)&default_trigger);
+    config_write_byte(OFF_BUTTONS + 2, *(uint8_t*)&default_trigger);
+    config_write_byte(OFF_BUTTONS + 3, *(uint8_t*)&default_trigger);
+    config_write_byte(OFF_BUTTONS + 4, *(uint8_t*)&default_trigger);
+    config_write_byte(OFF_BUTTONS + 5, *(uint8_t*)&default_trigger);
+    config_write_byte(OFF_BUTTONS + 6, *(uint8_t*)&default_trigger);
+
+    CommButtonOutputEffect effect = { .color=COMM_EFFECT_COLOR_WHITE, .mode = COMM_EFFECT_MODE_DISABLED };
+    uint8_t effect_pair = effect.raw & 0x0F;
+    effect_pair |= (effect.raw << 4) & 0xF0;
+    for (uint8_t i = 0; i < sizeof(CommButtonEffect); i++) {
+         config_write_byte(OFF_EFFECTS + i, effect_pair);
+    }
 }
