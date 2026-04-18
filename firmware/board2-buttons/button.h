@@ -5,7 +5,7 @@
 #include "libcomm.h"
 #include "task.h"
 
-#define BUTTON_COUNT 8
+#define BUTTON_COUNT 7
 
 void button_init(TaskController *ctrl);
 

@@ -5,6 +5,7 @@
 #include "task.h"
 #include "task_ids.h"
 #include "button.h"
+#include "led_effect.h"
 #include "libcomm.h"
 
 #include <xc.h>
@@ -13,9 +14,8 @@
 
 static TaskController ctrl;
 
-static void update_task(TaskId id, void *ctx);
-static void tick_isr   (void);
-static void tick_init  (void);
+static void tick_isr (void);
+static void tick_init(void);
 
 void init(void)
 {
@@ -25,36 +25,14 @@ void init(void)
 
     task_controller_init(&ctrl);
     button_init(&ctrl);
-    task_controller_add(&ctrl, TASK_UPDATE, 10, update_task, 0);
+    led_effect_init(&ctrl);
     tick_init();
 
     // Interrupts should be enabled last
     interrupt_init();
 }
 
-uint8_t curr = 0;
-uint8_t step = 1;
-
-uint8_t button_state = 0;
-uint8_t mode = 0;
-
 uint8_t i2c_data;
-RGBLedData led_data[7] = {0};
-
-static void update_task(TaskId id, void *ctx) {
-    (void)id;
-    (void)ctx;
-    curr += step;
-    uint8_t next_button_state = input_state_current().integer;
-    if (button_state != next_button_state)
-    {
-        uint8_t mask = button_state ^ next_button_state;
-        uint8_t released = next_button_state & mask;
-        mode ^= released;
-        button_state = next_button_state;
-    }
-    rgbled_set(led_data, 7);
-}
 
 void send_button_event(uint8_t button_id)
 {
@@ -66,7 +44,9 @@ void send_button_event(uint8_t button_id)
     (void)msg;
     (void)len;
 
-    led_data[button_id].red = !led_data[button_id].red * 10;
+    CommButtonOutputEffect eff = led_effect_get(button_id);
+    eff.mode = (eff.mode + 1) & 0x03;
+    led_effect_set(button_id, eff);
 }
 
 
@@ -103,6 +83,18 @@ void main(void)
     button_set_trigger(2, comm_button_trigger_make(COMM_BUTTON_MODE_HOLD, 1));
     button_set_trigger(1, comm_button_trigger_make(COMM_BUTTON_MODE_HOLD, 0));
     button_set_trigger(0, comm_button_trigger_make(COMM_BUTTON_MODE_CHANGE, 0));
+
+    CommButtonOutputEffect white = { .color=COMM_EFFECT_COLOR_WHITE, .mode = COMM_EFFECT_MODE_DISABLED };
+    CommButtonOutputEffect red = { .color=COMM_EFFECT_COLOR_RED, .mode = COMM_EFFECT_MODE_DISABLED };
+    CommButtonOutputEffect green = { .color=COMM_EFFECT_COLOR_GREEN, .mode = COMM_EFFECT_MODE_DISABLED };
+    CommButtonOutputEffect blue = { .color=COMM_EFFECT_COLOR_BLUE, .mode = COMM_EFFECT_MODE_DISABLED };
+    led_effect_set(6, blue);
+    led_effect_set(5, green);
+    led_effect_set(4, red);
+    led_effect_set(3, white);
+    led_effect_set(2, blue);
+    led_effect_set(1, green);
+    led_effect_set(0, red);
 
     while (1)
     {

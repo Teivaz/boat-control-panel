@@ -24,6 +24,9 @@ All write messages begin with a command byte (byte 0) with the MSB clear (0x00�
 
 | Command | Value | Direction |
 | --- | --- | --- |
+| `reset` | 0x0F | main → any (write) |
+| `config` | 0x0E | main → any (write) |
+| `config_read` | 0x8E | main → any (read) |
 | `button_effect` | 0x01 | main → button board |
 | `button_changed` | 0x02 | button board → main |
 | `button_state_read` | 0x83 | main → button board (read) |
@@ -39,6 +42,31 @@ All write messages begin with a command byte (byte 0) with the MSB clear (0x00�
 | `level_mode` | 0x0A | main → switching board (write) |
 | `level_mode_read` | 0x8A | main → switching board (read) |
 | `sensors_read` | 0x8B | main → switching board (read) |
+
+### Common
+
+The following commands are supported by every addressable device.
+
+- reset - perform a soft reset; the device restarts as if powered on. No response is emitted.
+  - write byte 0: command - 0x0F
+
+- config - write one byte of the device configuration. Persisted to non-volatile storage; survives power cycles. Address space and byte meaning are device-specific.
+  - write byte 0: command - 0x0E
+  - write byte 1: address - byte offset within the device configuration
+  - write byte 2: value - configuration byte to store
+
+- config_read - read one byte of the device configuration
+  - write byte 0: command - 0x8E
+  - write byte 1: address - byte offset within the device configuration
+  - read byte 0: value - configuration byte at the requested address
+
+The low end of the configuration address space is reserved for universal fields present on every device. Device-specific fields live at `0x10` and above.
+
+| Address | Field | Access | Description |
+|---|---|---|---|
+| 0x00 | device_id | read-only | 7-bit I2C address of this device; matches the address used to reach it |
+| 0x01 | hw_revision | read-only | Hardware revision, monotonic per board |
+| 0x02 | sw_revision | read-only | Firmware revision, monotonic per build |
 
 ### Main board (0x40)
 
@@ -71,14 +99,28 @@ Each button has an independent mode and timing configured via `button_trigger`:
 | `hold`    | `10` | Event fires once when the button has been held for ≥ the configured time. |
 | `change`  | `11` | Event fires on every button state change. No time parameter. |
 
-- button_effect - set the visual effect for each button output
+- button_effect - set the visual effect for each of the 8 button outputs
   - write byte 0: command - 0x01
   - write byte 1: outputs_76 - upper nibble = output 7, lower nibble = output 6
   - write byte 2: outputs_54 - upper nibble = output 5, lower nibble = output 4
   - write byte 3: outputs_32 - upper nibble = output 3, lower nibble = output 2
   - write byte 4: outputs_10 - upper nibble = output 1, lower nibble = output 0
 
-  Each nibble: `0x0` = off, `0x1` = on; values `0x2`–`0xF` reserved.
+  Each nibble encodes one output as `CC MM` — `[3:2]` color, `[1:0]` mode.
+
+  | CC | Color |
+  |---|---|
+  | 00 | white |
+  | 01 | red |
+  | 10 | green |
+  | 11 | blue |
+
+  | MM | Mode |
+  |---|---|
+  | 00 | disabled |
+  | 01 | enabled |
+  | 10 | flashing (fast) |
+  | 11 | pulsating (slow) |
 
 - button_state_read - polled read; returns the current physical state of all buttons
   - write byte 0: command - 0x83

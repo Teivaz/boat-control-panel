@@ -65,6 +65,24 @@ typedef enum {
 } CommMeterMode;
 
 /* ============================================================================
+ * Button output effect (button_effect nibble: CCMM)
+ * ============================================================================ */
+
+typedef enum {
+    COMM_EFFECT_COLOR_WHITE = 0x00,
+    COMM_EFFECT_COLOR_RED   = 0x01,
+    COMM_EFFECT_COLOR_GREEN = 0x02,
+    COMM_EFFECT_COLOR_BLUE  = 0x03,
+} CommEffectColor;
+
+typedef enum {
+    COMM_EFFECT_MODE_DISABLED  = 0x00,
+    COMM_EFFECT_MODE_ENABLED   = 0x01,
+    COMM_EFFECT_MODE_FLASHING  = 0x02,  /* fast  */
+    COMM_EFFECT_MODE_PULSATING = 0x03,  /* slow  */
+} CommEffectMode;
+
+/* ============================================================================
  * Message Payload Structs
  * ============================================================================ */
 
@@ -79,27 +97,28 @@ typedef struct {
 } CommTriggerConfig;
 
 /**
- * button_effect (0x01): 4 bytes
- * Nibble-packed output states; high outputs transmitted first.
- * Each nibble: 0x0 = off, 0x1 = on; 0x2-0xF reserved.
+ * Per-output effect nibble (CCMM). sizeof == 1 — only [3:0] is meaningful.
+ * Use `.raw` for wire-level access and the bitfield view for typed access.
  */
 typedef union {
+    uint8_t raw;
     struct {
-        uint8_t outputs_76;  /* upper nibble = output 7, lower nibble = output 6 */
-        uint8_t outputs_54;  /* upper nibble = output 5, lower nibble = output 4 */
-        uint8_t outputs_32;  /* upper nibble = output 3, lower nibble = output 2 */
-        uint8_t outputs_10;  /* upper nibble = output 1, lower nibble = output 0 */
+        uint8_t mode  : 2;  /* CommEffectMode  MM [1:0] */
+        uint8_t color : 2;  /* CommEffectColor CC [3:2] */
     };
-    struct {
-        uint8_t out6 : 4;
-        uint8_t out7 : 4;
-        uint8_t out4 : 4;
-        uint8_t out5 : 4;
-        uint8_t out2 : 4;
-        uint8_t out3 : 4;
-        uint8_t out0 : 4;
-        uint8_t out1 : 4;
-    };
+} CommButtonOutputEffect;
+
+/**
+ * button_effect (0x01): 4 bytes on the wire.
+ * Two outputs per byte; high-output bytes transmitted first.
+ * Upper nibble = odd output, lower nibble = even output.
+ * Use comm_button_effect_get/set to access individual outputs.
+ */
+typedef struct {
+    uint8_t outputs_76;
+    uint8_t outputs_54;
+    uint8_t outputs_32;
+    uint8_t outputs_10;
 } CommButtonEffect;
 
 /** button_changed (0x02): 3 bytes */
@@ -283,8 +302,8 @@ void comm_parse_sensors_response(const uint8_t *data, CommSensors *sensors);
  * ============================================================================ */
 
 void   comm_button_effect_init(CommButtonEffect *effect);
-int8_t comm_button_effect_set(CommButtonEffect *effect, uint8_t output_index, uint8_t value);
-int8_t comm_button_effect_get(const CommButtonEffect *effect, uint8_t output_index, uint8_t *value);
+int8_t comm_button_effect_set(CommButtonEffect *effect, uint8_t output_index, CommButtonOutputEffect value);
+int8_t comm_button_effect_get(const CommButtonEffect *effect, uint8_t output_index, CommButtonOutputEffect *value);
 
 /* ============================================================================
  * button_trigger helpers

@@ -3,6 +3,7 @@
 
 enum {
     TASK_UPDATE,
+    TASK_LED_EFFECT,
     TASK_BUTTON_0,
     TASK_BUTTON_1,
     TASK_BUTTON_2,

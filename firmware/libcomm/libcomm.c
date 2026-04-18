@@ -251,22 +251,23 @@ void comm_button_effect_init(CommButtonEffect *effect) {
 
 /* output layout: byte_index = (7 - output_index) / 2
  * even index -> lower nibble, odd index -> upper nibble */
-int8_t comm_button_effect_set(CommButtonEffect *effect, uint8_t output_index, uint8_t value) {
-    if (effect == NULL || output_index > 7 || value > 0xF) return -1;
+int8_t comm_button_effect_set(CommButtonEffect *effect, uint8_t output_index, CommButtonOutputEffect value) {
+    if (effect == NULL || output_index > 7) return -1;
     uint8_t *bytes = (uint8_t *)effect;
     uint8_t byte_index = (7 - output_index) / 2;
+    uint8_t nibble    = value.raw & 0x0F;
     if (output_index & 1) {
-        bytes[byte_index] = (bytes[byte_index] & 0x0F) | (uint8_t)(value << 4);
+        bytes[byte_index] = (bytes[byte_index] & 0x0F) | (uint8_t)(nibble << 4);
     } else {
-        bytes[byte_index] = (bytes[byte_index] & 0xF0) | value;
+        bytes[byte_index] = (bytes[byte_index] & 0xF0) | nibble;
     }
     return 0;
 }
 
-int8_t comm_button_effect_get(const CommButtonEffect *effect, uint8_t output_index, uint8_t *value) {
+int8_t comm_button_effect_get(const CommButtonEffect *effect, uint8_t output_index, CommButtonOutputEffect *value) {
     if (effect == NULL || output_index > 7 || value == NULL) return -1;
     const uint8_t *bytes = (const uint8_t *)effect;
     uint8_t byte_index = (7 - output_index) / 2;
-    *value = (output_index & 1) ? (bytes[byte_index] >> 4) : (bytes[byte_index] & 0x0F);
+    value->raw = (output_index & 1) ? (bytes[byte_index] >> 4) : (bytes[byte_index] & 0x0F);
     return 0;
 }
