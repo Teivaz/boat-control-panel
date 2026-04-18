@@ -3,6 +3,9 @@
 
 #include <xc.h>
 
+#define INTERRUPT_PUSH const int8_t _gie_state = GIE; GIE = 0
+#define INTERRUPT_POP GIE = (__bit)_gie_state
+
 /* ============================================================================
  * Device Addresses
  * ============================================================================ */

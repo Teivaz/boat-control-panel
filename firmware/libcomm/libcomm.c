@@ -207,8 +207,8 @@ void comm_parse_levels_response(const uint8_t *data, CommLevels *levels) {
 
 uint8_t comm_build_level_mode(CommMessage *msg, CommMeterMode mode_0, CommMeterMode mode_1) {
     msg->id = COMM_LEVEL_MODE;
-    msg->level_mode.mode_0 = mode_0;
-    msg->level_mode.mode_1 = mode_1;
+    msg->level_mode.mode_0 = (uint8_t)mode_0;
+    msg->level_mode.mode_1 = (uint8_t)mode_1;
     return 1 + sizeof(CommLevelMode);
 }
 

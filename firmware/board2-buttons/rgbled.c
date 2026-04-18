@@ -35,7 +35,7 @@ uint16_t _copy_to_buffer(RGBLedData *rgb, uint8_t count)
         iptr += 1;
         optr += 4;
     }
-    return optr - _rgbled_buffer;
+    return (uint16_t)(optr - _rgbled_buffer);
 }
 
 void rgbled_spi_init(void)

@@ -1,5 +1,6 @@
 #include "input.h"
 #include "interrupt.h"
+#include "libcomm.h"
 
 #define _INPUT_0 PORTAbits.RA7
 #define _INPUT_1 PORTAbits.RA6
@@ -32,10 +33,9 @@ void input_init(void)
 
 InputState input_state_current(void)
 {
-    const uint8_t interrupt_state = GIE;
-    GIE = 0;
+    INTERRUPT_PUSH;
     InputState result = _global_input_state;
-    GIE = interrupt_state;
+    INTERRUPT_POP;
     return result;
 }
 

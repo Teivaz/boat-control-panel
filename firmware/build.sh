@@ -8,6 +8,16 @@ BOARD="$(basename "$(pwd)")"
 # ── Build the Docker image (cached after first run) ───────────────────────────
 docker build --platform linux/amd64 -t "${IMAGE}" "${SCRIPT_DIR}/toolchain"
 
+# ── Clean ─────────────────────────────────────────────────────────────────────
+if [ "${1:-}" = "clean" ]; then
+    docker run --rm --platform linux/amd64 \
+        -v "${SCRIPT_DIR}:/dist" \
+        "${IMAGE}" \
+        make -C "/dist/${BOARD}" clean CONF=default
+    rm -rf build dist
+    exit 0
+fi
+
 # ── Compile ───────────────────────────────────────────────────────────────────
 # Mount the firmware root so sibling directories (e.g. libcomm) are accessible.
 # The board to build is passed as an argument to make via -C.
