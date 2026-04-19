@@ -19,8 +19,9 @@ void comm_init(void) {
 
 /* ISR context — handlers must stay short. */
 static void on_rx(const uint8_t *data, uint8_t len) {
-    if (len == 0)
+    if (len == 0) {
         return;
+    }
     switch (data[0]) {
         case COMM_RELAY_STATE:
             if (len == 1 + sizeof(CommRelayState)) {
@@ -63,8 +64,9 @@ static void on_rx(const uint8_t *data, uint8_t len) {
 
 static uint8_t on_read(const uint8_t *request, uint8_t request_len,
                        uint8_t *response, uint8_t response_max) {
-    if (request_len == 0 || response_max == 0)
+    if (request_len == 0 || response_max == 0) {
         return 0;
+    }
 
     switch (request[0]) {
         case COMM_RELAY_STATE_READ: {

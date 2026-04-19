@@ -20,8 +20,9 @@ static const NavPlan plans[] = {
 
 NavResolution nav_lights_resolve(NavMode mode, uint8_t enabled_mask) {
     NavResolution r = {0, 0};
-    if (mode == NAV_MODE_OFF)
+    if (mode == NAV_MODE_OFF) {
         return r;
+    }
 
     const NavPlan p = plans[mode];
     if ((p.primary & enabled_mask) == p.primary) {

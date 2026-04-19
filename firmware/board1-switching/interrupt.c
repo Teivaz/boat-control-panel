@@ -32,14 +32,16 @@ void interrupt_set_handler_TMR0(void (*h)(void)) {
 
 void __interrupt(irq(IOC), base(8)) IOC_ISR(void) {
     PIR0bits.IOCIF = 0;
-    if (interrupt_handler_IOC)
+    if (interrupt_handler_IOC) {
         interrupt_handler_IOC();
+    }
 }
 
 void __interrupt(irq(TMR0), base(8)) TMR0_ISR(void) {
     PIR3bits.TMR0IF = 0;
-    if (interrupt_handler_TMR0)
+    if (interrupt_handler_TMR0) {
         interrupt_handler_TMR0();
+    }
 }
 
 /* Unused vectors reset the device. I2C1 ISRs are defined in i2c.c and the

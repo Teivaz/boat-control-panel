@@ -51,12 +51,15 @@ void sensors_set_change_handler(SensorsChangeHandler handler) {
 
 static uint8_t read_raw(void) {
     uint8_t s = 0;
-    if (PIN_BILGE)
+    if (PIN_BILGE) {
         s |= 0x01;
-    if (PIN_SHORE)
+    }
+    if (PIN_SHORE) {
         s |= 0x02;
-    if (PIN_AC)
+    }
+    if (PIN_AC) {
         s |= 0x04;
+    }
     return s;
 }
 
@@ -74,8 +77,9 @@ static void poll_task(TaskId id, void *ctx) {
         if (match_count == SENSORS_STABLE_N && raw != stable_state) {
             uint8_t prev = stable_state;
             stable_state = raw;
-            if (change_handler)
+            if (change_handler) {
                 change_handler(prev, raw);
+            }
         }
     }
 }

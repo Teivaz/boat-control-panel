@@ -148,8 +148,9 @@ void controller_on_button_changed(uint8_t sender, uint8_t prev, uint8_t curr) {
     /* Newly-pressed bits: 0 -> 1 transitions. */
     uint8_t rising = (uint8_t) (curr & ~prev);
     for (uint8_t i = 0; i < 7; i++) {
-        if (rising & (uint8_t) (1u << i))
+        if (rising & (uint8_t) (1u << i)) {
             apply_action(&table[i]);
+        }
     }
 }
 
@@ -258,8 +259,9 @@ static void recompute_target(void) {
 static void retry_task(TaskId id, void *ctx) {
     (void) id;
     (void) ctx;
-    if (!relay_dirty)
+    if (!relay_dirty) {
         return;
+    }
 
     uint16_t snapshot;
     INTERRUPT_PUSH;
@@ -274,8 +276,9 @@ static void retry_task(TaskId id, void *ctx) {
          * the current target — a producer could have bumped it while we
          * were transmitting. */
         INTERRUPT_PUSH;
-        if (relay_target == snapshot)
+        if (relay_target == snapshot) {
             relay_dirty = 0;
+        }
         INTERRUPT_POP;
     }
 }

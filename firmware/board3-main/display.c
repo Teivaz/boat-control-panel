@@ -35,8 +35,9 @@ void display_send_cmd(uint8_t cmd) {
 }
 
 void display_send_data(const uint8_t *data, uint16_t len) {
-    for (uint16_t i = 0; i < len; i++)
+    for (uint16_t i = 0; i < len; i++) {
         bus_write(data[i], DC_DATA);
+    }
 }
 
 /* SSD1322 init sequence for a 256x64 panel (e.g. NHD-3.12-25664). Values

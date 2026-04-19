@@ -122,8 +122,9 @@ static void handle_event(void) {
         /* Client is receiving from the host. */
         if (I2C1STAT1bits.RXBF) {
             uint8_t byte = I2C1RXB;
-            if (rx_len < I2C_BUF_SIZE)
+            if (rx_len < I2C_BUF_SIZE) {
                 rx_buf[rx_len++] = byte;
+            }
             I2C1CON1bits.ACKDT = 0;
             I2C1PIRbits.ACKTIF = 0;
         }
@@ -136,16 +137,21 @@ static void handle_event(void) {
 static void handle_error(void) {
     /* All error paths: clear the flag, abandon the in-flight transaction,
      * release the clock and go back to idle. The originator will retry. */
-    if (I2C1ERRbits.BCLIF)
+    if (I2C1ERRbits.BCLIF) {
         I2C1ERRbits.BCLIF = 0;
-    if (I2C1STAT1bits.TXWE)
+    }
+    if (I2C1STAT1bits.TXWE) {
         I2C1STAT1bits.TXWE = 0;
-    if (I2C1CON1bits.RXO)
+    }
+    if (I2C1CON1bits.RXO) {
         I2C1CON1bits.RXO = 0;
-    if (I2C1CON1bits.TXU)
+    }
+    if (I2C1CON1bits.TXU) {
         I2C1CON1bits.TXU = 0;
-    if (I2C1STAT1bits.RXRE)
+    }
+    if (I2C1STAT1bits.RXRE) {
         I2C1STAT1bits.RXRE = 0;
+    }
     I2C1ERRbits.NACKIF = 0;
 
     reset_state();
@@ -164,14 +170,16 @@ static void handle_error(void) {
  */
 
 I2cResult i2c_transmit(uint8_t address, const uint8_t *data, uint8_t len) {
-    if (len == 0)
+    if (len == 0) {
         return I2C_RESULT_OK;
+    }
 
     /* Bus free? (BFRE=1 means no start/stop framing in progress.) */
     uint16_t timeout = I2C_POLL_MAX;
     while (!I2C1STAT0bits.BFRE) {
-        if (--timeout == 0)
+        if (--timeout == 0) {
             return I2C_RESULT_BUSY;
+        }
     }
 
     /* Mask only the I2C interrupts — other ISRs stay live. */

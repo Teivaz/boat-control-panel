@@ -66,8 +66,9 @@ static void retry_task(TaskId id, void *ctx) {
         uint8_t len = comm_build_button_changed(&msg, queue[q_head].prev,
                                                 queue[q_head].curr);
         if (i2c_transmit(COMM_ADDRESS_MAIN, (const uint8_t *) &msg, len) !=
-            I2C_RESULT_OK)
+            I2C_RESULT_OK) {
             break;
+        }
         q_head = (uint8_t) ((q_head + 1) & RETRY_QUEUE_MASK);
     }
 }
@@ -82,8 +83,9 @@ static void retry_task(TaskId id, void *ctx) {
  */
 
 static void on_rx(const uint8_t *data, uint8_t len) {
-    if (len == 0)
+    if (len == 0) {
         return;
+    }
     switch (data[0]) {
         case COMM_BUTTON_EFFECT:
             if (len == 1 + sizeof(CommButtonEffect)) {
@@ -120,8 +122,9 @@ static void on_rx(const uint8_t *data, uint8_t len) {
 
 static uint8_t on_read(const uint8_t *request, uint8_t request_len,
                        uint8_t *response, uint8_t response_max) {
-    if (request_len == 0 || response_max == 0)
+    if (request_len == 0 || response_max == 0) {
         return 0;
+    }
 
     switch (request[0]) {
         case COMM_BUTTON_STATE_READ:

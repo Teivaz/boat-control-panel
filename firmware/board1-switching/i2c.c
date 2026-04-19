@@ -109,8 +109,9 @@ static void handle_event(void) {
     } else {
         if (I2C1STAT1bits.RXBF) {
             uint8_t byte = I2C1RXB;
-            if (rx_len < I2C_BUF_SIZE)
+            if (rx_len < I2C_BUF_SIZE) {
                 rx_buf[rx_len++] = byte;
+            }
             I2C1CON1bits.ACKDT = 0;
             I2C1PIRbits.ACKTIF = 0;
         }
@@ -120,16 +121,21 @@ static void handle_event(void) {
 }
 
 static void handle_error(void) {
-    if (I2C1ERRbits.BCLIF)
+    if (I2C1ERRbits.BCLIF) {
         I2C1ERRbits.BCLIF = 0;
-    if (I2C1STAT1bits.TXWE)
+    }
+    if (I2C1STAT1bits.TXWE) {
         I2C1STAT1bits.TXWE = 0;
-    if (I2C1CON1bits.RXO)
+    }
+    if (I2C1CON1bits.RXO) {
         I2C1CON1bits.RXO = 0;
-    if (I2C1CON1bits.TXU)
+    }
+    if (I2C1CON1bits.TXU) {
         I2C1CON1bits.TXU = 0;
-    if (I2C1STAT1bits.RXRE)
+    }
+    if (I2C1STAT1bits.RXRE) {
         I2C1STAT1bits.RXRE = 0;
+    }
     I2C1ERRbits.NACKIF = 0;
 
     reset_state();
@@ -143,13 +149,15 @@ static void handle_error(void) {
  */
 
 I2cResult i2c_transmit(uint8_t address, const uint8_t *data, uint8_t len) {
-    if (len == 0)
+    if (len == 0) {
         return I2C_RESULT_OK;
+    }
 
     uint16_t timeout = I2C_POLL_MAX;
     while (!I2C1STAT0bits.BFRE) {
-        if (--timeout == 0)
+        if (--timeout == 0) {
             return I2C_RESULT_BUSY;
+        }
     }
 
     uint8_t pie7_saved = PIE7;

@@ -28,14 +28,16 @@ void led_effect_init(TaskController *c) {
 }
 
 void led_effect_set(uint8_t led_id, CommButtonOutputEffect eff) {
-    if (led_id < LED_EFFECT_COUNT)
+    if (led_id < LED_EFFECT_COUNT) {
         effects[led_id] = eff;
+    }
 }
 
 CommButtonOutputEffect led_effect_get(uint8_t led_id) {
     CommButtonOutputEffect e = {0};
-    if (led_id < LED_EFFECT_COUNT)
+    if (led_id < LED_EFFECT_COUNT) {
         e = effects[led_id];
+    }
     return e;
 }
 

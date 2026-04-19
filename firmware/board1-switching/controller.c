@@ -69,8 +69,9 @@ static const uint8_t wire_to_proto[16] = {
 static uint16_t map_proto_to_wire(uint16_t proto) {
     uint16_t wire = 0;
     for (uint8_t b = 0; b < 16; b++) {
-        if (proto & (uint16_t) (1u << b))
+        if (proto & (uint16_t) (1u << b)) {
             wire |= (uint16_t) (1u << proto_to_wire[b]);
+        }
     }
     return wire;
 }
@@ -78,8 +79,9 @@ static uint16_t map_proto_to_wire(uint16_t proto) {
 static uint16_t map_wire_to_proto(uint16_t wire) {
     uint16_t proto = 0;
     for (uint8_t b = 0; b < 16; b++) {
-        if (wire & (uint16_t) (1u << b))
+        if (wire & (uint16_t) (1u << b)) {
             proto |= (uint16_t) (1u << wire_to_proto[b]);
+        }
     }
     return proto;
 }
@@ -195,8 +197,9 @@ static void apply_target(uint16_t proto_target) {
     uint16_t wire = map_proto_to_wire(proto_target);
     /* Power-master rail: assert wire bit 1 whenever any non-main relay is
      * on. The master can also drive proto bit 15 explicitly to force it. */
-    if (wire & (uint16_t) ~(1u << WIRE_MAIN_BIT))
+    if (wire & (uint16_t) ~(1u << WIRE_MAIN_BIT)) {
         wire |= (uint16_t) (1u << WIRE_MAIN_BIT);
+    }
     relay_out_write(wire);
 }
 
@@ -218,8 +221,9 @@ static void monitor_task(TaskId id, void *ctx) {
     /* Always report wire-1 ("main") transitions even if its proto bit isn't
      * in the mask — the master needs to know the rail is hot. */
     uint16_t effective = (uint16_t) (relay_mask | (1u << PROTO_MAIN_BIT));
-    if ((proto ^ relay_physical) & effective)
+    if ((proto ^ relay_physical) & effective) {
         push_dirty = 1;
+    }
     relay_physical = proto;
     INTERRUPT_POP;
 }
@@ -240,8 +244,9 @@ static void poll_levels_task(TaskId id, void *ctx) {
 static void retry_task(TaskId id, void *ctx) {
     (void) id;
     (void) ctx;
-    if (!push_dirty)
+    if (!push_dirty) {
         return;
+    }
 
     uint16_t prev_r, curr_r;
     uint8_t prev_s, curr_s;
@@ -258,15 +263,17 @@ static void retry_task(TaskId id, void *ctx) {
     uint8_t len =
         comm_build_relay_changed(&msg, prev_r, curr_r, prev_s, curr_s);
     if (i2c_transmit(COMM_ADDRESS_MAIN, (const uint8_t *) &msg, len) !=
-        I2C_RESULT_OK)
+        I2C_RESULT_OK) {
         return;
+    }
 
     {
         INTERRUPT_PUSH;
         last_pushed_relays = curr_r;
         last_pushed_sensors = curr_s;
-        if (relay_physical == curr_r && sensor_shadow == curr_s)
+        if (relay_physical == curr_r && sensor_shadow == curr_s) {
             push_dirty = 0;
+        }
         INTERRUPT_POP;
     }
 }

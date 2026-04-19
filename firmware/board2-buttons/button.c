@@ -58,8 +58,9 @@ void button_init(TaskController *c) {
 }
 
 void button_set_trigger(uint8_t button_id, CommTriggerConfig cfg) {
-    if (button_id >= BUTTON_COUNT)
+    if (button_id >= BUTTON_COUNT) {
         return;
+    }
     ButtonState *b = &buttons[button_id];
     const uint16_t new_time = comm_button_trigger_time_ms(cfg);
     const uint8_t mode_diff = (cfg.mode != b->mode);
@@ -104,8 +105,9 @@ CommTriggerConfig button_get_trigger(uint8_t button_id) {
 static void on_input_changed(uint8_t prev, uint8_t curr) {
     uint8_t changed = prev ^ curr;
     for (uint8_t i = 0; i < BUTTON_COUNT && changed; i++, changed >>= 1) {
-        if (changed & 1)
+        if (changed & 1) {
             dispatch_edge(&buttons[i], (curr >> i) & 1);
+        }
     }
 }
 
@@ -132,8 +134,9 @@ static void dispatch_edge(ButtonState *b, uint8_t pressed) {
 
         case COMM_BUTTON_MODE_HOLD:
             if (pressed) {
-                if (b->fsm != FSM_IDLE)
+                if (b->fsm != FSM_IDLE) {
                     break; /* stray edge */
+                }
                 if (b->time_ms == 0) {
                     send_button_event(i);
                     b->fsm = FSM_HOLD_FIRED;
@@ -142,16 +145,18 @@ static void dispatch_edge(ButtonState *b, uint8_t pressed) {
                     b->fsm = FSM_HOLD_WAIT;
                 }
             } else {
-                if (b->fsm == FSM_HOLD_WAIT)
+                if (b->fsm == FSM_HOLD_WAIT) {
                     cancel_timer(b);
+                }
                 b->fsm = FSM_IDLE;
             }
             break;
 
         case COMM_BUTTON_MODE_RELEASE:
             if (pressed) {
-                if (b->fsm != FSM_IDLE)
+                if (b->fsm != FSM_IDLE) {
                     break;
+                }
                 if (b->time_ms == 0) {
                     b->fsm = FSM_REL_READY;
                 } else {

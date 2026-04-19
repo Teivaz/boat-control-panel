@@ -72,16 +72,18 @@ uint8_t config_read_byte(uint8_t address) {
             return SW_REVISION;
     }
     uint8_t pending;
-    if (queue_lookup(address, &pending))
+    if (queue_lookup(address, &pending)) {
         return pending;
+    }
     uint8_t offset = eeprom_offset_for(address);
     return offset == OFF_NONE ? 0xFF : nvm_read(offset);
 }
 
 /* ISR-safe enqueue. Drops on full; config writes are idempotent. */
 void config_write_byte(uint8_t address, uint8_t value) {
-    if (eeprom_offset_for(address) == OFF_NONE)
+    if (eeprom_offset_for(address) == OFF_NONE) {
         return;
+    }
     INTERRUPT_PUSH;
     uint8_t next = (uint8_t) ((wq_tail + 1) & WRITE_QUEUE_MASK);
     if (next != wq_head) {
@@ -120,13 +122,15 @@ static uint8_t queue_lookup(uint8_t address, uint8_t *out) {
 static void flush_task(TaskId id, void *ctx) {
     (void) id;
     (void) ctx;
-    if (wq_head == wq_tail)
+    if (wq_head == wq_tail) {
         return;
+    }
     uint8_t addr = wq[wq_head].address;
     uint8_t value = wq[wq_head].value;
     uint8_t offset = eeprom_offset_for(addr);
-    if (offset != OFF_NONE)
+    if (offset != OFF_NONE) {
         nvm_write(offset, value);
+    }
     wq_head = (uint8_t) ((wq_head + 1) & WRITE_QUEUE_MASK);
 }
 
@@ -144,8 +148,9 @@ static uint8_t nvm_read(uint8_t offset) {
 }
 
 static void nvm_write(uint8_t offset, uint8_t value) {
-    if (nvm_read(offset) == value)
+    if (nvm_read(offset) == value) {
         return;
+    }
 
     NVMADRU = EEPROM_ADDR_U;
     NVMADRH = 0x00;
