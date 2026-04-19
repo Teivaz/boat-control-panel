@@ -2,6 +2,7 @@
 #include "config.h"
 #include "controller.h"
 #include "display.h"
+#include "display_text.h"
 #include "i2c.h"
 #include "interrupt.h"
 #include "libcomm.h"
@@ -32,6 +33,7 @@ static void init(void) {
     config_init(&ctrl);
     comm_init();
     controller_init(&ctrl);
+    display_text_init(&ctrl);
     tick_init();
 
     /* Interrupts enabled last. */

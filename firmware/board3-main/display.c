@@ -19,54 +19,14 @@
 #define RST_PIN LATBbits.LATB3
 #define WR_PIN LATBbits.LATB4
 
-#define DC_COMMAND 0
-#define DC_DATA 1
+static u8g2_t u8g2;
 
-static void bus_write(uint8_t byte, uint8_t dc) {
-    DC_PIN = dc;
+static void bus_write(uint8_t byte) {
     LATC = byte;
     WR_PIN = 0;   /* !WR low — data setup window */
     __asm("NOP"); /* >= 60 ns low pulse (single NOP at 64 MHz is ~62.5 ns) */
     WR_PIN = 1;   /* !WR rising edge latches the byte */
 }
-
-void display_send_cmd(uint8_t cmd) {
-    bus_write(cmd, DC_COMMAND);
-}
-
-void display_send_data(const uint8_t* data, uint16_t len) {
-    for (uint16_t i = 0; i < len; i++) {
-        bus_write(data[i], DC_DATA);
-    }
-}
-
-/* SSD1322 init sequence for a 256x64 panel (e.g. NHD-3.12-25664). Values
- * match the controller's datasheet defaults for the common monochrome use
- * case; display remap (0xA0) may need tuning on hardware once the panel
- * orientation is verified. */
-static const uint8_t init_seq[] = {
-    /* cmd,  arg_count, args... */
-    0xFD, 1, 0x12,       /* command lock: unlock                     */
-    0xAE, 0,             /* display off                              */
-    0xB3, 1, 0x91,       /* clock divide ratio / oscillator freq     */
-    0xCA, 1, 0x3F,       /* multiplex ratio (64MUX)                  */
-    0xA2, 1, 0x00,       /* display offset                           */
-    0xA1, 1, 0x00,       /* start line                               */
-    0xA0, 2, 0x14, 0x11, /* remap + dual-COM mode                    */
-    0xAB, 1, 0x01,       /* function selection: internal VDD         */
-    0xB4, 2, 0xA0, 0xB5, /* display enhancement A                    */
-    0xC1, 1, 0x9F,       /* contrast current                         */
-    0xC7, 1, 0x0F,       /* master current                           */
-    0xB9, 0,             /* select default linear grayscale table    */
-    0xB1, 1, 0xE2,       /* phase length                             */
-    0xD1, 2, 0x82, 0x20, /* display enhancement B                    */
-    0xBB, 1, 0x1F,       /* pre-charge voltage                       */
-    0xB6, 1, 0x08,       /* second pre-charge period                 */
-    0xBE, 1, 0x07,       /* VCOMH                                    */
-    0xA6, 0,             /* normal display                           */
-    0xA9, 0,             /* exit partial display                     */
-    0xAF, 0,             /* display on                               */
-};
 
 static void gpio_init(void) {
     /* PORTC: 8-bit data bus, all digital outputs. */
@@ -83,33 +43,78 @@ static void gpio_init(void) {
     TRISBbits.TRISB4 = 0;
 
     /* Idle state: strobe and !RST high, D/!C command. */
-    DC_PIN = DC_COMMAND;
+    DC_PIN = 0;
     WR_PIN = 1;
     RST_PIN = 1;
 }
 
-static void hw_reset(void) {
-    RST_PIN = 1;
-    __delay_ms(1);
-    RST_PIN = 0;
-    __delay_ms(1); /* datasheet min: 100 us */
-    RST_PIN = 1;
-    __delay_ms(2); /* tRES: allow internal reset to settle */
+/* u8g2 byte callback for an 8080-mode parallel bus. nCS is tied low so
+ * the start/end transfer messages have no work to do. */
+static uint8_t byte_cb(u8x8_t* u8x8, uint8_t msg, uint8_t arg_int, void* arg_ptr) {
+    (void)u8x8;
+    switch (msg) {
+    case U8X8_MSG_BYTE_SEND: {
+        const uint8_t* data = (const uint8_t*)arg_ptr;
+        for (uint8_t i = 0; i < arg_int; i++) {
+            bus_write(data[i]);
+        }
+        break;
+    }
+    case U8X8_MSG_BYTE_INIT:
+    case U8X8_MSG_BYTE_START_TRANSFER:
+    case U8X8_MSG_BYTE_END_TRANSFER:
+        break;
+    case U8X8_MSG_BYTE_SET_DC:
+        DC_PIN = arg_int;
+        break;
+    default:
+        return 0;
+    }
+    return 1;
+}
+
+/* u8g2 gpio/delay callback. The byte bus pins are already configured by
+ * display_init; here we only service the !RST line and the delay calls
+ * u8g2 makes during display initialisation. */
+static uint8_t gpio_and_delay_cb(u8x8_t* u8x8, uint8_t msg, uint8_t arg_int, void* arg_ptr) {
+    (void)u8x8;
+    (void)arg_ptr;
+    switch (msg) {
+    case U8X8_MSG_GPIO_AND_DELAY_INIT:
+        break;
+    case U8X8_MSG_DELAY_NANO:
+        __asm("NOP");
+        break;
+    case U8X8_MSG_DELAY_100NANO:
+        __delay_us(1);
+        break;
+    case U8X8_MSG_DELAY_10MICRO:
+        for (uint8_t i = 0; i < arg_int; i++) {
+            __delay_us(10);
+        }
+        break;
+    case U8X8_MSG_DELAY_MILLI:
+        for (uint8_t i = 0; i < arg_int; i++) {
+            __delay_ms(1);
+        }
+        break;
+    case U8X8_MSG_GPIO_RESET:
+        RST_PIN = arg_int;
+        break;
+    default:
+        return 0;
+    }
+    return 1;
 }
 
 void display_init(void) {
     gpio_init();
-    hw_reset();
+    u8g2_Setup_ssd1322_nhd_256x64_f(&u8g2, U8G2_R0, byte_cb, gpio_and_delay_cb);
+    u8g2_InitDisplay(&u8g2);
+    u8g2_SetPowerSave(&u8g2, 0);
+    u8g2_SetFont(&u8g2, u8g2_font_unifont_tr);
+}
 
-    const uint8_t* p = init_seq;
-    const uint8_t* end = init_seq + sizeof(init_seq);
-    while (p < end) {
-        uint8_t cmd = *p++;
-        uint8_t nargs = *p++;
-        display_send_cmd(cmd);
-        if (nargs) {
-            display_send_data(p, nargs);
-            p += nargs;
-        }
-    }
+u8g2_t* display_u8g2(void) {
+    return &u8g2;
 }
