@@ -202,6 +202,36 @@ uint8_t controller_sensors(void) {
     return sensor_state;
 }
 
+uint8_t controller_button_base_on(uint8_t side, uint8_t button_idx) {
+    /* Buttons per-side are 0..6. */
+    if (button_idx >= 7) {
+        return 0;
+    }
+
+    const ButtonAction* table = NULL;
+    if (side == 0) {
+        table = left_actions;
+    } else if (side == 1) {
+        table = right_actions;
+    } else {
+        return 0;
+    }
+
+    const ButtonAction* action = &table[button_idx];
+    switch (action->kind) {
+        case ACTION_TOGGLE_POWER:
+            return (uint8_t)power_on;
+        case ACTION_TOGGLE_RELAY: {
+            uint16_t bit = (uint16_t)(1u << action->param);
+            return (uint8_t)((relay_target & bit) != 0);
+        }
+        case ACTION_TOGGLE_NAV_MODE:
+            return (uint8_t)(nav_mode == action->param);
+        default:
+            return 0;
+    }
+}
+
 /* ============================================================================
  * Action logic
  * ============================================================================

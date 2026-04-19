@@ -20,7 +20,7 @@ static volatile uint8_t cursor;
 static volatile uint8_t working_mask; /* live copy of the nav enabled mask */
 
 static void enter(void);
-static void exit(void);
+static void exit_config(void);
 static void sample_task(TaskId id, void* ctx);
 
 void config_mode_init(TaskController* ctrl) {
@@ -74,7 +74,7 @@ static void enter(void) {
     active = 1;
 }
 
-static void exit(void) {
+static void exit_config(void) {
     if (active) {
         config_write_byte(CONFIG_ADDR_NAV_ENABLED_MASK, (uint8_t)(working_mask & NAV_LIGHT_ALL));
     }
@@ -98,7 +98,7 @@ static void sample_task(TaskId id, void* ctx) {
             if (raw_stable) {
                 enter();
             } else {
-                exit();
+                exit_config();
             }
         }
     }

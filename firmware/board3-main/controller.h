@@ -26,4 +26,6 @@ uint16_t controller_battery_mv(void);
 uint8_t controller_level(uint8_t meter_index); /* 0 or 1 */
 uint8_t controller_sensors(void);
 
+uint8_t controller_button_base_on(uint8_t side, uint8_t button_idx);
+
 #endif /* CONTROLLER_H */
