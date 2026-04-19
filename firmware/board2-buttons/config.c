@@ -1,4 +1,6 @@
 #include "config.h"
+#include "task.h"
+#include "task_ids.h"
 
 #include <xc.h>
 
@@ -27,19 +29,42 @@
 #define OFF_EFFECTS       (OFF_BUTTONS + BUTTON_COUNT * sizeof(CommTriggerConfig))
 #define OFF_NONE          0xFF
 
-static uint8_t nvm_read       (uint8_t offset);
-static void    nvm_write      (uint8_t offset, uint8_t value);
-static uint8_t eeprom_offset_for (uint8_t address);
-static uint8_t effect_byte_index (uint8_t led_id);
-static void write_default_config(void);
+/* Deferred-write queue. Producer: I2C ISR via config_write_byte.
+ * Consumer: flush_task (main context). Power-of-two so wrap is a mask. Size
+ * 4 is plenty — config writes are one-byte-per-command from the host. */
+#define WRITE_QUEUE_SIZE   4
+#define WRITE_QUEUE_MASK   (WRITE_QUEUE_SIZE - 1)
+#define FLUSH_TICK_MS      20
 
-void config_init(void) {
-    if (nvm_read(OFF_MAGIC_LO) == CONFIG_MAGIC_LO &&
-        nvm_read(OFF_MAGIC_HI) == CONFIG_MAGIC_HI) return;
-    write_default_config();
-    /* Magic written last so a reset mid-init re-triggers seeding. */
-    nvm_write(OFF_MAGIC_LO, CONFIG_MAGIC_LO);
-    nvm_write(OFF_MAGIC_HI, CONFIG_MAGIC_HI);
+typedef struct {
+    uint8_t address;
+    uint8_t value;
+} WriteEntry;
+
+static volatile WriteEntry wq[WRITE_QUEUE_SIZE];
+static volatile uint8_t    wq_head;   /* consumer (flush_task) */
+static volatile uint8_t    wq_tail;   /* producer (config_write_byte) */
+
+static uint8_t nvm_read             (uint8_t offset);
+static void    nvm_write            (uint8_t offset, uint8_t value);
+static uint8_t eeprom_offset_for    (uint8_t address);
+static uint8_t effect_byte_index    (uint8_t led_id);
+static uint8_t queue_lookup         (uint8_t address, uint8_t *out);
+static void    flush_task           (TaskId id, void *ctx);
+static void    write_default_config (void);
+
+void config_init(TaskController *ctrl) {
+    wq_head = wq_tail = 0;
+
+    if (nvm_read(OFF_MAGIC_LO) != CONFIG_MAGIC_LO ||
+        nvm_read(OFF_MAGIC_HI) != CONFIG_MAGIC_HI) {
+        write_default_config();
+        /* Magic written last so a reset mid-init re-triggers seeding. */
+        nvm_write(OFF_MAGIC_LO, CONFIG_MAGIC_LO);
+        nvm_write(OFF_MAGIC_HI, CONFIG_MAGIC_HI);
+    }
+
+    task_controller_add(ctrl, TASK_CONFIG_FLUSH, FLUSH_TICK_MS, flush_task, 0);
 }
 
 uint8_t config_read_byte(uint8_t address) {
@@ -48,13 +73,25 @@ uint8_t config_read_byte(uint8_t address) {
         case COMM_CONFIG_HW_REVISION: return HW_REVISION;
         case COMM_CONFIG_SW_REVISION: return SW_REVISION;
     }
+    uint8_t pending;
+    if (queue_lookup(address, &pending)) return pending;
     uint8_t offset = eeprom_offset_for(address);
     return offset == OFF_NONE ? 0xFF : nvm_read(offset);
 }
 
+/* ISR-safe: enqueue only. The actual EEPROM program happens in main context
+ * via flush_task. Drops on full — config writes are idempotent so the host
+ * can retry. */
 void config_write_byte(uint8_t address, uint8_t value) {
-    uint8_t offset = eeprom_offset_for(address);
-    if (offset != OFF_NONE) nvm_write(offset, value);
+    if (eeprom_offset_for(address) == OFF_NONE) return;
+    INTERRUPT_PUSH;
+    uint8_t next = (uint8_t)((wq_tail + 1) & WRITE_QUEUE_MASK);
+    if (next != wq_head) {
+        wq[wq_tail].address = address;
+        wq[wq_tail].value   = value;
+        wq_tail = next;
+    }
+    INTERRUPT_POP;
 }
 
 CommTriggerConfig config_get_button(uint8_t button_id) {
@@ -108,7 +145,41 @@ static uint8_t eeprom_offset_for(uint8_t address) {
     return OFF_NONE;
 }
 
+/* Walk head..tail oldest-first; latest matching value wins so a
+ * write-then-write to the same address reads back the newest pending value.
+ * Snapshot tail once to keep the bound stable if a producer preempts. */
+static uint8_t queue_lookup(uint8_t address, uint8_t *out) {
+    uint8_t tail  = wq_tail;
+    uint8_t found = 0;
+    for (uint8_t i = wq_head; i != tail; i = (uint8_t)((i + 1) & WRITE_QUEUE_MASK)) {
+        if (wq[i].address == address) {
+            *out  = wq[i].value;
+            found = 1;
+        }
+    }
+    return found;
+}
+
+/* Drain one entry per tick — each nvm_write blocks ~4 ms on the cell
+ * program, so the 20 ms interval keeps main context responsive. Increment
+ * head AFTER the persist completes so a racing ISR read still sees the
+ * pending value in the queue instead of stale EEPROM. */
+static void flush_task(TaskId id, void *ctx) {
+    (void)id; (void)ctx;
+    if (wq_head == wq_tail) return;
+    uint8_t addr   = wq[wq_head].address;
+    uint8_t value  = wq[wq_head].value;
+    uint8_t offset = eeprom_offset_for(addr);
+    if (offset != OFF_NONE) nvm_write(offset, value);
+    wq_head = (uint8_t)((wq_head + 1) & WRITE_QUEUE_MASK);
+}
+
+/* Wait for any in-flight NVM op before starting — an ISR read that races
+ * with the main-context flush would otherwise overwrite NVMADR* partway
+ * through a cell program. Worst-case ISR extension is one write (~4 ms),
+ * bounded and rare (both sides must touch config simultaneously). */
 static uint8_t nvm_read(uint8_t offset) {
+    while (NVMCON0bits.GO);
     NVMADRU = EEPROM_ADDR_U;
     NVMADRH = 0x00;
     NVMADRL = offset;
@@ -138,27 +209,26 @@ static void nvm_write(uint8_t offset, uint8_t value) {
     while (NVMCON0bits.GO);
 }
 
-void write_default_config(void) {
-    // Default mode is 1ms hold time
+/* Runs on a virgin device (magic header missing). Bypasses the write queue
+ * — the scheduler hasn't started yet, and nvm_write is safe to block in
+ * init context. Writes internal offsets directly. */
+static void write_default_config(void) {
     CommTriggerConfig default_trigger = comm_button_trigger_make(COMM_BUTTON_MODE_HOLD, 1);
     if (comm_address() == COMM_ADDRESS_BUTTON_BOARD_L) {
-        // Button 0 on the left board has 1.5s hold time
+        /* Button 0 on the left board has a 1.5 s hold time. */
         CommTriggerConfig trigger = comm_button_trigger_make(COMM_BUTTON_MODE_HOLD, 1500);
-        config_write_byte(OFF_BUTTONS + 0, *(uint8_t*)&trigger);
+        nvm_write(OFF_BUTTONS + 0, *(uint8_t *)&trigger);
     } else {
-        config_write_byte(OFF_BUTTONS + 0, *(uint8_t*)&default_trigger);
+        nvm_write(OFF_BUTTONS + 0, *(uint8_t *)&default_trigger);
     }
-    config_write_byte(OFF_BUTTONS + 1, *(uint8_t*)&default_trigger);
-    config_write_byte(OFF_BUTTONS + 2, *(uint8_t*)&default_trigger);
-    config_write_byte(OFF_BUTTONS + 3, *(uint8_t*)&default_trigger);
-    config_write_byte(OFF_BUTTONS + 4, *(uint8_t*)&default_trigger);
-    config_write_byte(OFF_BUTTONS + 5, *(uint8_t*)&default_trigger);
-    config_write_byte(OFF_BUTTONS + 6, *(uint8_t*)&default_trigger);
+    for (uint8_t i = 1; i < BUTTON_COUNT; i++) {
+        nvm_write(OFF_BUTTONS + i, *(uint8_t *)&default_trigger);
+    }
 
-    CommButtonOutputEffect effect = { .color=COMM_EFFECT_COLOR_WHITE, .mode = COMM_EFFECT_MODE_DISABLED };
-    uint8_t effect_pair = effect.raw & 0x0F;
-    effect_pair |= (effect.raw << 4) & 0xF0;
+    CommButtonOutputEffect effect = { .color = COMM_EFFECT_COLOR_WHITE,
+                                      .mode  = COMM_EFFECT_MODE_DISABLED };
+    uint8_t pair = (uint8_t)((effect.raw & 0x0F) | ((effect.raw & 0x0F) << 4));
     for (uint8_t i = 0; i < sizeof(CommButtonEffect); i++) {
-         config_write_byte(OFF_EFFECTS + i, effect_pair);
+        nvm_write(OFF_EFFECTS + i, pair);
     }
 }

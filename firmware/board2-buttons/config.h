@@ -5,6 +5,7 @@
 #include "libcomm.h"
 #include "button.h"
 #include "led_effect.h"
+#include "task.h"
 
 /* Device-specific configuration address map (protocol space). Universal
  * addresses 0x00..0x0F are owned by the module (see CommConfigAddress).
@@ -14,7 +15,10 @@
 #define CONFIG_ADDR_BUTTON_TRIGGER   0x10
 #define CONFIG_ADDR_LED_EFFECT       (CONFIG_ADDR_BUTTON_TRIGGER + BUTTON_COUNT * sizeof(CommTriggerConfig))
 
-void config_init(void);
+/* Registers a periodic task that drains the deferred-write queue to EEPROM.
+ * config_write_byte is ISR-safe (enqueues only); the actual cell program
+ * happens in main context. */
+void config_init(TaskController *ctrl);
 
 /* Protocol-level byte access. Reads from unmapped addresses return 0xFF;
  * writes to read-only/unmapped addresses are silently ignored. */

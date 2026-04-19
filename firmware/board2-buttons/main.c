@@ -27,9 +27,9 @@ void init(void) {
     task_controller_init(&ctrl);
     button_init(&ctrl);
     led_effect_init(&ctrl);
-    comm_init();
+    comm_init(&ctrl);
+    config_init(&ctrl);
     tick_init();
-    config_init();
 
     // Interrupts should be enabled last
     interrupt_init();
