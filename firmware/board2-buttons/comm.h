@@ -8,7 +8,7 @@
 /* Protocol dispatcher. Wires i2c + libcomm to the application modules
  * (button, led_effect, config, input), and registers a periodic task that
  * drains the outbound button_changed retry queue. */
-void comm_init(TaskController *ctrl);
+void comm_init(TaskController* ctrl);
 
 /* Enqueue a button_changed (0x02) event for the main board. Safe to call
  * from any context (IOC ISR edge, timer task, I2C ISR reconfigure).

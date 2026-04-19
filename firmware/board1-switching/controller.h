@@ -12,7 +12,7 @@
  *     relay_changed (filtered by the configured relay_mask).
  *   - Maintains battery / level / sensor shadows so I2C read handlers can
  *     respond synchronously from ISR context. */
-void controller_init(TaskController *ctrl);
+void controller_init(TaskController* ctrl);
 
 /* Inbound dispatch hooks — invoked from I2C ISR context. */
 void controller_set_relay_target(uint16_t target);

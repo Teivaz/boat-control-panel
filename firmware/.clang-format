@@ -1,26 +1,26 @@
 ---
 # .clang-format
-Language: C
+Language: Cpp
 
 # Indentation & Alignment
 IndentWidth: 4
 UseTab: Never
-ColumnLimit: 80
+ColumnLimit: 120
 IndentCaseLabels: true
 
 # Brace Style (Attached)
 BreakBeforeBraces: Attach
 AllowShortFunctionsOnASingleLine: None
-AllowShortLoopsOnASingleLine: false
+AllowShortLoopsOnASingleLine: true
 
 # Spacing - The "C" look
 SpaceBeforeParens: ControlStatements
 SpaceInEmptyParentheses: false
 SpacesInParentheses: false
-SpaceAfterCStyleCast: true
+SpaceAfterCStyleCast: false
 
-# Pointer Alignment (e.g., int *ptr)
-PointerAlignment: Right
+# Pointer Alignment (e.g., int* ptr)
+PointerAlignment: Left
 
 # Organization
 SortIncludes: true
@@ -29,3 +29,5 @@ IncludeBlocks: Regroup
 # This forces the addition of braces for all control statements
 InsertBraces: true
 AllowShortIfStatementsOnASingleLine: Never
+AllowShortBlocksOnASingleLine: Empty
+InsertNewlineAtEOF: true

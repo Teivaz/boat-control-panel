@@ -28,25 +28,24 @@ typedef struct {
     ButtonFsm fsm;
 } ButtonState;
 
-static TaskController *ctrl = 0;
+static TaskController* ctrl = 0;
 static ButtonState buttons[BUTTON_COUNT];
 
 static const TaskId button_task_ids[BUTTON_COUNT] = {
-    TASK_BUTTON_0, TASK_BUTTON_1, TASK_BUTTON_2, TASK_BUTTON_3,
-    TASK_BUTTON_4, TASK_BUTTON_5, TASK_BUTTON_6,
+    TASK_BUTTON_0, TASK_BUTTON_1, TASK_BUTTON_2, TASK_BUTTON_3, TASK_BUTTON_4, TASK_BUTTON_5, TASK_BUTTON_6,
 };
 
-static void button_timer_cb(TaskId id, void *context);
+static void button_timer_cb(TaskId id, void* context);
 static void on_input_changed(uint8_t prev, uint8_t curr);
-static void dispatch_edge(ButtonState *b, uint8_t pressed);
-static void dispatch_timer(ButtonState *b);
-static void arm_timer(ButtonState *b, uint16_t ms);
-static void cancel_timer(ButtonState *b);
-static uint8_t button_index(const ButtonState *b) {
-    return (uint8_t) (b - buttons);
+static void dispatch_edge(ButtonState* b, uint8_t pressed);
+static void dispatch_timer(ButtonState* b);
+static void arm_timer(ButtonState* b, uint16_t ms);
+static void cancel_timer(ButtonState* b);
+static uint8_t button_index(const ButtonState* b) {
+    return (uint8_t)(b - buttons);
 }
 
-void button_init(TaskController *c) {
+void button_init(TaskController* c) {
     ctrl = c;
     for (uint8_t i = 0; i < BUTTON_COUNT; i++) {
         buttons[i].task_id = button_task_ids[i];
@@ -61,7 +60,7 @@ void button_set_trigger(uint8_t button_id, CommTriggerConfig cfg) {
     if (button_id >= BUTTON_COUNT) {
         return;
     }
-    ButtonState *b = &buttons[button_id];
+    ButtonState* b = &buttons[button_id];
     const uint16_t new_time = comm_button_trigger_time_ms(cfg);
     const uint8_t mode_diff = (cfg.mode != b->mode);
     const uint8_t time_diff = (new_time != b->time_ms);
@@ -75,8 +74,7 @@ void button_set_trigger(uint8_t button_id, CommTriggerConfig cfg) {
 
     /* time-only change while a timer is armed: re-arm with the new value,
      * collapsing through the zero case as on the original press. */
-    if (!mode_diff && time_diff &&
-        (b->fsm == FSM_HOLD_WAIT || b->fsm == FSM_REL_WAIT)) {
+    if (!mode_diff && time_diff && (b->fsm == FSM_HOLD_WAIT || b->fsm == FSM_REL_WAIT)) {
         cancel_timer(b);
         if (new_time == 0) {
             if (b->fsm == FSM_HOLD_WAIT) {
@@ -94,8 +92,7 @@ void button_set_trigger(uint8_t button_id, CommTriggerConfig cfg) {
 CommTriggerConfig button_get_trigger(uint8_t button_id) {
     CommTriggerConfig cfg = {0};
     if (button_id < BUTTON_COUNT) {
-        cfg = comm_button_trigger_make(buttons[button_id].mode,
-                                       buttons[button_id].time_ms);
+        cfg = comm_button_trigger_make(buttons[button_id].mode, buttons[button_id].time_ms);
     }
     return cfg;
 }
@@ -111,20 +108,20 @@ static void on_input_changed(uint8_t prev, uint8_t curr) {
     }
 }
 
-static void arm_timer(ButtonState *b, uint16_t ms) {
+static void arm_timer(ButtonState* b, uint16_t ms) {
     task_controller_add(ctrl, b->task_id, ms, button_timer_cb, b);
 }
 
-static void cancel_timer(ButtonState *b) {
+static void cancel_timer(ButtonState* b) {
     task_controller_remove(ctrl, b->task_id);
 }
 
-static void button_timer_cb(TaskId id, void *context) {
+static void button_timer_cb(TaskId id, void* context) {
     task_controller_remove(ctrl, id); /* one-shot */
-    dispatch_timer((ButtonState *) context);
+    dispatch_timer((ButtonState*)context);
 }
 
-static void dispatch_edge(ButtonState *b, uint8_t pressed) {
+static void dispatch_edge(ButtonState* b, uint8_t pressed) {
     const uint8_t i = button_index(b);
 
     switch (b->mode) {
@@ -180,7 +177,7 @@ static void dispatch_edge(ButtonState *b, uint8_t pressed) {
     }
 }
 
-static void dispatch_timer(ButtonState *b) {
+static void dispatch_timer(ButtonState* b) {
     switch (b->fsm) {
         case FSM_HOLD_WAIT:
             send_button_event(button_index(b));

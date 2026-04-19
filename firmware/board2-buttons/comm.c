@@ -28,13 +28,12 @@ static volatile ButtonChange queue[RETRY_QUEUE_SIZE];
 static volatile uint8_t q_head; /* consumer (retry_task) owns this */
 static volatile uint8_t q_tail; /* producer (any caller of _send_*) owns this */
 
-static void on_rx(const uint8_t *data, uint8_t len);
-static uint8_t on_read(const uint8_t *request, uint8_t request_len,
-                       uint8_t *response, uint8_t response_max);
-static void retry_task(TaskId id, void *ctx);
-static void apply_button_effect(const CommButtonEffect *eff);
+static void on_rx(const uint8_t* data, uint8_t len);
+static uint8_t on_read(const uint8_t* request, uint8_t request_len, uint8_t* response, uint8_t response_max);
+static void retry_task(TaskId id, void* ctx);
+static void apply_button_effect(const CommButtonEffect* eff);
 
-void comm_init(TaskController *ctrl) {
+void comm_init(TaskController* ctrl) {
     q_head = q_tail = 0;
     i2c_set_rx_handler(on_rx);
     i2c_set_read_handler(on_read);
@@ -45,7 +44,7 @@ void comm_init(TaskController *ctrl) {
  * preempting producers; the consumer reads `head` independently. */
 void comm_send_button_changed(uint8_t prev_state, uint8_t current_state) {
     INTERRUPT_PUSH;
-    uint8_t next = (uint8_t) ((q_tail + 1) & RETRY_QUEUE_MASK);
+    uint8_t next = (uint8_t)((q_tail + 1) & RETRY_QUEUE_MASK);
     if (next != q_head) {
         queue[q_tail].prev = prev_state;
         queue[q_tail].curr = current_state;
@@ -58,18 +57,16 @@ void comm_send_button_changed(uint8_t prev_state, uint8_t current_state) {
  * stays queued for the next tick; transient collisions clear within a few ms
  * on a contested bus. i2c_transmit runs with only the I2C IRQ group masked,
  * so the scheduler tick keeps advancing while a transfer is in flight. */
-static void retry_task(TaskId id, void *ctx) {
-    (void) id;
-    (void) ctx;
+static void retry_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
     while (q_head != q_tail) {
         CommMessage msg;
-        uint8_t len = comm_build_button_changed(&msg, queue[q_head].prev,
-                                                queue[q_head].curr);
-        if (i2c_transmit(COMM_ADDRESS_MAIN, (const uint8_t *) &msg, len) !=
-            I2C_RESULT_OK) {
+        uint8_t len = comm_build_button_changed(&msg, queue[q_head].prev, queue[q_head].curr);
+        if (i2c_transmit(COMM_ADDRESS_MAIN, (const uint8_t*)&msg, len) != I2C_RESULT_OK) {
             break;
         }
-        q_head = (uint8_t) ((q_head + 1) & RETRY_QUEUE_MASK);
+        q_head = (uint8_t)((q_head + 1) & RETRY_QUEUE_MASK);
     }
 }
 
@@ -82,7 +79,7 @@ static void retry_task(TaskId id, void *ctx) {
  * ============================================================================
  */
 
-static void on_rx(const uint8_t *data, uint8_t len) {
+static void on_rx(const uint8_t* data, uint8_t len) {
     if (len == 0) {
         return;
     }
@@ -120,8 +117,7 @@ static void on_rx(const uint8_t *data, uint8_t len) {
     }
 }
 
-static uint8_t on_read(const uint8_t *request, uint8_t request_len,
-                       uint8_t *response, uint8_t response_max) {
+static uint8_t on_read(const uint8_t* request, uint8_t request_len, uint8_t* response, uint8_t response_max) {
     if (request_len == 0 || response_max == 0) {
         return 0;
     }
@@ -134,7 +130,7 @@ static uint8_t on_read(const uint8_t *request, uint8_t request_len,
         case COMM_BUTTON_TRIGGER_READ:
             if (request_len >= 2) {
                 CommTriggerConfig cfg = button_get_trigger(request[1] & 0x07);
-                response[0] = *(uint8_t *) &cfg;
+                response[0] = *(uint8_t*)&cfg;
                 return 1;
             }
             break;
@@ -152,7 +148,7 @@ static uint8_t on_read(const uint8_t *request, uint8_t request_len,
     return 0;
 }
 
-static void apply_button_effect(const CommButtonEffect *eff) {
+static void apply_button_effect(const CommButtonEffect* eff) {
     for (uint8_t i = 0; i < LED_EFFECT_COUNT; i++) {
         CommButtonOutputEffect out;
         if (comm_button_effect_get(eff, i, &out) == 0) {

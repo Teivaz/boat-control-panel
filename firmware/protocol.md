@@ -1,7 +1,7 @@
 # I2C Communication Protocol Description
 
 All devices should be able to operate in standard (100 kHz) and fast (400 kHz) modes.
-The system operates in multi-master mode with an event-based system. If a device needs to implement polling the time interval for polling calls should be ≥ 100 ms.
+The system operates in multi-master mode with an event-based system. If a device needs to implement polling the time interval for polling calls should be ≥ 20 ms.
 Addressing scheme is 7-bit.
 Signal lines are pulled up to 3.3V.
 

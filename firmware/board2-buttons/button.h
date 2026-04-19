@@ -8,7 +8,7 @@
 
 #define BUTTON_COUNT 7
 
-void button_init(TaskController *ctrl);
+void button_init(TaskController* ctrl);
 
 void button_set_trigger(uint8_t button_id, CommTriggerConfig cfg);
 CommTriggerConfig button_get_trigger(uint8_t button_id);

@@ -7,24 +7,23 @@
  * pulsating at ~0.4 Hz (triangular ramp over 128 ticks = 2.56 s). */
 #define LED_EFFECT_TICK_MS 20
 
-static TaskController *ctrl;
+static TaskController* ctrl;
 static CommButtonOutputEffect effects[LED_EFFECT_COUNT];
 static RGBLedData frame[LED_EFFECT_COUNT];
 static uint8_t phase;
 
-static void led_effect_task(TaskId id, void *ctx);
+static void led_effect_task(TaskId id, void* ctx);
 static uint8_t level_for_mode(uint8_t mode);
 static RGBLedData color_for_value(uint8_t color, uint8_t level);
 
-void led_effect_init(TaskController *c) {
+void led_effect_init(TaskController* c) {
     ctrl = c;
     for (uint8_t i = 0; i < LED_EFFECT_COUNT; i++) {
         effects[i].raw = 0;
         frame[i].red = frame[i].green = frame[i].blue = 0;
     }
     phase = 0;
-    task_controller_add(ctrl, TASK_LED_EFFECT, LED_EFFECT_TICK_MS,
-                        led_effect_task, 0);
+    task_controller_add(ctrl, TASK_LED_EFFECT, LED_EFFECT_TICK_MS, led_effect_task, 0);
 }
 
 void led_effect_set(uint8_t led_id, CommButtonOutputEffect eff) {
@@ -51,7 +50,7 @@ static uint8_t level_for_mode(uint8_t mode) {
             return (phase & 0x08) ? 0x00 : 0xFF;
         case COMM_EFFECT_MODE_PULSATING: {
             uint8_t p = phase & 0x3F; /* 0..63 */
-            return (p < 32) ? (uint8_t) (p << 3) : (uint8_t) ((63 - p) << 3);
+            return (p < 32) ? (uint8_t)(p << 3) : (uint8_t)((63 - p) << 3);
         }
     }
     return 0;
@@ -78,9 +77,9 @@ static RGBLedData color_for_value(uint8_t color, uint8_t level) {
     return d;
 }
 
-static void led_effect_task(TaskId id, void *ctx) {
-    (void) id;
-    (void) ctx;
+static void led_effect_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
     phase++;
     for (uint8_t i = 0; i < LED_EFFECT_COUNT; i++) {
         uint8_t lvl = level_for_mode(effects[i].mode);

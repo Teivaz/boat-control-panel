@@ -16,6 +16,6 @@ typedef struct {
 
 /* Blocking read of the 7 time registers at address 0x00. Returns 1 on
  * success, 0 on any I2C failure (caller should retry on the next tick). */
-uint8_t rtc_read(RtcTime *out);
+uint8_t rtc_read(RtcTime* out);
 
 #endif /* RTC_H */

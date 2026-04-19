@@ -45,15 +45,14 @@ static volatile uint8_t wq_tail;
 static uint8_t nvm_read(uint8_t offset);
 static void nvm_write(uint8_t offset, uint8_t value);
 static uint8_t eeprom_offset_for(uint8_t address);
-static uint8_t queue_lookup(uint8_t address, uint8_t *out);
-static void flush_task(TaskId id, void *ctx);
+static uint8_t queue_lookup(uint8_t address, uint8_t* out);
+static void flush_task(TaskId id, void* ctx);
 static void write_defaults(void);
 
-void config_init(TaskController *ctrl) {
+void config_init(TaskController* ctrl) {
     wq_head = wq_tail = 0;
 
-    if (nvm_read(OFF_MAGIC_LO) != CONFIG_MAGIC_LO ||
-        nvm_read(OFF_MAGIC_HI) != CONFIG_MAGIC_HI) {
+    if (nvm_read(OFF_MAGIC_LO) != CONFIG_MAGIC_LO || nvm_read(OFF_MAGIC_HI) != CONFIG_MAGIC_HI) {
         write_defaults();
         nvm_write(OFF_MAGIC_LO, CONFIG_MAGIC_LO);
         nvm_write(OFF_MAGIC_HI, CONFIG_MAGIC_HI);
@@ -85,7 +84,7 @@ void config_write_byte(uint8_t address, uint8_t value) {
         return;
     }
     INTERRUPT_PUSH;
-    uint8_t next = (uint8_t) ((wq_tail + 1) & WRITE_QUEUE_MASK);
+    uint8_t next = (uint8_t)((wq_tail + 1) & WRITE_QUEUE_MASK);
     if (next != wq_head) {
         wq[wq_tail].address = address;
         wq[wq_tail].value = value;
@@ -106,11 +105,10 @@ static uint8_t eeprom_offset_for(uint8_t address) {
     return OFF_NONE;
 }
 
-static uint8_t queue_lookup(uint8_t address, uint8_t *out) {
+static uint8_t queue_lookup(uint8_t address, uint8_t* out) {
     uint8_t tail = wq_tail;
     uint8_t found = 0;
-    for (uint8_t i = wq_head; i != tail;
-         i = (uint8_t) ((i + 1) & WRITE_QUEUE_MASK)) {
+    for (uint8_t i = wq_head; i != tail; i = (uint8_t)((i + 1) & WRITE_QUEUE_MASK)) {
         if (wq[i].address == address) {
             *out = wq[i].value;
             found = 1;
@@ -119,9 +117,9 @@ static uint8_t queue_lookup(uint8_t address, uint8_t *out) {
     return found;
 }
 
-static void flush_task(TaskId id, void *ctx) {
-    (void) id;
-    (void) ctx;
+static void flush_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
     if (wq_head == wq_tail) {
         return;
     }
@@ -131,19 +129,17 @@ static void flush_task(TaskId id, void *ctx) {
     if (offset != OFF_NONE) {
         nvm_write(offset, value);
     }
-    wq_head = (uint8_t) ((wq_head + 1) & WRITE_QUEUE_MASK);
+    wq_head = (uint8_t)((wq_head + 1) & WRITE_QUEUE_MASK);
 }
 
 static uint8_t nvm_read(uint8_t offset) {
-    while (NVMCON0bits.GO)
-        ;
+    while (NVMCON0bits.GO);
     NVMADRU = EEPROM_ADDR_U;
     NVMADRH = 0x00;
     NVMADRL = offset;
     NVMCON1bits.CMD = 0x0;
     NVMCON0bits.GO = 1;
-    while (NVMCON0bits.GO)
-        ;
+    while (NVMCON0bits.GO);
     return NVMDATL;
 }
 
@@ -164,8 +160,7 @@ static void nvm_write(uint8_t offset, uint8_t value) {
     NVMCON0bits.GO = 1;
     INTERRUPT_POP;
 
-    while (NVMCON0bits.GO)
-        ;
+    while (NVMCON0bits.GO);
 }
 
 static void write_defaults(void) {

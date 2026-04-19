@@ -15,13 +15,12 @@
  *   LED_EFFECT      4              bytes, one CommButtonEffect (packed nibbles)
  */
 #define CONFIG_ADDR_BUTTON_TRIGGER 0x10
-#define CONFIG_ADDR_LED_EFFECT                                                 \
-    (CONFIG_ADDR_BUTTON_TRIGGER + BUTTON_COUNT * sizeof(CommTriggerConfig))
+#define CONFIG_ADDR_LED_EFFECT (CONFIG_ADDR_BUTTON_TRIGGER + BUTTON_COUNT * sizeof(CommTriggerConfig))
 
 /* Registers a periodic task that drains the deferred-write queue to EEPROM.
  * config_write_byte is ISR-safe (enqueues only); the actual cell program
  * happens in main context. */
-void config_init(TaskController *ctrl);
+void config_init(TaskController* ctrl);
 
 /* Protocol-level byte access. Reads from unmapped addresses return 0xFF;
  * writes to read-only/unmapped addresses are silently ignored. */

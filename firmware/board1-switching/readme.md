@@ -1,4 +1,4 @@
-# Board 1. Switching
+#Board 1. Switching
 
 This board contains 16 relay channels, each is controlled and monitored.
 

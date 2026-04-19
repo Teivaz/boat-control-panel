@@ -62,12 +62,9 @@ static const ButtonAction left_actions[7] = {
 
 /* Right panel (COMM_ADDRESS_BUTTON_BOARD_R = 0x46), buttons 0..6. */
 static const ButtonAction right_actions[7] = {
-    {ACTION_TOGGLE_RELAY, RELAY_WATER_PUMP},
-    {ACTION_TOGGLE_RELAY, RELAY_FRIDGE},
-    {ACTION_TOGGLE_RELAY, RELAY_DECK_LIGHTS},
-    {ACTION_TOGGLE_RELAY, RELAY_CABIN_LIGHTS},
-    {ACTION_TOGGLE_RELAY, RELAY_USB},
-    {ACTION_TOGGLE_RELAY, RELAY_AUX_1},
+    {ACTION_TOGGLE_RELAY, RELAY_WATER_PUMP},  {ACTION_TOGGLE_RELAY, RELAY_FRIDGE},
+    {ACTION_TOGGLE_RELAY, RELAY_DECK_LIGHTS}, {ACTION_TOGGLE_RELAY, RELAY_CABIN_LIGHTS},
+    {ACTION_TOGGLE_RELAY, RELAY_USB},         {ACTION_TOGGLE_RELAY, RELAY_AUX_1},
     {ACTION_TOGGLE_RELAY, RELAY_AUX_2},
 };
 
@@ -99,14 +96,14 @@ static volatile uint8_t levels[2];
 #define RETRY_TICK_MS TASK_MIN_MS
 #define POLL_TICK_MS 200u /* protocol minimum is 100 ms; 200 ms is ample */
 
-static void retry_task(TaskId id, void *ctx);
-static void poll_battery_task(TaskId id, void *ctx);
-static void poll_levels_task(TaskId id, void *ctx);
-static void poll_sensors_task(TaskId id, void *ctx);
-static void apply_action(const ButtonAction *a);
+static void retry_task(TaskId id, void* ctx);
+static void poll_battery_task(TaskId id, void* ctx);
+static void poll_levels_task(TaskId id, void* ctx);
+static void poll_sensors_task(TaskId id, void* ctx);
+static void apply_action(const ButtonAction* a);
 static void recompute_target(void);
 
-void controller_init(TaskController *ctrl) {
+void controller_init(TaskController* ctrl) {
     power_on = 0;
     nav_mode = NAV_MODE_OFF;
     nav_error = 0;
@@ -119,12 +116,9 @@ void controller_init(TaskController *ctrl) {
     levels[0] = 0;
     levels[1] = 0;
     task_controller_add(ctrl, TASK_COMM_RETRY, RETRY_TICK_MS, retry_task, 0);
-    task_controller_add(ctrl, TASK_POLL_BATTERY, POLL_TICK_MS,
-                        poll_battery_task, 0);
-    task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task,
-                        0);
-    task_controller_add(ctrl, TASK_POLL_SENSORS, POLL_TICK_MS,
-                        poll_sensors_task, 0);
+    task_controller_add(ctrl, TASK_POLL_BATTERY, POLL_TICK_MS, poll_battery_task, 0);
+    task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task, 0);
+    task_controller_add(ctrl, TASK_POLL_SENSORS, POLL_TICK_MS, poll_sensors_task, 0);
 }
 
 /* ============================================================================
@@ -133,7 +127,7 @@ void controller_init(TaskController *ctrl) {
  */
 
 void controller_on_button_changed(uint8_t sender, uint8_t prev, uint8_t curr) {
-    const ButtonAction *table;
+    const ButtonAction* table;
     switch (sender) {
         case COMM_ADDRESS_BUTTON_BOARD_L:
             table = left_actions;
@@ -146,20 +140,18 @@ void controller_on_button_changed(uint8_t sender, uint8_t prev, uint8_t curr) {
             return;
     }
     /* Newly-pressed bits: 0 -> 1 transitions. */
-    uint8_t rising = (uint8_t) (curr & ~prev);
+    uint8_t rising = (uint8_t)(curr & ~prev);
     for (uint8_t i = 0; i < 7; i++) {
-        if (rising & (uint8_t) (1u << i)) {
+        if (rising & (uint8_t)(1u << i)) {
             apply_action(&table[i]);
         }
     }
 }
 
-void controller_on_relay_changed(uint8_t sender, uint16_t prev_r,
-                                 uint16_t curr_r, uint8_t prev_s,
-                                 uint8_t curr_s) {
-    (void) sender;
-    (void) prev_r;
-    (void) prev_s;
+void controller_on_relay_changed(uint8_t sender, uint16_t prev_r, uint16_t curr_r, uint8_t prev_s, uint8_t curr_s) {
+    (void)sender;
+    (void)prev_r;
+    (void)prev_s;
     relay_physical = curr_r;
     sensor_state = curr_s;
 }
@@ -173,7 +165,7 @@ uint8_t controller_power_on(void) {
     return power_on;
 }
 NavMode controller_nav_mode(void) {
-    return (NavMode) nav_mode;
+    return (NavMode)nav_mode;
 }
 uint8_t controller_nav_error(void) {
     return nav_error;
@@ -199,22 +191,21 @@ uint8_t controller_sensors(void) {
  * ============================================================================
  */
 
-static void apply_action(const ButtonAction *a) {
+static void apply_action(const ButtonAction* a) {
     switch (a->kind) {
         case ACTION_TOGGLE_POWER:
             power_on = !power_on;
             break;
 
         case ACTION_TOGGLE_RELAY: {
-            uint16_t bit = (uint16_t) (1u << a->param);
+            uint16_t bit = (uint16_t)(1u << a->param);
             relay_intent ^= bit;
             break;
         }
 
         case ACTION_TOGGLE_NAV_MODE: {
-            NavMode requested = (NavMode) a->param;
-            nav_mode =
-                (uint8_t) ((nav_mode == requested) ? NAV_MODE_OFF : requested);
+            NavMode requested = (NavMode)a->param;
+            nav_mode = (uint8_t)((nav_mode == requested) ? NAV_MODE_OFF : requested);
             break;
         }
 
@@ -232,14 +223,14 @@ static void recompute_target(void) {
 
     if (power_on) {
         uint8_t enabled = config_get_nav_enabled_mask();
-        NavResolution r = nav_lights_resolve((NavMode) nav_mode, enabled);
+        NavResolution r = nav_lights_resolve((NavMode)nav_mode, enabled);
         err = r.error;
 
         /* Map 5-bit nav_lights_mask (NAV_LIGHT_* bit positions) onto the
          * relay indices RELAY_NAV_*. The two encodings are aligned (bit 0 =
          * anchoring, ..., bit 4 = stern) so the mask copies directly. */
-        t |= (uint16_t) (r.lights_mask & NAV_MASK_BITS);
-        t |= (uint16_t) (relay_intent & ~NAV_MASK_BITS);
+        t |= (uint16_t)(r.lights_mask & NAV_MASK_BITS);
+        t |= (uint16_t)(relay_intent & ~NAV_MASK_BITS);
     }
 
     INTERRUPT_PUSH;
@@ -256,9 +247,9 @@ static void recompute_target(void) {
  * ============================================================================
  */
 
-static void retry_task(TaskId id, void *ctx) {
-    (void) id;
-    (void) ctx;
+static void retry_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
     if (!relay_dirty) {
         return;
     }
@@ -270,8 +261,7 @@ static void retry_task(TaskId id, void *ctx) {
 
     CommMessage msg;
     uint8_t len = comm_build_relay_state(&msg, snapshot);
-    if (i2c_transmit(COMM_ADDRESS_SWITCHING, (const uint8_t *) &msg, len) ==
-        I2C_RESULT_OK) {
+    if (i2c_transmit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, len) == I2C_RESULT_OK) {
         /* Only clear the flag if the value we actually sent still matches
          * the current target — a producer could have bumped it while we
          * were transmitting. */
@@ -290,32 +280,30 @@ static void retry_task(TaskId id, void *ctx) {
  * ============================================================================
  */
 
-static void poll_battery_task(TaskId id, void *ctx) {
-    (void) id;
-    (void) ctx;
+static void poll_battery_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
     uint8_t req = COMM_BATTERY_READ;
     uint8_t rx[2];
-    if (i2c_receive(COMM_ADDRESS_SWITCHING, &req, 1, rx, sizeof(rx)) ==
-        I2C_RESULT_OK) {
-        battery_mv = (uint16_t) (rx[0] | ((uint16_t) rx[1] << 8));
+    if (i2c_receive(COMM_ADDRESS_SWITCHING, &req, 1, rx, sizeof(rx)) == I2C_RESULT_OK) {
+        battery_mv = (uint16_t)(rx[0] | ((uint16_t)rx[1] << 8));
     }
 }
 
-static void poll_levels_task(TaskId id, void *ctx) {
-    (void) id;
-    (void) ctx;
+static void poll_levels_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
     uint8_t req = COMM_LEVELS_READ;
     uint8_t rx[2];
-    if (i2c_receive(COMM_ADDRESS_SWITCHING, &req, 1, rx, sizeof(rx)) ==
-        I2C_RESULT_OK) {
+    if (i2c_receive(COMM_ADDRESS_SWITCHING, &req, 1, rx, sizeof(rx)) == I2C_RESULT_OK) {
         levels[0] = rx[0];
         levels[1] = rx[1];
     }
 }
 
-static void poll_sensors_task(TaskId id, void *ctx) {
-    (void) id;
-    (void) ctx;
+static void poll_sensors_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
     uint8_t req = COMM_SENSORS_READ;
     uint8_t rx;
     if (i2c_receive(COMM_ADDRESS_SWITCHING, &req, 1, &rx, 1) == I2C_RESULT_OK) {

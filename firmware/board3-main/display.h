@@ -13,6 +13,6 @@
 
 void display_init(void); /* pin config + reset + SSD1322 boot sequence */
 void display_send_cmd(uint8_t cmd);
-void display_send_data(const uint8_t *data, uint16_t len);
+void display_send_data(const uint8_t* data, uint16_t len);
 
 #endif /* DISPLAY_H */

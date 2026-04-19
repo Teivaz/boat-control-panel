@@ -42,7 +42,7 @@ void input_set_change_handler(InputChangeHandler handler) {
     _change_handler = handler;
 }
 
-void _input_state_init(InputState *state) {
+void _input_state_init(InputState* state) {
     state->integer = 0x00;
 }
 
@@ -56,7 +56,7 @@ void _input_state_interrupt_handler(void) {
     }
 }
 
-void _input_state_update(InputState *state) {
+void _input_state_update(InputState* state) {
     state->b0 = !_INPUT_0;
     state->b1 = !_INPUT_1;
     state->b2 = !_INPUT_2;

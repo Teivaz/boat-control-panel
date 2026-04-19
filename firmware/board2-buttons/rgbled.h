@@ -20,6 +20,6 @@ typedef union {
 } RGBLedData;
 
 void rgbled_init(void);
-void rgbled_set(RGBLedData *rgb, uint8_t count);
+void rgbled_set(RGBLedData* rgb, uint8_t count);
 
 #endif /* RGBLED_H */

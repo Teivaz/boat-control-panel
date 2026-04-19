@@ -51,15 +51,14 @@ static uint8_t nvm_read(uint8_t offset);
 static void nvm_write(uint8_t offset, uint8_t value);
 static uint8_t eeprom_offset_for(uint8_t address);
 static uint8_t effect_byte_index(uint8_t led_id);
-static uint8_t queue_lookup(uint8_t address, uint8_t *out);
-static void flush_task(TaskId id, void *ctx);
+static uint8_t queue_lookup(uint8_t address, uint8_t* out);
+static void flush_task(TaskId id, void* ctx);
 static void write_default_config(void);
 
-void config_init(TaskController *ctrl) {
+void config_init(TaskController* ctrl) {
     wq_head = wq_tail = 0;
 
-    if (nvm_read(OFF_MAGIC_LO) != CONFIG_MAGIC_LO ||
-        nvm_read(OFF_MAGIC_HI) != CONFIG_MAGIC_HI) {
+    if (nvm_read(OFF_MAGIC_LO) != CONFIG_MAGIC_LO || nvm_read(OFF_MAGIC_HI) != CONFIG_MAGIC_HI) {
         write_default_config();
         /* Magic written last so a reset mid-init re-triggers seeding. */
         nvm_write(OFF_MAGIC_LO, CONFIG_MAGIC_LO);
@@ -94,7 +93,7 @@ void config_write_byte(uint8_t address, uint8_t value) {
         return;
     }
     INTERRUPT_PUSH;
-    uint8_t next = (uint8_t) ((wq_tail + 1) & WRITE_QUEUE_MASK);
+    uint8_t next = (uint8_t)((wq_tail + 1) & WRITE_QUEUE_MASK);
     if (next != wq_head) {
         wq[wq_tail].address = address;
         wq[wq_tail].value = value;
@@ -106,24 +105,21 @@ void config_write_byte(uint8_t address, uint8_t value) {
 CommTriggerConfig config_get_button(uint8_t button_id) {
     CommTriggerConfig cfg = {0};
     if (button_id < BUTTON_COUNT) {
-        *(uint8_t *) &cfg =
-            config_read_byte(CONFIG_ADDR_BUTTON_TRIGGER + button_id);
+        *(uint8_t*)&cfg = config_read_byte(CONFIG_ADDR_BUTTON_TRIGGER + button_id);
     }
     return cfg;
 }
 
 void config_set_button(uint8_t button_id, CommTriggerConfig cfg) {
     if (button_id < BUTTON_COUNT) {
-        config_write_byte(CONFIG_ADDR_BUTTON_TRIGGER + button_id,
-                          *(uint8_t *) &cfg);
+        config_write_byte(CONFIG_ADDR_BUTTON_TRIGGER + button_id, *(uint8_t*)&cfg);
     }
 }
 
 CommButtonOutputEffect config_get_effect(uint8_t led_id) {
     CommButtonOutputEffect eff = {0};
     if (led_id < LED_EFFECT_COUNT) {
-        uint8_t byte = config_read_byte(CONFIG_ADDR_LED_EFFECT +
-                                        effect_byte_index(led_id));
+        uint8_t byte = config_read_byte(CONFIG_ADDR_LED_EFFECT + effect_byte_index(led_id));
         eff.raw = (led_id & 1) ? (byte >> 4) : (byte & 0x0F);
     }
     return eff;
@@ -133,29 +129,25 @@ void config_set_effect(uint8_t led_id, CommButtonOutputEffect eff) {
     if (led_id >= LED_EFFECT_COUNT) {
         return;
     }
-    uint8_t addr =
-        (uint8_t) (CONFIG_ADDR_LED_EFFECT + effect_byte_index(led_id));
+    uint8_t addr = (uint8_t)(CONFIG_ADDR_LED_EFFECT + effect_byte_index(led_id));
     uint8_t byte = config_read_byte(addr);
     uint8_t nib = eff.raw & 0x0F;
-    byte = (led_id & 1) ? (uint8_t) ((byte & 0x0F) | (nib << 4))
-                        : (uint8_t) ((byte & 0xF0) | nib);
+    byte = (led_id & 1) ? (uint8_t)((byte & 0x0F) | (nib << 4)) : (uint8_t)((byte & 0xF0) | nib);
     config_write_byte(addr, byte);
 }
 
 /* CommButtonEffect packs output N's nibble in byte (7 - N) / 2.
  * odd N -> upper nibble, even N -> lower nibble. */
 static uint8_t effect_byte_index(uint8_t led_id) {
-    return (uint8_t) ((7 - led_id) / 2);
+    return (uint8_t)((7 - led_id) / 2);
 }
 
 static uint8_t eeprom_offset_for(uint8_t address) {
-    if (address >= CONFIG_ADDR_BUTTON_TRIGGER &&
-        address < CONFIG_ADDR_BUTTON_TRIGGER + BUTTON_COUNT) {
-        return (uint8_t) (OFF_BUTTONS + (address - CONFIG_ADDR_BUTTON_TRIGGER));
+    if (address >= CONFIG_ADDR_BUTTON_TRIGGER && address < CONFIG_ADDR_BUTTON_TRIGGER + BUTTON_COUNT) {
+        return (uint8_t)(OFF_BUTTONS + (address - CONFIG_ADDR_BUTTON_TRIGGER));
     }
-    if (address >= CONFIG_ADDR_LED_EFFECT &&
-        address < CONFIG_ADDR_LED_EFFECT + sizeof(CommButtonEffect)) {
-        return (uint8_t) (OFF_EFFECTS + (address - CONFIG_ADDR_LED_EFFECT));
+    if (address >= CONFIG_ADDR_LED_EFFECT && address < CONFIG_ADDR_LED_EFFECT + sizeof(CommButtonEffect)) {
+        return (uint8_t)(OFF_EFFECTS + (address - CONFIG_ADDR_LED_EFFECT));
     }
     return OFF_NONE;
 }
@@ -163,11 +155,10 @@ static uint8_t eeprom_offset_for(uint8_t address) {
 /* Walk head..tail oldest-first; latest matching value wins so a
  * write-then-write to the same address reads back the newest pending value.
  * Snapshot tail once to keep the bound stable if a producer preempts. */
-static uint8_t queue_lookup(uint8_t address, uint8_t *out) {
+static uint8_t queue_lookup(uint8_t address, uint8_t* out) {
     uint8_t tail = wq_tail;
     uint8_t found = 0;
-    for (uint8_t i = wq_head; i != tail;
-         i = (uint8_t) ((i + 1) & WRITE_QUEUE_MASK)) {
+    for (uint8_t i = wq_head; i != tail; i = (uint8_t)((i + 1) & WRITE_QUEUE_MASK)) {
         if (wq[i].address == address) {
             *out = wq[i].value;
             found = 1;
@@ -180,9 +171,9 @@ static uint8_t queue_lookup(uint8_t address, uint8_t *out) {
  * program, so the 20 ms interval keeps main context responsive. Increment
  * head AFTER the persist completes so a racing ISR read still sees the
  * pending value in the queue instead of stale EEPROM. */
-static void flush_task(TaskId id, void *ctx) {
-    (void) id;
-    (void) ctx;
+static void flush_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
     if (wq_head == wq_tail) {
         return;
     }
@@ -192,7 +183,7 @@ static void flush_task(TaskId id, void *ctx) {
     if (offset != OFF_NONE) {
         nvm_write(offset, value);
     }
-    wq_head = (uint8_t) ((wq_head + 1) & WRITE_QUEUE_MASK);
+    wq_head = (uint8_t)((wq_head + 1) & WRITE_QUEUE_MASK);
 }
 
 /* Wait for any in-flight NVM op before starting — an ISR read that races
@@ -200,15 +191,13 @@ static void flush_task(TaskId id, void *ctx) {
  * through a cell program. Worst-case ISR extension is one write (~4 ms),
  * bounded and rare (both sides must touch config simultaneously). */
 static uint8_t nvm_read(uint8_t offset) {
-    while (NVMCON0bits.GO)
-        ;
+    while (NVMCON0bits.GO);
     NVMADRU = EEPROM_ADDR_U;
     NVMADRH = 0x00;
     NVMADRL = offset;
     NVMCON1bits.CMD = 0x0; /* read byte */
     NVMCON0bits.GO = 1;
-    while (NVMCON0bits.GO)
-        ;
+    while (NVMCON0bits.GO);
     return NVMDATL;
 }
 
@@ -231,31 +220,27 @@ static void nvm_write(uint8_t offset, uint8_t value) {
     NVMCON0bits.GO = 1;
     INTERRUPT_POP;
 
-    while (NVMCON0bits.GO)
-        ;
+    while (NVMCON0bits.GO);
 }
 
 /* Runs on a virgin device (magic header missing). Bypasses the write queue
  * — the scheduler hasn't started yet, and nvm_write is safe to block in
  * init context. Writes internal offsets directly. */
 static void write_default_config(void) {
-    CommTriggerConfig default_trigger =
-        comm_button_trigger_make(COMM_BUTTON_MODE_HOLD, 1);
+    CommTriggerConfig default_trigger = comm_button_trigger_make(COMM_BUTTON_MODE_HOLD, 1);
     if (comm_address() == COMM_ADDRESS_BUTTON_BOARD_L) {
         /* Button 0 on the left board has a 1.5 s hold time. */
-        CommTriggerConfig trigger =
-            comm_button_trigger_make(COMM_BUTTON_MODE_HOLD, 1500);
-        nvm_write(OFF_BUTTONS + 0, *(uint8_t *) &trigger);
+        CommTriggerConfig trigger = comm_button_trigger_make(COMM_BUTTON_MODE_HOLD, 1500);
+        nvm_write(OFF_BUTTONS + 0, *(uint8_t*)&trigger);
     } else {
-        nvm_write(OFF_BUTTONS + 0, *(uint8_t *) &default_trigger);
+        nvm_write(OFF_BUTTONS + 0, *(uint8_t*)&default_trigger);
     }
     for (uint8_t i = 1; i < BUTTON_COUNT; i++) {
-        nvm_write(OFF_BUTTONS + i, *(uint8_t *) &default_trigger);
+        nvm_write(OFF_BUTTONS + i, *(uint8_t*)&default_trigger);
     }
 
-    CommButtonOutputEffect effect = {.color = COMM_EFFECT_COLOR_WHITE,
-                                     .mode = COMM_EFFECT_MODE_DISABLED};
-    uint8_t pair = (uint8_t) ((effect.raw & 0x0F) | ((effect.raw & 0x0F) << 4));
+    CommButtonOutputEffect effect = {.color = COMM_EFFECT_COLOR_WHITE, .mode = COMM_EFFECT_MODE_DISABLED};
+    uint8_t pair = (uint8_t)((effect.raw & 0x0F) | ((effect.raw & 0x0F) << 4));
     for (uint8_t i = 0; i < sizeof(CommButtonEffect); i++) {
         nvm_write(OFF_EFFECTS + i, pair);
     }

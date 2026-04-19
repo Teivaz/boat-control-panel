@@ -34,7 +34,7 @@ void display_send_cmd(uint8_t cmd) {
     bus_write(cmd, DC_COMMAND);
 }
 
-void display_send_data(const uint8_t *data, uint16_t len) {
+void display_send_data(const uint8_t* data, uint16_t len) {
     for (uint16_t i = 0; i < len; i++) {
         bus_write(data[i], DC_DATA);
     }
@@ -101,8 +101,8 @@ void display_init(void) {
     gpio_init();
     hw_reset();
 
-    const uint8_t *p = init_seq;
-    const uint8_t *end = init_seq + sizeof(init_seq);
+    const uint8_t* p = init_seq;
+    const uint8_t* end = init_seq + sizeof(init_seq);
     while (p < end) {
         uint8_t cmd = *p++;
         uint8_t nargs = *p++;

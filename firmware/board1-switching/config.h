@@ -15,7 +15,7 @@
 #define CONFIG_ADDR_LEVEL_OFFSET_FUEL 0x11
 #define CONFIG_ADDR_BATTERY_CAL 0x12
 
-void config_init(TaskController *ctrl);
+void config_init(TaskController* ctrl);
 uint8_t config_read_byte(uint8_t address);
 void config_write_byte(uint8_t address, uint8_t value);
 

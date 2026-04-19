@@ -79,10 +79,10 @@ uint16_t relay_mon_read(void) {
          * safe across temperature. */
         __asm("NOP");
         if (COM_0) {
-            result |= (uint16_t) (1u << mux0_to_wire[addr]);
+            result |= (uint16_t)(1u << mux0_to_wire[addr]);
         }
         if (COM_1) {
-            result |= (uint16_t) (1u << mux1_to_wire[addr]);
+            result |= (uint16_t)(1u << mux1_to_wire[addr]);
         }
     }
     return result;

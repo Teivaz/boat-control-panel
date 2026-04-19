@@ -69,8 +69,8 @@ static const uint8_t wire_to_proto[16] = {
 static uint16_t map_proto_to_wire(uint16_t proto) {
     uint16_t wire = 0;
     for (uint8_t b = 0; b < 16; b++) {
-        if (proto & (uint16_t) (1u << b)) {
-            wire |= (uint16_t) (1u << proto_to_wire[b]);
+        if (proto & (uint16_t)(1u << b)) {
+            wire |= (uint16_t)(1u << proto_to_wire[b]);
         }
     }
     return wire;
@@ -79,8 +79,8 @@ static uint16_t map_proto_to_wire(uint16_t proto) {
 static uint16_t map_wire_to_proto(uint16_t wire) {
     uint16_t proto = 0;
     for (uint8_t b = 0; b < 16; b++) {
-        if (wire & (uint16_t) (1u << b)) {
-            proto |= (uint16_t) (1u << wire_to_proto[b]);
+        if (wire & (uint16_t)(1u << b)) {
+            proto |= (uint16_t)(1u << wire_to_proto[b]);
         }
     }
     return proto;
@@ -115,12 +115,12 @@ static volatile uint8_t levels[2];
 
 static void apply_target(uint16_t proto_target);
 static void on_sensors_changed(uint8_t prev, uint8_t curr);
-static void monitor_task(TaskId id, void *ctx);
-static void poll_battery_task(TaskId id, void *ctx);
-static void poll_levels_task(TaskId id, void *ctx);
-static void retry_task(TaskId id, void *ctx);
+static void monitor_task(TaskId id, void* ctx);
+static void poll_battery_task(TaskId id, void* ctx);
+static void poll_levels_task(TaskId id, void* ctx);
+static void retry_task(TaskId id, void* ctx);
 
-void controller_init(TaskController *ctrl) {
+void controller_init(TaskController* ctrl) {
     relay_target = 0;
     relay_physical = 0;
     relay_mask = 0;
@@ -137,13 +137,10 @@ void controller_init(TaskController *ctrl) {
 
     sensors_set_change_handler(on_sensors_changed);
 
-    task_controller_add(ctrl, TASK_POLL_MONITOR, MONITOR_TICK_MS, monitor_task,
-                        0);
+    task_controller_add(ctrl, TASK_POLL_MONITOR, MONITOR_TICK_MS, monitor_task, 0);
     task_controller_add(ctrl, TASK_COMM_RETRY, RETRY_TICK_MS, retry_task, 0);
-    task_controller_add(ctrl, TASK_POLL_BATTERY, POLL_TICK_MS,
-                        poll_battery_task, 0);
-    task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task,
-                        0);
+    task_controller_add(ctrl, TASK_POLL_BATTERY, POLL_TICK_MS, poll_battery_task, 0);
+    task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task, 0);
 }
 
 /* ============================================================================
@@ -161,7 +158,7 @@ void controller_set_relay_mask(uint16_t mask) {
 }
 
 void controller_set_level_mode(uint8_t mode_byte) {
-    level_mode_byte = (uint8_t) (mode_byte & 0x0F);
+    level_mode_byte = (uint8_t)(mode_byte & 0x0F);
 }
 
 /* ============================================================================
@@ -197,30 +194,30 @@ static void apply_target(uint16_t proto_target) {
     uint16_t wire = map_proto_to_wire(proto_target);
     /* Power-master rail: assert wire bit 1 whenever any non-main relay is
      * on. The master can also drive proto bit 15 explicitly to force it. */
-    if (wire & (uint16_t) ~(1u << WIRE_MAIN_BIT)) {
-        wire |= (uint16_t) (1u << WIRE_MAIN_BIT);
+    if (wire & (uint16_t)~(1u << WIRE_MAIN_BIT)) {
+        wire |= (uint16_t)(1u << WIRE_MAIN_BIT);
     }
     relay_out_write(wire);
 }
 
 static void on_sensors_changed(uint8_t prev, uint8_t curr) {
-    (void) prev;
+    (void)prev;
     INTERRUPT_PUSH;
     sensor_shadow = curr;
     push_dirty = 1;
     INTERRUPT_POP;
 }
 
-static void monitor_task(TaskId id, void *ctx) {
-    (void) id;
-    (void) ctx;
+static void monitor_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
     uint16_t wire = relay_mon_read();
     uint16_t proto = map_wire_to_proto(wire);
 
     INTERRUPT_PUSH;
     /* Always report wire-1 ("main") transitions even if its proto bit isn't
      * in the mask — the master needs to know the rail is hot. */
-    uint16_t effective = (uint16_t) (relay_mask | (1u << PROTO_MAIN_BIT));
+    uint16_t effective = (uint16_t)(relay_mask | (1u << PROTO_MAIN_BIT));
     if ((proto ^ relay_physical) & effective) {
         push_dirty = 1;
     }
@@ -228,22 +225,22 @@ static void monitor_task(TaskId id, void *ctx) {
     INTERRUPT_POP;
 }
 
-static void poll_battery_task(TaskId id, void *ctx) {
-    (void) id;
-    (void) ctx;
+static void poll_battery_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
     battery_mv = adc_read_battery_mv();
 }
 
-static void poll_levels_task(TaskId id, void *ctx) {
-    (void) id;
-    (void) ctx;
+static void poll_levels_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
     levels[0] = adc_read_level_fresh_water();
     levels[1] = adc_read_level_fuel();
 }
 
-static void retry_task(TaskId id, void *ctx) {
-    (void) id;
-    (void) ctx;
+static void retry_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
     if (!push_dirty) {
         return;
     }
@@ -260,10 +257,8 @@ static void retry_task(TaskId id, void *ctx) {
     }
 
     CommMessage msg;
-    uint8_t len =
-        comm_build_relay_changed(&msg, prev_r, curr_r, prev_s, curr_s);
-    if (i2c_transmit(COMM_ADDRESS_MAIN, (const uint8_t *) &msg, len) !=
-        I2C_RESULT_OK) {
+    uint8_t len = comm_build_relay_changed(&msg, prev_r, curr_r, prev_s, curr_s);
+    if (i2c_transmit(COMM_ADDRESS_MAIN, (const uint8_t*)&msg, len) != I2C_RESULT_OK) {
         return;
     }
 

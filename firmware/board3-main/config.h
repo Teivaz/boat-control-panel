@@ -22,7 +22,7 @@
 #define NAV_LIGHT_STERN 0x10
 #define NAV_LIGHT_ALL 0x1F
 
-void config_init(TaskController *ctrl);
+void config_init(TaskController* ctrl);
 uint8_t config_read_byte(uint8_t address);
 void config_write_byte(uint8_t address, uint8_t value);
 

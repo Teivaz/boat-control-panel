@@ -8,9 +8,8 @@
 
 #include <xc.h>
 
-static void on_rx(const uint8_t *data, uint8_t len);
-static uint8_t on_read(const uint8_t *request, uint8_t request_len,
-                       uint8_t *response, uint8_t response_max);
+static void on_rx(const uint8_t* data, uint8_t len);
+static uint8_t on_read(const uint8_t* request, uint8_t request_len, uint8_t* response, uint8_t response_max);
 
 void comm_init(void) {
     i2c_set_rx_handler(on_rx);
@@ -18,7 +17,7 @@ void comm_init(void) {
 }
 
 /* ISR context — handlers must stay short. */
-static void on_rx(const uint8_t *data, uint8_t len) {
+static void on_rx(const uint8_t* data, uint8_t len) {
     if (len == 0) {
         return;
     }
@@ -62,8 +61,7 @@ static void on_rx(const uint8_t *data, uint8_t len) {
     }
 }
 
-static uint8_t on_read(const uint8_t *request, uint8_t request_len,
-                       uint8_t *response, uint8_t response_max) {
+static uint8_t on_read(const uint8_t* request, uint8_t request_len, uint8_t* response, uint8_t response_max) {
     if (request_len == 0 || response_max == 0) {
         return 0;
     }
@@ -71,22 +69,22 @@ static uint8_t on_read(const uint8_t *request, uint8_t request_len,
     switch (request[0]) {
         case COMM_RELAY_STATE_READ: {
             uint16_t v = controller_relay_target();
-            response[0] = (uint8_t) (v & 0xFF);
-            response[1] = (uint8_t) (v >> 8);
+            response[0] = (uint8_t)(v & 0xFF);
+            response[1] = (uint8_t)(v >> 8);
             return 2;
         }
 
         case COMM_RELAY_MASK_READ: {
             uint16_t v = controller_relay_mask();
-            response[0] = (uint8_t) (v & 0xFF);
-            response[1] = (uint8_t) (v >> 8);
+            response[0] = (uint8_t)(v & 0xFF);
+            response[1] = (uint8_t)(v >> 8);
             return 2;
         }
 
         case COMM_BATTERY_READ: {
             uint16_t v = controller_battery_mv();
-            response[0] = (uint8_t) (v & 0xFF);
-            response[1] = (uint8_t) (v >> 8);
+            response[0] = (uint8_t)(v & 0xFF);
+            response[1] = (uint8_t)(v >> 8);
             return 2;
         }
 
@@ -100,7 +98,7 @@ static uint8_t on_read(const uint8_t *request, uint8_t request_len,
             return 1;
 
         case COMM_SENSORS_READ:
-            response[0] = (uint8_t) (sensors_state() & 0x07);
+            response[0] = (uint8_t)(sensors_state() & 0x07);
             return 1;
 
         case COMM_CONFIG_READ:

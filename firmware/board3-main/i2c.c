@@ -86,7 +86,7 @@ static void handle_event(void) {
         I2C1CON1bits.ACKDT = 0;
 
         if (state == STATE_RX && rx_len > 0 && rx_handler) {
-            rx_handler((const uint8_t *) rx_buf, rx_len);
+            rx_handler((const uint8_t*)rx_buf, rx_len);
         }
         reset_state();
     } else if (I2C1PIRbits.ADRIF) {
@@ -96,8 +96,7 @@ static void handle_event(void) {
             tx_pos = 0;
             tx_len = 0;
             if (read_handler) {
-                tx_len = read_handler((const uint8_t *) rx_buf, rx_len,
-                                      (uint8_t *) tx_buf, I2C_BUF_SIZE);
+                tx_len = read_handler((const uint8_t*)rx_buf, rx_len, (uint8_t*)tx_buf, I2C_BUF_SIZE);
             }
             state = STATE_TX;
         } else {
@@ -172,7 +171,7 @@ static void host_end(uint8_t pie7_saved) {
     PIE7 = pie7_saved;
 }
 
-I2cResult i2c_transmit(uint8_t address, const uint8_t *data, uint8_t len) {
+I2cResult i2c_transmit(uint8_t address, const uint8_t* data, uint8_t len) {
     if (len == 0) {
         return I2C_RESULT_OK;
     }
@@ -185,7 +184,7 @@ I2cResult i2c_transmit(uint8_t address, const uint8_t *data, uint8_t len) {
     I2C1CON0bits.MODE = 0b100;
     I2C1CNTH = 0;
     I2C1CNTL = len;
-    I2C1ADB1 = (uint8_t) (address << 1);
+    I2C1ADB1 = (uint8_t)(address << 1);
     I2C1ERRbits.BCLIF = 0;
     I2C1ERRbits.NACKIF = 0;
     I2C1PIRbits.PCIF = 0;
@@ -238,8 +237,7 @@ done:
 /* Write-phase first (tx/tx_len), repeated-start, then read rx_len bytes.
  * Both phases run under the same bus lock; client ISRs are masked throughout.
  */
-I2cResult i2c_receive(uint8_t address, const uint8_t *tx, uint8_t tx_len,
-                      uint8_t *rx, uint8_t rx_len) {
+I2cResult i2c_receive(uint8_t address, const uint8_t* tx, uint8_t tx_len, uint8_t* rx, uint8_t rx_len) {
     if (rx_len == 0) {
         return I2C_RESULT_OK;
     }
@@ -264,7 +262,7 @@ I2cResult i2c_receive(uint8_t address, const uint8_t *tx, uint8_t tx_len,
     if (tx_len > 0) {
         I2C1CNTH = 0;
         I2C1CNTL = tx_len;
-        I2C1ADB1 = (uint8_t) (address << 1);
+        I2C1ADB1 = (uint8_t)(address << 1);
         I2C1CON0bits.RSEN = 1;
         I2C1CON0bits.S = 1;
 
@@ -312,7 +310,7 @@ I2cResult i2c_receive(uint8_t address, const uint8_t *tx, uint8_t tx_len,
     I2C1CON0bits.RSEN = 0;
     I2C1CNTH = 0;
     I2C1CNTL = rx_len;
-    I2C1ADB1 = (uint8_t) ((address << 1) | 0x01);
+    I2C1ADB1 = (uint8_t)((address << 1) | 0x01);
     I2C1ERRbits.BCLIF = 0;
     I2C1ERRbits.NACKIF = 0;
     I2C1PIRbits.PCIF = 0;
@@ -373,10 +371,10 @@ static void client_mode_enable(void) {
     I2C1CNTH = 0;
 
     const uint8_t addr = comm_address();
-    I2C1ADR0 = (uint8_t) (addr << 1);
-    I2C1ADR1 = (uint8_t) (addr << 1);
-    I2C1ADR2 = (uint8_t) (addr << 1);
-    I2C1ADR3 = (uint8_t) (addr << 1);
+    I2C1ADR0 = (uint8_t)(addr << 1);
+    I2C1ADR1 = (uint8_t)(addr << 1);
+    I2C1ADR2 = (uint8_t)(addr << 1);
+    I2C1ADR3 = (uint8_t)(addr << 1);
 
     I2C1STAT1bits.CLRBF = 1;
     I2C1PIRbits.PCIF = 0;

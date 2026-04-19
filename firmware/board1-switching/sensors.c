@@ -21,9 +21,9 @@ static uint8_t match_count;
 static SensorsChangeHandler change_handler;
 
 static uint8_t read_raw(void);
-static void poll_task(TaskId id, void *ctx);
+static void poll_task(TaskId id, void* ctx);
 
-void sensors_init(TaskController *ctrl) {
+void sensors_init(TaskController* ctrl) {
     /* Digital inputs, no pullups (upstream circuitry provides the level).
      * RC5 is also a candidate CRC-on-boot output — we keep BPEN=OFF in the
      * config bits so it stays a free GPIO. */
@@ -63,9 +63,9 @@ static uint8_t read_raw(void) {
     return s;
 }
 
-static void poll_task(TaskId id, void *ctx) {
-    (void) id;
-    (void) ctx;
+static void poll_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
     uint8_t raw = read_raw();
     if (raw != candidate) {
         candidate = raw;

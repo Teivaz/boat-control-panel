@@ -37,7 +37,7 @@ void init(void) {
 
 void send_button_event(uint8_t button_id) {
     uint8_t cur = input_state_current().integer;
-    uint8_t prev = cur ^ (uint8_t) (1u << button_id);
+    uint8_t prev = cur ^ (uint8_t)(1u << button_id);
     comm_send_button_changed(prev, cur);
 }
 
