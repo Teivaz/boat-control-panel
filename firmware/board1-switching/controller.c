@@ -101,23 +101,17 @@ static volatile uint16_t last_pushed_relays;
 static volatile uint8_t last_pushed_sensors;
 static volatile uint8_t push_dirty;
 
-static volatile uint16_t battery_mv;
-static volatile uint8_t levels[2];
-
 /* ============================================================================
  * Tasks
  * ============================================================================
  */
 
 #define MONITOR_TICK_MS 50u
-#define POLL_TICK_MS 200u
 #define RETRY_TICK_MS TASK_MIN_MS
 
 static void apply_target(uint16_t proto_target);
 static void on_sensors_changed(uint8_t prev, uint8_t curr);
 static void monitor_task(TaskId id, void* ctx);
-static void poll_battery_task(TaskId id, void* ctx);
-static void poll_levels_task(TaskId id, void* ctx);
 static void retry_task(TaskId id, void* ctx);
 
 void controller_init(TaskController* ctrl) {
@@ -129,9 +123,6 @@ void controller_init(TaskController* ctrl) {
     last_pushed_relays = 0;
     last_pushed_sensors = sensor_shadow;
     push_dirty = 0;
-    battery_mv = 0;
-    levels[0] = 0;
-    levels[1] = 0;
 
     apply_target(0);
 
@@ -139,8 +130,6 @@ void controller_init(TaskController* ctrl) {
 
     task_controller_add(ctrl, TASK_POLL_MONITOR, MONITOR_TICK_MS, monitor_task, 0);
     task_controller_add(ctrl, TASK_COMM_RETRY, RETRY_TICK_MS, retry_task, 0);
-    task_controller_add(ctrl, TASK_POLL_BATTERY, POLL_TICK_MS, poll_battery_task, 0);
-    task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task, 0);
 }
 
 /* ============================================================================
@@ -179,10 +168,16 @@ uint8_t controller_level_mode(void) {
     return level_mode_byte;
 }
 uint16_t controller_battery_mv(void) {
-    return battery_mv;
+    return adc_read_battery_mv();
 }
 uint8_t controller_level(uint8_t i) {
-    return (i < 2) ? levels[i] : 0;
+    if (i == 0) {
+        return adc_read_level_fresh_water();
+    }
+    if (i == 1) {
+        return adc_read_level_fuel();
+    }
+    return 0;
 }
 
 /* ============================================================================
@@ -223,19 +218,6 @@ static void monitor_task(TaskId id, void* ctx) {
     }
     relay_physical = proto;
     INTERRUPT_POP;
-}
-
-static void poll_battery_task(TaskId id, void* ctx) {
-    (void)id;
-    (void)ctx;
-    battery_mv = adc_read_battery_mv();
-}
-
-static void poll_levels_task(TaskId id, void* ctx) {
-    (void)id;
-    (void)ctx;
-    levels[0] = adc_read_level_fresh_water();
-    levels[1] = adc_read_level_fuel();
 }
 
 static void retry_task(TaskId id, void* ctx) {

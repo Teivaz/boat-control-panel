@@ -28,6 +28,7 @@ static void client_mode_disable(void);
 static void reset_state(void);
 static void handle_event(void);
 static void handle_error(void);
+static I2cResult host_transmit(uint8_t address, const uint8_t* data, uint8_t len);
 
 void i2c_init(void) {
     /* RC3 = SCL, RC4 = SDA. Open-drain, I2C-specific slew + weak pulls. */
@@ -165,6 +166,15 @@ I2cResult i2c_transmit(uint8_t address, const uint8_t* data, uint8_t len) {
     PIE7bits.I2C1RXIE = 0;
     PIE7bits.I2C1TXIE = 0;
 
+    I2cResult result = host_transmit(address, data, len);
+
+    client_mode_disable();
+    client_mode_enable();
+    PIE7 = pie7_saved;
+    return result;
+}
+
+static I2cResult host_transmit(uint8_t address, const uint8_t* data, uint8_t len) {
     client_mode_disable();
     I2C1CON0bits.MODE = 0b100;
     I2C1CNTH = 0;
@@ -176,47 +186,35 @@ I2cResult i2c_transmit(uint8_t address, const uint8_t* data, uint8_t len) {
     I2C1CON0bits.EN = 1;
     I2C1CON0bits.S = 1;
 
-    I2cResult result = I2C_RESULT_OK;
     for (uint8_t i = 0; i < len; i++) {
-        timeout = I2C_POLL_MAX;
+        uint16_t timeout = I2C_POLL_MAX;
         while (!I2C1STAT1bits.TXBE) {
             if (I2C1ERRbits.BCLIF) {
-                result = I2C_RESULT_COLLISION;
-                goto done;
+                return I2C_RESULT_COLLISION;
             }
             if (I2C1ERRbits.NACKIF) {
-                result = I2C_RESULT_NACK;
-                goto done;
+                return I2C_RESULT_NACK;
             }
             if (--timeout == 0) {
-                result = I2C_RESULT_TIMEOUT;
-                goto done;
+                return I2C_RESULT_TIMEOUT;
             }
         }
         I2C1TXB = data[i];
     }
 
-    timeout = I2C_POLL_MAX;
+    uint16_t timeout = I2C_POLL_MAX;
     while (!I2C1PIRbits.PCIF) {
         if (I2C1ERRbits.BCLIF) {
-            result = I2C_RESULT_COLLISION;
-            break;
+            return I2C_RESULT_COLLISION;
         }
         if (I2C1ERRbits.NACKIF) {
-            result = I2C_RESULT_NACK;
-            break;
+            return I2C_RESULT_NACK;
         }
         if (--timeout == 0) {
-            result = I2C_RESULT_TIMEOUT;
-            break;
+            return I2C_RESULT_TIMEOUT;
         }
     }
-
-done:
-    client_mode_disable();
-    client_mode_enable();
-    PIE7 = pie7_saved;
-    return result;
+    return I2C_RESULT_OK;
 }
 
 /* ============================================================================

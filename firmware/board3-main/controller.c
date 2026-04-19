@@ -1,6 +1,7 @@
 #include "controller.h"
 
 #include "config.h"
+#include "config_mode.h"
 #include "i2c.h"
 #include "libcomm.h"
 #include "nav_lights.h"
@@ -84,6 +85,13 @@ static volatile uint8_t relay_dirty; /* target diverged from bus    */
 static volatile uint16_t battery_mv;
 static volatile uint8_t levels[2];
 
+/* Power-off snapshot kept in RAM only (per todo: no EEPROM persistence).
+ * Captured on the active -> inactive transition and reapplied when power
+ * returns so the user's prior selection of relays and nav mode survives
+ * the power toggle without relying on flash wear or boot-time defaults. */
+static uint16_t saved_relay_intent;
+static uint8_t saved_nav_mode;
+
 /* ============================================================================
  * Outbound retry queue
  *
@@ -94,7 +102,7 @@ static volatile uint8_t levels[2];
  */
 
 #define RETRY_TICK_MS TASK_MIN_MS
-#define POLL_TICK_MS 200u /* protocol minimum is 100 ms; 200 ms is ample */
+#define POLL_TICK_MS 20u
 
 static void retry_task(TaskId id, void* ctx);
 static void poll_battery_task(TaskId id, void* ctx);
@@ -115,6 +123,8 @@ void controller_init(TaskController* ctrl) {
     battery_mv = 0;
     levels[0] = 0;
     levels[1] = 0;
+    saved_relay_intent = 0;
+    saved_nav_mode = NAV_MODE_OFF;
     task_controller_add(ctrl, TASK_COMM_RETRY, RETRY_TICK_MS, retry_task, 0);
     task_controller_add(ctrl, TASK_POLL_BATTERY, POLL_TICK_MS, poll_battery_task, 0);
     task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task, 0);
@@ -127,6 +137,14 @@ void controller_init(TaskController* ctrl) {
  */
 
 void controller_on_button_changed(uint8_t sender, uint8_t prev, uint8_t curr) {
+    uint8_t rising = (uint8_t)(curr & ~prev);
+    if (config_mode_active()) {
+        /* Normal actions are suppressed while configuring; button presses
+         * edit the nav-enabled mask instead. */
+        config_mode_on_buttons(sender, rising);
+        return;
+    }
+
     const ButtonAction* table;
     switch (sender) {
         case COMM_ADDRESS_BUTTON_BOARD_L:
@@ -139,8 +157,6 @@ void controller_on_button_changed(uint8_t sender, uint8_t prev, uint8_t curr) {
         default:
             return;
     }
-    /* Newly-pressed bits: 0 -> 1 transitions. */
-    uint8_t rising = (uint8_t)(curr & ~prev);
     for (uint8_t i = 0; i < 7; i++) {
         if (rising & (uint8_t)(1u << i)) {
             apply_action(&table[i]);
@@ -194,7 +210,18 @@ uint8_t controller_sensors(void) {
 static void apply_action(const ButtonAction* a) {
     switch (a->kind) {
         case ACTION_TOGGLE_POWER:
-            power_on = !power_on;
+            if (power_on) {
+                saved_relay_intent = relay_intent;
+                saved_nav_mode = nav_mode;
+                power_on = 0;
+                /* Pull everything down: recompute_target() below will zero
+                 * relay_target and mark it dirty so the retry task ships a
+                 * relay_state write clearing every coil. */
+            } else {
+                relay_intent = saved_relay_intent;
+                nav_mode = saved_nav_mode;
+                power_on = 1;
+            }
             break;
 
         case ACTION_TOGGLE_RELAY: {
