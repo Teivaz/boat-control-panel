@@ -2,7 +2,7 @@
 
 The main board keeps track of all internal states, it receives messages from other boards (e.g. buttons) or polls (~200ms) boards (e.g. RTC). This board also is equipped with 64x256 display where in the normal mode it only shows 3 items: level of fresh water, level of fuel, charge of the battery (acid 12V battery, measured by voltage). This board controls navigational lights (bow, stern, steaming, anchoring, tricolor).
 
-### Communications
+## Communications
 
 RB1 SDA
 RB2 SCL
@@ -86,4 +86,3 @@ RC4 D4
 RC5 D5
 RC6 D6
 RC7 D7
-
