@@ -10,10 +10,8 @@
 
 #include <xc.h>
 
-typedef union
-{
-    struct
-    {
+typedef union {
+    struct {
         uint8_t b0 : 1;
         uint8_t b1 : 1;
         uint8_t b2 : 1;

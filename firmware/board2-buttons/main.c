@@ -1,14 +1,14 @@
-#include "rgbled.h"
+#include "button.h"
+#include "comm.h"
+#include "config.h"
+#include "i2c.h"
 #include "input.h"
 #include "interrupt.h"
-#include "i2c.h"
+#include "led_effect.h"
+#include "libcomm.h"
+#include "rgbled.h"
 #include "task.h"
 #include "task_ids.h"
-#include "button.h"
-#include "led_effect.h"
-#include "comm.h"
-#include "libcomm.h"
-#include "config.h"
 
 #include <xc.h>
 
@@ -16,7 +16,7 @@
 
 static TaskController ctrl;
 
-static void tick_isr (void);
+static void tick_isr(void);
 static void tick_init(void);
 
 void init(void) {
@@ -36,8 +36,8 @@ void init(void) {
 }
 
 void send_button_event(uint8_t button_id) {
-    uint8_t cur  = input_state_current().integer;
-    uint8_t prev = cur ^ (uint8_t)(1u << button_id);
+    uint8_t cur = input_state_current().integer;
+    uint8_t prev = cur ^ (uint8_t) (1u << button_id);
     comm_send_button_changed(prev, cur);
 }
 
@@ -49,8 +49,8 @@ static void tick_isr(void) {
 }
 
 static void tick_init(void) {
-    T0CON0bits.EN   = 0;
-    T0CON1bits.CS   = 0b010; // Fosc/4 -> 16MHz
+    T0CON0bits.EN = 0;
+    T0CON1bits.CS = 0b010;    // Fosc/4 -> 16MHz
     T0CON1bits.CKPS = 0b0111; // divide by 128 -> 125 kHz (8 us)
     interrupt_set_handler_TMR0(tick_isr);
     PIE3bits.TMR0IE = 1;
@@ -66,10 +66,10 @@ static void tick_init(void) {
 void main(void) {
     init();
 
-    for(uint8_t i = 0; i < BUTTON_COUNT; i++) {
+    for (uint8_t i = 0; i < BUTTON_COUNT; i++) {
         button_set_trigger(i, config_get_button(i));
     }
-    for(uint8_t i = 0; i < LED_EFFECT_COUNT; i++) {
+    for (uint8_t i = 0; i < LED_EFFECT_COUNT; i++) {
         led_effect_set(i, config_get_effect(i));
     }
 

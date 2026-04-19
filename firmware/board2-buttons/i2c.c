@@ -1,14 +1,15 @@
 #include "i2c.h"
+
 #include "libcomm.h"
 
 /* Maximum message body on this board: button_effect (1 + 4) writes and
  * relay_changed-style reads never exceed 8 bytes. */
-#define I2C_BUF_SIZE  8
+#define I2C_BUF_SIZE 8
 
 /* Timeout counter bound for polled host-mode loops. Each iteration is a
  * handful of cycles; at 64 MHz a value of 10000 covers > 1 ms, which is
  * two full byte times at 400 kHz. */
-#define I2C_POLL_MAX  10000
+#define I2C_POLL_MAX 10000
 
 typedef enum {
     STATE_IDLE,
@@ -16,28 +17,27 @@ typedef enum {
     STATE_TX,
 } ClientState;
 
-static volatile ClientState   state;
-static volatile uint8_t       rx_buf[I2C_BUF_SIZE];
-static volatile uint8_t       rx_len;
-static volatile uint8_t       tx_buf[I2C_BUF_SIZE];
-static volatile uint8_t       tx_len;
-static volatile uint8_t       tx_pos;
+static volatile ClientState state;
+static volatile uint8_t rx_buf[I2C_BUF_SIZE];
+static volatile uint8_t rx_len;
+static volatile uint8_t tx_buf[I2C_BUF_SIZE];
+static volatile uint8_t tx_len;
+static volatile uint8_t tx_pos;
 
-static I2cRxHandler   rx_handler;
+static I2cRxHandler rx_handler;
 static I2cReadHandler read_handler;
 
-static void client_mode_enable (void);
+static void client_mode_enable(void);
 static void client_mode_disable(void);
-static void reset_state        (void);
-static void handle_event       (void);
-static void handle_error       (void);
+static void reset_state(void);
+static void handle_event(void);
+static void handle_error(void);
 
-void i2c_init(void)
-{
+void i2c_init(void) {
     /* Pin config — open-drain, I2C-specific TH/PU slew + stronger weak
      * pull-ups — same as before. */
-    LATCbits.LATC3   = 1;
-    LATCbits.LATC4   = 1;
+    LATCbits.LATC3 = 1;
+    LATCbits.LATC4 = 1;
     ANSELCbits.ANSELC3 = 0;
     ANSELCbits.ANSELC4 = 0;
     TRISCbits.TRISC3 = 0;
@@ -49,11 +49,11 @@ void i2c_init(void)
     RC3I2Cbits.PU = 0b01;
     RC4I2Cbits.PU = 0b01;
 
-    INT0PPS     = 0x08;  /* RB0 -> INT0 */
-    I2C1SCLPPS  = 0x13;  /* RC3 -> SCL1 */
-    RC3PPS      = 0x37;
-    I2C1SDAPPS  = 0x14;  /* RC4 -> SDA1 */
-    RC4PPS      = 0x38;
+    INT0PPS = 0x08;    /* RB0 -> INT0 */
+    I2C1SCLPPS = 0x13; /* RC3 -> SCL1 */
+    RC3PPS = 0x37;
+    I2C1SDAPPS = 0x14; /* RC4 -> SDA1 */
+    RC4PPS = 0x38;
 
     /* BAUD for 400 kHz fast mode at Fosc = 64 MHz and I2C1CLK = Fosc:
      *   F_SCL = F_CLK / (2 * (BAUD + 1))
@@ -63,12 +63,17 @@ void i2c_init(void)
     client_mode_enable();
 }
 
-void i2c_set_rx_handler  (I2cRxHandler   h) { rx_handler   = h; }
-void i2c_set_read_handler(I2cReadHandler h) { read_handler = h; }
+void i2c_set_rx_handler(I2cRxHandler h) {
+    rx_handler = h;
+}
+void i2c_set_read_handler(I2cReadHandler h) {
+    read_handler = h;
+}
 
 /* ============================================================================
  * Client-mode ISR entry points
- * ============================================================================ */
+ * ============================================================================
+ */
 
 void __interrupt(irq(I2C1TX, I2C1RX, I2C1), base(8)) I2C1_ISR(void) {
     handle_event();
@@ -88,11 +93,10 @@ static void handle_event(void) {
         I2C1CON1bits.ACKDT = 0;
 
         if (state == STATE_RX && rx_len > 0 && rx_handler) {
-            rx_handler((const uint8_t *)rx_buf, rx_len);
+            rx_handler((const uint8_t *) rx_buf, rx_len);
         }
         reset_state();
-    }
-    else if (I2C1PIRbits.ADRIF) {
+    } else if (I2C1PIRbits.ADRIF) {
         I2C1PIRbits.ADRIF = 0;
 
         if (I2C1STAT0bits.R) {
@@ -101,26 +105,25 @@ static void handle_event(void) {
             tx_pos = 0;
             tx_len = 0;
             if (read_handler) {
-                tx_len = read_handler((const uint8_t *)rx_buf, rx_len,
-                                      (uint8_t *)tx_buf, I2C_BUF_SIZE);
+                tx_len = read_handler((const uint8_t *) rx_buf, rx_len,
+                                      (uint8_t *) tx_buf, I2C_BUF_SIZE);
             }
             state = STATE_TX;
         } else {
             rx_len = 0;
-            state  = STATE_RX;
+            state = STATE_RX;
         }
-    }
-    else if (I2C1STAT0bits.R) {
+    } else if (I2C1STAT0bits.R) {
         /* Client is transmitting to the host. */
         if (I2C1STAT1bits.TXBE && !I2C1CON1bits.ACKSTAT) {
             I2C1TXB = (tx_pos < tx_len) ? tx_buf[tx_pos++] : 0;
         }
-    }
-    else {
+    } else {
         /* Client is receiving from the host. */
         if (I2C1STAT1bits.RXBF) {
             uint8_t byte = I2C1RXB;
-            if (rx_len < I2C_BUF_SIZE) rx_buf[rx_len++] = byte;
+            if (rx_len < I2C_BUF_SIZE)
+                rx_buf[rx_len++] = byte;
             I2C1CON1bits.ACKDT = 0;
             I2C1PIRbits.ACKTIF = 0;
         }
@@ -133,16 +136,21 @@ static void handle_event(void) {
 static void handle_error(void) {
     /* All error paths: clear the flag, abandon the in-flight transaction,
      * release the clock and go back to idle. The originator will retry. */
-    if (I2C1ERRbits.BCLIF)       I2C1ERRbits.BCLIF       = 0;
-    if (I2C1STAT1bits.TXWE)      I2C1STAT1bits.TXWE      = 0;
-    if (I2C1CON1bits.RXO)        I2C1CON1bits.RXO        = 0;
-    if (I2C1CON1bits.TXU)        I2C1CON1bits.TXU        = 0;
-    if (I2C1STAT1bits.RXRE)      I2C1STAT1bits.RXRE      = 0;
+    if (I2C1ERRbits.BCLIF)
+        I2C1ERRbits.BCLIF = 0;
+    if (I2C1STAT1bits.TXWE)
+        I2C1STAT1bits.TXWE = 0;
+    if (I2C1CON1bits.RXO)
+        I2C1CON1bits.RXO = 0;
+    if (I2C1CON1bits.TXU)
+        I2C1CON1bits.TXU = 0;
+    if (I2C1STAT1bits.RXRE)
+        I2C1STAT1bits.RXRE = 0;
     I2C1ERRbits.NACKIF = 0;
 
     reset_state();
     I2C1STAT1bits.CLRBF = 1;
-    I2C1CON0bits.CSTR   = 0;
+    I2C1CON0bits.CSTR = 0;
 }
 
 /* ============================================================================
@@ -152,42 +160,54 @@ static void handle_error(void) {
  * client mode. Blocks for the duration of the transfer (~90 µs for 4 bytes
  * at 400 kHz). Client ISRs are masked to prevent concurrent register access;
  * other interrupts remain live.
- * ============================================================================ */
+ * ============================================================================
+ */
 
 I2cResult i2c_transmit(uint8_t address, const uint8_t *data, uint8_t len) {
-    if (len == 0) return I2C_RESULT_OK;
+    if (len == 0)
+        return I2C_RESULT_OK;
 
     /* Bus free? (BFRE=1 means no start/stop framing in progress.) */
     uint16_t timeout = I2C_POLL_MAX;
     while (!I2C1STAT0bits.BFRE) {
-        if (--timeout == 0) return I2C_RESULT_BUSY;
+        if (--timeout == 0)
+            return I2C_RESULT_BUSY;
     }
 
     /* Mask only the I2C interrupts — other ISRs stay live. */
     uint8_t pie7_saved = PIE7;
-    PIE7bits.I2C1IE   = 0;
-    PIE7bits.I2C1EIE  = 0;
+    PIE7bits.I2C1IE = 0;
+    PIE7bits.I2C1EIE = 0;
     PIE7bits.I2C1RXIE = 0;
     PIE7bits.I2C1TXIE = 0;
 
     client_mode_disable();
-    I2C1CON0bits.MODE = 0b100;        /* host 7-bit */
+    I2C1CON0bits.MODE = 0b100; /* host 7-bit */
     I2C1CNTH = 0;
     I2C1CNTL = len;
-    I2C1ADB1 = (uint8_t)(address << 1);
-    I2C1ERRbits.BCLIF  = 0;
+    I2C1ADB1 = (uint8_t) (address << 1);
+    I2C1ERRbits.BCLIF = 0;
     I2C1ERRbits.NACKIF = 0;
-    I2C1PIRbits.PCIF   = 0;
+    I2C1PIRbits.PCIF = 0;
     I2C1CON0bits.EN = 1;
-    I2C1CON0bits.S  = 1;               /* issue start */
+    I2C1CON0bits.S = 1; /* issue start */
 
     I2cResult result = I2C_RESULT_OK;
     for (uint8_t i = 0; i < len; i++) {
         timeout = I2C_POLL_MAX;
         while (!I2C1STAT1bits.TXBE) {
-            if (I2C1ERRbits.BCLIF)  { result = I2C_RESULT_COLLISION; goto done; }
-            if (I2C1ERRbits.NACKIF) { result = I2C_RESULT_NACK;      goto done; }
-            if (--timeout == 0)     { result = I2C_RESULT_TIMEOUT;   goto done; }
+            if (I2C1ERRbits.BCLIF) {
+                result = I2C_RESULT_COLLISION;
+                goto done;
+            }
+            if (I2C1ERRbits.NACKIF) {
+                result = I2C_RESULT_NACK;
+                goto done;
+            }
+            if (--timeout == 0) {
+                result = I2C_RESULT_TIMEOUT;
+                goto done;
+            }
         }
         I2C1TXB = data[i];
     }
@@ -195,9 +215,18 @@ I2cResult i2c_transmit(uint8_t address, const uint8_t *data, uint8_t len) {
     /* Wait for the peripheral to generate stop (or fail). */
     timeout = I2C_POLL_MAX;
     while (!I2C1PIRbits.PCIF) {
-        if (I2C1ERRbits.BCLIF)  { result = I2C_RESULT_COLLISION; break; }
-        if (I2C1ERRbits.NACKIF) { result = I2C_RESULT_NACK;      break; }
-        if (--timeout == 0)     { result = I2C_RESULT_TIMEOUT;   break; }
+        if (I2C1ERRbits.BCLIF) {
+            result = I2C_RESULT_COLLISION;
+            break;
+        }
+        if (I2C1ERRbits.NACKIF) {
+            result = I2C_RESULT_NACK;
+            break;
+        }
+        if (--timeout == 0) {
+            result = I2C_RESULT_TIMEOUT;
+            break;
+        }
     }
 
 done:
@@ -209,11 +238,12 @@ done:
 
 /* ============================================================================
  * Internal helpers
- * ============================================================================ */
+ * ============================================================================
+ */
 
 static void client_mode_enable(void) {
     I2C1CON0bits.EN = 0;
-    I2C1CON0bits.MODE = 0b000;   /* client 7-bit, four addresses */
+    I2C1CON0bits.MODE = 0b000; /* client 7-bit, four addresses */
 
     /* Enable CSD (clock stretch on data) so the application has time to
      * buffer RX / fill TX between bytes. */
@@ -225,26 +255,26 @@ static void client_mode_enable(void) {
     I2C1CNTH = 0;
 
     const uint8_t addr = comm_address();
-    I2C1ADR0 = (uint8_t)(addr << 1);
-    I2C1ADR1 = (uint8_t)(addr << 1);
-    I2C1ADR2 = (uint8_t)(addr << 1);
-    I2C1ADR3 = (uint8_t)(addr << 1);
+    I2C1ADR0 = (uint8_t) (addr << 1);
+    I2C1ADR1 = (uint8_t) (addr << 1);
+    I2C1ADR2 = (uint8_t) (addr << 1);
+    I2C1ADR3 = (uint8_t) (addr << 1);
 
     /* Clear sticky state before handing the bus back. */
     I2C1STAT1bits.CLRBF = 1;
-    I2C1PIRbits.PCIF    = 0;
-    I2C1PIRbits.ADRIF   = 0;
-    I2C1PIRbits.ACKTIF  = 0;
-    I2C1ERRbits.BCLIF   = 0;
-    I2C1ERRbits.NACKIF  = 0;
+    I2C1PIRbits.PCIF = 0;
+    I2C1PIRbits.ADRIF = 0;
+    I2C1PIRbits.ACKTIF = 0;
+    I2C1ERRbits.BCLIF = 0;
+    I2C1ERRbits.NACKIF = 0;
     reset_state();
 
-    PIE7bits.I2C1IE    = 1;
-    PIE7bits.I2C1EIE   = 1;
-    PIE7bits.I2C1RXIE  = 1;
-    PIE7bits.I2C1TXIE  = 1;
-    I2C1PIEbits.PCIE   = 1;
-    I2C1PIEbits.ADRIE  = 1;
+    PIE7bits.I2C1IE = 1;
+    PIE7bits.I2C1EIE = 1;
+    PIE7bits.I2C1RXIE = 1;
+    PIE7bits.I2C1TXIE = 1;
+    I2C1PIEbits.PCIE = 1;
+    I2C1PIEbits.ADRIE = 1;
     I2C1ERRbits.NACKIE = 1;
 
     I2C1CON0bits.EN = 1;
@@ -255,8 +285,8 @@ static void client_mode_disable(void) {
 }
 
 static void reset_state(void) {
-    state   = STATE_IDLE;
-    rx_len  = 0;
-    tx_len  = 0;
-    tx_pos  = 0;
+    state = STATE_IDLE;
+    rx_len = 0;
+    tx_len = 0;
+    tx_pos = 0;
 }

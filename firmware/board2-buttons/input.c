@@ -1,4 +1,5 @@
 #include "input.h"
+
 #include "interrupt.h"
 #include "libcomm.h"
 
@@ -11,11 +12,10 @@
 #define _INPUT_6 PORTAbits.RA4
 #define _INPUT_7 PORTAbits.RA5
 
-static InputState          _global_input_state;
-static InputChangeHandler  _change_handler;
+static InputState _global_input_state;
+static InputChangeHandler _change_handler;
 
-void input_init(void)
-{
+void input_init(void) {
     LATA = 0x00;
     ODCONA = 0x00; // Open-Drain Control Register. Default 0
     TRISA = 0xFF;
@@ -31,26 +31,22 @@ void input_init(void)
     IOCAN = 0xFF;
 }
 
-InputState input_state_current(void)
-{
+InputState input_state_current(void) {
     INTERRUPT_PUSH;
     InputState result = _global_input_state;
     INTERRUPT_POP;
     return result;
 }
 
-void input_set_change_handler(InputChangeHandler handler)
-{
+void input_set_change_handler(InputChangeHandler handler) {
     _change_handler = handler;
 }
 
-void _input_state_init(InputState *state)
-{
+void _input_state_init(InputState *state) {
     state->integer = 0x00;
 }
 
-void _input_state_interrupt_handler(void)
-{
+void _input_state_interrupt_handler(void) {
     IOCAF = 0x00;
     const uint8_t prev = _global_input_state.integer;
     _input_state_update(&_global_input_state);
@@ -60,8 +56,7 @@ void _input_state_interrupt_handler(void)
     }
 }
 
-void _input_state_update(InputState *state)
-{
+void _input_state_update(InputState *state) {
     state->b0 = !_INPUT_0;
     state->b1 = !_INPUT_1;
     state->b2 = !_INPUT_2;

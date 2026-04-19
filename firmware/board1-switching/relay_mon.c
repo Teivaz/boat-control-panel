@@ -17,22 +17,22 @@
  * two 8-element lookup tables below — one per mux — so a single pass
  * through the 8 addresses fills all 16 wire bits. */
 
-#define SEL_A       LATBbits.LATB3
-#define SEL_B       LATBbits.LATB4
-#define SEL_C       LATBbits.LATB5
-#define COM_0       PORTAbits.RA3
-#define COM_1       PORTAbits.RA4
+#define SEL_A LATBbits.LATB3
+#define SEL_B LATBbits.LATB4
+#define SEL_C LATBbits.LATB5
+#define COM_0 PORTAbits.RA3
+#define COM_1 PORTAbits.RA4
 
 /* mux0_to_wire[addr] = the wire bit that mux 0 channel `addr` monitors. */
 static const uint8_t mux0_to_wire[8] = {
-    6,  /* addr 0 -> anchor_light   (wire 6)  */
-    8,  /* addr 1 -> tricolor_light (wire 8)  */
-    9,  /* addr 2 -> fresh_water    (wire 9)  */
-    5,  /* addr 3 -> steaming_light (wire 5)  */
-    4,  /* addr 4 -> stern_light    (wire 4)  */
-    1,  /* addr 5 -> main           (wire 1)  */
-    3,  /* addr 6 -> bow_light      (wire 3)  */
-    2,  /* addr 7 -> autopilot      (wire 2)  */
+    6, /* addr 0 -> anchor_light   (wire 6)  */
+    8, /* addr 1 -> tricolor_light (wire 8)  */
+    9, /* addr 2 -> fresh_water    (wire 9)  */
+    5, /* addr 3 -> steaming_light (wire 5)  */
+    4, /* addr 4 -> stern_light    (wire 4)  */
+    1, /* addr 5 -> main           (wire 1)  */
+    3, /* addr 6 -> bow_light      (wire 3)  */
+    2, /* addr 7 -> autopilot      (wire 2)  */
 };
 
 /* mux1_to_wire[addr] = the wire bit that mux 1 channel `addr` monitors. */
@@ -77,9 +77,14 @@ uint16_t relay_mon_read(void) {
         /* SN74LV4051A typical enable/transition time < 100 ns at 3.3 V.
          * A single NOP at 64 MHz (~15.6 ns) is light; stack a few to be
          * safe across temperature. */
-        __asm("NOP"); __asm("NOP"); __asm("NOP"); __asm("NOP");
-        if (COM_0) result |= (uint16_t)(1u << mux0_to_wire[addr]);
-        if (COM_1) result |= (uint16_t)(1u << mux1_to_wire[addr]);
+        __asm("NOP");
+        __asm("NOP");
+        __asm("NOP");
+        __asm("NOP");
+        if (COM_0)
+            result |= (uint16_t) (1u << mux0_to_wire[addr]);
+        if (COM_1)
+            result |= (uint16_t) (1u << mux1_to_wire[addr]);
     }
     return result;
 }

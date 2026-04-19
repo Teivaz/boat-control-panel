@@ -9,7 +9,7 @@
  *
  * Read time is ~8 mux-settle periods; safe to call from the main-context
  * polling task. */
-void     relay_mon_init(void);
+void relay_mon_init(void);
 uint16_t relay_mon_read(void);
 
 #endif /* RELAY_MON_H */

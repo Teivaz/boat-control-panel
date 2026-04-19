@@ -11,10 +11,10 @@
  * Bit 0 is the lowest bit and is transmitted last, so we shift MSB-first
  * from bit 15 down to bit 0. */
 
-#define PIN_A          LATAbits.LATA0
-#define PIN_LATCH_CLK  LATAbits.LATA1
-#define PIN_SHIFT_CLK  LATAbits.LATA2
-#define PIN_NRST       LATBbits.LATB1
+#define PIN_A LATAbits.LATA0
+#define PIN_LATCH_CLK LATAbits.LATA1
+#define PIN_SHIFT_CLK LATAbits.LATA2
+#define PIN_NRST LATBbits.LATB1
 
 void relay_out_init(void) {
     ANSELAbits.ANSELA0 = 0;

@@ -1,8 +1,9 @@
 #ifndef COMM_H
 #define COMM_H
 
-#include <stdint.h>
 #include "task.h"
+
+#include <stdint.h>
 
 /* Protocol dispatcher. Wires i2c + libcomm to the application modules
  * (button, led_effect, config, input), and registers a periodic task that

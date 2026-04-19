@@ -7,17 +7,14 @@
  * buffer so writes are non-blocking. */
 
 #define RGBLED_COUNT 5
-#define RGBLED_BUFFER_LEN ((uint8_t)(4 * 3 * RGBLED_COUNT))
+#define RGBLED_BUFFER_LEN ((uint8_t) (4 * 3 * RGBLED_COUNT))
 
 static uint8_t _rgbled_buffer[RGBLED_BUFFER_LEN] = {0};
 
-static void _byte_to_sequence(uint8_t input_byte, uint8_t *dest)
-{
-    for (uint8_t i = 0; i < 4; i++)
-    {
+static void _byte_to_sequence(uint8_t input_byte, uint8_t *dest) {
+    for (uint8_t i = 0; i < 4; i++) {
         uint8_t output_byte = 0;
-        for (uint8_t n = 0; n < 2; n++)
-        {
+        for (uint8_t n = 0; n < 2; n++) {
             uint8_t bit = !!(input_byte & 0b10000000);
             input_byte <<= 1;
             uint8_t nibble = 0b0001 | (bit * 0b0110);
@@ -27,23 +24,20 @@ static void _byte_to_sequence(uint8_t input_byte, uint8_t *dest)
     }
 }
 
-static uint16_t _copy_to_buffer(RGBLedData *rgb, uint8_t count)
-{
-    uint8_t *iptr = (uint8_t *)rgb;
+static uint16_t _copy_to_buffer(RGBLedData *rgb, uint8_t count) {
+    uint8_t *iptr = (uint8_t *) rgb;
     uint8_t *iend = iptr + count * sizeof(RGBLedData);
     uint8_t *optr = _rgbled_buffer;
     uint8_t *oend = _rgbled_buffer + RGBLED_BUFFER_LEN;
-    while (iptr < iend && optr < oend)
-    {
+    while (iptr < iend && optr < oend) {
         _byte_to_sequence(*iptr, optr);
         iptr += 1;
         optr += 4;
     }
-    return (uint16_t)(optr - _rgbled_buffer);
+    return (uint16_t) (optr - _rgbled_buffer);
 }
 
-static void rgbled_spi_init(void)
-{
+static void rgbled_spi_init(void) {
     /* RB5 as SDO1 output. */
     LATBbits.LATB5 = 0;
     TRISBbits.TRISB5 = 0;
@@ -70,17 +64,16 @@ static void rgbled_spi_init(void)
     SPI1CON0bits.EN = 1;
 }
 
-static void rgbled_dma_init(void)
-{
+static void rgbled_dma_init(void) {
     DMASELECT = 0;             /* DMA1 */
     DMAnCON1bits.DMODE = 0b00; /* destination stays fixed */
     DMAnCON1bits.SMR = 0b00;   /* source in SFR/GPR space   */
     DMAnCON1bits.SMODE = 0b01; /* source auto-increments    */
     DMAnCON1bits.SSTP = 1;     /* stop SIRQEN on completion */
     DMAnSSZ = RGBLED_BUFFER_LEN;
-    DMAnSSA = (uint24_t)_rgbled_buffer;
+    DMAnSSA = (uint24_t) _rgbled_buffer;
     DMAnDSZ = 1;
-    DMAnDSA = (uint16_t)&SPI1TXB;
+    DMAnDSA = (uint16_t) &SPI1TXB;
     DMAnSIRQ = 0x19; /* SPI1TX */
     DMAnAIRQ = 0;
     DMA1PR = 0x01;
@@ -90,17 +83,14 @@ static void rgbled_dma_init(void)
     DMAnCON0bits.EN = 1;
 }
 
-void rgbled_init(void)
-{
+void rgbled_init(void) {
     rgbled_spi_init();
     rgbled_dma_init();
 }
 
-void rgbled_set(RGBLedData *rgb, uint8_t count)
-{
+void rgbled_set(RGBLedData *rgb, uint8_t count) {
     DMASELECT = 0;
-    if (DMAnCON0bits.XIP != 0)
-    {
+    if (DMAnCON0bits.XIP != 0) {
         return;
     }
 

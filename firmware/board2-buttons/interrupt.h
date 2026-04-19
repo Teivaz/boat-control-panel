@@ -12,6 +12,6 @@
 
 void interrupt_init(void);
 void interrupt_set_handler_IOC(void (*interrupt_handler)(void));
-void interrupt_set_handler_TMR0(void (* interrupt_handler)(void));
+void interrupt_set_handler_TMR0(void (*interrupt_handler)(void));
 
 #endif /* INTERRUPT_H */
