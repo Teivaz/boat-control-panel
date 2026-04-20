@@ -2,6 +2,7 @@
 #define CONTROLLER_H
 
 #include "nav_lights.h"
+#include "rtc.h"
 #include "task.h"
 
 #include <stdint.h>
@@ -27,5 +28,20 @@ uint8_t controller_level(uint8_t meter_index); /* 0 or 1 */
 uint8_t controller_sensors(void);
 
 uint8_t controller_button_base_on(uint8_t side, uint8_t button_idx);
+
+/* Last time read from the DS3231. Returns 1 if the shadow has been
+ * populated by at least one successful poll, 0 otherwise. */
+uint8_t controller_time(RtcTime* out);
+
+/* Pushes hour:minute to the RTC and refreshes the shadow on success.
+ * Returns 1 on success, 0 on I2C failure or invalid arguments. */
+uint8_t controller_set_time(uint8_t hour, uint8_t minute);
+
+/* Synchronous read/write of a switching-board config byte (e.g. the
+ * level-meter offsets at CONFIG_ADDR_LEVEL_OFFSET_WATER / _FUEL). Used by
+ * the menu UI to calibrate the float meters at runtime. Returns 1 on
+ * success, 0 on I2C failure. */
+uint8_t controller_read_switching_config(uint8_t address, uint8_t* out);
+uint8_t controller_write_switching_config(uint8_t address, uint8_t value);
 
 #endif /* CONTROLLER_H */

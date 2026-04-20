@@ -54,11 +54,20 @@ static void render_normal(void) {
     }
 }
 
-/* In config mode the pixels reflect the enabled-mask and highlight the
- * selected slot, so the physical panel doubles as the configuration UI. */
+/* In the nav-edit screen the pixels reflect the working enabled-mask and
+ * highlight the selected slot. On other config screens (menu / time) the
+ * indicators dim out so the user's attention stays on the OLED. */
 static void render_config(void) {
-    uint8_t enabled = config_get_nav_enabled_mask();
-    uint8_t cursor = config_mode_cursor();
+    if (config_mode_screen() != CONFIG_SCREEN_NAV) {
+        for (uint8_t i = 0; i < LED_COUNT; i++) {
+            leds[i].red = 0;
+            leds[i].green = 0;
+            leds[i].blue = DIM_BRIGHTNESS;
+        }
+        return;
+    }
+    uint8_t enabled = config_mode_nav_working_mask();
+    uint8_t cursor = config_mode_nav_cursor();
     for (uint8_t i = 0; i < LED_COUNT; i++) {
         uint8_t on = (enabled & (uint8_t)(1u << i)) != 0;
         if (i == cursor) {

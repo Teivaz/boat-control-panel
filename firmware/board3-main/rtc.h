@@ -18,4 +18,9 @@ typedef struct {
  * success, 0 on any I2C failure (caller should retry on the next tick). */
 uint8_t rtc_read(RtcTime* out);
 
+/* Updates seconds, minutes and hours (24h mode), zeroing the seconds field
+ * so the user-set time aligns to a fresh minute. Date / day / month / year
+ * are left untouched. Returns 1 on success, 0 on I2C failure. */
+uint8_t rtc_write_time(uint8_t hour, uint8_t minute);
+
 #endif /* RTC_H */

@@ -1,9 +1,12 @@
+#include "button_fx.h"
 #include "comm.h"
 #include "config.h"
+#include "config_mode.h"
 #include "controller.h"
 #include "display.h"
 #include "display_text.h"
 #include "i2c.h"
+#include "indicator.h"
 #include "interrupt.h"
 #include "libcomm.h"
 #include "rgbled.h"
@@ -31,8 +34,11 @@ static void init(void) {
 
     task_controller_init(&ctrl);
     config_init(&ctrl);
+    config_mode_init(&ctrl);
     comm_init();
     controller_init(&ctrl);
+    button_fx_init(&ctrl);
+    indicator_init(&ctrl);
     display_text_init(&ctrl);
     tick_init();
 

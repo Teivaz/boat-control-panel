@@ -1,10 +1,12 @@
 #include "controller.h"
 
+#include "button_fx.h"
 #include "config.h"
 #include "config_mode.h"
 #include "i2c.h"
 #include "libcomm.h"
 #include "nav_lights.h"
+#include "rtc.h"
 #include "task.h"
 #include "task_ids.h"
 
@@ -103,13 +105,27 @@ static uint8_t saved_nav_mode;
 
 #define RETRY_TICK_MS TASK_MIN_MS
 #define POLL_TICK_MS 20u
+/* RTC ticks once per second; polling at 250 ms keeps the displayed clock
+ * within a quarter second of the chip without being wasteful. */
+#define RTC_TICK_MS 250u
+
+/* Mask + expected value of the relay bits an action touched. button_fx uses
+ * this to decide what to wait for before the press completes. */
+typedef struct {
+    uint16_t mask;
+    uint16_t value;
+} ActionEffect;
 
 static void retry_task(TaskId id, void* ctx);
 static void poll_battery_task(TaskId id, void* ctx);
 static void poll_levels_task(TaskId id, void* ctx);
 static void poll_sensors_task(TaskId id, void* ctx);
-static void apply_action(const ButtonAction* a);
+static void poll_rtc_task(TaskId id, void* ctx);
+static ActionEffect apply_action(const ButtonAction* a);
 static void recompute_target(void);
+
+static volatile RtcTime rtc_shadow;
+static volatile uint8_t rtc_valid;
 
 void controller_init(TaskController* ctrl) {
     power_on = 0;
@@ -125,10 +141,12 @@ void controller_init(TaskController* ctrl) {
     levels[1] = 0;
     saved_relay_intent = 0;
     saved_nav_mode = NAV_MODE_OFF;
+    rtc_valid = 0;
     task_controller_add(ctrl, TASK_COMM_RETRY, RETRY_TICK_MS, retry_task, 0);
     task_controller_add(ctrl, TASK_POLL_BATTERY, POLL_TICK_MS, poll_battery_task, 0);
     task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task, 0);
     task_controller_add(ctrl, TASK_POLL_SENSORS, POLL_TICK_MS, poll_sensors_task, 0);
+    task_controller_add(ctrl, TASK_POLL_RTC, RTC_TICK_MS, poll_rtc_task, 0);
 }
 
 /* ============================================================================
@@ -146,20 +164,34 @@ void controller_on_button_changed(uint8_t sender, uint8_t prev, uint8_t curr) {
     }
 
     const ButtonAction* table;
+    uint8_t side;
     switch (sender) {
         case COMM_ADDRESS_BUTTON_BOARD_L:
             table = left_actions;
+            side = 0;
             break;
         case COMM_ADDRESS_BUTTON_BOARD_R:
             table = right_actions;
+            side = 1;
             break;
         /* L2 / R2 not yet mapped. */
         default:
             return;
     }
     for (uint8_t i = 0; i < 7; i++) {
-        if (rising & (uint8_t)(1u << i)) {
-            apply_action(&table[i]);
+        if ((rising & (uint8_t)(1u << i)) == 0) {
+            continue;
+        }
+        /* Per readme: a press on a button currently flagged as ERROR clears
+         * the error and turns the channel off. The follow-up apply_action
+         * toggles the intent which — since the prior attempt never landed
+         * physically — converges to OFF. */
+        if (button_fx_is_error(side, i)) {
+            button_fx_clear(side, i);
+        }
+        ActionEffect eff = apply_action(&table[i]);
+        if (eff.mask != 0) {
+            button_fx_notify_press(side, i, eff.mask, eff.value);
         }
     }
 }
@@ -170,6 +202,7 @@ void controller_on_relay_changed(uint8_t sender, uint16_t prev_r, uint16_t curr_
     (void)prev_s;
     relay_physical = curr_r;
     sensor_state = curr_s;
+    button_fx_on_relay_physical(curr_r);
 }
 
 /* ============================================================================
@@ -237,7 +270,8 @@ uint8_t controller_button_base_on(uint8_t side, uint8_t button_idx) {
  * ============================================================================
  */
 
-static void apply_action(const ButtonAction* a) {
+static ActionEffect apply_action(const ButtonAction* a) {
+    ActionEffect eff = {0, 0};
     switch (a->kind) {
         case ACTION_TOGGLE_POWER:
             if (power_on) {
@@ -252,24 +286,29 @@ static void apply_action(const ButtonAction* a) {
                 nav_mode = saved_nav_mode;
                 power_on = 1;
             }
+            eff.mask = 0xFFFFu;
             break;
 
         case ACTION_TOGGLE_RELAY: {
             uint16_t bit = (uint16_t)(1u << a->param);
             relay_intent ^= bit;
+            eff.mask = bit;
             break;
         }
 
         case ACTION_TOGGLE_NAV_MODE: {
             NavMode requested = (NavMode)a->param;
             nav_mode = (uint8_t)((nav_mode == requested) ? NAV_MODE_OFF : requested);
+            eff.mask = NAV_MASK_BITS;
             break;
         }
 
         default:
-            return;
+            return eff;
     }
     recompute_target();
+    eff.value = (uint16_t)(relay_target & eff.mask);
+    return eff;
 }
 
 /* Projects (power, nav_mode, relay_intent) onto the 16-bit relay target.
@@ -366,4 +405,54 @@ static void poll_sensors_task(TaskId id, void* ctx) {
     if (i2c_receive(COMM_ADDRESS_SWITCHING, &req, 1, &rx, 1) == I2C_RESULT_OK) {
         sensor_state = rx;
     }
+}
+
+static void poll_rtc_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
+    RtcTime t;
+    if (rtc_read(&t)) {
+        INTERRUPT_PUSH;
+        rtc_shadow = t;
+        rtc_valid = 1;
+        INTERRUPT_POP;
+    }
+}
+
+uint8_t controller_time(RtcTime* out) {
+    if (!rtc_valid) {
+        return 0;
+    }
+    INTERRUPT_PUSH;
+    *out = rtc_shadow;
+    INTERRUPT_POP;
+    return 1;
+}
+
+uint8_t controller_set_time(uint8_t hour, uint8_t minute) {
+    if (!rtc_write_time(hour, minute)) {
+        return 0;
+    }
+    /* Refresh the shadow immediately so the UI reflects the new time
+     * without waiting for the next poll tick. */
+    RtcTime t;
+    if (rtc_read(&t)) {
+        INTERRUPT_PUSH;
+        rtc_shadow = t;
+        rtc_valid = 1;
+        INTERRUPT_POP;
+    }
+    return 1;
+}
+
+uint8_t controller_read_switching_config(uint8_t address, uint8_t* out) {
+    CommMessage msg;
+    uint8_t len = comm_build_config_read(&msg, address);
+    return i2c_receive(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, len, out, 1) == I2C_RESULT_OK;
+}
+
+uint8_t controller_write_switching_config(uint8_t address, uint8_t value) {
+    CommMessage msg;
+    uint8_t len = comm_build_config(&msg, address, value);
+    return i2c_transmit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, len) == I2C_RESULT_OK;
 }
