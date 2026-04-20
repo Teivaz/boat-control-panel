@@ -31,31 +31,36 @@ There are no unit tests — validation is done via hardware flashing with a PICk
 
 ## Repository Structure
 
-Only `build.sh`, `toolchain/`, `protocol.md`, `board2-buttons/`, and `libcomm/` are git-tracked. MPLAB X project directories (`*.X/`), `sample/`, and `u8g2/` are intentionally git-ignored.
+Git-tracked: `build.sh`, `.clang-format`, `toolchain/`, `protocol.md`, `libcomm/`, and one directory per board (`board1-switching/`, `board2-buttons/`, `board3-main/`). MPLAB X project directories (`*.X/`), `sample/`, and a top-level `u8g2/` are git-ignored.
 
 | Path | Description |
 |---|---|
-| `board2-buttons/` | C sources for the button board |
-| `libcomm/` | Shared protocol library (linked into each board) |
+| `board1-switching/` | C sources for the switching board (`DEVICE_TYPE_SWITCHING`) |
+| `board2-buttons/` | C sources for the button board (`DEVICE_TYPE_INPUT`) |
+| `board3-main/` | C sources for the main board (`DEVICE_TYPE_MAIN`); vendors a trimmed subset of `u8g2/` for the SSD1322 OLED — this copy **is** tracked (only the top-level `u8g2/` is ignored) |
+| `libcomm/` | Shared protocol library + task scheduler, linked into each board |
 | `toolchain/Dockerfile` | Docker build environment |
 | `protocol.md` | I2C multi-board protocol spec — source of truth for command IDs, addresses, and bit layouts |
+| `board{1,3}/readme.md` | Per-board hardware notes (pinout, relay map, connected peripherals) — read these first when touching a board |
 
 The `*.X/` directories are experimental MPLAB X projects used to prototype and verify chip capabilities. They will not make it to the final product but serve as reference for how specific hardware features were explored.
 
+Code style is enforced by `.clang-format` (4-space indent, 120 col, attached braces, pointer-left, `InsertBraces: true`). Match it when editing.
+
 ## Architecture
 
-### Execution model (button board)
+### Execution model
 
-`main.c` initializes peripherals, registers tasks on a file-scope `TaskController`, starts the 1 ms hardware tick via `task_controller_start(&ctrl)`, then calls `interrupt_init()` last (interrupts must be enabled after all peripherals are configured). The `while(1)` loop body is `task_controller_poll(&ctrl)` — every task callback runs in main context, never in ISR context.
+Every board's `main.c` follows the same shape: initialize peripherals, `task_controller_init(&ctrl)`, hand `&ctrl` to each module's `_init` so they can register tasks, configure the 1 ms TMR0 tick (local `tick_init` in each `main.c`), then call `interrupt_init()` last (interrupts must be enabled after all peripherals are configured). The `while(1)` loop body is `task_controller_poll(&ctrl)` — every task callback runs in main context, never in ISR context.
 
-### Task scheduler (`task.c` / `task.h`)
+### Task scheduler (`libcomm/task.c` / `libcomm/task.h`)
 
-Central scheduling primitive for the button board. Design notes that matter for callers:
+Shared scheduling primitive used by all boards. Design notes that matter for callers:
 
-- Deferred dispatch: the TMR0 ISR only decrements `remaining_ms` and sets `pending`; callbacks are fired from `task_controller_poll`.
+- Deferred dispatch: the TMR0 ISR calls `task_controller_tick(&ctrl)` which only decrements `remaining_ms` and sets `pending`; callbacks are fired from `task_controller_poll`.
 - Interval range 1..15000 ms. After a callback returns, `remaining_ms` is reloaded from the task's *current* `interval_ms` — so a callback may change its own interval via `task_controller_set_interval` and have the new value take effect on the next fire.
 - Removing a task (including the currently-executing one) from inside a callback is safe; the poll loop rechecks `id` and `pending` before the post-callback reload.
-- `task_controller_start` owns TMR0 setup (8-bit mode, Fosc/4 with /16384 prescaler, ~1 ms period) and registers its own ISR via `interrupt_set_handler_TMR0`. There is no longer a separate timer module — `timer_update.*` files exist empty and should be deleted when convenient.
+- The scheduler does **not** own TMR0. Each board configures TMR0 itself in `tick_init` (typically 8-bit mode, Fosc/4, /128 prescaler, match = 124 → 1 ms) and routes the ISR to `task_controller_tick` via `interrupt_set_handler_TMR0`. Task IDs live in each board's `task_ids.h`.
 
 ### ISR wiring
 

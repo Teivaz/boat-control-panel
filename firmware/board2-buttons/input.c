@@ -3,29 +3,32 @@
 #include "interrupt.h"
 #include "libcomm.h"
 
-#define _INPUT_0 PORTAbits.RA7
-#define _INPUT_1 PORTAbits.RA6
-#define _INPUT_2 PORTAbits.RA0
-#define _INPUT_3 PORTAbits.RA1
-#define _INPUT_4 PORTAbits.RA2
-#define _INPUT_5 PORTAbits.RA3
-#define _INPUT_6 PORTAbits.RA4
-#define _INPUT_7 PORTAbits.RA5
+#define PIN_INPUT_0 PORTAbits.RA7
+#define PIN_INPUT_1 PORTAbits.RA6
+#define PIN_INPUT_2 PORTAbits.RA0
+#define PIN_INPUT_3 PORTAbits.RA1
+#define PIN_INPUT_4 PORTAbits.RA2
+#define PIN_INPUT_5 PORTAbits.RA3
+#define PIN_INPUT_6 PORTAbits.RA4
+#define PIN_INPUT_7 PORTAbits.RA5
 
-static InputState _global_input_state;
-static InputChangeHandler _change_handler;
+static volatile InputState input_state;
+static InputChangeHandler change_handler;
+
+static void sample_pins(InputState* state);
+static void ioc_handler(void);
 
 void input_init(void) {
     LATA = 0x00;
-    ODCONA = 0x00; // Open-Drain Control Register. Default 0
+    ODCONA = 0x00;
     TRISA = 0xFF;
     ANSELA = 0x00;
-    WPUA = 0xFF;    // Weak Pull-Up Register. Default unset
-    SLRCONA = 0xFF; // Slew Rate Control Register. Default set
-    INLVLA = 0xFF;  // Input Level Control Register. Default set
+    WPUA = 0xFF;
+    SLRCONA = 0xFF;
+    INLVLA = 0xFF;
 
-    _input_state_init(&_global_input_state);
-    interrupt_set_handler_IOC(&_input_state_interrupt_handler);
+    input_state.integer = 0x00;
+    interrupt_set_handler_IOC(ioc_handler);
     PIE0bits.IOCIE = 1;
     IOCAP = 0xFF;
     IOCAN = 0xFF;
@@ -33,36 +36,34 @@ void input_init(void) {
 
 InputState input_state_current(void) {
     INTERRUPT_PUSH;
-    InputState result = _global_input_state;
+    InputState result = input_state;
     INTERRUPT_POP;
     return result;
 }
 
 void input_set_change_handler(InputChangeHandler handler) {
-    _change_handler = handler;
+    change_handler = handler;
 }
 
-void _input_state_init(InputState* state) {
-    state->integer = 0x00;
-}
-
-void _input_state_interrupt_handler(void) {
+static void ioc_handler(void) {
     IOCAF = 0x00;
-    const uint8_t prev = _global_input_state.integer;
-    _input_state_update(&_global_input_state);
-    const uint8_t curr = _global_input_state.integer;
-    if (curr != prev && _change_handler) {
-        _change_handler(prev, curr);
+    const uint8_t prev = input_state.integer;
+    InputState next = input_state;
+    sample_pins(&next);
+    input_state = next;
+    const uint8_t curr = next.integer;
+    if (curr != prev && change_handler) {
+        change_handler(prev, curr);
     }
 }
 
-void _input_state_update(InputState* state) {
-    state->b0 = !_INPUT_0;
-    state->b1 = !_INPUT_1;
-    state->b2 = !_INPUT_2;
-    state->b3 = !_INPUT_3;
-    state->b4 = !_INPUT_4;
-    state->b5 = !_INPUT_5;
-    state->b6 = !_INPUT_6;
-    state->b7 = !_INPUT_7;
+static void sample_pins(InputState* state) {
+    state->b0 = !PIN_INPUT_0;
+    state->b1 = !PIN_INPUT_1;
+    state->b2 = !PIN_INPUT_2;
+    state->b3 = !PIN_INPUT_3;
+    state->b4 = !PIN_INPUT_4;
+    state->b5 = !PIN_INPUT_5;
+    state->b6 = !PIN_INPUT_6;
+    state->b7 = !PIN_INPUT_7;
 }

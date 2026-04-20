@@ -21,7 +21,6 @@ void controller_set_level_mode(uint8_t mode_byte);
 
 /* Cached state queries (used by I2C read handlers in ISR context). */
 uint16_t controller_relay_target(void);
-uint16_t controller_relay_physical(void);
 uint16_t controller_relay_mask(void);
 uint8_t controller_level_mode(void);
 uint16_t controller_battery_mv(void);

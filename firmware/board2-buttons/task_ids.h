@@ -2,7 +2,6 @@
 #define TASK_IDS_H
 
 enum {
-    TASK_UPDATE,
     TASK_LED_EFFECT,
     TASK_COMM_RETRY,
     TASK_CONFIG_FLUSH,

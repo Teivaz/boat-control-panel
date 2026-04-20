@@ -19,7 +19,7 @@ static TaskController ctrl;
 static void tick_isr(void);
 static void tick_init(void);
 
-void init(void) {
+static void init(void) {
     rgbled_init();
     input_init();
     i2c_init();
@@ -31,7 +31,7 @@ void init(void) {
     config_init(&ctrl);
     tick_init();
 
-    // Interrupts should be enabled last
+    /* Interrupts enabled last. */
     interrupt_init();
 }
 
@@ -50,17 +50,15 @@ static void tick_isr(void) {
 
 static void tick_init(void) {
     T0CON0bits.EN = 0;
-    T0CON1bits.CS = 0b010;    // Fosc/4 -> 16MHz
-    T0CON1bits.CKPS = 0b0111; // divide by 128 -> 125 kHz (8 us)
+    T0CON1bits.CS = 0b010;    /* Fosc/4 -> 16 MHz */
+    T0CON1bits.CKPS = 0b0111; /* 16 MHz / 128 -> 125 kHz */
     interrupt_set_handler_TMR0(tick_isr);
     PIE3bits.TMR0IE = 1;
 
-    INTERRUPT_PUSH;
     PIR3bits.TMR0IF = 0;
     TMR0L = 0;
-    TMR0H = 124; // on 125th tick the elapsed time would be exactly 1ms
+    TMR0H = 124; /* 124 cycles + 1 for trigger at 125 kHz => 1 kHz / 1ms */
     T0CON0bits.EN = 1;
-    INTERRUPT_POP;
 }
 
 void main(void) {

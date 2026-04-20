@@ -158,9 +158,6 @@ void controller_set_level_mode(uint8_t mode_byte) {
 uint16_t controller_relay_target(void) {
     return relay_target;
 }
-uint16_t controller_relay_physical(void) {
-    return relay_physical;
-}
 uint16_t controller_relay_mask(void) {
     return relay_mask;
 }
@@ -170,11 +167,11 @@ uint8_t controller_level_mode(void) {
 uint16_t controller_battery_mv(void) {
     return adc_read_battery_mv();
 }
-uint8_t controller_level(uint8_t i) {
-    if (i == 0) {
+uint8_t controller_level(uint8_t meter_index) {
+    if (meter_index == 0) {
         return adc_read_level_fresh_water();
     }
-    if (i == 1) {
+    if (meter_index == 1) {
         return adc_read_level_fuel();
     }
     return 0;

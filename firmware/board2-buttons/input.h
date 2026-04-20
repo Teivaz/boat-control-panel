@@ -33,8 +33,4 @@ InputState input_state_current(void);
  * Receives the input-byte values before and after the update. */
 void input_set_change_handler(InputChangeHandler handler);
 
-void _input_state_init(InputState* state);
-void _input_state_interrupt_handler();
-void _input_state_update(InputState* state);
-
 #endif /* INPUT_H */
