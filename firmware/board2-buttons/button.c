@@ -100,6 +100,7 @@ CommTriggerConfig button_get_trigger(uint8_t button_id) {
 /* Runs in the IOC ISR context. Timeout-driven FSM transitions are the
  * only work that still flows through the task scheduler. */
 static void on_input_changed(uint8_t prev, uint8_t curr) {
+    // TODO: Simplify this interrupt. Remove call dispatch_edge, instead add a function to run on main loop and put it there
     uint8_t changed = prev ^ curr;
     for (uint8_t i = 0; i < BUTTON_COUNT && changed; i++, changed >>= 1) {
         if (changed & 1) {

@@ -44,17 +44,18 @@ void send_button_event(uint8_t button_id) {
 /* TMR0 in 8-bit mode clocked from Fosc/4 with /128 prescaler gives
  * 16 MHz / 128 ≈ 125 kHz (~1.024 ms per count). Match value 124 in
  * TMR0H yields a 1 ms period interrupt. */
-static void tick_isr(void) {
+void __interrupt(irq(TMR0), base(8)) TMR0_ISR(void) {
+    PIR3bits.TMR0IF = 0;
     task_controller_tick(&ctrl);
 }
 
 static void tick_init(void) {
     T0CON0bits.EN = 0;
+    // Assign peripheral interrupt priority vectors
+    IPR3bits.TMR0IP = 1;
     T0CON1bits.CS = 0b010;    /* Fosc/4 -> 16 MHz */
     T0CON1bits.CKPS = 0b0111; /* 16 MHz / 128 -> 125 kHz */
-    interrupt_set_handler_TMR0(tick_isr);
     PIE3bits.TMR0IE = 1;
-
     PIR3bits.TMR0IF = 0;
     TMR0L = 0;
     TMR0H = 124; /* 124 cycles + 1 for trigger at 125 kHz => 1 kHz / 1ms */

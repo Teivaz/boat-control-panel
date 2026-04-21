@@ -28,7 +28,6 @@ void input_init(void) {
     INLVLA = 0xFF;
 
     input_state.integer = 0x00;
-    interrupt_set_handler_IOC(ioc_handler);
     PIE0bits.IOCIE = 1;
     IOCAP = 0xFF;
     IOCAN = 0xFF;
@@ -36,13 +35,18 @@ void input_init(void) {
 
 InputState input_state_current(void) {
     INTERRUPT_PUSH;
-    InputState result = input_state;
+    const InputState result = input_state;
     INTERRUPT_POP;
     return result;
 }
 
 void input_set_change_handler(InputChangeHandler handler) {
     change_handler = handler;
+}
+
+void __interrupt(irq(IOC), base(8)) IOC_ISR(void) {
+    PIR0bits.IOCIF = 0;
+    ioc_handler();
 }
 
 static void ioc_handler(void) {

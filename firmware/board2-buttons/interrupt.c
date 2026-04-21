@@ -15,38 +15,7 @@ void interrupt_init(void) {
     IVTLOCK = 0xAA;
     IVTLOCKbits.IVTLOCKED = 0x01; // lock IVT
 
-    // Assign peripheral interrupt priority vectors
-    IPR1bits.INT0IP = 1;
-    IPR3bits.TMR0IP = 1;
-
     GIE = 1;
-}
-
-static void (*interrupt_handler_IOC)(void);
-static void (*interrupt_handler_TMR0)(void);
-
-void interrupt_set_handler_IOC(void (*h)(void)) {
-    interrupt_handler_IOC = h;
-}
-
-void interrupt_set_handler_TMR0(void (*h)(void)) {
-    interrupt_handler_TMR0 = h;
-}
-
-void __interrupt(irq(IOC), base(8)) IOC_ISR(void) {
-    PIR0bits.IOCIF = 0;
-
-    if (interrupt_handler_IOC) {
-        interrupt_handler_IOC();
-    }
-}
-
-void __interrupt(irq(TMR0), base(8)) TMR0_ISR(void) {
-    PIR3bits.TMR0IF = 0;
-
-    if (interrupt_handler_TMR0) {
-        interrupt_handler_TMR0();
-    }
 }
 
 void __interrupt(irq(SWINT), base(8)) SWINT_ISR(void) {
