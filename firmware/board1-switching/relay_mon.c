@@ -74,9 +74,8 @@ uint16_t relay_mon_read(void) {
         SEL_A = (addr >> 0) & 1u;
         SEL_B = (addr >> 1) & 1u;
         SEL_C = (addr >> 2) & 1u;
-        /* SN74LV4051A typical enable/transition time < 14 ns at 3.3 V.
-         * A single NOP at 64 MHz (~15.6 ns) is light; stack a few to be
-         * safe across temperature. */
+        /* SN74LV4051A typical enable/transition time < 14 ns at 3.3 V. 
+         * A single NOP at 64 MHz (~15.6 ns) is just enough for it.*/
         __asm("NOP");
         if (COM_0) {
             result |= (uint16_t)(1u << mux0_to_wire[addr]);

@@ -141,18 +141,22 @@ static void refresh_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
 
-    /* Age any pending slot towards the error state. */
+    /* Age any pending slot towards the error state. The read-modify-write on
+     * s->state must be atomic against on_relay_physical, which can transition
+     * PENDING -> IDLE from ISR context; without the guard we could clobber
+     * that IDLE with ERROR and strand the slot. */
     for (uint8_t side = 0; side < BUTTON_FX_SIDES; side++) {
         for (uint8_t b = 0; b < BUTTON_FX_BUTTONS_PER_SIDE; b++) {
             Slot* s = (Slot*)&slots[side][b];
-            if (s->state != FX_PENDING) {
-                continue;
+            INTERRUPT_PUSH;
+            if (s->state == FX_PENDING) {
+                if (s->deadline_ticks == 0) {
+                    s->state = FX_ERROR;
+                } else {
+                    s->deadline_ticks--;
+                }
             }
-            if (s->deadline_ticks == 0) {
-                s->state = FX_ERROR;
-            } else {
-                s->deadline_ticks--;
-            }
+            INTERRUPT_POP;
         }
     }
 

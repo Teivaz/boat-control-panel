@@ -56,7 +56,7 @@ void input_set_change_handler(InputChangeHandler handler) {
 void __interrupt(irq(IOC), base(8)) IOC_ISR(void) {
     PIR0bits.IOCIF = 0;
     IOCAF = 0x00;
-    InputState next = input_state;
+    InputState next;
     sample_pins(&next);
     input_state = next;
     run_in_main_loop(ctrl, dispatch_pending, 0);

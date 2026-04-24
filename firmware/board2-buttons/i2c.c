@@ -35,6 +35,15 @@ static void handle_error(void);
 static I2cResult host_transmit(uint8_t address, const uint8_t* data, uint8_t len);
 
 void i2c_init(void) {
+    /* RB0 is the L/R variant strap read by comm_address(). ANSELB.ANSB0
+     * defaults to analog on reset — leaving it set forces PORTB.RB0 to
+     * read 0 and pins the board to the L address. Configure as digital
+     * input with the internal weak pull-up so a floating strap reads as
+     * R and strapping to GND selects L. */
+    ANSELBbits.ANSELB0 = 0;
+    TRISBbits.TRISB0 = 1;
+    WPUBbits.WPUB0 = 1;
+
     /* Pin config — open-drain, I2C-specific TH/PU slew + stronger weak
      * pull-ups — same as before. */
     LATCbits.LATC3 = 1;

@@ -112,36 +112,37 @@ static void poll_task(TaskId id, void* ctx) {
     (void)ctx;
     uint8_t raw = read_raw();
     for (uint8_t i = 0; i < 3; i++) {
-        if (pending_ticks[i] == 0) {
-            continue;
-        }
-        uint8_t cur_bit = (uint8_t)((raw >> i) & 1u);
-        uint8_t stable_bit = (uint8_t)((stable_state >> i) & 1u);
-        if (cur_bit == stable_bit) {
-            pending_ticks[i] = 0;
-            continue;
-        }
-        if (cur_bit != pending_target[i]) {
-            /* Mid-flight glitch — restart the window at the new value. */
-            pending_target[i] = cur_bit;
-            pending_ticks[i] = SENSORS_THRESHOLD_TICKS;
-            continue;
-        }
-
-        uint8_t remaining;
+        /* IOC_ISR can re-arm pending_ticks / pending_target at any point,
+         * so the whole state machine step runs atomically. The change hook
+         * is invoked after INTERRUPT_POP so handlers stay out of the
+         * critical section. */
+        uint8_t prev = 0, next = 0, fired = 0;
         INTERRUPT_PUSH;
-        remaining = (uint8_t)(pending_ticks[i] - 1u);
-        pending_ticks[i] = remaining;
+        if (pending_ticks[i] != 0) {
+            uint8_t cur_bit = (uint8_t)((raw >> i) & 1u);
+            uint8_t stable_bit = (uint8_t)((stable_state >> i) & 1u);
+            if (cur_bit == stable_bit) {
+                pending_ticks[i] = 0;
+            } else if (cur_bit != pending_target[i]) {
+                /* Mid-flight glitch — restart the window at the new value. */
+                pending_target[i] = cur_bit;
+                pending_ticks[i] = SENSORS_THRESHOLD_TICKS;
+            } else {
+                uint8_t remaining = (uint8_t)(pending_ticks[i] - 1u);
+                pending_ticks[i] = remaining;
+                if (remaining == 0) {
+                    uint8_t mask = (uint8_t)(1u << i);
+                    prev = stable_state;
+                    next = (uint8_t)((stable_state & ~mask) | (uint8_t)(cur_bit << i));
+                    stable_state = next;
+                    fired = 1;
+                }
+            }
+        }
         INTERRUPT_POP;
 
-        if (remaining == 0) {
-            uint8_t prev = stable_state;
-            uint8_t mask = (uint8_t)(1u << i);
-            uint8_t next = (uint8_t)((stable_state & ~mask) | (uint8_t)(cur_bit << i));
-            stable_state = next;
-            if (change_handler) {
-                change_handler(prev, next);
-            }
+        if (fired && change_handler) {
+            change_handler(prev, next);
         }
     }
 }

@@ -30,6 +30,16 @@ static void init(void) {
     config_init(&ctrl);
     tick_init();
 
+    /* Seed trigger/effect state from EEPROM before enabling interrupts so
+     * an inbound I2C write can't race with the restore. Queued enabled
+     * events drain once the scheduler starts. */
+    for (uint8_t i = 0; i < BUTTON_COUNT; i++) {
+        button_set_trigger(i, config_get_button(i));
+    }
+    for (uint8_t i = 0; i < LED_EFFECT_COUNT; i++) {
+        led_effect_set(i, config_get_effect(i));
+    }
+
     /* Interrupts enabled last. */
     interrupt_init();
 }
@@ -57,14 +67,6 @@ static void tick_init(void) {
 
 void main(void) {
     init();
-
-    for (uint8_t i = 0; i < BUTTON_COUNT; i++) {
-        button_set_trigger(i, config_get_button(i));
-    }
-    for (uint8_t i = 0; i < LED_EFFECT_COUNT; i++) {
-        led_effect_set(i, config_get_effect(i));
-    }
-
     while (1) {
         task_controller_poll(&ctrl);
     }

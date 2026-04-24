@@ -12,7 +12,6 @@ enum {
     TASK_CONFIG_MODE,   // sample RA7 config-mode switch
     TASK_DISPLAY_TEXT,  // repaint the text UI
     TASK_BUTTON_FX,     // push button_effect updates to both button boards
-    TASK_BUTTON_FX_TMO, // age pending-feedback deadlines
 };
 
 #endif /* TASK_IDS_H */

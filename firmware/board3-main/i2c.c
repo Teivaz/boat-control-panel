@@ -234,11 +234,11 @@ done:
     return result;
 }
 
-/* Write-phase first (tx/tx_len), repeated-start, then read rx_len bytes.
+/* Write-phase first (tx/tx_count), repeated-start, then read rx_count bytes.
  * Both phases run under the same bus lock; client ISRs are masked throughout.
  */
-I2cResult i2c_receive(uint8_t address, const uint8_t* tx, uint8_t tx_len, uint8_t* rx, uint8_t rx_len) {
-    if (rx_len == 0) {
+I2cResult i2c_receive(uint8_t address, const uint8_t* tx, uint8_t tx_count, uint8_t* rx, uint8_t rx_count) {
+    if (rx_count == 0) {
         return I2C_RESULT_OK;
     }
 
@@ -256,17 +256,17 @@ I2cResult i2c_receive(uint8_t address, const uint8_t* tx, uint8_t tx_len, uint8_
     I2C1CON0bits.EN = 1;
 
     /* Write phase (suppresses the stop via RSEN=1 so the next start is a
-     * repeated start). If tx_len == 0 we still need an addressed-write start
-     * so callers who only want a read should pass tx_len=0 with an empty tx —
+     * repeated start). If tx_count == 0 we still need an addressed-write start
+     * so callers who only want a read should pass tx_count=0 with an empty tx —
      * we skip the write frame in that case and just do an address-read. */
-    if (tx_len > 0) {
+    if (tx_count > 0) {
         I2C1CNTH = 0;
-        I2C1CNTL = tx_len;
+        I2C1CNTL = tx_count;
         I2C1ADB1 = (uint8_t)(address << 1);
         I2C1CON0bits.RSEN = 1;
         I2C1CON0bits.S = 1;
 
-        for (uint8_t i = 0; i < tx_len; i++) {
+        for (uint8_t i = 0; i < tx_count; i++) {
             uint16_t timeout = I2C_POLL_MAX;
             while (!I2C1STAT1bits.TXBE) {
                 if (I2C1ERRbits.BCLIF) {
@@ -309,14 +309,14 @@ I2cResult i2c_receive(uint8_t address, const uint8_t* tx, uint8_t tx_len, uint8_
     /* Read phase. */
     I2C1CON0bits.RSEN = 0;
     I2C1CNTH = 0;
-    I2C1CNTL = rx_len;
+    I2C1CNTL = rx_count;
     I2C1ADB1 = (uint8_t)((address << 1) | 0x01);
     I2C1ERRbits.BCLIF = 0;
     I2C1ERRbits.NACKIF = 0;
     I2C1PIRbits.PCIF = 0;
     I2C1CON0bits.S = 1;
 
-    for (uint8_t i = 0; i < rx_len; i++) {
+    for (uint8_t i = 0; i < rx_count; i++) {
         uint16_t timeout = I2C_POLL_MAX;
         while (!I2C1STAT1bits.RXBF) {
             if (I2C1ERRbits.BCLIF) {
