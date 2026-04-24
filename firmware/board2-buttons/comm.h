@@ -1,6 +1,7 @@
 #ifndef COMM_H
 #define COMM_H
 
+#include "libcomm.h"
 #include "task.h"
 
 #include <stdint.h>
@@ -11,10 +12,10 @@
 void comm_init(TaskController* ctrl);
 
 /* Enqueue a button_changed (0x02) event for the main board. Safe to call
- * from any context (IOC ISR edge, timer task, I2C ISR reconfigure).
+ * from any context (main-loop button dispatcher, trigger config writes).
  * The actual transmit runs in main context; bus collisions / NACKs stay
  * queued and retry on the next tick. Drops on overflow — the main board's
  * polled button_state_read is the fallback. */
-void comm_send_button_changed(uint8_t prev_state, uint8_t current_state);
+void comm_send_button_event(uint8_t button_id, CommButtonEvent event);
 
 #endif /* COMM_H */

@@ -154,12 +154,15 @@ void controller_init(TaskController* ctrl) {
  * ============================================================================
  */
 
-void controller_on_button_changed(uint8_t sender, uint8_t prev, uint8_t curr) {
-    uint8_t rising = (uint8_t)(curr & ~prev);
+void controller_on_button_changed(uint8_t sender, uint8_t button_id, CommButtonEvent event) {
+    /* Only TRIGGERED drives user actions; ENABLED/DISABLED are informational. */
+    if (event != COMM_BUTTON_EVENT_TRIGGERED || button_id >= 7) {
+        return;
+    }
     if (config_mode_active()) {
         /* Normal actions are suppressed while configuring; button presses
          * edit the nav-enabled mask instead. */
-        config_mode_on_buttons(sender, rising);
+        config_mode_on_button_pressed(sender, button_id);
         return;
     }
 
@@ -178,21 +181,16 @@ void controller_on_button_changed(uint8_t sender, uint8_t prev, uint8_t curr) {
         default:
             return;
     }
-    for (uint8_t i = 0; i < 7; i++) {
-        if ((rising & (uint8_t)(1u << i)) == 0) {
-            continue;
-        }
-        /* Per readme: a press on a button currently flagged as ERROR clears
-         * the error and turns the channel off. The follow-up apply_action
-         * toggles the intent which — since the prior attempt never landed
-         * physically — converges to OFF. */
-        if (button_fx_is_error(side, i)) {
-            button_fx_clear(side, i);
-        }
-        ActionEffect eff = apply_action(&table[i]);
-        if (eff.mask != 0) {
-            button_fx_notify_press(side, i, eff.mask, eff.value);
-        }
+    /* Per readme: a press on a button currently flagged as ERROR clears
+     * the error and turns the channel off. The follow-up apply_action
+     * toggles the intent which — since the prior attempt never landed
+     * physically — converges to OFF. */
+    if (button_fx_is_error(side, button_id)) {
+        button_fx_clear(side, button_id);
+    }
+    ActionEffect eff = apply_action(&table[button_id]);
+    if (eff.mask != 0) {
+        button_fx_notify_press(side, button_id, eff.mask, eff.value);
     }
 }
 

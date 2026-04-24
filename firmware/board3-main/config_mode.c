@@ -119,33 +119,19 @@ uint8_t config_mode_offset_value(void) {
 }
 
 /* Runs from the I2C rx ISR (via controller dispatch). Keep it brief. */
-void config_mode_on_buttons(uint8_t side, uint8_t rising) {
-    if (!active || rising == 0) {
+void config_mode_on_button_pressed(uint8_t side, uint8_t button_idx) {
+    if (!active) {
         return;
     }
     /* Translate (side, button) into the four logical actions. Anything else
      * is ignored — the menu only listens to the four mapped buttons. */
     uint8_t btn;
-    if (side == SIDE_LEFT) {
-        if (rising & (uint8_t)(1u << BTN_UP)) {
-            btn = BTN_UP;
-        } else if (rising & (uint8_t)(1u << BTN_DOWN)) {
-            btn = BTN_DOWN;
-        } else {
-            return;
-        }
+    if (side == SIDE_LEFT && (button_idx == BTN_UP || button_idx == BTN_DOWN)) {
         /* Encode as a logical event id reusing the original button index plus
          * a side bit so the per-screen handlers can distinguish all four. */
-        btn |= 0x10u; /* left-side flag */
-    } else if (side == SIDE_RIGHT) {
-        if (rising & (uint8_t)(1u << BTN_BACK)) {
-            btn = BTN_BACK;
-        } else if (rising & (uint8_t)(1u << BTN_SELECT)) {
-            btn = BTN_SELECT;
-        } else {
-            return;
-        }
-        btn |= 0x20u; /* right-side flag */
+        btn = (uint8_t)(button_idx | 0x10u); /* left-side flag */
+    } else if (side == SIDE_RIGHT && (button_idx == BTN_BACK || button_idx == BTN_SELECT)) {
+        btn = (uint8_t)(button_idx | 0x20u); /* right-side flag */
     } else {
         return;
     }

@@ -22,8 +22,9 @@
  * happens in main context. */
 void config_init(TaskController* ctrl);
 
-/* Protocol-level byte access. Reads from unmapped addresses return 0xFF;
- * writes to read-only/unmapped addresses are silently ignored. */
+/* Protocol-level byte access — both ISR-callable (invoked from I2C on_rx /
+ * on_read). Reads from unmapped addresses return 0xFF; writes to
+ * read-only/unmapped addresses are silently ignored. */
 uint8_t config_read_byte(uint8_t address);
 void config_write_byte(uint8_t address, uint8_t value);
 

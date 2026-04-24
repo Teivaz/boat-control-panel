@@ -15,37 +15,12 @@ void interrupt_init(void) {
     IVTLOCK = 0xAA;
     IVTLOCKbits.IVTLOCKED = 0x01;
 
-    IPR3bits.TMR0IP = 1;
-
     GIE = 1;
 }
 
-static void (*interrupt_handler_IOC)(void);
-static void (*interrupt_handler_TMR0)(void);
-
-void interrupt_set_handler_IOC(void (*h)(void)) {
-    interrupt_handler_IOC = h;
-}
-void interrupt_set_handler_TMR0(void (*h)(void)) {
-    interrupt_handler_TMR0 = h;
-}
-
-void __interrupt(irq(IOC), base(8)) IOC_ISR(void) {
-    PIR0bits.IOCIF = 0;
-    if (interrupt_handler_IOC) {
-        interrupt_handler_IOC();
-    }
-}
-
-void __interrupt(irq(TMR0), base(8)) TMR0_ISR(void) {
-    PIR3bits.TMR0IF = 0;
-    if (interrupt_handler_TMR0) {
-        interrupt_handler_TMR0();
-    }
-}
-
-/* Unused vectors reset the device. I2C1 ISRs are defined in i2c.c and the
- * AD ISR is defined in adc.c. */
+/* Unused vectors reset the device. Owned vectors are defined alongside the
+ * peripheral they serve: TMR0 in main.c, IOC in sensors.c, I2C1 in i2c.c,
+ * AD in adc.c. */
 void __interrupt(irq(SWINT), base(8)) SWINT_ISR(void) {
     __asm("RESET");
 }

@@ -52,8 +52,8 @@ uint8_t config_mode_offset_target(void); /* 0 = water, 1 = fuel */
 uint8_t config_mode_offset_value(void);
 
 /* Invoked from the button-change dispatch when config mode is active.
- * `side` is the originating button board I2C address; `rising` is the mask
- * of buttons whose state flipped 0 -> 1 this event. */
-void config_mode_on_buttons(uint8_t side, uint8_t rising);
+ * `side` is the originating button board I2C address; `button_idx` is the
+ * index (0..6) of the button whose trigger fired. */
+void config_mode_on_button_pressed(uint8_t side, uint8_t button_idx);
 
 #endif /* CONFIG_MODE_H */

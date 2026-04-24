@@ -11,7 +11,7 @@
 void led_effect_init(TaskController* ctrl);
 
 /* Per-LED effect — color + mode from the button_effect nibble. Takes effect
- * on the next animation tick. */
+ * on the next animation tick. ISR-callable — invoked from on_rx. */
 void led_effect_set(uint8_t led_id, CommButtonOutputEffect eff);
 CommButtonOutputEffect led_effect_get(uint8_t led_id);
 

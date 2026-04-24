@@ -27,14 +27,14 @@ Derived from a file-by-file audit of `board1-switching/` and `board2-buttons/`. 
 
 ### Concurrency discipline
 - **Main context**: `main()`, `task_controller_poll`, every `*_task` callback.
-- **ISR context**: each peripheral ISR (`I2C1_ISR`, `AD_ISR`, `IOC` / `TMR0` via `interrupt_set_handler_*`), plus the `on_rx` / `on_read` handlers that `i2c.c` invokes from its ISR.
+- **ISR context**: each peripheral ISR (`I2C1_ISR`, `AD_ISR`, `IOC_ISR`, `TMR0_ISR`) plus the `on_rx` / `on_read` handlers that `i2c.c` invokes from its ISR. Every ISR-callable function carries an `ISR context` / `ISR-callable` comment.
 - Any variable shared between the two is `volatile`. Multi-byte volatile reads/writes from main context wrap access in `INTERRUPT_PUSH` / `INTERRUPT_POP` (from `libcomm.h`). Pure-ISR shared variables don't need the guard because ISRs don't preempt each other here.
 - ISR context → main context handoff uses a `push_dirty` flag plus a periodic task that drains the state; handlers invoked from an ISR (`on_rx`, `on_read`, change callbacks) must stay short and avoid blocking peripherals.
 
 ### Interrupts
 - All vectors use `__interrupt(irq(NAME), base(8))` with the IVT locked at `0x0008` by `interrupt_init`.
-- `interrupt.c` owns `IOC` and `TMR0` dispatch through `interrupt_set_handler_IOC` / `_TMR0`; all other IRQs are either defined directly by the owning module (`I2C1_ISR` in `i2c.c`, `AD_ISR` in `adc.c`) or stubbed to `__asm("RESET")` to trap unexpected interrupts.
-- The function pointers backing the dispatched handlers are `static` in `interrupt.c` — they're implementation detail, not API.
+- Each ISR is defined in the module that owns the peripheral it serves (`TMR0_ISR` in `main.c`, `IOC_ISR` in the input/sensors module that enables IOC, `I2C1_ISR` in `i2c.c`, `AD_ISR` in `adc.c`). The peripheral-specific interrupt enablement (`PIE*`, `IPR*`, and the peripheral's `IE`/`IP` bits) lives alongside the ISR in the same module.
+- `interrupt.c` holds only `interrupt_init` (IVT lock/unlock + `GIE`) plus `__asm("RESET")` stubs for vectors that no module claims. No function-pointer dispatch table.
 
 ### Comments
 - Top-of-file comment: what the module owns, how the hardware is wired, and any non-obvious invariants (e.g. the wire-bit ↔ protocol-bit mapping tables, EMA time constant rationale).
@@ -66,4 +66,4 @@ Derived from a file-by-file audit of `board1-switching/` and `board2-buttons/`. 
 - Mirror the `_init(TaskController*)` + `_task` pattern for anything that needs periodic work — don't add a second scheduling mechanism.
 - Keep I2C-command dispatch in `comm.c`; keep transport (`i2c.c`) free of libcomm types.
 - When a handler has to move data from ISR to main context, use a `volatile` shadow + dirty flag drained by a task — not a callback that blocks in the ISR.
-- Wire a fresh IRQ either via `interrupt_set_handler_*` (if it's already dispatched there) or by adding the `__interrupt(irq(...), base(8))` definition in the module that owns the peripheral, and delete the matching reset-trap stub in `interrupt.c` if one exists.
+- Wire a fresh IRQ by adding the `__interrupt(irq(...), base(8))` definition in the module that owns the peripheral and deleting the matching reset-trap stub in `interrupt.c`. Enable the interrupt (`PIE*`, `IPR*`) in the same module.

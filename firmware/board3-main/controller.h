@@ -1,6 +1,7 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
+#include "libcomm.h"
 #include "nav_lights.h"
 #include "rtc.h"
 #include "task.h"
@@ -13,7 +14,7 @@ void controller_init(TaskController* ctrl);
 
 /* Inbound dispatch hooks. Both are invoked from I2C ISR context — must be
  * non-blocking. Senders are identified by their 7-bit I2C address. */
-void controller_on_button_changed(uint8_t sender, uint8_t prev, uint8_t curr);
+void controller_on_button_changed(uint8_t sender, uint8_t button_id, CommButtonEvent event);
 void controller_on_relay_changed(uint8_t sender, uint16_t prev_relays, uint16_t curr_relays, uint8_t prev_sensors,
                                  uint8_t curr_sensors);
 

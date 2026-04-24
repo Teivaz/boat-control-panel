@@ -60,11 +60,12 @@ Shared scheduling primitive used by all boards. Design notes that matter for cal
 - Deferred dispatch: the TMR0 ISR calls `task_controller_tick(&ctrl)` which only decrements `remaining_ms` and sets `pending`; callbacks are fired from `task_controller_poll`.
 - Interval range 1..15000 ms. After a callback returns, `remaining_ms` is reloaded from the task's *current* `interval_ms` — so a callback may change its own interval via `task_controller_set_interval` and have the new value take effect on the next fire.
 - Removing a task (including the currently-executing one) from inside a callback is safe; the poll loop rechecks `id` and `pending` before the post-callback reload.
-- The scheduler does **not** own TMR0. Each board configures TMR0 itself in `tick_init` (typically 8-bit mode, Fosc/4, /128 prescaler, match = 124 → 1 ms) and routes the ISR to `task_controller_tick` via `interrupt_set_handler_TMR0`. Task IDs live in each board's `task_ids.h`.
+- The scheduler does **not** own TMR0. Each board configures TMR0 itself in `tick_init` (typically 8-bit mode, Fosc/4, /128 prescaler, match = 124 → 1 ms) and defines `TMR0_ISR` locally (usually in `main.c`) to call `task_controller_tick`. Task IDs live in each board's `task_ids.h`.
+- `run_in_main_loop(ctrl, cb, ctx)` is ISR-callable and schedules `cb(ctx)` to run once on the next `task_controller_poll`. Use it from ISRs to push non-trivial work out of interrupt context. Queue depth is `TASK_DEFERRED_QUEUE_SIZE` (4); on overflow the call drops — callers that need lossless delivery must dedupe via a flag cleared by their callback.
 
 ### ISR wiring
 
-All ISRs use `__interrupt(irq(...), base(8))` with IVT locked to `0x0008`. The `interrupt` module registers callbacks for IOC and TMR0. Do not use the MCC-generated interrupt dispatcher — hand-written ISRs are registered directly via `interrupt_set_handler_*`.
+All ISRs use `__interrupt(irq(...), base(8))` with IVT locked to `0x0008`. Each ISR is defined in the module that owns the peripheral it serves (e.g. `TMR0_ISR` in `main.c`, `IOC_ISR` in the input/sensors module that enables it, `I2C1_ISR` in `i2c.c`, `AD_ISR` in `adc.c`). `interrupt.c` holds only `interrupt_init` (IVT lock/unlock + GIE) and `__asm("RESET")` stubs for vectors no board module claims. Do not use the MCC-generated interrupt dispatcher.
 
 ### libcomm
 

@@ -1,5 +1,6 @@
 #include "button.h"
 
+#include "comm.h"
 #include "input.h"
 #include "task_ids.h"
 
@@ -68,6 +69,13 @@ void button_set_trigger(uint8_t button_id, CommTriggerConfig cfg) {
     if (mode_diff) {
         cancel_timer(b);
         b->fsm = FSM_IDLE;
+        const uint8_t was_unknown = (b->mode == COMM_BUTTON_MODE_UNKNOWN);
+        const uint8_t now_unknown = (cfg.mode == COMM_BUTTON_MODE_UNKNOWN);
+        if (was_unknown && !now_unknown) {
+            comm_send_button_event(button_id, COMM_BUTTON_EVENT_ENABLED);
+        } else if (!was_unknown && now_unknown) {
+            comm_send_button_event(button_id, COMM_BUTTON_EVENT_DISABLED);
+        }
     }
     b->mode = cfg.mode;
     b->time_ms = new_time;
@@ -78,7 +86,7 @@ void button_set_trigger(uint8_t button_id, CommTriggerConfig cfg) {
         cancel_timer(b);
         if (new_time == 0) {
             if (b->fsm == FSM_HOLD_WAIT) {
-                send_button_event(button_index(b));
+                comm_send_button_event(button_index(b), COMM_BUTTON_EVENT_TRIGGERED);
                 b->fsm = FSM_HOLD_FIRED;
             } else {
                 b->fsm = FSM_REL_READY;
@@ -97,10 +105,8 @@ CommTriggerConfig button_get_trigger(uint8_t button_id) {
     return cfg;
 }
 
-/* Runs in the IOC ISR context. Timeout-driven FSM transitions are the
- * only work that still flows through the task scheduler. */
+/* Main-loop context — input.c defers IOC edges through run_in_main_loop. */
 static void on_input_changed(uint8_t prev, uint8_t curr) {
-    // TODO: Simplify this interrupt. Remove call dispatch_edge, instead add a function to run on main loop and put it there
     uint8_t changed = prev ^ curr;
     for (uint8_t i = 0; i < BUTTON_COUNT && changed; i++, changed >>= 1) {
         if (changed & 1) {
@@ -127,7 +133,7 @@ static void dispatch_edge(ButtonState* b, uint8_t pressed) {
 
     switch (b->mode) {
         case COMM_BUTTON_MODE_CHANGE:
-            send_button_event(i);
+            comm_send_button_event(i, COMM_BUTTON_EVENT_TRIGGERED);
             break;
 
         case COMM_BUTTON_MODE_HOLD:
@@ -136,7 +142,7 @@ static void dispatch_edge(ButtonState* b, uint8_t pressed) {
                     break; /* stray edge */
                 }
                 if (b->time_ms == 0) {
-                    send_button_event(i);
+                    comm_send_button_event(i, COMM_BUTTON_EVENT_TRIGGERED);
                     b->fsm = FSM_HOLD_FIRED;
                 } else {
                     arm_timer(b, b->time_ms);
@@ -166,7 +172,7 @@ static void dispatch_edge(ButtonState* b, uint8_t pressed) {
                     cancel_timer(b);
                     b->fsm = FSM_IDLE; /* released too early */
                 } else if (b->fsm == FSM_REL_READY) {
-                    send_button_event(i);
+                    comm_send_button_event(i, COMM_BUTTON_EVENT_TRIGGERED);
                     b->fsm = FSM_IDLE;
                 }
             }
@@ -181,7 +187,7 @@ static void dispatch_edge(ButtonState* b, uint8_t pressed) {
 static void dispatch_timer(ButtonState* b) {
     switch (b->fsm) {
         case FSM_HOLD_WAIT:
-            send_button_event(button_index(b));
+            comm_send_button_event(button_index(b), COMM_BUTTON_EVENT_TRIGGERED);
             b->fsm = FSM_HOLD_FIRED;
             break;
         case FSM_REL_WAIT:

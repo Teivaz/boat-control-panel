@@ -1,6 +1,5 @@
 #include "sensors.h"
 
-#include "interrupt.h"
 #include "libcomm.h"
 #include "task_ids.h"
 
@@ -26,8 +25,7 @@ static volatile uint8_t pending_target[3];
 static SensorsChangeHandler change_handler;
 
 static uint8_t read_raw(void);
-static void arm_pin(uint8_t i, uint8_t cur_bit);
-static void ioc_handler(void);
+static void arm_pin(uint8_t i, uint8_t cur_bit); /* ISR-callable */
 static void poll_task(TaskId id, void* ctx);
 
 void sensors_init(TaskController* ctrl) {
@@ -56,7 +54,6 @@ void sensors_init(TaskController* ctrl) {
     IOCCNbits.IOCCN2 = 1;
     IOCCNbits.IOCCN5 = 1;
 
-    interrupt_set_handler_IOC(ioc_handler);
     PIE0bits.IOCIE = 1;
 
     task_controller_add(ctrl, TASK_POLL_SENSORS, SENSORS_POLL_MS, poll_task, 0);
@@ -96,10 +93,11 @@ static void arm_pin(uint8_t i, uint8_t cur_bit) {
     }
 }
 
-static void ioc_handler(void) {
-    /* Clear only the pins we own; leave any spurious flags on unused bits
-     * alone. Edge flags are cleared before re-reading so a transition that
-     * races the read still raises a fresh interrupt. */
+/* ISR context. Clear only the pins we own; leave any spurious flags on
+ * unused bits alone. Edge flags are cleared before re-reading so a
+ * transition that races the read still raises a fresh interrupt. */
+void __interrupt(irq(IOC), base(8)) IOC_ISR(void) {
+    PIR0bits.IOCIF = 0;
     IOCCFbits.IOCCF1 = 0;
     IOCCFbits.IOCCF2 = 0;
     IOCCFbits.IOCCF5 = 0;

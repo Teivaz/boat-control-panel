@@ -12,13 +12,17 @@
 #define PIN_INPUT_6 PORTAbits.RA4
 #define PIN_INPUT_7 PORTAbits.RA5
 
+static TaskController* ctrl;
 static volatile InputState input_state;
+/* State already observed by dispatch_pending. Updated only from main loop. */
+static uint8_t last_notified;
 static InputChangeHandler change_handler;
 
 static void sample_pins(InputState* state);
-static void ioc_handler(void);
+static void dispatch_pending(void* ctx); /* main-loop callback */
 
-void input_init(void) {
+void input_init(TaskController* controller) {
+    ctrl = controller;
     LATA = 0x00;
     ODCONA = 0x00;
     TRISA = 0xFF;
@@ -28,6 +32,7 @@ void input_init(void) {
     INLVLA = 0xFF;
 
     input_state.integer = 0x00;
+    last_notified = 0x00;
     PIE0bits.IOCIE = 1;
     IOCAP = 0xFF;
     IOCAN = 0xFF;
@@ -44,19 +49,28 @@ void input_set_change_handler(InputChangeHandler handler) {
     change_handler = handler;
 }
 
+/* ISR context. Captures the new pin values and hands dispatch off to the
+ * main loop — run_in_main_loop is idempotent against re-queues because
+ * dispatch_pending compares last_notified against the latest sampled state,
+ * so a dropped queue slot (full queue) is self-healing on the next edge. */
 void __interrupt(irq(IOC), base(8)) IOC_ISR(void) {
     PIR0bits.IOCIF = 0;
-    ioc_handler();
-}
-
-static void ioc_handler(void) {
     IOCAF = 0x00;
-    const uint8_t prev = input_state.integer;
     InputState next = input_state;
     sample_pins(&next);
     input_state = next;
-    const uint8_t curr = next.integer;
-    if (curr != prev && change_handler) {
+    run_in_main_loop(ctrl, dispatch_pending, 0);
+}
+
+static void dispatch_pending(void* ctx) {
+    (void)ctx;
+    const uint8_t prev = last_notified;
+    const uint8_t curr = input_state_current().integer;
+    if (curr == prev) {
+        return;
+    }
+    last_notified = curr;
+    if (change_handler) {
         change_handler(prev, curr);
     }
 }

@@ -15,39 +15,14 @@ void interrupt_init(void) {
     IVTLOCK = 0xAA;
     IVTLOCKbits.IVTLOCKED = 0x01; // lock IVT
 
-    // Assign peripheral interrupt priority vectors
-    IPR3bits.TMR0IP = 1;
-
     GIE = 1;
 }
 
-void (*interrupt_handler_IOC)(void);
-void (*interrupt_handler_TMR0)(void);
-
-void interrupt_set_handler_IOC(void (*interrupt_handler)(void)) {
-    interrupt_handler_IOC = interrupt_handler;
-}
-
-void interrupt_set_handler_TMR0(void (*interrupt_handler)(void)) {
-    interrupt_handler_TMR0 = interrupt_handler;
-}
-
+/* Unused vectors reset the device. Owned vectors are defined alongside
+ * the peripheral they serve: TMR0 in main.c, I2C1 in i2c.c. */
 void __interrupt(irq(IOC), base(8)) IOC_ISR() {
-    PIR0bits.IOCIF = 0; // EXT_INT0 Interrupt Flag Clear
-
-    if (interrupt_handler_IOC) {
-        interrupt_handler_IOC();
-    }
+    __asm("RESET");
 }
-
-void __interrupt(irq(TMR0), base(8)) TMR0_ISR() {
-    PIR3bits.TMR0IF = 0;
-
-    if (interrupt_handler_TMR0) {
-        interrupt_handler_TMR0();
-    }
-}
-
 void __interrupt(irq(SWINT), base(8)) SWINT_ISR() {
     __asm("RESET");
 }

@@ -23,6 +23,10 @@
 #define NAV_LIGHT_ALL 0x1F
 
 void config_init(TaskController* ctrl);
+
+/* Both ISR-callable — invoked from the I2C on_rx / on_read handlers.
+ * read serves directly from the in-RAM shadow; write enqueues onto the
+ * flush queue drained from main context. */
 uint8_t config_read_byte(uint8_t address);
 void config_write_byte(uint8_t address, uint8_t value);
 

@@ -16,15 +16,14 @@
 
 static TaskController ctrl;
 
-static void tick_isr(void);
 static void tick_init(void);
 
 static void init(void) {
     rgbled_init();
-    input_init();
     i2c_init();
 
     task_controller_init(&ctrl);
+    input_init(&ctrl);
     button_init(&ctrl);
     led_effect_init(&ctrl);
     comm_init(&ctrl);
@@ -33,12 +32,6 @@ static void init(void) {
 
     /* Interrupts enabled last. */
     interrupt_init();
-}
-
-void send_button_event(uint8_t button_id) {
-    uint8_t cur = input_state_current().integer;
-    uint8_t prev = cur ^ (uint8_t)(1u << button_id);
-    comm_send_button_changed(prev, cur);
 }
 
 /* TMR0 in 8-bit mode clocked from Fosc/4 with /128 prescaler gives

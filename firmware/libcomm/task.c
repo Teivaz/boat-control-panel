@@ -15,6 +15,8 @@ void task_controller_init(TaskController *c) {
         c->tasks[i].id = TASK_INVALID_ID;
         c->tasks[i].pending = 0;
     }
+    c->deferred_head = 0;
+    c->deferred_tail = 0;
 }
 
 /* add/remove/set_interval are ISR-callable: they mutate shared state that
@@ -72,6 +74,7 @@ int8_t task_controller_set_interval(TaskController *c, TaskId id,
     return ret;
 }
 
+/* ISR-callable. */
 void task_controller_tick(TaskController *c) {
     for (uint8_t i = 0; i < TASK_MAX_COUNT; i++) {
         Task *t = &c->tasks[i];
@@ -84,7 +87,39 @@ void task_controller_tick(TaskController *c) {
     }
 }
 
+/* ISR-callable — INTERRUPT_PUSH/POP keeps the tail bump atomic against a
+ * preempting producer on the same controller. Callbacks enqueued during a
+ * poll iteration are picked up on the next poll. */
+int8_t run_in_main_loop(TaskController *c, MainLoopCallback cb, void *context) {
+    INTERRUPT_PUSH;
+    uint8_t next = (uint8_t) ((c->deferred_tail + 1) & (TASK_DEFERRED_QUEUE_SIZE - 1));
+    int8_t ret;
+    if (next == c->deferred_head) {
+        ret = -1;
+    } else {
+        c->deferred[c->deferred_tail].cb = cb;
+        c->deferred[c->deferred_tail].context = context;
+        c->deferred_tail = next;
+        ret = 0;
+    }
+    INTERRUPT_POP;
+    return ret;
+}
+
+/* Drain deferred entries queued by run_in_main_loop first, then dispatch any
+ * pending periodic tasks. Snapshot the tail once so entries queued *during*
+ * dispatch wait for the next poll — bounds work per call and prevents
+ * unbounded recursion when a callback defers itself. */
 void task_controller_poll(TaskController *c) {
+    uint8_t tail = c->deferred_tail;
+    while (c->deferred_head != tail) {
+        MainLoopCallback cb = c->deferred[c->deferred_head].cb;
+        void *ctx = c->deferred[c->deferred_head].context;
+        c->deferred_head = (uint8_t) ((c->deferred_head + 1) & (TASK_DEFERRED_QUEUE_SIZE - 1));
+        if (cb)
+            cb(ctx);
+    }
+
     for (uint8_t i = 0; i < TASK_MAX_COUNT; i++) {
         Task *t = &c->tasks[i];
         if (t->id == TASK_INVALID_ID || !t->pending)

@@ -38,19 +38,19 @@ void comm_parse_button_effect(const uint8_t *data, CommButtonEffect *effect) {
  * ============================================================================
  */
 
-uint8_t comm_build_button_changed(CommMessage *msg, uint8_t prev_state,
-                                  uint8_t current_state) {
+uint8_t comm_build_button_changed(CommMessage *msg, uint8_t button_id,
+                                  CommButtonEvent event) {
     msg->id = COMM_BUTTON_CHANGED;
     msg->button_changed.device_address = comm_address();
-    msg->button_changed.prev_state = prev_state;
-    msg->button_changed.current_state = current_state;
+    msg->button_changed.button_id = button_id & 0x07;
+    msg->button_changed.event = (uint8_t) event;
     return 1 + sizeof(CommButtonChanged);
 }
 
 void comm_parse_button_changed(const uint8_t *data, CommButtonChanged *event) {
     event->device_address = data[0];
-    event->prev_state = data[1];
-    event->current_state = data[2];
+    event->button_id = data[1] & 0x07;
+    event->event = data[2];
 }
 
 /* ============================================================================

@@ -4,7 +4,10 @@
 #include <xc.h>
 
 #define INTERRUPT_PUSH                                                         \
-    const int8_t _gie_state = GIE;                                             \
+    int8_t _gie_state = GIE;                                                   \
+    GIE = 0
+#define INTERRUPT_PUSH_NDECL                                                   \
+    _gie_state = GIE;                                                          \
     GIE = 0
 #define INTERRUPT_POP GIE = (__bit) _gie_state
 
@@ -92,6 +95,18 @@ typedef enum {
  * ============================================================================
  */
 
+/* ============================================================================
+ * Button change event (byte 3 of button_changed)
+ * ============================================================================
+ */
+
+typedef enum {
+    COMM_BUTTON_EVENT_NONE = 0,       /* reserved — never emitted on the wire */
+    COMM_BUTTON_EVENT_ENABLED = 1,    /* trigger was configured to non-UNKNOWN */
+    COMM_BUTTON_EVENT_DISABLED = 2,   /* trigger was cleared to UNKNOWN       */
+    COMM_BUTTON_EVENT_TRIGGERED = 3,  /* configured trigger condition fired   */
+} CommButtonEvent;
+
 typedef enum {
     COMM_EFFECT_COLOR_WHITE = 0x00,
     COMM_EFFECT_COLOR_RED = 0x01,
@@ -149,8 +164,8 @@ typedef struct {
 /** button_changed (0x02): 3 bytes */
 typedef struct {
     uint8_t device_address;
-    uint8_t prev_state;
-    uint8_t current_state;
+    uint8_t button_id;
+    uint8_t event; /* CommButtonEvent */
 } CommButtonChanged;
 
 /** button_state_read (0x83) response: 1 byte */
@@ -270,8 +285,8 @@ uint8_t comm_build_button_effect(CommMessage *msg,
 
 /* button_changed (0x02) — button board -> main; device_address is filled from
  * comm_address() */
-uint8_t comm_build_button_changed(CommMessage *msg, uint8_t prev_state,
-                                  uint8_t current_state);
+uint8_t comm_build_button_changed(CommMessage *msg, uint8_t button_id,
+                                  CommButtonEvent event);
 
 /* button_state_read (0x83) — main -> button board */
 uint8_t comm_build_button_state_read(CommMessage *msg);

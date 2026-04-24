@@ -25,7 +25,7 @@ static void on_rx(const uint8_t* data, uint8_t len) {
             if (len == 1 + sizeof(CommButtonChanged)) {
                 CommButtonChanged ev;
                 comm_parse_button_changed(&data[1], &ev);
-                controller_on_button_changed(ev.device_address, ev.prev_state, ev.current_state);
+                controller_on_button_changed(ev.device_address, ev.button_id, (CommButtonEvent)ev.event);
             }
             break;
 

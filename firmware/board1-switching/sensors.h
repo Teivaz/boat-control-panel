@@ -15,6 +15,9 @@
 typedef void (*SensorsChangeHandler)(uint8_t prev, uint8_t curr);
 
 void sensors_init(TaskController* ctrl);
+
+/* ISR-callable — on_read serves the sensors_read response directly from
+ * the debounced shadow. */
 uint8_t sensors_state(void);
 void sensors_set_change_handler(SensorsChangeHandler handler);
 
