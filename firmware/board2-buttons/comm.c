@@ -33,6 +33,11 @@ static uint8_t on_read(const uint8_t* request, uint8_t request_len, uint8_t* res
 static void retry_task(TaskId id, void* ctx);
 static void apply_button_effect(const CommButtonEffect* eff);
 
+uint8_t comm_address(void) {
+    return PORTBbits.RB0 == 0 ? COMM_ADDRESS_BUTTON_BOARD_L
+                              : COMM_ADDRESS_BUTTON_BOARD_R;
+}
+
 void comm_init(TaskController* ctrl) {
     q_head = q_tail = 0;
     i2c_set_rx_handler(on_rx);
@@ -64,7 +69,8 @@ static void retry_task(TaskId id, void* ctx) {
         CommMessage msg;
         uint8_t len = comm_build_button_changed(&msg, queue[q_head].button_id,
                                                 (CommButtonEvent)queue[q_head].event);
-        if (i2c_transmit(COMM_ADDRESS_MAIN, (const uint8_t*)&msg, len) != I2C_RESULT_OK) {
+        uint8_t result = i2c_transmit(COMM_ADDRESS_MAIN, (const uint8_t*)&msg, len);
+        if (result != I2C_RESULT_OK && result != I2C_RESULT_NACK) {
             break;
         }
         q_head = (uint8_t)((q_head + 1) & RETRY_QUEUE_MASK);

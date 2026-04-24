@@ -10,6 +10,10 @@
 static void on_rx(const uint8_t* data, uint8_t len);
 static uint8_t on_read(const uint8_t* request, uint8_t request_len, uint8_t* response, uint8_t response_max);
 
+uint8_t comm_address(void) {
+    return COMM_ADDRESS_MAIN;
+}
+
 void comm_init(void) {
     i2c_set_rx_handler(on_rx);
     i2c_set_read_handler(on_read);
@@ -25,7 +29,7 @@ static void on_rx(const uint8_t* data, uint8_t len) {
             if (len == 1 + sizeof(CommButtonChanged)) {
                 CommButtonChanged ev;
                 comm_parse_button_changed(&data[1], &ev);
-                controller_on_button_changed(ev.device_address, ev.button_id, (CommButtonEvent)ev.event);
+                controller_on_button_changed(ev.device_address, ev.button_id, ev.pressed, (CommButtonMode)ev.mode);
             }
             break;
 

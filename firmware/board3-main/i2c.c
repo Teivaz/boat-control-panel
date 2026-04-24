@@ -43,16 +43,19 @@ void i2c_init(void) {
     ODCONBbits.ODCB2 = 1;
     RB1I2Cbits.TH = 0b01;
     RB2I2Cbits.TH = 0b01;
-    RB1I2Cbits.PU = 0b01;
-    RB2I2Cbits.PU = 0b01;
+    RB1I2Cbits.PU = 0b10;
+    RB2I2Cbits.PU = 0b10;
+    RB1I2Cbits.SLEW = 0b01; // Fast mode 400kHz
+    RB2I2Cbits.SLEW = 0b01; // Fast mode 400kHz
 
     I2C1SCLPPS = 0x0A; /* RB2 -> SCL1 */
     RB2PPS = 0x37;
     I2C1SDAPPS = 0x09; /* RB1 -> SDA1 */
     RB1PPS = 0x38;
 
-    /* 400 kHz: BAUD = 64 MHz / (2 * 400 kHz) - 1 = 79 */
-    I2C1BAUD = 79;
+    I2C1CLK = 0x01; // Use Fosc
+    /* 400 kHz: BAUD = 64 MHz / (5 * 400 kHz) - 1 */
+    I2C1BAUD = 23; // ~400 kHz
 
     client_mode_enable();
 }

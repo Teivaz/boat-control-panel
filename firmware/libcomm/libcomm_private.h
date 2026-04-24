@@ -1,4 +1,0 @@
-#ifndef LIBCOMM_PRIVATE_H
-#define LIBCOMM_PRIVATE_H
-
-#endif /* LIBCOMM_PRIVATE_H */

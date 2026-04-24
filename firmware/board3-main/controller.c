@@ -154,9 +154,9 @@ void controller_init(TaskController* ctrl) {
  * ============================================================================
  */
 
-void controller_on_button_changed(uint8_t sender, uint8_t button_id, CommButtonEvent event) {
-    /* Only TRIGGERED drives user actions; ENABLED/DISABLED are informational. */
-    if (event != COMM_BUTTON_EVENT_TRIGGERED || button_id >= 7) {
+void controller_on_button_changed(uint8_t sender, uint8_t button_id, uint8_t pressed, CommButtonMode mode) {
+    const uint8_t should_trigger = (mode == COMM_BUTTON_MODE_RELEASE) || (mode == COMM_BUTTON_MODE_HOLD) || (mode == COMM_BUTTON_MODE_CHANGE && pressed);
+    if (button_id >= 7 || !should_trigger) {
         return;
     }
     if (config_mode_active()) {

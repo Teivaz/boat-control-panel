@@ -16,6 +16,10 @@ void comm_init(void) {
     i2c_set_read_handler(on_read);
 }
 
+uint8_t comm_address(void) {
+    return COMM_ADDRESS_SWITCHING;
+}
+
 /* ISR context — handlers must stay short. */
 static void on_rx(const uint8_t* data, uint8_t len) {
     if (len == 0) {

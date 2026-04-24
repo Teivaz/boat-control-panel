@@ -21,9 +21,9 @@
 #define PIN_ACTIVE() (PORTAbits.RA7 == 0)
 
 /* Button indices on the left / right boards used by the menu. */
-#define BTN_UP 1u     /* left  */
-#define BTN_DOWN 2u   /* left  */
-#define BTN_BACK 0u   /* right */
+#define BTN_UP 4u     /* left  */
+#define BTN_DOWN 3u   /* left  */
+#define BTN_BACK 2u   /* right */
 #define BTN_SELECT 1u /* right */
 
 #define SIDE_LEFT COMM_ADDRESS_BUTTON_BOARD_L
@@ -130,7 +130,7 @@ void config_mode_on_button_pressed(uint8_t side, uint8_t button_idx) {
         /* Encode as a logical event id reusing the original button index plus
          * a side bit so the per-screen handlers can distinguish all four. */
         btn = (uint8_t)(button_idx | 0x10u); /* left-side flag */
-    } else if (side == SIDE_RIGHT && (button_idx == BTN_BACK || button_idx == BTN_SELECT)) {
+    } else if (side == SIDE_LEFT && (button_idx == BTN_BACK || button_idx == BTN_SELECT)) {
         btn = (uint8_t)(button_idx | 0x20u); /* right-side flag */
     } else {
         return;

@@ -73,15 +73,7 @@ The low end of the configuration address space is reserved for universal fields 
 - button_changed - pushed by a button board when a button's trigger fires, or when its trigger is (re)configured
   - write byte 0: command - 0x02
   - write byte 1: device_address - address of the sending button board
-  - write byte 2: button_id - `[7:3]` = 0, `[2:0]` button index
-  - write byte 3: event - one of the values below
-
-  | Value | Event | When emitted |
-  |---|---|---|
-  | 0x00 | `none` | Reserved; never sent on the wire. |
-  | 0x01 | `enabled` | Sent once after `button_trigger` configures a button to a non-`unknown` mode. |
-  | 0x02 | `disabled` | Sent once after `button_trigger` clears a button back to `unknown`. |
-  | 0x03 | `triggered` | The button's configured trigger condition fired. |
+  - write byte 2: button_id - `[7:6]` = 0, `[5:4]` = button mode, `[3]` button pressed, `[2:0]` button index
 
 - relay_changed - pushed by the switching board when any masked relay or any sensor changes state
   - write byte 0: command - 0x06

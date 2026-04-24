@@ -1,19 +1,5 @@
 #include "libcomm.h"
 
-uint8_t comm_address(void) {
-#ifdef DEVICE_TYPE_MAIN
-    return COMM_ADDRESS_MAIN;
-#elif defined DEVICE_TYPE_SWITCHING
-    return COMM_ADDRESS_SWITCHING;
-#elif defined DEVICE_TYPE_INPUT
-    return PORTBbits.RB0 == 0 ? COMM_ADDRESS_BUTTON_BOARD_L
-                              : COMM_ADDRESS_BUTTON_BOARD_R;
-#else
-#error                                                                         \
-    "Undefined device type. Define one of: DEVICE_TYPE_MAIN, DEVICE_TYPE_SWITCHING, DEVICE_TYPE_INPUT"
-#endif
-}
-
 /* ============================================================================
  * button_effect (0x01)
  * ============================================================================
@@ -38,19 +24,20 @@ void comm_parse_button_effect(const uint8_t *data, CommButtonEffect *effect) {
  * ============================================================================
  */
 
-uint8_t comm_build_button_changed(CommMessage *msg, uint8_t button_id,
-                                  CommButtonEvent event) {
+uint8_t comm_build_button_changed(CommMessage *msg, uint8_t button_id, uint8_t pressed, CommButtonMode mode) {
     msg->id = COMM_BUTTON_CHANGED;
     msg->button_changed.device_address = comm_address();
     msg->button_changed.button_id = button_id & 0x07;
-    msg->button_changed.event = (uint8_t) event;
+    msg->button_changed.pressed = pressed & 0x01;
+    msg->button_changed.mode = (uint8_t)mode & 0x03;
     return 1 + sizeof(CommButtonChanged);
 }
 
 void comm_parse_button_changed(const uint8_t *data, CommButtonChanged *event) {
     event->device_address = data[0];
     event->button_id = data[1] & 0x07;
-    event->event = data[2];
+    event->pressed = (data[1] >> 3) & 0x01;
+    event->mode = (data[1] >> 4) & 0x03;
 }
 
 /* ============================================================================

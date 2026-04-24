@@ -69,13 +69,6 @@ void button_set_trigger(uint8_t button_id, CommTriggerConfig cfg) {
     if (mode_diff) {
         cancel_timer(b);
         b->fsm = FSM_IDLE;
-        const uint8_t was_unknown = (b->mode == COMM_BUTTON_MODE_UNKNOWN);
-        const uint8_t now_unknown = (cfg.mode == COMM_BUTTON_MODE_UNKNOWN);
-        if (was_unknown && !now_unknown) {
-            comm_send_button_event(button_id, COMM_BUTTON_EVENT_ENABLED);
-        } else if (!was_unknown && now_unknown) {
-            comm_send_button_event(button_id, COMM_BUTTON_EVENT_DISABLED);
-        }
     }
     b->mode = cfg.mode;
     b->time_ms = new_time;
@@ -130,7 +123,6 @@ static void button_timer_cb(TaskId id, void* context) {
 
 static void dispatch_edge(ButtonState* b, uint8_t pressed) {
     const uint8_t i = button_index(b);
-
     switch (b->mode) {
         case COMM_BUTTON_MODE_CHANGE:
             comm_send_button_event(i, COMM_BUTTON_EVENT_TRIGGERED);
