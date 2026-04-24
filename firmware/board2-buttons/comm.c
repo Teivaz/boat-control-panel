@@ -20,8 +20,9 @@
 #define RETRY_TICK_MS TASK_MIN_MS /* drain as soon as main context polls */
 
 typedef struct {
-    uint8_t button_id;
-    uint8_t event;
+    uint8_t button_id : 3;
+    uint8_t pressed : 1;
+    uint8_t mode : 2;
 } ButtonEventEntry;
 
 static volatile ButtonEventEntry queue[RETRY_QUEUE_SIZE];
@@ -47,12 +48,13 @@ void comm_init(TaskController* ctrl) {
 
 /* Callable from any context. INTERRUPT_PUSH/POP covers the tail bump against
  * preempting producers; the consumer reads `head` independently. */
-void comm_send_button_event(uint8_t button_id, CommButtonEvent event) {
+void comm_send_button_event(uint8_t button_id, uint8_t pressed, CommButtonMode mode) {
     INTERRUPT_PUSH;
     uint8_t next = (uint8_t)((q_tail + 1) & RETRY_QUEUE_MASK);
     if (next != q_head) {
         queue[q_tail].button_id = button_id & 0x07;
-        queue[q_tail].event = (uint8_t)event;
+        queue[q_tail].pressed = pressed & 0x01;
+        queue[q_tail].mode = (uint8_t)mode & 0x03;
         q_tail = next;
     }
     INTERRUPT_POP;
@@ -68,7 +70,8 @@ static void retry_task(TaskId id, void* ctx) {
     while (q_head != q_tail) {
         CommMessage msg;
         uint8_t len = comm_build_button_changed(&msg, queue[q_head].button_id,
-                                                (CommButtonEvent)queue[q_head].event);
+                                                queue[q_head].pressed,
+                                                (CommButtonMode)queue[q_head].mode);
         uint8_t result = i2c_transmit(COMM_ADDRESS_MAIN, (const uint8_t*)&msg, len);
         if (result != I2C_RESULT_OK && result != I2C_RESULT_NACK) {
             break;

@@ -1,3 +1,5 @@
+#define _XTAL_FREQ 64000000UL
+
 #include "i2c.h"
 
 #include "libcomm.h"
@@ -55,7 +57,7 @@ void i2c_init(void) {
 
     I2C1CLK = 0x01; // Use Fosc
     /* 400 kHz: BAUD = 64 MHz / (5 * 400 kHz) - 1 */
-    I2C1BAUD = 23; // ~400 kHz
+    I2C1BAUD = 31; // ~400 kHz
 
     client_mode_enable();
 }
@@ -355,6 +357,55 @@ I2cResult i2c_receive(uint8_t address, const uint8_t* tx, uint8_t tx_count, uint
 done:
     host_end(pie7_saved);
     return result;
+}
+
+/* ============================================================================
+ * Bus recovery
+ * ============================================================================
+ */
+
+/* Half-period for the bit-banged clock (~100 kHz — slow enough for any
+ * stuck target to notice, fast enough to not stall the main loop). */
+#define I2C_RECOVER_HALF_US 5
+
+void i2c_bus_recover(void) {
+    uint8_t pie7_saved = PIE7;
+    PIE7bits.I2C1IE = 0;
+    PIE7bits.I2C1EIE = 0;
+    PIE7bits.I2C1RXIE = 0;
+    PIE7bits.I2C1TXIE = 0;
+
+    client_mode_disable();
+
+    /* Unmap PPS so LATB1/LATB2 drive the open-drain pins directly. */
+    RB1PPS = 0x00;
+    RB2PPS = 0x00;
+
+    LATBbits.LATB1 = 1; /* SDA released */
+    LATBbits.LATB2 = 1; /* SCL released */
+    __delay_us(I2C_RECOVER_HALF_US);
+
+    if (PORTBbits.RB1 == 0) {
+        for (uint8_t i = 0; i < 9 && PORTBbits.RB1 == 0; i++) {
+            LATBbits.LATB2 = 0;
+            __delay_us(I2C_RECOVER_HALF_US);
+            LATBbits.LATB2 = 1;
+            __delay_us(I2C_RECOVER_HALF_US);
+        }
+
+        /* Manual STOP: SDA low while SCL high, then release SDA. */
+        LATBbits.LATB1 = 0;
+        __delay_us(I2C_RECOVER_HALF_US);
+        LATBbits.LATB1 = 1;
+        __delay_us(I2C_RECOVER_HALF_US);
+    }
+
+    /* Restore peripheral mapping. */
+    RB2PPS = 0x37; /* SCL1 */
+    RB1PPS = 0x38; /* SDA1 */
+
+    client_mode_enable();
+    PIE7 = pie7_saved;
 }
 
 /* ============================================================================

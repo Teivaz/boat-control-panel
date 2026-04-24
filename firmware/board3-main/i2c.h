@@ -27,6 +27,12 @@ void i2c_set_read_handler(I2cReadHandler h);
 /* Host-mode blocking write. Main context only. */
 I2cResult i2c_transmit(uint8_t address, const uint8_t* data, uint8_t len);
 
+/* Bus recovery: if SDA is stuck low (a target was interrupted mid-byte),
+ * bit-bang up to 9 SCL pulses to let it release, then issue a manual STOP.
+ * No-op when SDA is already high. Main context only; client mode is
+ * restored on return. */
+void i2c_bus_recover(void);
+
 /* Host-mode blocking write-then-read (repeated-start). The first phase
  * transmits `tx_len` bytes (typically a cmd id + optional selector), then
  * a repeated-start issues an address-read and `rx_len` bytes are clocked

@@ -79,7 +79,7 @@ void button_set_trigger(uint8_t button_id, CommTriggerConfig cfg) {
         cancel_timer(b);
         if (new_time == 0) {
             if (b->fsm == FSM_HOLD_WAIT) {
-                comm_send_button_event(button_index(b), COMM_BUTTON_EVENT_TRIGGERED);
+                comm_send_button_event(button_index(b), 1, b->mode);
                 b->fsm = FSM_HOLD_FIRED;
             } else {
                 b->fsm = FSM_REL_READY;
@@ -125,7 +125,7 @@ static void dispatch_edge(ButtonState* b, uint8_t pressed) {
     const uint8_t i = button_index(b);
     switch (b->mode) {
         case COMM_BUTTON_MODE_CHANGE:
-            comm_send_button_event(i, COMM_BUTTON_EVENT_TRIGGERED);
+            comm_send_button_event(i, pressed, b->mode);
             break;
 
         case COMM_BUTTON_MODE_HOLD:
@@ -134,7 +134,7 @@ static void dispatch_edge(ButtonState* b, uint8_t pressed) {
                     break; /* stray edge */
                 }
                 if (b->time_ms == 0) {
-                    comm_send_button_event(i, COMM_BUTTON_EVENT_TRIGGERED);
+                    comm_send_button_event(i, pressed, b->mode);
                     b->fsm = FSM_HOLD_FIRED;
                 } else {
                     arm_timer(b, b->time_ms);
@@ -164,7 +164,7 @@ static void dispatch_edge(ButtonState* b, uint8_t pressed) {
                     cancel_timer(b);
                     b->fsm = FSM_IDLE; /* released too early */
                 } else if (b->fsm == FSM_REL_READY) {
-                    comm_send_button_event(i, COMM_BUTTON_EVENT_TRIGGERED);
+                    comm_send_button_event(i, pressed, b->mode);
                     b->fsm = FSM_IDLE;
                 }
             }
@@ -179,7 +179,7 @@ static void dispatch_edge(ButtonState* b, uint8_t pressed) {
 static void dispatch_timer(ButtonState* b) {
     switch (b->fsm) {
         case FSM_HOLD_WAIT:
-            comm_send_button_event(button_index(b), COMM_BUTTON_EVENT_TRIGGERED);
+            comm_send_button_event(button_index(b), 1, b->mode);
             b->fsm = FSM_HOLD_FIRED;
             break;
         case FSM_REL_WAIT:

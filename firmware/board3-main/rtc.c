@@ -15,7 +15,12 @@ uint8_t rtc_read(RtcTime* out) {
     uint8_t reg = 0x00;
     uint8_t buf[7];
     if (i2c_receive(COMM_ADDRESS_RTC, &reg, 1, buf, sizeof(buf)) != I2C_RESULT_OK) {
-        return 0;
+        /* DS3231 can be left holding SDA low if a transaction is aborted
+         * mid-byte — clock it free and retry once before giving up. */
+        i2c_bus_recover();
+        if (i2c_receive(COMM_ADDRESS_RTC, &reg, 1, buf, sizeof(buf)) != I2C_RESULT_OK) {
+            return 0;
+        }
     }
     out->second = bcd_to_bin(buf[0] & 0x7F);
     out->minute = bcd_to_bin(buf[1] & 0x7F);
@@ -43,5 +48,9 @@ uint8_t rtc_write_time(uint8_t hour, uint8_t minute) {
         bin_to_bcd(minute),
         (uint8_t)(bin_to_bcd(hour) & 0x3F),
     };
+    if (i2c_transmit(COMM_ADDRESS_RTC, buf, sizeof(buf)) == I2C_RESULT_OK) {
+        return 1;
+    }
+    i2c_bus_recover();
     return i2c_transmit(COMM_ADDRESS_RTC, buf, sizeof(buf)) == I2C_RESULT_OK;
 }
