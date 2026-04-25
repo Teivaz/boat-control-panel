@@ -46,6 +46,9 @@ static volatile uint8_t working_hour;
 static volatile uint8_t working_minute;
 static volatile uint8_t offset_target; /* 0=water, 1=fuel */
 static volatile uint8_t offset_value;
+/* Set while a menu commit (set_time / config_write / config_read) is in
+ * flight. Suppresses re-submission and (cosmetic) is queryable by the UI. */
+static volatile uint8_t op_busy;
 
 static void enter(void);
 static void exit_config(void);
@@ -57,6 +60,9 @@ static void handle_nav(uint8_t btn);
 static void handle_time(uint8_t btn);
 static void handle_offset(uint8_t btn);
 static void sample_task(TaskId id, void* ctx);
+static void on_set_time_done(uint8_t ok, void* ctx);
+static void on_offset_read_done(uint8_t ok, uint8_t value, void* ctx);
+static void on_offset_write_done(uint8_t ok, void* ctx);
 
 void config_mode_init(TaskController* ctrl) {
     active = 0;
@@ -222,16 +228,23 @@ static void handle_time(uint8_t btn) {
         case 0x20u | BTN_SELECT:
             if (time_field == TIME_FIELD_HOUR) {
                 time_field = TIME_FIELD_MINUTE;
-            } else {
+            } else if (!op_busy) {
                 /* Commit; on I2C failure, stay on the field so the user can
-                 * retry. Returns to the menu on success. */
-                if (controller_set_time(working_hour, working_minute)) {
-                    screen = CONFIG_SCREEN_MENU;
-                }
+                 * retry. Returns to the menu on success (in completion). */
+                op_busy = 1;
+                controller_set_time(working_hour, working_minute, on_set_time_done, 0);
             }
             break;
         default: break;
     }
+}
+
+static void on_set_time_done(uint8_t ok, void* ctx) {
+    (void)ctx;
+    if (ok) {
+        screen = CONFIG_SCREEN_MENU;
+    }
+    op_busy = 0;
 }
 
 static void handle_offset(uint8_t btn) {
@@ -247,13 +260,22 @@ static void handle_offset(uint8_t btn) {
             break;
         case 0x20u | BTN_SELECT:
             /* Commit; on I2C failure stay on the screen so the user can
-             * retry. Returns to the menu on success. */
-            if (controller_write_switching_config(offset_address(offset_target), offset_value)) {
-                screen = CONFIG_SCREEN_MENU;
+             * retry. Returns to the menu on success (in completion). */
+            if (!op_busy) {
+                op_busy = 1;
+                controller_write_switching_config(offset_address(offset_target), offset_value, on_offset_write_done, 0);
             }
             break;
         default: break;
     }
+}
+
+static void on_offset_write_done(uint8_t ok, void* ctx) {
+    (void)ctx;
+    if (ok) {
+        screen = CONFIG_SCREEN_MENU;
+    }
+    op_busy = 0;
 }
 
 static uint8_t offset_address(uint8_t target) {
@@ -263,13 +285,23 @@ static uint8_t offset_address(uint8_t target) {
 static void enter_offset(uint8_t target) {
     offset_target = target;
     /* Read the current calibration so the editor starts on the live value.
-     * On I2C failure default to 0 — the user can still set a new value. */
-    uint8_t v;
-    if (!controller_read_switching_config(offset_address(target), &v)) {
-        v = 0;
-    }
-    offset_value = v;
+     * On I2C failure default to 0 — the user can still set a new value.
+     * Switch to the screen immediately; the value populates when the
+     * completion fires. */
+    offset_value = 0;
     screen = CONFIG_SCREEN_OFFSET;
+    if (!op_busy) {
+        op_busy = 1;
+        controller_read_switching_config(offset_address(target), on_offset_read_done, 0);
+    }
+}
+
+static void on_offset_read_done(uint8_t ok, uint8_t value, void* ctx) {
+    (void)ctx;
+    if (ok) {
+        offset_value = value;
+    }
+    op_busy = 0;
 }
 
 static void load_time(void) {

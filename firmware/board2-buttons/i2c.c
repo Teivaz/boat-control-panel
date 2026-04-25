@@ -68,7 +68,8 @@ void i2c_init(void) {
 
     I2C1CLK = 0x01; // Use Fosc
     /* 400 kHz: BAUD = 64 MHz / (5 * 400 kHz) - 1 */
-    I2C1BAUD = 31; // ~400 kHz
+    // I2C1BAUD = 31; // ~400 kHz
+    I2C1BAUD = 71; // temp
 
     client_mode_enable();
 }

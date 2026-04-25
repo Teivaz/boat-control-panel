@@ -30,11 +30,17 @@ static volatile uint16_t last_physical;
  * changed" detector and as the build buffer for the next transmit. */
 static CommButtonEffect tx_effect[BUTTON_FX_SIDES];
 static CommButtonEffect prev_effect[BUTTON_FX_SIDES];
+/* Snapshot of the effect submitted on the in-flight transaction; on
+ * success completion this becomes the new prev_effect. */
+static CommButtonEffect inflight_effect[BUTTON_FX_SIDES];
+static volatile uint8_t inflight[BUTTON_FX_SIDES];
 
 static void build_side_effect(uint8_t side, CommButtonEffect* out);
 static uint8_t side_address(uint8_t side);
 static uint8_t effects_differ(const CommButtonEffect* a, const CommButtonEffect* b);
 static void refresh_task(TaskId id, void* ctx);
+static void on_effect_done_l(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx);
+static void on_effect_done_r(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx);
 
 void button_fx_init(TaskController* ctrl) {
     for (uint8_t s = 0; s < BUTTON_FX_SIDES; s++) {
@@ -46,6 +52,8 @@ void button_fx_init(TaskController* ctrl) {
         }
         comm_button_effect_init(&tx_effect[s]);
         comm_button_effect_init(&prev_effect[s]);
+        comm_button_effect_init(&inflight_effect[s]);
+        inflight[s] = 0;
         /* Force a first-pass transmit so the panels match our model. */
         prev_effect[s].outputs_76 = 0xFF;
     }
@@ -160,18 +168,47 @@ static void refresh_task(TaskId id, void* ctx) {
         }
     }
 
-    /* Push each side's effect vector if it has changed since the last push.
-     * The button board animates pulsating / flashing locally, so there's no
-     * need to keep retransmitting for animation frames. */
+    /* Push each side's effect vector if it has changed since the last
+     * successfully-sent value. While a transmit for this side is in flight
+     * we skip — when the completion fires it'll reflect that snapshot, and
+     * the next refresh tick will resubmit only if there's still a delta.
+     * The button board animates pulsating / flashing locally, so there's
+     * no need to keep retransmitting for animation frames. */
     for (uint8_t side = 0; side < BUTTON_FX_SIDES; side++) {
+        if (inflight[side]) {
+            continue;
+        }
         build_side_effect(side, &tx_effect[side]);
         if (!effects_differ(&tx_effect[side], &prev_effect[side])) {
             continue;
         }
+        inflight_effect[side] = tx_effect[side];
         CommMessage msg;
-        uint8_t len = comm_build_button_effect(&msg, &tx_effect[side]);
-        if (i2c_transmit(side_address(side), (const uint8_t*)&msg, len) == I2C_RESULT_OK) {
-            prev_effect[side] = tx_effect[side];
+        uint8_t len = comm_build_button_effect(&msg, &inflight_effect[side]);
+        I2cCompletion cb = (side == 0) ? on_effect_done_l : on_effect_done_r;
+        inflight[side] = 1;
+        if (i2c_submit(side_address(side), (const uint8_t*)&msg, len, 0, 0, cb, 0) != I2C_RESULT_OK) {
+            inflight[side] = 0;
         }
     }
+}
+
+static void on_effect_done_l(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx) {
+    (void)rx;
+    (void)rx_len;
+    (void)ctx;
+    if (r == I2C_RESULT_OK) {
+        prev_effect[0] = inflight_effect[0];
+    }
+    inflight[0] = 0;
+}
+
+static void on_effect_done_r(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx) {
+    (void)rx;
+    (void)rx_len;
+    (void)ctx;
+    if (r == I2C_RESULT_OK) {
+        prev_effect[1] = inflight_effect[1];
+    }
+    inflight[1] = 0;
 }

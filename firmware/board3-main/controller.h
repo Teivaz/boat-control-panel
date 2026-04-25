@@ -34,15 +34,19 @@ uint8_t controller_button_base_on(uint8_t side, uint8_t button_idx);
  * populated by at least one successful poll, 0 otherwise. */
 uint8_t controller_time(RtcTime* out);
 
-/* Pushes hour:minute to the RTC and refreshes the shadow on success.
- * Returns 1 on success, 0 on I2C failure or invalid arguments. */
-uint8_t controller_set_time(uint8_t hour, uint8_t minute);
+/* Async UI completions (main context). */
+typedef void (*ControllerOpCompletion)(uint8_t ok, void* ctx);
+typedef void (*ControllerReadCompletion)(uint8_t ok, uint8_t value, void* ctx);
 
-/* Synchronous read/write of a switching-board config byte (e.g. the
- * level-meter offsets at CONFIG_ADDR_LEVEL_OFFSET_WATER / _FUEL). Used by
- * the menu UI to calibrate the float meters at runtime. Returns 1 on
- * success, 0 on I2C failure. */
-uint8_t controller_read_switching_config(uint8_t address, uint8_t* out);
-uint8_t controller_write_switching_config(uint8_t address, uint8_t value);
+/* Push hour:minute to the RTC, refresh the shadow on success. cb fires in
+ * main context with ok=1 on success, 0 on I2C failure. */
+void controller_set_time(uint8_t hour, uint8_t minute, ControllerOpCompletion cb, void* ctx);
+
+/* Async read/write of a switching-board config byte (e.g. the level-meter
+ * offsets at CONFIG_ADDR_LEVEL_OFFSET_WATER / _FUEL). Used by the menu UI
+ * to calibrate the float meters at runtime. Completion fires in main
+ * context. */
+void controller_read_switching_config(uint8_t address, ControllerReadCompletion cb, void* ctx);
+void controller_write_switching_config(uint8_t address, uint8_t value, ControllerOpCompletion cb, void* ctx);
 
 #endif /* CONTROLLER_H */

@@ -31,7 +31,7 @@ static void init(void) {
 
     display_init();
     rgbled_init();
-    i2c_init();
+    i2c_init(&ctrl);
 
     config_init(&ctrl);
     config_mode_init(&ctrl);
@@ -54,6 +54,7 @@ static void init(void) {
 void __interrupt(irq(TMR0), base(8)) TMR0_ISR(void) {
     PIR3bits.TMR0IF = 0;
     task_controller_tick(&ctrl);
+    i2c_tick_ms();
 }
 
 static void tick_init(void) {

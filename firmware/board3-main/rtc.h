@@ -14,13 +14,16 @@ typedef struct {
     uint16_t year;  /* 2000-2099 */
 } RtcTime;
 
-/* Blocking read of the 7 time registers at address 0x00. Returns 1 on
- * success, 0 on any I2C failure (caller should retry on the next tick). */
-uint8_t rtc_read(RtcTime* out);
+/* Async completion: ok==1 means *time is populated. Runs in main context. */
+typedef void (*RtcReadCompletion)(uint8_t ok, const RtcTime* time, void* ctx);
+typedef void (*RtcWriteCompletion)(uint8_t ok, void* ctx);
 
-/* Updates seconds, minutes and hours (24h mode), zeroing the seconds field
- * so the user-set time aligns to a fresh minute. Date / day / month / year
- * are left untouched. Returns 1 on success, 0 on I2C failure. */
-uint8_t rtc_write_time(uint8_t hour, uint8_t minute);
+/* Read the 7 time registers at 0x00. The driver retries once with bus
+ * recovery on transient failure before reporting ok=0 to the callback. */
+void rtc_read(RtcReadCompletion cb, void* ctx);
+
+/* Update seconds (zeroed), minutes and hours (24h mode). Date / day /
+ * month / year are left untouched. Bus-recovery retry on failure. */
+void rtc_write_time(uint8_t hour, uint8_t minute, RtcWriteCompletion cb, void* ctx);
 
 #endif /* RTC_H */

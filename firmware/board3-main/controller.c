@@ -121,11 +121,33 @@ static void poll_battery_task(TaskId id, void* ctx);
 static void poll_levels_task(TaskId id, void* ctx);
 static void poll_sensors_task(TaskId id, void* ctx);
 static void poll_rtc_task(TaskId id, void* ctx);
+static void on_relay_state_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx);
+static void on_battery_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx);
+static void on_levels_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx);
+static void on_sensors_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx);
+static void on_rtc_read_done(uint8_t ok, const RtcTime* t, void* ctx);
 static ActionEffect apply_action(const ButtonAction* a);
 static void recompute_target(void);
 
 static volatile RtcTime rtc_shadow;
 static volatile uint8_t rtc_valid;
+
+/* Per-poll buffers for async I2C. The driver copies tx into its own queue
+ * entry, but rx_buf is referenced by pointer until the completion fires —
+ * keep them file-static. Polls are sequenced by their respective tasks
+ * (no overlap of the same kind). */
+static uint8_t batt_rx[2];
+static uint8_t levels_rx[2];
+static uint8_t sensors_rx[1];
+/* In-flight guards: a poll may fire while the previous transaction is
+ * still queued. Skip the new submit in that case — the task will retry
+ * on the next interval. */
+static volatile uint8_t batt_inflight;
+static volatile uint8_t levels_inflight;
+static volatile uint8_t sensors_inflight;
+static volatile uint8_t relay_inflight;
+static volatile uint8_t rtc_inflight;
+static volatile uint16_t relay_inflight_value;
 
 void controller_init(TaskController* ctrl) {
     power_on = 0;
@@ -142,6 +164,11 @@ void controller_init(TaskController* ctrl) {
     saved_relay_intent = 0;
     saved_nav_mode = NAV_MODE_OFF;
     rtc_valid = 0;
+    batt_inflight = 0;
+    levels_inflight = 0;
+    sensors_inflight = 0;
+    relay_inflight = 0;
+    rtc_inflight = 0;
     task_controller_add(ctrl, TASK_COMM_RETRY, RETRY_TICK_MS, retry_task, 0);
     task_controller_add(ctrl, TASK_POLL_BATTERY, POLL_TICK_MS, poll_battery_task, 0);
     task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task, 0);
@@ -344,7 +371,7 @@ static void recompute_target(void) {
 static void retry_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
-    if (!relay_dirty) {
+    if (!relay_dirty || relay_inflight) {
         return;
     }
 
@@ -355,16 +382,29 @@ static void retry_task(TaskId id, void* ctx) {
 
     CommMessage msg;
     uint8_t len = comm_build_relay_state(&msg, snapshot);
-    if (i2c_transmit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, len) == I2C_RESULT_OK) {
+    relay_inflight_value = snapshot;
+    relay_inflight = 1;
+    if (i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, len, 0, 0, on_relay_state_done, 0) !=
+        I2C_RESULT_OK) {
+        relay_inflight = 0;
+    }
+}
+
+static void on_relay_state_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx) {
+    (void)rx;
+    (void)rx_len;
+    (void)ctx;
+    if (r == I2C_RESULT_OK) {
         /* Only clear the flag if the value we actually sent still matches
-         * the current target — a producer could have bumped it while we
-         * were transmitting. */
+         * the current target — a producer could have bumped it while the
+         * transaction was in flight. */
         INTERRUPT_PUSH;
-        if (relay_target == snapshot) {
+        if (relay_target == relay_inflight_value) {
             relay_dirty = 0;
         }
         INTERRUPT_POP;
     }
+    relay_inflight = 0;
 }
 
 /* ============================================================================
@@ -377,44 +417,88 @@ static void retry_task(TaskId id, void* ctx) {
 static void poll_battery_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
+    if (batt_inflight) {
+        return;
+    }
     uint8_t req = COMM_BATTERY_READ;
-    uint8_t rx[2];
-    if (i2c_receive(COMM_ADDRESS_SWITCHING, &req, 1, rx, sizeof(rx)) == I2C_RESULT_OK) {
+    batt_inflight = 1;
+    if (i2c_submit(COMM_ADDRESS_SWITCHING, &req, 1, batt_rx, sizeof(batt_rx), on_battery_done, 0) != I2C_RESULT_OK) {
+        batt_inflight = 0;
+    }
+}
+
+static void on_battery_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx) {
+    (void)ctx;
+    if (r == I2C_RESULT_OK && rx_len >= 2) {
         battery_mv = (uint16_t)(rx[0] | ((uint16_t)rx[1] << 8));
     }
+    batt_inflight = 0;
 }
 
 static void poll_levels_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
+    if (levels_inflight) {
+        return;
+    }
     uint8_t req = COMM_LEVELS_READ;
-    uint8_t rx[2];
-    if (i2c_receive(COMM_ADDRESS_SWITCHING, &req, 1, rx, sizeof(rx)) == I2C_RESULT_OK) {
+    levels_inflight = 1;
+    if (i2c_submit(COMM_ADDRESS_SWITCHING, &req, 1, levels_rx, sizeof(levels_rx), on_levels_done, 0) !=
+        I2C_RESULT_OK) {
+        levels_inflight = 0;
+    }
+}
+
+static void on_levels_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx) {
+    (void)ctx;
+    if (r == I2C_RESULT_OK && rx_len >= 2) {
         levels[0] = rx[0];
         levels[1] = rx[1];
     }
+    levels_inflight = 0;
 }
 
 static void poll_sensors_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
-    uint8_t req = COMM_SENSORS_READ;
-    uint8_t rx;
-    if (i2c_receive(COMM_ADDRESS_SWITCHING, &req, 1, &rx, 1) == I2C_RESULT_OK) {
-        sensor_state = rx;
+    if (sensors_inflight) {
+        return;
     }
+    uint8_t req = COMM_SENSORS_READ;
+    sensors_inflight = 1;
+    if (i2c_submit(COMM_ADDRESS_SWITCHING, &req, 1, sensors_rx, sizeof(sensors_rx), on_sensors_done, 0) !=
+        I2C_RESULT_OK) {
+        sensors_inflight = 0;
+    }
+}
+
+static void on_sensors_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx) {
+    (void)ctx;
+    if (r == I2C_RESULT_OK && rx_len >= 1) {
+        sensor_state = rx[0];
+    }
+    sensors_inflight = 0;
 }
 
 static void poll_rtc_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
-    RtcTime t;
-    if (rtc_read(&t)) {
+    if (rtc_inflight) {
+        return;
+    }
+    rtc_inflight = 1;
+    rtc_read(on_rtc_read_done, 0);
+}
+
+static void on_rtc_read_done(uint8_t ok, const RtcTime* t, void* ctx) {
+    (void)ctx;
+    if (ok) {
         INTERRUPT_PUSH;
-        rtc_shadow = t;
+        rtc_shadow = *t;
         rtc_valid = 1;
         INTERRUPT_POP;
     }
+    rtc_inflight = 0;
 }
 
 uint8_t controller_time(RtcTime* out) {
@@ -427,30 +511,104 @@ uint8_t controller_time(RtcTime* out) {
     return 1;
 }
 
-uint8_t controller_set_time(uint8_t hour, uint8_t minute) {
-    if (!rtc_write_time(hour, minute)) {
-        return 0;
+/* Single in-flight UI operation. The menu can only have one menu action
+ * pending at a time, so a single slot suffices. */
+static struct {
+    ControllerOpCompletion op_cb;
+    ControllerReadCompletion read_cb;
+    void* ctx;
+    uint8_t rx;
+} ui_op;
+
+static void on_set_time_write_done(uint8_t ok, void* ctx);
+static void on_set_time_refresh_done(uint8_t ok, const RtcTime* t, void* ctx);
+static void on_ui_config_write_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx);
+static void on_ui_config_read_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx);
+
+void controller_set_time(uint8_t hour, uint8_t minute, ControllerOpCompletion cb, void* ctx) {
+    ui_op.op_cb = cb;
+    ui_op.ctx = ctx;
+    rtc_write_time(hour, minute, on_set_time_write_done, 0);
+}
+
+static void on_set_time_write_done(uint8_t ok, void* ctx) {
+    (void)ctx;
+    if (!ok) {
+        ControllerOpCompletion cb = ui_op.op_cb;
+        void* user_ctx = ui_op.ctx;
+        ui_op.op_cb = 0;
+        if (cb) {
+            cb(0, user_ctx);
+        }
+        return;
     }
     /* Refresh the shadow immediately so the UI reflects the new time
      * without waiting for the next poll tick. */
-    RtcTime t;
-    if (rtc_read(&t)) {
+    rtc_read(on_set_time_refresh_done, 0);
+}
+
+static void on_set_time_refresh_done(uint8_t ok, const RtcTime* t, void* ctx) {
+    (void)ctx;
+    if (ok) {
         INTERRUPT_PUSH;
-        rtc_shadow = t;
+        rtc_shadow = *t;
         rtc_valid = 1;
         INTERRUPT_POP;
     }
-    return 1;
+    ControllerOpCompletion cb = ui_op.op_cb;
+    void* user_ctx = ui_op.ctx;
+    ui_op.op_cb = 0;
+    if (cb) {
+        cb(1, user_ctx); /* write succeeded; refresh failure is non-fatal */
+    }
 }
 
-uint8_t controller_read_switching_config(uint8_t address, uint8_t* out) {
+void controller_read_switching_config(uint8_t address, ControllerReadCompletion cb, void* ctx) {
+    ui_op.read_cb = cb;
+    ui_op.ctx = ctx;
     CommMessage msg;
     uint8_t len = comm_build_config_read(&msg, address);
-    return i2c_receive(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, len, out, 1) == I2C_RESULT_OK;
+    if (i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, len, &ui_op.rx, 1, on_ui_config_read_done, 0) !=
+        I2C_RESULT_OK) {
+        ui_op.read_cb = 0;
+        if (cb) {
+            cb(0, 0, ctx);
+        }
+    }
 }
 
-uint8_t controller_write_switching_config(uint8_t address, uint8_t value) {
+static void on_ui_config_read_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx) {
+    (void)ctx;
+    ControllerReadCompletion cb = ui_op.read_cb;
+    void* user_ctx = ui_op.ctx;
+    ui_op.read_cb = 0;
+    if (cb) {
+        cb(r == I2C_RESULT_OK && rx_len >= 1, (rx_len >= 1) ? rx[0] : 0, user_ctx);
+    }
+}
+
+void controller_write_switching_config(uint8_t address, uint8_t value, ControllerOpCompletion cb, void* ctx) {
+    ui_op.op_cb = cb;
+    ui_op.ctx = ctx;
     CommMessage msg;
     uint8_t len = comm_build_config(&msg, address, value);
-    return i2c_transmit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, len) == I2C_RESULT_OK;
+    if (i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, len, 0, 0, on_ui_config_write_done, 0) !=
+        I2C_RESULT_OK) {
+        ui_op.op_cb = 0;
+        if (cb) {
+            cb(0, ctx);
+        }
+    }
+}
+
+static void on_ui_config_write_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx) {
+    (void)rx;
+    (void)rx_len;
+    (void)ctx;
+    ControllerOpCompletion cb = ui_op.op_cb;
+    void* user_ctx = ui_op.ctx;
+    ui_op.op_cb = 0;
+    if (cb) {
+        cb(r == I2C_RESULT_OK, user_ctx);
+    }
 }
