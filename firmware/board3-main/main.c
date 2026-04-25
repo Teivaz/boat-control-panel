@@ -27,11 +27,12 @@ static void init(void) {
     ANSELAbits.ANSELA7 = 0;
     WPUAbits.WPUA7 = 1;
 
+    task_controller_init(&ctrl);
+
     display_init();
     rgbled_init();
     i2c_init();
 
-    task_controller_init(&ctrl);
     config_init(&ctrl);
     config_mode_init(&ctrl);
     comm_init();
