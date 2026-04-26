@@ -1,5 +1,6 @@
 # ── Toolchain (supplied by build.sh / Docker CMD) ────────────────────────────
 MP_CC   ?= xc8-cc
+MP_AR   ?= xc8-ar
 DFP_DIR ?=
 CONF    ?= default
 
@@ -17,6 +18,7 @@ LIBCOMM_OBJS = $(patsubst $(LIBCOMM_DIR)/%.c,$(LIBCOMM_DIR)/build/$(CONF)/%.p1,$
 U8G2_DIR  = u8g2
 U8G2_SRCS = $(wildcard $(U8G2_DIR)/*.c)
 U8G2_OBJS = $(patsubst $(U8G2_DIR)/%.c,$(OBJDIR)/u8g2/%.p1,$(U8G2_SRCS))
+U8G2_LIB  = $(OBJDIR)/u8g2/libu8g2.a
 
 SRCS = $(wildcard *.c)
 OBJS = $(addprefix $(OBJDIR)/,$(SRCS:.c=.p1))
@@ -60,15 +62,19 @@ LDFLAGS = \
 # ── Targets ───────────────────────────────────────────────────────────────────
 .PHONY: dist clean libcomm
 
-dist: libcomm $(DISTDIR)/$(TARGET).production.hex
+dist: libcomm $(U8G2_LIB) $(DISTDIR)/$(TARGET).production.hex
 
 libcomm:
 	$(MAKE) -C $(LIBCOMM_DIR) dist DEFS="$(DEFS)"
 
 # XC8 generates the .hex alongside the .elf as a side-effect of linking
-$(DISTDIR)/$(TARGET).production.hex: $(OBJS) $(U8G2_OBJS) $(LIBCOMM_OBJS)
+$(DISTDIR)/$(TARGET).production.hex: $(OBJS) $(LIBCOMM_OBJS) $(U8G2_LIB)
 	@$(MKDIR) $(DISTDIR)
-	$(MP_CC) $(CFLAGS) $(LDFLAGS) -o $(DISTDIR)/$(TARGET).production.elf $(OBJS) $(U8G2_OBJS) $(LIBCOMM_OBJS)
+	$(MP_CC) $(CFLAGS) $(LDFLAGS) -o $(DISTDIR)/$(TARGET).production.elf $(OBJS) $(LIBCOMM_OBJS) $(U8G2_LIB)
+
+# u8g2 static library — archive .p1 objects
+$(U8G2_LIB): $(U8G2_OBJS)
+	$(MP_AR) r $@ $(U8G2_OBJS)
 
 $(OBJDIR)/%.p1: %.c Makefile
 	@$(MKDIR) $(OBJDIR)

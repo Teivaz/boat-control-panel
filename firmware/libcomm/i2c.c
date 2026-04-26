@@ -15,10 +15,13 @@
 
 /* ── Internal constants ────────────────────────────────────────────── */
 
-/* Fosc / (4 * (BAUD + 1)) = 400 kHz at Fosc = 64 MHz → BAUD = 39.
+/* Baud divisor for I2C Fast mode.  The PIC18F I2C host clock is
+ * Fosc / (5 * (BAUD + 1)).  At Fosc = 64 MHz:
+ *   BAUD = 31  → 400 kHz
+ *   BAUD = 71  → ~178 kHz (conservative, better signal integrity)
  * Override before compiling if the bus needs a different rate. */
 #ifndef I2C_BAUD
-#define I2C_BAUD 39
+#define I2C_BAUD 71
 #endif
 
 #define I2C_DEADLINE_BYTE_MS 5
@@ -170,6 +173,7 @@ I2cResult i2c_submit(uint8_t address, const uint8_t* tx, uint8_t tx_len, uint8_t
     }
 
     q_tail = q_next(q_tail);
+    try_dispatch(); 
     GIE = 1;
     return I2C_RESULT_OK;
 }
@@ -192,10 +196,14 @@ void i2c_poll(void) {
         }
     }
 
-    /* Phase 2 — start next op if bus is free. */
+    /* Phase 2 — start next op if bus is free.
+     * Interrupts disabled to prevent a race with try_dispatch called
+     * from i2c_tick_ms (backoff expiry) or client_handle_event (PCIF). */
+    GIE = 0;
     if (host_state == HOST_IDLE && q_head != q_tail) {
         try_dispatch();
     }
+    GIE = 1;
 }
 
 /* ── Dispatch & start ──────────────────────────────────────────────── */
