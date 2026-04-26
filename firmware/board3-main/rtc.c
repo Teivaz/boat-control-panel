@@ -1,6 +1,7 @@
 #include "rtc.h"
 
 #include "i2c.h"
+#include "i2c_board.h"
 #include "libcomm.h"
 
 /* Single in-flight DS3231 transaction. Both read and write callers are

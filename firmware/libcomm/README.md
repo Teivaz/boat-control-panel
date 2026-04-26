@@ -1,327 +1,146 @@
-# I2C Multi-Master Host Driver
+# libcomm — Shared I2C Protocol Library
 
-Interrupt-driven I2C host driver with DMA for PIC18F27/47/57Q84.
+Shared library for multi-board I2C communication on PIC18F27/47/57Q84.
 
-## Hardware used
+## Components
 
-| Resource | Role |
-|----------|------|
-| I2C1     | Multi-master host, 7-bit addressing, 400 kHz Fast mode |
-| DMA7     | TX path: RAM buffer → I2C1TXB |
-| DMA8     | RX path: I2C1RXB → RAM buffer |
-| Timer1   | 1 ms tick for software operation timeouts |
+| File | Description |
+|------|-------------|
+| `i2c.h` / `i2c.c` | Async, interrupt-driven I2C multi-master driver (host + client) |
+| `libcomm.h` / `libcomm.c` | Protocol message builders, parsers, and type definitions |
+| `libcomm_interface.h` / `libcomm_interface.c` | High-level send/dispatch layer over I2C + libcomm |
+| `task.h` / `task.c` | Cooperative task scheduler with ISR-safe deferred callbacks |
 
-## How it works
+## I2C Driver (`i2c.h`)
+
+Interrupt-driven I2C host + client driver on I2C1.  400 kHz Fast mode,
+7-bit addressing, multi-master with automatic collision retry.
+
+No pin setup, no ISR definitions — boards provide those.
+
+### API
+
+```c
+void i2c_init(uint8_t client_addr);     /* 0 = host-only                */
+void i2c_set_rx_handler(I2cRxHandler);   /* slave write callback (ISR)   */
+void i2c_set_read_handler(I2cReadHandler); /* slave read callback (ISR)  */
+I2cResult i2c_submit(addr, tx, tx_len, rx_buf, rx_len, cb, ctx);
+void i2c_poll(void);                     /* main loop — fires callbacks  */
+void i2c_tick_ms(void);                  /* call from 1 ms ISR           */
+void i2c_isr(void);                      /* call from I2C1/TX/RX vector  */
+void i2c_error_isr(void);               /* call from I2C1E vector       */
+```
+
+### How it works
 
 ```
     Main loop                       ISR context
     ─────────                       ───────────
 
-  i2c_submit_write() ──┐
-  i2c_submit_read()  ──┤
-                       ▼
-                ┌────────────┐
-                │ Pending Q  │  ring buffer, 4 slots
-                │ [0] [1]... │  each with 16-byte DMA buffer
-                └─────┬──────┘
-                      │  i2c_poll()
-                      ▼
-                ┌────────────┐
-                │ Active op  │  owns the I2C bus
-                │ DMA7 → TX  │  zero CPU during data phase
-                │ RX → DMA8  │
-                └─────┬──────┘
-                      │  i2c_i2c1_isr()  sets status flags
-                      │  i2c_timer1_isr() enforces timeout
-                      ▼
-                ┌────────────┐
-                │ Completed  │  i2c_poll() fires read callback
-                └────────────┘  and starts next queued op
+  i2c_submit() ──────┐
+                     ▼
+              ┌────────────┐
+              │ Pending Q  │  ring buffer, 8 slots
+              │ [0] [1]... │  each with 8-byte TX buffer
+              └─────┬──────┘
+                    │  i2c_poll()
+                    ▼
+              ┌────────────┐
+              │ Active op  │  owns the I2C bus
+              │ byte-level │  ISR shifts TX/RX per byte
+              └─────┬──────┘
+                    │  i2c_isr()       sets status flags
+                    │  i2c_tick_ms()   enforces timeout
+                    ▼
+              ┌────────────┐
+              │ Completed  │  i2c_poll() fires callback
+              └────────────┘  and starts next queued op
 ```
 
-All byte-level clocking is handled by DMA. The ISRs do only flag
-manipulation — no loops, no callbacks, no unbounded work. `i2c_poll()`
-is O(1) per call.
-
-## Context separation
+### Context separation
 
 | Function | Context | Notes |
 |----------|---------|-------|
 | `i2c_init` | Main | Call once before super-loop |
-| `i2c_submit_write` | Main | Copies data into queue, returns immediately |
-| `i2c_submit_read` | Main | Queues read, callback fires from `i2c_poll` |
-| `i2c_poll` | Main | Dequeues ops, starts transfers, fires callbacks |
-| `i2c_timer1_isr` | ISR | 1 ms tick, timeout enforcement |
-| `i2c_i2c1_isr` | ISR | Bus event handler (collision, NACK, Stop, timeout) |
+| `i2c_set_rx_handler` | Main | Set slave write handler |
+| `i2c_set_read_handler` | Main | Set slave read handler |
+| `i2c_submit` | Main | Copies tx into queue, returns immediately |
+| `i2c_poll` | Main | Fires callbacks, starts next op |
+| `i2c_tick_ms` | ISR | 1 ms tick, timeout enforcement |
+| `i2c_isr` | ISR | Bus event handler |
+| `i2c_error_isr` | ISR | Error handler (NACK, collision) |
 
 No function is called from both contexts.
 
-## Usage
-
-```c
-#include "i2c.h"
-
-static I2CDriver i2c;
-
-void read_done(uint8_t addr, const uint8_t *data, uint8_t len,
-               I2CStatus status, void *ctx)
-{
-    if (status == I2C_STATUS_OK) {
-        /* process data[0..len-1] — copy it, the pointer is
-           only valid during this callback */
-    }
-}
-
-void main(void)
-{
-    /* ... pin setup, oscillator, etc ... */
-    i2c_init(&i2c);
-
-    /* Write 3 bytes to device 0x50 (fire and forget) */
-    uint8_t tx[] = {0x00, 0x42, 0x43};
-    i2c_submit_write(&i2c, 0x50, tx, sizeof(tx), 100);
-
-    /* Read 4 bytes from device 0x68 */
-    i2c_submit_read(&i2c, 0x68, 4, 100, read_done, NULL);
-
-    for (;;) {
-        i2c_poll(&i2c);
-        /* ... other work ... */
-    }
-}
-
-/* In your interrupt dispatcher: */
-void __interrupt(irq(TMR1)) tmr1_handler(void) {
-    i2c_timer1_isr(&i2c);
-}
-void __interrupt(irq(I2C1), irq(I2C1E)) i2c1_handler(void) {
-    i2c_i2c1_isr(&i2c);
-}
-```
-
-## Configuration
+### Configuration
 
 Override before including `i2c.h`:
 
 | Define | Default | Description |
 |--------|---------|-------------|
-| `I2C_QUEUE_SIZE` | 4 | Queue depth (must be power of 2) |
-| `I2C_MAX_PAYLOAD` | 16 | Max bytes per operation (DMA buffer size) |
-| `I2C_DEFAULT_RETRIES` | 3 | Retry count on bus collision |
+| `I2C_QUEUE_SIZE` | 8 | Queue depth (must be power of 2) |
+| `I2C_TX_MAX` | 8 | Max bytes per TX payload |
+| `I2C_CLIENT_BUF_SIZE` | 8 | Max inbound message size (client mode) |
+| `I2C_RETRY_COUNT` | 3 | Retry count on bus collision / timeout |
 
-## State diagrams
+### Board integration
 
-### Operation lifecycle
+```c
+// In main.c:
+i2c_pins_init();                  // board-specific pin setup
+i2c_init(comm_address());         // 0 = host-only
+comm_interface_init();            // registers protocol dispatchers
 
-```
-                  i2c_submit_write()
-                  i2c_submit_read()
-                         │
-                         ▼
-                   ┌──────────┐
-                   │ PENDING  │  in queue, waiting for bus
-                   └────┬─────┘
-                        │ i2c_poll() dequeues, calls start_transfer()
-                        ▼
-                   ┌──────────┐
-              ┌───▶│  ACTIVE  │  DMA + I2C hardware own the bus
-              │    └──┬───┬───┘
-              │       │   │
-              │       │   ├─── PCIF (Stop complete) ──────▶ OK
-              │       │   ├─── NACKIF ────────────────────▶ NACK
-              │       │   ├─── BTOIF (hw bus timeout) ────▶ TIMEOUT
-              │       │   ├─── timer_ms reaches 0 ────────▶ TIMEOUT
-              │       │   └─── BCLIF (collision) ─────────▶ BUS_BUSY
-              │       │                                        │
-              │       │              retries > 0?              │
-              │       │              ┌────┴────┐               │
-              │       │              │ yes     │ no            │
-              │       │              ▼         ▼               │
-              │       │         (re-arm)    ERROR              │
-              │       │            │                           │
-              └───────┘            └───────────────────────────┘
-                  retry
+// ISR definitions:
+void __interrupt(irq(I2C1TX, I2C1RX, I2C1), base(8)) I2C1_ISR(void) {
+    i2c_isr();
+}
+void __interrupt(irq(I2C1E), base(8)) I2C1_ERROR_ISR(void) {
+    i2c_error_isr();
+}
 
-         Terminal states: OK, NACK, TIMEOUT, ERROR
-         i2c_poll() fires read callback (if any) then advances queue.
+// Main loop:
+while (1) {
+    i2c_poll();
+    task_controller_poll(&ctrl);
+}
 ```
 
-### Write transaction (bus level)
+## Protocol Interface (`libcomm_interface.h`)
 
-```
-  Main loop          I2C1 Hardware + DMA7             Client
-  ─────────          ─────────────────────            ──────
-      │
-      │ start_transfer():
-      │   I2C1ADB1 = addr<<1
-      │   I2C1TXB  = buf[0]
-      │   I2C1CNT  = len
-      │   arm DMA7 for buf[1..len-1]
-      │   set S bit
-      │
-      │               ┌─── wait for bus free (BFRE) ───┐
-      │               │                                │
-      │               ▼                                │
-      │         [S] Start condition                    │
-      │               │                                │
-      │               ▼                                │
-      │         [ADDR+W] ──────────────────────▶ match?
-      │               │                           │
-      │               │                      ◀── ACK ──
-      │               ▼
-      │         [buf[0]] from TXB ─────────▶ receive
-      │               │                       │
-      │               │                  ◀── ACK ──
-      │               ▼
-      │         [buf[1]] DMA7 loads TXB ───▶ receive     ← zero CPU
-      │               │                       │
-      │               │                  ◀── ACK ──
-      │              ...                     ...
-      │               │
-      │         [buf[n-1]] last byte ──────▶ receive
-      │               │                       │
-      │               │  I2C1CNT = 0     ◀── ACK ──
-      │               ▼
-      │         [P] Stop condition
-      │               │
-      │               ▼
-      │          PCIF fires ──▶ i2c_i2c1_isr()
-      │                          status = OK
-      │                          active = 0
-      │
-      │ i2c_poll():
-      │   advance queue head
-      ▼
+High-level layer that connects the I2C driver with the protocol
+builders/parsers.  Provides:
+
+1. **Send functions** — `comm_send_*()` for every protocol command
+2. **Dispatchers** — automatically parse incoming I2C messages and
+   call typed adopter callbacks
+3. **Adopter callbacks** — board implements `comm_on_*()` for the
+   commands it handles; empty stubs for the rest
+
+### Outbound
+
+```c
+// Write commands (fire-and-forget):
+comm_send_button_changed(button_id, pressed, mode);  // → main board
+comm_send_relay_state(relays);                        // → switching board
+comm_send_button_effect(addr, &effect);               // → button board
+
+// Read commands (async response via callback):
+comm_send_battery_read();     // response → comm_on_battery_read_response()
+comm_send_config_read(addr, config_addr);
 ```
 
-### Read transaction (bus level)
+### Inbound (adopter implements)
 
+```c
+// ISR context — incoming writes:
+void comm_on_button_changed_received(const CommButtonChanged* event);
+void comm_on_relay_changed_received(const CommRelayChanged* event);
+void comm_on_reset(void);
+
+// ISR context — incoming read requests:
+uint8_t comm_on_config_read_request(uint8_t address, uint8_t* value);
+
+// Main-loop context — read responses:
+void comm_on_battery_read_response(CommBattery* battery);
 ```
-  Main loop          I2C1 Hardware + DMA8             Client
-  ─────────          ─────────────────────            ──────
-      │
-      │ start_transfer():
-      │   I2C1ADB1 = addr<<1 | 1
-      │   I2C1CNT  = len
-      │   arm DMA8 for buf[0..len-1]
-      │   set S bit
-      │
-      │         [S] Start condition
-      │               │
-      │               ▼
-      │         [ADDR+R] ──────────────────────▶ match?
-      │               │                           │
-      │               │                      ◀── ACK ──
-      │               ▼
-      │         host clocks ◀───────────── [data 0]      ← zero CPU
-      │         DMA8 copies to buf[0]         │
-      │         ACK (CNT > 0) ─────────────▶  │
-      │               │
-      │         host clocks ◀───────────── [data 1]
-      │         DMA8 copies to buf[1]
-      │         ACK (CNT > 0) ─────────────▶
-      │              ...                     ...
-      │               │
-      │         host clocks ◀───────────── [data n-1]
-      │         DMA8 copies to buf[n-1]
-      │         NACK (CNT = 0, ACKCNT=1) ──▶  │
-      │               │
-      │               ▼
-      │         [P] Stop condition
-      │               │
-      │               ▼
-      │          PCIF fires ──▶ i2c_i2c1_isr()
-      │                          status = OK
-      │                          active = 0
-      │
-      │ i2c_poll():
-      │   callback(addr, buf, len, OK, ctx)
-      │   advance queue head
-      ▼
-```
-
-### Bus collision (multi-master arbitration)
-
-```
-  This host           Bus                  Other host
-  ─────────           ───                  ──────────
-      │                                        │
-      │──── [S] Start ────────────── [S] Start─┤
-      │                                        │
-      │──── [ADDR] bit 7 ──────── [ADDR] bit 7─┤  both drive SDA
-      │──── [ADDR] bit 6 ──────── [ADDR] bit 6─┤
-      │──── [ADDR] bit 5 = 1      [ADDR] bit 5 = 0 ─┤
-      │         │                                │
-      │    SDA reads 0, but                      │
-      │    we drove 1 → mismatch!                │
-      │         │                                │
-      │    BCLIF set                        (wins, continues)
-      │         │
-      │    i2c_i2c1_isr():
-      │      status = BUS_BUSY
-      │      active = 0
-      │         │
-      │    i2c_poll():
-      │      retries > 0?
-      │      ├── yes: retries--, re-arm
-      │      └── no:  status = ERROR, advance queue
-      ▼
-```
-
-### Timeout sequence
-
-```
-  Main loop          Timer1 ISR              I2C bus
-  ─────────          ──────────              ────────
-      │
-      │ start_transfer():
-      │   timer_ms = timeout_ms
-      │
-      │               ├─ 1 ms ─▶ timer_ms--
-      │               ├─ 1 ms ─▶ timer_ms--
-      │              ...
-      │               ├─ 1 ms ─▶ timer_ms-- → 0!
-      │               │
-      │               │  i2c_timer1_isr():
-      │               │    disable DMA7, DMA8
-      │               │    I2C1CON0.EN = 0   ──▶  bus released
-      │               │    I2C1CON0.EN = 1        (SDA/SCL float high)
-      │               │    status = TIMEOUT
-      │               │    active = 0
-      │               │
-      │ i2c_poll():
-      │   deliver TIMEOUT to callback (reads)
-      │   advance queue, start next op
-      ▼
-```
-
-## Bus collision handling
-
-On a multi-master bus, two hosts may start transmitting simultaneously.
-The I2C hardware detects the collision (BCLIF) and the ISR marks the
-operation as `I2C_STATUS_BUS_BUSY`. On the next `i2c_poll()`, if retries
-remain, the same operation is re-armed. After all retries are exhausted,
-the status becomes `I2C_STATUS_ERROR`.
-
-## Timeout
-
-Each operation carries a `timeout_ms` value. Timer1 decrements a
-countdown each millisecond. When it reaches zero the driver disables
-DMA and resets the I2C module to release the bus. The operation status
-becomes `I2C_STATUS_TIMEOUT`.
-
-## Return codes
-
-`i2c_submit_write` / `i2c_submit_read`:
-
-| Code | Meaning |
-|------|---------|
-| 0 | Queued successfully |
-| -1 | Queue full |
-| -2 | Invalid length (0 or > I2C_MAX_PAYLOAD) |
-
-## Files
-
-- `lib/i2c.h` — public types and API
-- `lib/i2c.c` — implementation
-- `lib/README.md` — this file

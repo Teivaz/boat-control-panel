@@ -2,6 +2,8 @@
 
 #include "libcomm.h" /* INTERRUPT_PUSH / INTERRUPT_POP */
 
+#include <xc.h>
+
 static Task* find_slot(TaskController* c, TaskId id) {
     for (uint8_t i = 0; i < TASK_MAX_COUNT; i++) {
         if (c->tasks[i].id == id) {

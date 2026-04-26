@@ -293,7 +293,7 @@ void comm_button_effect_init(CommButtonEffect* effect) {
 /* output layout: byte_index = (7 - output_index) / 2
  * even index -> lower nibble, odd index -> upper nibble */
 int8_t comm_button_effect_set(CommButtonEffect* effect, uint8_t output_index, CommButtonOutputEffect value) {
-    if (effect == NULL || output_index > 7) {
+    if (effect == 0 || output_index > 7) {
         return -1;
     }
     uint8_t* bytes = (uint8_t*)effect;
@@ -308,7 +308,7 @@ int8_t comm_button_effect_set(CommButtonEffect* effect, uint8_t output_index, Co
 }
 
 int8_t comm_button_effect_get(const CommButtonEffect* effect, uint8_t output_index, CommButtonOutputEffect* value) {
-    if (effect == NULL || output_index > 7 || value == NULL) {
+    if (effect == 0 || output_index > 7 || value == 0) {
         return -1;
     }
     const uint8_t* bytes = (const uint8_t*)effect;

@@ -6,16 +6,16 @@
 #include "display.h"
 #include "display_text.h"
 #include "i2c.h"
+#include "i2c_board.h"
 #include "indicator.h"
 #include "interrupt.h"
 #include "libcomm.h"
+#include "libcomm_interface.h"
 #include "rgbled.h"
 #include "task.h"
 #include "task_ids.h"
 
 #include <xc.h>
-
-#define _XTAL_FREQ 64000000UL
 
 static TaskController ctrl;
 
@@ -31,7 +31,10 @@ static void init(void) {
 
     display_init();
     rgbled_init();
-    i2c_init(&ctrl);
+
+    i2c_pins_init();
+    i2c_init(comm_address());
+    comm_interface_init();
 
     config_init(&ctrl);
     config_mode_init(&ctrl);
@@ -46,15 +49,18 @@ static void init(void) {
     interrupt_init();
 }
 
-/* TMR0 in 8-bit mode clocked from Fosc/4 with /128 prescaler gives
- * 16 MHz / 128 ≈ 125 kHz (~1.024 ms per count). Match value 124 in TMR0H
- * yields a 1 ms period interrupt.
- *
- * ISR context. */
 void __interrupt(irq(TMR0), base(8)) TMR0_ISR(void) {
     PIR3bits.TMR0IF = 0;
     task_controller_tick(&ctrl);
     i2c_tick_ms();
+}
+
+void __interrupt(irq(I2C1TX, I2C1RX, I2C1), base(8)) I2C1_ISR(void) {
+    i2c_isr();
+}
+
+void __interrupt(irq(I2C1E), base(8)) I2C1_ERROR_ISR(void) {
+    i2c_error_isr();
 }
 
 static void tick_init(void) {
@@ -75,6 +81,7 @@ static void tick_init(void) {
 void main(void) {
     init();
     while (1) {
+        i2c_poll();
         task_controller_poll(&ctrl);
     }
 }

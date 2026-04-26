@@ -19,7 +19,7 @@ void interrupt_init(void) {
 }
 
 /* Unused vectors reset the device. Owned vectors are defined alongside
- * the peripheral they serve: TMR0 in main.c, I2C1 in i2c.c. */
+ * the peripheral they serve: TMR0 + I2C1 in main.c. */
 void __interrupt(irq(IOC), base(8)) IOC_ISR() {
     __asm("RESET");
 }

@@ -10,6 +10,8 @@
 #include "task.h"
 #include "task_ids.h"
 
+#include <xc.h>
+
 /* ============================================================================
  * Relay assignment (main-board convention; the switching board driver simply
  * maps bit N to its Nth coil). Callers should address these via the macros so
@@ -267,7 +269,7 @@ uint8_t controller_button_base_on(uint8_t side, uint8_t button_idx) {
         return 0;
     }
 
-    const ButtonAction* table = NULL;
+    const ButtonAction* table = 0;
     if (side == 0) {
         table = left_actions;
     } else if (side == 1) {
