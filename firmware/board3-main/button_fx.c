@@ -18,7 +18,7 @@ typedef enum {
 
 typedef struct {
     uint8_t state;
-    uint8_t deadline_ticks;   /* counts down in FX_PENDING */
+    uint8_t deadline_ticks; /* counts down in FX_PENDING */
     uint16_t expected_mask;
     uint16_t expected_value;
 } Slot;

@@ -143,11 +143,20 @@ void config_mode_on_button_pressed(uint8_t side, uint8_t button_idx) {
     }
 
     switch (screen) {
-        case CONFIG_SCREEN_MENU:   handle_menu(btn); break;
-        case CONFIG_SCREEN_NAV:    handle_nav(btn); break;
-        case CONFIG_SCREEN_TIME:   handle_time(btn); break;
-        case CONFIG_SCREEN_OFFSET: handle_offset(btn); break;
-        default: break;
+        case CONFIG_SCREEN_MENU:
+            handle_menu(btn);
+            break;
+        case CONFIG_SCREEN_NAV:
+            handle_nav(btn);
+            break;
+        case CONFIG_SCREEN_TIME:
+            handle_time(btn);
+            break;
+        case CONFIG_SCREEN_OFFSET:
+            handle_offset(btn);
+            break;
+        default:
+            break;
     }
 }
 
@@ -179,7 +188,8 @@ static void handle_menu(uint8_t btn) {
                 enter_offset(1);
             }
             break;
-        default: break;
+        default:
+            break;
     }
 }
 
@@ -198,7 +208,8 @@ static void handle_nav(uint8_t btn) {
             working_mask ^= (uint8_t)(1u << nav_cursor);
             working_mask &= NAV_LIGHT_ALL;
             break;
-        default: break;
+        default:
+            break;
     }
 }
 
@@ -235,7 +246,8 @@ static void handle_time(uint8_t btn) {
                 controller_set_time(working_hour, working_minute, on_set_time_done, 0);
             }
             break;
-        default: break;
+        default:
+            break;
     }
 }
 
@@ -266,7 +278,8 @@ static void handle_offset(uint8_t btn) {
                 controller_write_switching_config(offset_address(offset_target), offset_value, on_offset_write_done, 0);
             }
             break;
-        default: break;
+        default:
+            break;
     }
 }
 

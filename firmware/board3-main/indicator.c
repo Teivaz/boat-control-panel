@@ -71,7 +71,7 @@ static void render_config(void) {
     for (uint8_t i = 0; i < LED_COUNT; i++) {
         uint8_t on = (enabled & (uint8_t)(1u << i)) != 0;
         if (i == cursor) {
-            leds[i].red = on ? 0 : DIM_BRIGHTNESS*2;
+            leds[i].red = on ? 0 : DIM_BRIGHTNESS * 2;
             leds[i].green = on ? ON_BRIGHTNESS : DIM_BRIGHTNESS;
             leds[i].blue = 0;
         } else {

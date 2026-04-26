@@ -75,7 +75,7 @@ static volatile uint8_t q_tail; /* producer */
 static volatile HostState host_state;
 static volatile uint8_t tx_idx;
 static volatile uint8_t rx_idx;
-static volatile uint16_t deadline_ms; /* 0 = inactive */
+static volatile uint16_t deadline_ms;       /* 0 = inactive */
 static volatile uint8_t completion_pending; /* run_in_main_loop in flight */
 static volatile I2cResult pending_result;
 static volatile uint8_t pending_rx_len;
@@ -133,7 +133,8 @@ void i2c_init(TaskController* ctrl) {
     RB1PPS = 0x38;
 
     I2C1CLK = 0x01;
-    I2C1BAUD = 31; /* 400 kHz @ Fosc=64 MHz */
+    // I2C1BAUD = 31; /* 400 kHz @ Fosc=64 MHz */
+    I2C1BAUD = 71; // temp
 
     client_mode_enable();
 }
@@ -207,23 +208,24 @@ static void try_dispatch(void) {
 
 /* Configure peripheral and kick off the write phase. */
 static void start_transaction(TransmitTask* t) {
-    /* Disable slave reception, switch to host mode. */
-    PIE7bits.I2C1IE = 0;
-    PIE7bits.I2C1EIE = 0;
-    PIE7bits.I2C1RXIE = 0;
-    PIE7bits.I2C1TXIE = 0;
-    client_mode_disable();
-
-    /* Bus-free check. BFRE=1 means no start/stop framing in progress. */
+    /* Bus-free check must happen while the peripheral is still enabled in
+     * client mode — BFRE reflects the actual line state only when the
+     * module is active. Reading it after EN=0 returns stale/zero forever
+     * and would trap us in a perpetual BACKOFF loop. */
     if (!I2C1STAT0bits.BFRE) {
-        /* Another master is using the bus — back off. */
-        client_mode_enable();
         host_state = HOST_BACKOFF;
         deadline_ms = I2C_BACKOFF_MS;
         return;
     }
 
     t->attempts++;
+
+    /* Disable slave reception, switch to host mode. */
+    PIE7bits.I2C1IE = 0;
+    PIE7bits.I2C1EIE = 0;
+    PIE7bits.I2C1RXIE = 0;
+    PIE7bits.I2C1TXIE = 0;
+    client_mode_disable();
     tx_idx = 0;
     rx_idx = 0;
 
@@ -237,10 +239,9 @@ static void start_transaction(TransmitTask* t) {
     I2C1PIRbits.PCIF = 0;
     I2C1STAT1bits.CLRBF = 1;
 
-    /* Pre-load first byte so TXBE is low when the address phase ends. */
-    I2C1TXB = t->tx[tx_idx++];
-
-    /* Enable host interrupts. */
+    /* Enable host interrupts. The first TXBE will fire after the address
+     * phase ACKs and the ISR will push tx[0]; mirrors the old polled
+     * driver, which waited for TXBE before writing each byte. */
     I2C1PIEbits.PCIE = 1;
     I2C1ERRbits.NACKIE = 1;
     PIE7bits.I2C1IE = 1;
@@ -468,8 +469,8 @@ static void slave_handle_event(void) {
             slave_tx_pos = 0;
             slave_tx_len = 0;
             if (read_handler) {
-                slave_tx_len = read_handler((const uint8_t*)slave_rx_buf, slave_rx_len, (uint8_t*)slave_tx_buf,
-                                            I2C_BUF_SIZE);
+                slave_tx_len =
+                    read_handler((const uint8_t*)slave_rx_buf, slave_rx_len, (uint8_t*)slave_tx_buf, I2C_BUF_SIZE);
             }
             slave_state = SLAVE_TX;
         } else {

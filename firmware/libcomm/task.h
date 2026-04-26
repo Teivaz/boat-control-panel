@@ -14,8 +14,8 @@
 #define TASK_DEFERRED_QUEUE_SIZE 4
 
 typedef uint8_t TaskId;
-typedef void (*TaskCallback)(TaskId id, void *context);
-typedef void (*MainLoopCallback)(void *context);
+typedef void (*TaskCallback)(TaskId id, void* context);
+typedef void (*MainLoopCallback)(void* context);
 
 typedef struct {
     TaskId id;       /* TASK_INVALID_ID = free slot */
@@ -23,12 +23,12 @@ typedef struct {
     uint16_t remaining_ms;
     uint16_t interval_ms;
     TaskCallback callback;
-    void *context;
+    void* context;
 } Task;
 
 typedef struct {
     MainLoopCallback cb;
-    void *context;
+    void* context;
 } DeferredEntry;
 
 typedef struct {
@@ -47,25 +47,23 @@ typedef struct {
  *  -4  id == TASK_INVALID_ID
  */
 
-void task_controller_init(TaskController *c);
-int8_t task_controller_add(TaskController *c, TaskId id, uint16_t interval_ms,
-                           TaskCallback cb, void *context);
-int8_t task_controller_remove(TaskController *c, TaskId id);
-int8_t task_controller_set_interval(TaskController *c, TaskId id,
-                                    uint16_t interval_ms);
+void task_controller_init(TaskController* c);
+int8_t task_controller_add(TaskController* c, TaskId id, uint16_t interval_ms, TaskCallback cb, void* context);
+int8_t task_controller_remove(TaskController* c, TaskId id);
+int8_t task_controller_set_interval(TaskController* c, TaskId id, uint16_t interval_ms);
 
 /* Call from the board's 1 ms timer ISR. Never invokes callbacks.
  * ISR-callable. */
-void task_controller_tick(TaskController *c);
+void task_controller_tick(TaskController* c);
 
 /* Call from the main loop. Dispatches any deferred callbacks queued via
  * run_in_main_loop, then any pending periodic callbacks. */
-void task_controller_poll(TaskController *c);
+void task_controller_poll(TaskController* c);
 
 /* Schedule cb(context) to run once on the next task_controller_poll. Intended
  * to be called from interrupt handlers so they can push work out of ISR
  * context. Returns 0 on success, -1 if the deferred queue is full.
  * ISR-callable. */
-int8_t run_in_main_loop(TaskController *c, MainLoopCallback cb, void *context);
+int8_t run_in_main_loop(TaskController* c, MainLoopCallback cb, void* context);
 
 #endif /* TASK_H */

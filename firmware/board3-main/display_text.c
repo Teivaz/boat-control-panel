@@ -149,7 +149,10 @@ static void render_normal(u8g2_t* g) {
 
 static void render_config_menu(u8g2_t* g) {
     static const char* items[CONFIG_MENU_COUNT] = {
-        "NAV LIGHTS", "SET TIME", "WATER OFS", "FUEL OFS",
+        "NAV LIGHTS",
+        "SET TIME",
+        "WATER OFS",
+        "FUEL OFS",
     };
     uint8_t cursor = config_mode_menu_cursor();
     /* Scroll vertically when the cursor would fall off the 3-line window. */
@@ -225,11 +228,20 @@ static void refresh_task(TaskId id, void* ctx) {
 
     if (config_mode_active()) {
         switch (config_mode_screen()) {
-            case CONFIG_SCREEN_MENU:   render_config_menu(g); break;
-            case CONFIG_SCREEN_NAV:    render_config_nav(g); break;
-            case CONFIG_SCREEN_TIME:   render_config_time(g); break;
-            case CONFIG_SCREEN_OFFSET: render_config_offset(g); break;
-            default: break;
+            case CONFIG_SCREEN_MENU:
+                render_config_menu(g);
+                break;
+            case CONFIG_SCREEN_NAV:
+                render_config_nav(g);
+                break;
+            case CONFIG_SCREEN_TIME:
+                render_config_time(g);
+                break;
+            case CONFIG_SCREEN_OFFSET:
+                render_config_offset(g);
+                break;
+            default:
+                break;
         }
     } else {
         render_normal(g);

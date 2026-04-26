@@ -15,9 +15,9 @@ typedef enum {
 
 static struct {
     RtcOp op;
-    uint8_t attempt;          /* 0 = first, 1 = post-bus-recover retry */
+    uint8_t attempt; /* 0 = first, 1 = post-bus-recover retry */
     /* Per-op state */
-    uint8_t read_reg;         /* RTC register pointer (0x00) for the write phase */
+    uint8_t read_reg; /* RTC register pointer (0x00) for the write phase */
     uint8_t read_buf[7];
     uint8_t write_buf[4];
     uint8_t write_hour;

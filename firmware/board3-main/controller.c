@@ -182,7 +182,8 @@ void controller_init(TaskController* ctrl) {
  */
 
 void controller_on_button_changed(uint8_t sender, uint8_t button_id, uint8_t pressed, CommButtonMode mode) {
-    const uint8_t should_trigger = (mode == COMM_BUTTON_MODE_RELEASE) || (mode == COMM_BUTTON_MODE_HOLD) || (mode == COMM_BUTTON_MODE_CHANGE && pressed);
+    const uint8_t should_trigger = (mode == COMM_BUTTON_MODE_RELEASE) || (mode == COMM_BUTTON_MODE_HOLD) ||
+                                   (mode == COMM_BUTTON_MODE_CHANGE && pressed);
     if (button_id >= 7 || !should_trigger) {
         return;
     }
@@ -384,8 +385,7 @@ static void retry_task(TaskId id, void* ctx) {
     uint8_t len = comm_build_relay_state(&msg, snapshot);
     relay_inflight_value = snapshot;
     relay_inflight = 1;
-    if (i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, len, 0, 0, on_relay_state_done, 0) !=
-        I2C_RESULT_OK) {
+    if (i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, len, 0, 0, on_relay_state_done, 0) != I2C_RESULT_OK) {
         relay_inflight = 0;
     }
 }
@@ -443,8 +443,7 @@ static void poll_levels_task(TaskId id, void* ctx) {
     }
     uint8_t req = COMM_LEVELS_READ;
     levels_inflight = 1;
-    if (i2c_submit(COMM_ADDRESS_SWITCHING, &req, 1, levels_rx, sizeof(levels_rx), on_levels_done, 0) !=
-        I2C_RESULT_OK) {
+    if (i2c_submit(COMM_ADDRESS_SWITCHING, &req, 1, levels_rx, sizeof(levels_rx), on_levels_done, 0) != I2C_RESULT_OK) {
         levels_inflight = 0;
     }
 }

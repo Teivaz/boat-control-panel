@@ -3,13 +3,13 @@
 
 #include <xc.h>
 
-#define INTERRUPT_PUSH                                                         \
-    int8_t _gie_state = GIE;                                                   \
+#define INTERRUPT_PUSH                                                                                                 \
+    int8_t _gie_state = GIE;                                                                                           \
     GIE = 0
-#define INTERRUPT_PUSH_NDECL                                                   \
-    _gie_state = GIE;                                                          \
+#define INTERRUPT_PUSH_NDECL                                                                                           \
+    _gie_state = GIE;                                                                                                  \
     GIE = 0
-#define INTERRUPT_POP GIE = (__bit) _gie_state
+#define INTERRUPT_POP GIE = (__bit)_gie_state
 
 /* ============================================================================
  * Device Addresses
@@ -43,15 +43,15 @@ typedef enum {
 
     /* Read IDs: MSB set (0x80–0xFF); `write ID | 0x80` when a write form exists
      */
-    COMM_BUTTON_STATE_READ = 0x83, /* main -> button board */
+    COMM_BUTTON_STATE_READ = 0x83,                         /* main -> button board */
     COMM_BUTTON_TRIGGER_READ = COMM_BUTTON_TRIGGER | 0x80, /* 0x84 */
     COMM_RELAY_STATE_READ = COMM_RELAY_STATE | 0x80,       /* 0x85 */
     COMM_RELAY_MASK_READ = COMM_RELAY_MASK | 0x80,         /* 0x87 */
-    COMM_BATTERY_READ = 0x88,                      /* main -> switching    */
-    COMM_LEVELS_READ = 0x89,                       /* main -> switching    */
-    COMM_LEVEL_MODE_READ = COMM_LEVEL_MODE | 0x80, /* 0x8A */
-    COMM_SENSORS_READ = 0x8B,                      /* main -> switching    */
-    COMM_CONFIG_READ = COMM_CONFIG | 0x80,         /* 0x8E */
+    COMM_BATTERY_READ = 0x88,                              /* main -> switching    */
+    COMM_LEVELS_READ = 0x89,                               /* main -> switching    */
+    COMM_LEVEL_MODE_READ = COMM_LEVEL_MODE | 0x80,         /* 0x8A */
+    COMM_SENSORS_READ = 0x8B,                              /* main -> switching    */
+    COMM_CONFIG_READ = COMM_CONFIG | 0x80,                 /* 0x8E */
 } CommId;
 
 /* ============================================================================
@@ -154,8 +154,8 @@ typedef struct {
     uint8_t device_address;
     struct {
         uint8_t button_id : 3; /* [2:0] Button Index */
-        uint8_t pressed : 1; /* [3] Button Pressed */
-        uint8_t mode : 2; /* [5:4] CommButtonMode */
+        uint8_t pressed : 1;   /* [3] Button Pressed */
+        uint8_t mode : 2;      /* [5:4] CommButtonMode */
     };
 } CommButtonChanged;
 
@@ -271,66 +271,61 @@ uint8_t comm_address(void);
  */
 
 /* button_effect (0x01) — main -> button board */
-uint8_t comm_build_button_effect(CommMessage *msg,
-                                 const CommButtonEffect *effect);
+uint8_t comm_build_button_effect(CommMessage* msg, const CommButtonEffect* effect);
 
 /* button_changed (0x02) — button board -> main; device_address is filled from
  * comm_address() */
-uint8_t comm_build_button_changed(CommMessage *msg, uint8_t button_id, 
-                                  uint8_t pressed, CommButtonMode mode);
+uint8_t comm_build_button_changed(CommMessage* msg, uint8_t button_id, uint8_t pressed, CommButtonMode mode);
 
 /* button_state_read (0x83) — main -> button board */
-uint8_t comm_build_button_state_read(CommMessage *msg);
+uint8_t comm_build_button_state_read(CommMessage* msg);
 
 /* button_trigger (0x04) — main -> button board */
-uint8_t comm_build_button_trigger(CommMessage *msg, uint8_t button_id,
-                                  CommTriggerConfig config);
+uint8_t comm_build_button_trigger(CommMessage* msg, uint8_t button_id, CommTriggerConfig config);
 
 /* button_trigger_read (0x84) — main -> button board */
-uint8_t comm_build_button_trigger_read(CommMessage *msg, uint8_t button_id);
+uint8_t comm_build_button_trigger_read(CommMessage* msg, uint8_t button_id);
 
 /* relay_state (0x05) — main -> switching board */
-uint8_t comm_build_relay_state(CommMessage *msg, uint16_t relays);
+uint8_t comm_build_relay_state(CommMessage* msg, uint16_t relays);
 
 /* relay_state_read (0x85) — main -> switching board */
-uint8_t comm_build_relay_state_read(CommMessage *msg);
+uint8_t comm_build_relay_state_read(CommMessage* msg);
 
 /* relay_changed (0x06) — switching board -> main; device_address is filled from
  * comm_address() */
-uint8_t comm_build_relay_changed(CommMessage *msg, uint16_t prev_relays,
-                                 uint16_t current_relays, uint8_t prev_sensors,
+uint8_t comm_build_relay_changed(CommMessage* msg, uint16_t prev_relays, uint16_t current_relays, uint8_t prev_sensors,
                                  uint8_t current_sensors);
 
 /* relay_mask (0x07) — main -> switching board */
-uint8_t comm_build_relay_mask(CommMessage *msg, uint16_t mask);
+uint8_t comm_build_relay_mask(CommMessage* msg, uint16_t mask);
 
 /* relay_mask_read (0x87) — main -> switching board */
-uint8_t comm_build_relay_mask_read(CommMessage *msg);
+uint8_t comm_build_relay_mask_read(CommMessage* msg);
 
 /* battery_read (0x88) — main -> switching board */
-uint8_t comm_build_battery_read(CommMessage *msg);
+uint8_t comm_build_battery_read(CommMessage* msg);
 
 /* levels_read (0x89) — main -> switching board */
-uint8_t comm_build_levels_read(CommMessage *msg);
+uint8_t comm_build_levels_read(CommMessage* msg);
 
 /* level_mode (0x0A) — main -> switching board */
-uint8_t comm_build_level_mode(CommMessage *msg, CommMeterMode mode_0,
-                              CommMeterMode mode_1);
+uint8_t comm_build_level_mode(CommMessage* msg, CommMeterMode mode_0, CommMeterMode mode_1);
 
 /* level_mode_read (0x8A) — main -> switching board */
-uint8_t comm_build_level_mode_read(CommMessage *msg);
+uint8_t comm_build_level_mode_read(CommMessage* msg);
 
 /* sensors_read (0x8B) — main -> switching board */
-uint8_t comm_build_sensors_read(CommMessage *msg);
+uint8_t comm_build_sensors_read(CommMessage* msg);
 
 /* reset (0x0F) — main -> any */
-uint8_t comm_build_reset(CommMessage *msg);
+uint8_t comm_build_reset(CommMessage* msg);
 
 /* config (0x0E) — main -> any */
-uint8_t comm_build_config(CommMessage *msg, uint8_t address, uint8_t value);
+uint8_t comm_build_config(CommMessage* msg, uint8_t address, uint8_t value);
 
 /* config_read (0x8E) — main -> any; write phase carries the address byte */
-uint8_t comm_build_config_read(CommMessage *msg, uint8_t address);
+uint8_t comm_build_config_read(CommMessage* msg, uint8_t address);
 
 /* ============================================================================
  * Inbound payload parsers
@@ -341,40 +336,33 @@ uint8_t comm_build_config_read(CommMessage *msg, uint8_t address);
  * ============================================================================
  */
 
-void comm_parse_button_effect(const uint8_t *data, CommButtonEffect *effect);
-void comm_parse_button_changed(const uint8_t *data, CommButtonChanged *event);
-void comm_parse_button_state_response(const uint8_t *data,
-                                      CommButtonState *state);
-void comm_parse_button_trigger_write(const uint8_t *data,
-                                     CommButtonTrigger *trigger);
-void comm_parse_button_trigger_response(const uint8_t *data,
-                                        CommTriggerConfig *config);
-void comm_parse_relay_state_write(const uint8_t *data, CommRelayState *state);
-void comm_parse_relay_state_response(const uint8_t *data,
-                                     CommRelayState *state);
-void comm_parse_relay_changed(const uint8_t *data, CommRelayChanged *event);
-void comm_parse_relay_mask_write(const uint8_t *data, CommRelayMask *mask);
-void comm_parse_relay_mask_response(const uint8_t *data, CommRelayMask *mask);
-void comm_parse_battery_response(const uint8_t *data, CommBattery *battery);
-void comm_parse_levels_response(const uint8_t *data, CommLevels *levels);
-void comm_parse_level_mode_write(const uint8_t *data, CommLevelMode *mode);
-void comm_parse_level_mode_response(const uint8_t *data, CommLevelMode *mode);
-void comm_parse_sensors_response(const uint8_t *data, CommSensors *sensors);
-void comm_parse_config_write(const uint8_t *data, CommConfig *config);
-void comm_parse_config_read_request(const uint8_t *data, uint8_t *address);
-void comm_parse_config_response(const uint8_t *data, uint8_t *value);
+void comm_parse_button_effect(const uint8_t* data, CommButtonEffect* effect);
+void comm_parse_button_changed(const uint8_t* data, CommButtonChanged* event);
+void comm_parse_button_state_response(const uint8_t* data, CommButtonState* state);
+void comm_parse_button_trigger_write(const uint8_t* data, CommButtonTrigger* trigger);
+void comm_parse_button_trigger_response(const uint8_t* data, CommTriggerConfig* config);
+void comm_parse_relay_state_write(const uint8_t* data, CommRelayState* state);
+void comm_parse_relay_state_response(const uint8_t* data, CommRelayState* state);
+void comm_parse_relay_changed(const uint8_t* data, CommRelayChanged* event);
+void comm_parse_relay_mask_write(const uint8_t* data, CommRelayMask* mask);
+void comm_parse_relay_mask_response(const uint8_t* data, CommRelayMask* mask);
+void comm_parse_battery_response(const uint8_t* data, CommBattery* battery);
+void comm_parse_levels_response(const uint8_t* data, CommLevels* levels);
+void comm_parse_level_mode_write(const uint8_t* data, CommLevelMode* mode);
+void comm_parse_level_mode_response(const uint8_t* data, CommLevelMode* mode);
+void comm_parse_sensors_response(const uint8_t* data, CommSensors* sensors);
+void comm_parse_config_write(const uint8_t* data, CommConfig* config);
+void comm_parse_config_read_request(const uint8_t* data, uint8_t* address);
+void comm_parse_config_response(const uint8_t* data, uint8_t* value);
 
 /* ============================================================================
  * button_effect helpers
  * ============================================================================
  */
 
-void comm_button_effect_init(CommButtonEffect *effect);
-int8_t comm_button_effect_set(CommButtonEffect *effect, uint8_t output_index,
-                              CommButtonOutputEffect value);
-int8_t comm_button_effect_get(const CommButtonEffect *effect,
-                              uint8_t output_index,
-                              CommButtonOutputEffect *value);
+void comm_button_effect_init(CommButtonEffect* effect);
+int8_t comm_button_effect_set(CommButtonEffect* effect, uint8_t output_index, CommButtonOutputEffect value);
+int8_t comm_button_effect_get(const CommButtonEffect* effect, uint8_t output_index, CommButtonOutputEffect* value);
 
 /* ============================================================================
  * button_trigger helpers
@@ -386,7 +374,6 @@ uint16_t comm_button_trigger_time_ms(CommTriggerConfig config);
 
 /** Build a config from mode + time in ms. time_ms is clamped to 15000 and
  *  encoded with the smallest EE that fits (finest available resolution). */
-CommTriggerConfig comm_button_trigger_make(CommButtonMode mode,
-                                           uint16_t time_ms);
+CommTriggerConfig comm_button_trigger_make(CommButtonMode mode, uint16_t time_ms);
 
 #endif /* LIBCOMM_H */

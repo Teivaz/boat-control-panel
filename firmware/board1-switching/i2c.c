@@ -47,7 +47,6 @@ void i2c_init(void) {
     RC3I2Cbits.SLEW = 0b01; // Fast mode 400kHz
     RC4I2Cbits.SLEW = 0b01; // Fast mode 400kHz
 
-
     I2C1SCLPPS = 0x13; /* RC3 -> SCL1 */
     RC3PPS = 0x37;
     I2C1SDAPPS = 0x14; /* RC4 -> SDA1 */

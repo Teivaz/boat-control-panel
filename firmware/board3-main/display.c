@@ -53,22 +53,22 @@ static void gpio_init(void) {
 static uint8_t byte_cb(u8x8_t* u8x8, uint8_t msg, uint8_t arg_int, void* arg_ptr) {
     (void)u8x8;
     switch (msg) {
-    case U8X8_MSG_BYTE_SEND: {
-        const uint8_t* data = (const uint8_t*)arg_ptr;
-        for (uint8_t i = 0; i < arg_int; i++) {
-            bus_write(data[i]);
+        case U8X8_MSG_BYTE_SEND: {
+            const uint8_t* data = (const uint8_t*)arg_ptr;
+            for (uint8_t i = 0; i < arg_int; i++) {
+                bus_write(data[i]);
+            }
+            break;
         }
-        break;
-    }
-    case U8X8_MSG_BYTE_INIT:
-    case U8X8_MSG_BYTE_START_TRANSFER:
-    case U8X8_MSG_BYTE_END_TRANSFER:
-        break;
-    case U8X8_MSG_BYTE_SET_DC:
-        DC_PIN = arg_int;
-        break;
-    default:
-        return 0;
+        case U8X8_MSG_BYTE_INIT:
+        case U8X8_MSG_BYTE_START_TRANSFER:
+        case U8X8_MSG_BYTE_END_TRANSFER:
+            break;
+        case U8X8_MSG_BYTE_SET_DC:
+            DC_PIN = arg_int;
+            break;
+        default:
+            return 0;
     }
     return 1;
 }
@@ -80,29 +80,29 @@ static uint8_t gpio_and_delay_cb(u8x8_t* u8x8, uint8_t msg, uint8_t arg_int, voi
     (void)u8x8;
     (void)arg_ptr;
     switch (msg) {
-    case U8X8_MSG_GPIO_AND_DELAY_INIT:
-        break;
-    case U8X8_MSG_DELAY_NANO:
-        __asm("NOP");
-        break;
-    case U8X8_MSG_DELAY_100NANO:
-        __delay_us(1);
-        break;
-    case U8X8_MSG_DELAY_10MICRO:
-        for (uint8_t i = 0; i < arg_int; i++) {
-            __delay_us(10);
-        }
-        break;
-    case U8X8_MSG_DELAY_MILLI:
-        for (uint8_t i = 0; i < arg_int; i++) {
-            __delay_ms(1);
-        }
-        break;
-    case U8X8_MSG_GPIO_RESET:
-        RST_PIN = arg_int;
-        break;
-    default:
-        return 0;
+        case U8X8_MSG_GPIO_AND_DELAY_INIT:
+            break;
+        case U8X8_MSG_DELAY_NANO:
+            __asm("NOP");
+            break;
+        case U8X8_MSG_DELAY_100NANO:
+            __delay_us(1);
+            break;
+        case U8X8_MSG_DELAY_10MICRO:
+            for (uint8_t i = 0; i < arg_int; i++) {
+                __delay_us(10);
+            }
+            break;
+        case U8X8_MSG_DELAY_MILLI:
+            for (uint8_t i = 0; i < arg_int; i++) {
+                __delay_ms(1);
+            }
+            break;
+        case U8X8_MSG_GPIO_RESET:
+            RST_PIN = arg_int;
+            break;
+        default:
+            return 0;
     }
     return 1;
 }

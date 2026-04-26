@@ -41,7 +41,7 @@ typedef enum {
 void config_mode_init(TaskController* ctrl);
 
 uint8_t config_mode_active(void);
-uint8_t config_mode_screen(void);  /* ConfigScreen */
+uint8_t config_mode_screen(void); /* ConfigScreen */
 uint8_t config_mode_menu_cursor(void);
 uint8_t config_mode_nav_cursor(void); /* index 0..4 within the nav screen */
 uint8_t config_mode_nav_working_mask(void);
