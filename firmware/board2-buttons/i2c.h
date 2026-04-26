@@ -9,7 +9,6 @@
 #define I2C_H
 
 #include <stdint.h>
-#include <xc.h>
 
 typedef enum {
     I2C_RESULT_OK = 0,

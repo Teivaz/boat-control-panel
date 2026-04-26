@@ -1,7 +1,7 @@
 #ifndef LIBCOMM_H
 #define LIBCOMM_H
 
-#include <xc.h>
+#include <stdint.h>
 
 #define INTERRUPT_PUSH                                                                                                 \
     int8_t _gie_state = GIE;                                                                                           \
