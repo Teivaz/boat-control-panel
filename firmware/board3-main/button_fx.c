@@ -1,8 +1,8 @@
 #include "button_fx.h"
 
 #include "controller.h"
-#include "i2c.h"
 #include "libcomm.h"
+#include "libcomm_interface.h"
 #include "task_ids.h"
 
 #include <xc.h>
@@ -183,11 +183,9 @@ static void refresh_task(TaskId id, void* ctx) {
             continue;
         }
         inflight_effect[side] = tx_effect[side];
-        CommMessage msg;
-        uint8_t len = comm_build_button_effect(&msg, &inflight_effect[side]);
         I2cCompletion cb = (side == 0) ? on_effect_done_l : on_effect_done_r;
         inflight[side] = 1;
-        if (i2c_submit(side_address(side), (const uint8_t*)&msg, len, 0, 0, cb, 0) != I2C_RESULT_OK) {
+        if (comm_send_button_effect(side_address(side), &inflight_effect[side], cb, 0) != I2C_RESULT_OK) {
             inflight[side] = 0;
         }
     }

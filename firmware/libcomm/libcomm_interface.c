@@ -360,67 +360,65 @@ void comm_interface_init(void) {
 
 /* ── Outbound write commands ───────────────────────────────────────────── */
 
-/*
- * Helper: build a message and submit as a write-only I2C transaction.
- * len = total byte count returned by the comm_build_* function (id + payload).
- */
-static I2cResult send_write(uint8_t addr, CommMessage* msg, uint8_t len) {
-    return i2c_submit(addr, (const uint8_t*)msg, len, 0, 0, 0, 0);
+static I2cResult send_write(uint8_t addr, CommMessage* msg, uint8_t len, I2cCompletion cb, void* ctx) {
+    return i2c_submit(addr, (const uint8_t*)msg, len, 0, 0, cb, ctx);
 }
 
-I2cResult comm_send_reset(uint8_t addr) {
+I2cResult comm_send_reset(uint8_t addr, I2cCompletion cb, void* ctx) {
     CommMessage msg;
     uint8_t len = comm_build_reset(&msg);
-    return send_write(addr, &msg, len);
+    return send_write(addr, &msg, len, cb, ctx);
 }
 
-I2cResult comm_send_config(uint8_t addr, uint8_t config_addr, uint8_t value) {
+I2cResult comm_send_config(uint8_t addr, uint8_t config_addr, uint8_t value, I2cCompletion cb, void* ctx) {
     CommMessage msg;
     uint8_t len = comm_build_config(&msg, config_addr, value);
-    return send_write(addr, &msg, len);
+    return send_write(addr, &msg, len, cb, ctx);
 }
 
-I2cResult comm_send_button_effect(uint8_t addr, const CommButtonEffect* effect) {
+I2cResult comm_send_button_effect(uint8_t addr, const CommButtonEffect* effect, I2cCompletion cb, void* ctx) {
     CommMessage msg;
     uint8_t len = comm_build_button_effect(&msg, effect);
-    return send_write(addr, &msg, len);
+    return send_write(addr, &msg, len, cb, ctx);
 }
 
-I2cResult comm_send_button_changed(uint8_t button_id, uint8_t pressed, CommButtonMode mode) {
+I2cResult comm_send_button_changed(uint8_t button_id, uint8_t pressed, CommButtonMode mode, I2cCompletion cb,
+                                   void* ctx) {
     CommMessage msg;
     uint8_t len = comm_build_button_changed(&msg, button_id, pressed, mode);
-    return send_write(COMM_ADDRESS_MAIN, &msg, len);
+    return send_write(COMM_ADDRESS_MAIN, &msg, len, cb, ctx);
 }
 
-I2cResult comm_send_button_trigger(uint8_t addr, uint8_t button_id, CommTriggerConfig config) {
+I2cResult comm_send_button_trigger(uint8_t addr, uint8_t button_id, CommTriggerConfig config, I2cCompletion cb,
+                                   void* ctx) {
     CommMessage msg;
     uint8_t len = comm_build_button_trigger(&msg, button_id, config);
-    return send_write(addr, &msg, len);
+    return send_write(addr, &msg, len, cb, ctx);
 }
 
-I2cResult comm_send_relay_state(uint16_t relays) {
+I2cResult comm_send_relay_state(uint16_t relays, I2cCompletion cb, void* ctx) {
     CommMessage msg;
     uint8_t len = comm_build_relay_state(&msg, relays);
-    return send_write(COMM_ADDRESS_SWITCHING, &msg, len);
+    return send_write(COMM_ADDRESS_SWITCHING, &msg, len, cb, ctx);
 }
 
 I2cResult comm_send_relay_changed(uint16_t prev_relays, uint16_t current_relays, uint8_t prev_sensors,
-                                  uint8_t current_sensors) {
+                                  uint8_t current_sensors, I2cCompletion cb, void* ctx) {
     CommMessage msg;
     uint8_t len = comm_build_relay_changed(&msg, prev_relays, current_relays, prev_sensors, current_sensors);
-    return send_write(COMM_ADDRESS_MAIN, &msg, len);
+    return send_write(COMM_ADDRESS_MAIN, &msg, len, cb, ctx);
 }
 
-I2cResult comm_send_relay_mask(uint16_t mask) {
+I2cResult comm_send_relay_mask(uint16_t mask, I2cCompletion cb, void* ctx) {
     CommMessage msg;
     uint8_t len = comm_build_relay_mask(&msg, mask);
-    return send_write(COMM_ADDRESS_SWITCHING, &msg, len);
+    return send_write(COMM_ADDRESS_SWITCHING, &msg, len, cb, ctx);
 }
 
-I2cResult comm_send_level_mode(CommMeterMode mode_0, CommMeterMode mode_1) {
+I2cResult comm_send_level_mode(CommMeterMode mode_0, CommMeterMode mode_1, I2cCompletion cb, void* ctx) {
     CommMessage msg;
     uint8_t len = comm_build_level_mode(&msg, mode_0, mode_1);
-    return send_write(COMM_ADDRESS_SWITCHING, &msg, len);
+    return send_write(COMM_ADDRESS_SWITCHING, &msg, len, cb, ctx);
 }
 
 /* ── Outbound read commands ────────────────────────────────────────────

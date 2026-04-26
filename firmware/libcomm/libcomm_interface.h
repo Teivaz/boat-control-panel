@@ -60,41 +60,46 @@ void comm_interface_init(void);
  * transaction.  Returns I2C_RESULT_OK on successful enqueue.
  * TX data is copied into the I2C queue — the CommMessage local is safe
  * to go out of scope immediately.
+ *
+ * cb/ctx are optional (pass 0, 0 for fire-and-forget).  When non-NULL
+ * the completion fires from i2c_poll() after the write lands or fails.
  * ============================================================================
  */
 
 /* reset (0x0F) — soft-reset the target device */
-I2cResult comm_send_reset(uint8_t addr);
+I2cResult comm_send_reset(uint8_t addr, I2cCompletion cb, void* ctx);
 
 /* config (0x0E) — write one byte of device configuration */
-I2cResult comm_send_config(uint8_t addr, uint8_t config_addr, uint8_t value);
+I2cResult comm_send_config(uint8_t addr, uint8_t config_addr, uint8_t value, I2cCompletion cb, void* ctx);
 
 /* button_effect (0x01) — set visual effects for 8 button outputs */
-I2cResult comm_send_button_effect(uint8_t addr, const CommButtonEffect* effect);
+I2cResult comm_send_button_effect(uint8_t addr, const CommButtonEffect* effect, I2cCompletion cb, void* ctx);
 
 /* button_changed (0x02) — notify main board of a button event.
  * Always sent to COMM_ADDRESS_MAIN; device_address filled from comm_address(). */
-I2cResult comm_send_button_changed(uint8_t button_id, uint8_t pressed, CommButtonMode mode);
+I2cResult comm_send_button_changed(uint8_t button_id, uint8_t pressed, CommButtonMode mode, I2cCompletion cb,
+                                   void* ctx);
 
 /* button_trigger (0x04) — write trigger config for one button */
-I2cResult comm_send_button_trigger(uint8_t addr, uint8_t button_id, CommTriggerConfig config);
+I2cResult comm_send_button_trigger(uint8_t addr, uint8_t button_id, CommTriggerConfig config, I2cCompletion cb,
+                                   void* ctx);
 
 /* relay_state (0x05) — set the target state of all 16 relays.
  * Always sent to COMM_ADDRESS_SWITCHING (only one switching board). */
-I2cResult comm_send_relay_state(uint16_t relays);
+I2cResult comm_send_relay_state(uint16_t relays, I2cCompletion cb, void* ctx);
 
 /* relay_changed (0x06) — notify main board of relay/sensor state change.
  * Always sent to COMM_ADDRESS_MAIN; device_address filled from comm_address(). */
 I2cResult comm_send_relay_changed(uint16_t prev_relays, uint16_t current_relays, uint8_t prev_sensors,
-                                  uint8_t current_sensors);
+                                  uint8_t current_sensors, I2cCompletion cb, void* ctx);
 
 /* relay_mask (0x07) — set the relay event mask.
  * Always sent to COMM_ADDRESS_SWITCHING (only one switching board). */
-I2cResult comm_send_relay_mask(uint16_t mask);
+I2cResult comm_send_relay_mask(uint16_t mask, I2cCompletion cb, void* ctx);
 
 /* level_mode (0x0A) — set level meter operating modes.
  * Always sent to COMM_ADDRESS_SWITCHING (only one switching board). */
-I2cResult comm_send_level_mode(CommMeterMode mode_0, CommMeterMode mode_1);
+I2cResult comm_send_level_mode(CommMeterMode mode_0, CommMeterMode mode_1, I2cCompletion cb, void* ctx);
 
 /* ============================================================================
  * Outbound read commands (library-implemented)

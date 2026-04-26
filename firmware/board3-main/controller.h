@@ -18,6 +18,13 @@ void controller_on_button_changed(uint8_t sender, uint8_t button_id, uint8_t pre
 void controller_on_relay_changed(uint8_t sender, uint16_t prev_relays, uint16_t curr_relays, uint8_t prev_sensors,
                                  uint8_t curr_sensors);
 
+/* Adopter-callback forwarders — called from comm.c when protocol read
+ * responses arrive.  Main-loop context.  NULL pointer means I2C error. */
+void controller_on_battery_response(const CommBattery* battery);
+void controller_on_levels_response(const CommLevels* levels);
+void controller_on_sensors_response(const CommSensors* sensors);
+void controller_on_config_read_response(const uint8_t* value);
+
 /* State queries for UI / display layers. */
 uint8_t controller_power_on(void);
 NavMode controller_nav_mode(void);
@@ -27,6 +34,12 @@ uint16_t controller_relay_physical(void);
 uint16_t controller_battery_mv(void);
 uint8_t controller_level(uint8_t meter_index); /* 0 or 1 */
 uint8_t controller_sensors(void);
+
+/* Returns 1 when the value has not been updated for > 10 s (switching
+ * board unresponsive).  UI should show "error" instead of the reading. */
+uint8_t controller_battery_stale(void);
+uint8_t controller_levels_stale(void);
+uint8_t controller_sensors_stale(void);
 
 uint8_t controller_button_base_on(uint8_t side, uint8_t button_idx);
 

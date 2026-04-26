@@ -103,11 +103,26 @@ uint8_t comm_on_sensors_read_request(CommSensors* sensors) {
 /* ============================================================================
  * Adopter callbacks: read response handlers (main-loop context)
  *
- * The main board polls the switching board directly via i2c_submit in
- * controller.c, so these are unused stubs.
+ * Battery, levels, sensors, and config_read are forwarded to the
+ * controller which latches the values into its shadow state.
  * ============================================================================
  */
 
+void comm_on_battery_read_response(CommBattery* battery) {
+    controller_on_battery_response(battery);
+}
+void comm_on_levels_read_response(CommLevels* levels) {
+    controller_on_levels_response(levels);
+}
+void comm_on_sensors_read_response(CommSensors* sensors) {
+    controller_on_sensors_response(sensors);
+}
+void comm_on_config_read_response(uint8_t addr, uint8_t* value) {
+    (void)addr;
+    controller_on_config_read_response(value);
+}
+
+/* Unused on the main board. */
 void comm_on_button_state_read_response(uint8_t addr, CommButtonState* state) {
     (void)addr;
     (void)state;
@@ -122,19 +137,6 @@ void comm_on_relay_state_read_response(CommRelayState* state) {
 void comm_on_relay_mask_read_response(CommRelayMask* mask) {
     (void)mask;
 }
-void comm_on_battery_read_response(CommBattery* battery) {
-    (void)battery;
-}
-void comm_on_levels_read_response(CommLevels* levels) {
-    (void)levels;
-}
 void comm_on_level_mode_read_response(CommLevelMode* mode) {
     (void)mode;
-}
-void comm_on_sensors_read_response(CommSensors* sensors) {
-    (void)sensors;
-}
-void comm_on_config_read_response(uint8_t addr, uint8_t* value) {
-    (void)addr;
-    (void)value;
 }
