@@ -135,15 +135,19 @@ static void on_config_read_done(I2cResult status, uint8_t* rx_buf, uint8_t rx_le
  * data[0] is the command ID; data[1..len-1] is the payload.
  */
 static void dispatch_rx(const uint8_t* data, uint8_t len) {
-    if (len < 1) {
+    if (!comm_can_parse(data, len)) {
         return;
     }
+    // TODO: Create circular buffer, copy data to next value
+    // then add to dispatch in main loop, callback should clear the
+    // circular buffer value.
+    
+
     uint8_t id = data[0];
     const uint8_t* payload = data + 1;
     uint8_t plen = len - 1;
 
     switch (id) {
-
     case COMM_RESET:
         comm_on_reset();
         break;
@@ -486,4 +490,16 @@ I2cResult comm_send_config_read(uint8_t addr, uint8_t config_addr) {
     uint8_t tx_len = comm_build_config_read(&msg, config_addr);
     return i2c_submit(addr, (const uint8_t*)&msg, tx_len, _rx_buf, 1, on_config_read_done,
                       (void*)(uintptr_t)addr);
+}
+
+static uint8_t active_read_command = 0;
+static uint8_t read_command_buffer[I2C_CLIENT_BUF_SIZE] = {0};
+static uint8_t read_command_buffer_len = 0;
+
+void _
+
+void _comm_on_read(uint8_t idx) {
+    if (active_read_command && idx < read_command_buffer_len) {
+        _i2c_set_tx(read_command_buffer[idx]);
+    }
 }

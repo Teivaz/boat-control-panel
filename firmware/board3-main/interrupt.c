@@ -1,7 +1,8 @@
 #include "interrupt.h"
+#include "libcomm.h"
 
 void interrupt_init(void) {
-    GIE = 0;
+    INTERRUPT_PUSH;
 
     IVTLOCK = 0x55;
     IVTLOCK = 0xAA;
@@ -15,7 +16,7 @@ void interrupt_init(void) {
     IVTLOCK = 0xAA;
     IVTLOCKbits.IVTLOCKED = 0x01; // lock IVT
 
-    GIE = 1;
+    INTERRUPT_POP;
 }
 
 /* Unused vectors reset the device. Owned vectors are defined alongside

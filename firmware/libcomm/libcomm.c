@@ -1,5 +1,51 @@
 #include "libcomm.h"
 
+uint8_t comm_can_parse(const uint8_t* data, uint8_t len) {
+    if (len == 0) {
+        return 0;
+    }
+    switch (data[0]) {
+        case COMM_BUTTON_EFFECT:
+            return len == 1 + sizeof(CommButtonEffect);
+        case COMM_BUTTON_CHANGED:
+            return len == 1 + sizeof(CommButtonChanged);
+        case COMM_BUTTON_TRIGGER:
+            return len == 1 + sizeof(CommButtonTrigger);
+        case COMM_RELAY_STATE:
+            return len == 1 + sizeof(CommRelayState);
+        case COMM_RELAY_CHANGED:
+            return len == 1 + sizeof(CommRelayChanged);
+        case COMM_RELAY_MASK:
+            return len == 1 + sizeof(CommRelayMask);
+        case COMM_LEVEL_MODE:
+            return len == 1 + sizeof(CommLevelMode);
+        case COMM_CONFIG:
+            return len == 1 + sizeof(CommConfig);
+        case COMM_RESET:
+            return len == 1;
+        case COMM_BUTTON_STATE_READ:
+            return 0;
+        case COMM_BUTTON_TRIGGER_READ:
+            return len == 2;
+        case COMM_RELAY_STATE_READ:
+            return 0;
+        case COMM_RELAY_MASK_READ:
+            return 0;
+        case COMM_BATTERY_READ:
+            return 0;
+        case COMM_LEVELS_READ:
+            return 0;
+        case COMM_LEVEL_MODE_READ:
+            return 0;
+        case COMM_SENSORS_READ:
+            return 0;
+        case COMM_CONFIG_READ:
+            return len == 2;
+        default:
+            return 0;
+    }
+}
+
 /* ============================================================================
  * button_effect (0x01)
  * ============================================================================

@@ -336,6 +336,8 @@ uint8_t comm_build_config_read(CommMessage* msg, uint8_t address);
  * ============================================================================
  */
 
+uint8_t comm_can_parse(const uint8_t* data, uint8_t len);
+
 void comm_parse_button_effect(const uint8_t* data, CommButtonEffect* effect);
 void comm_parse_button_changed(const uint8_t* data, CommButtonChanged* event);
 void comm_parse_button_state_response(const uint8_t* data, CommButtonState* state);

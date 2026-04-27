@@ -206,4 +206,11 @@ void comm_on_relay_changed_received(const CommRelayChanged* event);
 void comm_on_relay_mask_received(const CommRelayMask* mask);
 void comm_on_level_mode_received(const CommLevelMode* mode);
 
+/// internal
+
+// This function is invoked when I2C wants to read from client
+// Invoked from interrupt
+void _comm_on_read(uint8_t index);
+
+
 #endif /* LIBCOMM_INTERFACE_H */

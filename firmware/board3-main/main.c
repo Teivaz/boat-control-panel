@@ -80,6 +80,13 @@ static void tick_init(void) {
 
 void main(void) {
     init();
+
+    CommButtonEffect effect;
+    CommButtonOutputEffect oe = {.mode = 1, .color = 0};
+    comm_button_effect_init(&effect);
+    comm_button_effect_set(&effect, 1, oe);
+
+    comm_send_button_effect(0, &effect, 0, 0);
     while (1) {
         i2c_poll();
         task_controller_poll(&ctrl);
