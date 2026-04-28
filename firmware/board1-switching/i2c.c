@@ -261,10 +261,6 @@ static void client_mode_enable(void) {
     I2C1CON0bits.EN = 1;
 }
 
-static void client_mode_disable(void) {
-    I2C1CON0bits.EN = 0;
-}
-
 static void reset_state(void) {
     state = STATE_IDLE;
     rx_len = 0;

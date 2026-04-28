@@ -212,5 +212,4 @@ void comm_on_level_mode_received(const CommLevelMode* mode);
 // Invoked from interrupt
 void _comm_on_read(uint8_t index);
 
-
 #endif /* LIBCOMM_INTERFACE_H */

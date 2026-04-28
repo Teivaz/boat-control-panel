@@ -1,25 +1,10 @@
-/*
- * i2c.c — Shared I2C multi-master driver implementation.
- *
- * See i2c.h for the design overview and API contract.
- *
- * Pure byte-level interrupts, no DMA.  Protocol payloads are small
- * enough (<=8 bytes) that per-byte ISR overhead is negligible at
- * 400 kHz.  Pin/oscillator setup is the caller's job; only the I2C1
- * module itself is programmed here.
- */
 
 #include "i2c.h"
 
 #include <xc.h>
 
-/* ── Internal constants ────────────────────────────────────────────── */
-
-#define I2C_DEADLINE_BYTE_MS 1
-#define I2C_DEADLINE_STOP_MS 1
-#define I2C_BACKOFF_MS 1
-
-/* ── Queue helpers ─────────────────────────────────────────────────── */
+#define DMA_TX_CHANNEL 1 // DMA2
+#define DMA_RX_CHANNEL 2 // DMA3
 
 #define Q_MASK (I2C_QUEUE_SIZE - 1u)
 
@@ -27,562 +12,472 @@ static inline uint8_t q_next(uint8_t idx) {
     return (uint8_t)((idx + 1u) & Q_MASK);
 }
 
-/* ── Internal types (file-scope only) ──────────────────────────────── */
+static inline uint8_t q_prev(uint8_t idx) {
+    return (uint8_t)((idx + Q_MASK) & Q_MASK);
+}
 
 typedef enum {
-    HOST_IDLE = 0,
-    HOST_TX,
-    HOST_RX,
-    HOST_STOP,
-    HOST_BACKOFF,
-} HostState;
-
-typedef enum {
-    CLIENT_IDLE = 0,
-    CLIENT_RX,
-    CLIENT_TX,
-} ClientState;
+    MT_IDLE,
+    MT_RUNNING,
+    MT_FINISHED,
+} MessageTaskState;
 
 typedef struct {
     uint8_t addr;
-    uint8_t tx_len;
-    uint8_t rx_len;
     uint8_t tx[I2C_TX_MAX];
-    uint8_t* rx_buf;
-    I2cCompletion cb;
-    void* cb_ctx;
+    uint8_t tx_len;
+    uint8_t rx[I2C_RX_MAX];
+    uint8_t rx_len;
+    MessageTaskState state;
     uint8_t retries;
-    volatile I2cResult result;
-    volatile uint8_t done;
-} I2cOp;
+    I2cCompletion cb;
+    void* cb_ctx
+} MessageTask;
 
-/* ── Static state ──────────────────────────────────────────────────── */
+typedef enum {
+    FSM_IDLE,
+    FSM_HOST_TX,
+    FSM_HOST_RX,
+    FSM_CLIENT_TX,
+    FSM_CLIENT_RX,
+} FSMState;
 
+static volatile I2cCompletion g_cold_rx = 0;
+static volatile FSMState g_fsm = FSM_IDLE;
+static volatile uint8_t g_client_rx[I2C_RX_MAX] = {0};
+static volatile uint8_t g_client_rx_len = 0;
+static volatile uint8_t g_client_tx[I2C_TX_MAX] = {0};
+static volatile uint8_t g_client_tx_len = 0;
+static volatile MessageTask g_queue[I2C_QUEUE_SIZE] = {0};
+static volatile uint8_t g_q_head = 0;
+static volatile uint8_t g_q_tail = 0;
+
+static void i2c_dma_init(void);
+static void i2c_dma_set(MessageTask* task);
+static void i2c_dma_rx(void);
+static void i2c_dma_tx(void);
+static void i2c_start_task(MessageTask* task);
+static void prepend_completed_task(uint8_t addr, uint8_t* rx, uint8_t rx_len);
+static void i2c_error_reset(void);
 static void isr_on_address(void);
 static void isr_on_stop(void);
+static void isr_on_restart(void);
+static void isr_on_nack(void);
+static void isr_on_collision(void);
+static void isr_on_timeout(void);
 
-/* Host queue + FSM */
-static I2cOp queue[I2C_QUEUE_SIZE];
-static volatile uint8_t q_head;
-static volatile uint8_t q_tail;
-static volatile uint8_t host_state;     /* HostState */
-static volatile uint8_t tx_idx;
-static volatile uint8_t rx_idx;
-static volatile uint16_t deadline_ms;
-
-/* Client config */
-static uint8_t client_addr;
-static I2cRxHandler client_rx_cb;
-static I2cReadHandler client_read_cb;
-
-/* Client FSM + buffers */
-static volatile uint8_t client_state;   /* ClientState */
-static volatile uint8_t client_rx_len;
-static volatile uint8_t client_tx_len;
-static volatile uint8_t client_tx_pos;
-static volatile uint8_t client_rx_buf[I2C_CLIENT_BUF_SIZE];
-static volatile uint8_t client_tx_buf[I2C_CLIENT_BUF_SIZE];
-
-/* ── Forward declarations ──────────────────────────────────────────── */
-
-static void client_mode_enable(void);
-static void client_mode_disable(void);
-static void client_reset(void);
-static void client_handle_event(void);
-static void client_handle_error(void);
-
-static void try_dispatch(void);
-static void start_transaction(I2cOp* op);
-static void start_read_phase(I2cOp* op);
-static void host_complete(I2cResult r);
-static void host_handle_event(void);
-static void host_handle_error(void);
-
-/* ── Public API: handler setters ───────────────────────────────────── */
-
-void i2c_set_rx_handler(I2cRxHandler h) {
-    client_rx_cb = h;
+void i2c_set_cold_rx_handler(I2cCompletion cold_tx) {
+    g_cold_rx = colt_tx;
 }
 
-void i2c_set_read_handler(I2cReadHandler h) {
-    client_read_cb = h;
-}
-
-/* ── Public API: init ──────────────────────────────────────────────── */
-
-void i2c_init(uint8_t addr) {
-    q_head = 0;
-    q_tail = 0;
-    host_state = HOST_IDLE;
-    tx_idx = 0;
-    rx_idx = 0;
-    deadline_ms = 0;
-    client_state = CLIENT_IDLE;
-    client_rx_len = 0;
-    client_tx_len = 0;
-    client_tx_pos = 0;
-
-    client_addr = addr;
-
-    I2C1CON0bits.EN = 0;
-    I2C1CLK = 0x01;        /* FOSC */
-    I2C1BAUD = I2C_BAUD;
-    I2C1CON2bits.FME = I2C_FME;
-
-    client_mode_enable();
-}
-
-/* ── Public API: submit ────────────────────────────────────────────── */
-
-I2cResult i2c_submit(uint8_t address, const uint8_t* tx, uint8_t tx_len, uint8_t* rx_buf, uint8_t rx_len,
-                     I2cCompletion cb, void* ctx) {
+I2cResult i2c_set_client_tx(uint8_t* tx, uint8_t tx_len) {
+    if (tx == 0) {
+        return I2C_RESULT_BAD_ARG;
+    }
     if (tx_len == 0 || tx_len > I2C_TX_MAX) {
         return I2C_RESULT_BAD_ARG;
     }
-    if (rx_len > 0 && rx_buf == 0) {
-        return I2C_RESULT_BAD_ARG;
-    }
-
     INTERRUPT_PUSH;
-    if (q_next(q_tail) == q_head) {
-        GIE = 1;
-        return I2C_RESULT_QUEUE_FULL;
-    }
-
-    I2cOp* op = &queue[q_tail];
-    op->addr = address;
-    op->tx_len = tx_len;
-    op->rx_len = rx_len;
-    op->rx_buf = rx_buf;
-    op->cb = cb;
-    op->cb_ctx = ctx;
-    op->retries = I2C_RETRY_COUNT;
-    op->result = I2C_RESULT_OK;
-    op->done = 0;
     for (uint8_t i = 0; i < tx_len; i++) {
-        op->tx[i] = tx[i];
+        g_client_tx[i] = tx[i];
     }
-
-    q_tail = q_next(q_tail);
-    try_dispatch(); 
+    g_client_tx_len = tx_len;
     INTERRUPT_POP;
     return I2C_RESULT_OK;
 }
 
-/* ── Public API: poll ──────────────────────────────────────────────── */
+static void i2c_dma_init(void) {
+    DMASELECT = DMA_TX_CHANNEL;
+    DMAnCON1bits.DMODE = 0b00; /* Destination Pointer (DMADPTR) remains unchanged after each transfer */
+    DMAnCON1bits.DSTP = 0;     /* SIRQEN bit is not cleared when destination counter reloads */
+    DMAnCON1bits.SMR = 0b01;   /* Program Flash Memory is selected as the DMA source memory */
+    DMAnCON1bits.SMODE = 0b01; /* Source Pointer (DMASPTR) is incremented after each transfer */
+    DMAnCON1bits.SSTP = 1;     /* clear SIRQEN on completion */
+    DMAnDSZ = 1;
+    DMAnDSA = (uint16_t)&I2C1TXB;
+    DMAnSSZ = 0x00;
+    DMAnSSA = (uint24_t)0x00;
+    DMAnSIRQ = 0x39; // I2C1TX
+    DMAnAIRQ = 0;
+    // Change arbiter priority if needed and perform lock operation
+    DMA1PR = 0x01;           // Change the priority only if needed
+    PRLOCK = 0x55;           // This sequence
+    PRLOCK = 0xAA;           // is mandatory
+    PRLOCKbits.PRLOCKED = 1; // for DMA operation   
+    DMAnCON0bits.EN = 1;
 
-void i2c_poll(void) {
-    /* Phase 1 — deliver completion for the head op. */
-    if (host_state == HOST_IDLE && q_head != q_tail) {
-        I2cOp* op = &queue[q_head];
-        if (op->done) {
-            I2cResult r = op->result;
-            uint8_t actual_rx = (r == I2C_RESULT_OK) ? op->rx_len : 0;
-            if (op->cb) {
-                op->cb(r, op->rx_buf, actual_rx, op->cb_ctx);
-            }
-            INTERRUPT_PUSH;
-            q_head = q_next(q_head);
-            INTERRUPT_POP;
-        }
-    }
+    DMASELECT = DMA_RX_CHANNEL;
+    DMAnCON1bits.DMODE = 0b01; /* Destination Pointer (DMADPTR) is incremented after each transfer */
+    DMAnCON1bits.DSTP = 1;     /* SIRQEN bit is cleared when destination counter reloads */
+    DMAnCON1bits.SMR = 0b00;   /* SFR/GPR data space is selected as the DMA source memory */
+    DMAnCON1bits.SMODE = 0b00; /* Source Pointer (DMASPTR) remains unchanged after each transfer */
+    DMAnCON1bits.SSTP = 0;     /* SIRQEN bit is not cleared when source counter reloads */
+    DMAnDSZ = 0;
+    DMAnDSA = (uint16_t)g_rx_buf;
+    DMAnSSZ = 1;
+    DMAnSSA = (uint24_t)&I2C1RXB;
+    DMAnSIRQ = 0x38; // I2C1TX
+    DMAnAIRQ = 0;
+    // Change arbiter priority if needed and perform lock operation
+    DMA1PR = 0x01;           // Change the priority only if needed
+    PRLOCK = 0x55;           // This sequence
+    PRLOCK = 0xAA;           // is mandatory
+    PRLOCKbits.PRLOCKED = 1; // for DMA operation   
+    DMAnCON0bits.EN = 1;
+}
 
-    /* Phase 2 — start next op if bus is free.
-     * Interrupts disabled to prevent a race with try_dispatch called
-     * from i2c_tick_ms (backoff expiry) or client_handle_event (PCIF). */
+// Call this function when the device has won th
+static void i2c_dma_set(MessageTask* task) {
     INTERRUPT_PUSH;
-    if (host_state == HOST_IDLE && q_head != q_tail) {
-        try_dispatch();
+    if (task.tx_len) {
+        DMASELECT = DMA_TX_CHANNEL;
+        DMAnSSA = (uint24_t)task.tx;
+        DMAnSSZ = task.tx_len;
+        DMAnCON0bits.SIRQEN = 1;
+    }
+    if (task.rx_len) {
+        DMASELECT = DMA_RX_CHANNEL;
+        DMAnDSA = (uint16_t)task.rx;
+        DMAnDSZ = task.tx_len;
+        DMAnCON0bits.SIRQEN = 1;
     }
     INTERRUPT_POP;
 }
 
-/* ── Dispatch & start ──────────────────────────────────────────────── */
-
-static void try_dispatch(void) {
-    if (host_state != HOST_IDLE) {
-        return;
-    }
-    if (q_head == q_tail) {
-        return;
-    }
-    if (client_state != CLIENT_IDLE) {
-        return;
-    }
-    I2cOp* op = &queue[q_head];
-    start_transaction(op);
+static void i2c_dma_rx(void) {
+    INTERRUPT_PUSH;
+    DMASELECT = DMA_RX_CHANNEL;
+    DMAnDSA = (uint16_t)g_client_rx_buf;
+    DMAnDSZ = I2C_RX_MAX;
+    DMAnCON0bits.SIRQEN = 1;
+    I2CxCNT = I2C_RX_MAX;
+    INTERRUPT_POP;
 }
 
-static void host_mode_enable(void) {
-    I2C1PIE = (1 << _I2C1PIE_CNTIE_POSITION) |
-              (0 << _I2C1PIE_ACKTIE_POSITION) |
-              (1 << _I2C1PIE_WRIE_POSITION) |
-              (0 << _I2C1PIE_ADRIE_POSITION) |
-              (1 << _I2C1PIE_PCIE_POSITION) |
-              (1 << _I2C1PIE_RSCIE_POSITION) |
-              (0 << _I2C1PIE_SCIE_POSITION);
-
+static void i2c_dma_tx(void) {
+    if (g_client_tx_len == 0) {
+        return;
+    }
+    INTERRUPT_PUSH;
+    DMASELECT = DMA_TX_CHANNEL;
+    DMAnDSA = (uint16_t)g_client_tx_buf;
+    DMAnDSZ = g_client_tx_len;
+    DMAnCON0bits.SIRQEN = 1;
+    I2CxCNT = g_client_tx_len;
+    INTERRUPT_POP;
 }
 
-static void start_transaction(I2cOp* op) {
-    /* The hardware waits for BFRE internally after S is set (DS 37.4.2.3),
-     * so no software BFRE pre-check is needed.  The deadline timer covers
-     * the case where the bus never becomes free. */
+void i2c_init(uint8_t addr) {
+    g_client_rx_len = 0;
+    g_client_tx_len = 0;
+    g_fsm = FSM_IDLE;
+    g_q_head = 0;
+    g_q_tail = 0;
 
-    op->retries--;
+    i2c_dma_init();
+    i2c_dma_rx();
+    i2c_dma_tx();
 
-    PIE7bits.I2C1IE = 0;
-    PIE7bits.I2C1EIE = 0;
-    PIE7bits.I2C1RXIE = 0;
-    PIE7bits.I2C1TXIE = 0;
+    I2C1CON0bits.EN = 0;
+    I2C1CON0bits.MODE = 0b100; // Host 7 bit
+    I2C1CLK = 0x01;            /* FOSC */
+    I2C1BAUD = I2C_BAUD;
+    I2C1CON1bits.CSD = 0; // For multi master mode clock stretch should be enabled
+    I2C1CON2bits.FME = I2C_FME;
+    I2C1CON2bits.BFRET = 0b00; // 8 cycles for BFRE
 
-    client_mode_disable();
-    tx_idx = 0;
-    rx_idx = 0;
-
-    I2C1CON0bits.MODE = 0b100;
-
-    I2C1ERRbits.BCLIF = 0;
-    I2C1ERRbits.NACKIF = 0;
-    I2C1PIRbits.SCIF = 0;
-    I2C1PIRbits.PCIF = 0;
-    I2C1STAT1bits.CLRBF = 1;
-
-    PIE7bits.I2C1IE = 1;
-    PIE7bits.I2C1EIE = 1;
-    PIE7bits.I2C1RXIE = 1;
-    PIE7bits.I2C1TXIE = 1;
+    const uint8_t a = (uint8_t)(addr << 1);
+    I2C1ADR0 = a;
+    I2C1ADR1 = a;
+    I2C1ADR2 = a;
+    I2C1ADR3 = a;
 
     I2C1PIEbits.PCIE = 1;
     I2C1PIEbits.RSCIE = 1;
-    I2C1PIEbits.CNTIE = 1;
+    I2C1PIEbits.ADRIE = 1;
+
+    I2C1BTOC = 0x06;         // LFINTOSC as BTO clock source
+    I2C1BTObits.TOBY32 = 1;  // time x 32
+    I2C1BTObits.TOTIME = 35; // reset buts after ~35 ms
+
+    I2C1ERRbits.BLCIE = 1;
     I2C1ERRbits.NACKIE = 1;
+    I2C1ERRbits.BTOIE = 1;
 
-    host_state = HOST_TX;
-    deadline_ms = I2C_DEADLINE_BYTE_MS;
-
-    I2C1CNTH = 0;
-    I2C1CNTL = op->tx_len;
-    I2C1CON0bits.RSEN = (op->rx_len > 0) ? 1 : 0;
-    I2C1ADB1 = (uint8_t)(op->addr << 1);
+    PIE7bits.I2C1IE = 1;
+    PIE7bits.I2C1EIE = 1;
 
     I2C1CON0bits.EN = 1;
-    I2C1CON0bits.S = 1;
 }
 
-static void start_read_phase(I2cOp* op) {
-    I2C1CON0bits.RSEN = 0;
-    I2C1CNTH = 0;
-    I2C1CNTL = op->rx_len;
-    I2C1ADB1 = (uint8_t)((op->addr << 1) | 0x01);
-    I2C1ERRbits.BCLIF = 0;
-    I2C1ERRbits.NACKIF = 0;
-    I2C1PIRbits.PCIF = 0;
-    host_state = HOST_RX;
-    deadline_ms = I2C_DEADLINE_BYTE_MS;
-    I2C1CON0bits.S = 1;
-}
-
-static void host_complete(I2cResult r) {
-    I2cOp* op = &queue[q_head];
-
-    if ((r == I2C_RESULT_BUSY || r == I2C_RESULT_TIMEOUT) && op->retries > 0) {
-        /* Retry: re-arm and back off. */
-        I2C1CON0bits.EN = 0;
-        if (client_addr != 0) {
-            client_mode_enable();
+void i2c_poll(void) {
+    if (g_q_head != g_q_tail) {
+        MessageTask* task = &g_queue[g_head];
+        if (task->state == MT_FINISHED) {
+            if (task->cb) {
+                task->cb(task->rx, task->rx_len, task->cb_ctx);
+            }
+            INTERRUPT_PUSH;
+            g_q_head = q_next(g_q_head);
+            INTERRUPT_POP;
         }
-        host_state = HOST_BACKOFF;
-        deadline_ms = I2C_BACKOFF_MS;
-        return;
     }
 
-    deadline_ms = 0;
-    op->result = r;
-    op->done = 1;
-
-    I2C1CON0bits.EN = 0;
-    if (client_addr != 0) {
-        client_mode_enable();
+    if (g_q_head != g_q_tail) {
+        MessageTask* task = &g_queue[g_head];
+        INTERRUPT_PUSH;
+        if (task->state == MT_IDLE) {
+            i2c_start_task(task);
+        }
+        INTERRUPT_POP;
     }
-    host_state = HOST_IDLE;
 }
 
-/* ── ISR entry points ──────────────────────────────────────────────── */
+static void i2c_start_task(MessageTask* task) {
+    task->state = MT_RUNNING;
+    I2C1ADB1 = (uint8_t)(task->addr << 1);
+    if (task->rx_len > 0 && task->tx_len > 0) {
+        I2C1CON0bits.RSEN = 1;
+    }
+    i2c_dma_set(task);
+}
+
+// Should be submitted from main loop
+I2cResult i2c_submit(uint8_t addr, const uint8_t* tx, uint8_t tx_len, uint8_t rx_len, I2cCompletion cb, void* ctx) {
+    if (tx == 0) {
+        return I2C_RESULT_BAD_ARG;
+    }
+    if (tx_len == 0 || tx_len > I2C_TX_MAX) {
+        return I2C_RESULT_BAD_ARG;
+    }
+    if (rx_len > 0 && rx == 0) {
+        return I2C_RESULT_BAD_ARG;
+    }
+
+    INTERRUPT_PUSH;
+    if (q_next(g_q_tail) == g_q_head) {
+        INTERRUPT_POP;
+        return I2C_RESULT_QUEUE_FULL;
+    }
+    MessageTask* task = &g_queue[g_q_tail];
+    task->state = MT_IDLE;
+    g_q_tail = q_next(g_q_tail);
+    INTERRUPT_POP;
+
+    task->addr = addr;
+    task->tx_len = tx_len;
+    task->rx_len = rx_len;
+    task->cb = cb;
+    task->cb_ctx = ctx;
+    task->retries = I2C_RETRY_COUNT;
+    for (uint8_t i = 0; i < tx_len; i++) {
+        task->tx[i] = tx[i];
+    }
+
+    return I2C_RESULT_OK;
+}
+
+static void prepend_completed_task(uint8_t addr, uint8_t* rx, uint8_t rx_len) {
+    if (rx == 0) {
+        return I2C_RESULT_BAD_ARG;
+    }
+    if (rx_len == 0 || rx_len > I2C_RX_MAX) {
+        return I2C_RESULT_BAD_ARG;
+    }
+
+    if (q_prev(g_q_head) == g_q_tail) {
+        return I2C_RESULT_QUEUE_FULL;
+    }
+    g_q_head = q_prev(g_q_head);
+    MessageTask* task = &g_queue[g_q_head];
+    task->state = MT_FINISHED;
+
+    task->addr = addr;
+    task->tx_len = 0;
+    task->rx_len = rx_len;
+    task->cb = g_cold_rx;
+    task->cb_ctx = 0;
+    task->retries = I2C_RETRY_COUNT;
+    for (uint8_t i = 0; i < rx_len; i++) {
+        task->rx[i] = rx[i];
+    }
+
+    return I2C_RESULT_OK;
+}
+
+static void i2c_error_reset(void) {
+    // TODO: Clear all errors
+    I2C1STAT1bits.CLRBF = 0;
+}
 
 void __interrupt(irq(I2C1), base(8)) I2C1_ISR(void) {
     // Address detected, set on the 8th falling SCL edge for a matching received address byte
-    if (I2C1PIRbits.ADRIF) {
+    if (I2C1PIEbits.ADRIE && I2C1PIRbits.ADRIF) {
         I2C1PIRbits.ADRIF = 0;
         isr_on_address();
         return;
     }
 
     // Stop condition detected
-    if (I2C1PIRbits.PCIF) {
+    if (I2C1PIEbits.PCIE && I2C1PIRbits.PCIF) {
         I2C1PIRbits.PCIF = 0;
         isr_on_stop();
         return;
     }
 
-    if (I2C1PIRbits.RSCIF) {
+    if (I2C1PIEbits.RSCIE && I2C1PIRbits.RSCIF) {
         // RSCIF - Repeated Start Condition
         I2C1PIRbits.RSCIF = 0;
-        isr_on_stop();
+        isr_on_restart();
         return;
     }
 
-
-    if (I2C1PIRbits.WRIF) {
-        I2C1PIRbits.WRIF = 0;
-        uint8_t b = I2C1RXB;
-        if (client_rx_len < I2C_CLIENT_BUF_SIZE) {
-            client_rx_buf[client_rx_len++] = b;
-        }
-        I2C1CON1bits.ACKDT = 0;
-        I2C1CON0bits.CSTR = 0;
-        return;
-    }
-
-    if (I2C1PIRbits.ACKTIF) {
+    if (I2C1PIEbits.ACKTIE && I2C1PIRbits.ACKTIF) {
         // ACKTIF - Acknowledge Timeout
         I2C1PIRbits.ACKTIF = 0;
         I2C1CON0bits.CSTR = 0;
         return;
     }
-
-    if (I2C1PIRbits.CNTIF) {
-        // The I2C1CNT byte counter has reached zero
-        // The I2CxIF bit is read-only and can only be cleared by clearing 
-        // all the interrupt flag bits of the I2CxPIR register
-        I2C1PIR = 0; 
-        return;
-    }
-
-    if (I2C1PIRbits.SCIF) {
-        // SCIF - Start Condition
-        I2C1PIRbits.SCIF = 0;
-        return;
-    }
 }
-
-void __interrupt(irq(I2C1RX), base(8)) I2C1_RX_ISR(void) {
-    uint8_t b = I2C1RXB;
-    if (!I2C1STAT0bits.D) {
-        return;
-    }
-    if (client_rx_len < I2C_CLIENT_BUF_SIZE) {
-        client_rx_buf[client_rx_len++] = b;
-    }
-}
-
-void __interrupt(irq(I2C1TX), base(8)) I2C1_RX_ISR(void) {
-    I2C1STAT1bits.CLRBF = 0;
-    uint8_t b = I2C1TXB;
-    I2C1TXB = (client_tx_pos < client_tx_len) ? client_tx_buf[client_tx_pos++] : 0;
-}
-
-void i2c_error_isr(void) {
-    if (I2C1CON0bits.MODE == 0b000) {
-        client_handle_error();
-    } else {
-        host_handle_error();
-    }
-}
-
-/* ── Host ISR ──────────────────────────────────────────────────────── */
-
-static void host_handle_event(void) {
-    if (host_state == HOST_IDLE || host_state == HOST_BACKOFF) {
-        I2C1PIRbits.PCIF = 0;
-        return;
-    }
-    I2cOp* op = &queue[q_head];
-
-    if (I2C1PIRbits.PCIF) {
-        I2C1PIRbits.PCIF = 0;
-        if (host_state == HOST_STOP || host_state == HOST_RX) {
-            host_complete(I2C_RESULT_OK);
-        } else {
-            host_complete(I2C_RESULT_BUSY);
-        }
-        return;
-    }
-
-    if (host_state == HOST_TX && I2C1STAT1bits.TXBE) {
-        if (tx_idx < op->tx_len) {
-            I2C1TXB = op->tx[tx_idx++];
-            deadline_ms = I2C_DEADLINE_BYTE_MS;
-        } else if (op->rx_len > 0) {
-            start_read_phase(op);
-        } else {
-            host_state = HOST_STOP;
-            deadline_ms = I2C_DEADLINE_STOP_MS;
-        }
-        return;
-    }
-
-    if (host_state == HOST_RX && I2C1STAT1bits.RXBF) {
-        uint8_t b = I2C1RXB;
-        if (rx_idx < op->rx_len) {
-            op->rx_buf[rx_idx++] = b;
-        }
-        if (rx_idx >= op->rx_len) {
-            host_state = HOST_STOP;
-            deadline_ms = I2C_DEADLINE_STOP_MS;
-        } else {
-            deadline_ms = I2C_DEADLINE_BYTE_MS;
-        }
-        return;
-    }
-}
-
-static void host_handle_error(void) {
-    if (I2C1ERRbits.NACKIF) {
-        I2C1ERRbits.NACKIF = 0;
-        host_complete(I2C_RESULT_NACK);
-        return;
-    }
-    if (I2C1ERRbits.BCLIF) {
-        I2C1ERRbits.BCLIF = 0;
-        host_complete(I2C_RESULT_BUSY);
-        return;
-    }
-}
-
-/* ── Client ISR ────────────────────────────────────────────────────── */
 
 static void isr_on_address(void) {
-    if (I2C1STAT0bits.R) {
-        client_tx_pos = 0;
-        client_tx_len = 0;
-        if (client_read_cb) {
-            client_tx_len = client_read_cb((const uint8_t*)client_rx_buf, client_rx_len,
-                                            (uint8_t*)client_tx_buf, I2C_CLIENT_BUF_SIZE);
-        }
-        client_state = CLIENT_TX;
-    } else {
-        client_rx_len = 0;
-        client_state = CLIENT_RX;
+    if (g_fsm == FSM_HOST_TX) {
+        // Reset started task
+        MessageTask* task = &g_queue[g_head];
+        task->state = MT_IDLE;
+        g_fsm = FSM_IDLE;
     }
+
+    if (g_fsm == FSM_IDLE) {
+        const uint8_t has_tx = g_client_tx_len > 0;
+        if (I2C1STAT0bits.R && has_tx) {
+            // We are a client that has to transmit and has data
+            g_fsm = FSM_CLIENT_RX;
+            i2c_dma_tx();
+            I2C1CON1bits.ACKDT = 0; // ACK
+        } else if (I2C1STAT0bits.R && !has_tx) {
+            // We are a client that has to transmit but has no data
+            g_fsm = FSM_IDLE;
+            I2C1CON1bits.ACKDT = 1; // NACK
+        } else {
+            // We are a client that has to recieve
+            g_fsm = FSM_IDLE;
+            i2c_dma_rx();
+            I2C1CON1bits.ACKDT = fsm_client_rx();
+        }
+    }
+    I2C1CON0bits.CSTR = 0; // Release clock
 }
 
 static void isr_on_stop(void) {
-    // Clear all interrupt request flags
-    I2C1PIR = 0x00;
-    // Clear error flags
-    I2C1ERRbits.BCLIF = 0;   // Clear bus collision
-    I2C1ERRbits.BTOIF = 0;   // Clear bus timeout
-    I2C1ERRbits.NACKIF = 0;  // Clear NACK
-
-    // Clear status register and buffer
-    I2C1STAT1 = 0x00;
-    I2C1STAT1bits.CLRBF = 1;  // Clear buffers
-
-    if (client_state == CLIENT_RX && client_rx_len > 0 && client_rx_cb) {
-        client_rx_cb((const uint8_t*)client_rx_buf, client_rx_len);
+    if (g_fsm == FSM_HOST_TX || g_fsm == FSM_HOST_RX) {
+        g_fsm = FSM_IDLE;
+        MessageTask* task = &g_queue[g_head];
+        task->state = MT_FINISHED;
+    } else if (g_fsm == FSM_CLIENT_TX) {
+        g_fsm = FSM_IDLE;
+        g_client_tx_len = 0;
+    } else if (g_fsm == FSM_CLIENT_RX) {
+        g_fsm = FSM_IDLE;
+        prepend_completed_task(0, g_client_rx, g_client_rx_len);
     }
-    // TODO: mark this task as complete so it can be dispatched 
-    // and the next one can be started
-    // if (client_state == CLIENT_RX && client_rx_len > 0 && client_rx_cb) {
-    //     client_rx_cb((const uint8_t*)client_rx_buf, client_rx_len);
-    // }
-    // client_reset();
-    // try_dispatch();
+    i2c_error_reset();
 }
 
-static void client_handle_error(void) {
+static void isr_on_restart(void) {
+    if (g_fsm == FSM_HOST_TX) {
+        // if have pending operation, then host is switching from write to read
+        g_fsm == FSM_HOST_RX;
+        MessageTask* task = &g_queue[g_head];
+        I2C1CNT = task->rx_len;
+    } else if (g_fsm == FSM_CLIENT_RX) {
+        // If we are client, then we need to process isr_on_stop()
+        g_fsm = FSM_IDLE;
+        prepend_completed_task(0, g_client_rx, g_client_rx_len);
+    }
+}
+
+static void isr_on_nack(void) {
+    if (g_fsm == FSM_HOST_TX || g_fsm == FSM_HOST_RX) {
+        MessageTask* task = &g_queue[g_head];
+        if (--task->retries > 0) {
+            // Retry the task
+            g_fsm = FSM_IDLE;
+            task->state = MT_IDLE;
+        } else {
+            // Drop the task
+            g_q_head = q_next(g_q_head);
+        }
+    }
+}
+
+static void isr_on_collision(void) {
+    if (g_fsm == FSM_HOST_TX || g_fsm == FSM_HOST_RX) {
+        MessageTask* task = &g_queue[g_head];
+        task->state = MT_IDLE;
+        g_fsm = FSM_IDLE;
+    }
+}
+
+static void isr_on_timeout(void) {
+    if (g_fsm == FSM_HOST_TX || g_fsm == FSM_HOST_RX) {
+        MessageTask* task = &g_queue[g_head];
+        task->state = MT_IDLE;
+        g_fsm = FSM_IDLE;
+    }
+    g_client_rx_len = 0;
+    g_client_tx_len = 0;
+
+    I2C1PIR = 0x00;         // Clear protocol interrupt flags
+    I2C1ERRbits.BCLIF = 0;  // Clear bus collision flag
+    I2C1ERRbits.BTOIF = 0;  // Clear bus timeout flag
+    I2C1ERRbits.NACKIF = 0; // Clear NACK flag
+
+    // Clear status register and buffers
+    I2C1STAT1 = 0x00;
+    I2C1STAT1bits.CLRBF = 1; // Clear all buffers
+
+    I2C1CON0bits.EN = 0;
+
+// ===== SILICON ERRATA WORKAROUND =====
+// Same sequence as in I2C1_Initialize()
+// Prevents I2C module from locking up during reset
+#pragma message                                                                                                        \
+    "Refer to erratum DS80000870F: https://www.microchip.com/content/dam/mchp/documents/MCU08/ProductDocuments/Errata/PIC18F27-47-57Q43-Silicon-Errata-and-Datasheet-Clarifications-80000870J.pdf"
+    I2C1PIEbits.SCIE = 0;
+    I2C1PIEbits.PCIE = 0;
+    // Re-enable I2C module
+    I2C1CON0bits.EN = 1;
+    // Wait 1 microsecond for hardware to settle
+    __delay_us(1);
+
+    // Execute 6 NOP instructions for timing stability
+    __nop();
+    __nop();
+    __nop();
+    __nop();
+    __nop();
+    __nop();
+
+    // Clear spurious Start and Stop condition flags
+    I2C1PIRbits.SCIF = 0; // Clear Start Condition Interrupt Flag
+    I2C1PIRbits.PCIF = 0; // Clear Stop Condition Interrupt Flag
+    I2C1PIEbits.PCIE = 1;
+}
+
+void __interrupt(irq(I2C1E), base(8)) I2C1_ERROR_ISR(void) {
+    if (I2C1ERRbits.NACKIF) {
+        I2C1ERRbits.NACKIF = 0;
+        isr_on_nack();
+    }
+
+    if (I2C1ERRbits.BTOIF) {
+        I2C1ERRbits.BTOIF = 0;
+        isr_on_timeout();
+    }
+
     if (I2C1ERRbits.BCLIF) {
         I2C1ERRbits.BCLIF = 0;
+        isr_on_collision();
     }
-    if (I2C1STAT1bits.TXWE) {
-        I2C1STAT1bits.TXWE = 0;
-    }
-    if (I2C1CON1bits.RXO) {
-        I2C1CON1bits.RXO = 0;
-    }
-    if (I2C1CON1bits.TXU) {
-        I2C1CON1bits.TXU = 0;
-    }
-    if (I2C1STAT1bits.RXRE) {
-        I2C1STAT1bits.RXRE = 0;
-    }
-    I2C1ERRbits.NACKIF = 0;
-
-    client_reset();
-    I2C1STAT1bits.CLRBF = 1;
-    I2C1CON0bits.CSTR = 0;
-}
-
-/* ── Tick ──────────────────────────────────────────────────────────── */
-
-void i2c_tick_ms(void) {
-    if (deadline_ms == 0) {
-        return;
-    }
-    if (--deadline_ms != 0) {
-        return;
-    }
-    if (host_state == HOST_BACKOFF) {
-        host_state = HOST_IDLE;
-        try_dispatch();
-        return;
-    }
-    if (host_state != HOST_IDLE) {
-        host_complete(I2C_RESULT_TIMEOUT);
-    }
-}
-
-/* ── Internal helpers ──────────────────────────────────────────────── */
-
-static void client_mode_enable(void) {
-    I2C1CON0bits.EN = 0;
-    I2C1CON0bits.MODE = 0b000;
-
-    I2C1CON1 = 0x00;
-    I2C1CON1bits.CSD = 1;
-    I2C1CON2 = 0x00;
-
-    I2C1CNTL = 0;
-    I2C1CNTH = 0;
-
-    const uint8_t a = (uint8_t)(client_addr << 1);
-    I2C1ADR0 = a;
-    I2C1ADR1 = a;
-    I2C1ADR2 = a;
-    I2C1ADR3 = a;
-
-    I2C1STAT1bits.CLRBF = 1;
-    I2C1PIRbits.PCIF = 0;
-    I2C1PIRbits.ADRIF = 0;
-    I2C1PIRbits.ACKTIF = 0;
-    I2C1ERRbits.BCLIF = 0;
-    I2C1ERRbits.NACKIF = 0;
-    client_reset();
-
-    
-    // Interrupts
-    PIE7bits.I2C1IE = 1;
-    PIE7bits.I2C1EIE = 1;
-    PIE7bits.I2C1RXIE = 1;
-    PIE7bits.I2C1TXIE = 1;
-
-    I2C1PIE = (0 << _I2C1PIE_CNTIE_POSITION) |
-              (0 << _I2C1PIE_ACKTIE_POSITION) |
-              (1 << _I2C1PIE_WRIE_POSITION) |
-              (1 << _I2C1PIE_ADRIE_POSITION) |
-              (1 << _I2C1PIE_PCIE_POSITION) |
-              (1 << _I2C1PIE_RSCIE_POSITION) |
-              (0 << _I2C1PIE_SCIE_POSITION);
-
-    I2C1ERRbits.NACKIE = 1;
-
-    I2C1CON0bits.EN = 1;
-}
-
-static void client_reset(void) {
-    client_state = CLIENT_IDLE;
-    client_rx_len = 0;
-    client_tx_len = 0;
-    client_tx_pos = 0;
 }

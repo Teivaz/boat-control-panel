@@ -18,16 +18,22 @@ void rgbled_init(void) {
 }
 
 void rgbled_set(const RGBLedData* rgb, uint8_t count) {
+    INTERRUPT_PUSH;
     DMASELECT = 0;
     if (DMAnCON0bits.XIP != 0) {
+        INTERRUPT_POP;
         return;
     }
-
+    INTERRUPT_POP;
+    
     uint16_t byte_count = copy_to_buffer(rgb, count);
-
+    
+    INTERRUPT_PUSH_NDECL;
+    DMASELECT = 0;
     SPI1TCNT = byte_count;
     DMAnSSZ = byte_count;
     DMAnCON0bits.SIRQEN = 1;
+    INTERRUPT_POP;
 }
 
 /* Encodes one 8-bit intensity as four SPI bytes. Each source bit becomes a

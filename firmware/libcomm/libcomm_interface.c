@@ -141,83 +141,82 @@ static void dispatch_rx(const uint8_t* data, uint8_t len) {
     // TODO: Create circular buffer, copy data to next value
     // then add to dispatch in main loop, callback should clear the
     // circular buffer value.
-    
 
     uint8_t id = data[0];
     const uint8_t* payload = data + 1;
     uint8_t plen = len - 1;
 
     switch (id) {
-    case COMM_RESET:
-        comm_on_reset();
-        break;
+        case COMM_RESET:
+            comm_on_reset();
+            break;
 
-    case COMM_CONFIG:
-        if (plen >= 2) {
-            CommConfig config;
-            comm_parse_config_write(payload, &config);
-            comm_on_config_received(&config);
-        }
-        break;
+        case COMM_CONFIG:
+            if (plen >= 2) {
+                CommConfig config;
+                comm_parse_config_write(payload, &config);
+                comm_on_config_received(&config);
+            }
+            break;
 
-    case COMM_BUTTON_EFFECT:
-        if (plen >= 4) {
-            CommButtonEffect effect;
-            comm_parse_button_effect(payload, &effect);
-            comm_on_button_effect_received(&effect);
-        }
-        break;
+        case COMM_BUTTON_EFFECT:
+            if (plen >= 4) {
+                CommButtonEffect effect;
+                comm_parse_button_effect(payload, &effect);
+                comm_on_button_effect_received(&effect);
+            }
+            break;
 
-    case COMM_BUTTON_CHANGED:
-        if (plen >= 2) {
-            CommButtonChanged event;
-            comm_parse_button_changed(payload, &event);
-            comm_on_button_changed_received(&event);
-        }
-        break;
+        case COMM_BUTTON_CHANGED:
+            if (plen >= 2) {
+                CommButtonChanged event;
+                comm_parse_button_changed(payload, &event);
+                comm_on_button_changed_received(&event);
+            }
+            break;
 
-    case COMM_BUTTON_TRIGGER:
-        if (plen >= 2) {
-            CommButtonTrigger trigger;
-            comm_parse_button_trigger_write(payload, &trigger);
-            comm_on_button_trigger_received(&trigger);
-        }
-        break;
+        case COMM_BUTTON_TRIGGER:
+            if (plen >= 2) {
+                CommButtonTrigger trigger;
+                comm_parse_button_trigger_write(payload, &trigger);
+                comm_on_button_trigger_received(&trigger);
+            }
+            break;
 
-    case COMM_RELAY_STATE:
-        if (plen >= 2) {
-            CommRelayState state;
-            comm_parse_relay_state_write(payload, &state);
-            comm_on_relay_state_received(&state);
-        }
-        break;
+        case COMM_RELAY_STATE:
+            if (plen >= 2) {
+                CommRelayState state;
+                comm_parse_relay_state_write(payload, &state);
+                comm_on_relay_state_received(&state);
+            }
+            break;
 
-    case COMM_RELAY_CHANGED:
-        if (plen >= 7) {
-            CommRelayChanged event;
-            comm_parse_relay_changed(payload, &event);
-            comm_on_relay_changed_received(&event);
-        }
-        break;
+        case COMM_RELAY_CHANGED:
+            if (plen >= 7) {
+                CommRelayChanged event;
+                comm_parse_relay_changed(payload, &event);
+                comm_on_relay_changed_received(&event);
+            }
+            break;
 
-    case COMM_RELAY_MASK:
-        if (plen >= 2) {
-            CommRelayMask mask;
-            comm_parse_relay_mask_write(payload, &mask);
-            comm_on_relay_mask_received(&mask);
-        }
-        break;
+        case COMM_RELAY_MASK:
+            if (plen >= 2) {
+                CommRelayMask mask;
+                comm_parse_relay_mask_write(payload, &mask);
+                comm_on_relay_mask_received(&mask);
+            }
+            break;
 
-    case COMM_LEVEL_MODE:
-        if (plen >= 1) {
-            CommLevelMode mode;
-            comm_parse_level_mode_write(payload, &mode);
-            comm_on_level_mode_received(&mode);
-        }
-        break;
+        case COMM_LEVEL_MODE:
+            if (plen >= 1) {
+                CommLevelMode mode;
+                comm_parse_level_mode_write(payload, &mode);
+                comm_on_level_mode_received(&mode);
+            }
+            break;
 
-    default:
-        break;
+        default:
+            break;
     }
 }
 
@@ -235,123 +234,123 @@ static uint8_t dispatch_read(const uint8_t* request, uint8_t request_len, uint8_
 
     switch (id) {
 
-    case COMM_BUTTON_STATE_READ: {
-        if (response_max < 1) {
-            return 0;
+        case COMM_BUTTON_STATE_READ: {
+            if (response_max < 1) {
+                return 0;
+            }
+            CommButtonState state;
+            if (comm_on_button_state_read_request(&state) != 0) {
+                return 0;
+            }
+            response[0] = state.current_state;
+            return 1;
         }
-        CommButtonState state;
-        if (comm_on_button_state_read_request(&state) != 0) {
-            return 0;
-        }
-        response[0] = state.current_state;
-        return 1;
-    }
 
-    case COMM_BUTTON_TRIGGER_READ: {
-        if (response_max < 1 || request_len < 2) {
-            return 0;
+        case COMM_BUTTON_TRIGGER_READ: {
+            if (response_max < 1 || request_len < 2) {
+                return 0;
+            }
+            uint8_t button_id = request[1] & 0x07;
+            CommTriggerConfig config;
+            if (comm_on_button_trigger_read_request(button_id, &config) != 0) {
+                return 0;
+            }
+            /* CommTriggerConfig is a 1-byte bitfield; copy raw byte */
+            response[0] = *(const uint8_t*)&config;
+            return 1;
         }
-        uint8_t button_id = request[1] & 0x07;
-        CommTriggerConfig config;
-        if (comm_on_button_trigger_read_request(button_id, &config) != 0) {
-            return 0;
-        }
-        /* CommTriggerConfig is a 1-byte bitfield; copy raw byte */
-        response[0] = *(const uint8_t*)&config;
-        return 1;
-    }
 
-    case COMM_RELAY_STATE_READ: {
-        if (response_max < 2) {
-            return 0;
+        case COMM_RELAY_STATE_READ: {
+            if (response_max < 2) {
+                return 0;
+            }
+            CommRelayState state;
+            if (comm_on_relay_state_read_request(&state) != 0) {
+                return 0;
+            }
+            response[0] = (uint8_t)state.relays;
+            response[1] = (uint8_t)(state.relays >> 8);
+            return 2;
         }
-        CommRelayState state;
-        if (comm_on_relay_state_read_request(&state) != 0) {
-            return 0;
-        }
-        response[0] = (uint8_t)state.relays;
-        response[1] = (uint8_t)(state.relays >> 8);
-        return 2;
-    }
 
-    case COMM_RELAY_MASK_READ: {
-        if (response_max < 2) {
-            return 0;
+        case COMM_RELAY_MASK_READ: {
+            if (response_max < 2) {
+                return 0;
+            }
+            CommRelayMask mask;
+            if (comm_on_relay_mask_read_request(&mask) != 0) {
+                return 0;
+            }
+            response[0] = (uint8_t)mask.mask;
+            response[1] = (uint8_t)(mask.mask >> 8);
+            return 2;
         }
-        CommRelayMask mask;
-        if (comm_on_relay_mask_read_request(&mask) != 0) {
-            return 0;
-        }
-        response[0] = (uint8_t)mask.mask;
-        response[1] = (uint8_t)(mask.mask >> 8);
-        return 2;
-    }
 
-    case COMM_BATTERY_READ: {
-        if (response_max < 2) {
-            return 0;
+        case COMM_BATTERY_READ: {
+            if (response_max < 2) {
+                return 0;
+            }
+            CommBattery battery;
+            if (comm_on_battery_read_request(&battery) != 0) {
+                return 0;
+            }
+            response[0] = (uint8_t)battery.voltage;
+            response[1] = (uint8_t)(battery.voltage >> 8);
+            return 2;
         }
-        CommBattery battery;
-        if (comm_on_battery_read_request(&battery) != 0) {
-            return 0;
-        }
-        response[0] = (uint8_t)battery.voltage;
-        response[1] = (uint8_t)(battery.voltage >> 8);
-        return 2;
-    }
 
-    case COMM_LEVELS_READ: {
-        if (response_max < 2) {
-            return 0;
+        case COMM_LEVELS_READ: {
+            if (response_max < 2) {
+                return 0;
+            }
+            CommLevels levels;
+            if (comm_on_levels_read_request(&levels) != 0) {
+                return 0;
+            }
+            response[0] = levels.level_0;
+            response[1] = levels.level_1;
+            return 2;
         }
-        CommLevels levels;
-        if (comm_on_levels_read_request(&levels) != 0) {
-            return 0;
-        }
-        response[0] = levels.level_0;
-        response[1] = levels.level_1;
-        return 2;
-    }
 
-    case COMM_LEVEL_MODE_READ: {
-        if (response_max < 1) {
-            return 0;
+        case COMM_LEVEL_MODE_READ: {
+            if (response_max < 1) {
+                return 0;
+            }
+            CommLevelMode mode;
+            if (comm_on_level_mode_read_request(&mode) != 0) {
+                return 0;
+            }
+            response[0] = *(const uint8_t*)&mode & 0x0F;
+            return 1;
         }
-        CommLevelMode mode;
-        if (comm_on_level_mode_read_request(&mode) != 0) {
-            return 0;
-        }
-        response[0] = *(const uint8_t*)&mode & 0x0F;
-        return 1;
-    }
 
-    case COMM_SENSORS_READ: {
-        if (response_max < 1) {
-            return 0;
+        case COMM_SENSORS_READ: {
+            if (response_max < 1) {
+                return 0;
+            }
+            CommSensors sensors;
+            if (comm_on_sensors_read_request(&sensors) != 0) {
+                return 0;
+            }
+            response[0] = sensors.sensors & 0x07;
+            return 1;
         }
-        CommSensors sensors;
-        if (comm_on_sensors_read_request(&sensors) != 0) {
-            return 0;
-        }
-        response[0] = sensors.sensors & 0x07;
-        return 1;
-    }
 
-    case COMM_CONFIG_READ: {
-        if (response_max < 1 || request_len < 2) {
-            return 0;
+        case COMM_CONFIG_READ: {
+            if (response_max < 1 || request_len < 2) {
+                return 0;
+            }
+            uint8_t address = request[1];
+            uint8_t value;
+            if (comm_on_config_read_request(address, &value) != 0) {
+                return 0;
+            }
+            response[0] = value;
+            return 1;
         }
-        uint8_t address = request[1];
-        uint8_t value;
-        if (comm_on_config_read_request(address, &value) != 0) {
-            return 0;
-        }
-        response[0] = value;
-        return 1;
-    }
 
-    default:
-        return 0;
+        default:
+            return 0;
     }
 }
 
@@ -449,15 +448,13 @@ I2cResult comm_send_button_trigger_read(uint8_t addr, uint8_t button_id) {
 I2cResult comm_send_relay_state_read(void) {
     CommMessage msg;
     uint8_t tx_len = comm_build_relay_state_read(&msg);
-    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, _rx_buf, 2, on_relay_state_read_done,
-                      0);
+    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, _rx_buf, 2, on_relay_state_read_done, 0);
 }
 
 I2cResult comm_send_relay_mask_read(void) {
     CommMessage msg;
     uint8_t tx_len = comm_build_relay_mask_read(&msg);
-    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, _rx_buf, 2, on_relay_mask_read_done,
-                      0);
+    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, _rx_buf, 2, on_relay_mask_read_done, 0);
 }
 
 I2cResult comm_send_battery_read(void) {
@@ -475,8 +472,7 @@ I2cResult comm_send_levels_read(void) {
 I2cResult comm_send_level_mode_read(void) {
     CommMessage msg;
     uint8_t tx_len = comm_build_level_mode_read(&msg);
-    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, _rx_buf, 1, on_level_mode_read_done,
-                      0);
+    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, _rx_buf, 1, on_level_mode_read_done, 0);
 }
 
 I2cResult comm_send_sensors_read(void) {
@@ -488,15 +484,12 @@ I2cResult comm_send_sensors_read(void) {
 I2cResult comm_send_config_read(uint8_t addr, uint8_t config_addr) {
     CommMessage msg;
     uint8_t tx_len = comm_build_config_read(&msg, config_addr);
-    return i2c_submit(addr, (const uint8_t*)&msg, tx_len, _rx_buf, 1, on_config_read_done,
-                      (void*)(uintptr_t)addr);
+    return i2c_submit(addr, (const uint8_t*)&msg, tx_len, _rx_buf, 1, on_config_read_done, (void*)(uintptr_t)addr);
 }
 
 static uint8_t active_read_command = 0;
 static uint8_t read_command_buffer[I2C_CLIENT_BUF_SIZE] = {0};
 static uint8_t read_command_buffer_len = 0;
-
-void _
 
 void _comm_on_read(uint8_t idx) {
     if (active_read_command && idx < read_command_buffer_len) {

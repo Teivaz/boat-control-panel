@@ -39,7 +39,9 @@
  *   BAUD = 31  → 400 kHz
  *   BAUD = 7F  → 100 kHz
  * Override before compiling if the bus needs a different rate. */
+#ifndef I2C_FME
 #define I2C_FME 1
+#endif
 
 #if I2C_FME
 #define I2C_BAUD 0x31
@@ -48,11 +50,15 @@
 #endif
 
 #ifndef I2C_QUEUE_SIZE
-#define I2C_QUEUE_SIZE 8
+#define I2C_QUEUE_SIZE 16
 #endif
 
 #ifndef I2C_TX_MAX
 #define I2C_TX_MAX 8
+#endif
+
+#ifndef I2C_RX_MAX
+#define I2C_RX_MAX 8
 #endif
 
 #ifndef I2C_CLIENT_BUF_SIZE
@@ -77,53 +83,30 @@ typedef enum {
 /* Host completion callback.  Fired from i2c_poll() (main-loop context).
  * rx_buf is the pointer the caller passed to i2c_submit; rx_len is
  * actual bytes received (0 on write-only or non-OK result). */
-typedef void (*I2cCompletion)(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx);
-
-/* Client RX handler — invoked from ISR when a master finishes writing
- * to us (Stop condition).  data points into a driver buffer that is
- * reused on the next message; copy if needed. */
-typedef void (*I2cRxHandler)(const uint8_t* data, uint8_t len);
-
-/* Client read handler — invoked from ISR when a master addresses us
- * with R/W=1.  request[] is the preceding write-phase bytes (command +
- * params).  Write up to response_max bytes into response[] and return
- * the count.  Return 0 to decline. */
-typedef uint8_t (*I2cReadHandler)(const uint8_t* request, uint8_t request_len, uint8_t* response, uint8_t response_max);
+typedef void (*I2cCompletion)(uint8_t* rx_buf, uint8_t rx_len, void* ctx);
 
 /* ── Main-loop API ──────────────────────────────────────────────────── */
 
-/* Set the slave-side handlers.  May be called before or after i2c_init.
- * Either may be left unset (NULL) if that direction is unused. */
-void i2c_set_rx_handler(I2cRxHandler h);
-void i2c_set_read_handler(I2cReadHandler h);
+/* Set the client-side cold RX handlers.  May be called before or right
+ * after i2c_init. May be left unset (NULL) if that direction is unused. */
+void i2c_set_cold_rx_handler(I2cCompletion cold_tx);
 
 /* One-time hardware init.  Configures I2C1 at 400 kHz.
- * client_addr = 0 disables client mode (host-only).
  * Caller must have set up pins and oscillator beforehand. */
 void i2c_init(uint8_t client_addr);
 
+/* Set the data that the client is expected to transmit */
+I2cResult i2c_set_client_tx(uint8_t* tx, uint8_t tx_len);
+
 /* Submit a host write or write-then-read.
  *   tx, tx_len  — required (1..I2C_TX_MAX).  Copied into the queue.
- *   rx_buf, rx_len — write-then-read.  rx_len=0 means write-only.
- *                   When rx_len > 0, rx_buf must remain valid until cb.
+ *   rx_len      — write-then-read.  rx_len=0 means write-only.
  *   cb, ctx     — fired from i2c_poll().  cb may be NULL.
  * Main-loop context only. */
-I2cResult i2c_submit(uint8_t address, const uint8_t* tx, uint8_t tx_len, uint8_t* rx_buf, uint8_t rx_len,
-                     I2cCompletion cb, void* ctx);
+I2cResult i2c_submit(uint8_t addr, const uint8_t* tx, uint8_t tx_len, uint8_t rx_len, I2cCompletion cb, void* ctx);
 
 /* Main-loop poll.  Fires the completion callback for finished ops and
  * starts the next queued op when the bus is free.  O(1) per call. */
 void i2c_poll(void);
-
-/* ── ISR entry points ───────────────────────────────────────────────── */
-
-/* 1 ms tick — drives per-op timeout and bus-collision back-off. */
-void i2c_tick_ms(void);
-
-/* Call from the I2C1/I2C1TX/I2C1RX interrupt vector. */
-void i2c_isr(void);
-
-/* Call from the I2C1E interrupt vector. */
-void i2c_error_isr(void);
 
 #endif /* I2C_H */

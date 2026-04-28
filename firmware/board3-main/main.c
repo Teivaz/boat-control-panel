@@ -55,14 +55,6 @@ void __interrupt(irq(TMR0), base(8)) TMR0_ISR(void) {
     i2c_tick_ms();
 }
 
-void __interrupt(irq(I2C1TX, I2C1RX, I2C1), base(8)) I2C1_ISR(void) {
-    i2c_isr();
-}
-
-void __interrupt(irq(I2C1E), base(8)) I2C1_ERROR_ISR(void) {
-    i2c_error_isr();
-}
-
 static void tick_init(void) {
     T0CON0bits.EN = 0;
     IPR3bits.TMR0IP = 1;
