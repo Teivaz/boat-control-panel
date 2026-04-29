@@ -1,4 +1,5 @@
 #include "rgbled.h"
+#include "libcomm.h"
 
 /* 5 status LEDs on RB5, driven by the same LTST-E563C WS2812-like encoding
  * used on board2-buttons: SPI1 shifts out at 3.2 Mbps and each input bit is
@@ -11,7 +12,7 @@
 
 static uint8_t _rgbled_buffer[RGBLED_BUFFER_LEN] = {0};
 
-static void _byte_to_sequence(uint8_t input_byte, uint8_t* dest) {
+static void byte_to_sequence(uint8_t input_byte, uint8_t* dest) {
     for (uint8_t i = 0; i < 4; i++) {
         uint8_t output_byte = 0;
         for (uint8_t n = 0; n < 2; n++) {
@@ -24,13 +25,13 @@ static void _byte_to_sequence(uint8_t input_byte, uint8_t* dest) {
     }
 }
 
-static uint16_t _copy_to_buffer(RGBLedData* rgb, uint8_t count) {
+static uint16_t copy_to_buffer(RGBLedData* rgb, uint8_t count) {
     uint8_t* iptr = (uint8_t*)rgb;
     uint8_t* iend = iptr + count * sizeof(RGBLedData);
     uint8_t* optr = _rgbled_buffer;
     uint8_t* oend = _rgbled_buffer + RGBLED_BUFFER_LEN;
     while (iptr < iend && optr < oend) {
-        _byte_to_sequence(*iptr, optr);
+        byte_to_sequence(*iptr, optr);
         iptr += 1;
         optr += 4;
     }

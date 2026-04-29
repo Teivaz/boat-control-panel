@@ -17,7 +17,7 @@ void comm_init(void) {
 }
 
 /* ============================================================================
- * Adopter callbacks: incoming write handlers (ISR context)
+ * Adopter callbacks: incoming write handlers (main-loop context)
  * ============================================================================
  */
 
@@ -53,51 +53,6 @@ void comm_on_relay_mask_received(const CommRelayMask* mask) {
 }
 void comm_on_level_mode_received(const CommLevelMode* mode) {
     (void)mode;
-}
-
-/* ============================================================================
- * Adopter callbacks: read request handlers (ISR context)
- * ============================================================================
- */
-
-uint8_t comm_on_config_read_request(uint8_t address, uint8_t* value) {
-    *value = config_read_byte(address);
-    return 0;
-}
-
-/* Main board does not serve these reads — return error (0-length response). */
-uint8_t comm_on_button_state_read_request(CommButtonState* state) {
-    (void)state;
-    return 1;
-}
-uint8_t comm_on_button_trigger_read_request(uint8_t button_id, CommTriggerConfig* config) {
-    (void)button_id;
-    (void)config;
-    return 1;
-}
-uint8_t comm_on_relay_state_read_request(CommRelayState* state) {
-    (void)state;
-    return 1;
-}
-uint8_t comm_on_relay_mask_read_request(CommRelayMask* mask) {
-    (void)mask;
-    return 1;
-}
-uint8_t comm_on_battery_read_request(CommBattery* battery) {
-    (void)battery;
-    return 1;
-}
-uint8_t comm_on_levels_read_request(CommLevels* levels) {
-    (void)levels;
-    return 1;
-}
-uint8_t comm_on_level_mode_read_request(CommLevelMode* mode) {
-    (void)mode;
-    return 1;
-}
-uint8_t comm_on_sensors_read_request(CommSensors* sensors) {
-    (void)sensors;
-    return 1;
 }
 
 /* ============================================================================

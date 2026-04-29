@@ -8,35 +8,45 @@
  * driver + libcomm builders/parsers.  It provides:
  *
  *   1. Outbound send functions for every protocol command (write and
- *      read).  These are implemented in libcomm_interface.c.
+ *      read) — see libcomm_interface.c.
  *
  *   2. Adopter-implemented callbacks for:
- *      - Read responses  (main-loop context, via i2c_poll)
- *      - Read requests   (ISR context, via I2C client read handler)
- *      - Incoming writes (ISR context, via I2C client rx handler)
+ *        - Read responses  (main-loop context, fired from i2c_poll)
+ *        - Incoming writes (main-loop context, fired from i2c_poll
+ *          via the cold-rx handler)
  *
  * Usage:
- *   Call comm_interface_init() once after i2c_init().  It registers the
- *   protocol dispatchers with the I2C client automatically.  Then
- *   implement the comm_on_* callbacks your board needs — unused ones
- *   must still be defined (empty stubs are fine).
+ *   Call comm_interface_init() once after i2c_init().  It registers
+ *   the protocol dispatcher with the I2C driver as the cold-rx
+ *   handler.  Then implement the comm_on_* callbacks your board needs;
+ *   unused ones must still be defined as empty stubs.
  *
  * Read flow (requester side):
  *   comm_send_X_read(addr)  →  I2C write-then-read queued
- *                            →  i2c_poll fires internal callback
+ *                            →  i2c_poll fires the internal callback
  *                            →  comm_on_X_read_response(addr, parsed*)
  *
- * Read flow (responder side):
- *   Master sends read request  →  I2C client ISR fires dispatch_read
- *                              →  comm_on_X_read_request(out*) fills response
- *                              →  ISR shifts response bytes back to master
- *
  * Write flow (sender):
- *   comm_send_X(addr, ...)  →  I2C write-only queued (fire-and-forget)
+ *   comm_send_X(addr, ...)  →  I2C write queued
  *
  * Write flow (receiver):
- *   Master sends write  →  I2C client ISR fires dispatch_rx
- *                       →  comm_on_X(parsed*) handles the command
+ *   Master writes to us  →  driver buffers bytes, queues a cold-rx
+ *                          completion  →  i2c_poll fires the
+ *                          dispatcher  →  comm_on_X(parsed*)
+ *
+ * Note on read-from-this-device:
+ *   The new I2C driver only supports a pre-loaded client-TX response
+ *   (i2c_set_client_tx).  Parametric reads served from this device
+ *   are not supported — boards that need them must update the client
+ *   TX buffer ahead of time.
+ *
+ * Failure signalling:
+ *   The completion callback has no explicit status.  By convention,
+ *   a read response with rx_len == 0 indicates failure; the
+ *   corresponding comm_on_*_response callback receives a NULL pointer.
+ *   Write-only completions fire only on success — callers should rely
+ *   on application-level retry/timeout instead of expecting a failure
+ *   callback.
  */
 
 #include "i2c.h"
@@ -47,10 +57,8 @@
  * ============================================================================
  */
 
-/*
- * Register the protocol dispatchers as i2c_set_rx_handler /
- * i2c_set_read_handler.  Call once after i2c_init().
- */
+/* Register the protocol dispatcher as the I2C cold-rx handler.
+ * Call once after i2c_init(). */
 void comm_interface_init(void);
 
 /* ============================================================================
@@ -62,43 +70,23 @@ void comm_interface_init(void);
  * to go out of scope immediately.
  *
  * cb/ctx are optional (pass 0, 0 for fire-and-forget).  When non-NULL
- * the completion fires from i2c_poll() after the write lands or fails.
+ * the completion fires from i2c_poll() after the write lands.  No
+ * callback is invoked on a final retry failure — callers needing to
+ * detect that must apply their own timeout/retry policy.
  * ============================================================================
  */
 
-/* reset (0x0F) — soft-reset the target device */
 I2cResult comm_send_reset(uint8_t addr, I2cCompletion cb, void* ctx);
-
-/* config (0x0E) — write one byte of device configuration */
 I2cResult comm_send_config(uint8_t addr, uint8_t config_addr, uint8_t value, I2cCompletion cb, void* ctx);
-
-/* button_effect (0x01) — set visual effects for 8 button outputs */
 I2cResult comm_send_button_effect(uint8_t addr, const CommButtonEffect* effect, I2cCompletion cb, void* ctx);
-
-/* button_changed (0x02) — notify main board of a button event.
- * Always sent to COMM_ADDRESS_MAIN; device_address filled from comm_address(). */
 I2cResult comm_send_button_changed(uint8_t button_id, uint8_t pressed, CommButtonMode mode, I2cCompletion cb,
                                    void* ctx);
-
-/* button_trigger (0x04) — write trigger config for one button */
 I2cResult comm_send_button_trigger(uint8_t addr, uint8_t button_id, CommTriggerConfig config, I2cCompletion cb,
                                    void* ctx);
-
-/* relay_state (0x05) — set the target state of all 16 relays.
- * Always sent to COMM_ADDRESS_SWITCHING (only one switching board). */
 I2cResult comm_send_relay_state(uint16_t relays, I2cCompletion cb, void* ctx);
-
-/* relay_changed (0x06) — notify main board of relay/sensor state change.
- * Always sent to COMM_ADDRESS_MAIN; device_address filled from comm_address(). */
 I2cResult comm_send_relay_changed(uint16_t prev_relays, uint16_t current_relays, uint8_t prev_sensors,
                                   uint8_t current_sensors, I2cCompletion cb, void* ctx);
-
-/* relay_mask (0x07) — set the relay event mask.
- * Always sent to COMM_ADDRESS_SWITCHING (only one switching board). */
 I2cResult comm_send_relay_mask(uint16_t mask, I2cCompletion cb, void* ctx);
-
-/* level_mode (0x0A) — set level meter operating modes.
- * Always sent to COMM_ADDRESS_SWITCHING (only one switching board). */
 I2cResult comm_send_level_mode(CommMeterMode mode_0, CommMeterMode mode_1, I2cCompletion cb, void* ctx);
 
 /* ============================================================================
@@ -106,53 +94,30 @@ I2cResult comm_send_level_mode(CommMeterMode mode_0, CommMeterMode mode_1, I2cCo
  *
  * Each submits a write-then-read I2C transaction.  The response arrives
  * asynchronously via the matching comm_on_*_response callback in main-
- * loop context.  A single shared RX buffer is used — safe because
- * i2c_poll fires the completion callback before starting the next op.
- *
- * Returns I2C_RESULT_OK on successful enqueue.
+ * loop context.  Returns I2C_RESULT_OK on successful enqueue.
+ * On failure the response callback receives a NULL parsed-struct
+ * pointer.
  * ============================================================================
  */
 
-/* button_state_read (0x83) — read current button input register */
 I2cResult comm_send_button_state_read(uint8_t addr);
-
-/* button_trigger_read (0x84) — read trigger config for one button */
 I2cResult comm_send_button_trigger_read(uint8_t addr, uint8_t button_id);
-
-/* relay_state_read (0x85) — read target relay state.
- * Always sent to COMM_ADDRESS_SWITCHING. */
 I2cResult comm_send_relay_state_read(void);
-
-/* relay_mask_read (0x87) — read relay event mask.
- * Always sent to COMM_ADDRESS_SWITCHING. */
 I2cResult comm_send_relay_mask_read(void);
-
-/* battery_read (0x88) — read battery voltage.
- * Always sent to COMM_ADDRESS_SWITCHING. */
 I2cResult comm_send_battery_read(void);
-
-/* levels_read (0x89) — read both level meter values.
- * Always sent to COMM_ADDRESS_SWITCHING. */
 I2cResult comm_send_levels_read(void);
-
-/* level_mode_read (0x8A) — read level meter modes.
- * Always sent to COMM_ADDRESS_SWITCHING. */
 I2cResult comm_send_level_mode_read(void);
-
-/* sensors_read (0x8B) — read on/off sensor states.
- * Always sent to COMM_ADDRESS_SWITCHING. */
 I2cResult comm_send_sensors_read(void);
-
-/* config_read (0x8E) — read one byte of device configuration */
 I2cResult comm_send_config_read(uint8_t addr, uint8_t config_addr);
 
 /* ============================================================================
  * Adopter-implemented: read response handlers (main-loop context)
  *
- * Called from i2c_poll() when a read response arrives from a remote
- * device.  On I2C error the struct pointer is NULL.
+ * Called from i2c_poll() when a read response arrives.  On I2C error
+ * the parsed-struct pointer is NULL.
  *
- * The board must define all of these; use empty stubs for unneeded ones.
+ * The board must define all of these; use empty stubs for unneeded
+ * ones.
  * ============================================================================
  */
 
@@ -167,32 +132,12 @@ void comm_on_sensors_read_response(CommSensors* sensors);
 void comm_on_config_read_response(uint8_t addr, uint8_t* value);
 
 /* ============================================================================
- * Adopter-implemented: read request handlers (ISR context)
+ * Adopter-implemented: incoming write handlers (main-loop context)
  *
- * Called when another master issues a read to this device.  Fill the
- * output struct and return 0 on success or 1 on error (causes zero-
- * length response / NACK).
- *
- * Runs under clock stretching — keep it fast.
- * ============================================================================
- */
-
-uint8_t comm_on_button_state_read_request(CommButtonState* state);
-uint8_t comm_on_button_trigger_read_request(uint8_t button_id, CommTriggerConfig* config);
-uint8_t comm_on_relay_state_read_request(CommRelayState* state);
-uint8_t comm_on_relay_mask_read_request(CommRelayMask* mask);
-uint8_t comm_on_battery_read_request(CommBattery* battery);
-uint8_t comm_on_levels_read_request(CommLevels* levels);
-uint8_t comm_on_level_mode_read_request(CommLevelMode* mode);
-uint8_t comm_on_sensors_read_request(CommSensors* sensors);
-uint8_t comm_on_config_read_request(uint8_t address, uint8_t* value);
-
-/* ============================================================================
- * Adopter-implemented: incoming write handlers (ISR context)
- *
- * Called when another master writes a command to this device.
- * Runs in ISR context — must be short, no blocking.  Use
- * run_in_main_loop() to defer heavier work.
+ * Called when another master writes a command to this device.  Fired
+ * from i2c_poll() — safe to do non-trivial work, but be aware they run
+ * before queued host operations get a chance to start, so heavy work
+ * still benefits from being scheduled on a task.
  * ============================================================================
  */
 
@@ -205,11 +150,5 @@ void comm_on_relay_state_received(const CommRelayState* state);
 void comm_on_relay_changed_received(const CommRelayChanged* event);
 void comm_on_relay_mask_received(const CommRelayMask* mask);
 void comm_on_level_mode_received(const CommLevelMode* mode);
-
-/// internal
-
-// This function is invoked when I2C wants to read from client
-// Invoked from interrupt
-void _comm_on_read(uint8_t index);
 
 #endif /* LIBCOMM_INTERFACE_H */

@@ -24,6 +24,12 @@ void interrupt_init(void) {
 void __interrupt(irq(IOC), base(8)) IOC_ISR() {
     __asm("RESET");
 }
+void __interrupt(irq(I2C1RX), base(8)) I2C1RX_ISR() {
+    __asm("RESET");
+}
+void __interrupt(irq(I2C1TX), base(8)) I2C1TX_ISR() {
+    __asm("RESET");
+}
 void __interrupt(irq(SWINT), base(8)) SWINT_ISR() {
     __asm("RESET");
 }

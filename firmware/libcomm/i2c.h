@@ -1,26 +1,29 @@
 /*
  * i2c.h — Shared I2C multi-master driver for PIC18F27/47/57Q84.
  *
- * Async, interrupt-driven host + client (slave) on I2C1.
- * 400 kHz Fast mode, 7-bit addressing, multi-master with automatic
- * bus arbitration and collision retry.
+ * Async, DMA-driven host + client on I2C1.  400 kHz Fast mode,
+ * 7-bit addressing, multi-master with automatic bus arbitration and
+ * collision retry.  Bus timeout uses the peripheral BTO (LFINTOSC),
+ * not a software tick.  The driver owns I2C1 / I2C1E IRQs internally.
  *
  * Pin/PPS/oscillator setup is the caller's responsibility — this
- * driver only programs the I2C1 module registers.  Boards define
- * their own __interrupt handlers and call i2c_isr / i2c_error_isr.
+ * driver only programs the I2C1 module registers.
  *
- * Host side: i2c_submit() enqueues a write or write-then-read.
- * Completion callbacks fire from i2c_poll() in main-loop context.
+ * Host side:
+ *   i2c_submit() enqueues a write or write-then-read; the driver owns
+ *   both the TX (copied) and RX (returned in the completion) buffers.
+ *   Completion callbacks fire from i2c_poll() in main-loop context.
  *
- * Client side: i2c_init(addr) enables client mode on the given
- * 7-bit address.  Incoming writes are delivered to the rx handler;
- * incoming reads are answered by the read handler.  Both handlers
- * run in ISR context — keep them short.
+ * Client side:
+ *   i2c_init(addr) enables client mode on the given 7-bit address.
+ *   Incoming writes are delivered to the cold-rx handler asynchronously
+ *   from i2c_poll().  Replies to incoming reads come from the buffer
+ *   that the application has loaded with i2c_set_client_tx() — this
+ *   driver does not synthesise per-request responses.
  *
  * Context rules:
- *   Main loop only:  i2c_init, i2c_set_rx_handler, i2c_set_read_handler,
- *                    i2c_submit, i2c_poll
- *   ISR only:        i2c_tick_ms, i2c_isr, i2c_error_isr
+ *   Main loop only:  i2c_init, i2c_set_cold_rx_handler,
+ *                    i2c_set_client_tx, i2c_submit, i2c_poll
  *
  * Prerequisites (caller-owned):
  *   SDA/SCL: TRIS, ANSEL=0, ODCON=1, RxxI2C TH/PU/SLEW, PPS routed
@@ -80,9 +83,15 @@ typedef enum {
     I2C_RESULT_BAD_ARG,    /* i2c_submit rejected — invalid lengths      */
 } I2cResult;
 
-/* Host completion callback.  Fired from i2c_poll() (main-loop context).
- * rx_buf is the pointer the caller passed to i2c_submit; rx_len is
- * actual bytes received (0 on write-only or non-OK result). */
+/* Completion callback.  Fired from i2c_poll() (main-loop context) for
+ * host transactions, and for cold (client) RX deliveries.
+ *   rx_buf — driver-owned buffer holding received bytes.  Valid only
+ *            while the callback is running; copy out anything that
+ *            must outlive the callback.
+ *   rx_len — bytes received.  0 means either: write-only success, or
+ *            a host transaction that ultimately failed after retries.
+ *            For host reads, callers should treat rx_len == 0 as
+ *            failure since the protocol expects > 0 bytes back. */
 typedef void (*I2cCompletion)(uint8_t* rx_buf, uint8_t rx_len, void* ctx);
 
 /* ── Main-loop API ──────────────────────────────────────────────────── */

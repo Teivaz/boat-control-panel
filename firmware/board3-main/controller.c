@@ -123,7 +123,7 @@ static void poll_battery_task(TaskId id, void* ctx);
 static void poll_levels_task(TaskId id, void* ctx);
 static void poll_sensors_task(TaskId id, void* ctx);
 static void poll_rtc_task(TaskId id, void* ctx);
-static void on_relay_state_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx);
+static void on_relay_state_done(uint8_t* rx, uint8_t rx_len, void* ctx);
 static void on_rtc_read_done(uint8_t ok, const RtcTime* t, void* ctx);
 static ActionEffect apply_action(const ButtonAction* a);
 static void recompute_target(void);
@@ -392,20 +392,19 @@ static void retry_task(TaskId id, void* ctx) {
     }
 }
 
-static void on_relay_state_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx) {
+static void on_relay_state_done(uint8_t* rx, uint8_t rx_len, void* ctx) {
     (void)rx;
     (void)rx_len;
     (void)ctx;
-    if (r == I2C_RESULT_OK) {
-        /* Only clear the flag if the value we actually sent still matches
-         * the current target — a producer could have bumped it while the
-         * transaction was in flight. */
-        INTERRUPT_PUSH;
-        if (relay_target == relay_inflight_value) {
-            relay_dirty = 0;
-        }
-        INTERRUPT_POP;
+    /* The new I2cCompletion only fires for write-only ops on success;
+     * a final-retry failure is silent.  Clear the flag if the value
+     * we actually sent still matches the current target — a producer
+     * could have bumped it while the transaction was in flight. */
+    INTERRUPT_PUSH;
+    if (relay_target == relay_inflight_value) {
+        relay_dirty = 0;
     }
+    INTERRUPT_POP;
     relay_inflight = 0;
 }
 
@@ -509,7 +508,7 @@ static struct {
 
 static void on_set_time_write_done(uint8_t ok, void* ctx);
 static void on_set_time_refresh_done(uint8_t ok, const RtcTime* t, void* ctx);
-static void on_ui_config_write_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx);
+static void on_ui_config_write_done(uint8_t* rx, uint8_t rx_len, void* ctx);
 
 void controller_set_time(uint8_t hour, uint8_t minute, ControllerOpCompletion cb, void* ctx) {
     ui_op.op_cb = cb;
@@ -580,14 +579,15 @@ void controller_write_switching_config(uint8_t address, uint8_t value, Controlle
     }
 }
 
-static void on_ui_config_write_done(I2cResult r, uint8_t* rx, uint8_t rx_len, void* ctx) {
+static void on_ui_config_write_done(uint8_t* rx, uint8_t rx_len, void* ctx) {
     (void)rx;
     (void)rx_len;
     (void)ctx;
+    /* Completion fires only on success; final-retry failure is silent. */
     ControllerOpCompletion cb = ui_op.op_cb;
     void* user_ctx = ui_op.ctx;
     ui_op.op_cb = 0;
     if (cb) {
-        cb(r == I2C_RESULT_OK, user_ctx);
+        cb(1, user_ctx);
     }
 }
