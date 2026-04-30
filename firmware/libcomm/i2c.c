@@ -356,7 +356,6 @@ static void isr_on_address(void) {
         MessageTask* task = &g_queue[g_q_head];
         task->state = MT_IDLE;
         g_fsm = FSM_IDLE;
-        I2C1CON0bits.MODE = 0b000;
     }
 
     if (g_fsm == FSM_IDLE) {
@@ -364,7 +363,6 @@ static void isr_on_address(void) {
         if (I2C1STAT0bits.R && has_tx) {
             /* Master reads from us — shift out preloaded client TX. */
             g_fsm = FSM_CLIENT_TX;
-            I2C1CON0bits.MODE = 0b000;
             i2c_dma_client_tx();
             I2C1CON1bits.ACKDT = 0; /* ACK */
         } else if (I2C1STAT0bits.R) {
@@ -373,7 +371,6 @@ static void isr_on_address(void) {
         } else {
             /* Master writes to us — receive into the cold-rx buffer. */
             g_fsm = FSM_CLIENT_RX;
-            I2C1CON0bits.MODE = 0b000;
             i2c_dma_client_rx();
             I2C1CON1bits.ACKDT = 0; /* ACK */
         }
@@ -386,7 +383,6 @@ static void isr_on_stop(void) {
         host_finish(MT_FINISHED);
     } else if (g_fsm == FSM_CLIENT_TX) {
         g_fsm = FSM_IDLE;
-        I2C1CON0bits.MODE = 0b000;
         g_client_tx_len = 0;
     } else if (g_fsm == FSM_CLIENT_RX) {
         /* DMA was set up for I2C_RX_MAX; what we actually received is
@@ -396,7 +392,6 @@ static void isr_on_stop(void) {
         uint8_t received = (uint8_t)(I2C_RX_MAX - remaining);
         prepend_completed_task(0, g_client_rx, received);
         g_fsm = FSM_IDLE;
-        I2C1CON0bits.MODE = 0b000;
         i2c_dma_client_rx(); /* re-arm for the next inbound message */
     }
 }
@@ -405,7 +400,6 @@ static void isr_on_restart(void) {
     if (g_fsm == FSM_HOST_TX) {
         /* Switching from write to read phase of the host transaction. */
         g_fsm = FSM_HOST_RX;
-        I2C1CON0bits.MODE = 0b000;
         MessageTask* task = &g_queue[g_q_head];
         I2C1CNTH = 0;
         I2C1CNTL = task->rx_len;
@@ -418,7 +412,6 @@ static void isr_on_restart(void) {
         uint8_t received = (uint8_t)(I2C_RX_MAX - remaining);
         prepend_completed_task(0, g_client_rx, received);
         g_fsm = FSM_IDLE;
-        I2C1CON0bits.MODE = 0b000;
         i2c_dma_client_rx();
     }
 }
@@ -432,7 +425,6 @@ static void isr_on_nack(void) {
         task->retries--;
         task->state = MT_IDLE;
         g_fsm = FSM_IDLE;
-        I2C1CON0bits.MODE = 0b000;
     } else {
         host_finish(MT_FAILED);
     }
@@ -443,7 +435,6 @@ static void isr_on_collision(void) {
         MessageTask* task = &g_queue[g_q_head];
         task->state = MT_IDLE; /* will be retried by i2c_poll */
         g_fsm = FSM_IDLE;
-        I2C1CON0bits.MODE = 0b000;
     }
 }
 
@@ -452,7 +443,6 @@ static void isr_on_timeout(void) {
         host_finish(MT_FAILED);
     } else {
         g_fsm = FSM_IDLE;
-        I2C1CON0bits.MODE = 0b000;
     }
 
     I2C1PIR = 0x00;
