@@ -179,8 +179,8 @@ void i2c_init(uint8_t addr) {
     g_q_tail = 0;
 
     I2C1CON0bits.EN = 0;
-    I2C1CON0bits.MODE = 0b100; /* Host 7 bit */
-    I2C1CLK = 0x01;            /* FOSC */
+    I2C1CON0bits.MODE = 0b000;
+    I2C1CLK = 0x01; /* FOSC */
     I2C1BAUD = I2C_BAUD;
     I2C1CON1bits.CSD = 0; /* multi-master: clock-stretch on data enabled */
     I2C1CON2bits.FME = I2C_FME;
@@ -241,6 +241,7 @@ void i2c_poll(void) {
 static void i2c_start_task(MessageTask* task) {
     task->state = MT_RUNNING;
     g_fsm = FSM_HOST_TX;
+    I2C1CON0bits.MODE = 0b100;
     I2C1ADB1 = (uint8_t)(task->addr << 1);
     if (task->rx_len > 0 && task->tx_len > 0) {
         I2C1CON0bits.RSEN = 1; /* repeated-start at end of TX phase */
@@ -279,7 +280,6 @@ I2cResult i2c_submit(uint8_t addr, const uint8_t* tx, uint8_t tx_len, uint8_t rx
     for (uint8_t i = 0; i < tx_len; i++) {
         task->tx[i] = tx[i];
     }
-    task->rx[0] = 0xAA;
     task->state = MT_IDLE;
     g_q_tail = q_next(g_q_tail);
     INTERRUPT_POP;
@@ -316,6 +316,7 @@ static void host_finish(MessageTaskState final_state) {
     MessageTask* task = &g_queue[g_q_head];
     task->state = final_state;
     g_fsm = FSM_IDLE;
+    I2C1CON0bits.MODE = 0b000;
 }
 
 void __interrupt(irq(I2C1), base(8)) I2C1_ISR(void) {
@@ -355,6 +356,7 @@ static void isr_on_address(void) {
         MessageTask* task = &g_queue[g_q_head];
         task->state = MT_IDLE;
         g_fsm = FSM_IDLE;
+        I2C1CON0bits.MODE = 0b000;
     }
 
     if (g_fsm == FSM_IDLE) {
@@ -362,6 +364,7 @@ static void isr_on_address(void) {
         if (I2C1STAT0bits.R && has_tx) {
             /* Master reads from us — shift out preloaded client TX. */
             g_fsm = FSM_CLIENT_TX;
+            I2C1CON0bits.MODE = 0b000;
             i2c_dma_client_tx();
             I2C1CON1bits.ACKDT = 0; /* ACK */
         } else if (I2C1STAT0bits.R) {
@@ -370,6 +373,7 @@ static void isr_on_address(void) {
         } else {
             /* Master writes to us — receive into the cold-rx buffer. */
             g_fsm = FSM_CLIENT_RX;
+            I2C1CON0bits.MODE = 0b000;
             i2c_dma_client_rx();
             I2C1CON1bits.ACKDT = 0; /* ACK */
         }
@@ -382,6 +386,7 @@ static void isr_on_stop(void) {
         host_finish(MT_FINISHED);
     } else if (g_fsm == FSM_CLIENT_TX) {
         g_fsm = FSM_IDLE;
+        I2C1CON0bits.MODE = 0b000;
         g_client_tx_len = 0;
     } else if (g_fsm == FSM_CLIENT_RX) {
         /* DMA was set up for I2C_RX_MAX; what we actually received is
@@ -391,6 +396,7 @@ static void isr_on_stop(void) {
         uint8_t received = (uint8_t)(I2C_RX_MAX - remaining);
         prepend_completed_task(0, g_client_rx, received);
         g_fsm = FSM_IDLE;
+        I2C1CON0bits.MODE = 0b000;
         i2c_dma_client_rx(); /* re-arm for the next inbound message */
     }
 }
@@ -399,6 +405,7 @@ static void isr_on_restart(void) {
     if (g_fsm == FSM_HOST_TX) {
         /* Switching from write to read phase of the host transaction. */
         g_fsm = FSM_HOST_RX;
+        I2C1CON0bits.MODE = 0b000;
         MessageTask* task = &g_queue[g_q_head];
         I2C1CNTH = 0;
         I2C1CNTL = task->rx_len;
@@ -411,6 +418,7 @@ static void isr_on_restart(void) {
         uint8_t received = (uint8_t)(I2C_RX_MAX - remaining);
         prepend_completed_task(0, g_client_rx, received);
         g_fsm = FSM_IDLE;
+        I2C1CON0bits.MODE = 0b000;
         i2c_dma_client_rx();
     }
 }
@@ -424,6 +432,7 @@ static void isr_on_nack(void) {
         task->retries--;
         task->state = MT_IDLE;
         g_fsm = FSM_IDLE;
+        I2C1CON0bits.MODE = 0b000;
     } else {
         host_finish(MT_FAILED);
     }
@@ -434,6 +443,7 @@ static void isr_on_collision(void) {
         MessageTask* task = &g_queue[g_q_head];
         task->state = MT_IDLE; /* will be retried by i2c_poll */
         g_fsm = FSM_IDLE;
+        I2C1CON0bits.MODE = 0b000;
     }
 }
 
@@ -442,6 +452,7 @@ static void isr_on_timeout(void) {
         host_finish(MT_FAILED);
     } else {
         g_fsm = FSM_IDLE;
+        I2C1CON0bits.MODE = 0b000;
     }
 
     I2C1PIR = 0x00;

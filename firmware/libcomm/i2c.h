@@ -69,7 +69,7 @@
 #endif
 
 #ifndef I2C_RETRY_COUNT
-#define I2C_RETRY_COUNT 3
+#define I2C_RETRY_COUNT 1
 #endif
 
 /* ── Types ──────────────────────────────────────────────────────────── */
