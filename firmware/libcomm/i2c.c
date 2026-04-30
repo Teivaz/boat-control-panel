@@ -386,9 +386,9 @@ static void isr_on_stop(void) {
         g_client_tx_len = 0;
     } else if (g_fsm == FSM_CLIENT_RX) {
         /* DMA was set up for I2C_RX_MAX; what we actually received is
-         * I2C_RX_MAX minus the DMA destination size remaining. */
+         * I2C_RX_MAX minus the DMA destination count remaining. */
         DMASELECT = DMA_RX_CHANNEL;
-        uint8_t remaining = (uint8_t)DMAnDSZ;
+        uint8_t remaining = (uint8_t)DMAnDCNT;
         uint8_t received = (uint8_t)(I2C_RX_MAX - remaining);
         prepend_completed_task(0, g_client_rx, received);
         g_fsm = FSM_IDLE;
@@ -408,7 +408,7 @@ static void isr_on_restart(void) {
          * accumulated bytes as a cold message and prepare for the next
          * address phase to choose direction again. */
         DMASELECT = DMA_RX_CHANNEL;
-        uint8_t remaining = (uint8_t)DMAnDSZ;
+        uint8_t remaining = (uint8_t)DMAnDCNT;
         uint8_t received = (uint8_t)(I2C_RX_MAX - remaining);
         prepend_completed_task(0, g_client_rx, received);
         g_fsm = FSM_IDLE;
