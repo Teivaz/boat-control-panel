@@ -51,8 +51,12 @@ CFLAGS = \
     -std=c99 \
     -gdwarf-3 \
     -mstack=compiled:auto:auto:auto \
+    -MMD -MP \
     -I$(LIBCOMM_DIR) \
     -I$(U8G2_DIR)
+
+DEPS      = $(OBJS:.p1=.d)
+U8G2_DEPS = $(U8G2_OBJS:.p1=.d)
 
 LDFLAGS = \
     -Wl,-Map=$(DISTDIR)/$(TARGET).map \
@@ -83,6 +87,8 @@ $(OBJDIR)/%.p1: %.c Makefile
 $(OBJDIR)/u8g2/%.p1: $(U8G2_DIR)/%.c Makefile
 	@$(MKDIR) $(OBJDIR)/u8g2
 	$(MP_CC) $(CFLAGS) -c -o $@ $<
+
+-include $(DEPS) $(U8G2_DEPS)
 
 clean:
 	$(MAKE) -C $(LIBCOMM_DIR) clean

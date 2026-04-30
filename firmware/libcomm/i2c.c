@@ -103,7 +103,6 @@ static void i2c_dma_init(void) {
     DMAnSSA = 0;
     DMAnSIRQ = 0x39; /* I2C1TX request */
     DMAnAIRQ = 0;
-    DMAnCON0bits.EN = 1;
 
     /* Host RX channel: I2C1RXB -> GPR, destination increments. */
     DMASELECT = DMA_RX_CHANNEL;
@@ -118,30 +117,34 @@ static void i2c_dma_init(void) {
     DMAnSSA = (uint24_t)&I2C1RXB;
     DMAnSIRQ = 0x38; /* I2C1RX request */
     DMAnAIRQ = 0;
-    DMAnCON0bits.EN = 1;
 
     /* Lock the DMA arbiter once both channels are configured.  The
-     * arbiter is global; the lock applies to all priority registers. */
-    DMA2PR = 0x02;
-    DMA3PR = 0x03;
-    PRLOCK = 0x55;
-    PRLOCK = 0xAA;
-    PRLOCKbits.PRLOCKED = 1;
+    * arbiter is global; the lock applies to all priority registers. */
+   DMA2PR = 0x02;
+   DMA3PR = 0x03;
+   PRLOCK = 0x55;
+   PRLOCK = 0xAA;
+   PRLOCKbits.PRLOCKED = 1;
+   DMAnCON0bits.EN = 1;
 }
 
 static void i2c_dma_set_host(MessageTask* task) {
     INTERRUPT_PUSH;
     if (task->tx_len) {
         DMASELECT = DMA_TX_CHANNEL;
+        DMAnCON0bits.EN = 0;
         DMAnSSA = (uint24_t)task->tx;
         DMAnSSZ = task->tx_len;
         DMAnCON0bits.SIRQEN = 1;
+        DMAnCON0bits.EN = 1;
     }
     if (task->rx_len) {
         DMASELECT = DMA_RX_CHANNEL;
+        DMAnCON0bits.EN = 0;
         DMAnDSA = (uint16_t)task->rx;
         DMAnDSZ = task->rx_len;
         DMAnCON0bits.SIRQEN = 1;
+        DMAnCON0bits.EN = 1;
     }
     INTERRUPT_POP;
 }
@@ -176,7 +179,7 @@ void i2c_init(uint8_t addr) {
     g_q_tail = 0;
 
     I2C1CON0bits.EN = 0;
-    I2C1CON0bits.MODE = 0b100; // Host 7 bit
+    I2C1CON0bits.MODE = 0b100; /* Host 7 bit */
     I2C1CLK = 0x01;            /* FOSC */
     I2C1BAUD = I2C_BAUD;
     I2C1CON1bits.CSD = 0; /* multi-master: clock-stretch on data enabled */
@@ -276,6 +279,7 @@ I2cResult i2c_submit(uint8_t addr, const uint8_t* tx, uint8_t tx_len, uint8_t rx
     for (uint8_t i = 0; i < tx_len; i++) {
         task->tx[i] = tx[i];
     }
+    task->rx[0] = 0xAA;
     task->state = MT_IDLE;
     g_q_tail = q_next(g_q_tail);
     INTERRUPT_POP;
@@ -315,29 +319,29 @@ static void host_finish(MessageTaskState final_state) {
 }
 
 void __interrupt(irq(I2C1), base(8)) I2C1_ISR(void) {
-// Address detected, set on the 8th falling SCL edge for a matching received address byte
+    // Address detected, set on the 8th falling SCL edge for a matching received address byte
     if (I2C1PIEbits.ADRIE && I2C1PIRbits.ADRIF) {
         I2C1PIRbits.ADRIF = 0;
         isr_on_address();
         return;
     }
 
-// Stop condition detected
+    // Stop condition detected
     if (I2C1PIEbits.PCIE && I2C1PIRbits.PCIF) {
         I2C1PIRbits.PCIF = 0;
         isr_on_stop();
         return;
     }
 
+    // RSCIF - Repeated Start Condition
     if (I2C1PIEbits.RSCIE && I2C1PIRbits.RSCIF) {
-// RSCIF - Repeated Start Condition
         I2C1PIRbits.RSCIF = 0;
         isr_on_restart();
         return;
     }
 
+    // ACKTIF - Acknowledge Timeout
     if (I2C1PIEbits.ACKTIE && I2C1PIRbits.ACKTIF) {
-// ACKTIF - Acknowledge Timeout
         I2C1PIRbits.ACKTIF = 0;
         I2C1CON0bits.CSTR = 0;
         return;

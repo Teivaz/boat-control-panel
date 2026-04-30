@@ -28,7 +28,10 @@ CFLAGS = \
     -std=c99 \
     -gdwarf-3 \
     -mstack=compiled:auto:auto:auto \
+    -MMD -MP \
     $(DEFS)
+
+DEPS = $(OBJS:.p1=.d)
 
 # ── Targets ───────────────────────────────────────────────────────────────────
 # dist just compiles sources to .p1 objects — XC8 .p1 files are pre-linked
@@ -41,6 +44,8 @@ dist: $(OBJS)
 $(OBJDIR)/%.p1: %.c Makefile
 	@$(MKDIR) $(OBJDIR)
 	$(MP_CC) $(CFLAGS) -c -o $@ $<
+
+-include $(DEPS)
 
 clean:
 	$(RM) -r build

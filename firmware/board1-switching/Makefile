@@ -45,7 +45,10 @@ CFLAGS = \
     -std=c99 \
     -gdwarf-3 \
     -mstack=compiled:auto:auto:auto \
+    -MMD -MP \
     -I$(LIBCOMM_DIR)
+
+DEPS = $(OBJS:.p1=.d)
 
 LDFLAGS = \
     -Wl,-Map=$(DISTDIR)/$(TARGET).map \
@@ -68,6 +71,8 @@ $(DISTDIR)/$(TARGET).production.hex: $(OBJS) $(LIBCOMM_OBJS)
 $(OBJDIR)/%.p1: %.c Makefile
 	@$(MKDIR) $(OBJDIR)
 	$(MP_CC) $(CFLAGS) -c -o $@ $<
+
+-include $(DEPS)
 
 clean:
 	$(MAKE) -C $(LIBCOMM_DIR) clean
