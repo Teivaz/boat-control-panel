@@ -27,22 +27,25 @@ static void init(void) {
     ANSELAbits.ANSELA7 = 0;
     WPUAbits.WPUA7 = 1;
 
+    // Low level system without dependencies
     task_controller_init(&ctrl);
-
-    display_init();
-    rgbled_init();
-
+    config_init(&ctrl);
     i2c_pins_init();
+    rgbled_init();
+    display_init();
+
+    // Higher level systems that might depend on the low level
     i2c_init(comm_address());
     comm_interface_init();
-
-    config_init(&ctrl);
-    config_mode_init(&ctrl);
     comm_init();
+
+    // High level systems that schedule tasks
+    config_mode_init(&ctrl);
     controller_init(&ctrl);
     button_fx_init(&ctrl);
     indicator_init(&ctrl);
     display_text_init(&ctrl);
+
     tick_init();
 
     /* Interrupts enabled last. */
@@ -77,7 +80,7 @@ void main(void) {
     comm_button_effect_init(&effect);
     comm_button_effect_set(&effect, 1, oe);
 
-    comm_send_button_effect(0, &effect, 0, 0);
+    // comm_send_button_effect(COMM_ADDRESS_BUTTON_BOARD_L, &effect, 0, 0);
     while (1) {
         i2c_poll();
         task_controller_poll(&ctrl);

@@ -417,9 +417,8 @@ static void isr_on_restart(void) {
          * accumulated bytes as a cold message and prepare for the next
          * address phase to choose direction again. */
         DMASELECT = DMA_RX_CHANNEL;
-        uint8_t remaining = (uint8_t)DMAnDCNT;
-        uint8_t received = (uint8_t)(I2C_RX_MAX - remaining);
-        prepend_completed_task(0, g_client_rx, received);
+        uint8_t received = (uint8_t)DMAnDCNT;
+        prepend_completed_task(0x00, g_client_rx, received);
         g_fsm = FSM_IDLE;
         i2c_dma_client_rx();
     }

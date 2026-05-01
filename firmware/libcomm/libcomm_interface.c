@@ -127,6 +127,10 @@ static void on_config_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
 
 static void cold_rx_dispatch(uint8_t* data, uint8_t len, void* ctx) {
     (void)ctx;
+
+    uint8_t buf[] = {0x00, 0x1, 0x2, len, data[0], data[1]};
+    i2c_submit(COMM_ADDRESS_BUTTON_BOARD_L, buf, 6, 0, 0, 0);
+
     if (!comm_can_parse(data, len)) {
         return;
     }
