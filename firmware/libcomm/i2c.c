@@ -338,11 +338,18 @@ static void host_finish(MessageTaskState final_state, I2cResult result) {
     if (g_fsm != FSM_HOST_TX && g_fsm != FSM_HOST_RX) {
         return;
     }
+    DMASELECT = DMA_TX_CHANNEL;
+    DMAnCON0bits.SIRQEN = 0;
+    DMAnCON0bits.EN = 0;
+    DMASELECT = DMA_RX_CHANNEL;
+    DMAnCON0bits.SIRQEN = 0;
+    DMAnCON0bits.EN = 0;
     MessageTask* task = &g_queue[g_q_head];
     task->state = final_state;
     task->result = result;
     g_fsm = FSM_IDLE;
     I2C1CON0bits.MODE = 0b000;
+    i2c_dma_client_rx();
 }
 
 void __interrupt(irq(I2C1), base(8)) I2C1_ISR(void) {
