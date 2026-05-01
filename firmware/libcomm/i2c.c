@@ -194,7 +194,6 @@ void i2c_init(uint8_t addr) {
     I2C1CLK = 0x01; /* FOSC */
     I2C1BAUD = I2C_BAUD;
     I2C1CON1bits.CSD = 0; /* multi-master: clock-stretch on data enabled */
-    // I2C1CON1bits.ACKCNT = 1; /* NACK last byte of host reads */
     I2C1CON2bits.FME = I2C_FME;
     /* BFRET = 0b10 (32 FOSC/4 cycles ≈ 2 µs at FOSC = 64 MHz) gives the
      * peripheral enough bus-free margin to safely back start conditions
@@ -355,6 +354,7 @@ static void host_reset_to_client(void) {
     DMAnCON0bits.EN = 0;
     I2C1CON0bits.EN = 0;
     I2C1CON0bits.MODE = 0b000;
+    I2C1CON1bits.ACKCNT = 0;
     I2C1PIR = 0x00;
     I2C1CON0bits.EN = 1;
     i2c_dma_client_rx();
@@ -399,6 +399,7 @@ static void isr_on_address(void) {
         task->state = MT_IDLE;
         g_fsm = FSM_IDLE;
         I2C1CON0bits.MODE = 0b000;
+        I2C1CON1bits.ACKCNT = 0;
     }
 
     if (g_fsm == FSM_IDLE) {
@@ -444,6 +445,7 @@ static void isr_on_restart(void) {
         /* Switching from write to read phase of the host transaction. */
         g_fsm = FSM_HOST_RX;
         MessageTask* task = &g_queue[g_q_head];
+        I2C1CON1bits.ACKCNT = 1;
         I2C1CNTH = 0;
         I2C1CNTL = task->rx_len;
     } else if (g_fsm == FSM_CLIENT_RX) {
@@ -502,6 +504,7 @@ static void isr_on_timeout(void) {
     I2C1STAT1bits.CLRBF = 1;
 
     I2C1CON0bits.EN = 0;
+    I2C1CON1bits.ACKCNT = 0;
 
 /* ===== SILICON ERRATA WORKAROUND =====
  * Same sequence as in the init path. Prevents I2C from locking up
