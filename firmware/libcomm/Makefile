@@ -28,7 +28,7 @@ CFLAGS = \
     -std=c99 \
     -gdwarf-3 \
     -mstack=compiled:auto:auto:auto \
-    -MMD -MP \
+    -MMD \
     $(DEFS)
 
 DEPS = $(OBJS:.p1=.d)

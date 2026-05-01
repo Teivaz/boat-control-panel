@@ -51,7 +51,7 @@ CFLAGS = \
     -std=c99 \
     -gdwarf-3 \
     -mstack=compiled:auto:auto:auto \
-    -MMD -MP \
+    -MMD \
     -I$(LIBCOMM_DIR) \
     -I$(U8G2_DIR)
 
