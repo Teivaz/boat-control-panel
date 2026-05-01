@@ -152,9 +152,11 @@ static void i2c_dma_set_host(MessageTask* task) {
 static void i2c_dma_client_rx(void) {
     INTERRUPT_PUSH;
     DMASELECT = DMA_RX_CHANNEL;
+    DMAnCON0bits.EN = 0;
     DMAnDSA = (uint16_t)g_client_rx;
     DMAnDSZ = I2C_RX_MAX;
     DMAnCON0bits.SIRQEN = 1;
+    DMAnCON0bits.EN = 1;
     INTERRUPT_POP;
 }
 
@@ -164,9 +166,11 @@ static void i2c_dma_client_tx(void) {
     }
     INTERRUPT_PUSH;
     DMASELECT = DMA_TX_CHANNEL;
+    DMAnCON0bits.EN = 0;
     DMAnSSA = (uint24_t)g_client_tx;
     DMAnSSZ = g_client_tx_len;
     DMAnCON0bits.SIRQEN = 1;
+    DMAnCON0bits.EN = 1;
     I2C1CNTH = 0;
     I2C1CNTL = g_client_tx_len;
     INTERRUPT_POP;
@@ -216,14 +220,19 @@ void i2c_init(uint8_t addr) {
 
 void i2c_poll(void) {
     if (g_q_head != g_q_tail) {
-        MessageTask* task = &g_queue[g_q_head];
+        INTERRUPT_PUSH;
+        uint8_t cur = g_q_head;
+        INTERRUPT_POP;
+        MessageTask* task = &g_queue[cur];
         if (task->state == MT_FINISHED || task->state == MT_FAILED) {
             uint8_t rx_len = (task->state == MT_FINISHED) ? task->rx_len : 0;
             if (task->cb) {
                 task->cb(task->rx, rx_len, task->cb_ctx);
             }
             INTERRUPT_PUSH;
-            g_q_head = q_next(g_q_head);
+            if (g_q_head == cur) {
+                g_q_head = q_next(cur);
+            }
             INTERRUPT_POP;
         }
     }
@@ -356,6 +365,7 @@ static void isr_on_address(void) {
         MessageTask* task = &g_queue[g_q_head];
         task->state = MT_IDLE;
         g_fsm = FSM_IDLE;
+        I2C1CON0bits.MODE = 0b000;
     }
 
     if (g_fsm == FSM_IDLE) {
@@ -473,6 +483,7 @@ static void isr_on_timeout(void) {
     I2C1PIRbits.SCIF = 0;
     I2C1PIRbits.PCIF = 0;
     I2C1PIEbits.PCIE = 1;
+    I2C1PIEbits.RSCIE = 1;
 }
 
 void __interrupt(irq(I2C1E), base(8)) I2C1_ERROR_ISR(void) {
