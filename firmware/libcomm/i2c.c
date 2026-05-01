@@ -187,6 +187,7 @@ void i2c_init(uint8_t addr) {
     I2C1CLK = 0x01; /* FOSC */
     I2C1BAUD = I2C_BAUD;
     I2C1CON1bits.CSD = 0; /* multi-master: clock-stretch on data enabled */
+    I2C1CON1bits.ACKCNT = 1; /* NACK last byte of host reads */
     I2C1CON2bits.FME = I2C_FME;
     I2C1CON2bits.BFRET = 0b00; /* 8 cycles for BFRE */
 
