@@ -193,7 +193,7 @@ void i2c_init(uint8_t addr) {
     I2C1CLK = 0x01; /* FOSC */
     I2C1BAUD = I2C_BAUD;
     I2C1CON1bits.CSD = 0; /* multi-master: clock-stretch on data enabled */
-    I2C1CON1bits.ACKCNT = 1; /* NACK last byte of host reads */
+    // I2C1CON1bits.ACKCNT = 1; /* NACK last byte of host reads */
     I2C1CON2bits.FME = I2C_FME;
     /* BFRET = 0b10 (32 FOSC/4 cycles ≈ 2 µs at FOSC = 64 MHz) gives the
      * peripheral enough bus-free margin to safely back start conditions
