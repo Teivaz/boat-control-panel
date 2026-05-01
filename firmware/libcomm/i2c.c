@@ -135,7 +135,7 @@ static void i2c_dma_set_host(MessageTask* task) {
         DMAnCON0bits.EN = 0;
         DMAnSSA = (uint24_t)task->tx;
         DMAnSSZ = task->tx_len;
-        DMAnCON0bits.SIRQEN = 1;
+        DMAnCON0bits.SIRQEN = 0;
         DMAnCON0bits.EN = 1;
     }
     if (task->rx_len) {
@@ -261,6 +261,10 @@ static void i2c_start_task(MessageTask* task) {
     I2C1CNTL = task->tx_len;
     i2c_dma_set_host(task);
     I2C1CON0bits.S = 1; /* issue start */
+    if (task->tx_len) {
+        DMASELECT = DMA_TX_CHANNEL;
+        DMAnCON0bits.SIRQEN = 1;
+    }
 }
 
 I2cResult i2c_submit(uint8_t addr, const uint8_t* tx, uint8_t tx_len, uint8_t rx_len, I2cCompletion cb, void* ctx) {
