@@ -190,7 +190,10 @@ void i2c_init(uint8_t addr) {
     I2C1CON1bits.CSD = 0; /* multi-master: clock-stretch on data enabled */
     I2C1CON1bits.ACKCNT = 1; /* NACK last byte of host reads */
     I2C1CON2bits.FME = I2C_FME;
-    I2C1CON2bits.BFRET = 0b00; /* 8 cycles for BFRE */
+    /* BFRET = 0b10 (32 FOSC/4 cycles ≈ 2 µs at FOSC = 64 MHz) gives the
+     * peripheral enough bus-free margin to safely back start conditions
+     * after a STOP, especially during rapid client→host transitions. */
+    I2C1CON2bits.BFRET = 0b10;
 
     const uint8_t a = (uint8_t)(addr << 1);
     I2C1ADR0 = a;
@@ -295,6 +298,7 @@ I2cResult i2c_submit(uint8_t addr, const uint8_t* tx, uint8_t tx_len, uint8_t rx
     for (uint8_t i = 0; i < tx_len; i++) {
         task->tx[i] = tx[i];
     }
+    task->result = I2C_RESULT_OK; /* overwritten by host_finish on completion */
     task->state = MT_IDLE;
     g_q_tail = q_next(g_q_tail);
     INTERRUPT_POP;
