@@ -219,10 +219,47 @@ static void cold_rx_dispatch(I2cResult result, uint8_t* data, uint8_t len, void*
     }
 }
 
+/* ── ISR-context read-request dispatcher ──────────────────────────────
+ *
+ * Fired from isr_on_restart when a master issues a repeated-start read
+ * after writing to this device.  Stages the response via
+ * i2c_set_client_tx so it is ready when the address handler arms DMA.
+ * ISR context — implementations must not block.
+ * ──────────────────────────────────────────────────────────────────────── */
+
+static void read_request_dispatch(const volatile uint8_t* data, uint8_t len) {
+    if (len == 0) {
+        return;
+    }
+    uint8_t id = data[0];
+
+    switch (id) {
+        case COMM_BUTTON_STATE_READ:
+            comm_on_button_state_read_requested();
+            break;
+
+        case COMM_BUTTON_TRIGGER_READ:
+            if (len >= 2) {
+                comm_on_button_trigger_read_requested(data[1] & 0x07);
+            }
+            break;
+
+        case COMM_CONFIG_READ:
+            if (len >= 2) {
+                comm_on_config_read_requested(data[1]);
+            }
+            break;
+
+        default:
+            break;
+    }
+}
+
 /* ── Initialization ────────────────────────────────────────────────────── */
 
 void comm_interface_init(void) {
     i2c_set_cold_rx_handler(cold_rx_dispatch);
+    i2c_set_read_request_handler(read_request_dispatch);
 }
 
 /* ── Outbound write commands ───────────────────────────────────────────── */

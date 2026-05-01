@@ -55,6 +55,16 @@ void comm_on_level_mode_received(const CommLevelMode* mode) {
     (void)mode;
 }
 
+/* Main board does not serve these reads — empty stubs. */
+void comm_on_button_state_read_requested(void) {
+}
+void comm_on_button_trigger_read_requested(uint8_t button_id) {
+    (void)button_id;
+}
+void comm_on_config_read_requested(uint8_t address) {
+    (void)address;
+}
+
 /* ============================================================================
  * Adopter callbacks: read response handlers (main-loop context)
  *

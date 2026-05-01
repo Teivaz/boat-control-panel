@@ -2,10 +2,12 @@
 #include "comm.h"
 #include "config.h"
 #include "i2c.h"
+#include "i2c_board.h"
 #include "input.h"
 #include "interrupt.h"
 #include "led_effect.h"
 #include "libcomm.h"
+#include "libcomm_interface.h"
 #include "rgbled.h"
 #include "task.h"
 #include "task_ids.h"
@@ -20,7 +22,9 @@ static void tick_init(void);
 
 static void init(void) {
     rgbled_init();
-    i2c_init();
+    i2c_pins_init();
+    i2c_init(comm_address());
+    comm_interface_init();
 
     task_controller_init(&ctrl);
     input_init(&ctrl);
@@ -68,6 +72,7 @@ static void tick_init(void) {
 void main(void) {
     init();
     while (1) {
+        i2c_poll();
         task_controller_poll(&ctrl);
     }
 }

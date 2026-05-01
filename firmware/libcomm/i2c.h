@@ -94,11 +94,23 @@ typedef enum {
  *            failure since the protocol expects > 0 bytes back. */
 typedef void (*I2cCompletion)(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx);
 
+/* Read-request callback.  Fired from ISR context when a master issues
+ * a repeated-start read after writing to this device (the write phase
+ * of a write-then-read transaction).  The handler should inspect the
+ * write-phase data (command + params) and call i2c_set_client_tx() to
+ * stage the response before the address handler arms client TX DMA.
+ * ISR-callable only — must not block. */
+typedef void (*I2cReadRequestHandler)(const volatile uint8_t* data, uint8_t len);
+
 /* ── Main-loop API ──────────────────────────────────────────────────── */
 
-/* Set the client-side cold RX handlers.  May be called before or right
+/* Set the client-side cold RX handler.  May be called before or right
  * after i2c_init. May be left unset (NULL) if that direction is unused. */
 void i2c_set_cold_rx_handler(I2cCompletion cold_tx);
+
+/* Set the client-side read-request handler (ISR context).  Fires when
+ * a repeated-start read follows a client write.  May be left unset. */
+void i2c_set_read_request_handler(I2cReadRequestHandler handler);
 
 /* One-time hardware init.  Configures I2C1 at 400 kHz.
  * Caller must have set up pins and oscillator beforehand. */

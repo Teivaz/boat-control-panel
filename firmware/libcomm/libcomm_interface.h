@@ -151,4 +151,18 @@ void comm_on_relay_changed_received(const CommRelayChanged* event);
 void comm_on_relay_mask_received(const CommRelayMask* mask);
 void comm_on_level_mode_received(const CommLevelMode* mode);
 
+/* ============================================================================
+ * Adopter-implemented: incoming read-request handlers (ISR context)
+ *
+ * Called from the I2C restart ISR when a master issues a write-then-read
+ * to this device.  The handler must call i2c_set_client_tx() to stage
+ * the response before returning — the address handler arms client TX
+ * DMA immediately after.  Must not block.
+ * ============================================================================
+ */
+
+void comm_on_button_state_read_requested(void);
+void comm_on_button_trigger_read_requested(uint8_t button_id);
+void comm_on_config_read_requested(uint8_t address);
+
 #endif /* LIBCOMM_INTERFACE_H */

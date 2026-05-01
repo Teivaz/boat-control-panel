@@ -48,6 +48,7 @@ typedef enum {
 } FSMState;
 
 static I2cCompletion g_cold_rx = 0;
+static I2cReadRequestHandler g_read_request = 0;
 static volatile FSMState g_fsm = FSM_IDLE;
 static volatile uint8_t g_client_rx[I2C_RX_MAX] = {0};
 static volatile uint8_t g_client_tx[I2C_TX_MAX] = {0};
@@ -72,6 +73,10 @@ static void isr_on_timeout(void);
 
 void i2c_set_cold_rx_handler(I2cCompletion cold_rx) {
     g_cold_rx = cold_rx;
+}
+
+void i2c_set_read_request_handler(I2cReadRequestHandler handler) {
+    g_read_request = handler;
 }
 
 I2cResult i2c_set_client_tx(uint8_t* tx, uint8_t tx_len) {
@@ -432,6 +437,9 @@ static void isr_on_restart(void) {
         DMASELECT = DMA_RX_CHANNEL;
         uint8_t remaining = (uint8_t)DMAnDCNT;
         uint8_t received = (uint8_t)(I2C_RX_MAX - remaining);
+        if (g_read_request && received > 0) {
+            g_read_request(g_client_rx, received);
+        }
         prepend_completed_task(0, g_client_rx, received);
         g_fsm = FSM_IDLE;
         i2c_dma_client_rx();

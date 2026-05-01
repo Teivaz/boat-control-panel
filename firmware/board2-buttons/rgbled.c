@@ -1,5 +1,5 @@
 #include "rgbled.h"
-
+#include "libcomm.h"
 #include <xc.h>
 
 #define RGBLED_COUNT 7

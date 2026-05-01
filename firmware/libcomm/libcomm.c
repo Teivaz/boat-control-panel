@@ -24,7 +24,7 @@ uint8_t comm_can_parse(const uint8_t* data, uint8_t len) {
         case COMM_RESET:
             return len == 1;
         case COMM_BUTTON_STATE_READ:
-            return 0;
+            return len == 1;
         case COMM_BUTTON_TRIGGER_READ:
             return len == 2;
         case COMM_RELAY_STATE_READ:
