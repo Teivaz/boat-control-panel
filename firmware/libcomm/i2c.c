@@ -398,9 +398,8 @@ static void isr_on_stop(void) {
         /* DMA was set up for I2C_RX_MAX; what we actually received is
          * I2C_RX_MAX minus the DMA destination count remaining. */
         DMASELECT = DMA_RX_CHANNEL;
-        uint8_t remaining = (uint8_t)DMAnDCNT;
-        uint8_t received = (uint8_t)(I2C_RX_MAX - remaining);
-        prepend_completed_task(0, g_client_rx, received);
+        uint8_t received = (uint8_t)DMAnDCNT;
+        prepend_completed_task(0x00, g_client_rx, received);
         g_fsm = FSM_IDLE;
         i2c_dma_client_rx(); /* re-arm for the next inbound message */
     }
