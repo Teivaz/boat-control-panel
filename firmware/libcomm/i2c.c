@@ -64,6 +64,7 @@ static void i2c_dma_client_tx(void);
 static void i2c_start_task(MessageTask* task);
 static void prepend_completed_task(uint8_t addr, const volatile uint8_t* rx, uint8_t rx_len);
 static void host_finish(MessageTaskState final_state, I2cResult result);
+static void host_reset_to_client(void);
 static void isr_on_address(void);
 static void isr_on_stop(void);
 static void isr_on_restart(void);
@@ -338,16 +339,20 @@ static void host_finish(MessageTaskState final_state, I2cResult result) {
     if (g_fsm != FSM_HOST_TX && g_fsm != FSM_HOST_RX) {
         return;
     }
+    MessageTask* task = &g_queue[g_q_head];
+    task->state = final_state;
+    task->result = result;
+    g_fsm = FSM_IDLE;
+    host_reset_to_client();
+}
+
+static void host_reset_to_client(void) {
     DMASELECT = DMA_TX_CHANNEL;
     DMAnCON0bits.SIRQEN = 0;
     DMAnCON0bits.EN = 0;
     DMASELECT = DMA_RX_CHANNEL;
     DMAnCON0bits.SIRQEN = 0;
     DMAnCON0bits.EN = 0;
-    MessageTask* task = &g_queue[g_q_head];
-    task->state = final_state;
-    task->result = result;
-    g_fsm = FSM_IDLE;
     I2C1CON0bits.EN = 0;
     I2C1CON0bits.MODE = 0b000;
     I2C1PIR = 0x00;
@@ -388,7 +393,8 @@ void __interrupt(irq(I2C1), base(8)) I2C1_ISR(void) {
 static void isr_on_address(void) {
     if (g_fsm == FSM_HOST_TX || g_fsm == FSM_HOST_RX) {
         /* Lost arbitration to a competing master mid-transaction; let
-         * the started task retry on the next poll. */
+         * the started task retry on the next poll.  Do NOT EN-cycle here:
+         * the address match is still pending and we must respond to it. */
         MessageTask* task = &g_queue[g_q_head];
         task->state = MT_IDLE;
         g_fsm = FSM_IDLE;
@@ -465,6 +471,7 @@ static void isr_on_nack(void) {
         task->retries--;
         task->state = MT_IDLE;
         g_fsm = FSM_IDLE;
+        host_reset_to_client();
     } else {
         host_finish(MT_FAILED, I2C_RESULT_NACK);
     }
@@ -475,6 +482,7 @@ static void isr_on_collision(void) {
         MessageTask* task = &g_queue[g_q_head];
         task->state = MT_IDLE; /* will be retried by i2c_poll */
         g_fsm = FSM_IDLE;
+        host_reset_to_client();
     }
 }
 
@@ -514,6 +522,7 @@ static void isr_on_timeout(void) {
     I2C1PIRbits.PCIF = 0;
     I2C1PIEbits.PCIE = 1;
     I2C1PIEbits.RSCIE = 1;
+    i2c_dma_client_rx();
 }
 
 void __interrupt(irq(I2C1E), base(8)) I2C1_ERROR_ISR(void) {
