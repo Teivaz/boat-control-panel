@@ -19,7 +19,8 @@
  * address is passed through cb_ctx (uint8_t widened to void*).
  * ──────────────────────────────────────────────────────────────────────── */
 
-static void on_button_state_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+static void on_button_state_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+    (void)result;
     uint8_t addr = (uint8_t)(uintptr_t)ctx;
     if (rx_len == 0) {
         comm_on_button_state_read_response(addr, 0);
@@ -30,7 +31,8 @@ static void on_button_state_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx
     comm_on_button_state_read_response(addr, &state);
 }
 
-static void on_button_trigger_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+static void on_button_trigger_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+    (void)result;
     uint8_t addr = (uint8_t)(uintptr_t)ctx;
     if (rx_len == 0) {
         comm_on_button_trigger_read_response(addr, 0);
@@ -41,7 +43,8 @@ static void on_button_trigger_read_done(uint8_t* rx_buf, uint8_t rx_len, void* c
     comm_on_button_trigger_read_response(addr, &config);
 }
 
-static void on_relay_state_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+static void on_relay_state_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+    (void)result;
     (void)ctx;
     if (rx_len == 0) {
         comm_on_relay_state_read_response(0);
@@ -52,7 +55,8 @@ static void on_relay_state_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx)
     comm_on_relay_state_read_response(&state);
 }
 
-static void on_relay_mask_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+static void on_relay_mask_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+    (void)result;
     (void)ctx;
     if (rx_len == 0) {
         comm_on_relay_mask_read_response(0);
@@ -63,7 +67,8 @@ static void on_relay_mask_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) 
     comm_on_relay_mask_read_response(&mask);
 }
 
-static void on_battery_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+static void on_battery_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+    (void)result;
     (void)ctx;
     if (rx_len == 0) {
         comm_on_battery_read_response(0);
@@ -74,7 +79,8 @@ static void on_battery_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
     comm_on_battery_read_response(&battery);
 }
 
-static void on_levels_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+static void on_levels_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+    (void)result;
     (void)ctx;
     if (rx_len == 0) {
         comm_on_levels_read_response(0);
@@ -85,7 +91,8 @@ static void on_levels_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
     comm_on_levels_read_response(&levels);
 }
 
-static void on_level_mode_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+static void on_level_mode_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+    (void)result;
     (void)ctx;
     if (rx_len == 0) {
         comm_on_level_mode_read_response(0);
@@ -96,7 +103,8 @@ static void on_level_mode_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) 
     comm_on_level_mode_read_response(&mode);
 }
 
-static void on_sensors_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+static void on_sensors_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+    (void)result;
     (void)ctx;
     if (rx_len == 0) {
         comm_on_sensors_read_response(0);
@@ -107,7 +115,8 @@ static void on_sensors_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
     comm_on_sensors_read_response(&sensors);
 }
 
-static void on_config_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+static void on_config_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+    (void)result;
     uint8_t addr = (uint8_t)(uintptr_t)ctx;
     if (rx_len == 0) {
         comm_on_config_read_response(addr, 0);
@@ -125,7 +134,8 @@ static void on_config_read_done(uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
  * data[0] is the command id, data[1..len-1] is the payload.
  * ──────────────────────────────────────────────────────────────────────── */
 
-static void cold_rx_dispatch(uint8_t* data, uint8_t len, void* ctx) {
+static void cold_rx_dispatch(I2cResult result, uint8_t* data, uint8_t len, void* ctx) {
+    (void)result;
     (void)ctx;
     if (!comm_can_parse(data, len)) {
         return;

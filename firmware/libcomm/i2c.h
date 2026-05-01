@@ -85,14 +85,14 @@ typedef enum {
 
 /* Completion callback.  Fired from i2c_poll() (main-loop context) for
  * host transactions, and for cold (client) RX deliveries.
+ *   result — I2C_RESULT_OK on success, or the failure reason.
  *   rx_buf — driver-owned buffer holding received bytes.  Valid only
  *            while the callback is running; copy out anything that
  *            must outlive the callback.
- *   rx_len — bytes received.  0 means either: write-only success, or
- *            a host transaction that ultimately failed after retries.
+ *   rx_len — bytes received.  0 on write-only success or any failure.
  *            For host reads, callers should treat rx_len == 0 as
  *            failure since the protocol expects > 0 bytes back. */
-typedef void (*I2cCompletion)(uint8_t* rx_buf, uint8_t rx_len, void* ctx);
+typedef void (*I2cCompletion)(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx);
 
 /* ── Main-loop API ──────────────────────────────────────────────────── */
 

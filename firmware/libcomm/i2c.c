@@ -33,6 +33,7 @@ typedef struct {
     uint8_t rx[I2C_RX_MAX];
     uint8_t rx_len;
     MessageTaskState state;
+    I2cResult result;
     uint8_t retries;
     I2cCompletion cb;
     void* cb_ctx;
@@ -61,7 +62,7 @@ static void i2c_dma_client_rx(void);
 static void i2c_dma_client_tx(void);
 static void i2c_start_task(MessageTask* task);
 static void prepend_completed_task(uint8_t addr, const volatile uint8_t* rx, uint8_t rx_len);
-static void host_finish(MessageTaskState final_state);
+static void host_finish(MessageTaskState final_state, I2cResult result);
 static void isr_on_address(void);
 static void isr_on_stop(void);
 static void isr_on_restart(void);
@@ -228,7 +229,7 @@ void i2c_poll(void) {
         if (task->state == MT_FINISHED || task->state == MT_FAILED) {
             uint8_t rx_len = (task->state == MT_FINISHED) ? task->rx_len : 0;
             if (task->cb) {
-                task->cb(task->rx, rx_len, task->cb_ctx);
+                task->cb(task->result, task->rx, rx_len, task->cb_ctx);
             }
             INTERRUPT_PUSH;
             if (g_q_head == cur) {
@@ -321,14 +322,16 @@ static void prepend_completed_task(uint8_t addr, const volatile uint8_t* rx, uin
         task->rx[i] = rx[i];
     }
     task->state = MT_FINISHED;
+    task->result = I2C_RESULT_OK;
 }
 
-static void host_finish(MessageTaskState final_state) {
+static void host_finish(MessageTaskState final_state, I2cResult result) {
     if (g_fsm != FSM_HOST_TX && g_fsm != FSM_HOST_RX) {
         return;
     }
     MessageTask* task = &g_queue[g_q_head];
     task->state = final_state;
+    task->result = result;
     g_fsm = FSM_IDLE;
     I2C1CON0bits.MODE = 0b000;
 }
@@ -395,7 +398,7 @@ static void isr_on_address(void) {
 
 static void isr_on_stop(void) {
     if (g_fsm == FSM_HOST_TX || g_fsm == FSM_HOST_RX) {
-        host_finish(MT_FINISHED);
+        host_finish(MT_FINISHED, I2C_RESULT_OK);
     } else if (g_fsm == FSM_CLIENT_TX) {
         g_fsm = FSM_IDLE;
         g_client_tx_len = 0;
@@ -441,7 +444,7 @@ static void isr_on_nack(void) {
         task->state = MT_IDLE;
         g_fsm = FSM_IDLE;
     } else {
-        host_finish(MT_FAILED);
+        host_finish(MT_FAILED, I2C_RESULT_NACK);
     }
 }
 
@@ -455,7 +458,7 @@ static void isr_on_collision(void) {
 
 static void isr_on_timeout(void) {
     if (g_fsm == FSM_HOST_TX || g_fsm == FSM_HOST_RX) {
-        host_finish(MT_FAILED);
+        host_finish(MT_FAILED, I2C_RESULT_TIMEOUT);
     } else {
         g_fsm = FSM_IDLE;
     }

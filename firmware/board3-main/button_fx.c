@@ -39,8 +39,8 @@ static void build_side_effect(uint8_t side, CommButtonEffect* out);
 static uint8_t side_address(uint8_t side);
 static uint8_t effects_differ(const CommButtonEffect* a, const CommButtonEffect* b);
 static void refresh_task(TaskId id, void* ctx);
-static void on_effect_done_l(uint8_t* rx, uint8_t rx_len, void* ctx);
-static void on_effect_done_r(uint8_t* rx, uint8_t rx_len, void* ctx);
+static void on_effect_done_l(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
+static void on_effect_done_r(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
 
 void button_fx_init(TaskController* ctrl) {
     for (uint8_t s = 0; s < BUTTON_FX_SIDES; s++) {
@@ -191,7 +191,8 @@ static void refresh_task(TaskId id, void* ctx) {
     }
 }
 
-static void on_effect_done_l(uint8_t* rx, uint8_t rx_len, void* ctx) {
+static void on_effect_done_l(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx) {
+    (void)result;
     (void)rx;
     (void)rx_len;
     (void)ctx;
@@ -200,7 +201,8 @@ static void on_effect_done_l(uint8_t* rx, uint8_t rx_len, void* ctx) {
     inflight[0] = 0;
 }
 
-static void on_effect_done_r(uint8_t* rx, uint8_t rx_len, void* ctx) {
+static void on_effect_done_r(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx) {
+    (void)result;
     (void)rx;
     (void)rx_len;
     (void)ctx;
