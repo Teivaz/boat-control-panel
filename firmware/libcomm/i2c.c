@@ -348,7 +348,10 @@ static void host_finish(MessageTaskState final_state, I2cResult result) {
     task->state = final_state;
     task->result = result;
     g_fsm = FSM_IDLE;
+    I2C1CON0bits.EN = 0;
     I2C1CON0bits.MODE = 0b000;
+    I2C1PIR = 0x00;
+    I2C1CON0bits.EN = 1;
     i2c_dma_client_rx();
 }
 
