@@ -123,6 +123,19 @@ void comm_on_config_read_requested(uint8_t address) {
     i2c_set_client_tx(&value, 1);
 }
 
+void comm_on_relay_state_read_requested(void) {
+}
+void comm_on_relay_mask_read_requested(void) {
+}
+void comm_on_battery_read_requested(void) {
+}
+void comm_on_levels_read_requested(void) {
+}
+void comm_on_level_mode_read_requested(void) {
+}
+void comm_on_sensors_read_requested(void) {
+}
+
 /* ============================================================================
  * Adopter callbacks: read response handlers (main-loop context)
  *

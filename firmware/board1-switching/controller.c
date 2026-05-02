@@ -1,8 +1,8 @@
 #include "controller.h"
 
 #include "adc.h"
-#include "i2c.h"
 #include "libcomm.h"
+#include "libcomm_interface.h"
 #include "relay_mon.h"
 #include "relay_out.h"
 #include "sensors.h"
@@ -235,9 +235,7 @@ static void retry_task(TaskId id, void* ctx) {
         INTERRUPT_POP;
     }
 
-    CommMessage msg;
-    uint8_t len = comm_build_relay_changed(&msg, prev_r, curr_r, prev_s, curr_s);
-    if (i2c_transmit(COMM_ADDRESS_MAIN, (const uint8_t*)&msg, len) != I2C_RESULT_OK) {
+    if (comm_send_relay_changed(prev_r, curr_r, prev_s, curr_s, 0, 0) != I2C_RESULT_OK) {
         return;
     }
 

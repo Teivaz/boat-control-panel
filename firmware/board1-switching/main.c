@@ -3,8 +3,10 @@
 #include "config.h"
 #include "controller.h"
 #include "i2c.h"
+#include "i2c_board.h"
 #include "interrupt.h"
 #include "libcomm.h"
+#include "libcomm_interface.h"
 #include "relay_mon.h"
 #include "relay_out.h"
 #include "sensors.h"
@@ -22,7 +24,9 @@ static void init(void) {
     relay_out_init();
     relay_mon_init();
     adc_init();
-    i2c_init();
+    i2c_pins_init();
+    i2c_init(comm_address());
+    comm_interface_init();
 
     task_controller_init(&ctrl);
     config_init(&ctrl);
@@ -61,6 +65,7 @@ static void tick_init(void) {
 void main(void) {
     init();
     while (1) {
+        i2c_poll();
         task_controller_poll(&ctrl);
     }
 }

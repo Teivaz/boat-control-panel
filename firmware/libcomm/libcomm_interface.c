@@ -250,6 +250,30 @@ static void read_request_dispatch(const volatile uint8_t* data, uint8_t len) {
             }
             break;
 
+        case COMM_RELAY_STATE_READ:
+            comm_on_relay_state_read_requested();
+            break;
+
+        case COMM_RELAY_MASK_READ:
+            comm_on_relay_mask_read_requested();
+            break;
+
+        case COMM_BATTERY_READ:
+            comm_on_battery_read_requested();
+            break;
+
+        case COMM_LEVELS_READ:
+            comm_on_levels_read_requested();
+            break;
+
+        case COMM_LEVEL_MODE_READ:
+            comm_on_level_mode_read_requested();
+            break;
+
+        case COMM_SENSORS_READ:
+            comm_on_sensors_read_requested();
+            break;
+
         default:
             break;
     }

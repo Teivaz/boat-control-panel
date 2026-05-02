@@ -28,17 +28,17 @@ uint8_t comm_can_parse(const uint8_t* data, uint8_t len) {
         case COMM_BUTTON_TRIGGER_READ:
             return len == 2;
         case COMM_RELAY_STATE_READ:
-            return 0;
+            return len == 1;
         case COMM_RELAY_MASK_READ:
-            return 0;
+            return len == 1;
         case COMM_BATTERY_READ:
-            return 0;
+            return len == 1;
         case COMM_LEVELS_READ:
-            return 0;
+            return len == 1;
         case COMM_LEVEL_MODE_READ:
-            return 0;
+            return len == 1;
         case COMM_SENSORS_READ:
-            return 0;
+            return len == 1;
         case COMM_CONFIG_READ:
             return len == 2;
         default:
