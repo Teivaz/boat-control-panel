@@ -426,8 +426,12 @@ static void isr_on_stop(void) {
     if (g_fsm == FSM_HOST_TX || g_fsm == FSM_HOST_RX) {
         host_finish(MT_FINISHED, I2C_RESULT_OK);
     } else if (g_fsm == FSM_CLIENT_TX) {
+        DMASELECT = DMA_TX_CHANNEL;
+        DMAnCON0bits.SIRQEN = 0;
+        DMAnCON0bits.EN = 0;
         g_fsm = FSM_IDLE;
         g_client_tx_len = 0;
+        i2c_dma_client_rx();
     } else if (g_fsm == FSM_CLIENT_RX) {
         /* DMA was set up for I2C_RX_MAX; what we actually received is
          * I2C_RX_MAX minus the DMA destination count remaining. */
