@@ -62,8 +62,8 @@ static void tick_init(void) {
     IPR3bits.TMR0IP = 1;
     T0CON1bits.CS = 0b010;    /* Fosc/4 -> 16 MHz */
     T0CON1bits.CKPS = 0b0111; /* 16 MHz / 128 -> 125 kHz */
-    PIE3bits.TMR0IE = 1;
     PIR3bits.TMR0IF = 0;
+    PIE3bits.TMR0IE = 1;
     TMR0L = 0;
     TMR0H = 124; /* 124 cycles + 1 for trigger at 125 kHz => 1 kHz / 1ms */
     T0CON0bits.EN = 1;

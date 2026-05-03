@@ -37,10 +37,14 @@ static volatile uint16_t latest[3]; /* 12-bit burst-averaged reading */
 static volatile uint32_t level_ema[2];
 static volatile uint8_t sweep_idx;
 static volatile uint8_t ema_primed[2];
+static uint16_t g_max_voltage_mv;
 
 static void start_burst(uint8_t idx);
+static uint16_t flash_read_word(uint32_t addr);
 
 void adc_init(void) {
+    g_max_voltage_mv = flash_read_word(DIA_FVRA2X);
+
     ANSELAbits.ANSELA5 = 1;
     ANSELAbits.ANSELA6 = 1;
     ANSELAbits.ANSELA7 = 1;
@@ -63,9 +67,12 @@ void adc_init(void) {
     ADRPT = 16;
     ADCLK = 32; /* Fosc/64 -> 1 MHz Tad */
 
+    ADCON3bits.CALC = 0b001; // ADRES-ADSTPT. Actual result vs. setpoint
+    ADSTATbits.MATH = 0;     // ADMATH registers not updated(0)
+
     ADREFbits.PREF = 0b11; /* Vref+ = FVR */
     ADPRE = 0;
-    ADACQ = 16;
+    ADACQ = 0; // 16;
 
     latest[0] = latest[1] = latest[2] = 0;
     level_ema[0] = level_ema[1] = 0;
@@ -81,10 +88,14 @@ void adc_init(void) {
 
 void __interrupt(irq(AD), base(8)) AD_ISR(void) {
     PIR1bits.ADIF = 0;
+    if (ADCNT != ADRPT) {
+        return;
+    }
 
     uint8_t idx = sweep_idx;
-    uint16_t raw = (uint16_t)ADRES;
-    latest[idx] = raw;
+    uint32_t raw = (uint16_t)ADRES;
+    raw = raw * g_max_voltage_mv / 0xFFF;
+    latest[idx] = (uint16_t)raw;
 
     if (idx == CH_WATER || idx == CH_FUEL) {
         uint8_t li = (idx == CH_WATER) ? 0u : 1u;
@@ -100,7 +111,10 @@ void __interrupt(irq(AD), base(8)) AD_ISR(void) {
 
     idx = (uint8_t)((idx + 1u) % 3u);
     sweep_idx = idx;
-    start_burst(idx);
+
+    ADCON2bits.ACLR = 1;
+    ADPCH = channels[idx];
+    ADCON0bits.GO = 1;
 }
 
 uint16_t adc_read_battery_mv(void) {
@@ -108,8 +122,7 @@ uint16_t adc_read_battery_mv(void) {
     INTERRUPT_PUSH;
     raw = latest[CH_BATT];
     INTERRUPT_POP;
-    /* V_pin = raw * FVR_mV / 4096; V_batt = V_pin * 10. */
-    return (uint16_t)((uint32_t)raw * ADC_FVR_MV * 10u / 4096u);
+    return raw * 10u;
 }
 
 uint8_t adc_read_level_fresh_water(void) {
@@ -132,4 +145,17 @@ static void start_burst(uint8_t idx) {
     ADCON2bits.ACLR = 1;
     ADPCH = channels[idx];
     ADCON0bits.GO = 1;
+}
+
+static uint16_t flash_read_word(uint32_t addr) {
+    uint8_t result_l, result_h;
+    TBLPTRU = (uint8_t)((addr & 0x00FF0000) >> 16);
+    TBLPTRH = (uint8_t)((addr & 0x0000FF00) >> 8);
+    TBLPTRL = (uint8_t)(addr & 0x000000FF);
+    asm("TBLRD*+");
+    result_l = TABLAT;
+    asm("TBLRD");
+    result_h = TABLAT;
+
+    return (((uint16_t)result_h << 8) | (result_l));
 }

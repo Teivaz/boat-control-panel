@@ -5,6 +5,8 @@
 #include <xc.h>
 
 void i2c_pins_init(void) {
+    LATCbits.LATC3 = 1;
+    LATCbits.LATC4 = 1;
     ANSELCbits.ANSELC3 = 0;
     ANSELCbits.ANSELC4 = 0;
     TRISCbits.TRISC3 = 0;

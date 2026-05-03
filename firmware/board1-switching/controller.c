@@ -184,11 +184,9 @@ uint8_t controller_level(uint8_t meter_index) {
 
 static void apply_target(uint16_t proto_target) {
     uint16_t wire = map_proto_to_wire(proto_target);
-    /* Power-master rail: assert wire bit 1 whenever any non-main relay is
-     * on. The master can also drive proto bit 15 explicitly to force it. */
-    if (wire & (uint16_t)~(1u << WIRE_MAIN_BIT)) {
-        wire |= (uint16_t)(1u << WIRE_MAIN_BIT);
-    }
+    // Main should always be 1
+    // TODO: uncomment
+    // wire |= (uint16_t)(1u << WIRE_MAIN_BIT);
     relay_out_write(wire);
 }
 

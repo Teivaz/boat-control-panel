@@ -1,6 +1,8 @@
 #ifndef ADC_H
 #define ADC_H
 
+#include "task.h"
+
 #include <stdint.h>
 
 /* Continuous three-channel ADC sweep. Each conversion is a hardware 16-sample
