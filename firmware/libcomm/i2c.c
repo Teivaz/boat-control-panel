@@ -47,8 +47,10 @@ typedef enum {
     FSM_CLIENT_RX,
 } FSMState;
 
+// TODO: use only one callback
 static I2cCompletion g_cold_rx = 0;
 static I2cReadRequestHandler g_read_request = 0;
+
 static volatile FSMState g_fsm = FSM_IDLE;
 static volatile uint8_t g_client_rx[I2C_RX_MAX] = {0};
 static volatile uint8_t g_client_tx[I2C_TX_MAX] = {0};
@@ -61,16 +63,19 @@ static void i2c_dma_init(void);
 static void i2c_dma_set_host(MessageTask* task);
 static void i2c_dma_client_rx(void);
 static void i2c_dma_client_tx(void);
-static void i2c_start_task(MessageTask* task);
 static void prepend_completed_task(uint8_t addr, const volatile uint8_t* rx, uint8_t rx_len);
-static void host_finish(MessageTaskState final_state, I2cResult result);
-static void host_reset_to_client(void);
 static void isr_on_address(void);
 static void isr_on_stop(void);
 static void isr_on_restart(void);
+static void isr_on_transmit_exhausted(void);
 static void isr_on_nack(void);
 static void isr_on_collision(void);
 static void isr_on_timeout(void);
+static void on_cold_rx_complete(void);
+static void switch_to_host(void);
+static void arm_event(void);
+static void switch_to_client(void);
+static void disarm_event(I2cResult reason);
 
 void i2c_set_cold_rx_handler(I2cCompletion cold_rx) {
     g_cold_rx = cold_rx;
@@ -81,6 +86,9 @@ void i2c_set_read_request_handler(I2cReadRequestHandler handler) {
 }
 
 I2cResult i2c_set_client_tx(uint8_t* tx, uint8_t tx_len) {
+    if (g_fsm == FSM_CLIENT_TX) {
+        return I2C_RESULT_BUSY;
+    }
     if (tx == 0) {
         return I2C_RESULT_BAD_ARG;
     }
@@ -142,7 +150,7 @@ static void i2c_dma_set_host(MessageTask* task) {
         DMAnCON0bits.EN = 0;
         DMAnSSA = (uint24_t)task->tx;
         DMAnSSZ = task->tx_len;
-        DMAnCON0bits.SIRQEN = 0;
+        DMAnCON0bits.SIRQEN = 1;
         DMAnCON0bits.EN = 1;
     }
     if (task->rx_len) {
@@ -183,6 +191,61 @@ static void i2c_dma_client_tx(void) {
     INTERRUPT_POP;
 }
 
+static void disarm_event(I2cResult reason) {
+    // take existing event, reset its state to idle, do not decrement retry
+    MessageTask* task = &g_queue[g_q_head];
+    switch (reason) {
+        case  I2C_RESULT_OK:
+            task->state = MT_FINISHED;
+            task->result = I2C_RESULT_OK;
+            break;
+        case I2C_RESULT_BUSY:
+            task->state = MT_IDLE;
+            break;
+        case I2C_RESULT_NACK:
+        default:
+            if (task->retries == 0) {
+                task->state = MT_FAILED;
+                task->result = reason;
+            }
+            else {
+                task->retries--;
+                task->state = MT_IDLE;
+            }
+            break;
+    }
+}
+
+static void switch_to_client(void) {
+    I2C1CON0bits.MODE = 0b000;
+    I2C1CON1bits.ACKCNT = 0;
+    I2C1STAT1bits.CLRBF = 1;
+    i2c_dma_client_rx();
+}
+
+static void arm_event(void) {
+    MessageTask* task = &g_queue[g_q_head];
+    i2c_dma_set_host(task);
+    task->state = MT_RUNNING;
+    I2C1ADB1 = (uint8_t)(task->addr << 1);
+    if (task->rx_len > 0 && task->tx_len > 0) {
+        I2C1CON0bits.RSEN = 1; /* repeated-start at end of TX phase */
+    } else {
+        I2C1CON0bits.RSEN = 0;
+    }
+    if (task->tx_len == 0) {
+        I2C1ADB1 |= 0b1; // Read only
+    }
+    I2C1CNTH = 0;
+    I2C1CNTL = task->tx_len;
+}
+
+static void switch_to_host(void) {
+    I2C1CON0bits.MODE = 0b100;
+    I2C1CON1bits.ACKCNT = 0;
+    I2C1STAT1bits.CLRBF = 1;
+}
+
 void i2c_init(uint8_t addr) {
     g_client_tx_len = 0;
     g_fsm = FSM_IDLE;
@@ -190,15 +253,12 @@ void i2c_init(uint8_t addr) {
     g_q_tail = 0;
 
     I2C1CON0bits.EN = 0;
-    I2C1CON0bits.MODE = 0b000;
+    I2C1CON0bits.MODE = 0b110;
     I2C1CLK = 0x01; /* FOSC */
     I2C1BAUD = I2C_BAUD;
     I2C1CON1bits.CSD = 0; /* multi-master: clock-stretch on data enabled */
     I2C1CON2bits.FME = I2C_FME;
-    /* BFRET = 0b10 (32 FOSC/4 cycles ≈ 2 µs at FOSC = 64 MHz) gives the
-     * peripheral enough bus-free margin to safely back start conditions
-     * after a STOP, especially during rapid client→host transitions. */
-    I2C1CON2bits.BFRET = 0b10;
+    I2C1CON2bits.BFRET = 0b00;
 
     const uint8_t a = (uint8_t)(addr << 1);
     I2C1ADR0 = a;
@@ -209,6 +269,7 @@ void i2c_init(uint8_t addr) {
     I2C1PIEbits.PCIE = 1;
     I2C1PIEbits.RSCIE = 1;
     I2C1PIEbits.ADRIE = 1;
+    I2C1PIEbits.CNTIE = 1;
 
     I2C1BTOC = 0x06;         /* LFINTOSC as BTO clock source */
     I2C1BTObits.TOBY32 = 1;  /* x32 */
@@ -229,51 +290,45 @@ void i2c_init(uint8_t addr) {
 }
 
 void i2c_poll(void) {
+    I2cCompletion callback = 0;
+    uint8_t rx[I2C_RX_MAX];
+    uint8_t rx_len = 0;
+    void* ctx = 0;
+    I2cResult result = 0;
+
+    INTERRUPT_PUSH;
     if (g_q_head != g_q_tail) {
-        INTERRUPT_PUSH;
         uint8_t cur = g_q_head;
-        INTERRUPT_POP;
         MessageTask* task = &g_queue[cur];
-        if (task->state == MT_FINISHED || task->state == MT_FAILED) {
-            uint8_t rx_len = (task->state == MT_FINISHED) ? task->rx_len : 0;
-            if (task->cb) {
-                task->cb(task->result, task->rx, rx_len, task->cb_ctx);
+        ctx = task->cb_ctx;
+        result = task->result;
+        if (task->state == MT_FAILED) {
+            callback = task->cb;
+            rx_len = 0;
+            g_q_head = q_next(cur);
+        }
+        else if (task->state == MT_FINISHED) {
+            callback = task->cb;
+            rx_len = task->rx_len;
+            for (uint8_t i = 0; i < rx_len; i++) {
+                rx[i] = task->rx[i];
             }
-            INTERRUPT_PUSH;
-            if (g_q_head == cur) {
-                g_q_head = q_next(cur);
-            }
-            INTERRUPT_POP;
+            g_q_head = q_next(cur);
         }
     }
-
     if (g_q_head != g_q_tail) {
         MessageTask* task = &g_queue[g_q_head];
-        INTERRUPT_PUSH;
         if (task->state == MT_IDLE && g_fsm == FSM_IDLE) {
-            i2c_start_task(task);
+            switch_to_host();
+            arm_event();
+            g_fsm = FSM_HOST_TX;
+            I2C1CON0bits.S = 1;
         }
-        INTERRUPT_POP;
     }
-}
+    INTERRUPT_POP;
 
-static void i2c_start_task(MessageTask* task) {
-    task->state = MT_RUNNING;
-    g_fsm = FSM_HOST_TX;
-    I2C1CON0bits.MODE = 0b100;
-    I2C1ADB1 = (uint8_t)(task->addr << 1);
-    if (task->rx_len > 0 && task->tx_len > 0) {
-        I2C1CON0bits.RSEN = 1; /* repeated-start at end of TX phase */
-    } else {
-        I2C1CON0bits.RSEN = 0;
-    }
-    I2C1CNTH = 0;
-    I2C1CNTL = task->tx_len;
-    i2c_dma_set_host(task);
-    I2C1CON0bits.S = 1; /* issue start */
-    if (task->tx_len) {
-        DMASELECT = DMA_TX_CHANNEL;
-        DMAnCON0bits.SIRQEN = 1;
+    if (callback) {
+        callback(result, rx, rx_len, ctx);
     }
 }
 
@@ -303,7 +358,7 @@ I2cResult i2c_submit(uint8_t addr, const uint8_t* tx, uint8_t tx_len, uint8_t rx
     for (uint8_t i = 0; i < tx_len; i++) {
         task->tx[i] = tx[i];
     }
-    task->result = I2C_RESULT_OK; /* overwritten by host_finish on completion */
+    task->result = I2C_RESULT_OK;
     task->state = MT_IDLE;
     g_q_tail = q_next(g_q_tail);
     INTERRUPT_POP;
@@ -334,33 +389,14 @@ static void prepend_completed_task(uint8_t addr, const volatile uint8_t* rx, uin
     task->result = I2C_RESULT_OK;
 }
 
-static void host_finish(MessageTaskState final_state, I2cResult result) {
-    if (g_fsm != FSM_HOST_TX && g_fsm != FSM_HOST_RX) {
+void __interrupt(irq(I2C1), base(8)) I2C1_ISR(void) {
+    // byte counter has reached zero.  All planned bytes have been transferred
+    if (I2C1PIEbits.CNTIE && I2C1PIRbits.CNTIF) {
+        I2C1PIRbits.CNTIF = 0;
+        isr_on_transmit_exhausted();
         return;
     }
-    MessageTask* task = &g_queue[g_q_head];
-    task->state = final_state;
-    task->result = result;
-    g_fsm = FSM_IDLE;
-    host_reset_to_client();
-}
 
-static void host_reset_to_client(void) {
-    DMASELECT = DMA_TX_CHANNEL;
-    DMAnCON0bits.SIRQEN = 0;
-    DMAnCON0bits.EN = 0;
-    DMASELECT = DMA_RX_CHANNEL;
-    DMAnCON0bits.SIRQEN = 0;
-    DMAnCON0bits.EN = 0;
-    I2C1CON0bits.EN = 0;
-    I2C1CON0bits.MODE = 0b000;
-    I2C1CON1bits.ACKCNT = 0;
-    I2C1PIR = 0x00;
-    I2C1CON0bits.EN = 1;
-    i2c_dma_client_rx();
-}
-
-void __interrupt(irq(I2C1), base(8)) I2C1_ISR(void) {
     // Address detected, set on the 8th falling SCL edge for a matching received address byte
     if (I2C1PIEbits.ADRIE && I2C1PIRbits.ADRIF) {
         I2C1PIRbits.ADRIF = 0;
@@ -391,130 +427,180 @@ void __interrupt(irq(I2C1), base(8)) I2C1_ISR(void) {
 }
 
 static void isr_on_address(void) {
-    if (g_fsm == FSM_HOST_TX || g_fsm == FSM_HOST_RX) {
-        /* Lost arbitration to a competing master mid-transaction; let
-         * the started task retry on the next poll.  Do NOT EN-cycle here:
-         * the address match is still pending and we must respond to it. */
-        MessageTask* task = &g_queue[g_q_head];
-        task->state = MT_IDLE;
-        g_fsm = FSM_IDLE;
-        I2C1CON0bits.MODE = 0b000;
-        I2C1CON1bits.ACKCNT = 0;
+    switch (g_fsm)
+    {
+    case FSM_HOST_TX:
+    case FSM_HOST_RX:
+        // We have likely lost arbitration
+        disarm_event(I2C_RESULT_BUSY);
+        switch_to_client();
+        break;
+    case FSM_CLIENT_RX:
+    case FSM_CLIENT_TX:
+        I2C1STAT1bits.CLRBF = 1;
+        break;
+    case FSM_IDLE:
+        break;
     }
-
-    if (g_fsm == FSM_IDLE) {
-        const uint8_t has_tx = g_client_tx_len > 0;
-        if (I2C1STAT0bits.R && has_tx) {
-            /* Master reads from us — shift out preloaded client TX. */
-            g_fsm = FSM_CLIENT_TX;
-            i2c_dma_client_tx();
-            I2C1CON1bits.ACKDT = 0; /* ACK */
-        } else if (I2C1STAT0bits.R) {
-            /* Master reads from us but we have nothing prepared. */
-            I2C1CON1bits.ACKDT = 1; /* NACK */
-        } else {
-            /* Master writes to us — receive into the cold-rx buffer. */
-            g_fsm = FSM_CLIENT_RX;
-            i2c_dma_client_rx();
-            I2C1CON1bits.ACKDT = 0; /* ACK */
-        }
+    if (I2C1STAT0bits.R && g_client_tx_len > 0) {
+        g_fsm = FSM_CLIENT_TX;
+        i2c_dma_client_tx();
+        I2C1CON1bits.ACKDT = 0;
     }
-    I2C1CON0bits.CSTR = 0; /* release clock */
+    else if (I2C1STAT0bits.R) {
+        I2C1CON1bits.ACKDT = 1;
+    }
+    else {
+        g_fsm = FSM_CLIENT_RX;
+        i2c_dma_client_rx();
+        I2C1CON1bits.ACKDT = 0;
+    }
+    I2C1CON0bits.CSTR = 0;
 }
 
-static void isr_on_stop(void) {
-    if (g_fsm == FSM_HOST_TX || g_fsm == FSM_HOST_RX) {
-        host_finish(MT_FINISHED, I2C_RESULT_OK);
-    } else if (g_fsm == FSM_CLIENT_TX) {
-        DMASELECT = DMA_TX_CHANNEL;
-        DMAnCON0bits.SIRQEN = 0;
-        DMAnCON0bits.EN = 0;
-        g_fsm = FSM_IDLE;
-        g_client_tx_len = 0;
-        i2c_dma_client_rx();
-    } else if (g_fsm == FSM_CLIENT_RX) {
-        /* DMA was set up for I2C_RX_MAX; what we actually received is
-         * I2C_RX_MAX minus the DMA destination count remaining. */
-        DMASELECT = DMA_RX_CHANNEL;
-        uint8_t remaining = (uint8_t)DMAnDCNT;
-        uint8_t received = (uint8_t)(I2C_RX_MAX - remaining);
-        prepend_completed_task(0x00, g_client_rx, received);
-        g_fsm = FSM_IDLE;
-        i2c_dma_client_rx(); /* re-arm for the next inbound message */
+static void isr_on_transmit_exhausted(void) {
+    MessageTask* task = &g_queue[g_q_head];
+    switch(g_fsm) {
+        case FSM_IDLE:
+            break;
+        case FSM_HOST_TX:
+            if (task->rx_len > 0) {
+                g_fsm = FSM_HOST_RX;
+                I2C1CON0bits.S = 1; // Start
+                I2C1CON1bits.ACKCNT = 1; // NACK on end of next read
+            }
+            else {
+                g_fsm = FSM_IDLE;
+                disarm_event(I2C_RESULT_OK);
+                switch_to_client();
+            }
+            break;
+        case FSM_HOST_RX:
+            g_fsm = FSM_IDLE;
+            switch_to_client();
+            break;
+        case FSM_CLIENT_RX:
+        case FSM_CLIENT_TX:
+            break;
+    }
+    I2C1CON0bits.CSTR = 0;
+}
+
+static void isr_on_nack(void) {
+    switch(g_fsm) {
+        case FSM_IDLE:
+            break;
+        case FSM_HOST_TX:
+        case FSM_HOST_RX:
+            g_fsm = FSM_IDLE;
+            disarm_event(I2C_RESULT_NACK);
+            switch_to_client();
+            break;
+        case FSM_CLIENT_RX:
+        case FSM_CLIENT_TX:
+            break;
     }
 }
 
 static void isr_on_restart(void) {
-    if (g_fsm == FSM_HOST_TX) {
-        /* Switching from write to read phase of the host transaction. */
-        g_fsm = FSM_HOST_RX;
-        MessageTask* task = &g_queue[g_q_head];
-        I2C1CON1bits.ACKCNT = 1;
-        I2C1CNTH = 0;
-        I2C1CNTL = task->rx_len;
-    } else if (g_fsm == FSM_CLIENT_RX) {
-        /* The master issued a repeated start without a stop; treat the
-         * accumulated bytes as a cold message and prepare for the next
-         * address phase to choose direction again. */
-        DMASELECT = DMA_RX_CHANNEL;
-        uint8_t remaining = (uint8_t)DMAnDCNT;
-        uint8_t received = (uint8_t)(I2C_RX_MAX - remaining);
-        if (g_read_request && received > 0) {
-            g_read_request(g_client_rx, received);
-        }
-        prepend_completed_task(0, g_client_rx, received);
-        g_fsm = FSM_IDLE;
-        i2c_dma_client_rx();
+    switch(g_fsm) {
+        case FSM_IDLE:
+            break;
+        case FSM_HOST_RX:
+        case FSM_HOST_TX:
+            g_fsm = FSM_IDLE;
+            disarm_event(I2C_RESULT_BUSY);
+            switch_to_client();
+            break;
+        case FSM_CLIENT_RX:
+        case FSM_CLIENT_TX:
+            g_fsm = FSM_IDLE;
+            i2c_dma_client_rx();
+            break;
     }
 }
 
-static void isr_on_nack(void) {
-    if (g_fsm != FSM_HOST_TX && g_fsm != FSM_HOST_RX) {
-        return;
-    }
-    MessageTask* task = &g_queue[g_q_head];
-    if (task->retries > 0) {
-        task->retries--;
-        task->state = MT_IDLE;
-        g_fsm = FSM_IDLE;
-        host_reset_to_client();
-    } else {
-        host_finish(MT_FAILED, I2C_RESULT_NACK);
+static void on_cold_rx_complete(void) {
+    /* DMA was set up for I2C_RX_MAX; what we actually received is
+     * I2C_RX_MAX minus the DMA destination count remaining. */
+    DMASELECT = DMA_RX_CHANNEL;
+    uint8_t remaining = (uint8_t)DMAnDCNT;
+    uint8_t received = (uint8_t)(I2C_RX_MAX - remaining);
+    // When receiving the client does not transmit address, set provisional 0x00
+    prepend_completed_task(0x00, g_client_rx, received);
+}
+
+static void isr_on_stop(void) {
+    switch (g_fsm) {
+        case FSM_IDLE:
+            // Irrelevant stop
+            break;
+        case FSM_HOST_TX:
+        case FSM_HOST_RX:
+            g_fsm = FSM_IDLE;
+            disarm_event(I2C_RESULT_OK);
+            switch_to_client();
+            break;
+        case FSM_CLIENT_RX:
+            g_fsm = FSM_IDLE;
+            on_cold_rx_complete();
+            i2c_dma_client_rx();
+            break;
+        case FSM_CLIENT_TX:
+            g_fsm = FSM_IDLE;
+            i2c_dma_client_rx();
+            break;
     }
 }
 
 static void isr_on_collision(void) {
-    if (g_fsm == FSM_HOST_TX || g_fsm == FSM_HOST_RX) {
-        MessageTask* task = &g_queue[g_q_head];
-        task->state = MT_IDLE; /* will be retried by i2c_poll */
-        g_fsm = FSM_IDLE;
-        host_reset_to_client();
+    switch (g_fsm) {
+        case FSM_IDLE:
+            break;
+        case FSM_HOST_TX:
+        case FSM_HOST_RX:
+            g_fsm = FSM_IDLE;
+            disarm_event(I2C_RESULT_BUSY);
+            switch_to_client();
+            break;
+        case FSM_CLIENT_TX:
+        case FSM_CLIENT_RX:
+            g_fsm = FSM_IDLE;
+            i2c_dma_client_rx();
+            break;
     }
 }
 
 static void isr_on_timeout(void) {
-    if (g_fsm == FSM_HOST_TX || g_fsm == FSM_HOST_RX) {
-        host_finish(MT_FAILED, I2C_RESULT_TIMEOUT);
-    } else {
+    switch (g_fsm) {
+    case FSM_IDLE:
+        break;
+    case FSM_HOST_TX:
+    case FSM_HOST_RX:
         g_fsm = FSM_IDLE;
+        disarm_event(I2C_RESULT_TIMEOUT);
+        switch_to_client();
+        break;
+    case FSM_CLIENT_TX:
+    case FSM_CLIENT_RX:
+        g_fsm = FSM_IDLE;
+        i2c_dma_client_rx();
+        break;
     }
 
     I2C1PIR = 0x00;
     I2C1ERRbits.BCLIF = 0;
     I2C1ERRbits.BTOIF = 0;
     I2C1ERRbits.NACKIF = 0;
-
     I2C1STAT1 = 0x00;
     I2C1STAT1bits.CLRBF = 1;
-
     I2C1CON0bits.EN = 0;
     I2C1CON1bits.ACKCNT = 0;
 
-/* ===== SILICON ERRATA WORKAROUND =====
- * Same sequence as in the init path. Prevents I2C from locking up
- * during reset. */
-#pragma message                                                                                                        \
-    "Refer to erratum DS80000870F: https://www.microchip.com/content/dam/mchp/documents/MCU08/ProductDocuments/Errata/PIC18F27-47-57Q43-Silicon-Errata-and-Datasheet-Clarifications-80000870J.pdf"
+    /* ===== SILICON ERRATA WORKAROUND =====
+    * Same sequence as in the init path. Prevents I2C from locking up
+    * during reset. */
+    #pragma message "Refer to erratum DS80000870F: https://www.microchip.com/content/dam/mchp/documents/MCU08/ProductDocuments/Errata/PIC18F27-47-57Q43-Silicon-Errata-and-Datasheet-Clarifications-80000870J.pdf"
     I2C1PIEbits.SCIE = 0;
     I2C1PIEbits.PCIE = 0;
     I2C1CON0bits.EN = 1;

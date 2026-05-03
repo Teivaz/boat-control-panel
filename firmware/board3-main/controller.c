@@ -105,8 +105,8 @@ static uint8_t saved_nav_mode;
  * ============================================================================
  */
 
-#define RETRY_TICK_MS TASK_MIN_MS
-#define POLL_TICK_MS 20u
+#define RETRY_TICK_MS 200u
+#define POLL_TICK_MS 200u
 /* RTC ticks once per second; polling at 250 ms keeps the displayed clock
  * within a quarter second of the chip without being wasteful. */
 #define RTC_TICK_MS 250u
@@ -164,10 +164,10 @@ void controller_init(TaskController* ctrl) {
     batt_age = STALE_THRESHOLD;
     levels_age = STALE_THRESHOLD;
     sensors_age = STALE_THRESHOLD;
-    // task_controller_add(ctrl, TASK_COMM_RETRY, RETRY_TICK_MS, retry_task, 0);
-    // task_controller_add(ctrl, TASK_POLL_BATTERY, POLL_TICK_MS, poll_battery_task, 0);
-    // task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task, 0);
-    // task_controller_add(ctrl, TASK_POLL_SENSORS, POLL_TICK_MS, poll_sensors_task, 0);
+    task_controller_add(ctrl, TASK_COMM_RETRY, RETRY_TICK_MS, retry_task, 0);
+    task_controller_add(ctrl, TASK_POLL_BATTERY, POLL_TICK_MS, poll_battery_task, 0);
+    task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task, 0);
+    task_controller_add(ctrl, TASK_POLL_SENSORS, POLL_TICK_MS, poll_sensors_task, 0);
     // task_controller_add(ctrl, TASK_POLL_RTC, RTC_TICK_MS, poll_rtc_task, 0);
 }
 
