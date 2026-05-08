@@ -214,6 +214,7 @@ static void disarm_event(I2cResult reason) {
             }
             break;
     }
+    I2C1CON0bits.RSEN = 0;
 }
 
 static void switch_to_client(void) {
@@ -466,6 +467,7 @@ static void isr_on_transmit_exhausted(void) {
         case FSM_HOST_TX:
             if (task->rx_len > 0) {
                 g_fsm = FSM_HOST_RX;
+                I2C1ADB1 |= 0b1;
                 I2C1CON0bits.S = 1; // Start
                 I2C1CON1bits.ACKCNT = 1; // NACK on end of next read
             }
@@ -480,7 +482,9 @@ static void isr_on_transmit_exhausted(void) {
             switch_to_client();
             break;
         case FSM_CLIENT_RX:
+break;
         case FSM_CLIENT_TX:
+g_client_tx_len = 0;
             break;
     }
     I2C1CON0bits.CSTR = 0;
@@ -513,6 +517,10 @@ static void isr_on_restart(void) {
             switch_to_client();
             break;
         case FSM_CLIENT_RX:
+g_fsm = FSM_IDLE;
+            on_cold_rx_complete();
+            i2c_dma_client_rx();
+            break;
         case FSM_CLIENT_TX:
             g_fsm = FSM_IDLE;
             i2c_dma_client_rx();
