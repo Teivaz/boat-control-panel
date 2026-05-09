@@ -80,13 +80,15 @@ Command IDs follow a fixed pattern: write form `0x0X`, read form `0x8X = write |
 
 `comm_address()` returns the device's I2C address at runtime, selected by a compile-time `DEVICE_TYPE_*` macro (`DEVICE_TYPE_INPUT`, `DEVICE_TYPE_MAIN`, `DEVICE_TYPE_SWITCHING`) set in the board's Makefile via `-DDEVICE_TYPE_INPUT`. For `DEVICE_TYPE_INPUT` boards the address further depends on `PORTB.RB0` (L vs R variant).
 
-### I2C (multi-master, button board)
+### I2C (multi-master, shared driver in libcomm/)
 
-`board2-buttons/i2c.c` runs in client mode most of the time and briefly switches to host mode for outbound transmits. Pins RC3/RC4, fast mode (400 kHz, BAUD=79 at Fosc=64 MHz). The client-side ISR assembles complete messages into a fixed-size buffer and invokes two application callbacks registered via `i2c_set_rx_handler` / `i2c_set_read_handler`; callbacks run in ISR context and must stay short. On a read request the handler fills a response buffer that the ISR then shifts out byte-by-byte on TX_READY. Clock stretching (`CSTR`) is released at the end of every ISR. The client match address comes from `comm_address()`.
+`libcomm/i2c.c` implements both host and client roles. Each board provides pin setup in a local `i2c_board.c`. Pins RC3/RC4 (boards 1 & 2) or RB1/RB2 (board 3). Default mode is 100 kHz (BAUD=0x7F); 400 kHz Fast mode (BAUD=0x31) when `I2C_FME=1`. Bus timeout uses the peripheral BTO (LFINTOSC), not a software tick.
 
-`i2c_transmit` is the host-mode entry point: waits for bus-free (`I2C1STAT0.BFRE`), masks just the I2C interrupt group (TMR0/IOC stay live), switches `MODE` to host, drives the transaction, and restores client mode on exit. Returns `I2cResult` — callers should treat `BUSY` / `COLLISION` as retryable.
+Client-side: incoming writes are buffered and delivered asynchronously via `i2c_poll()` through the cold-rx handler registered by `comm_interface_init()`. Read requests are served from a pre-loaded buffer set with `i2c_set_client_tx()` — an `I2cReadRequestHandler` registered internally by `libcomm_interface.c` stages the response in ISR context before DMA ships it.
 
-`comm.c` is the protocol dispatcher layered on top: maps incoming command IDs to the button/led_effect/config modules and builds outbound `button_changed` messages. `i2c.c` has no knowledge of libcomm.
+`i2c_submit` is the host-mode entry point: enqueues a write or write-then-read transaction. Completion callbacks fire from `i2c_poll()` in main-loop context. Returns `I2cResult` — callers should treat `BUSY` / `QUEUE_FULL` as retryable.
+
+`libcomm_interface.c` is the protocol dispatcher layered on top: registers itself as the cold-rx handler and the read-request handler, maps incoming command IDs to typed `comm_on_*` callbacks implemented by each board. `i2c.c` has no knowledge of libcomm.
 
 ### Multi-board protocol
 

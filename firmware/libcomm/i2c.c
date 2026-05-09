@@ -189,11 +189,6 @@ static void i2c_dma_client_tx(void) {
     DMAnCON0bits.SIRQEN = 1;
     DMAnCON0bits.AIRQEN = 1;
     DMAnCON0bits.EN = 1;
-    /* In slave-TX the peripheral is already in TX mode by the time we get
-     * here (R bit set on ADRIF), so I2C1TXIF has been level-asserted with no
-     * fresh rising edge for SIRQEN to catch. Manually fire one transfer to
-     * load byte 0; subsequent bytes ride the real TXBE edges. */
-    DMAnCON0bits.DGO = 1;
     INTERRUPT_POP;
 }
 
@@ -463,6 +458,12 @@ static void isr_on_address(void) {
     g_client_tx[1] = 0x44;
     if (I2C1STAT0bits.R && g_client_tx_len > 0) {
         g_fsm = FSM_CLIENT_TX;
+        /* I2CxTXIF is the DMA source trigger; per DS §37.3.9 it asserts only
+         * when TXBE=1 AND I2CxCNT!=0. Program CNT here so the level trigger
+         * fires and drives DMA byte-by-byte. Safe write window: CSTR is
+         * stretching after address-ACK, not on the 8th/9th falling SCL edge. */
+        I2C1CNTH = 0;
+        I2C1CNTL = g_client_tx_len;
         i2c_dma_client_tx();
         I2C1CON1bits.ACKDT = 0;
     }
@@ -502,11 +503,10 @@ static void isr_on_transmit_exhausted(void) {
         case FSM_CLIENT_RX:
             break;
         case FSM_CLIENT_TX:
-            /* CNTIF should not fire in slave-TX (we no longer program I2C1CNT
-             * for this path). If it does — e.g. a stale flag from a prior host
-             * transaction — ignore it: the master controls when slave-TX ends,
-             * and dropping CSTR here would race with the in-flight TXBE-edge
-             * load done by DMA. */
+            /* CNTIF fires once per client-TX when the last planned byte is
+             * shifted out. Don't drop CSTR — the master owns when the
+             * transaction ends (NACK + STOP/RESTART). isr_on_stop /
+             * isr_on_restart handle the teardown. */
             return;
     }
     I2C1CON0bits.CSTR = 0;

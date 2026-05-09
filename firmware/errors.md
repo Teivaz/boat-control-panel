@@ -5,7 +5,7 @@ Snapshot of XC8 v3.10 and clang diagnostics across `board1-switching`,
 clean (no errors). Warnings are grouped by mechanism; each entry lists the
 root cause and whether action is warranted.
 
-## 1. Real bug — dispatcher elided
+## 1. Non-reentrant duplication for `run_in_main_loop` (resolved)
 
 ```
 task.c:120: advisory (2098) indirect function call via a NULL pointer ignored
@@ -13,23 +13,11 @@ task.c:120: warning  (759)  expression generates no code
 task.c:100..102: advisory (1498) pointer (run_in_main_loop@c) may have no targets
 ```
 
-Affected: **all three boards**.
-
-The poll loop in `task_controller_poll` calls `cb(ctx)` at `task.c:120`,
-where `cb` was populated by `run_in_main_loop`. XC8's whole-program pointer
-analysis concludes `run_in_main_loop` is never called (warning 520 —
-confirmed: no caller exists in any board yet), therefore the `cb` field is
-never written, therefore the call target is provably NULL, therefore the
-indirect call is elided entirely.
-
-**Impact**: latent. No board currently produces deferred callbacks, so the
-consumer being optimized away is silent. As soon as one module calls
-`run_in_main_loop`, the analysis flips and the dispatcher is emitted.
-
-**Action**: leave as-is until the first real caller lands. If dispatch must
-be guaranteed regardless of caller visibility, mark the call
-`__attribute__((noinline))` or move the function-pointer read behind a
-`volatile` temporary.
+These warnings applied when no board called `run_in_main_loop`. Since then,
+`board2-buttons/input.c:62` calls `run_in_main_loop(ctrl, dispatch_pending, 0)`
+from its IOC ISR to defer button debounce into main context. With a live
+caller the pointer analysis resolves and the dispatcher is emitted. These
+warnings should no longer appear for board2-buttons builds.
 
 ## 2. Dead code in board modules (520 — never called)
 
@@ -139,8 +127,8 @@ clang sign warnings are cosmetic.
 
 ## 7. Summary
 
-- 1 latent correctness concern (§1) — fixes itself when `run_in_main_loop`
-  gains a real caller.
+- 1 resolved concern (§1) — `run_in_main_loop` now has a live caller in
+  board2-buttons; warnings should no longer appear for that board.
 - 7 locally dead functions (§2) — candidates for cleanup in a follow-up.
 - Everything else (§3–§6) is structural: consequence of a shared library
   over heterogeneous devices, the XC8 non-reentrancy model, or vendor code.
