@@ -177,18 +177,48 @@ static void i2c_dma_client_rx(void) {
     INTERRUPT_POP;
 }
 
+/*
+ * Load the client TX path: byte 0 written directly to I2C1TXB, DMA armed to
+ * deliver bytes 1..g_client_tx_len-1 on subsequent TXBE rising edges.
+ *
+ * Why byte 0 is direct-write and not DMA:
+ *   The window between CNT being written and the peripheral's first TXB->SR
+ *   move (at the 9th falling of the address byte) is only a handful of CPU
+ *   cycles. Even with raised DMA priority, the DMA transfer occasionally
+ *   doesn't complete in time — the byte appears one slot late on the wire.
+ *   Writing TXB directly guarantees byte 0 is in place before CSTR=0 drops.
+ *
+ * Bytes 1..N-1 stay on DMA because each TXBE rising edge happens at the 9th
+ * falling SCL of the prior byte — a full byte period (~20 us at 400 kHz) of
+ * headroom, which is trivial even at default DMA priority.
+ *
+ * Preconditions:
+ *   - CLRBF has just been set, so TXBE=1.
+ *   - I2C1CNT is still 0 (caller writes it after this returns, generating the
+ *     first TXIF edge — harmless here because byte 0 is already in TXB).
+ *
+ * On return for N > 1:
+ *   - TXB holds g_client_tx[0] (TXBE=0).
+ *   - DMA armed with SCNT=N-1, SPTR=&g_client_tx[1], SIRQEN=1, EN=1.
+ *   DMAnCON1.SSTP=1 disarms the channel after the last transfer.
+ *
+ * Static config (CON1, DSA=&I2C1TXB, DSZ, SIRQ=I2C1TX, AIRQ=0) lives in
+ * i2c_dma_init and is not touched here.
+ */
 static void i2c_dma_client_tx(void) {
     if (g_client_tx_len == 0) {
         return;
     }
     INTERRUPT_PUSH;
-    DMASELECT = DMA_TX_CHANNEL;
-    DMAnCON0bits.EN = 0;
-    DMAnSSA = (uint24_t)g_client_tx;
-    DMAnSSZ = g_client_tx_len;
-    DMAnCON0bits.SIRQEN = 1;
-    DMAnCON0bits.AIRQEN = 1;
-    DMAnCON0bits.EN = 1;
+    I2C1TXB = g_client_tx[0];
+    if (g_client_tx_len > 1) {
+        DMASELECT = DMA_TX_CHANNEL;
+        DMAnCON0bits.EN = 0;
+        DMAnSSA = (uint24_t)&g_client_tx[1];
+        DMAnSSZ = (uint16_t)(g_client_tx_len - 1u);
+        DMAnCON0bits.SIRQEN = 1;
+        DMAnCON0bits.EN = 1;
+    }
     INTERRUPT_POP;
 }
 
@@ -458,19 +488,15 @@ static void isr_on_address(void) {
     g_client_tx[1] = 0x44;
     if (I2C1STAT0bits.R && g_client_tx_len > 0) {
         g_fsm = FSM_CLIENT_TX;
-        /* The DMA source trigger (I2C1TX IRQ, per PIR7) is edge-latched on the
-         * rising edge of TXIF, where TXIF = TXBE && I2C1CNT!=0. If CNT is
-         * written before the DMA is armed, the TXIF edge happens while SIRQEN
-         * is still 0 and is lost; the DMA then never fires for byte 0.
-         *
-         * Correct ordering:
-         *   1. CLRBF: force TXBE=1, TXIF=0 as a known starting state (clears
-         *      any stale TXIF set by prior activity).
-         *   2. Arm DMA while CNT=0 (TXIF stays 0, no edge is generated yet).
-         *   3. Write CNT: TXIF goes 0->1, DMA catches the edge and loads byte 0.
-         *   4. Drop CSTR: peripheral moves TXB->SR, TXBE rises again, DMA
-         *      loads byte 1, and so on for the remaining bytes. SSTP=1 then
-         *      clears SIRQEN when SCNT reloads.
+        /* Client TX setup:
+         *   1. CLRBF — known TX state: TXBE=1, TXIF=0, TXB empty.
+         *   2. i2c_dma_client_tx — writes byte 0 directly to TXB (racing the
+         *      peripheral's first TXB->SR move is unreliable, so byte 0 is
+         *      off the DMA's critical path) and arms DMA for bytes 1..N-1.
+         *   3. Write CNT — required for the TXBE-empty-between-bytes stretch
+         *      mechanism (§37.5.1 CSTR rule) to engage if we ever run out of
+         *      data, and for CNTIF to fire at end of transaction.
+         *   4. Drop CSTR at end of isr_on_address — peripheral resumes.
          *
          * CNT write is safe here because CSTR is stretching (DS §37.5.11). */
         I2C1STAT1bits.CLRBF = 1;
