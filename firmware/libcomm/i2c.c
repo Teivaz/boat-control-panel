@@ -133,13 +133,11 @@ static void i2c_dma_init(void) {
     DMAnAIRQ = 0;    /* unwire abort: stale NACK/BTO/BCL must not kill in-flight transfers */
     DMAnCON0bits.EN = 1;
 
-    // /* Lock the DMA arbiter once both channels are configured.  The
-    // * arbiter is global; the lock applies to all priority registers. */
-    // DMA2PR = 0x02;
-    // DMA3PR = 0x03;
-    // PRLOCK = 0x55;
-    // PRLOCK = 0xAA;
-    // PRLOCKbits.PRLOCKED = 1;
+    DMA2PR = 0x02;
+    DMA3PR = 0x03;
+    PRLOCK = 0x55;
+    PRLOCK = 0xAA;
+    PRLOCKbits.PRLOCKED = 1;
 }
 
 static void i2c_dma_set_host(MessageTask* task) {
