@@ -380,8 +380,6 @@ I2cResult i2c_submit(uint8_t addr, const uint8_t* tx, uint8_t tx_len, uint8_t rx
         return I2C_RESULT_BAD_ARG;
     }
 
-    rx_len = 5; // TODO: Remove me
-
     INTERRUPT_PUSH;
     if (q_next(g_q_tail) == g_q_head) {
         INTERRUPT_POP;
@@ -481,9 +479,6 @@ static void isr_on_address(void) {
     case FSM_IDLE:
         break;
     }
-    g_client_tx_len = 2;
-    g_client_tx[0] = 0x33;
-    g_client_tx[1] = 0x44;
     if (I2C1STAT0bits.R && g_client_tx_len > 0) {
         g_fsm = FSM_CLIENT_TX;
         /* Client TX setup:
@@ -587,11 +582,6 @@ static void isr_on_restart(void) {
 }
 
 static void on_cold_rx_complete(void) {
-    // todo: remove me
-    g_client_tx_len = 2;
-    g_client_tx[0] = 0x22;
-    g_client_tx[1] = 0x33;
-
     /* DMA was set up for I2C_RX_MAX; what we actually received is
      * I2C_RX_MAX minus the DMA destination count remaining. */
     DMASELECT = DMA_RX_CHANNEL;
