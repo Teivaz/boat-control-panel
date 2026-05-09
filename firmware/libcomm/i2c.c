@@ -458,13 +458,25 @@ static void isr_on_address(void) {
     g_client_tx[1] = 0x44;
     if (I2C1STAT0bits.R && g_client_tx_len > 0) {
         g_fsm = FSM_CLIENT_TX;
-        /* I2CxTXIF is the DMA source trigger; per DS §37.3.9 it asserts only
-         * when TXBE=1 AND I2CxCNT!=0. Program CNT here so the level trigger
-         * fires and drives DMA byte-by-byte. Safe write window: CSTR is
-         * stretching after address-ACK, not on the 8th/9th falling SCL edge. */
+        /* The DMA source trigger (I2C1TX IRQ, per PIR7) is edge-latched on the
+         * rising edge of TXIF, where TXIF = TXBE && I2C1CNT!=0. If CNT is
+         * written before the DMA is armed, the TXIF edge happens while SIRQEN
+         * is still 0 and is lost; the DMA then never fires for byte 0.
+         *
+         * Correct ordering:
+         *   1. CLRBF: force TXBE=1, TXIF=0 as a known starting state (clears
+         *      any stale TXIF set by prior activity).
+         *   2. Arm DMA while CNT=0 (TXIF stays 0, no edge is generated yet).
+         *   3. Write CNT: TXIF goes 0->1, DMA catches the edge and loads byte 0.
+         *   4. Drop CSTR: peripheral moves TXB->SR, TXBE rises again, DMA
+         *      loads byte 1, and so on for the remaining bytes. SSTP=1 then
+         *      clears SIRQEN when SCNT reloads.
+         *
+         * CNT write is safe here because CSTR is stretching (DS §37.5.11). */
+        I2C1STAT1bits.CLRBF = 1;
+        i2c_dma_client_tx();
         I2C1CNTH = 0;
         I2C1CNTL = g_client_tx_len;
-        i2c_dma_client_tx();
         I2C1CON1bits.ACKDT = 0;
     }
     else if (I2C1STAT0bits.R) {
