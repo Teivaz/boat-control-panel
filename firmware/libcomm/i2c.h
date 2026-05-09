@@ -108,10 +108,6 @@ typedef void (*I2cReadRequestHandler)(const volatile uint8_t* data, uint8_t len)
  * after i2c_init. May be left unset (NULL) if that direction is unused. */
 void i2c_set_cold_rx_handler(I2cCompletion cold_tx);
 
-/* Set the client-side read-request handler (ISR context).  Fires when
- * a repeated-start read follows a client write.  May be left unset. */
-void i2c_set_read_request_handler(I2cReadRequestHandler handler);
-
 /* One-time hardware init.  Configures I2C1 at 400 kHz.
  * Caller must have set up pins and oscillator beforehand. */
 void i2c_init(uint8_t client_addr);

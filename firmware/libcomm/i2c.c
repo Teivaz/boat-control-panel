@@ -73,16 +73,12 @@ static void isr_on_collision(void);
 static void isr_on_timeout(void);
 static void on_cold_rx_complete(void);
 static void switch_to_host(void);
-static void arm_event(void);
+static FSMState arm_event(void);
 static void switch_to_client(void);
 static void disarm_event(I2cResult reason);
 
 void i2c_set_cold_rx_handler(I2cCompletion cold_rx) {
     g_cold_rx = cold_rx;
-}
-
-void i2c_set_read_request_handler(I2cReadRequestHandler handler) {
-    g_read_request = handler;
 }
 
 I2cResult i2c_set_client_tx(uint8_t* tx, uint8_t tx_len) {
@@ -117,7 +113,9 @@ static void i2c_dma_init(void) {
     DMAnSSZ = 0;
     DMAnSSA = 0;
     DMAnSIRQ = 0x39; /* I2C1TX request */
-    DMAnAIRQ = 0;
+    DMAnAIRQ = 0x3b; /* I2C1E */
+    DMAnAIRQ = 0;    /* unwire abort: stale NACK/BTO/BCL must not kill in-flight transfers */
+    DMAnCON0bits.EN = 1;
 
     /* Host RX channel: I2C1RXB -> GPR, destination increments. */
     DMASELECT = DMA_RX_CHANNEL;
@@ -131,16 +129,17 @@ static void i2c_dma_init(void) {
     DMAnSSZ = 1;
     DMAnSSA = (uint24_t)&I2C1RXB;
     DMAnSIRQ = 0x38; /* I2C1RX request */
-    DMAnAIRQ = 0;
+    DMAnAIRQ = 0x3b; /* I2C1E */
+    DMAnAIRQ = 0;    /* unwire abort: stale NACK/BTO/BCL must not kill in-flight transfers */
+    DMAnCON0bits.EN = 1;
 
-    /* Lock the DMA arbiter once both channels are configured.  The
-    * arbiter is global; the lock applies to all priority registers. */
-   DMA2PR = 0x02;
-   DMA3PR = 0x03;
-   PRLOCK = 0x55;
-   PRLOCK = 0xAA;
-   PRLOCKbits.PRLOCKED = 1;
-   DMAnCON0bits.EN = 1;
+    // /* Lock the DMA arbiter once both channels are configured.  The
+    // * arbiter is global; the lock applies to all priority registers. */
+    // DMA2PR = 0x02;
+    // DMA3PR = 0x03;
+    // PRLOCK = 0x55;
+    // PRLOCK = 0xAA;
+    // PRLOCKbits.PRLOCKED = 1;
 }
 
 static void i2c_dma_set_host(MessageTask* task) {
@@ -151,6 +150,7 @@ static void i2c_dma_set_host(MessageTask* task) {
         DMAnSSA = (uint24_t)task->tx;
         DMAnSSZ = task->tx_len;
         DMAnCON0bits.SIRQEN = 1;
+        DMAnCON0bits.AIRQEN = 1;
         DMAnCON0bits.EN = 1;
     }
     if (task->rx_len) {
@@ -159,6 +159,7 @@ static void i2c_dma_set_host(MessageTask* task) {
         DMAnDSA = (uint16_t)task->rx;
         DMAnDSZ = task->rx_len;
         DMAnCON0bits.SIRQEN = 1;
+        DMAnCON0bits.AIRQEN = 1;
         DMAnCON0bits.EN = 1;
     }
     INTERRUPT_POP;
@@ -171,6 +172,7 @@ static void i2c_dma_client_rx(void) {
     DMAnDSA = (uint16_t)g_client_rx;
     DMAnDSZ = I2C_RX_MAX;
     DMAnCON0bits.SIRQEN = 1;
+    DMAnCON0bits.AIRQEN = 1;
     DMAnCON0bits.EN = 1;
     INTERRUPT_POP;
 }
@@ -185,9 +187,13 @@ static void i2c_dma_client_tx(void) {
     DMAnSSA = (uint24_t)g_client_tx;
     DMAnSSZ = g_client_tx_len;
     DMAnCON0bits.SIRQEN = 1;
+    DMAnCON0bits.AIRQEN = 1;
     DMAnCON0bits.EN = 1;
-    I2C1CNTH = 0;
-    I2C1CNTL = g_client_tx_len;
+    /* In slave-TX the peripheral is already in TX mode by the time we get
+     * here (R bit set on ADRIF), so I2C1TXIF has been level-asserted with no
+     * fresh rising edge for SIRQEN to catch. Manually fire one transfer to
+     * load byte 0; subsequent bytes ride the real TXBE edges. */
+    DMAnCON0bits.DGO = 1;
     INTERRUPT_POP;
 }
 
@@ -224,21 +230,24 @@ static void switch_to_client(void) {
     i2c_dma_client_rx();
 }
 
-static void arm_event(void) {
+static FSMState arm_event(void) {
     MessageTask* task = &g_queue[g_q_head];
     i2c_dma_set_host(task);
     task->state = MT_RUNNING;
     I2C1ADB1 = (uint8_t)(task->addr << 1);
-    if (task->rx_len > 0 && task->tx_len > 0) {
-        I2C1CON0bits.RSEN = 1; /* repeated-start at end of TX phase */
-    } else {
-        I2C1CON0bits.RSEN = 0;
+    if (task->tx_len > 0) {
+        I2C1CNTH = 0;
+        I2C1CNTL = task->tx_len;
+        I2C1CON0bits.RSEN = task->rx_len > 0;
+        return FSM_HOST_TX;
     }
-    if (task->tx_len == 0) {
+    if (task->rx_len > 0) {
         I2C1ADB1 |= 0b1; // Read only
+        I2C1CNTH = 0;
+        I2C1CNTL = task->rx_len;
+        return FSM_HOST_RX;
     }
-    I2C1CNTH = 0;
-    I2C1CNTL = task->tx_len;
+    return FSM_IDLE;
 }
 
 static void switch_to_host(void) {
@@ -321,9 +330,13 @@ void i2c_poll(void) {
         MessageTask* task = &g_queue[g_q_head];
         if (task->state == MT_IDLE && g_fsm == FSM_IDLE) {
             switch_to_host();
-            arm_event();
-            g_fsm = FSM_HOST_TX;
-            I2C1CON0bits.S = 1;
+            g_fsm = arm_event();
+            if (g_fsm == FSM_IDLE) {
+                i2c_dma_client_rx();
+            }
+            else {
+                I2C1CON0bits.S = 1;
+            }
         }
     }
     INTERRUPT_POP;
@@ -343,6 +356,8 @@ I2cResult i2c_submit(uint8_t addr, const uint8_t* tx, uint8_t tx_len, uint8_t rx
     if (rx_len > I2C_RX_MAX) {
         return I2C_RESULT_BAD_ARG;
     }
+
+    rx_len = 5; // TODO: Remove me
 
     INTERRUPT_PUSH;
     if (q_next(g_q_tail) == g_q_head) {
@@ -443,6 +458,9 @@ static void isr_on_address(void) {
     case FSM_IDLE:
         break;
     }
+    g_client_tx_len = 2;
+    g_client_tx[0] = 0x33;
+    g_client_tx[1] = 0x44;
     if (I2C1STAT0bits.R && g_client_tx_len > 0) {
         g_fsm = FSM_CLIENT_TX;
         i2c_dma_client_tx();
@@ -482,10 +500,14 @@ static void isr_on_transmit_exhausted(void) {
             switch_to_client();
             break;
         case FSM_CLIENT_RX:
-break;
-        case FSM_CLIENT_TX:
-g_client_tx_len = 0;
             break;
+        case FSM_CLIENT_TX:
+            /* CNTIF should not fire in slave-TX (we no longer program I2C1CNT
+             * for this path). If it does — e.g. a stale flag from a prior host
+             * transaction — ignore it: the master controls when slave-TX ends,
+             * and dropping CSTR here would race with the in-flight TXBE-edge
+             * load done by DMA. */
+            return;
     }
     I2C1CON0bits.CSTR = 0;
 }
@@ -517,7 +539,7 @@ static void isr_on_restart(void) {
             switch_to_client();
             break;
         case FSM_CLIENT_RX:
-g_fsm = FSM_IDLE;
+            g_fsm = FSM_IDLE;
             on_cold_rx_complete();
             i2c_dma_client_rx();
             break;
@@ -529,6 +551,11 @@ g_fsm = FSM_IDLE;
 }
 
 static void on_cold_rx_complete(void) {
+    // todo: remove me
+    g_client_tx_len = 2;
+    g_client_tx[0] = 0x22;
+    g_client_tx[1] = 0x33;
+
     /* DMA was set up for I2C_RX_MAX; what we actually received is
      * I2C_RX_MAX minus the DMA destination count remaining. */
     DMASELECT = DMA_RX_CHANNEL;
