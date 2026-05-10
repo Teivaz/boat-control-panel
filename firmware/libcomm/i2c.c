@@ -248,26 +248,23 @@ static void disarm_event(I2cResult reason) {
             break;
     }
     I2C1CON0bits.RSEN = 0;
+    /* Unload both DMA channels so no partial / dirty state survives into
+     * the next transaction (e.g. TX DMA armed with stale SSA/SCNT after an
+     * address NACK, or RX DMA holding residual DCNT after BTO).  The next
+     * state entry re-arms from scratch: i2c_dma_set_host for host ops,
+     * i2c_dma_client_rx for client reception, i2c_dma_client_tx for client
+     * reply — each does EN=0 -> config -> SIRQEN=1 -> EN=1. */
+    DMASELECT = DMA_TX_CHANNEL;
+    DMAnCON0bits.SIRQEN = 0;
+    DMAnCON0bits.EN = 0;
+    DMASELECT = DMA_RX_CHANNEL;
+    DMAnCON0bits.SIRQEN = 0;
+    DMAnCON0bits.EN = 0;
 }
 
 static void switch_to_client(void) {
     I2C1CON0bits.MODE = 0b000;
     I2C1CON1bits.ACKCNT = 0;
-    /* Tear down any TX DMA state left armed by an aborted host-TX (address
-     * NACK, collision, BTO).  If SIRQEN were still 1 with stale SSA/SCNT,
-     * the CLRBF below raises TXBE which re-asserts TXIF and makes the DMA
-     * load a ghost byte from the aborted task's source buffer into TXB —
-     * the next client-TX's direct preload then hits TXWE (§37.3.9) and is
-     * silently dropped, leaving the ghost byte to ship as byte 0. */
-    DMASELECT = DMA_TX_CHANNEL;
-    DMAnCON0bits.SIRQEN = 0;
-    DMAnCON0bits.EN = 0;
-    /* Clear TXWE and CNT so an IDLE gap between transactions can't set up
-     * the stale-TXB race again.  TXWE must be cleared by software
-     * (§37.3.9); CLRBF below clears TXBE/RXBF/TXIF/RXIF but not TXWE. */
-    I2C1STAT1bits.TXWE = 0;
-    I2C1CNTH = 0;
-    I2C1CNTL = 0;
     I2C1STAT1bits.CLRBF = 1;
     i2c_dma_client_rx();
 }
