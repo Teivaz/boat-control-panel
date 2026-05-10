@@ -35,6 +35,7 @@ typedef struct {
     MessageTaskState state;
     I2cResult result;
     uint8_t retries;
+    uint8_t tx_done;  /* 1 once write phase has completed, for log phase */
     I2cCompletion cb;
     void* cb_ctx;
 } MessageTask;
@@ -402,6 +403,18 @@ void i2c_poll(void) {
         if (task->state == MT_FAILED) {
             callback = task->cb;
             rx_len = 0;
+            /* Emit the WN/RN the error ISRs deferred.  We log from here
+             * (main context, inside the critical section) because calling
+             * log_append from I2C1_ERROR_ISR destabilises the chip — see
+             * CLAUDE.md.  tx_done distinguishes "write phase failed before
+             * it finished" (tx_len > 0 and !tx_done -> WN) from "write OK,
+             * read phase failed" (tx_done -> RN).  A pure read-only task
+             * (tx_len == 0) also logs RN. */
+            if (task->tx_len > 0 && !task->tx_done) {
+                log_append(I2C_LOG_WN, task->addr, task->tx, task->tx_len);
+            } else if (task->rx_len > 0) {
+                log_append(I2C_LOG_RN, task->addr, task->rx, task->rx_len);
+            }
             g_q_head = q_next(cur);
         }
         else if (task->state == MT_FINISHED) {
@@ -456,6 +469,7 @@ I2cResult i2c_submit(uint8_t addr, const uint8_t* tx, uint8_t tx_len, uint8_t rx
     task->cb = cb;
     task->cb_ctx = ctx;
     task->retries = I2C_RETRY_COUNT;
+    task->tx_done = 0;
     for (uint8_t i = 0; i < tx_len; i++) {
         task->tx[i] = tx[i];
     }
@@ -580,6 +594,7 @@ static void isr_on_transmit_exhausted(void) {
         case FSM_IDLE:
             break;
         case FSM_HOST_TX:
+            task->tx_done = 1;
             log_host_phase(FSM_HOST_TX, I2C_RESULT_OK);
             if (task->rx_len > 0) {
                 g_fsm = FSM_HOST_RX;
@@ -614,7 +629,9 @@ static void isr_on_nack(void) {
         case FSM_IDLE:
             break;
         case FSM_HOST_TX:
-            log_host_phase(FSM_HOST_TX, I2C_RESULT_NACK);
+            /* Log emitted from i2c_poll main-context dispatch (tx_done=0 on
+             * the failed task selects WN).  Calling log_host_phase from
+             * I2C1_ERROR_ISR destabilises the chip — see CLAUDE.md. */
             g_fsm = FSM_IDLE;
             disarm_event(I2C_RESULT_NACK);
             switch_to_client();
@@ -626,7 +643,7 @@ static void isr_on_nack(void) {
             if (I2C1CNTL == 0 && I2C1CNTH == 0) {
                 break;
             }
-            log_host_phase(FSM_HOST_RX, I2C_RESULT_NACK);
+            /* RN logged from i2c_poll main-context dispatch. */
             g_fsm = FSM_IDLE;
             disarm_event(I2C_RESULT_NACK);
             switch_to_client();
@@ -711,7 +728,7 @@ static void isr_on_collision(void) {
             break;
         case FSM_HOST_TX:
         case FSM_HOST_RX:
-            log_host_phase(g_fsm, I2C_RESULT_BUSY);
+            /* Log emitted from i2c_poll — see isr_on_nack. */
             g_fsm = FSM_IDLE;
             disarm_event(I2C_RESULT_BUSY);
             switch_to_client();
@@ -730,7 +747,7 @@ static void isr_on_timeout(void) {
         break;
     case FSM_HOST_TX:
     case FSM_HOST_RX:
-        log_host_phase(g_fsm, I2C_RESULT_TIMEOUT);
+        /* Log emitted from i2c_poll — see isr_on_nack. */
         g_fsm = FSM_IDLE;
         disarm_event(I2C_RESULT_TIMEOUT);
         switch_to_client();

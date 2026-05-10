@@ -7,11 +7,12 @@
 #include <stdint.h>
 #include <xc.h>
 
-/* Right-half layout on the 256x64 panel.  luRS10 cap height ~10 px, so we
- * pack 6 lines with 10 px spacing (baselines at 10, 20, 30, 40, 50, 60). */
+/* Right-half layout on the 256x64 panel.  u8g2_font_5x7_tr is a fixed 5x7
+ * pixel cell, so 8 px line spacing gives 8 visible lines in the 64 px
+ * height (baselines at 7, 15, 23, 31, 39, 47, 55, 63). */
 #define LOG_X            130u
-#define LOG_LINE_HEIGHT  10u
-#define LOG_MAX_LINES    6u
+#define LOG_LINE_HEIGHT  8u
+#define LOG_MAX_LINES    8u
 #define LOG_TEXT_MAX     24u  /* label + up to 8 hex bytes with spaces */
 
 void i2c_log_init(void) {
@@ -61,13 +62,13 @@ void i2c_log_render(u8g2_t* g) {
     I2cLogEntry snapshot[LOG_MAX_LINES];
     uint8_t count = i2c_log_snapshot(snapshot, LOG_MAX_LINES);
 
-    u8g2_SetFont(g, u8g2_font_luRS10_tr);
+    u8g2_SetFont(g, u8g2_font_5x7_tr);
 
     char buf[LOG_TEXT_MAX + 1];
     for (uint8_t i = 0; i < count; i++) {
         /* snapshot[0] is newest — render at the top. */
         format_entry(buf, &snapshot[i]);
-        uint8_t baseline = (uint8_t)(LOG_LINE_HEIGHT * (i + 1u));
+        uint8_t baseline = (uint8_t)(LOG_LINE_HEIGHT * (i + 1u) - 1u);
         u8g2_DrawStr(g, LOG_X, baseline, buf);
     }
 
