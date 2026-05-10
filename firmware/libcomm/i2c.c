@@ -594,15 +594,14 @@ static void isr_on_transmit_exhausted(void) {
             if (task->rx_len > 0) {
                 g_fsm = FSM_HOST_RX;
                 I2C1ADB1 |= 0b1;
-                /* Set up the RX phase before the Restart:
-                 *   CNT = rx_len so each byte decrements and ACKCNT kicks
-                 *     in at the last byte.
-                 *   RSEN = 0 so at CNT=0 (9th falling of the last RX byte)
-                 *     hardware auto-issues Stop instead of MDR-pausing.
-                 *   ACKCNT = 1 so the terminal byte is NACKed, telling the
-                 *     client "done reading". */
-                I2C1CNTH = 0;
-                I2C1CNTL = task->rx_len;
+                /* Clear RSEN so the 9th-falling of the terminal RX byte
+                 * auto-issues Stop (§37.5.1: CNT=0 ∧ RSEN=0) rather than
+                 * setting MDR (pause-for-Restart) as RSEN=1 would.  Without
+                 * this the bus hangs after the master's terminal NACK until
+                 * BTO.  CNT is left alone — the peripheral produces the
+                 * correct ACK/NACK pattern (ACK middle bytes, NACK the
+                 * final one) on its own, observed on the wire.  ACKCNT=1
+                 * belts-and-braces the terminal NACK. */
                 I2C1CON0bits.RSEN = 0;
                 I2C1CON1bits.ACKCNT = 1;
                 I2C1CON0bits.S = 1; // Restart (MDR=1 from prior 9th-falling)
