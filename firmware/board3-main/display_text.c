@@ -4,6 +4,7 @@
 #include "config_mode.h"
 #include "controller.h"
 #include "display.h"
+#include "i2c_log.h"
 #include "rtc.h"
 #include "task_ids.h"
 #include "u8g2.h"
@@ -243,6 +244,8 @@ static void refresh_task(TaskId id, void* ctx) {
             default:
                 break;
         }
+        /* Diagnostic I2C event log on the right half. */
+        i2c_log_render(g);
     } else {
         render_normal(g);
     }

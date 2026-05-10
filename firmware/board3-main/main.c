@@ -7,6 +7,7 @@
 #include "display_text.h"
 #include "i2c.h"
 #include "i2c_board.h"
+#include "i2c_log.h"
 #include "indicator.h"
 #include "interrupt.h"
 #include "libcomm.h"
@@ -37,6 +38,7 @@ static void init(void) {
     // Higher level systems that might depend on the low level
     i2c_init(comm_address());
     comm_interface_init();
+    i2c_log_init();
     comm_init();
 
     // High level systems that schedule tasks

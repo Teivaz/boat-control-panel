@@ -106,6 +106,24 @@ typedef void (*I2cCompletion)(I2cResult result, uint8_t* rx_buf, uint8_t rx_len,
  * with i2c_set_cold_rx_handler().  ISR-callable only — must not block. */
 typedef uint8_t (*I2cSyncColdRxHandler)(uint8_t* data, uint8_t len);
 
+/* Wire-event logger.  Fired from ISR context for each I2C transaction the
+ * driver finishes, so the app can trace bus activity.  The kind indicates
+ * direction and outcome; addr is the peer address (0 for client-RX, target
+ * address for host ops); data/len is the message payload (the received
+ * bytes for CR, tx buffer for WA/WN, rx buffer for RA/RN).  The handler
+ * must not block — copying the bytes into a ring buffer is the typical
+ * implementation. */
+typedef enum {
+    I2C_LOG_CR,  /* client received (data = raw message, sender info embedded) */
+    I2C_LOG_WA,  /* host write acknowledged (data = tx buffer) */
+    I2C_LOG_WN,  /* host write not acknowledged / aborted */
+    I2C_LOG_RA,  /* host read acknowledged (data = rx buffer) */
+    I2C_LOG_RN,  /* host read not acknowledged / aborted */
+} I2cLogKind;
+
+typedef void (*I2cLogger)(I2cLogKind kind, uint8_t addr,
+                          const uint8_t* data, uint8_t len);
+
 /* ── Main-loop API ──────────────────────────────────────────────────── */
 
 /* Set the client-side cold RX handler.  May be called before or right
@@ -115,6 +133,9 @@ void i2c_set_cold_rx_handler(I2cCompletion cold_tx);
 /* Set the synchronous cold-RX handler (see I2cSyncColdRxHandler).  If unset,
  * every client-RX transaction is queued for async delivery as before. */
 void i2c_set_sync_cold_rx_handler(I2cSyncColdRxHandler handler);
+
+/* Set the wire-event logger (see I2cLogger).  May be left NULL. */
+void i2c_set_logger(I2cLogger logger);
 
 /* One-time hardware init.  Configures I2C1 at 400 kHz.
  * Caller must have set up pins and oscillator beforehand. */

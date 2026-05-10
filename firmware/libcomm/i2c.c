@@ -50,6 +50,7 @@ typedef enum {
 // TODO: use only one callback
 static I2cCompletion g_cold_rx = 0;
 static I2cSyncColdRxHandler g_sync_cold_rx = 0;
+static I2cLogger g_logger = 0;
 
 static volatile FSMState g_fsm = FSM_IDLE;
 static volatile uint8_t g_client_rx[I2C_RX_MAX] = {0};
@@ -83,6 +84,22 @@ void i2c_set_cold_rx_handler(I2cCompletion cold_rx) {
 
 void i2c_set_sync_cold_rx_handler(I2cSyncColdRxHandler handler) {
     g_sync_cold_rx = handler;
+}
+
+void i2c_set_logger(I2cLogger logger) {
+    g_logger = logger;
+}
+
+static void log_host_phase(FSMState phase, I2cResult reason) {
+    if (!g_logger) return;
+    MessageTask* task = &g_queue[g_q_head];
+    if (phase == FSM_HOST_TX) {
+        I2cLogKind kind = (reason == I2C_RESULT_OK) ? I2C_LOG_WA : I2C_LOG_WN;
+        g_logger(kind, task->addr, task->tx, task->tx_len);
+    } else if (phase == FSM_HOST_RX) {
+        I2cLogKind kind = (reason == I2C_RESULT_OK) ? I2C_LOG_RA : I2C_LOG_RN;
+        g_logger(kind, task->addr, task->rx, task->rx_len);
+    }
 }
 
 I2cResult i2c_set_client_tx(uint8_t* tx, uint8_t tx_len) {
@@ -485,6 +502,7 @@ static void isr_on_address(void) {
     case FSM_HOST_TX:
     case FSM_HOST_RX:
         // We have likely lost arbitration
+        log_host_phase(g_fsm, I2C_RESULT_BUSY);
         disarm_event(I2C_RESULT_BUSY);
         switch_to_client();
         break;
@@ -531,6 +549,7 @@ static void isr_on_transmit_exhausted(void) {
         case FSM_IDLE:
             break;
         case FSM_HOST_TX:
+            log_host_phase(FSM_HOST_TX, I2C_RESULT_OK);
             if (task->rx_len > 0) {
                 g_fsm = FSM_HOST_RX;
                 I2C1ADB1 |= 0b1;
@@ -565,6 +584,7 @@ static void isr_on_nack(void) {
             break;
         case FSM_HOST_TX:
         case FSM_HOST_RX:
+            log_host_phase(g_fsm, I2C_RESULT_NACK);
             g_fsm = FSM_IDLE;
             disarm_event(I2C_RESULT_NACK);
             switch_to_client();
@@ -581,6 +601,7 @@ static void isr_on_restart(void) {
             break;
         case FSM_HOST_RX:
         case FSM_HOST_TX:
+            log_host_phase(g_fsm, I2C_RESULT_BUSY);
             g_fsm = FSM_IDLE;
             disarm_event(I2C_RESULT_BUSY);
             switch_to_client();
@@ -606,6 +627,9 @@ static void on_cold_rx_complete(void) {
     if (received == 0) {
         return;
     }
+    if (g_logger) {
+        g_logger(I2C_LOG_CR, 0, (const uint8_t*)g_client_rx, received);
+    }
     /* Offer to the synchronous handler first.  It runs in this ISR, so an
      * urgent handler (e.g. a read-request dispatcher that stages the reply
      * via i2c_set_client_tx before the read-phase address arrives) can
@@ -624,6 +648,7 @@ static void isr_on_stop(void) {
             break;
         case FSM_HOST_TX:
         case FSM_HOST_RX:
+            log_host_phase(g_fsm, I2C_RESULT_OK);
             g_fsm = FSM_IDLE;
             disarm_event(I2C_RESULT_OK);
             switch_to_client();
@@ -646,6 +671,7 @@ static void isr_on_collision(void) {
             break;
         case FSM_HOST_TX:
         case FSM_HOST_RX:
+            log_host_phase(g_fsm, I2C_RESULT_BUSY);
             g_fsm = FSM_IDLE;
             disarm_event(I2C_RESULT_BUSY);
             switch_to_client();
@@ -664,6 +690,7 @@ static void isr_on_timeout(void) {
         break;
     case FSM_HOST_TX:
     case FSM_HOST_RX:
+        log_host_phase(g_fsm, I2C_RESULT_TIMEOUT);
         g_fsm = FSM_IDLE;
         disarm_event(I2C_RESULT_TIMEOUT);
         switch_to_client();
