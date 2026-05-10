@@ -594,8 +594,18 @@ static void isr_on_transmit_exhausted(void) {
             if (task->rx_len > 0) {
                 g_fsm = FSM_HOST_RX;
                 I2C1ADB1 |= 0b1;
-                I2C1CON0bits.S = 1; // Start
-                I2C1CON1bits.ACKCNT = 1; // NACK on end of next read
+                /* Set up the RX phase before the Restart:
+                 *   CNT = rx_len so each byte decrements and ACKCNT kicks
+                 *     in at the last byte.
+                 *   RSEN = 0 so at CNT=0 (9th falling of the last RX byte)
+                 *     hardware auto-issues Stop instead of MDR-pausing.
+                 *   ACKCNT = 1 so the terminal byte is NACKed, telling the
+                 *     client "done reading". */
+                I2C1CNTH = 0;
+                I2C1CNTL = task->rx_len;
+                I2C1CON0bits.RSEN = 0;
+                I2C1CON1bits.ACKCNT = 1;
+                I2C1CON0bits.S = 1; // Restart (MDR=1 from prior 9th-falling)
             }
             else {
                 g_fsm = FSM_IDLE;
@@ -604,8 +614,10 @@ static void isr_on_transmit_exhausted(void) {
             }
             break;
         case FSM_HOST_RX:
-            g_fsm = FSM_IDLE;
-            switch_to_client();
+            /* CNTIF fires at the 9th falling of the last RX byte (CNT just
+             * decremented to 0).  Hardware auto-issues Stop next because
+             * RSEN=0; isr_on_stop's HOST_RX branch logs RA and disarms.
+             * Keep FSM at HOST_RX so that branch runs. */
             break;
         case FSM_CLIENT_RX:
             break;
