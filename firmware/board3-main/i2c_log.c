@@ -5,6 +5,7 @@
 #include "u8g2.h"
 
 #include <stdint.h>
+#include <xc.h>
 
 /* Capacity must be a power of two so we can mask-wrap the head index.
  * 8 entries gives some headroom beyond the 6 lines we render. */
