@@ -84,11 +84,11 @@ Command IDs follow a fixed pattern: write form `0x0X`, read form `0x8X = write |
 
 `libcomm/i2c.c` implements both host and client roles. Each board provides pin setup in a local `i2c_board.c`. Pins RC3/RC4 (boards 1 & 2) or RB1/RB2 (board 3). Default mode is 100 kHz (BAUD=0x7F); 400 kHz Fast mode (BAUD=0x31) when `I2C_FME=1`. Bus timeout uses the peripheral BTO (LFINTOSC), not a software tick.
 
-Client-side: incoming writes are buffered and delivered asynchronously via `i2c_poll()` through the cold-rx handler registered by `comm_interface_init()`. Read requests are served from a pre-loaded buffer set with `i2c_set_client_tx()` — an `I2cReadRequestHandler` registered internally by `libcomm_interface.c` stages the response in ISR context before DMA ships it.
+Client-side: inbound writes flow through two hooks. A synchronous `I2cSyncColdRxHandler` (registered by `comm_interface_init()`) fires in ISR context the moment a client-RX transaction completes — it dispatches read commands to `comm_on_*_read_requested()`, which stages the response via `i2c_set_client_tx()` before the master's read-phase address triggers client TX. The sync handler returns `0` when it consumed the message; otherwise it returns `1` and the driver queues the bytes for async delivery via the cold-rx `I2cCompletion` (also registered by `comm_interface_init()`), which `i2c_poll()` later drains in main-loop context to dispatch write commands.
 
 `i2c_submit` is the host-mode entry point: enqueues a write or write-then-read transaction. Completion callbacks fire from `i2c_poll()` in main-loop context. Returns `I2cResult` — callers should treat `BUSY` / `QUEUE_FULL` as retryable.
 
-`libcomm_interface.c` is the protocol dispatcher layered on top: registers itself as the cold-rx handler and the read-request handler, maps incoming command IDs to typed `comm_on_*` callbacks implemented by each board. `i2c.c` has no knowledge of libcomm.
+`libcomm_interface.c` is the protocol dispatcher layered on top: registers both the sync cold-rx handler (for read commands with MSB set) and the async cold-rx handler (for write commands), maps incoming command IDs to typed `comm_on_*` callbacks implemented by each board. `i2c.c` has no knowledge of libcomm.
 
 ### Multi-board protocol
 

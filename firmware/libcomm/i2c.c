@@ -49,7 +49,7 @@ typedef enum {
 
 // TODO: use only one callback
 static I2cCompletion g_cold_rx = 0;
-static I2cReadRequestHandler g_read_request = 0;
+static I2cSyncColdRxHandler g_sync_cold_rx = 0;
 
 static volatile FSMState g_fsm = FSM_IDLE;
 static volatile uint8_t g_client_rx[I2C_RX_MAX] = {0};
@@ -79,6 +79,10 @@ static void disarm_event(I2cResult reason);
 
 void i2c_set_cold_rx_handler(I2cCompletion cold_rx) {
     g_cold_rx = cold_rx;
+}
+
+void i2c_set_sync_cold_rx_handler(I2cSyncColdRxHandler handler) {
+    g_sync_cold_rx = handler;
 }
 
 I2cResult i2c_set_client_tx(uint8_t* tx, uint8_t tx_len) {
@@ -587,6 +591,16 @@ static void on_cold_rx_complete(void) {
     DMASELECT = DMA_RX_CHANNEL;
     uint8_t remaining = (uint8_t)DMAnDCNT;
     uint8_t received = (uint8_t)(I2C_RX_MAX - remaining);
+    if (received == 0) {
+        return;
+    }
+    /* Offer to the synchronous handler first.  It runs in this ISR, so an
+     * urgent handler (e.g. a read-request dispatcher that stages the reply
+     * via i2c_set_client_tx before the read-phase address arrives) can
+     * return 0 to keep the bytes off the async cold-RX queue. */
+    if (g_sync_cold_rx && g_sync_cold_rx((uint8_t*)g_client_rx, received) == 0) {
+        return;
+    }
     // When receiving the client does not transmit address, set provisional 0x00
     prepend_completed_task(0x00, g_client_rx, received);
 }

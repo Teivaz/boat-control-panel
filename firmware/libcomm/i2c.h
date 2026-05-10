@@ -94,19 +94,27 @@ typedef enum {
  *            failure since the protocol expects > 0 bytes back. */
 typedef void (*I2cCompletion)(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx);
 
-/* Read-request callback.  Fired from ISR context when a master issues
- * a repeated-start read after writing to this device (the write phase
- * of a write-then-read transaction).  The handler should inspect the
- * write-phase data (command + params) and call i2c_set_client_tx() to
- * stage the response before the address handler arms client TX DMA.
- * ISR-callable only — must not block. */
-typedef void (*I2cReadRequestHandler)(const volatile uint8_t* data, uint8_t len);
+/* Synchronous cold-RX handler.  Fired from ISR context the moment a
+ * client-RX transaction completes (stop or restart), before the next
+ * address byte can arrive.  Lets the app intercept urgent commands — for
+ * example, a read request whose response must be staged via
+ * i2c_set_client_tx() before the read-phase address triggers client TX.
+ *
+ * Return 0 if the request was handled synchronously (the driver will skip
+ * the asynchronous cold-RX queue).  Return 1 to defer: the driver will
+ * queue the bytes for main-loop delivery via the I2cCompletion registered
+ * with i2c_set_cold_rx_handler().  ISR-callable only — must not block. */
+typedef uint8_t (*I2cSyncColdRxHandler)(uint8_t* data, uint8_t len);
 
 /* ── Main-loop API ──────────────────────────────────────────────────── */
 
 /* Set the client-side cold RX handler.  May be called before or right
  * after i2c_init. May be left unset (NULL) if that direction is unused. */
 void i2c_set_cold_rx_handler(I2cCompletion cold_tx);
+
+/* Set the synchronous cold-RX handler (see I2cSyncColdRxHandler).  If unset,
+ * every client-RX transaction is queued for async delivery as before. */
+void i2c_set_sync_cold_rx_handler(I2cSyncColdRxHandler handler);
 
 /* One-time hardware init.  Configures I2C1 at 400 kHz.
  * Caller must have set up pins and oscillator beforehand. */

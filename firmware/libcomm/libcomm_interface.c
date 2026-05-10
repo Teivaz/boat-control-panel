@@ -134,6 +134,82 @@ static void on_config_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_le
  * data[0] is the command id, data[1..len-1] is the payload.
  * ──────────────────────────────────────────────────────────────────────── */
 
+/* ── Cold-RX dispatchers ───────────────────────────────────────────────
+ *
+ * Two entry points from the I2C driver:
+ *   sync_cold_rx_dispatch — fires in ISR context the moment a client-RX
+ *     transaction completes (before the next address byte).  Handles read
+ *     commands synchronously so the response is staged via
+ *     i2c_set_client_tx() before the read-phase address arrives.  Returns
+ *     0 when it has handled the message; the driver then skips the async
+ *     queue.  Returns 1 to let the write dispatcher handle it from the
+ *     main loop.
+ *   cold_rx_dispatch — fires from i2c_poll() in main-loop context for
+ *     messages the sync path declined to handle (all non-read commands).
+ *     data[0] is the command id, data[1..len-1] is the payload.
+ * ──────────────────────────────────────────────────────────────────────── */
+
+static uint8_t sync_cold_rx_dispatch(uint8_t* data, uint8_t len) {
+    if (!comm_can_parse(data, len)) {
+        return 1;
+    }
+    uint8_t id = data[0];
+    /* Read commands (MSB set) must stage a reply before the master's
+     * read-phase address triggers client TX.  Anything else is deferred. */
+    if ((id & 0x80) == 0) {
+        return 1;
+    }
+
+    const uint8_t* payload = data + 1;
+    uint8_t plen = len - 1;
+
+    switch (id) {
+        case COMM_BUTTON_STATE_READ:
+            comm_on_button_state_read_requested();
+            break;
+
+        case COMM_BUTTON_TRIGGER_READ:
+            if (plen >= 1) {
+                comm_on_button_trigger_read_requested(payload[0] & 0x07);
+            }
+            break;
+
+        case COMM_CONFIG_READ:
+            if (plen >= 1) {
+                comm_on_config_read_requested(payload[0]);
+            }
+            break;
+
+        case COMM_RELAY_STATE_READ:
+            comm_on_relay_state_read_requested();
+            break;
+
+        case COMM_RELAY_MASK_READ:
+            comm_on_relay_mask_read_requested();
+            break;
+
+        case COMM_BATTERY_READ:
+            comm_on_battery_read_requested();
+            break;
+
+        case COMM_LEVELS_READ:
+            comm_on_levels_read_requested();
+            break;
+
+        case COMM_LEVEL_MODE_READ:
+            comm_on_level_mode_read_requested();
+            break;
+
+        case COMM_SENSORS_READ:
+            comm_on_sensors_read_requested();
+            break;
+
+        default:
+            return 1;
+    }
+    return 0;
+}
+
 static void cold_rx_dispatch(I2cResult result, uint8_t* data, uint8_t len, void* ctx) {
     (void)result;
     (void)ctx;
@@ -214,46 +290,6 @@ static void cold_rx_dispatch(I2cResult result, uint8_t* data, uint8_t len, void*
             }
             break;
 
-        case COMM_BUTTON_STATE_READ:
-            comm_on_button_state_read_requested();
-            break;
-
-        case COMM_BUTTON_TRIGGER_READ:
-            if (plen >= 1) {
-                comm_on_button_trigger_read_requested(payload[0] & 0x07);
-            }
-            break;
-
-        case COMM_CONFIG_READ:
-            if (plen >= 1) {
-                comm_on_config_read_requested(payload[0]);
-            }
-            break;
-
-        case COMM_RELAY_STATE_READ:
-            comm_on_relay_state_read_requested();
-            break;
-
-        case COMM_RELAY_MASK_READ:
-            comm_on_relay_mask_read_requested();
-            break;
-
-        case COMM_BATTERY_READ:
-            comm_on_battery_read_requested();
-            break;
-
-        case COMM_LEVELS_READ:
-            comm_on_levels_read_requested();
-            break;
-
-        case COMM_LEVEL_MODE_READ:
-            comm_on_level_mode_read_requested();
-            break;
-
-        case COMM_SENSORS_READ:
-            comm_on_sensors_read_requested();
-            break;
-
         default:
             break;
     }
@@ -262,6 +298,7 @@ static void cold_rx_dispatch(I2cResult result, uint8_t* data, uint8_t len, void*
 /* ── Initialization ────────────────────────────────────────────────────── */
 
 void comm_interface_init(void) {
+    i2c_set_sync_cold_rx_handler(sync_cold_rx_dispatch);
     i2c_set_cold_rx_handler(cold_rx_dispatch);
 }
 
