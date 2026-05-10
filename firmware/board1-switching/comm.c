@@ -72,11 +72,6 @@ void comm_on_relay_mask_read_requested(void) {
 }
 
 void comm_on_battery_read_requested(void) {
-    // TODO: remove me
-    uint8_t buf2[2] = {0xaa, 0x55};
-    i2c_set_client_tx(buf2, 2);
-    return;
-
     uint16_t v = controller_battery_mv();
     uint8_t buf[2] = {(uint8_t)v, (uint8_t)(v >> 8)};
     i2c_set_client_tx(buf, 2);
