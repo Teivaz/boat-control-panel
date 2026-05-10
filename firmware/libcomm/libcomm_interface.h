@@ -76,8 +76,7 @@ void comm_interface_init(void);
  * ============================================================================
  */
 
-I2cResult comm_send_reset(uint8_t addr, I2cCompletion cb, void* ctx);
-I2cResult comm_send_config(uint8_t addr, uint8_t config_addr, uint8_t value, I2cCompletion cb, void* ctx);
+I2cResult comm_send_reset(uint8_t addr, I2cCompletion cb, void* ctx);I2cResult comm_send_config(uint8_t addr, uint8_t config_addr, uint8_t value, I2cCompletion cb, void* ctx);
 I2cResult comm_send_button_effect(uint8_t addr, const CommButtonEffect* effect, I2cCompletion cb, void* ctx);
 I2cResult comm_send_button_changed(uint8_t button_id, uint8_t pressed, CommButtonMode mode, I2cCompletion cb,
                                    void* ctx);
@@ -155,11 +154,17 @@ void comm_on_level_mode_received(const CommLevelMode* mode);
  * Adopter-implemented: incoming read-request handlers (ISR context)
  *
  * Called from the I2C restart ISR when a master issues a write-then-read
- * to this device.  The handler must call i2c_set_client_tx() to stage
- * the response before returning — the address handler arms client TX
- * DMA immediately after.  Must not block.
+ * to this device.  The handler must call comm_respond() to stage the
+ * response payload (library appends CRC-8) before returning — the address
+ * handler arms client TX DMA immediately after.  Must not block.
  * ============================================================================
  */
+
+/* Stage a read response: copies the caller's payload, appends CRC-8, and
+ * calls i2c_set_client_tx() with length `len + 1`.  Boards' read-request
+ * handlers should use this rather than calling i2c_set_client_tx directly
+ * so the wire-level framing (payload + CRC) stays consistent. */
+I2cResult comm_respond(const uint8_t* data, uint8_t len);
 
 void comm_on_button_state_read_requested(void);
 void comm_on_button_trigger_read_requested(uint8_t button_id);

@@ -62,39 +62,39 @@ void comm_on_relay_changed_received(const CommRelayChanged* event) {
 void comm_on_relay_state_read_requested(void) {
     uint16_t v = controller_relay_target();
     uint8_t buf[2] = {(uint8_t)v, (uint8_t)(v >> 8)};
-    i2c_set_client_tx(buf, 2);
+    comm_respond(buf, 2);
 }
 
 void comm_on_relay_mask_read_requested(void) {
     uint16_t v = controller_relay_mask();
     uint8_t buf[2] = {(uint8_t)v, (uint8_t)(v >> 8)};
-    i2c_set_client_tx(buf, 2);
+    comm_respond(buf, 2);
 }
 
 void comm_on_battery_read_requested(void) {
     uint16_t v = controller_battery_mv();
     uint8_t buf[2] = {(uint8_t)v, (uint8_t)(v >> 8)};
-    i2c_set_client_tx(buf, 2);
+    comm_respond(buf, 2);
 }
 
 void comm_on_levels_read_requested(void) {
     uint8_t buf[2] = {controller_level(0), controller_level(1)};
-    i2c_set_client_tx(buf, 2);
+    comm_respond(buf, 2);
 }
 
 void comm_on_level_mode_read_requested(void) {
     uint8_t v = controller_level_mode();
-    i2c_set_client_tx(&v, 1);
+    comm_respond(&v, 1);
 }
 
 void comm_on_sensors_read_requested(void) {
     uint8_t v = (uint8_t)(sensors_state() & 0x07);
-    i2c_set_client_tx(&v, 1);
+    comm_respond(&v, 1);
 }
 
 void comm_on_config_read_requested(uint8_t address) {
     uint8_t v = config_read_byte(address);
-    i2c_set_client_tx(&v, 1);
+    comm_respond(&v, 1);
 }
 
 void comm_on_button_state_read_requested(void) {

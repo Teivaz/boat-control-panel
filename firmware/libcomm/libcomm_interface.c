@@ -8,6 +8,16 @@
 
 #include <stdint.h>
 
+/* Validate a read-response frame: the last byte must be the CRC-8 over the
+ * preceding `expected` payload bytes.  Returns 1 if the frame is the right
+ * length and the CRC matches. */
+static uint8_t response_crc_ok(const uint8_t* rx, uint8_t rx_len, uint8_t expected_payload) {
+    if (rx_len != (uint8_t)(expected_payload + 1u)) {
+        return 0;
+    }
+    return (uint8_t)(comm_crc8(rx, expected_payload) == rx[expected_payload]);
+}
+
 /* ── Internal: read completion callbacks ───────────────────────────────
  *
  * Each is an I2cCompletion fired from i2c_poll() (main-loop context).
@@ -22,7 +32,7 @@
 static void on_button_state_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
     (void)result;
     uint8_t addr = (uint8_t)(uintptr_t)ctx;
-    if (rx_len == 0) {
+    if (!response_crc_ok(rx_buf, rx_len, (uint8_t)sizeof(CommButtonState))) {
         comm_on_button_state_read_response(addr, 0);
         return;
     }
@@ -34,7 +44,7 @@ static void on_button_state_read_done(I2cResult result, uint8_t* rx_buf, uint8_t
 static void on_button_trigger_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
     (void)result;
     uint8_t addr = (uint8_t)(uintptr_t)ctx;
-    if (rx_len == 0) {
+    if (!response_crc_ok(rx_buf, rx_len, (uint8_t)sizeof(CommTriggerConfig))) {
         comm_on_button_trigger_read_response(addr, 0);
         return;
     }
@@ -46,7 +56,7 @@ static void on_button_trigger_read_done(I2cResult result, uint8_t* rx_buf, uint8
 static void on_relay_state_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
     (void)result;
     (void)ctx;
-    if (rx_len == 0) {
+    if (!response_crc_ok(rx_buf, rx_len, (uint8_t)sizeof(CommRelayState))) {
         comm_on_relay_state_read_response(0);
         return;
     }
@@ -58,7 +68,7 @@ static void on_relay_state_read_done(I2cResult result, uint8_t* rx_buf, uint8_t 
 static void on_relay_mask_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
     (void)result;
     (void)ctx;
-    if (rx_len == 0) {
+    if (!response_crc_ok(rx_buf, rx_len, (uint8_t)sizeof(CommRelayMask))) {
         comm_on_relay_mask_read_response(0);
         return;
     }
@@ -70,7 +80,7 @@ static void on_relay_mask_read_done(I2cResult result, uint8_t* rx_buf, uint8_t r
 static void on_battery_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
     (void)result;
     (void)ctx;
-    if (rx_len == 0) {
+    if (!response_crc_ok(rx_buf, rx_len, (uint8_t)sizeof(CommBattery))) {
         comm_on_battery_read_response(0);
         return;
     }
@@ -82,7 +92,7 @@ static void on_battery_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_l
 static void on_levels_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
     (void)result;
     (void)ctx;
-    if (rx_len == 0) {
+    if (!response_crc_ok(rx_buf, rx_len, (uint8_t)sizeof(CommLevels))) {
         comm_on_levels_read_response(0);
         return;
     }
@@ -94,7 +104,7 @@ static void on_levels_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_le
 static void on_level_mode_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
     (void)result;
     (void)ctx;
-    if (rx_len == 0) {
+    if (!response_crc_ok(rx_buf, rx_len, (uint8_t)sizeof(CommLevelMode))) {
         comm_on_level_mode_read_response(0);
         return;
     }
@@ -106,7 +116,7 @@ static void on_level_mode_read_done(I2cResult result, uint8_t* rx_buf, uint8_t r
 static void on_sensors_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
     (void)result;
     (void)ctx;
-    if (rx_len == 0) {
+    if (!response_crc_ok(rx_buf, rx_len, (uint8_t)sizeof(CommSensors))) {
         comm_on_sensors_read_response(0);
         return;
     }
@@ -118,7 +128,7 @@ static void on_sensors_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_l
 static void on_config_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
     (void)result;
     uint8_t addr = (uint8_t)(uintptr_t)ctx;
-    if (rx_len == 0) {
+    if (!response_crc_ok(rx_buf, rx_len, 1 /* value byte */)) {
         comm_on_config_read_response(addr, 0);
         return;
     }
@@ -375,53 +385,76 @@ I2cResult comm_send_level_mode(CommMeterMode mode_0, CommMeterMode mode_1, I2cCo
 I2cResult comm_send_button_state_read(uint8_t addr) {
     CommMessage msg;
     uint8_t tx_len = comm_build_button_state_read(&msg);
-    return i2c_submit(addr, (const uint8_t*)&msg, tx_len, 1, on_button_state_read_done, (void*)(uintptr_t)addr);
+    /* rx_len = payload(1) + CRC(1) */
+    return i2c_submit(addr, (const uint8_t*)&msg, tx_len, 2, on_button_state_read_done, (void*)(uintptr_t)addr);
 }
 
 I2cResult comm_send_button_trigger_read(uint8_t addr, uint8_t button_id) {
     CommMessage msg;
     uint8_t tx_len = comm_build_button_trigger_read(&msg, button_id);
-    return i2c_submit(addr, (const uint8_t*)&msg, tx_len, 1, on_button_trigger_read_done, (void*)(uintptr_t)addr);
+    /* rx_len = payload(1) + CRC(1) */
+    return i2c_submit(addr, (const uint8_t*)&msg, tx_len, 2, on_button_trigger_read_done, (void*)(uintptr_t)addr);
 }
 
 I2cResult comm_send_relay_state_read(void) {
     CommMessage msg;
     uint8_t tx_len = comm_build_relay_state_read(&msg);
-    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 2, on_relay_state_read_done, 0);
+    /* rx_len = payload(2) + CRC(1) */
+    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 3, on_relay_state_read_done, 0);
 }
 
 I2cResult comm_send_relay_mask_read(void) {
     CommMessage msg;
     uint8_t tx_len = comm_build_relay_mask_read(&msg);
-    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 2, on_relay_mask_read_done, 0);
+    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 3, on_relay_mask_read_done, 0);
 }
 
 I2cResult comm_send_battery_read(void) {
     CommMessage msg;
     uint8_t tx_len = comm_build_battery_read(&msg);
-    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 2, on_battery_read_done, 0);
+    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 3, on_battery_read_done, 0);
 }
 
 I2cResult comm_send_levels_read(void) {
     CommMessage msg;
     uint8_t tx_len = comm_build_levels_read(&msg);
-    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 2, on_levels_read_done, 0);
+    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 3, on_levels_read_done, 0);
 }
 
 I2cResult comm_send_level_mode_read(void) {
     CommMessage msg;
     uint8_t tx_len = comm_build_level_mode_read(&msg);
-    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 1, on_level_mode_read_done, 0);
+    /* rx_len = payload(1) + CRC(1) */
+    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 2, on_level_mode_read_done, 0);
 }
 
 I2cResult comm_send_sensors_read(void) {
     CommMessage msg;
     uint8_t tx_len = comm_build_sensors_read(&msg);
-    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 1, on_sensors_read_done, 0);
+    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 2, on_sensors_read_done, 0);
 }
 
 I2cResult comm_send_config_read(uint8_t addr, uint8_t config_addr) {
     CommMessage msg;
     uint8_t tx_len = comm_build_config_read(&msg, config_addr);
-    return i2c_submit(addr, (const uint8_t*)&msg, tx_len, 1, on_config_read_done, (void*)(uintptr_t)addr);
+    return i2c_submit(addr, (const uint8_t*)&msg, tx_len, 2, on_config_read_done, (void*)(uintptr_t)addr);
+}
+
+/* ── Response staging ──────────────────────────────────────────────────
+ *
+ * Boards' read-request handlers use this to stage their reply: the helper
+ * copies `len` bytes of payload into a local frame buffer, appends CRC-8,
+ * and hands the framed buffer + len+1 to the driver.  Keeps wire framing
+ * out of per-board callbacks. */
+
+I2cResult comm_respond(const uint8_t* data, uint8_t len) {
+    if (data == 0 || (uint16_t)len + 1u > (uint16_t)I2C_TX_MAX) {
+        return I2C_RESULT_BAD_ARG;
+    }
+    uint8_t buf[I2C_TX_MAX];
+    for (uint8_t i = 0; i < len; i++) {
+        buf[i] = data[i];
+    }
+    buf[len] = comm_crc8(data, len);
+    return i2c_set_client_tx(buf, (uint8_t)(len + 1u));
 }

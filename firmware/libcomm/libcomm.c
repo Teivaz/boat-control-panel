@@ -1,49 +1,115 @@
 #include "libcomm.h"
 
+/* Write the trailing CRC and return the total byte count.  The caller hands
+ * us the payload length (without id and without CRC); we finalise as
+ *   [id] [payload...] [crc] — crc over id + payload.
+ *
+ * Hot-path sizes are unrolled so XC8 emits straight-line PFM reads with no
+ * loop-counter overhead — the total byte span (id + payload) is always a
+ * compile-time constant at the builder call sites.  crc8_table is defined
+ * in crc.c and declared extern via crc.h (pulled in by libcomm.h). */
+static uint8_t comm_finalize(CommMessage* msg, uint8_t payload_len) {
+    const uint8_t n = (uint8_t)(1u + payload_len);
+    const uint8_t* b = (const uint8_t*)msg;
+    uint8_t crc;
+    switch (n) {
+        case 2: /* 1-byte payload messages: button_trigger_read, level_mode, config_read */
+            crc = crc8_table[b[0]];
+            crc = crc8_table[crc ^ b[1]];
+            break;
+        case 3: /* 2-byte payload: button_changed, button_trigger, relay_state, relay_mask, config */
+            crc = crc8_table[b[0]];
+            crc = crc8_table[crc ^ b[1]];
+            crc = crc8_table[crc ^ b[2]];
+            break;
+        case 5: /* 4-byte payload: button_effect */
+            crc = crc8_table[b[0]];
+            crc = crc8_table[crc ^ b[1]];
+            crc = crc8_table[crc ^ b[2]];
+            crc = crc8_table[crc ^ b[3]];
+            crc = crc8_table[crc ^ b[4]];
+            break;
+        case 8: /* 7-byte payload: relay_changed */
+            crc = crc8_table[b[0]];
+            crc = crc8_table[crc ^ b[1]];
+            crc = crc8_table[crc ^ b[2]];
+            crc = crc8_table[crc ^ b[3]];
+            crc = crc8_table[crc ^ b[4]];
+            crc = crc8_table[crc ^ b[5]];
+            crc = crc8_table[crc ^ b[6]];
+            crc = crc8_table[crc ^ b[7]];
+            break;
+        default: /* Fallback for any future sizes; generic loop. */
+            crc = comm_crc8(b, n);
+            break;
+    }
+    ((uint8_t*)msg)[n] = crc;
+    return (uint8_t)(n + 1u);
+}
+
+/* Precomputed CRC-8 (poly 0x07, init 0x00) for every single-byte command so
+ * the runtime CRC loop is skipped for the bus's busiest read-pollers.  If a
+ * new id-only command is added, regenerate these with:
+ *   python3 -c "d=0xID; c=d
+ *     for _ in range(8): c = ((c<<1)^0x07)&0xFF if c&0x80 else (c<<1)&0xFF
+ *     print(hex(c))"
+ * or by looking up comm_crc8(&id, 1) at runtime once. */
+#define CRC8_RESET              0x2D  /* crc8(0x0F) */
+#define CRC8_BUTTON_STATE_READ  0x80  /* crc8(0x83) */
+#define CRC8_RELAY_STATE_READ   0x92  /* crc8(0x85) */
+#define CRC8_RELAY_MASK_READ    0x9C  /* crc8(0x87) */
+#define CRC8_BATTERY_READ       0xB1  /* crc8(0x88) */
+#define CRC8_LEVELS_READ        0xB6  /* crc8(0x89) */
+#define CRC8_LEVEL_MODE_READ    0xBF  /* crc8(0x8A) */
+#define CRC8_SENSORS_READ       0xB8  /* crc8(0x8B) */
+
+/* Fast-path for single-byte (id-only) commands: skips the CRC bit-loop and
+ * writes the precomputed value directly.  Layout on the wire is [id][crc]. */
+static uint8_t comm_finalize_precomputed(CommMessage* msg, uint8_t crc) {
+    msg->raw[0] = crc;
+    return 2;
+}
+
+/* Payload size (without id, without CRC) for each command id, or 0xFF for
+ * an unknown id.  Keeps the size table in one place so the CRC check can
+ * validate both length and crc generically. */
+static uint8_t expected_body_len(uint8_t id) {
+    switch (id) {
+        case COMM_BUTTON_EFFECT:        return (uint8_t)sizeof(CommButtonEffect);
+        case COMM_BUTTON_CHANGED:       return (uint8_t)sizeof(CommButtonChanged);
+        case COMM_BUTTON_TRIGGER:       return (uint8_t)sizeof(CommButtonTrigger);
+        case COMM_RELAY_STATE:          return (uint8_t)sizeof(CommRelayState);
+        case COMM_RELAY_CHANGED:        return (uint8_t)sizeof(CommRelayChanged);
+        case COMM_RELAY_MASK:           return (uint8_t)sizeof(CommRelayMask);
+        case COMM_LEVEL_MODE:           return (uint8_t)sizeof(CommLevelMode);
+        case COMM_CONFIG:               return (uint8_t)sizeof(CommConfig);
+        case COMM_RESET:                return 0;
+        case COMM_BUTTON_STATE_READ:    return 0;
+        case COMM_BUTTON_TRIGGER_READ:  return 1; /* button_id byte */
+        case COMM_RELAY_STATE_READ:     return 0;
+        case COMM_RELAY_MASK_READ:      return 0;
+        case COMM_BATTERY_READ:         return 0;
+        case COMM_LEVELS_READ:          return 0;
+        case COMM_LEVEL_MODE_READ:      return 0;
+        case COMM_SENSORS_READ:         return 0;
+        case COMM_CONFIG_READ:          return 1; /* address byte */
+        default:                        return 0xFF;
+    }
+}
+
 uint8_t comm_can_parse(const uint8_t* data, uint8_t len) {
-    if (len == 0) {
+    /* Shape: [id] [body...] [crc]. Minimum is 2 bytes (id + crc). */
+    if (len < 2) {
         return 0;
     }
-    switch (data[0]) {
-        case COMM_BUTTON_EFFECT:
-            return len == 1 + sizeof(CommButtonEffect);
-        case COMM_BUTTON_CHANGED:
-            return len == 1 + sizeof(CommButtonChanged);
-        case COMM_BUTTON_TRIGGER:
-            return len == 1 + sizeof(CommButtonTrigger);
-        case COMM_RELAY_STATE:
-            return len == 1 + sizeof(CommRelayState);
-        case COMM_RELAY_CHANGED:
-            return len == 1 + sizeof(CommRelayChanged);
-        case COMM_RELAY_MASK:
-            return len == 1 + sizeof(CommRelayMask);
-        case COMM_LEVEL_MODE:
-            return len == 1 + sizeof(CommLevelMode);
-        case COMM_CONFIG:
-            return len == 1 + sizeof(CommConfig);
-        case COMM_RESET:
-            return len == 1;
-        case COMM_BUTTON_STATE_READ:
-            return len == 1;
-        case COMM_BUTTON_TRIGGER_READ:
-            return len == 2;
-        case COMM_RELAY_STATE_READ:
-            return len == 1;
-        case COMM_RELAY_MASK_READ:
-            return len == 1;
-        case COMM_BATTERY_READ:
-            return len == 1;
-        case COMM_LEVELS_READ:
-            return len == 1;
-        case COMM_LEVEL_MODE_READ:
-            return len == 1;
-        case COMM_SENSORS_READ:
-            return len == 1;
-        case COMM_CONFIG_READ:
-            return len == 2;
-        default:
-            return 0;
+    uint8_t body = expected_body_len(data[0]);
+    if (body == 0xFF) {
+        return 0;
     }
+    if (len != (uint8_t)(1u + body + 1u)) {
+        return 0;
+    }
+    return (uint8_t)(comm_crc8(data, (uint8_t)(len - 1u)) == data[len - 1u]);
 }
 
 /* ============================================================================
@@ -54,7 +120,7 @@ uint8_t comm_can_parse(const uint8_t* data, uint8_t len) {
 uint8_t comm_build_button_effect(CommMessage* msg, const CommButtonEffect* effect) {
     msg->id = COMM_BUTTON_EFFECT;
     msg->button_effect = *effect;
-    return 1 + sizeof(CommButtonEffect);
+    return comm_finalize(msg, (uint8_t)sizeof(CommButtonEffect));
 }
 
 void comm_parse_button_effect(const uint8_t* data, CommButtonEffect* effect) {
@@ -75,7 +141,7 @@ uint8_t comm_build_button_changed(CommMessage* msg, uint8_t button_id, uint8_t p
     msg->button_changed.button_id = button_id & 0x07;
     msg->button_changed.pressed = pressed & 0x01;
     msg->button_changed.mode = (uint8_t)mode & 0x03;
-    return 1 + sizeof(CommButtonChanged);
+    return comm_finalize(msg, (uint8_t)sizeof(CommButtonChanged));
 }
 
 void comm_parse_button_changed(const uint8_t* data, CommButtonChanged* event) {
@@ -92,7 +158,7 @@ void comm_parse_button_changed(const uint8_t* data, CommButtonChanged* event) {
 
 uint8_t comm_build_button_state_read(CommMessage* msg) {
     msg->id = COMM_BUTTON_STATE_READ;
-    return 1;
+    return comm_finalize_precomputed(msg, CRC8_BUTTON_STATE_READ);
 }
 
 void comm_parse_button_state_response(const uint8_t* data, CommButtonState* state) {
@@ -108,13 +174,13 @@ uint8_t comm_build_button_trigger(CommMessage* msg, uint8_t button_id, CommTrigg
     msg->id = COMM_BUTTON_TRIGGER;
     msg->button_trigger.button_id = button_id & 0x07;
     msg->button_trigger.config = config;
-    return 1 + sizeof(CommButtonTrigger);
+    return comm_finalize(msg, (uint8_t)sizeof(CommButtonTrigger));
 }
 
 uint8_t comm_build_button_trigger_read(CommMessage* msg, uint8_t button_id) {
     msg->id = COMM_BUTTON_TRIGGER_READ;
     msg->button_trigger.button_id = button_id & 0x07;
-    return 1 + 1;
+    return comm_finalize(msg, 1);
 }
 
 void comm_parse_button_trigger_write(const uint8_t* data, CommButtonTrigger* trigger) {
@@ -156,12 +222,12 @@ CommTriggerConfig comm_button_trigger_make(CommButtonMode mode, uint16_t time_ms
 uint8_t comm_build_relay_state(CommMessage* msg, uint16_t relays) {
     msg->id = COMM_RELAY_STATE;
     msg->relay_state.relays = relays;
-    return 1 + sizeof(CommRelayState);
+    return comm_finalize(msg, (uint8_t)sizeof(CommRelayState));
 }
 
 uint8_t comm_build_relay_state_read(CommMessage* msg) {
     msg->id = COMM_RELAY_STATE_READ;
-    return 1;
+    return comm_finalize_precomputed(msg, CRC8_RELAY_STATE_READ);
 }
 
 void comm_parse_relay_state_write(const uint8_t* data, CommRelayState* state) {
@@ -185,7 +251,7 @@ uint8_t comm_build_relay_changed(CommMessage* msg, uint16_t prev_relays, uint16_
     msg->relay_changed.current_relays = current_relays;
     msg->relay_changed.prev_sensors = prev_sensors;
     msg->relay_changed.current_sensors = current_sensors;
-    return 1 + sizeof(CommRelayChanged);
+    return comm_finalize(msg, (uint8_t)sizeof(CommRelayChanged));
 }
 
 void comm_parse_relay_changed(const uint8_t* data, CommRelayChanged* event) {
@@ -204,12 +270,12 @@ void comm_parse_relay_changed(const uint8_t* data, CommRelayChanged* event) {
 uint8_t comm_build_relay_mask(CommMessage* msg, uint16_t mask) {
     msg->id = COMM_RELAY_MASK;
     msg->relay_mask.mask = mask;
-    return 1 + sizeof(CommRelayMask);
+    return comm_finalize(msg, (uint8_t)sizeof(CommRelayMask));
 }
 
 uint8_t comm_build_relay_mask_read(CommMessage* msg) {
     msg->id = COMM_RELAY_MASK_READ;
-    return 1;
+    return comm_finalize_precomputed(msg, CRC8_RELAY_MASK_READ);
 }
 
 void comm_parse_relay_mask_write(const uint8_t* data, CommRelayMask* mask) {
@@ -227,7 +293,7 @@ void comm_parse_relay_mask_response(const uint8_t* data, CommRelayMask* mask) {
 
 uint8_t comm_build_battery_read(CommMessage* msg) {
     msg->id = COMM_BATTERY_READ;
-    return 1;
+    return comm_finalize_precomputed(msg, CRC8_BATTERY_READ);
 }
 
 void comm_parse_battery_response(const uint8_t* data, CommBattery* battery) {
@@ -241,7 +307,7 @@ void comm_parse_battery_response(const uint8_t* data, CommBattery* battery) {
 
 uint8_t comm_build_levels_read(CommMessage* msg) {
     msg->id = COMM_LEVELS_READ;
-    return 1;
+    return comm_finalize_precomputed(msg, CRC8_LEVELS_READ);
 }
 
 void comm_parse_levels_response(const uint8_t* data, CommLevels* levels) {
@@ -258,12 +324,12 @@ uint8_t comm_build_level_mode(CommMessage* msg, CommMeterMode mode_0, CommMeterM
     msg->id = COMM_LEVEL_MODE;
     msg->level_mode.mode_0 = (uint8_t)mode_0;
     msg->level_mode.mode_1 = (uint8_t)mode_1;
-    return 1 + sizeof(CommLevelMode);
+    return comm_finalize(msg, (uint8_t)sizeof(CommLevelMode));
 }
 
 uint8_t comm_build_level_mode_read(CommMessage* msg) {
     msg->id = COMM_LEVEL_MODE_READ;
-    return 1;
+    return comm_finalize_precomputed(msg, CRC8_LEVEL_MODE_READ);
 }
 
 void comm_parse_level_mode_write(const uint8_t* data, CommLevelMode* mode) {
@@ -281,7 +347,7 @@ void comm_parse_level_mode_response(const uint8_t* data, CommLevelMode* mode) {
 
 uint8_t comm_build_sensors_read(CommMessage* msg) {
     msg->id = COMM_SENSORS_READ;
-    return 1;
+    return comm_finalize_precomputed(msg, CRC8_SENSORS_READ);
 }
 
 void comm_parse_sensors_response(const uint8_t* data, CommSensors* sensors) {
@@ -295,20 +361,20 @@ void comm_parse_sensors_response(const uint8_t* data, CommSensors* sensors) {
 
 uint8_t comm_build_reset(CommMessage* msg) {
     msg->id = COMM_RESET;
-    return 1;
+    return comm_finalize_precomputed(msg, CRC8_RESET);
 }
 
 uint8_t comm_build_config(CommMessage* msg, uint8_t address, uint8_t value) {
     msg->id = COMM_CONFIG;
     msg->config.address = address;
     msg->config.value = value;
-    return 1 + sizeof(CommConfig);
+    return comm_finalize(msg, (uint8_t)sizeof(CommConfig));
 }
 
 uint8_t comm_build_config_read(CommMessage* msg, uint8_t address) {
     msg->id = COMM_CONFIG_READ;
     msg->config.address = address;
-    return 1 + 1;
+    return comm_finalize(msg, 1);
 }
 
 void comm_parse_config_write(const uint8_t* data, CommConfig* config) {

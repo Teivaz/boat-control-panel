@@ -150,6 +150,9 @@ I2cResult i2c_set_client_tx(uint8_t* tx, uint8_t tx_len) {
     }
     g_client_tx_len = tx_len;
     INTERRUPT_POP;
+    /* Log the staged response.  tx_len bytes include the trailing CRC
+     * appended by comm_respond; the renderer verifies and displays CT+/CT-. */
+    log_append(I2C_LOG_CT, 0, tx, tx_len);
     return I2C_RESULT_OK;
 }
 

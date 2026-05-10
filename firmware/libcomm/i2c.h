@@ -57,15 +57,15 @@
 #endif
 
 #ifndef I2C_TX_MAX
-#define I2C_TX_MAX 8
+#define I2C_TX_MAX 16
 #endif
 
 #ifndef I2C_RX_MAX
-#define I2C_RX_MAX 8
+#define I2C_RX_MAX 16
 #endif
 
 #ifndef I2C_CLIENT_BUF_SIZE
-#define I2C_CLIENT_BUF_SIZE 8
+#define I2C_CLIENT_BUF_SIZE 16
 #endif
 
 #ifndef I2C_RETRY_COUNT
@@ -115,13 +115,15 @@ typedef uint8_t (*I2cSyncColdRxHandler)(uint8_t* data, uint8_t len);
  * bytes for CR, tx buffer for WA/WN, rx buffer for RA/RN). */
 typedef enum {
     I2C_LOG_CR,  /* client received (data = raw message, sender info embedded) */
+    I2C_LOG_CT,  /* client transmitted a response (data = framed response + CRC) */
     I2C_LOG_WA,  /* host write acknowledged (data = tx buffer) */
     I2C_LOG_WN,  /* host write not acknowledged / aborted */
     I2C_LOG_RA,  /* host read acknowledged (data = rx buffer) */
     I2C_LOG_RN,  /* host read not acknowledged / aborted */
 } I2cLogKind;
 
-#define I2C_LOG_DATA_MAX 6u
+#define I2C_LOG_DATA_MAX 9u   /* big enough for the largest framed message
+                                 (relay_changed: 1 id + 7 payload + 1 crc) */
 
 typedef struct {
     uint8_t kind;  /* I2cLogKind */

@@ -22,6 +22,16 @@ Signal lines are pulled up to 3.3V.
 
 All write messages begin with a command byte (byte 0) with the MSB clear (0x00–0x7F). Read messages use a write phase to send the command byte with the MSB set (0x80–0xFF), followed by a repeated-start read phase. The read command ID equals the write command ID OR 0x80.
 
+### Checksum
+
+Every on-wire message ends with a single CRC-8 byte (polynomial `0x07`, initial value `0x00`, no final XOR — the SMBus/SAE-J1850 CRC). The CRC is computed over every preceding byte of that message:
+
+- **Write messages** (id + payload): CRC spans `[id, payload[0..N-1]]`. Total wire length is `1 + N + 1` bytes.
+- **Read-phase responses** (payload only, no id): CRC spans `[payload[0..N-1]]`. Total wire length is `N + 1` bytes.
+- **Command-only messages** (`reset`, most `*_read` write phases): CRC spans `[id]` alone. Total wire length is 2 bytes.
+
+Receivers drop any message whose trailing byte doesn't match the computed CRC. Per-byte payload sizes below do **not** include the CRC byte; add 1 to the byte count on the wire.
+
 | Command | Value | Direction |
 | --- | --- | --- |
 | `reset` | 0x0F | main → any (write) |

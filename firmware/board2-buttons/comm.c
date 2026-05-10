@@ -109,18 +109,18 @@ void comm_on_level_mode_received(const CommLevelMode* mode) {
 
 void comm_on_button_state_read_requested(void) {
     uint8_t state = input_state_current().integer;
-    i2c_set_client_tx(&state, 1);
+    comm_respond(&state, 1);
 }
 
 void comm_on_button_trigger_read_requested(uint8_t button_id) {
     CommTriggerConfig cfg = button_get_trigger(button_id);
     uint8_t raw = *(const uint8_t*)&cfg;
-    i2c_set_client_tx(&raw, 1);
+    comm_respond(&raw, 1);
 }
 
 void comm_on_config_read_requested(uint8_t address) {
     uint8_t value = config_read_byte(address);
-    i2c_set_client_tx(&value, 1);
+    comm_respond(&value, 1);
 }
 
 void comm_on_relay_state_read_requested(void) {

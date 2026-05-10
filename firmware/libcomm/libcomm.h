@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#include "crc.h"
+
 #define INTERRUPT_PUSH                                                                                                 \
     int8_t _gie_state = GIE;                                                                                           \
     GIE = 0
@@ -232,7 +234,11 @@ typedef struct {
  */
 
 /**
- * Universal message: command byte followed by the payload union.
+ * Universal message: command byte followed by the payload union, then a
+ * trailing CRC-8 byte.  On the wire the layout is:
+ *     [id] [payload ...] [CRC-8]
+ * Builders write the CRC at offset (1 + payload_len); the raw union is
+ * sized to 8 to leave room for the CRC after the longest (7-byte) payload.
  * Inspect id to determine which union member to access.
  */
 typedef struct {
@@ -250,7 +256,7 @@ typedef struct {
         CommLevelMode level_mode;         /* 0x0A: 1 byte  */
         CommSensors sensors;              /* 0x8B: 1 byte  */
         CommConfig config;                /* 0x0E: 2 bytes */
-        uint8_t raw[7];
+        uint8_t raw[8];                   /* 7 payload bytes + 1 CRC */
     };
 } CommMessage;
 

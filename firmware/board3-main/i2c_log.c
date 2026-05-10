@@ -20,13 +20,27 @@ void i2c_log_init(void) {
      * stable symbol in case boot wiring wants a hook in the future. */
 }
 
-static const char* kind_label(uint8_t k) {
-    switch (k) {
-        case I2C_LOG_CR: return "CR";
-        case I2C_LOG_WA: return "WA";
-        case I2C_LOG_WN: return "WN";
-        case I2C_LOG_RA: return "RA";
-        case I2C_LOG_RN: return "RN";
+static uint8_t crc_valid(const I2cLogEntry* e) {
+    /* CR/CT frames store payload + trailing CRC; anything <2 bytes can't be
+     * framed, so fail closed. */
+    if (e->len < 2u) {
+        return 0;
+    }
+    return (uint8_t)(comm_crc8(e->data, (uint8_t)(e->len - 1u)) == e->data[e->len - 1u]);
+}
+
+static const char* kind_label(const I2cLogEntry* e) {
+    switch (e->kind) {
+        case I2C_LOG_CR: return crc_valid(e) ? "CR+" : "CR-";
+        case I2C_LOG_CT: return crc_valid(e) ? "CT+" : "CT-";
+        case I2C_LOG_WA: return "W+";
+        case I2C_LOG_WN: return "W-";
+        /* R+ requires both I2C-level ACK (set by the ISR on successful Stop)
+         * AND CRC match on the response payload.  A corrupt response with
+         * an I2C-level ACK is shown as R- so the log matches what
+         * on_*_read_done actually delivered (NULL → caller saw failure). */
+        case I2C_LOG_RA: return crc_valid(e) ? "R+" : "R-";
+        case I2C_LOG_RN: return "R-";
         default:         return "??";
     }
 }
@@ -42,12 +56,14 @@ static uint8_t append_hex(char* out, uint8_t pos, uint8_t v) {
 }
 
 static void format_entry(char* out, const I2cLogEntry* e) {
-    const char* label = kind_label(e->kind);
+    const char* label = kind_label(e);
     uint8_t pos = 0;
-    out[pos++] = label[0];
-    out[pos++] = label[1];
-    /* CR carries sender/id in its payload; host ops prefix the target addr. */
-    if (e->kind != I2C_LOG_CR) {
+    while (*label && pos < LOG_TEXT_MAX) {
+        out[pos++] = *label++;
+    }
+    /* CR / CT don't carry a separate peer address (CR embeds the sender in
+     * its payload, CT uses addr=0); host ops prefix the target addr. */
+    if (e->kind != I2C_LOG_CR && e->kind != I2C_LOG_CT) {
         out[pos++] = ' ';
         pos = append_hex(out, pos, e->addr);
     }
