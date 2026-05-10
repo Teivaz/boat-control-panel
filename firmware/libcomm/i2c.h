@@ -106,13 +106,13 @@ typedef void (*I2cCompletion)(I2cResult result, uint8_t* rx_buf, uint8_t rx_len,
  * with i2c_set_cold_rx_handler().  ISR-callable only — must not block. */
 typedef uint8_t (*I2cSyncColdRxHandler)(uint8_t* data, uint8_t len);
 
-/* Wire-event logger.  Fired from ISR context for each I2C transaction the
- * driver finishes, so the app can trace bus activity.  The kind indicates
- * direction and outcome; addr is the peer address (0 for client-RX, target
- * address for host ops); data/len is the message payload (the received
- * bytes for CR, tx buffer for WA/WN, rx buffer for RA/RN).  The handler
- * must not block — copying the bytes into a ring buffer is the typical
- * implementation. */
+/* Wire-event log.  The driver records each transaction into an internal
+ * ring buffer (CR for client receive, WA/WN for host-write ack/nack,
+ * RA/RN for host-read ack/nack).  Boards that want to visualise bus
+ * activity snapshot the ring from main context via i2c_log_snapshot.
+ * kind is one of I2cLogKind; addr is the peer address (0 for client-RX,
+ * target address for host ops); data[0..len-1] is the payload (received
+ * bytes for CR, tx buffer for WA/WN, rx buffer for RA/RN). */
 typedef enum {
     I2C_LOG_CR,  /* client received (data = raw message, sender info embedded) */
     I2C_LOG_WA,  /* host write acknowledged (data = tx buffer) */
@@ -121,8 +121,14 @@ typedef enum {
     I2C_LOG_RN,  /* host read not acknowledged / aborted */
 } I2cLogKind;
 
-typedef void (*I2cLogger)(I2cLogKind kind, uint8_t addr,
-                          const uint8_t* data, uint8_t len);
+#define I2C_LOG_DATA_MAX 6u
+
+typedef struct {
+    uint8_t kind;  /* I2cLogKind */
+    uint8_t addr;
+    uint8_t len;
+    uint8_t data[I2C_LOG_DATA_MAX];
+} I2cLogEntry;
 
 /* ── Main-loop API ──────────────────────────────────────────────────── */
 
@@ -134,8 +140,10 @@ void i2c_set_cold_rx_handler(I2cCompletion cold_tx);
  * every client-RX transaction is queued for async delivery as before. */
 void i2c_set_sync_cold_rx_handler(I2cSyncColdRxHandler handler);
 
-/* Set the wire-event logger (see I2cLogger).  May be left NULL. */
-void i2c_set_logger(I2cLogger logger);
+/* Copy up to `capacity` most-recent log entries into `out`, newest first.
+ * Returns the number of entries actually copied.  Main-context only —
+ * reads are briefly interrupt-locked so an ISR append can't interleave. */
+uint8_t i2c_log_snapshot(I2cLogEntry* out, uint8_t capacity);
 
 /* One-time hardware init.  Configures I2C1 at 400 kHz.
  * Caller must have set up pins and oscillator beforehand. */

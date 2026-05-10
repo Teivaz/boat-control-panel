@@ -50,7 +50,13 @@ typedef enum {
 // TODO: use only one callback
 static I2cCompletion g_cold_rx = 0;
 static I2cSyncColdRxHandler g_sync_cold_rx = 0;
-static I2cLogger g_logger = 0;
+
+#define LOG_CAPACITY 8u
+#define LOG_MASK     (LOG_CAPACITY - 1u)
+
+static I2cLogEntry g_log[LOG_CAPACITY];
+static uint8_t g_log_head = 0;
+static uint8_t g_log_count = 0;
 
 static volatile FSMState g_fsm = FSM_IDLE;
 static volatile uint8_t g_client_rx[I2C_RX_MAX] = {0};
@@ -86,20 +92,45 @@ void i2c_set_sync_cold_rx_handler(I2cSyncColdRxHandler handler) {
     g_sync_cold_rx = handler;
 }
 
-void i2c_set_logger(I2cLogger logger) {
-    g_logger = logger;
+static void log_append(I2cLogKind kind, uint8_t addr, const uint8_t* data, uint8_t len) {
+    uint8_t slot;
+    if (g_log_count < LOG_CAPACITY) {
+        slot = (uint8_t)((g_log_head + g_log_count) & LOG_MASK);
+        g_log_count++;
+    } else {
+        slot = g_log_head;
+        g_log_head = (uint8_t)((g_log_head + 1u) & LOG_MASK);
+    }
+    g_log[slot].kind = (uint8_t)kind;
+    g_log[slot].addr = addr;
+    uint8_t n = (len > I2C_LOG_DATA_MAX) ? (uint8_t)I2C_LOG_DATA_MAX : len;
+    g_log[slot].len = n;
+    for (uint8_t i = 0; i < n; i++) {
+        g_log[slot].data[i] = data[i];
+    }
 }
 
 static void log_host_phase(FSMState phase, I2cResult reason) {
-    if (!g_logger) return;
     MessageTask* task = &g_queue[g_q_head];
     if (phase == FSM_HOST_TX) {
         I2cLogKind kind = (reason == I2C_RESULT_OK) ? I2C_LOG_WA : I2C_LOG_WN;
-        g_logger(kind, task->addr, task->tx, task->tx_len);
+        log_append(kind, task->addr, task->tx, task->tx_len);
     } else if (phase == FSM_HOST_RX) {
         I2cLogKind kind = (reason == I2C_RESULT_OK) ? I2C_LOG_RA : I2C_LOG_RN;
-        g_logger(kind, task->addr, task->rx, task->rx_len);
+        log_append(kind, task->addr, task->rx, task->rx_len);
     }
+}
+
+uint8_t i2c_log_snapshot(I2cLogEntry* out, uint8_t capacity) {
+    INTERRUPT_PUSH;
+    uint8_t count = (g_log_count < capacity) ? g_log_count : capacity;
+    for (uint8_t i = 0; i < count; i++) {
+        /* Newest first: snapshot[0] = most recent. */
+        uint8_t idx = (uint8_t)((g_log_head + g_log_count - 1u - i) & LOG_MASK);
+        out[i] = g_log[idx];
+    }
+    INTERRUPT_POP;
+    return count;
 }
 
 I2cResult i2c_set_client_tx(uint8_t* tx, uint8_t tx_len) {
@@ -583,8 +614,19 @@ static void isr_on_nack(void) {
         case FSM_IDLE:
             break;
         case FSM_HOST_TX:
+            log_host_phase(FSM_HOST_TX, I2C_RESULT_NACK);
+            g_fsm = FSM_IDLE;
+            disarm_event(I2C_RESULT_NACK);
+            switch_to_client();
+            break;
         case FSM_HOST_RX:
-            log_host_phase(g_fsm, I2C_RESULT_NACK);
+            /* Host's own terminal NACK (ACKCNT=1 on the last-read byte with
+             * CNT=0) is spec-correct "I have enough" signalling, not a
+             * failure.  Let isr_on_stop complete the transaction as OK. */
+            if (I2C1CNTL == 0 && I2C1CNTH == 0) {
+                break;
+            }
+            log_host_phase(FSM_HOST_RX, I2C_RESULT_NACK);
             g_fsm = FSM_IDLE;
             disarm_event(I2C_RESULT_NACK);
             switch_to_client();
@@ -627,9 +669,7 @@ static void on_cold_rx_complete(void) {
     if (received == 0) {
         return;
     }
-    if (g_logger) {
-        g_logger(I2C_LOG_CR, 0, (const uint8_t*)g_client_rx, received);
-    }
+    log_append(I2C_LOG_CR, 0, (const uint8_t*)g_client_rx, received);
     /* Offer to the synchronous handler first.  It runs in this ISR, so an
      * urgent handler (e.g. a read-request dispatcher that stages the reply
      * via i2c_set_client_tx before the read-phase address arrives) can

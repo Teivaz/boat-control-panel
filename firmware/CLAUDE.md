@@ -93,3 +93,13 @@ Client-side: inbound writes flow through two hooks. A synchronous `I2cSyncColdRx
 ### Multi-board protocol
 
 Boards communicate over I2C in multi-master mode. Every message begins with a command byte; MSB clear (`0x00–0x7F`) is a write, MSB set (`0x80–0xFF`) is a read (write phase sends the command, repeated-start read phase returns the payload). See `protocol.md` for addresses, the full command set, and per-byte bit layouts.
+
+## Hard-won gotchas
+
+### Do not call one function pointer from more than one interrupt vector
+
+On this chip/toolchain (PIC18F27Q84 + XC8 v3.10) dispatching the same function pointer from two distinct ISR vectors destabilises the device — typical symptom is a RESET loop (`STVREN=ON` in config_bits reboots on stack overflow, and the duplicated ISR-call-graph codegen around indirect calls apparently overflows the hardware return stack or corrupts code paths). A pointer called from a single ISR vector is fine (`g_sync_cold_rx` fires only from `on_cold_rx_complete` inside `I2C1_ISR` and works); the moment you wire the same pointer into `I2C1_ERROR_ISR` too (or any second vector), the board reboots repeatedly. If ISR-context dispatch is needed across more than one vector, use direct static calls; for board-specific behavior, have the driver own the data structure and expose a main-context snapshot/read API to the board. See `libcomm/i2c.c`'s internal `g_log` ring + `i2c_log_snapshot()` for the pattern.
+
+### NACK at end of message is by design — treat as ACK in those paths
+
+On I²C a host NACKs the final byte of a read to signal "I have enough" — this is spec-correct and not an error. Likewise a client-TX transaction ends with the master NACKing the last byte it wanted. Any NACK that fires *at end-of-message* (`CNT=0 ∧ ACKCNT=1` for host-RX; master's terminal NACK during client-TX) must not be logged as `WN`/`RN`, must not fail the task, and must not be counted as a retry. The driver's `isr_on_nack` skips client-mode NACKs correctly; host-mode NACK with `I2CxCNT=0` needs the same treatment (let `isr_on_stop` complete the transaction as OK).
