@@ -87,6 +87,20 @@ static void format_levels(char* out, const char* label, uint8_t level_raw) {
     out[pos] = '\0';
 }
 
+/* 12 V lead-acid SoC from battery voltage. Linear between 11.8 V (0 %) and
+ * 12.7 V (100 %) — close enough to the resting-voltage curve for gauge use.
+ * Sags under load, so values shown at high current will underread. */
+static uint8_t battery_soc_pct(uint16_t mv) {
+    if (mv >= 12700u) {
+        return 100;
+    }
+    if (mv <= 11800u) {
+        return 0;
+    }
+    /* (mv - 11800) * 100 / 900 simplifies to (mv - 11800) / 9. */
+    return (uint8_t)((mv - 11800u) / 9u);
+}
+
 static void format_battery(char* out, uint16_t mv) {
     /* Show as XX.YV with one decimal place, clamped at 99.9V. */
     uint16_t tenths = (uint16_t)((mv + 50u) / 100u);
@@ -101,6 +115,9 @@ static void format_battery(char* out, uint16_t mv) {
     out[pos++] = '.';
     pos = append_u8(out, pos, frac, 1);
     out[pos++] = 'V';
+    out[pos++] = ' ';
+    pos = append_u8(out, pos, battery_soc_pct(mv), 1);
+    out[pos++] = '%';
     out[pos] = '\0';
 }
 
@@ -246,9 +263,10 @@ static void refresh_task(TaskId id, void* ctx) {
         }
         /* Diagnostic I2C event log on the right half. */
         i2c_log_render(g);
-    } else {
+    } else if (controller_power_on()) {
         render_normal(g);
     }
+    /* Disabled normal mode: buffer already cleared, ship it blank. */
 
     u8g2_SendBuffer(g);
 }

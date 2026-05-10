@@ -34,6 +34,7 @@
 #define RELAY_USB 12
 #define RELAY_AUX_1 13
 #define RELAY_AUX_2 14
+#define RELAY_MAIN 15 /* main contactor — engaged whenever power_on */
 
 #define NAV_MASK_BITS 0x001Fu /* relays 0..4 */
 
@@ -352,6 +353,8 @@ static void recompute_target(void) {
         NavResolution r = nav_lights_resolve((NavMode)nav_mode, enabled);
         err = r.error;
 
+        /* Main contactor — gates downstream loads; on whenever we're powered. */
+        t |= (uint16_t)(1u << RELAY_MAIN);
         /* Map 5-bit nav_lights_mask (NAV_LIGHT_* bit positions) onto the
          * relay indices RELAY_NAV_*. The two encodings are aligned (bit 0 =
          * anchoring, ..., bit 4 = stern) so the mask copies directly. */
@@ -419,6 +422,11 @@ static void on_relay_state_done(I2cResult result, uint8_t* rx, uint8_t rx_len, v
 static void poll_battery_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
+    /* Suspend polling while disabled: no reads/writes on the bus, counter
+     * frozen so the UI doesn't show "stale" the moment power comes back. */
+    if (!power_on) {
+        return;
+    }
     if (batt_age < STALE_THRESHOLD) {
         batt_age++;
     }
@@ -428,6 +436,9 @@ static void poll_battery_task(TaskId id, void* ctx) {
 static void poll_levels_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
+    if (!power_on) {
+        return;
+    }
     if (levels_age < STALE_THRESHOLD) {
         levels_age++;
     }
@@ -437,6 +448,9 @@ static void poll_levels_task(TaskId id, void* ctx) {
 static void poll_sensors_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
+    if (!power_on) {
+        return;
+    }
     if (sensors_age < STALE_THRESHOLD) {
         sensors_age++;
     }
