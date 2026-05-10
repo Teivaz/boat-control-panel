@@ -274,27 +274,22 @@ static void i2c_dma_client_tx(void) {
 }
 
 static void disarm_event(I2cResult reason) {
-    // take existing event, reset its state to idle, do not decrement retry
+    /* OK finishes the task; every non-OK reason (BUSY / NACK / TIMEOUT)
+     * decrements `retries` and either re-queues the task as MT_IDLE or
+     * gives up as MT_FAILED.  Having BUSY decrement too (rather than
+     * retrying forever) bounds arbitration-loss / collision cases and
+     * lets i2c_poll emit one WN/RN per task when the retries are
+     * exhausted — the single source of failure logging. */
     MessageTask* task = &g_queue[g_q_head];
-    switch (reason) {
-        case  I2C_RESULT_OK:
-            task->state = MT_FINISHED;
-            task->result = I2C_RESULT_OK;
-            break;
-        case I2C_RESULT_BUSY:
-            task->state = MT_IDLE;
-            break;
-        case I2C_RESULT_NACK:
-        default:
-            if (task->retries == 0) {
-                task->state = MT_FAILED;
-                task->result = reason;
-            }
-            else {
-                task->retries--;
-                task->state = MT_IDLE;
-            }
-            break;
+    if (reason == I2C_RESULT_OK) {
+        task->state = MT_FINISHED;
+        task->result = I2C_RESULT_OK;
+    } else if (task->retries == 0) {
+        task->state = MT_FAILED;
+        task->result = reason;
+    } else {
+        task->retries--;
+        task->state = MT_IDLE;
     }
     I2C1CON0bits.RSEN = 0;
     /* Unload both DMA channels so no partial / dirty state survives into
@@ -546,8 +541,8 @@ static void isr_on_address(void) {
     {
     case FSM_HOST_TX:
     case FSM_HOST_RX:
-        // We have likely lost arbitration
-        log_host_phase(g_fsm, I2C_RESULT_BUSY);
+        // We have likely lost arbitration.  WN/RN log is emitted from
+        // i2c_poll on the final failure dispatch.
         disarm_event(I2C_RESULT_BUSY);
         switch_to_client();
         break;
@@ -660,7 +655,8 @@ static void isr_on_restart(void) {
             break;
         case FSM_HOST_RX:
         case FSM_HOST_TX:
-            log_host_phase(g_fsm, I2C_RESULT_BUSY);
+            /* Unexpected restart while we're the host — treat as arbitration
+             * loss / bus glitch; log emitted from i2c_poll on final fail. */
             g_fsm = FSM_IDLE;
             disarm_event(I2C_RESULT_BUSY);
             switch_to_client();
