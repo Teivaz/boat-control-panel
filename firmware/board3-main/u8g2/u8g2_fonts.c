@@ -2,3 +2,4 @@
 
 #include "fonts/u8g2_font_luRS10_tr.c"
 #include "fonts/u8g2_font_unifont_tr.c"
+#include "fonts/u8g2_font_5x7_tr.c"
