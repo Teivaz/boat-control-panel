@@ -522,8 +522,18 @@ static void isr_on_transmit_exhausted(void) {
             if (task->rx_len > 0) {
                 g_fsm = FSM_HOST_RX;
                 I2C1ADB1 |= 0b1;
-                I2C1CON0bits.S = 1; // Start
-                I2C1CON1bits.ACKCNT = 1; // NACK on end of next read
+                /* Set up the RX phase before issuing the Restart:
+                 *   CNT=rx_len so CNTIF fires at end of count (9th falling
+                 *     with CNT=0) and ACKCNT gates the final byte's NACK.
+                 *   ACKCNT=1 NACKs the terminal byte to signal end-of-read
+                 *     to the client (§37.5.2).
+                 *   RSEN=0 so that at CNT=0 the host issues Stop (§37.5.1)
+                 *     rather than MDR-pausing as it would with RSEN=1. */
+                I2C1CNTH = 0;
+                I2C1CNTL = task->rx_len;
+                I2C1CON1bits.ACKCNT = 1;
+                I2C1CON0bits.RSEN = 0;
+                I2C1CON0bits.S = 1;
             }
             else {
                 g_fsm = FSM_IDLE;
