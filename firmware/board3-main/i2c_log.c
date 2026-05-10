@@ -5,6 +5,7 @@
 #include "u8g2.h"
 
 #include <stdint.h>
+#include <xc.h>
 
 /* Right-half layout on the 256x64 panel.  luRS10 cap height ~10 px, so we
  * pack 6 lines with 10 px spacing (baselines at 10, 20, 30, 40, 50, 60). */
