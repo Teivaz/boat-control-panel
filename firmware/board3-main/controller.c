@@ -13,30 +13,36 @@
 #include <xc.h>
 
 /* ============================================================================
- * Relay assignment (main-board convention; the switching board driver simply
- * maps bit N to its Nth coil). Callers should address these via the macros so
- * the layout can be tweaked without touching action logic.
+ * Relay assignment — bit position in the 16-bit relay word matches the
+ * switching board's wiring (see board1-switching/readme.md). Callers address
+ * via these macros so the layout can be tweaked without touching action
+ * logic. The nav-light positions are non-contiguous (tricolor sits at bit 8,
+ * separate from the cluster at 3..6) so use NAV_MASK_BITS / nav_lights_to_relay_bits
+ * rather than treating the nav region as a single shift.
  * ============================================================================
  */
 
-#define RELAY_NAV_ANCHORING 0
-#define RELAY_NAV_TRICOLOR 1
-#define RELAY_NAV_STEAMING 2
+#define RELAY_INSTRUMENTS 0
+#define RELAY_MAIN 1 /* main contactor — engaged whenever power_on */
+#define RELAY_AUTOPILOT 2
 #define RELAY_NAV_BOW 3
 #define RELAY_NAV_STERN 4
-#define RELAY_INSTRUMENTS 5
-#define RELAY_AUTOPILOT 6
-#define RELAY_INVERTER 7
-#define RELAY_WATER_PUMP 8
-#define RELAY_FRIDGE 9
-#define RELAY_DECK_LIGHTS 10
-#define RELAY_CABIN_LIGHTS 11
-#define RELAY_USB 12
-#define RELAY_AUX_1 13
-#define RELAY_AUX_2 14
-#define RELAY_MAIN 15 /* main contactor — engaged whenever power_on */
+#define RELAY_NAV_STEAMING 5
+#define RELAY_NAV_ANCHORING 6
+#define RELAY_CABIN_LIGHTS 7
+#define RELAY_NAV_TRICOLOR 8
+#define RELAY_WATER_PUMP 9
+#define RELAY_FRIDGE 10
+#define RELAY_INVERTER 11
+#define RELAY_AUX_1 12
+#define RELAY_AUX_2 13
+#define RELAY_DECK_LIGHTS 14
+#define RELAY_USB 15
 
-#define NAV_MASK_BITS 0x001Fu /* relays 0..4 */
+/* Nav-light bits in the relay word — non-contiguous (3,4,5,6,8). */
+#define NAV_MASK_BITS                                                                                                  \
+    ((uint16_t)((1u << RELAY_NAV_BOW) | (1u << RELAY_NAV_STERN) | (1u << RELAY_NAV_STEAMING) |                         \
+                (1u << RELAY_NAV_ANCHORING) | (1u << RELAY_NAV_TRICOLOR)))
 
 /* ============================================================================
  * Button → action mapping
@@ -247,6 +253,29 @@ uint16_t controller_relay_target(void) {
 uint16_t controller_relay_physical(void) {
     return relay_physical;
 }
+uint8_t controller_nav_lights_active(void) {
+    /* Inverse of nav_lights_to_relay_bits: pull the (possibly non-contiguous)
+     * nav-relay bits out of the physical word and re-pack into the 5-bit
+     * NAV_LIGHT_* layout the UI expects. */
+    uint16_t phys = relay_physical;
+    uint8_t r = 0;
+    if (phys & (uint16_t)(1u << RELAY_NAV_ANCHORING)) {
+        r |= NAV_LIGHT_ANCHORING;
+    }
+    if (phys & (uint16_t)(1u << RELAY_NAV_TRICOLOR)) {
+        r |= NAV_LIGHT_TRICOLOR;
+    }
+    if (phys & (uint16_t)(1u << RELAY_NAV_STEAMING)) {
+        r |= NAV_LIGHT_STEAMING;
+    }
+    if (phys & (uint16_t)(1u << RELAY_NAV_BOW)) {
+        r |= NAV_LIGHT_BOW;
+    }
+    if (phys & (uint16_t)(1u << RELAY_NAV_STERN)) {
+        r |= NAV_LIGHT_STERN;
+    }
+    return r;
+}
 uint16_t controller_battery_mv(void) {
     return battery_mv;
 }
@@ -342,6 +371,31 @@ static ActionEffect apply_action(const ButtonAction* a) {
     return eff;
 }
 
+/* Translate the 5-bit NAV_LIGHT_* mask returned by nav_lights_resolve into
+ * the relay-word bit positions used on the wire. The two encodings used
+ * to be aligned (when relay bits 0..4 were the nav lights) but now the
+ * relay layout follows the switching board's wiring (bow/stern/steaming/
+ * anchor at 3..6, tricolor at 8 — non-contiguous). */
+static uint16_t nav_lights_to_relay_bits(uint8_t lights_mask) {
+    uint16_t r = 0;
+    if (lights_mask & NAV_LIGHT_ANCHORING) {
+        r |= (uint16_t)(1u << RELAY_NAV_ANCHORING);
+    }
+    if (lights_mask & NAV_LIGHT_TRICOLOR) {
+        r |= (uint16_t)(1u << RELAY_NAV_TRICOLOR);
+    }
+    if (lights_mask & NAV_LIGHT_STEAMING) {
+        r |= (uint16_t)(1u << RELAY_NAV_STEAMING);
+    }
+    if (lights_mask & NAV_LIGHT_BOW) {
+        r |= (uint16_t)(1u << RELAY_NAV_BOW);
+    }
+    if (lights_mask & NAV_LIGHT_STERN) {
+        r |= (uint16_t)(1u << RELAY_NAV_STERN);
+    }
+    return r;
+}
+
 /* Projects (power, nav_mode, relay_intent) onto the 16-bit relay target.
  * Also latches nav_error for UI. */
 static void recompute_target(void) {
@@ -355,10 +409,7 @@ static void recompute_target(void) {
 
         /* Main contactor — gates downstream loads; on whenever we're powered. */
         t |= (uint16_t)(1u << RELAY_MAIN);
-        /* Map 5-bit nav_lights_mask (NAV_LIGHT_* bit positions) onto the
-         * relay indices RELAY_NAV_*. The two encodings are aligned (bit 0 =
-         * anchoring, ..., bit 4 = stern) so the mask copies directly. */
-        t |= (uint16_t)(r.lights_mask & NAV_MASK_BITS);
+        t |= nav_lights_to_relay_bits(r.lights_mask);
         t |= (uint16_t)(relay_intent & ~NAV_MASK_BITS);
     }
 

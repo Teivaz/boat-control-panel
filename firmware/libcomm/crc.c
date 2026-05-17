@@ -30,9 +30,11 @@ const uint8_t crc8_table[256] = {
 };
 
 uint8_t comm_crc8(const uint8_t* data, uint8_t len) {
-    /* SMBus / SAE-J1850 CRC-8: poly 0x07, init 0x00.  Table-driven — each
-     * byte advances the accumulator via one PFM read, no bit-loop. */
-    uint8_t crc = 0;
+    /* CRC-8/ROHC: poly 0x07, init 0xFF.  The non-zero init breaks the
+     * all-zeros aliasing of an init=0 CRC-8, so a fully-corrupted bus that
+     * delivers `00 00 00` no longer validates. Table-driven — each byte
+     * advances the accumulator via one PFM read, no bit-loop. */
+    uint8_t crc = 0xFF;
     for (uint8_t i = 0; i < len; i++) {
         crc = crc8_table[crc ^ data[i]];
     }

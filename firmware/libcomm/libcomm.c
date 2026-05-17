@@ -14,23 +14,23 @@ static uint8_t comm_finalize(CommMessage* msg, uint8_t payload_len) {
     uint8_t crc;
     switch (n) {
         case 2: /* 1-byte payload messages: button_trigger_read, level_mode, config_read */
-            crc = crc8_table[b[0]];
+            crc = crc8_table[0xFFu ^ b[0]];
             crc = crc8_table[crc ^ b[1]];
             break;
         case 3: /* 2-byte payload: button_changed, button_trigger, relay_state, relay_mask, config */
-            crc = crc8_table[b[0]];
+            crc = crc8_table[0xFFu ^ b[0]];
             crc = crc8_table[crc ^ b[1]];
             crc = crc8_table[crc ^ b[2]];
             break;
         case 5: /* 4-byte payload: button_effect */
-            crc = crc8_table[b[0]];
+            crc = crc8_table[0xFFu ^ b[0]];
             crc = crc8_table[crc ^ b[1]];
             crc = crc8_table[crc ^ b[2]];
             crc = crc8_table[crc ^ b[3]];
             crc = crc8_table[crc ^ b[4]];
             break;
         case 8: /* 7-byte payload: relay_changed */
-            crc = crc8_table[b[0]];
+            crc = crc8_table[0xFFu ^ b[0]];
             crc = crc8_table[crc ^ b[1]];
             crc = crc8_table[crc ^ b[2]];
             crc = crc8_table[crc ^ b[3]];
@@ -47,21 +47,21 @@ static uint8_t comm_finalize(CommMessage* msg, uint8_t payload_len) {
     return (uint8_t)(n + 1u);
 }
 
-/* Precomputed CRC-8 (poly 0x07, init 0x00) for every single-byte command so
+/* Precomputed CRC-8 (poly 0x07, init 0xFF) for every single-byte command so
  * the runtime CRC loop is skipped for the bus's busiest read-pollers.  If a
  * new id-only command is added, regenerate these with:
- *   python3 -c "d=0xID; c=d
+ *   python3 -c "d=0xID; c=d^0xFF
  *     for _ in range(8): c = ((c<<1)^0x07)&0xFF if c&0x80 else (c<<1)&0xFF
  *     print(hex(c))"
  * or by looking up comm_crc8(&id, 1) at runtime once. */
-#define CRC8_RESET              0x2D  /* crc8(0x0F) */
-#define CRC8_BUTTON_STATE_READ  0x80  /* crc8(0x83) */
-#define CRC8_RELAY_STATE_READ   0x92  /* crc8(0x85) */
-#define CRC8_RELAY_MASK_READ    0x9C  /* crc8(0x87) */
-#define CRC8_BATTERY_READ       0xB1  /* crc8(0x88) */
-#define CRC8_LEVELS_READ        0xB6  /* crc8(0x89) */
-#define CRC8_LEVEL_MODE_READ    0xBF  /* crc8(0x8A) */
-#define CRC8_SENSORS_READ       0xB8  /* crc8(0x8B) */
+#define CRC8_RESET              0xDE  /* crc8(0x0F) */
+#define CRC8_BUTTON_STATE_READ  0x73  /* crc8(0x83) */
+#define CRC8_RELAY_STATE_READ   0x61  /* crc8(0x85) */
+#define CRC8_RELAY_MASK_READ    0x6F  /* crc8(0x87) */
+#define CRC8_BATTERY_READ       0x42  /* crc8(0x88) */
+#define CRC8_LEVELS_READ        0x45  /* crc8(0x89) */
+#define CRC8_LEVEL_MODE_READ    0x4C  /* crc8(0x8A) */
+#define CRC8_SENSORS_READ       0x4B  /* crc8(0x8B) */
 
 /* Fast-path for single-byte (id-only) commands: skips the CRC bit-loop and
  * writes the precomputed value directly.  Layout on the wire is [id][crc]. */

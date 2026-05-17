@@ -697,6 +697,13 @@ static void on_cold_rx_complete(void) {
         return;
     }
     log_append(I2C_LOG_CR, 0, (const uint8_t*)g_client_rx, received);
+    /* Invalidate any previous TX response before dispatch. If the request
+     * is a read whose write-phase CRC validates, the sync handler will
+     * call comm_respond → i2c_set_client_tx, repopulating g_client_tx_len.
+     * If the CRC fails (or the id isn't a read), len stays 0 and the
+     * following read-phase address gets NACK'd in isr_on_address rather
+     * than echoing stale bytes from the previous transaction. */
+    g_client_tx_len = 0;
     /* Offer to the synchronous handler first.  It runs in this ISR, so an
      * urgent handler (e.g. a read-request dispatcher that stages the reply
      * via i2c_set_client_tx before the read-phase address arrives) can

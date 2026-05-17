@@ -6,9 +6,11 @@
 #include "rgbled.h"
 #include "task_ids.h"
 
-/* LED layout (index -> physical meaning) mirrors the NAV_LIGHT_* bit order
- * and the RELAY_NAV_* relay indices, so a single bit position selects the
- * relay, the nav-mask entry, and the corresponding pixel simultaneously. */
+/* LED layout (index -> physical meaning) follows the NAV_LIGHT_* bit order:
+ *   0 anchoring, 1 tricolor, 2 steaming, 3 bow, 4 stern.
+ * The relay-word bits for these lights are non-contiguous, so use
+ * controller_nav_lights_active() to get a 5-bit mask aligned with the LED
+ * index instead of poking at the raw relay word. */
 #define LED_COUNT 5
 #define REFRESH_MS 50u
 #define ERROR_HALF_PERIOD_MS 250u /* -> ~2 Hz flash */
@@ -45,9 +47,9 @@ static void render_error(void) {
 }
 
 static void render_normal(void) {
-    uint16_t phys = controller_relay_physical();
+    uint8_t lit = controller_nav_lights_active();
     for (uint8_t i = 0; i < LED_COUNT; i++) {
-        uint8_t active = (phys & (uint16_t)(1u << i)) != 0;
+        uint8_t active = (lit & (uint8_t)(1u << i)) != 0;
         leds[i].red = active ? ON_BRIGHTNESS : 0;
         leds[i].green = active ? ON_BRIGHTNESS : 0;
         leds[i].blue = active ? ON_BRIGHTNESS : 0;

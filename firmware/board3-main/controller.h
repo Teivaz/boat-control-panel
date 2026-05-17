@@ -31,6 +31,10 @@ NavMode controller_nav_mode(void);
 uint8_t controller_nav_error(void);
 uint16_t controller_relay_target(void);
 uint16_t controller_relay_physical(void);
+/* Physically-active nav lights as a NAV_LIGHT_* bitmask (anchoring, tricolor,
+ * steaming, bow, stern at bits 0..4). Decouples callers from the relay
+ * word's actual bit layout, which is non-contiguous on the wire. */
+uint8_t controller_nav_lights_active(void);
 uint16_t controller_battery_mv(void);
 uint8_t controller_level(uint8_t meter_index); /* 0 or 1 */
 uint8_t controller_sensors(void);

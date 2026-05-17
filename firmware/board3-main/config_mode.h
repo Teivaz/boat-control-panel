@@ -15,10 +15,10 @@
  *                  -> Fuel-float  offset     (raw 8-bit, written to switching)
  *
  * Buttons (regardless of which screen is active):
- *   left  1  : up   / increment
- *   left  2  : down / decrement
- *   right 0  : back (returns to menu, or exits config when at the menu)
- *   right 1  : select
+ *   left 1 : up    / increment
+ *   left 2 : down  / decrement
+ *   left 3 : enter / select
+ *   left 4 : exit  / back (exits config when at the top-level menu)
  *
  * Toggling RA7 inactive commits the working nav-light mask to EEPROM. Time
  * and float-offset edits commit on select. */

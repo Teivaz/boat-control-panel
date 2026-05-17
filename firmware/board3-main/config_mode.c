@@ -20,11 +20,14 @@
 /* RA7 is pulled up via WPUA7; the switch closes to ground when active. */
 #define PIN_ACTIVE() (PORTAbits.RA7 == 0)
 
-/* Button indices on the left / right boards used by the menu. */
-#define BTN_UP 4u     /* left  */
-#define BTN_DOWN 3u   /* left  */
-#define BTN_BACK 2u   /* right */
-#define BTN_SELECT 1u /* right */
+/* Button indices on the left board used by the menu. The four logical
+ * actions are encoded with disjoint high-nibble flags (0x10 vs 0x20) so
+ * the per-screen switches can match all four cases without collision
+ * even though every event comes from the same I2C side. */
+#define BTN_UP 1u     /* L1 */
+#define BTN_DOWN 2u   /* L2 */
+#define BTN_SELECT 3u /* L3 — "enter" */
+#define BTN_BACK 4u   /* L4 — "exit" */
 
 #define SIDE_LEFT COMM_ADDRESS_BUTTON_BOARD_L
 #define SIDE_RIGHT COMM_ADDRESS_BUTTON_BOARD_R
@@ -130,14 +133,14 @@ void config_mode_on_button_pressed(uint8_t side, uint8_t button_idx) {
         return;
     }
     /* Translate (side, button) into the four logical actions. Anything else
-     * is ignored — the menu only listens to the four mapped buttons. */
+     * is ignored — the menu only listens to the four mapped buttons.
+     * Up/Down get the 0x10 high-nibble flag; Select/Back get 0x20 so the
+     * per-screen switch statements can match without collision. */
     uint8_t btn;
     if (side == SIDE_LEFT && (button_idx == BTN_UP || button_idx == BTN_DOWN)) {
-        /* Encode as a logical event id reusing the original button index plus
-         * a side bit so the per-screen handlers can distinguish all four. */
-        btn = (uint8_t)(button_idx | 0x10u); /* left-side flag */
-    } else if (side == SIDE_LEFT && (button_idx == BTN_BACK || button_idx == BTN_SELECT)) {
-        btn = (uint8_t)(button_idx | 0x20u); /* right-side flag */
+        btn = (uint8_t)(button_idx | 0x10u);
+    } else if (side == SIDE_LEFT && (button_idx == BTN_SELECT || button_idx == BTN_BACK)) {
+        btn = (uint8_t)(button_idx | 0x20u);
     } else {
         return;
     }
