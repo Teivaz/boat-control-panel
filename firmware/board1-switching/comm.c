@@ -30,7 +30,12 @@ void comm_on_relay_mask_received(const CommRelayMask* mask) {
 }
 
 void comm_on_level_mode_received(const CommLevelMode* mode) {
-    controller_set_level_mode(*(const uint8_t*)mode & 0x0F);
+    /* Update RAM and persist so the mode survives a reboot. config_write_byte
+     * dedups against pending writes, so a flurry of repeated writes coalesces
+     * to a single NVM program. */
+    uint8_t byte = (uint8_t)(*(const uint8_t*)mode & 0x0F);
+    controller_set_level_mode(byte);
+    config_write_byte(CONFIG_ADDR_LEVEL_MODE, byte);
 }
 
 void comm_on_config_received(const CommConfig* config) {

@@ -55,10 +55,9 @@ typedef void (*ControllerReadCompletion)(uint8_t ok, uint8_t value, void* ctx);
  * main context with ok=1 on success, 0 on I2C failure. */
 void controller_set_time(uint8_t hour, uint8_t minute, ControllerOpCompletion cb, void* ctx);
 
-/* Async read/write of a switching-board config byte (e.g. the level-meter
- * offsets at CONFIG_ADDR_LEVEL_OFFSET_WATER / _FUEL). Used by the menu UI
- * to calibrate the float meters at runtime. Completion fires in main
- * context. */
+/* Async read/write of a switching-board config byte (e.g. the per-channel
+ * level-meter scale-at-100Ω calibration). Used by the menu UI to calibrate
+ * the float meters at runtime. Completion fires in main context. */
 void controller_read_switching_config(uint8_t address, ControllerReadCompletion cb, void* ctx);
 void controller_write_switching_config(uint8_t address, uint8_t value, ControllerOpCompletion cb, void* ctx);
 

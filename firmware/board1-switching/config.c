@@ -15,18 +15,24 @@
  * Storage layout (internal — protocol addresses are remapped by
  * eeprom_offset_for):
  *   0x00..0x01   magic header
- *   OFF_WATER    1 byte — water-meter wire offset (protocol 0x10)
- *   OFF_FUEL     1 byte — fuel-meter wire offset  (protocol 0x11)
- *   OFF_BATT     1 byte — battery divider trim    (protocol 0x12) */
+ *   OFF_WATER     1 byte — water level scale @100Ω      (protocol 0x10)
+ *   OFF_FUEL      1 byte — fuel  level scale @100Ω      (protocol 0x11)
+ *   OFF_BATT      1 byte — battery scale @12000mV / 100 (protocol 0x12)
+ *   OFF_LEVEL_MODE 1 byte — packed CommLevelMode        (protocol 0x13) */
 #define EEPROM_ADDR_U 0x38
+/* Bump CONFIG_MAGIC_HI whenever the EEPROM layout changes so virgin and
+ * stale-magic devices both run write_defaults on boot. Was 0xA8; bumped
+ * to 0xA9 when the battery (min, nominal) slots at 0x28..0x2B were
+ * dropped in favour of a single scale-at-12000mV byte. */
 #define CONFIG_MAGIC_LO 0x5A
-#define CONFIG_MAGIC_HI 0xA5
+#define CONFIG_MAGIC_HI 0xA9
 
 #define OFF_MAGIC_LO 0x00
 #define OFF_MAGIC_HI 0x01
 #define OFF_WATER 0x02
 #define OFF_FUEL 0x03
 #define OFF_BATT 0x04
+#define OFF_LEVEL_MODE 0x05
 #define OFF_NONE 0xFF
 
 #define WRITE_QUEUE_SIZE 4
@@ -113,12 +119,10 @@ void config_write_byte(uint8_t address, uint8_t value) {
 
 static uint8_t eeprom_offset_for(uint8_t address) {
     switch (address) {
-        case CONFIG_ADDR_LEVEL_OFFSET_WATER:
-            return OFF_WATER;
-        case CONFIG_ADDR_LEVEL_OFFSET_FUEL:
-            return OFF_FUEL;
-        case CONFIG_ADDR_BATTERY_CAL:
-            return OFF_BATT;
+        case CONFIG_ADDR_WATER_CAL:   return OFF_WATER;
+        case CONFIG_ADDR_FUEL_CAL:    return OFF_FUEL;
+        case CONFIG_ADDR_BATTERY_CAL: return OFF_BATT;
+        case CONFIG_ADDR_LEVEL_MODE:  return OFF_LEVEL_MODE;
     }
     return OFF_NONE;
 }
@@ -195,7 +199,19 @@ static void nvm_write(uint8_t offset, uint8_t value) {
 }
 
 static void write_defaults(void) {
-    nvm_write(OFF_WATER, 0);
-    nvm_write(OFF_FUEL, 0);
-    nvm_write(OFF_BATT, 0);
+    /* Per-channel scale-factor defaults — each channel's calibration byte
+     * is the value reported when its known reference was applied. The
+     * defaults below mean "trust the nominal hardware" (no correction).
+     * Both meters default to mode 1 (European 0..190 Ω) — packed as
+     * (mode_1=1, mode_0=1) = 0x05. */
+    nvm_write(OFF_WATER, 100);          /* 100 Ω → displayed 100 Ω */
+    nvm_write(OFF_FUEL, 100);
+    nvm_write(OFF_BATT, 120);           /* 12000 mV → displayed 120 (×100 mV units) */
+    nvm_write(OFF_LEVEL_MODE, 0x05);
+}
+
+uint16_t config_read_word(uint8_t address_lo) {
+    uint16_t lo = config_read_byte(address_lo);
+    uint16_t hi = config_read_byte((uint8_t)(address_lo + 1u));
+    return (uint16_t)(lo | (hi << 8));
 }

@@ -26,10 +26,13 @@ static void init(void) {
     i2c_pins_init();
     i2c_init(comm_address());
     comm_interface_init();
-    adc_init();
 
     task_controller_init(&ctrl);
     config_init(&ctrl);
+    /* adc_init kicks off the first conversion; the AD ISR schedules
+     * per-channel processors via run_in_main_loop, so the scheduler must
+     * be live before we start sampling. */
+    adc_init(&ctrl);
     comm_init();
     sensors_init(&ctrl);
     controller_init(&ctrl);

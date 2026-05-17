@@ -1,6 +1,7 @@
 #include "controller.h"
 
 #include "adc.h"
+#include "config.h"
 #include "libcomm.h"
 #include "libcomm_interface.h"
 #include "relay_mon.h"
@@ -118,7 +119,17 @@ void controller_init(TaskController* ctrl) {
     relay_target = 0;
     relay_physical = 0;
     relay_mask = 0;
-    level_mode_byte = 0;
+    /* Restore the meter mode from EEPROM (config_init seeds it to
+     * (mode_1=European, mode_0=European) = 0x05 on a virgin device). If
+     * the read returns the all-ones erase pattern (0xFF) we still got
+     * something sensible after masking to the 4-bit mode field — fall back
+     * to the default explicitly so a corrupted byte doesn't leave both
+     * channels in an unintended mode. */
+    uint8_t saved = config_read_byte(CONFIG_ADDR_LEVEL_MODE);
+    if (saved == 0xFF) {
+        saved = ((uint8_t)COMM_METER_MODE_0_190 << 2) | (uint8_t)COMM_METER_MODE_0_190;
+    }
+    level_mode_byte = (uint8_t)(saved & 0x0F);
     sensor_shadow = sensors_state();
     last_pushed_relays = 0;
     last_pushed_sensors = sensor_shadow;

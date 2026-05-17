@@ -260,7 +260,7 @@ static void write_default_config(void) {
     CommTriggerConfig default_trigger = comm_button_trigger_make(COMM_BUTTON_MODE_HOLD, 1);
     if (comm_address() == COMM_ADDRESS_BUTTON_BOARD_L) {
         /* Button 0 on the left board has a 1.5 s hold time. */
-        CommTriggerConfig trigger = comm_button_trigger_make(COMM_BUTTON_MODE_HOLD, 1500);
+        CommTriggerConfig trigger = comm_button_trigger_make(COMM_BUTTON_MODE_HOLD, 800);
         nvm_write(OFF_BUTTONS + 0, *(uint8_t*)&trigger);
     } else {
         nvm_write(OFF_BUTTONS + 0, *(uint8_t*)&default_trigger);

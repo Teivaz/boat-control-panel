@@ -73,16 +73,16 @@ static uint8_t append_u8(char* out, uint8_t pos, uint16_t value, uint8_t min_dig
     return pos;
 }
 
-static void format_levels(char* out, const char* label, uint8_t level_raw) {
-    /* level_raw is ADC output 0..255 scaled into a rough 0..100% read-out. */
-    uint16_t percent = (uint16_t)(((uint16_t)level_raw * 100u + 127u) / 255u);
-    if (percent > 100u) {
-        percent = 100u;
+static void format_levels(char* out, const char* label, uint8_t level_pct) {
+    /* Switching board now sends the level pre-converted to 0..100 via the
+     * configured meter mode (see adc.c map_mv_to_percent). Clamp defensively. */
+    if (level_pct > 100u) {
+        level_pct = 100u;
     }
     uint8_t pos = 0;
     pos = append_str(out, pos, label);
     out[pos++] = ' ';
-    pos = append_u8(out, pos, percent, 1);
+    pos = append_u8(out, pos, level_pct, 1);
     out[pos++] = '%';
     out[pos] = '\0';
 }

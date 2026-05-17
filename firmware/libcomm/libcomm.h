@@ -87,9 +87,9 @@ typedef enum {
  */
 
 typedef enum {
-    COMM_METER_MODE_UNKNOWN = 0,
-    COMM_METER_MODE_240_33 = 1,
-    COMM_METER_MODE_0_190 = 2,
+    COMM_METER_MODE_CALIBRATION = 0, /* raw Ω passthrough; used during calibration */
+    COMM_METER_MODE_0_190 = 1,       /* European, 0..190 Ω; full = high resistance — DEFAULT */
+    COMM_METER_MODE_240_33 = 2,      /* American, 240..33 Ω; full = low resistance */
 } CommMeterMode;
 
 /* ============================================================================
@@ -240,8 +240,12 @@ typedef struct {
  * Builders write the CRC at offset (1 + payload_len); the raw union is
  * sized to 8 to leave room for the CRC after the longest (7-byte) payload.
  * Inspect id to determine which union member to access.
+ *
+ * `packed` makes the struct match the wire on hosts where the union's
+ * uint16_t members would otherwise force a padding byte after `id`. XC8
+ * already packs structs by default so the attribute is a no-op there.
  */
-typedef struct {
+typedef struct __attribute__((packed)) {
     uint8_t id; /* CommId */
     union {
         CommButtonEffect button_effect;   /* 0x01: 4 bytes */
