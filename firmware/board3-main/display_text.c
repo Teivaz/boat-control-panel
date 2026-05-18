@@ -74,16 +74,20 @@ static uint8_t append_u8(char* out, uint8_t pos, uint16_t value, uint8_t min_dig
 }
 
 static void format_levels(char* out, const char* label, uint8_t level_pct) {
-    /* Switching board now sends the level pre-converted to 0..100 via the
-     * configured meter mode (see adc.c map_mv_to_percent). Clamp defensively. */
-    if (level_pct > 100u) {
-        level_pct = 100u;
-    }
+    /* Switching board sends 0..100 percent (modes 1 / 2) or raw Ω 0..255
+     * (mode 0). Values >100 in operating modes are the over-range sentinel
+     * the switching board emits when the float reads way above full-scale
+     * (typically open circuit / disconnected). Show "ERR" instead of a
+     * misleading percentage. */
     uint8_t pos = 0;
     pos = append_str(out, pos, label);
     out[pos++] = ' ';
-    pos = append_u8(out, pos, level_pct, 1);
-    out[pos++] = '%';
+    if (level_pct > 100u) {
+        pos = append_str(out, pos, "ERR");
+    } else {
+        pos = append_u8(out, pos, level_pct, 1);
+        out[pos++] = '%';
+    }
     out[pos] = '\0';
 }
 

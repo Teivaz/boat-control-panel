@@ -33,6 +33,15 @@
 #define MODE_0_190_EMPTY_OHM 0u
 #define MODE_0_190_FULL_OHM 190u
 
+/* Over-range sentinel: when the calibrated Ω exceeds 1.5× the channel's
+ * normal max, the float is almost certainly open / disconnected and the
+ * current source rails. Report 255 (above the legal 0..100 percent range)
+ * so the main board's UI can show "ERR" rather than a misleading 0 % or
+ * 100 % reading. */
+#define MODE_240_33_OVER_RANGE_OHM 360u /* 1.5 × MODE_240_33_EMPTY_OHM */
+#define MODE_0_190_OVER_RANGE_OHM 285u  /* 1.5 × MODE_0_190_FULL_OHM   */
+#define LEVEL_OVER_RANGE_SENTINEL 255u
+
 static const uint8_t channels[3] = {
     ADC_CHANNEL_WATER,
     ADC_CHANNEL_BATT,
@@ -183,6 +192,9 @@ static uint16_t raw_to_mv(uint16_t raw) {
 static uint8_t ohm_to_percent(uint16_t ohm, uint8_t mode) {
     switch (mode) {
         case COMM_METER_MODE_240_33:
+            if (ohm > MODE_240_33_OVER_RANGE_OHM) {
+                return LEVEL_OVER_RANGE_SENTINEL;
+            }
             if (ohm >= MODE_240_33_EMPTY_OHM) {
                 return 0;
             }
@@ -192,6 +204,9 @@ static uint8_t ohm_to_percent(uint16_t ohm, uint8_t mode) {
             return (uint8_t)(((uint32_t)(MODE_240_33_EMPTY_OHM - ohm) * 100u) /
                              (MODE_240_33_EMPTY_OHM - MODE_240_33_FULL_OHM));
         case COMM_METER_MODE_0_190:
+            if (ohm > MODE_0_190_OVER_RANGE_OHM) {
+                return LEVEL_OVER_RANGE_SENTINEL;
+            }
             if (ohm >= MODE_0_190_FULL_OHM) {
                 return 100;
             }
