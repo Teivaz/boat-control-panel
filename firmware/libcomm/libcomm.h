@@ -37,8 +37,9 @@ typedef enum {
     COMM_BUTTON_CHANGED = 0x02, /* button board -> main */
     COMM_BUTTON_TRIGGER = 0x04, /* main -> button board */
     COMM_RELAY_STATE = 0x05,    /* main -> switching    */
-    COMM_RELAY_CHANGED = 0x06,  /* switching -> main    */
-    COMM_RELAY_MASK = 0x07,     /* main -> switching    */
+    COMM_CHANNEL_CHANGED = 0x06,/* switching -> main; pushed when channel
+                                 * voltage (mux-observed) or sensor changes */
+    /* 0x07 reserved (was relay_mask, removed). */
     COMM_LEVEL_MODE = 0x0A,     /* main -> switching    */
     COMM_CONFIG = 0x0E,         /* main -> any          */
     COMM_RESET = 0x0F,          /* main -> any          */
@@ -47,8 +48,9 @@ typedef enum {
      */
     COMM_BUTTON_STATE_READ = 0x83,                         /* main -> button board */
     COMM_BUTTON_TRIGGER_READ = COMM_BUTTON_TRIGGER | 0x80, /* 0x84 */
-    COMM_RELAY_STATE_READ = COMM_RELAY_STATE | 0x80,       /* 0x85 */
-    COMM_RELAY_MASK_READ = COMM_RELAY_MASK | 0x80,         /* 0x87 */
+    COMM_RELAY_STATE_READ = COMM_RELAY_STATE | 0x80,       /* 0x85 — returns commanded target */
+    COMM_CHANNEL_STATE_READ = 0x87, /* main -> switching; returns physical
+                                     * channel-voltage state (mux-observed) */
     COMM_BATTERY_READ = 0x88,                              /* main -> switching    */
     COMM_LEVELS_READ = 0x89,                               /* main -> switching    */
     COMM_LEVEL_MODE_READ = COMM_LEVEL_MODE | 0x80,         /* 0x8A */
@@ -181,21 +183,25 @@ typedef struct {
 } CommRelayState;
 
 /**
- * relay_changed (0x06): 7 bytes
- * Relay state is little-endian 16-bit: low byte first on the wire.
+ * channel_changed (0x06): 7 bytes
+ * Channel state is little-endian 16-bit: low byte first on the wire.
+ * "Channel state" = the voltage observed downstream of each relay's fuse
+ * (read via the relay-output mux). A relay can be commanded ON yet have
+ * its channel read 0 if the fuse is blown.
  */
 typedef struct {
     uint8_t device_address;
-    uint16_t prev_relays; /* bit N = relay N */
-    uint16_t current_relays;
+    uint16_t prev_channels; /* bit N = channel N */
+    uint16_t current_channels;
     uint8_t prev_sensors; /* [7:3]=0, [2] s2, [1] s1, [0] s0 */
     uint8_t current_sensors;
-} CommRelayChanged;
+} CommChannelChanged;
 
-/** relay_mask (0x07) write/response payload: 2 bytes */
+/** channel_state_read (0x87) response: 2 bytes
+ *  Bitmask of channel-voltage state (1 = energised). */
 typedef struct {
-    uint16_t mask; /* bit N = relay N; 1 = events enabled */
-} CommRelayMask;
+    uint16_t channels;
+} CommChannelState;
 
 /** battery_read (0x88) response: 2 bytes */
 typedef struct {
@@ -248,19 +254,19 @@ typedef struct {
 typedef struct __attribute__((packed)) {
     uint8_t id; /* CommId */
     union {
-        CommButtonEffect button_effect;   /* 0x01: 4 bytes */
-        CommButtonChanged button_changed; /* 0x02: 2 bytes */
-        CommButtonState button_state;     /* 0x83: 1 byte  */
-        CommButtonTrigger button_trigger; /* 0x04: 2 bytes */
-        CommRelayState relay_state;       /* 0x05: 2 bytes */
-        CommRelayChanged relay_changed;   /* 0x06: 7 bytes */
-        CommRelayMask relay_mask;         /* 0x07: 2 bytes */
-        CommBattery battery;              /* 0x88: 2 bytes */
-        CommLevels levels;                /* 0x89: 2 bytes */
-        CommLevelMode level_mode;         /* 0x0A: 1 byte  */
-        CommSensors sensors;              /* 0x8B: 1 byte  */
-        CommConfig config;                /* 0x0E: 2 bytes */
-        uint8_t raw[8];                   /* 7 payload bytes + 1 CRC */
+        CommButtonEffect button_effect;     /* 0x01: 4 bytes */
+        CommButtonChanged button_changed;   /* 0x02: 2 bytes */
+        CommButtonState button_state;       /* 0x83: 1 byte  */
+        CommButtonTrigger button_trigger;   /* 0x04: 2 bytes */
+        CommRelayState relay_state;         /* 0x05: 2 bytes */
+        CommChannelChanged channel_changed; /* 0x06: 7 bytes */
+        CommChannelState channel_state;     /* 0x87: 2 bytes */
+        CommBattery battery;                /* 0x88: 2 bytes */
+        CommLevels levels;                  /* 0x89: 2 bytes */
+        CommLevelMode level_mode;           /* 0x0A: 1 byte  */
+        CommSensors sensors;                /* 0x8B: 1 byte  */
+        CommConfig config;                  /* 0x0E: 2 bytes */
+        uint8_t raw[8];                     /* 7 payload bytes + 1 CRC */
     };
 } CommMessage;
 
@@ -299,19 +305,18 @@ uint8_t comm_build_button_trigger_read(CommMessage* msg, uint8_t button_id);
 /* relay_state (0x05) — main -> switching board */
 uint8_t comm_build_relay_state(CommMessage* msg, uint16_t relays);
 
-/* relay_state_read (0x85) — main -> switching board */
+/* relay_state_read (0x85) — main -> switching board; returns commanded target */
 uint8_t comm_build_relay_state_read(CommMessage* msg);
 
-/* relay_changed (0x06) — switching board -> main; device_address is filled from
- * comm_address() */
-uint8_t comm_build_relay_changed(CommMessage* msg, uint16_t prev_relays, uint16_t current_relays, uint8_t prev_sensors,
-                                 uint8_t current_sensors);
+/* channel_changed (0x06) — switching board -> main; device_address is filled
+ * from comm_address(). "channels" reflect mux-observed voltage downstream of
+ * each relay's fuse, not the commanded relay target. */
+uint8_t comm_build_channel_changed(CommMessage* msg, uint16_t prev_channels, uint16_t current_channels,
+                                   uint8_t prev_sensors, uint8_t current_sensors);
 
-/* relay_mask (0x07) — main -> switching board */
-uint8_t comm_build_relay_mask(CommMessage* msg, uint16_t mask);
-
-/* relay_mask_read (0x87) — main -> switching board */
-uint8_t comm_build_relay_mask_read(CommMessage* msg);
+/* channel_state_read (0x87) — main -> switching board; returns mux-observed
+ * channel voltage state (per-channel; not the commanded relay target). */
+uint8_t comm_build_channel_state_read(CommMessage* msg);
 
 /* battery_read (0x88) — main -> switching board */
 uint8_t comm_build_battery_read(CommMessage* msg);
@@ -355,9 +360,8 @@ void comm_parse_button_trigger_write(const uint8_t* data, CommButtonTrigger* tri
 void comm_parse_button_trigger_response(const uint8_t* data, CommTriggerConfig* config);
 void comm_parse_relay_state_write(const uint8_t* data, CommRelayState* state);
 void comm_parse_relay_state_response(const uint8_t* data, CommRelayState* state);
-void comm_parse_relay_changed(const uint8_t* data, CommRelayChanged* event);
-void comm_parse_relay_mask_write(const uint8_t* data, CommRelayMask* mask);
-void comm_parse_relay_mask_response(const uint8_t* data, CommRelayMask* mask);
+void comm_parse_channel_changed(const uint8_t* data, CommChannelChanged* event);
+void comm_parse_channel_state_response(const uint8_t* data, CommChannelState* state);
 void comm_parse_battery_response(const uint8_t* data, CommBattery* battery);
 void comm_parse_levels_response(const uint8_t* data, CommLevels* levels);
 void comm_parse_level_mode_write(const uint8_t* data, CommLevelMode* mode);

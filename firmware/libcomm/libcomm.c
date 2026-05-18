@@ -17,7 +17,7 @@ static uint8_t comm_finalize(CommMessage* msg, uint8_t payload_len) {
             crc = crc8_table[0xFFu ^ b[0]];
             crc = crc8_table[crc ^ b[1]];
             break;
-        case 3: /* 2-byte payload: button_changed, button_trigger, relay_state, relay_mask, config */
+        case 3: /* 2-byte payload: button_changed, button_trigger, relay_state, config */
             crc = crc8_table[0xFFu ^ b[0]];
             crc = crc8_table[crc ^ b[1]];
             crc = crc8_table[crc ^ b[2]];
@@ -29,7 +29,7 @@ static uint8_t comm_finalize(CommMessage* msg, uint8_t payload_len) {
             crc = crc8_table[crc ^ b[3]];
             crc = crc8_table[crc ^ b[4]];
             break;
-        case 8: /* 7-byte payload: relay_changed */
+        case 8: /* 7-byte payload: channel_changed */
             crc = crc8_table[0xFFu ^ b[0]];
             crc = crc8_table[crc ^ b[1]];
             crc = crc8_table[crc ^ b[2]];
@@ -57,7 +57,7 @@ static uint8_t comm_finalize(CommMessage* msg, uint8_t payload_len) {
 #define CRC8_RESET              0xDE  /* crc8(0x0F) */
 #define CRC8_BUTTON_STATE_READ  0x73  /* crc8(0x83) */
 #define CRC8_RELAY_STATE_READ   0x61  /* crc8(0x85) */
-#define CRC8_RELAY_MASK_READ    0x6F  /* crc8(0x87) */
+#define CRC8_CHANNEL_STATE_READ 0x6F  /* crc8(0x87) */
 #define CRC8_BATTERY_READ       0x42  /* crc8(0x88) */
 #define CRC8_LEVELS_READ        0x45  /* crc8(0x89) */
 #define CRC8_LEVEL_MODE_READ    0x4C  /* crc8(0x8A) */
@@ -79,15 +79,14 @@ static uint8_t expected_body_len(uint8_t id) {
         case COMM_BUTTON_CHANGED:       return (uint8_t)sizeof(CommButtonChanged);
         case COMM_BUTTON_TRIGGER:       return (uint8_t)sizeof(CommButtonTrigger);
         case COMM_RELAY_STATE:          return (uint8_t)sizeof(CommRelayState);
-        case COMM_RELAY_CHANGED:        return (uint8_t)sizeof(CommRelayChanged);
-        case COMM_RELAY_MASK:           return (uint8_t)sizeof(CommRelayMask);
+        case COMM_CHANNEL_CHANGED:      return (uint8_t)sizeof(CommChannelChanged);
         case COMM_LEVEL_MODE:           return (uint8_t)sizeof(CommLevelMode);
         case COMM_CONFIG:               return (uint8_t)sizeof(CommConfig);
         case COMM_RESET:                return 0;
         case COMM_BUTTON_STATE_READ:    return 0;
         case COMM_BUTTON_TRIGGER_READ:  return 1; /* button_id byte */
         case COMM_RELAY_STATE_READ:     return 0;
-        case COMM_RELAY_MASK_READ:      return 0;
+        case COMM_CHANNEL_STATE_READ:   return 0;
         case COMM_BATTERY_READ:         return 0;
         case COMM_LEVELS_READ:          return 0;
         case COMM_LEVEL_MODE_READ:      return 0;
@@ -239,52 +238,43 @@ void comm_parse_relay_state_response(const uint8_t* data, CommRelayState* state)
 }
 
 /* ============================================================================
- * relay_changed (0x06)
+ * channel_changed (0x06)
  * ============================================================================
  */
 
-uint8_t comm_build_relay_changed(CommMessage* msg, uint16_t prev_relays, uint16_t current_relays, uint8_t prev_sensors,
-                                 uint8_t current_sensors) {
-    msg->id = COMM_RELAY_CHANGED;
-    msg->relay_changed.device_address = comm_address();
-    msg->relay_changed.prev_relays = prev_relays;
-    msg->relay_changed.current_relays = current_relays;
-    msg->relay_changed.prev_sensors = prev_sensors;
-    msg->relay_changed.current_sensors = current_sensors;
-    return comm_finalize(msg, (uint8_t)sizeof(CommRelayChanged));
+uint8_t comm_build_channel_changed(CommMessage* msg, uint16_t prev_channels, uint16_t current_channels,
+                                   uint8_t prev_sensors, uint8_t current_sensors) {
+    msg->id = COMM_CHANNEL_CHANGED;
+    msg->channel_changed.device_address = comm_address();
+    msg->channel_changed.prev_channels = prev_channels;
+    msg->channel_changed.current_channels = current_channels;
+    msg->channel_changed.prev_sensors = prev_sensors;
+    msg->channel_changed.current_sensors = current_sensors;
+    return comm_finalize(msg, (uint8_t)sizeof(CommChannelChanged));
 }
 
-void comm_parse_relay_changed(const uint8_t* data, CommRelayChanged* event) {
+void comm_parse_channel_changed(const uint8_t* data, CommChannelChanged* event) {
     event->device_address = data[0];
-    event->prev_relays = (uint16_t)data[1] | ((uint16_t)data[2] << 8);
-    event->current_relays = (uint16_t)data[3] | ((uint16_t)data[4] << 8);
+    event->prev_channels = (uint16_t)data[1] | ((uint16_t)data[2] << 8);
+    event->current_channels = (uint16_t)data[3] | ((uint16_t)data[4] << 8);
     event->prev_sensors = data[5];
     event->current_sensors = data[6];
 }
 
 /* ============================================================================
- * relay_mask (0x07 / 0x87)
+ * channel_state_read (0x87)
  * ============================================================================
  */
 
-uint8_t comm_build_relay_mask(CommMessage* msg, uint16_t mask) {
-    msg->id = COMM_RELAY_MASK;
-    msg->relay_mask.mask = mask;
-    return comm_finalize(msg, (uint8_t)sizeof(CommRelayMask));
+uint8_t comm_build_channel_state_read(CommMessage* msg) {
+    msg->id = COMM_CHANNEL_STATE_READ;
+    return comm_finalize_precomputed(msg, CRC8_CHANNEL_STATE_READ);
 }
 
-uint8_t comm_build_relay_mask_read(CommMessage* msg) {
-    msg->id = COMM_RELAY_MASK_READ;
-    return comm_finalize_precomputed(msg, CRC8_RELAY_MASK_READ);
+void comm_parse_channel_state_response(const uint8_t* data, CommChannelState* state) {
+    state->channels = (uint16_t)data[0] | ((uint16_t)data[1] << 8);
 }
 
-void comm_parse_relay_mask_write(const uint8_t* data, CommRelayMask* mask) {
-    mask->mask = (uint16_t)data[0] | ((uint16_t)data[1] << 8);
-}
-
-void comm_parse_relay_mask_response(const uint8_t* data, CommRelayMask* mask) {
-    mask->mask = (uint16_t)data[0] | ((uint16_t)data[1] << 8);
-}
 
 /* ============================================================================
  * battery_read (0x88)

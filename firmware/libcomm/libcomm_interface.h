@@ -83,9 +83,8 @@ I2cResult comm_send_button_changed(uint8_t button_id, uint8_t pressed, CommButto
 I2cResult comm_send_button_trigger(uint8_t addr, uint8_t button_id, CommTriggerConfig config, I2cCompletion cb,
                                    void* ctx);
 I2cResult comm_send_relay_state(uint16_t relays, I2cCompletion cb, void* ctx);
-I2cResult comm_send_relay_changed(uint16_t prev_relays, uint16_t current_relays, uint8_t prev_sensors,
-                                  uint8_t current_sensors, I2cCompletion cb, void* ctx);
-I2cResult comm_send_relay_mask(uint16_t mask, I2cCompletion cb, void* ctx);
+I2cResult comm_send_channel_changed(uint16_t prev_channels, uint16_t current_channels, uint8_t prev_sensors,
+                                    uint8_t current_sensors, I2cCompletion cb, void* ctx);
 I2cResult comm_send_level_mode(CommMeterMode mode_0, CommMeterMode mode_1, I2cCompletion cb, void* ctx);
 
 /* ============================================================================
@@ -102,7 +101,7 @@ I2cResult comm_send_level_mode(CommMeterMode mode_0, CommMeterMode mode_1, I2cCo
 I2cResult comm_send_button_state_read(uint8_t addr);
 I2cResult comm_send_button_trigger_read(uint8_t addr, uint8_t button_id);
 I2cResult comm_send_relay_state_read(void);
-I2cResult comm_send_relay_mask_read(void);
+I2cResult comm_send_channel_state_read(void);
 I2cResult comm_send_battery_read(void);
 I2cResult comm_send_levels_read(void);
 I2cResult comm_send_level_mode_read(void);
@@ -123,7 +122,7 @@ I2cResult comm_send_config_read(uint8_t addr, uint8_t config_addr);
 void comm_on_button_state_read_response(uint8_t addr, CommButtonState* state);
 void comm_on_button_trigger_read_response(uint8_t addr, CommTriggerConfig* config);
 void comm_on_relay_state_read_response(CommRelayState* state);
-void comm_on_relay_mask_read_response(CommRelayMask* mask);
+void comm_on_channel_state_read_response(CommChannelState* state);
 void comm_on_battery_read_response(CommBattery* battery);
 void comm_on_levels_read_response(CommLevels* levels);
 void comm_on_level_mode_read_response(CommLevelMode* mode);
@@ -146,8 +145,7 @@ void comm_on_button_effect_received(const CommButtonEffect* effect);
 void comm_on_button_changed_received(const CommButtonChanged* event);
 void comm_on_button_trigger_received(const CommButtonTrigger* trigger);
 void comm_on_relay_state_received(const CommRelayState* state);
-void comm_on_relay_changed_received(const CommRelayChanged* event);
-void comm_on_relay_mask_received(const CommRelayMask* mask);
+void comm_on_channel_changed_received(const CommChannelChanged* event);
 void comm_on_level_mode_received(const CommLevelMode* mode);
 
 /* ============================================================================
@@ -169,7 +167,7 @@ I2cResult comm_respond(const uint8_t* data, uint8_t len);
 void comm_on_button_state_read_requested(void);
 void comm_on_button_trigger_read_requested(uint8_t button_id);
 void comm_on_relay_state_read_requested(void);
-void comm_on_relay_mask_read_requested(void);
+void comm_on_channel_state_read_requested(void);
 void comm_on_battery_read_requested(void);
 void comm_on_levels_read_requested(void);
 void comm_on_level_mode_read_requested(void);

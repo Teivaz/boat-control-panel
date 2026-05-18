@@ -25,26 +25,26 @@
 
 /* mux0_to_wire[addr] = the wire bit that mux 0 channel `addr` monitors. */
 static const uint8_t mux0_to_wire[8] = {
-    6, /* addr 0 -> anchor_light   (wire 6)  */
-    8, /* addr 1 -> tricolor_light (wire 8)  */
-    9, /* addr 2 -> fresh_water    (wire 9)  */
-    5, /* addr 3 -> steaming_light (wire 5)  */
-    4, /* addr 4 -> stern_light    (wire 4)  */
-    1, /* addr 5 -> main           (wire 1)  */
-    3, /* addr 6 -> bow_light      (wire 3)  */
-    2, /* addr 7 -> autopilot      (wire 2)  */
+    6, /* addr 0 -> anchor_light     (wire 6) */
+    7, /* addr 1 -> tricolor_light   (wire 7) */
+    9, /* addr 2 -> fresh_water_pump (wire 9) */
+    5, /* addr 3 -> steaming_light   (wire 5) */
+    4, /* addr 4 -> stern_light      (wire 4) */
+    0, /* addr 5 -> main             (wire 0) */
+    3, /* addr 6 -> bow_light        (wire 3) */
+    2, /* addr 7 -> autopilot        (wire 2) */
 };
 
 /* mux1_to_wire[addr] = the wire bit that mux 1 channel `addr` monitors. */
 static const uint8_t mux1_to_wire[8] = {
-    15, /* addr 0 -> usb          (wire 15) */
-    7,  /* addr 1 -> cabin_lights (wire 7)  */
-    0,  /* addr 2 -> instruments  (wire 0)  */
-    14, /* addr 3 -> deck_lights  (wire 14) */
-    13, /* addr 4 -> aux2         (wire 13) */
-    10, /* addr 5 -> fridge       (wire 10) */
-    12, /* addr 6 -> aux1         (wire 12) */
-    11, /* addr 7 -> inverter     (wire 11) */
+    13, /* addr 0 -> usb           (wire 13) */
+    12, /* addr 1 -> cabin_lights  (wire 12) */
+    1,  /* addr 2 -> instruments   (wire 1)  */
+    11, /* addr 3 -> deck_lights   (wire 11) */
+    15, /* addr 4 -> aux2          (wire 15) */
+    10, /* addr 5 -> fridge        (wire 10) */
+    14, /* addr 6 -> aux1          (wire 14) */
+    8,  /* addr 7 -> inverter      (wire 8)  */
 };
 
 void relay_mon_init(void) {

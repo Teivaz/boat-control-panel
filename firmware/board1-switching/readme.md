@@ -11,26 +11,27 @@ RC4 SDA
 
 The relays are controlled with 2 shift registers MC74HC595A connected in series.
 
-| Bit | ID | Channel Name |
-|---|---|---|
-| 0 | 14 | instruments |
-| 1 | 15 | main |
-| 2 | 0 | autopilot |
-| 3 | 1 | bow_light |
-| 4 | 2 | stern_light |
-| 5 | 3 | steaming_light |
-| 6 | 4 | anchor_light |
-| 7 | 13 | cabin_lights |
-| 8 | 5 | tricolor_light |
-| 9 | 6 | fresh_water_pump |
-| 10 | 7 | fridge |
-| 11 | 8 | inverter |
-| 12 | 9 | aux1 |
-| 13 | 10 | aux2 |
-| 14 | 11 | deck_lights |
-| 15 | 12 | usb |
+The "Address" column is the bit position in the 16-bit shift word, with bit 0
+the lowest bit (transmitted last, lands at the near-end shift-register output).
 
-The 0 is lowest bit transmitted last.
+| Protocol Bit | Address | Channel Name |
+|---|---|---|
+| 0 | 1 | main |
+| 1 | 0 | instruments |
+| 2 | 2 | autopilot |
+| 3 | 3 | bow_light |
+| 4 | 4 | stern_light |
+| 5 | 5 | steaming_light |
+| 6 | 6 | anchor_light |
+| 7 | 8 | tricolor_light |
+| 8 | 11 | inverter |
+| 9 | 9 | fresh_water_pump |
+| 10 | 10 | fridge |
+| 11 | 14 | deck_lights |
+| 12 | 7 | cabin_lights |
+| 13 | 15 | usb |
+| 14 | 12 | aux1 |
+| 15 | 13 | aux2 |
 
 ### Pinout
 
@@ -48,22 +49,22 @@ Logical 1 on the input means the channel has power.
 
 | Bit | Multiplexer | Channel Name |
 |---|---|---|
-| 2 | 1 | instruments |
 | 5 | 0 | main |
+| 2 | 1 | instruments |
 | 7 | 0 | autopilot |
 | 6 | 0 | bow_light |
 | 4 | 0 | stern_light |
 | 3 | 0 | steaming_light |
 | 0 | 0 | anchor_light |
-| 1 | 1 | cabin_lights |
 | 1 | 0 | tricolor_light |
+| 7 | 1 | inverter |
 | 2 | 0 | fresh_water_pump |
 | 5 | 1 | fridge |
-| 7 | 1 | inverter |
+| 3 | 1 | deck_lights |
+| 1 | 1 | cabin_lights |
+| 0 | 1 | usb |
 | 6 | 1 | aux1 |
 | 4 | 1 | aux2 |
-| 3 | 1 | deck_lights |
-| 0 | 1 | usb |
 
 The addressing of the multiplexer is done with A B and C pins, simultaneous for both multiplexers. Reading done through COM pin. The nINH is connected to GND.
 

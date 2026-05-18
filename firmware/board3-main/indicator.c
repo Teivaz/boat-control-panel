@@ -95,6 +95,14 @@ static void refresh_task(TaskId id, void* ctx) {
 
     if (config_mode_active()) {
         render_config();
+    } else if (!controller_power_on()) {
+        /* OFF / PENDING / ERROR: ring goes dark — display gets the same
+         * blank treatment in display_text.c. */
+        for (uint8_t i = 0; i < LED_COUNT; i++) {
+            leds[i].red = 0;
+            leds[i].green = 0;
+            leds[i].blue = 0;
+        }
     } else if (controller_nav_error()) {
         render_error();
     } else {

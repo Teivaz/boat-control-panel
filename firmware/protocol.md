@@ -44,9 +44,8 @@ Receivers drop any message whose trailing byte doesn't match the computed CRC. P
 | `button_trigger_read` | 0x84 | main → button board (read) |
 | `relay_state` | 0x05 | main → switching board (write) |
 | `relay_state_read` | 0x85 | main → switching board (read) |
-| `relay_changed` | 0x06 | switching board → main |
-| `relay_mask` | 0x07 | main → switching board (write) |
-| `relay_mask_read` | 0x87 | main → switching board (read) |
+| `channel_changed` | 0x06 | switching board → main |
+| `channel_state_read` | 0x87 | main → switching board (read) |
 | `battery_read` | 0x88 | main → switching board (read) |
 | `levels_read` | 0x89 | main → switching board (read) |
 | `level_mode` | 0x0A | main → switching board (write) |
@@ -85,13 +84,13 @@ The low end of the configuration address space is reserved for universal fields 
   - write byte 1: device_address - address of the sending button board
   - write byte 2: button_id - `[7:6]` = 0, `[5:4]` = button mode, `[3]` button pressed, `[2:0]` button index
 
-- relay_changed - pushed by the switching board when any masked relay or any sensor changes state
+- channel_changed - pushed by the switching board when any channel-voltage bit (mux-observed downstream of each relay's fuse) or any sensor changes state
   - write byte 0: command - 0x06
   - write byte 1: device_address - address of the sending switching board
-  - write byte 2: prev_relays_lo - previous physical state of relays 0–7; bit N = relay N
-  - write byte 3: prev_relays_hi - previous physical state of relays 8–15; bit N = relay N−8
-  - write byte 4: current_relays_lo - current physical state of relays 0–7
-  - write byte 5: current_relays_hi - current physical state of relays 8–15
+  - write byte 2: prev_channels_lo - previous channel-voltage state of channels 0–7; bit N = channel N
+  - write byte 3: prev_channels_hi - previous channel-voltage state of channels 8–15; bit N = channel N−8
+  - write byte 4: current_channels_lo - current channel-voltage state of channels 0–7
+  - write byte 5: current_channels_hi - current channel-voltage state of channels 8–15
   - write byte 6: prev_sensors - previous sensor state; `[7:3]` = 0, `[2]` sensor_2, `[1]` sensor_1, `[0]` sensor_0
   - write byte 7: current_sensors - current sensor state; same layout as prev_sensors
 
@@ -158,29 +157,27 @@ Each button has an independent mode and timing configured via `button_trigger`:
 
 ### Switching board (0x42)
 
-The switching board has 16 relay channels. Each relay has a target state (desired) and a physical state (actual). Physical state normally tracks target state with a small delay but may diverge due to external factors. Relay state is represented as a 2-byte bitmask transmitted low byte first: byte 0 = relays 0–7, byte 1 = relays 8–15 (bit N = relay N; 1 = on, 0 = off).
+The switching board has 16 relay channels. Each channel has three observable states:
+
+- **relay target** — what the firmware was last commanded to set (`relay_state` write).
+- **channel voltage** — the voltage observed downstream of the relay's fuse, read via the relay-output mux. A blown fuse can leave a relay commanded ON while its channel reads 0; a stuck contactor can do the inverse.
+
+Both states are 2-byte bitmasks transmitted low byte first: byte 0 = bits 0–7, byte 1 = bits 8–15 (bit N = channel N; 1 = on, 0 = off).
 
 - relay_state - write the target state of all 16 relays
   - write byte 0: command - 0x05
   - write byte 1: relays_lo - target state of relays 0–7
   - write byte 2: relays_hi - target state of relays 8–15
 
-- relay_state_read - read the target state of all 16 relays
+- relay_state_read - read the commanded target state of all 16 relays (the last value written via `relay_state`)
   - write byte 0: command - 0x85
   - read byte 0: relays_lo
   - read byte 1: relays_hi
 
-- relay_mask - write the event mask; only relays with their mask bit set trigger `relay_changed` messages
-  - write byte 0: command - 0x07
-  - write byte 1: mask_lo - event mask for relays 0–7
-  - write byte 2: mask_hi - event mask for relays 8–15
-
-  Default on power-on is 0x0000 (all events suppressed).
-
-- relay_mask_read - read the event mask
+- channel_state_read - read the channel-voltage state of all 16 channels (mux-observed; reflects fuse / contactor health, not just the commanded relay target)
   - write byte 0: command - 0x87
-  - read byte 0: mask_lo
-  - read byte 1: mask_hi
+  - read byte 0: channels_lo
+  - read byte 1: channels_hi
 
 - battery_read - polled read; returns battery voltage as an unsigned 16-bit value
   - write byte 0: command - 0x88

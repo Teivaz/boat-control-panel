@@ -25,10 +25,6 @@ void comm_on_relay_state_received(const CommRelayState* state) {
     controller_set_relay_target(state->relays);
 }
 
-void comm_on_relay_mask_received(const CommRelayMask* mask) {
-    controller_set_relay_mask(mask->mask);
-}
-
 void comm_on_level_mode_received(const CommLevelMode* mode) {
     /* Update RAM and persist so the mode survives a reboot. config_write_byte
      * dedups against pending writes, so a flurry of repeated writes coalesces
@@ -55,7 +51,7 @@ void comm_on_button_changed_received(const CommButtonChanged* event) {
 void comm_on_button_trigger_received(const CommButtonTrigger* trigger) {
     (void)trigger;
 }
-void comm_on_relay_changed_received(const CommRelayChanged* event) {
+void comm_on_channel_changed_received(const CommChannelChanged* event) {
     (void)event;
 }
 
@@ -70,8 +66,8 @@ void comm_on_relay_state_read_requested(void) {
     comm_respond(buf, 2);
 }
 
-void comm_on_relay_mask_read_requested(void) {
-    uint16_t v = controller_relay_mask();
+void comm_on_channel_state_read_requested(void) {
+    uint16_t v = controller_channel_state();
     uint8_t buf[2] = {(uint8_t)v, (uint8_t)(v >> 8)};
     comm_respond(buf, 2);
 }
@@ -126,8 +122,8 @@ void comm_on_button_trigger_read_response(uint8_t addr, CommTriggerConfig* confi
 void comm_on_relay_state_read_response(CommRelayState* state) {
     (void)state;
 }
-void comm_on_relay_mask_read_response(CommRelayMask* mask) {
-    (void)mask;
+void comm_on_channel_state_read_response(CommChannelState* state) {
+    (void)state;
 }
 void comm_on_battery_read_response(CommBattery* battery) {
     (void)battery;

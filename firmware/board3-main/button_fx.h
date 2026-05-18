@@ -9,8 +9,8 @@
  *
  * Lifecycle per button press:
  *   1. button_fx_notify_press() switches the slot to PENDING -> pulsating.
- *   2. As relay_changed events roll in, the expected (mask, value) is
- *      matched against relay_physical; when it matches, the slot clears
+ *   2. As channel_changed events roll in, the expected (mask, value) is
+ *      matched against channel_state; when it matches, the slot clears
  *      back to IDLE and the base effect takes over.
  *   3. If the expected state does not arrive within BUTTON_FX_TIMEOUT_MS,
  *      the slot flips to ERROR -> flashing red. Controllers clear the
@@ -25,6 +25,6 @@ void button_fx_init(TaskController* ctrl);
 uint8_t button_fx_is_error(uint8_t side, uint8_t button_idx);
 void button_fx_clear(uint8_t side, uint8_t button_idx);
 void button_fx_notify_press(uint8_t side, uint8_t button_idx, uint16_t expected_mask, uint16_t expected_value);
-void button_fx_on_relay_physical(uint16_t physical);
+void button_fx_on_channel_state(uint16_t channels);
 
 #endif /* BUTTON_FX_H */

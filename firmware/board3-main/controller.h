@@ -15,14 +15,15 @@ void controller_init(TaskController* ctrl);
 /* Inbound dispatch hooks. Both are invoked from I2C ISR context — must be
  * non-blocking. Senders are identified by their 7-bit I2C address. */
 void controller_on_button_changed(uint8_t sender, uint8_t button_id, uint8_t pressed, CommButtonMode mode);
-void controller_on_relay_changed(uint8_t sender, uint16_t prev_relays, uint16_t curr_relays, uint8_t prev_sensors,
-                                 uint8_t curr_sensors);
+void controller_on_channel_changed(uint8_t sender, uint16_t prev_channels, uint16_t curr_channels,
+                                   uint8_t prev_sensors, uint8_t curr_sensors);
 
 /* Adopter-callback forwarders — called from comm.c when protocol read
  * responses arrive.  Main-loop context.  NULL pointer means I2C error. */
 void controller_on_battery_response(const CommBattery* battery);
 void controller_on_levels_response(const CommLevels* levels);
 void controller_on_sensors_response(const CommSensors* sensors);
+void controller_on_channel_state_response(const CommChannelState* state);
 void controller_on_config_read_response(const uint8_t* value);
 
 /* State queries for UI / display layers. */
@@ -30,7 +31,7 @@ uint8_t controller_power_on(void);
 NavMode controller_nav_mode(void);
 uint8_t controller_nav_error(void);
 uint16_t controller_relay_target(void);
-uint16_t controller_relay_physical(void);
+uint16_t controller_channel_state(void);
 /* Physically-active nav lights as a NAV_LIGHT_* bitmask (anchoring, tricolor,
  * steaming, bow, stern at bits 0..4). Decouples callers from the relay
  * word's actual bit layout, which is non-contiguous on the wire. */

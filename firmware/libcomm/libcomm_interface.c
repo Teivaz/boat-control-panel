@@ -65,16 +65,16 @@ static void on_relay_state_read_done(I2cResult result, uint8_t* rx_buf, uint8_t 
     comm_on_relay_state_read_response(&state);
 }
 
-static void on_relay_mask_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
+static void on_channel_state_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
     (void)result;
     (void)ctx;
-    if (!response_crc_ok(rx_buf, rx_len, (uint8_t)sizeof(CommRelayMask))) {
-        comm_on_relay_mask_read_response(0);
+    if (!response_crc_ok(rx_buf, rx_len, (uint8_t)sizeof(CommChannelState))) {
+        comm_on_channel_state_read_response(0);
         return;
     }
-    CommRelayMask mask;
-    comm_parse_relay_mask_response(rx_buf, &mask);
-    comm_on_relay_mask_read_response(&mask);
+    CommChannelState state;
+    comm_parse_channel_state_response(rx_buf, &state);
+    comm_on_channel_state_read_response(&state);
 }
 
 static void on_battery_read_done(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx) {
@@ -194,8 +194,8 @@ static uint8_t sync_cold_rx_dispatch(uint8_t* data, uint8_t len) {
             comm_on_relay_state_read_requested();
             break;
 
-        case COMM_RELAY_MASK_READ:
-            comm_on_relay_mask_read_requested();
+        case COMM_CHANNEL_STATE_READ:
+            comm_on_channel_state_read_requested();
             break;
 
         case COMM_BATTERY_READ:
@@ -276,19 +276,11 @@ static void cold_rx_dispatch(I2cResult result, uint8_t* data, uint8_t len, void*
             }
             break;
 
-        case COMM_RELAY_CHANGED:
+        case COMM_CHANNEL_CHANGED:
             if (plen >= 7) {
-                CommRelayChanged event;
-                comm_parse_relay_changed(payload, &event);
-                comm_on_relay_changed_received(&event);
-            }
-            break;
-
-        case COMM_RELAY_MASK:
-            if (plen >= 2) {
-                CommRelayMask mask;
-                comm_parse_relay_mask_write(payload, &mask);
-                comm_on_relay_mask_received(&mask);
+                CommChannelChanged event;
+                comm_parse_channel_changed(payload, &event);
+                comm_on_channel_changed_received(&event);
             }
             break;
 
@@ -356,17 +348,11 @@ I2cResult comm_send_relay_state(uint16_t relays, I2cCompletion cb, void* ctx) {
     return send_write(COMM_ADDRESS_SWITCHING, &msg, len, cb, ctx);
 }
 
-I2cResult comm_send_relay_changed(uint16_t prev_relays, uint16_t current_relays, uint8_t prev_sensors,
-                                  uint8_t current_sensors, I2cCompletion cb, void* ctx) {
+I2cResult comm_send_channel_changed(uint16_t prev_channels, uint16_t current_channels, uint8_t prev_sensors,
+                                    uint8_t current_sensors, I2cCompletion cb, void* ctx) {
     CommMessage msg;
-    uint8_t len = comm_build_relay_changed(&msg, prev_relays, current_relays, prev_sensors, current_sensors);
+    uint8_t len = comm_build_channel_changed(&msg, prev_channels, current_channels, prev_sensors, current_sensors);
     return send_write(COMM_ADDRESS_MAIN, &msg, len, cb, ctx);
-}
-
-I2cResult comm_send_relay_mask(uint16_t mask, I2cCompletion cb, void* ctx) {
-    CommMessage msg;
-    uint8_t len = comm_build_relay_mask(&msg, mask);
-    return send_write(COMM_ADDRESS_SWITCHING, &msg, len, cb, ctx);
 }
 
 I2cResult comm_send_level_mode(CommMeterMode mode_0, CommMeterMode mode_1, I2cCompletion cb, void* ctx) {
@@ -403,10 +389,11 @@ I2cResult comm_send_relay_state_read(void) {
     return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 3, on_relay_state_read_done, 0);
 }
 
-I2cResult comm_send_relay_mask_read(void) {
+I2cResult comm_send_channel_state_read(void) {
     CommMessage msg;
-    uint8_t tx_len = comm_build_relay_mask_read(&msg);
-    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 3, on_relay_mask_read_done, 0);
+    uint8_t tx_len = comm_build_channel_state_read(&msg);
+    /* rx_len = payload(2) + CRC(1) */
+    return i2c_submit(COMM_ADDRESS_SWITCHING, (const uint8_t*)&msg, tx_len, 3, on_channel_state_read_done, 0);
 }
 
 I2cResult comm_send_battery_read(void) {

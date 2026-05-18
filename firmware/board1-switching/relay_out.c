@@ -40,11 +40,59 @@ void relay_out_init(void) {
     relay_out_write(0);
 }
 
+/* Wire-bit (protocol) → internal shift-register pin number.
+ *
+ * The readme's "Address" column doesn't match the actual hardware. Empirical
+ * mapping from sr_mask bit to physical channel (verified on the dev board):
+ *
+ *   sr_mask bit | channel              sr_mask bit | channel
+ *   ----------- | -----------          ----------- | -----------
+ *           0   | instruments                  8   | tricolor_light
+ *           1   | main                         9   | fresh_water_pump
+ *           2   | autopilot                   10   | fridge
+ *           3   | bow_light                   11   | inverter
+ *           4   | stern_light                 12   | aux1
+ *           5   | steaming_light              13   | aux2
+ *           6   | anchor_light                14   | deck_lights
+ *           7   | cabin_lights                15   | usb
+ *
+ * Each entry below is the sr_mask bit for that protocol bit's channel.
+ * The mux-side monitoring table in the readme matches the hardware directly,
+ * so only this output LUT is rebuilt from observation. */
+static const uint8_t wire_to_sr[16] = {
+    1,  /* wire 0  → main             */
+    0,  /* wire 1  → instruments      */
+    2,  /* wire 2  → autopilot        */
+    3,  /* wire 3  → bow_light        */
+    4,  /* wire 4  → stern_light      */
+    5,  /* wire 5  → steaming_light   */
+    6,  /* wire 6  → anchor_light     */
+    8,  /* wire 7  → tricolor_light   */
+    11, /* wire 8  → inverter         */
+    9,  /* wire 9  → fresh_water_pump */
+    10, /* wire 10 → fridge           */
+    14, /* wire 11 → deck_lights      */
+    7,  /* wire 12 → cabin_lights     */
+    15, /* wire 13 → usb              */
+    12, /* wire 14 → aux1             */
+    13, /* wire 15 → aux2             */
+};
+
 void relay_out_write(uint16_t wire_mask) {
+    /* Translate wire bits to the SIPO chain's pin layout. The shift order
+     * below puts wire-mask bit i at SR pin i unmodified, which doesn't
+     * match the readme's wiring — remap first so each wire bit drives the
+     * right physical coil. */
+    uint16_t sr_mask = 0;
+    for (uint8_t i = 0; i < 16; i++) {
+        if (wire_mask & (uint16_t)(1u << i)) {
+            sr_mask |= (uint16_t)(1u << wire_to_sr[i]);
+        }
+    }
     PIN_LATCH_CLK = 0;
     for (int8_t i = 15; i >= 0; i--) {
         PIN_SHIFT_CLK = 0;
-        PIN_A = (wire_mask >> i) & 1u;
+        PIN_A = (sr_mask >> i) & 1u;
         PIN_SHIFT_CLK = 1;
     }
     PIN_LATCH_CLK = 1;

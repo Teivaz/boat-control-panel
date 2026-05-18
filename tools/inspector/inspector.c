@@ -10,7 +10,7 @@
 #include <unistd.h>
 
 /* libcomm.c references comm_address() from comm_build_button_changed and
- * comm_build_relay_changed — the inspector uses comm_build_button_changed
+ * comm_build_channel_changed — the inspector uses comm_build_button_changed
  * to emulate inbound events, so the stub returns a settable sender that
  * cmd_button overrides for the duration of the build call. */
 static uint8_t g_fake_sender;
@@ -353,24 +353,18 @@ static int cmd_relays_write(const Board* b, uint16_t val) {
     return do_write(b, &msg, len);
 }
 
-static int cmd_mask_read(const Board* b) {
+static int cmd_channels_read(const Board* b) {
     CommMessage msg;
-    uint8_t wlen = comm_build_relay_mask_read(&msg);
+    uint8_t wlen = comm_build_channel_state_read(&msg);
     uint8_t rdata[3];
     int r = do_read(b, &msg, wlen, rdata, sizeof(rdata));
     if (r >= 0) {
         return r;
     }
-    CommRelayMask m;
-    comm_parse_relay_mask_response(rdata, &m);
-    print_u16(NULL, m.mask);
+    CommChannelState st;
+    comm_parse_channel_state_response(rdata, &st);
+    print_u16(NULL, st.channels);
     return 0;
-}
-
-static int cmd_mask_write(const Board* b, uint16_t val) {
-    CommMessage msg;
-    uint8_t len = comm_build_relay_mask(&msg, val);
-    return do_write(b, &msg, len);
 }
 
 static int cmd_meter_read(const Board* b) {
@@ -477,9 +471,9 @@ static void usage(void) {
           "  sw:        battery | voltage\n"
           "             levels\n"
           "             sensors\n"
-          "             relays read | write <hex16>\n"
-          "             mask   read | write <hex16>\n"
-          "             meter  read | write <m0> <m1>     (mode: 0|1|2)\n"
+          "             relays   read | write <hex16>   (commanded target)\n"
+          "             channels                        (mux-observed channel voltage)\n"
+          "             meter    read | write <m0> <m1> (mode: 0|1|2)\n"
           "\n"
           "  l*, r*:    buttons\n"
           "             trigger read  <id>\n"
@@ -584,26 +578,8 @@ static int dispatch(const Board* b, int argc, char** argv) {
                 return cmd_relays_write(b, val);
             }
         }
-        if (strcasecmp(v, "mask") == 0) {
-            if (argc < 2) {
-                usage();
-                return 1;
-            }
-            if (strcasecmp(argv[1], "read") == 0) {
-                return cmd_mask_read(b);
-            }
-            if (strcasecmp(argv[1], "write") == 0) {
-                if (argc < 3) {
-                    usage();
-                    return 1;
-                }
-                uint16_t val;
-                if (parse_u16(argv[2], &val) < 0) {
-                    usage();
-                    return 1;
-                }
-                return cmd_mask_write(b, val);
-            }
+        if (strcasecmp(v, "channels") == 0) {
+            return cmd_channels_read(b);
         }
         if (strcasecmp(v, "meter") == 0) {
             if (argc < 2) {

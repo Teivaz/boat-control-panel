@@ -130,7 +130,7 @@ comm_send_config_read(addr, config_addr);
 ```c
 // Main-loop context — incoming writes:
 void comm_on_button_changed_received(const CommButtonChanged* event);
-void comm_on_relay_changed_received(const CommRelayChanged* event);
+void comm_on_channel_changed_received(const CommChannelChanged* event);
 void comm_on_reset(void);
 
 // Main-loop context — read responses:

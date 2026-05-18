@@ -24,7 +24,7 @@ typedef struct {
 } Slot;
 
 static volatile Slot slots[BUTTON_FX_SIDES][BUTTON_FX_BUTTONS_PER_SIDE];
-static volatile uint16_t last_physical;
+static volatile uint16_t last_channels;
 
 /* Previously-sent wire bytes per side: used both as the "has something
  * changed" detector and as the build buffer for the next transmit. */
@@ -57,7 +57,7 @@ void button_fx_init(TaskController* ctrl) {
         /* Force a first-pass transmit so the panels match our model. */
         prev_effect[s].outputs_76 = 0xFF;
     }
-    last_physical = 0;
+    last_channels = 0;
     task_controller_add(ctrl, TASK_BUTTON_FX, TICK_MS, refresh_task, 0);
 }
 
@@ -85,9 +85,9 @@ void button_fx_notify_press(uint8_t side, uint8_t idx, uint16_t mask, uint16_t v
     Slot* s = (Slot*)&slots[side][idx];
     s->expected_mask = mask;
     s->expected_value = (uint16_t)(value & mask);
-    /* Fast-path: if the physical bus already matches the requested state
-     * there is nothing to wait for. */
-    if ((last_physical & mask) == s->expected_value) {
+    /* Fast-path: if the bus already shows channel voltage matching the
+     * requested state there is nothing to wait for. */
+    if ((last_channels & mask) == s->expected_value) {
         s->state = FX_IDLE;
         s->deadline_ticks = 0;
     } else {
@@ -96,15 +96,15 @@ void button_fx_notify_press(uint8_t side, uint8_t idx, uint16_t mask, uint16_t v
     }
 }
 
-void button_fx_on_relay_physical(uint16_t physical) {
-    last_physical = physical;
+void button_fx_on_channel_state(uint16_t channels) {
+    last_channels = channels;
     for (uint8_t side = 0; side < BUTTON_FX_SIDES; side++) {
         for (uint8_t b = 0; b < BUTTON_FX_BUTTONS_PER_SIDE; b++) {
             Slot* s = (Slot*)&slots[side][b];
             if (s->state != FX_PENDING) {
                 continue;
             }
-            if ((physical & s->expected_mask) == s->expected_value) {
+            if ((channels & s->expected_mask) == s->expected_value) {
                 s->state = FX_IDLE;
                 s->deadline_ticks = 0;
             }
@@ -150,7 +150,7 @@ static void refresh_task(TaskId id, void* ctx) {
     (void)ctx;
 
     /* Age any pending slot towards the error state. The read-modify-write on
-     * s->state must be atomic against on_relay_physical, which can transition
+     * s->state must be atomic against on_channel_state, which can transition
      * PENDING -> IDLE from ISR context; without the guard we could clobber
      * that IDLE with ERROR and strand the slot. */
     for (uint8_t side = 0; side < BUTTON_FX_SIDES; side++) {

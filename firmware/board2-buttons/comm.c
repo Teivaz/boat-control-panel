@@ -89,11 +89,8 @@ void comm_on_button_changed_received(const CommButtonChanged* event) {
 void comm_on_relay_state_received(const CommRelayState* state) {
     (void)state;
 }
-void comm_on_relay_changed_received(const CommRelayChanged* event) {
+void comm_on_channel_changed_received(const CommChannelChanged* event) {
     (void)event;
-}
-void comm_on_relay_mask_received(const CommRelayMask* mask) {
-    (void)mask;
 }
 void comm_on_level_mode_received(const CommLevelMode* mode) {
     (void)mode;
@@ -125,7 +122,7 @@ void comm_on_config_read_requested(uint8_t address) {
 
 void comm_on_relay_state_read_requested(void) {
 }
-void comm_on_relay_mask_read_requested(void) {
+void comm_on_channel_state_read_requested(void) {
 }
 void comm_on_battery_read_requested(void) {
 }
@@ -154,8 +151,8 @@ void comm_on_button_trigger_read_response(uint8_t addr, CommTriggerConfig* confi
 void comm_on_relay_state_read_response(CommRelayState* state) {
     (void)state;
 }
-void comm_on_relay_mask_read_response(CommRelayMask* mask) {
-    (void)mask;
+void comm_on_channel_state_read_response(CommChannelState* state) {
+    (void)state;
 }
 void comm_on_battery_read_response(CommBattery* battery) {
     (void)battery;
