@@ -373,10 +373,7 @@ void i2c_init(uint8_t addr) {
 
     I2C1BTOC = 0x06;         /* LFINTOSC as BTO clock source */
     I2C1BTObits.TOBY32 = 1;  /* x32 */
-    I2C1BTObits.TOTIME = 5;  /* ~5 ms — BTO is now only a stuck-bus recovery
-                              * path (the CNT=N-1 trick keeps normal slave-TX
-                              * completion off this code path), so a tighter
-                              * timeout recovers faster from real faults. */
+    I2C1BTObits.TOTIME = 35; /* ~35 ms */
 
     I2C1ERRbits.BCLIE = 1;
     I2C1ERRbits.NACKIE = 1;

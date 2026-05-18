@@ -19,21 +19,19 @@ void i2c_pins_init(void) {
     TRISCbits.TRISC4 = 0;
     ODCONCbits.ODCC3 = 1;
     ODCONCbits.ODCC4 = 1;
-    RC3I2Cbits.TH = 0b01;
-    RC4I2Cbits.TH = 0b01;
-    SLRCONCbits.SLRC3 = 0;
-    SLRCONCbits.SLRC4 = 0;
 #if I2C_FME
-    RC3I2Cbits.PU = 0b11;
-    RC4I2Cbits.PU = 0b11;
-    RC3I2Cbits.SLEW = 0b00;
-    RC4I2Cbits.SLEW = 0b00;
-#else
-    RC3I2Cbits.PU = 0b10;
-    RC4I2Cbits.PU = 0b10;
     RC3I2Cbits.SLEW = 0b01;
     RC4I2Cbits.SLEW = 0b01;
+#else
+    SLRCONCbits.SLRC3 = 0b0;
+    SLRCONCbits.SLRC4 = 0b0;
+    RC3I2Cbits.SLEW = 0b00;
+    RC4I2Cbits.SLEW = 0b00;
 #endif
+    RC3I2Cbits.PU = 0b10;
+    RC4I2Cbits.PU = 0b10;
+    RC3I2Cbits.TH = 0b01;
+    RC4I2Cbits.TH = 0b01;
 
     I2C1SCLPPS = 0x13; /* RC3 -> SCL1 */
     RC3PPS = 0x37;

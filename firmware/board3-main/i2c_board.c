@@ -20,11 +20,11 @@ void i2c_pins_init(void) {
     ODCONBbits.ODCB2 = 1;
     RB1I2Cbits.TH = 0b01;
     RB2I2Cbits.TH = 0b01;
-    SLRCONBbits.SLRB1 = 0;
-    SLRCONBbits.SLRB2 = 0;
 #if I2C_FME
     RB1I2Cbits.PU = 0b11;
     RB2I2Cbits.PU = 0b11;
+    SLRCONBbits.SLRB1 = 0;
+    SLRCONBbits.SLRB2 = 0;
     RB1I2Cbits.SLEW = 0b00;
     RB2I2Cbits.SLEW = 0b00;
 #else
