@@ -1,8 +1,14 @@
-### inspector — host-side CLI that talks to the panel boards over CH347 USB-I2C
+### inspector — host-side CLI that talks to the panel boards over a
+### USB-I2C bridge (CH347 via libusb, CP2112 via hidapi).
 ###
-### Depends on libusb-1.0.
-###   macOS:  brew install libusb
-###   Linux:  apt install libusb-1.0-0-dev
+### Dependencies:
+###   libusb-1.0 (CH347 bulk transport)
+###     macOS:  brew install libusb
+###     Linux:  apt install libusb-1.0-0-dev
+###   hidapi    (CP2112 HID transport — macOS HID needs hidapi rather than
+###             libusb because IOHIDFamily owns the device)
+###     macOS:  brew install hidapi
+###     Linux:  apt install libhidapi-dev
 ###
 ### Links the device-side libcomm sources directly so the CLI uses the same
 ### message builders / parsers / CRC the boards do. comm_address() — needed
@@ -10,32 +16,38 @@
 ### (the CLI never calls those, but they have to link).
 
 CC      ?= cc
-PKG     := libusb-1.0
 
-### Resolve libusb include + link flags. Try pkg-config; fall back to a
-### Homebrew prefix probe (covers macOS without pkg-config installed). If
-### neither works, hand-set USB_CFLAGS / USB_LDFLAGS on the make command line.
+### Resolve libusb + hidapi include + link flags. Try pkg-config first; fall
+### back to a Homebrew prefix probe for each (covers macOS without pkg-config).
 PKGCONFIG := $(shell command -v pkg-config 2>/dev/null)
 ifeq ($(PKGCONFIG),)
-  BREW_PREFIX := $(shell brew --prefix libusb 2>/dev/null)
-  ifneq ($(BREW_PREFIX),)
-    USB_CFLAGS  := -I$(BREW_PREFIX)/include
-    USB_LDFLAGS := -L$(BREW_PREFIX)/lib -lusb-1.0
+  USB_PREFIX := $(shell brew --prefix libusb 2>/dev/null)
+  HID_PREFIX := $(shell brew --prefix hidapi 2>/dev/null)
+  ifneq ($(USB_PREFIX),)
+    USB_CFLAGS  := -I$(USB_PREFIX)/include
+    USB_LDFLAGS := -L$(USB_PREFIX)/lib -lusb-1.0
   else
-    USB_CFLAGS  :=
     USB_LDFLAGS := -lusb-1.0
   endif
+  ifneq ($(HID_PREFIX),)
+    HID_CFLAGS  := -I$(HID_PREFIX)/include
+    HID_LDFLAGS := -L$(HID_PREFIX)/lib -lhidapi
+  else
+    HID_LDFLAGS := -lhidapi
+  endif
 else
-  USB_CFLAGS  := $(shell $(PKGCONFIG) --cflags $(PKG))
-  USB_LDFLAGS := $(shell $(PKGCONFIG) --libs $(PKG))
+  USB_CFLAGS  := $(shell $(PKGCONFIG) --cflags libusb-1.0)
+  USB_LDFLAGS := $(shell $(PKGCONFIG) --libs   libusb-1.0)
+  HID_CFLAGS  := $(shell $(PKGCONFIG) --cflags hidapi)
+  HID_LDFLAGS := $(shell $(PKGCONFIG) --libs   hidapi)
 endif
 
 LIBCOMM := ../../firmware/libcomm
 CFLAGS  := -std=c11 -Wall -Wextra -Wno-unused-parameter -O2 -g \
-           -I. -I$(LIBCOMM) $(USB_CFLAGS)
-LDFLAGS := $(USB_LDFLAGS)
+           -I. -I$(LIBCOMM) $(USB_CFLAGS) $(HID_CFLAGS)
+LDFLAGS := $(USB_LDFLAGS) $(HID_LDFLAGS)
 
-SRCS    := inspector.c ch347.c $(LIBCOMM)/libcomm.c $(LIBCOMM)/crc.c
+SRCS    := inspector.c transport.c ch347.c cp2112.c $(LIBCOMM)/libcomm.c $(LIBCOMM)/crc.c
 OBJS    := $(SRCS:.c=.o)
 
 inspector: $(OBJS)

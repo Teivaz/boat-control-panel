@@ -1,4 +1,4 @@
-#include "ch347.h"
+#include "transport.h"
 #include "libcomm.h"
 #include "crc.h"
 
@@ -101,23 +101,42 @@ static int g_repeat;
 static int g_crc_suppressed;
 
 /* Top-of-frame spinner state — visible only in --repeat mode. The braille
- * glyph advances each cycle so the user sees the bus is alive; the leading
- * char (`o` / `x`) reflects whether the most recent request landed cleanly
- * (no NACK, no USB error, no CRC mismatch). */
+ * glyph advances each cycle so the user sees the bus is alive; the status
+ * icon (◯ ok / ✖ fail) reflects whether the most recent request landed
+ * cleanly (no NACK, no USB error, no CRC mismatch). Counters track
+ * cumulative success/failure for the whole session so a noisy bus is
+ * obvious at a glance instead of disappearing into the suppress-and-hold
+ * logic. */
 static const char* const SPINNER[] = {
     "\xE2\xA0\x8B", "\xE2\xA0\x99", "\xE2\xA0\xB9", "\xE2\xA0\xB8", "\xE2\xA0\xBC",
     "\xE2\xA0\xB4", "\xE2\xA0\xA6", "\xE2\xA0\xA7", "\xE2\xA0\x87", "\xE2\xA0\x8F",
 };
 #define SPINNER_LEN (sizeof(SPINNER) / sizeof(SPINNER[0]))
+#define STATUS_OK_STR   "\xE2\x97\xAF" /* ◯ U+25EF Large Circle */
+#define STATUS_FAIL_STR "\xE2\x9C\x96" /* ✖ U+2716 Heavy Multiplication X */
 static int g_spinner_idx;
 static int g_last_ok = 1;
+static uint32_t g_total_requests;
+static uint32_t g_ok_requests;
+static uint32_t g_baud_khz = 20;
 
 static void eol(void) {
     g_lines++;
 }
 
 static void print_spinner(void) {
-    printf("%c %s\n", g_last_ok ? 'o' : 'x', SPINNER[g_spinner_idx]);
+    printf("%s %s", SPINNER[g_spinner_idx], g_last_ok ? STATUS_OK_STR : STATUS_FAIL_STR);
+    if (g_total_requests > 0) {
+        /* Successes × 1000 / total → one-decimal percent. uint32 math is
+         * fine until counts exceed ~4 M, which won't happen interactively. */
+        uint32_t tenths = (g_ok_requests * 1000u + g_total_requests / 2u) / g_total_requests;
+        printf(" %lu/%lu (%lu.%lu%%)", (unsigned long)g_ok_requests, (unsigned long)g_total_requests,
+               (unsigned long)(tenths / 10u), (unsigned long)(tenths % 10u));
+    }
+    printf(" @ %s %lukHz", transport_name(), (unsigned long)g_baud_khz);
+    /* Clear to end of line (ANSI \033[K) so a previous frame's longer stats
+     * text doesn't leave a residual tail when this frame's text is shorter. */
+    fputs("\033[K\n", stdout);
     g_spinner_idx = (int)(((unsigned)g_spinner_idx + 1u) % SPINNER_LEN);
     eol();
 }
@@ -165,14 +184,14 @@ static void print_u16(const char* label, uint16_t v) {
  */
 
 static int do_write(const Board* b, const CommMessage* msg, uint8_t len) {
-    int rc = ch347_i2c_write(b->addr, (const uint8_t*)msg, len);
-    if (rc == CH347_WRITE_NACK) {
+    int rc = transport_i2c_write(b->addr, (const uint8_t*)msg, len);
+    if (rc == TRANSPORT_WRITE_NACK) {
         puts("write NACK");
         eol();
         g_last_ok = 0;
         return 0;
     }
-    if (rc != CH347_OK) {
+    if (rc != TRANSPORT_OK) {
         fprintf(stderr, "usb error %d\n", rc);
         g_last_ok = 0;
         return 1;
@@ -182,20 +201,20 @@ static int do_write(const Board* b, const CommMessage* msg, uint8_t len) {
 }
 
 static int do_read(const Board* b, const CommMessage* msg, uint8_t wlen, uint8_t* rdata, uint8_t rlen) {
-    int rc = ch347_i2c_write_read(b->addr, (const uint8_t*)msg, wlen, rdata, rlen);
-    if (rc == CH347_WRITE_NACK) {
+    int rc = transport_i2c_write_read(b->addr, (const uint8_t*)msg, wlen, rdata, rlen);
+    if (rc == TRANSPORT_WRITE_NACK) {
         puts("write NACK");
         eol();
         g_last_ok = 0;
         return 0;
     }
-    if (rc == CH347_READ_NACK) {
+    if (rc == TRANSPORT_READ_NACK) {
         puts("read NACK");
         eol();
         g_last_ok = 0;
         return 0;
     }
-    if (rc != CH347_OK) {
+    if (rc != TRANSPORT_OK) {
         fprintf(stderr, "usb error %d\n", rc);
         g_last_ok = 0;
         return 1;
@@ -440,9 +459,11 @@ static int cmd_trigger_write(const Board* b, uint8_t id, CommButtonMode mode, ui
  */
 
 static void usage(void) {
-    fputs("usage: inspector [-r|--repeat [ms]] <board> <command> [args]\n"
+    fputs("usage: inspector [-r|--repeat [ms]] [-b|--baud <khz>] <board> <command> [args]\n"
           "  -r, --repeat [ms]  rerun every <ms> (default 500), refreshing in place;\n"
           "                     transient CRC errors are hidden, last good frame held\n"
+          "  -b, --baud <khz>   I2C bus speed in kHz (rounds down to nearest CH347\n"
+          "                     stream-protocol step: 20, 100, 400, 750). Default 20.\n"
           "\n"
           "  boards:    main | sw | l | l2 | r | r2\n"
           "\n"
@@ -674,6 +695,21 @@ int main(int argc, char** argv) {
                     argi++;
                 }
             }
+        } else if (strcmp(argv[argi], "-b") == 0 || strcmp(argv[argi], "--baud") == 0) {
+            argi++;
+            if (argi >= argc) {
+                fprintf(stderr, "expected <khz> after -b/--baud\n");
+                usage();
+                return 1;
+            }
+            unsigned long v;
+            if (parse_uint(argv[argi], &v) < 0 || v == 0) {
+                fprintf(stderr, "bad baud value: %s\n", argv[argi]);
+                usage();
+                return 1;
+            }
+            g_baud_khz = (uint32_t)v;
+            argi++;
         } else if (strcmp(argv[argi], "-h") == 0 || strcmp(argv[argi], "--help") == 0) {
             usage();
             return 0;
@@ -693,13 +729,14 @@ int main(int argc, char** argv) {
         usage();
         return 1;
     }
-    int rc = ch347_open();
-    if (rc == CH347_NOT_FOUND) {
-        fprintf(stderr, "no CH347 device found (VID 0x1A86, PID 0x55DB)\n");
+    int rc = transport_open(g_baud_khz * 1000u);
+    if (rc == TRANSPORT_NOT_FOUND) {
+        fprintf(stderr, "no I2C bridge found — tried CH347 (VID 0x1A86, PID 0x55DB)"
+                        " and CP2112 (VID 0x10C4, PID 0xEA90)\n");
         return 2;
     }
-    if (rc != CH347_OK) {
-        fprintf(stderr, "ch347_open failed: %d\n", rc);
+    if (rc != TRANSPORT_OK) {
+        fprintf(stderr, "transport_open failed: %d\n", rc);
         return 2;
     }
     int sub_argc = argc - argi - 1;
@@ -730,6 +767,10 @@ int main(int argc, char** argv) {
             print_spinner();
             int spinner_lines = g_lines;
             r = dispatch(b, sub_argc, sub_argv);
+            g_total_requests++;
+            if (g_last_ok) {
+                g_ok_requests++;
+            }
             if (g_crc_suppressed) {
                 /* Push the cursor past whatever data the previous good
                  * iteration left on screen so the sleeping cursor lands at
@@ -748,6 +789,6 @@ int main(int argc, char** argv) {
             usleep(interval_us);
         }
     }
-    ch347_close();
+    transport_close();
     return r;
 }

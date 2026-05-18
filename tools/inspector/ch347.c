@@ -51,24 +51,38 @@ static void hex_dump(const char* tag, const uint8_t* buf, size_t len) {
 #define STM_IN(n)            (0xC0 | (n))  /* read n bytes; n < 0x40        */
 #define STM_END              0x00
 /* Speed select: 0x60 + bits. 0x60 = 20 kHz, 0x61 = 100 kHz,
- * 0x62 = 400 kHz, 0x63 = 750 kHz. */
-#define STM_SET_SPEED        0x60          /* 20 kHz — slowest, most forgiving */
+ * 0x62 = 400 kHz, 0x63 = 750 kHz. baud_to_stm picks the highest opcode
+ * that doesn't exceed the requested rate. */
+#define STM_SPEED_BASE       0x60
 
 #define MAX_STREAM_BYTES     63u           /* CH347 stream packet payload   */
 
 static libusb_context*       g_ctx;
 static libusb_device_handle* g_dev;
 
-int ch347_open(void) {
+static uint8_t baud_to_stm(uint32_t baud_hz) {
+    if (baud_hz >= 750000u) {
+        return STM_SPEED_BASE | 0x03; /* 750 kHz */
+    }
+    if (baud_hz >= 400000u) {
+        return STM_SPEED_BASE | 0x02; /* 400 kHz */
+    }
+    if (baud_hz >= 100000u) {
+        return STM_SPEED_BASE | 0x01; /* 100 kHz */
+    }
+    return STM_SPEED_BASE; /* 20 kHz */
+}
+
+int ch347_open(uint32_t baud_hz) {
     int rc = libusb_init(&g_ctx);
     if (rc != 0) {
-        return CH347_USB_ERR;
+        return TRANSPORT_USB_ERR;
     }
     g_dev = libusb_open_device_with_vid_pid(g_ctx, CH347_VID, CH347_PID);
     if (!g_dev) {
         libusb_exit(g_ctx);
         g_ctx = NULL;
-        return CH347_NOT_FOUND;
+        return TRANSPORT_NOT_FOUND;
     }
     /* Detach a kernel driver only on Linux — macOS doesn't claim CH347 by
      * default, but the call is a no-op on systems where it isn't supported. */
@@ -79,14 +93,14 @@ int ch347_open(void) {
         libusb_exit(g_ctx);
         g_dev = NULL;
         g_ctx = NULL;
-        return CH347_USB_ERR;
+        return TRANSPORT_USB_ERR;
     }
     /* Configure I2C bus speed once per session. STREAM frame: AA <set> 00. */
-    uint8_t init_frame[] = {CMD_I2C_STREAM, STM_SET_SPEED, STM_END};
+    uint8_t init_frame[] = {CMD_I2C_STREAM, baud_to_stm(baud_hz), STM_END};
     int transferred = 0;
     libusb_bulk_transfer(g_dev, CH347_EP_OUT, init_frame, sizeof(init_frame),
                          &transferred, CH347_BULK_TIMEOUT_MS);
-    return CH347_OK;
+    return TRANSPORT_OK;
 }
 
 void ch347_close(void) {
@@ -102,39 +116,39 @@ void ch347_close(void) {
 }
 
 /* Push one CH347 stream frame: bulk-OUT it, then bulk-IN the response.
- * The returned byte count is filled into *in_len. Returns CH347_OK or
- * CH347_USB_ERR. */
+ * The returned byte count is filled into *in_len. Returns TRANSPORT_OK or
+ * TRANSPORT_USB_ERR. */
 static int xfer(const uint8_t* out, size_t out_len,
                 uint8_t* in, size_t in_cap, size_t* in_len) {
     if (!g_dev) {
-        return CH347_USB_ERR;
+        return TRANSPORT_USB_ERR;
     }
     hex_dump("OUT", out, out_len);
     int transferred = 0;
     int rc = libusb_bulk_transfer(g_dev, CH347_EP_OUT, (uint8_t*)out,
                                   (int)out_len, &transferred, CH347_BULK_TIMEOUT_MS);
     if (rc != 0 || transferred != (int)out_len) {
-        return CH347_USB_ERR;
+        return TRANSPORT_USB_ERR;
     }
     if (in_cap == 0) {
         *in_len = 0;
-        return CH347_OK;
+        return TRANSPORT_OK;
     }
     transferred = 0;
     rc = libusb_bulk_transfer(g_dev, CH347_EP_IN, in, (int)in_cap,
                               &transferred, CH347_BULK_TIMEOUT_MS);
     if (rc != 0) {
-        return CH347_USB_ERR;
+        return TRANSPORT_USB_ERR;
     }
     *in_len = (size_t)transferred;
     hex_dump("IN ", in, *in_len);
-    return CH347_OK;
+    return TRANSPORT_OK;
 }
 
 int ch347_i2c_write(uint8_t addr7, const uint8_t* data, size_t len) {
     /* Frame: AA STA OUT(1+len) <addr<<1> <data...> STO END */
     if (len + 1u > MAX_STREAM_BYTES) {
-        return CH347_BAD_ARG;
+        return TRANSPORT_BAD_ARG;
     }
     uint8_t frame[MAX_STREAM_BYTES + 8];
     size_t n = 0;
@@ -150,7 +164,7 @@ int ch347_i2c_write(uint8_t addr7, const uint8_t* data, size_t len) {
     uint8_t resp[MAX_STREAM_BYTES + 8];
     size_t resp_len = 0;
     int rc = xfer(frame, n, resp, sizeof(resp), &resp_len);
-    if (rc != CH347_OK) {
+    if (rc != TRANSPORT_OK) {
         return rc;
     }
     /* For a pure write, the device returns one byte per OUT byte; bit 7 of
@@ -160,10 +174,10 @@ int ch347_i2c_write(uint8_t addr7, const uint8_t* data, size_t len) {
      * every returned byte. */
     for (size_t i = 0; i < resp_len; i++) {
         if (resp[i] & 0x80) {
-            return CH347_WRITE_NACK;
+            return TRANSPORT_WRITE_NACK;
         }
     }
-    return CH347_OK;
+    return TRANSPORT_OK;
 }
 
 int ch347_i2c_write_read(uint8_t addr7,
@@ -180,7 +194,7 @@ int ch347_i2c_write_read(uint8_t addr7,
      * portability we just emit one IN(rlen) and let the bridge handle
      * terminal NACK; if your variant requires the split, change here. */
     if (wlen + 2u > MAX_STREAM_BYTES || rlen + 2u > MAX_STREAM_BYTES) {
-        return CH347_BAD_ARG;
+        return TRANSPORT_BAD_ARG;
     }
     uint8_t frame[MAX_STREAM_BYTES + 8];
     size_t n = 0;
@@ -200,25 +214,25 @@ int ch347_i2c_write_read(uint8_t addr7,
     uint8_t resp[MAX_STREAM_BYTES + 8];
     size_t resp_len = 0;
     int rc = xfer(frame, n, resp, sizeof(resp), &resp_len);
-    if (rc != CH347_OK) {
+    if (rc != TRANSPORT_OK) {
         return rc;
     }
     /* Response layout: <write-phase ACK bytes...> <read-addr ACK> <data...>
      * The last (1 + wlen) bytes from the write phase are ACK statuses; then
      * one byte for the read-phase addr ACK; then `rlen` data bytes. */
     if (resp_len < wlen + 2u + rlen) {
-        return CH347_USB_ERR;
+        return TRANSPORT_USB_ERR;
     }
     /* Check write-phase ACKs (covers slave address + every data byte). */
     for (size_t i = 0; i < wlen + 1u; i++) {
         if (resp[i] & 0x80) {
-            return CH347_WRITE_NACK;
+            return TRANSPORT_WRITE_NACK;
         }
     }
     /* Check read-phase address ACK. */
     if (resp[wlen + 1u] & 0x80) {
-        return CH347_READ_NACK;
+        return TRANSPORT_READ_NACK;
     }
     memcpy(rdata, &resp[wlen + 2u], rlen);
-    return CH347_OK;
+    return TRANSPORT_OK;
 }
