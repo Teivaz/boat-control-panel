@@ -629,10 +629,12 @@ static void isr_on_transmit_exhausted(void) {
             break;
         case FSM_CLIENT_TX:
             /* CNTIF fires once per client-TX when the last planned byte is
-             * shifted out. Don't drop CSTR — the master owns when the
-             * transaction ends (NACK + STOP/RESTART). isr_on_stop /
-             * isr_on_restart handle the teardown. */
-            return;
+             * shifted out. The peripheral auto-stretches SCL on CNT=0, so
+             * fall through to the unconditional CSTR=0 below — otherwise
+             * the master can't clock the terminal NACK or STOP and the bus
+             * hangs until BTO recovers (~36 ms). isr_on_stop /
+             * isr_on_restart handle the teardown after the master finishes. */
+            break;
     }
     I2C1CON0bits.CSTR = 0;
 }

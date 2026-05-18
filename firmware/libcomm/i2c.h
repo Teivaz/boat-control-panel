@@ -43,7 +43,7 @@
  *   BAUD = 7F  → 100 kHz
  * Override before compiling if the bus needs a different rate. */
 #ifndef I2C_FME
-#define I2C_FME 0
+#define I2C_FME 1
 #endif
 
 #if I2C_FME
