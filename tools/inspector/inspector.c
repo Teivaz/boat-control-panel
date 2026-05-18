@@ -192,7 +192,8 @@ static int do_write(const Board* b, const CommMessage* msg, uint8_t len) {
         return 0;
     }
     if (rc != TRANSPORT_OK) {
-        fprintf(stderr, "usb error %d\n", rc);
+        printf("usb error %d\n", rc);
+        eol();
         g_last_ok = 0;
         return 1;
     }
@@ -215,7 +216,8 @@ static int do_read(const Board* b, const CommMessage* msg, uint8_t wlen, uint8_t
         return 0;
     }
     if (rc != TRANSPORT_OK) {
-        fprintf(stderr, "usb error %d\n", rc);
+        printf("usb error %d\n", rc);
+        eol();
         g_last_ok = 0;
         return 1;
     }
