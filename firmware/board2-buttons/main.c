@@ -51,15 +51,15 @@ static void init(void) {
 /* TMR0 in 8-bit mode clocked from Fosc/4 with /128 prescaler gives
  * 16 MHz / 128 ≈ 125 kHz (~1.024 ms per count). Match value 124 in
  * TMR0H yields a 1 ms period interrupt. */
-void __interrupt(irq(TMR0), base(8)) TMR0_ISR(void) {
+void __interrupt(low_priority, irq(TMR0), base(8)) TMR0_ISR(void) {
     PIR3bits.TMR0IF = 0;
     task_controller_tick(&ctrl);
 }
 
 static void tick_init(void) {
     T0CON0bits.EN = 0;
-    // Assign peripheral interrupt priority vectors
-    IPR3bits.TMR0IP = 1;
+    /* Priority is owned by interrupt_init's IPR clear-and-promote step;
+     * TMR0 ends up low-priority correctly there. */
     T0CON1bits.CS = 0b010;    /* Fosc/4 -> 16 MHz */
     T0CON1bits.CKPS = 0b0111; /* 16 MHz / 128 -> 125 kHz */
     PIR3bits.TMR0IF = 0;

@@ -54,14 +54,15 @@ static void init(void) {
     interrupt_init();
 }
 
-void __interrupt(irq(TMR0), base(8)) TMR0_ISR(void) {
+void __interrupt(low_priority, irq(TMR0), base(8)) TMR0_ISR(void) {
     PIR3bits.TMR0IF = 0;
     task_controller_tick(&ctrl);
 }
 
 static void tick_init(void) {
     T0CON0bits.EN = 0;
-    IPR3bits.TMR0IP = 1;
+    /* Priority is owned by interrupt_init's IPR clear-and-promote step;
+     * TMR0 ends up low-priority correctly there. */
     T0CON1bits.CS = 0b010;    /* Fosc/4 -> 16 MHz */
     T0CON1bits.CKPS = 0b0111; /* /128     -> 125 kHz */
     PIE3bits.TMR0IE = 1;

@@ -2,6 +2,7 @@
 #include "libcomm.h"
 
 void interrupt_init(void) {
+    GIE = 0;
 
     IVTLOCK = 0x55;
     IVTLOCK = 0xAA;
@@ -15,7 +16,20 @@ void interrupt_init(void) {
     IVTLOCK = 0xAA;
     IVTLOCKbits.IVTLOCKED = 0x01; // lock IVT
 
-    GIE = 1;
+    /* Interrupt priorities: I2C events preempt everything else so the
+     * client RX / TX path stays responsive. Clear all IPRs to low first,
+     * then promote the two I2C vectors. In priority mode GIE/GIEH gates
+     * high-priority interrupts and GIEL gates low; both must be set. */
+    INTCON0bits.IPEN = 1;
+    IPR0 = 0; IPR1 = 0; IPR2 = 0;  IPR3 = 0;
+    IPR4 = 0; IPR5 = 0; IPR6 = 0;  IPR7 = 0;
+    IPR8 = 0; IPR9 = 0; IPR10 = 0; IPR11 = 0;
+    IPR12 = 0; IPR13 = 0; IPR14 = 0; IPR15 = 0;
+    IPR7bits.I2C1IP = 1;
+    IPR7bits.I2C1EIP = 1;
+
+    INTCON0bits.GIEL = 1;
+    GIE = 1; /* = GIEH in priority mode */
 }
 
 /* Unused vectors reset the device. Owned vectors are defined alongside

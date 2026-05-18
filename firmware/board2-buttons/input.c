@@ -53,7 +53,7 @@ void input_set_change_handler(InputChangeHandler handler) {
  * main loop — run_in_main_loop is idempotent against re-queues because
  * dispatch_pending compares last_notified against the latest sampled state,
  * so a dropped queue slot (full queue) is self-healing on the next edge. */
-void __interrupt(irq(IOC), base(8)) IOC_ISR(void) {
+void __interrupt(low_priority, irq(IOC), base(8)) IOC_ISR(void) {
     PIR0bits.IOCIF = 0;
     IOCAF = 0x00;
     InputState next;
