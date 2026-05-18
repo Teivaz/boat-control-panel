@@ -96,7 +96,7 @@ static void arm_pin(uint8_t i, uint8_t cur_bit) {
 /* ISR context. Clear only the pins we own; leave any spurious flags on
  * unused bits alone. Edge flags are cleared before re-reading so a
  * transition that races the read still raises a fresh interrupt. */
-void __interrupt(irq(IOC), base(8)) IOC_ISR(void) {
+void __interrupt(low_priority, irq(IOC), base(8)) IOC_ISR(void) {
     PIR0bits.IOCIF = 0;
     IOCCFbits.IOCCF1 = 0;
     IOCCFbits.IOCCF2 = 0;

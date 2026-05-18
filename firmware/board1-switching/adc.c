@@ -147,7 +147,7 @@ void adc_init(TaskController* ctrl) {
  * channel, kick off the next burst. The per-channel converter runs on the
  * main loop via run_in_main_loop so config/EEPROM reads and the
  * normalisation arithmetic don't sit inside the ISR. */
-void __interrupt(irq(AD), base(8)) AD_ISR(void) {
+void __interrupt(low_priority, irq(AD), base(8)) AD_ISR(void) {
     PIR1bits.ADIF = 0;
     if (ADCNT != ADRPT) {
         return;

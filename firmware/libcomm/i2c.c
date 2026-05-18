@@ -354,7 +354,11 @@ void i2c_init(uint8_t addr) {
     I2C1BAUD = I2C_BAUD;
     I2C1CON1bits.CSD = 0; /* multi-master: clock-stretch on data enabled */
     I2C1CON2bits.FME = I2C_FME;
-    I2C1CON2bits.BFRET = 0b00;
+    /* Bus-free wait time before re-entering arbitration. 0b11 = 32 BAUD
+     * periods (vs 0b00 = 6) gives marginal bridges like the CH347 more
+     * time to drive a clean rising edge between transactions. Cost is
+     * only a few hundred µs of host-side throughput we don't care about. */
+    I2C1CON2bits.BFRET = 0b11;
 
     const uint8_t a = (uint8_t)(addr << 1);
     I2C1ADR0 = a;
@@ -502,7 +506,7 @@ static void prepend_completed_task(uint8_t addr, const volatile uint8_t* rx, uin
     task->result = I2C_RESULT_OK;
 }
 
-void __interrupt(irq(I2C1), base(8)) I2C1_ISR(void) {
+void __interrupt(high_priority, irq(I2C1), base(8)) I2C1_ISR(void) {
     // byte counter has reached zero.  All planned bytes have been transferred
     if (I2C1PIEbits.CNTIE && I2C1PIRbits.CNTIF) {
         I2C1PIRbits.CNTIF = 0;
@@ -806,7 +810,7 @@ static void isr_on_timeout(void) {
     i2c_dma_client_rx();
 }
 
-void __interrupt(irq(I2C1E), base(8)) I2C1_ERROR_ISR(void) {
+void __interrupt(high_priority, irq(I2C1E), base(8)) I2C1_ERROR_ISR(void) {
     if (I2C1ERRbits.NACKIF) {
         I2C1ERRbits.NACKIF = 0;
         isr_on_nack();

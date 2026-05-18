@@ -48,7 +48,7 @@ static void init(void) {
  * yields a 1 ms period interrupt.
  *
  * ISR context. */
-void __interrupt(irq(TMR0), base(8)) TMR0_ISR(void) {
+void __interrupt(low_priority, irq(TMR0), base(8)) TMR0_ISR(void) {
     PIR3bits.TMR0IF = 0;
     task_controller_tick(&ctrl);
 }
