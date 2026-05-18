@@ -373,7 +373,10 @@ void i2c_init(uint8_t addr) {
 
     I2C1BTOC = 0x06;         /* LFINTOSC as BTO clock source */
     I2C1BTObits.TOBY32 = 1;  /* x32 */
-    I2C1BTObits.TOTIME = 35; /* ~35 ms */
+    I2C1BTObits.TOTIME = 5;  /* ~5 ms — BTO is now only a stuck-bus recovery
+                              * path (the CNT=N-1 trick keeps normal slave-TX
+                              * completion off this code path), so a tighter
+                              * timeout recovers faster from real faults. */
 
     I2C1ERRbits.BCLIE = 1;
     I2C1ERRbits.NACKIE = 1;
@@ -567,16 +570,29 @@ static void isr_on_address(void) {
          *   2. i2c_dma_client_tx — writes byte 0 directly to TXB (racing the
          *      peripheral's first TXB->SR move is unreliable, so byte 0 is
          *      off the DMA's critical path) and arms DMA for bytes 1..N-1.
-         *   3. Write CNT — required for the TXBE-empty-between-bytes stretch
-         *      mechanism (§37.5.1 CSTR rule) to engage if we ever run out of
-         *      data, and for CNTIF to fire at end of transaction.
+         *   3. Write CNT = N - 1. The peripheral checks (TXBE && CNT > 0)
+         *      at every 8th SCL falling edge and stretches if true. With CNT
+         *      initialised to N - 1 it decrements to 0 just before the last
+         *      byte's 8th falling — so the last byte's check sees CNT == 0
+         *      and the bus releases cleanly, letting the host clock the 9th
+         *      bit for its terminal NACK + STOP. With CNT = N the last byte
+         *      always stretches until BTO (~36 ms) recovers.
          *   4. Drop CSTR at end of isr_on_address — peripheral resumes.
+         *
+         * Side effect of CNT = N - 1: CNTIF fires after byte N - 2 (not the
+         * last byte). The CLIENT_TX path of isr_on_transmit_exhausted then
+         * runs early; clearing CSTR there is a benign no-op because no
+         * stretch is in effect at that point. End-of-transaction cleanup
+         * happens via PCIF in isr_on_stop, unchanged.
+         *
+         * For N == 1 the initial CNT is 0; the stretch check then trivially
+         * fails on the only byte and the path collapses to the same shape.
          *
          * CNT write is safe here because CSTR is stretching (DS §37.5.11). */
         I2C1STAT1bits.CLRBF = 1;
         i2c_dma_client_tx();
         I2C1CNTH = 0;
-        I2C1CNTL = g_client_tx_len;
+        I2C1CNTL = (uint8_t)(g_client_tx_len - 1u);
         I2C1CON1bits.ACKDT = 0;
     }
     else if (I2C1STAT0bits.R) {
