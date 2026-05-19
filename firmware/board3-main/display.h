@@ -12,6 +12,11 @@
 #define DISPLAY_HEIGHT 64
 
 void display_init(void);
+/* Take the OLED out of power-save (turn the panel on). Call this only
+ * after the framebuffer has been populated and shipped via u8g2_SendBuffer,
+ * so the first thing the user sees is the intended UI rather than the
+ * SSD1322's power-on RAM contents. */
+void display_enable(void);
 u8g2_t* display_u8g2(void);
 
 #endif /* DISPLAY_H */

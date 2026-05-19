@@ -111,8 +111,14 @@ void display_init(void) {
     gpio_init();
     u8g2_Setup_ssd1322_nhd_256x64_f(&u8g2, U8G2_R0, byte_cb, gpio_and_delay_cb);
     u8g2_InitDisplay(&u8g2);
-    u8g2_SetPowerSave(&u8g2, 0);
+    /* Stay in power-save (panel off) until the first frame has been
+     * shipped — display_text calls display_enable() after its first
+     * SendBuffer so the user never sees the SSD1322's power-on RAM. */
     u8g2_SetFont(&u8g2, u8g2_font_unifont_tr);
+}
+
+void display_enable(void) {
+    u8g2_SetPowerSave(&u8g2, 0);
 }
 
 u8g2_t* display_u8g2(void) {
