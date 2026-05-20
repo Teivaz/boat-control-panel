@@ -2,6 +2,7 @@
 #define CONTROLLER_H
 
 #include "button_fx.h" /* ButtonIndex / Channel for the public queries below */
+#include "indicator.h" /* NavLights for the nav-state queries below */
 #include "libcomm.h"
 #include "rtc.h"
 #include "task.h"
@@ -35,9 +36,18 @@ uint8_t controller_battery_stale(void);
 uint8_t controller_levels_stale(void);
 uint8_t controller_sensors_stale(void);
 
-/* button_fx renderer asks this for the per-button "is the channel that
- * this button represents currently on?" steady-state colour decision. */
-uint8_t controller_button_base_on(ButtonIndex button);
+/* Nav-light state queries — the indicator's refresh task pulls these
+ * each frame to decide what to render. All are O(1).
+ *   enabled       — slots the user wants lit (target nav bits).
+ *   pending       — enabled ∧ not-yet-observed.
+ *   errored       — per-light failure (currently always 0; reserved for
+ *                   the per-light timeout that doesn't exist yet).
+ *   config_error  — 1 when the requested mode can't be realised with
+ *                   the operator's nav-enabled mask. */
+NavLights controller_nav_enabled(void);
+NavLights controller_nav_pending(void);
+NavLights controller_nav_errored(void);
+uint8_t controller_nav_config_error(void);
 
 /* Last time read from the DS3231. Returns 1 if the shadow has been
  * populated by at least one successful poll, 0 otherwise. */

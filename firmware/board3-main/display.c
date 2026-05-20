@@ -121,6 +121,10 @@ void display_enable(void) {
     u8g2_SetPowerSave(&u8g2, 0);
 }
 
+void display_disable(void) {
+    u8g2_SetPowerSave(&u8g2, 1);
+}
+
 u8g2_t* display_u8g2(void) {
     return &u8g2;
 }

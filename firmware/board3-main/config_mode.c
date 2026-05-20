@@ -88,7 +88,10 @@ uint8_t config_mode_menu_cursor(void) {
 }
 
 uint8_t config_mode_nav_cursor(void) {
-    return nav_cursor;
+    if (screen == CONFIG_SCREEN_NAV) {
+        return nav_cursor;
+    }
+    return 0xFF;
 }
 
 uint8_t config_mode_nav_working_mask(void) {

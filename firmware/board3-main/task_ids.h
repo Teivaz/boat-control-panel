@@ -13,7 +13,6 @@ enum {
     TASK_CONFIG_MODE,  // sample RA7 config-mode switch
     TASK_DISPLAY_TEXT, // repaint the text UI
     TASK_BUTTON_FX,    // push button_effect updates to both button boards
-    TASK_INDICATOR_SYNC, // periodic recompute of indicator mode (catches config-mode flips)
 };
 
 #endif /* TASK_IDS_H */

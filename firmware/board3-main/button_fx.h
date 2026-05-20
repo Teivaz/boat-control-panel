@@ -33,22 +33,22 @@ typedef enum {
  * mask of currently-energised channels (the `channels` argument to
  * button_fx_on_channel_state). */
 typedef enum {
-    CHANNEL_MAIN = 1 << 0,
-    CHANNEL_INSTRUMENTS = 1 << 1,
-    CHANNEL_AUTOPILOT = 1 << 2,
-    CHANNEL_NAV_BOW = 1 << 3,
-    CHANNEL_NAV_STERN = 1 << 4,
-    CHANNEL_NAV_STEAMING = 1 << 5,
-    CHANNEL_NAV_ANCHORING = 1 << 6,
-    CHANNEL_NAV_TRICOLOR = 1 << 7,
-    CHANNEL_INVERTER = 1 << 8,
-    CHANNEL_WATER_PUMP = 1 << 9,
-    CHANNEL_FRIDGE = 1 << 10,
-    CHANNEL_DECK_LIGHTS = 1 << 11,
-    CHANNEL_CABIN_LIGHTS = 1 << 12,
-    CHANNEL_USB = 1 << 13,
-    CHANNEL_AUX_1 = 1 << 14,
-    CHANNEL_AUX_2 = 1 << 15,
+    CHANNEL_MAIN = 1U << 0,
+    CHANNEL_INSTRUMENTS = 1U << 1,
+    CHANNEL_AUTOPILOT = 1U << 2,
+    CHANNEL_NAV_BOW = 1U << 3,
+    CHANNEL_NAV_STERN = 1U << 4,
+    CHANNEL_NAV_STEAMING = 1U << 5,
+    CHANNEL_NAV_ANCHORING = 1U << 6,
+    CHANNEL_NAV_TRICOLOR = 1U << 7,
+    CHANNEL_INVERTER = 1U << 8,
+    CHANNEL_WATER_PUMP = 1U << 9,
+    CHANNEL_FRIDGE = 1U << 10,
+    CHANNEL_DECK_LIGHTS = 1U << 11,
+    CHANNEL_CABIN_LIGHTS = 1U << 12,
+    CHANNEL_USB = 1U << 13,
+    CHANNEL_AUX_1 = 1U << 14,
+    CHANNEL_AUX_2 = 1U << 15,
 } Channel;
 
 #define CHANNEL_COUNT 16

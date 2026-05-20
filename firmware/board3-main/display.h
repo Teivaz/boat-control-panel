@@ -17,6 +17,10 @@ void display_init(void);
  * so the first thing the user sees is the intended UI rather than the
  * SSD1322's power-on RAM contents. */
 void display_enable(void);
+/* Put the OLED back into power-save (panel off). The peripheral / DDRAM
+ * keep their state; the next display_enable() will show whatever was last
+ * shipped to the buffer. */
+void display_disable(void);
 u8g2_t* display_u8g2(void);
 
 #endif /* DISPLAY_H */

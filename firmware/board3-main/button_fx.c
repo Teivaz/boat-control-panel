@@ -11,8 +11,7 @@
  *
  * Each button slot runs a tiny state machine:
  *   FX_IDLE    — slot reflects the channel's steady on/off colour. The
- *                renderer asks controller_button_base_on() for the
- *                current intent.
+ *                renderer checks the target value for the current intent.
  *   FX_PENDING — user just pressed and we're waiting for the channel
  *                state to reach the expected value. Renders as pulsating
  *                white. Cleared either by the next matching
@@ -94,10 +93,11 @@ void button_fx_clear(ButtonIndex idx) {
     if (idx >= BUTTON_COUNT) {
         return;
     }
-    g_slots[idx].state = FX_IDLE;
-    g_slots[idx].deadline_ticks = 0;
-    g_slots[idx].channel_mask = 0;
-    g_slots[idx].channel_value = 0;
+    Slot* slot = &g_slots[idx];
+    slot->state = FX_IDLE;
+    slot->deadline_ticks = 0;
+    slot->channel_mask = 0;
+    slot->channel_value = 0;
 }
 
 void button_fx_set(ButtonIndex idx, uint16_t value, uint16_t mask) {
@@ -223,16 +223,17 @@ static void build_button_effect(uint8_t button_group, CommButtonEffect* out) {
     for (uint8_t i = 0; i < BUTTONS_PER_GROUP; i++) {
         ButtonIndex button = (ButtonIndex)(base | i);
         CommButtonOutputEffect fx;
-        FxState st = g_slots[button].state;
-        if (st == FX_ERROR) {
+        Slot* slot = &g_slots[button];
+        if (slot->state == FX_ERROR) {
             fx.mode = COMM_EFFECT_MODE_FLASHING;
             fx.color = COMM_EFFECT_COLOR_RED;
-        } else if (st == FX_PENDING) {
+        } else if (slot->state == FX_PENDING) {
             fx.mode = COMM_EFFECT_MODE_PULSATING;
             fx.color = COMM_EFFECT_COLOR_WHITE;
         } else {
             fx.color = COMM_EFFECT_COLOR_WHITE;
-            fx.mode = controller_button_base_on(button) ? COMM_EFFECT_MODE_ENABLED : COMM_EFFECT_MODE_DISABLED;
+            uint8_t has_value = !!(slot->channel_mask & slot->channel_value);
+            fx.mode = has_value ? COMM_EFFECT_MODE_ENABLED : COMM_EFFECT_MODE_DISABLED;
         }
         (void)comm_button_effect_set(out, i, fx);
     }

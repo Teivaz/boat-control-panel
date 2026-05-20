@@ -3,6 +3,7 @@
 #include "button_fx.h"
 #include "config.h"
 #include "config_mode.h"
+#include "display_text.h"
 #include "indicator.h"
 #include "libcomm.h"
 #include "libcomm_interface.h"
@@ -20,7 +21,6 @@
  *   L1 INTENT    toggle_power / toggle_relay / set_nav_light_mode
  *   L2 STATE     set_channels(uint16_t)               sole writer of g_relay_target
  *                apply_channel_observation(uint16_t)  sole writer of g_channel_state
- *                update_indicator()                   sole caller of indicator_*
  *   L3 BUS OUT   retry_task, on_relay_state_done
  *   L3 BUS IN    poll_*_task, on_*_response
  *
@@ -33,8 +33,9 @@
  *
  * No power state machine: g_on follows the *observed* main bit. Per-
  * button "pending → error" feedback is owned by button_fx; per-nav-
- * light feedback is owned by indicator. Both subsystems receive the new
- * target / observation through set_channels / apply_channel_observation.
+ * light feedback is owned by indicator. button_fx is push-driven by
+ * set_channels / apply_channel_observation; the indicator is pull-driven
+ * — its refresh task reads controller_nav_* each frame.
  * ============================================================================
  */
 
@@ -68,9 +69,8 @@ typedef struct {
 } ActionEvent;
 
 #define RETRY_TICK_MS 200u
-#define POLL_TICK_MS 200u
+#define POLL_TICK_MS 100u
 #define POLL_TICK_SLOW_MS 5000u
-#define INDICATOR_SYNC_TICK_MS 100u
 #define RTC_TICK_MS 250u
 #define STALE_THRESHOLD (10000u / POLL_TICK_MS) /* 10 s */
 
@@ -92,7 +92,6 @@ static void set_nav_light_mode(NavLightMode mode);
 
 static void set_channels(uint16_t new_target);
 static void apply_channel_observation(uint16_t observed);
-static void update_indicator(void);
 
 static void retry_task(TaskId id, void* ctx);
 static void on_relay_state_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
@@ -104,8 +103,6 @@ static void poll_sensors_task(TaskId id, void* ctx);
 static void poll_channels_task(TaskId id, void* ctx);
 static void poll_rtc_task(TaskId id, void* ctx);
 static void on_rtc_read_done(uint8_t ok, const RtcTime* t, void* ctx);
-
-static void indicator_sync_task(TaskId id, void* ctx);
 
 static void on_set_time_write_done(uint8_t ok, void* ctx);
 static void on_set_time_refresh_done(uint8_t ok, const RtcTime* t, void* ctx);
@@ -179,7 +176,6 @@ void controller_init(TaskController* ctrl) {
     task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task, 0);
     task_controller_add(ctrl, TASK_POLL_SENSORS, POLL_TICK_MS, poll_sensors_task, 0);
     task_controller_add(ctrl, TASK_POLL_CHANNELS, POLL_TICK_MS, poll_channels_task, 0);
-    task_controller_add(ctrl, TASK_INDICATOR_SYNC, INDICATOR_SYNC_TICK_MS, indicator_sync_task, 0);
     /* RTC poll opt-in — wire when the DS3231 is on the bus. */
     (void)poll_rtc_task;
     (void)on_rtc_read_done;
@@ -241,7 +237,7 @@ void comm_on_channel_changed_received(const CommChannelChanged* event) {
     apply_channel_observation(event->current_channels);
 }
 
-void comm_on_channel_state_read_response(const CommChannelState* state) {
+void comm_on_channel_state_read_response(CommChannelState* state) {
     if (!state) {
         return;
     }
@@ -305,9 +301,9 @@ static uint16_t mask_for_button(ButtonIndex button) {
         case BUTTON_L0: return CHANNEL_MAIN;
         case BUTTON_L1: return CHANNEL_INSTRUMENTS;
         case BUTTON_L2: return CHANNEL_AUTOPILOT;
-        case BUTTON_L3:
-        case BUTTON_L4:
-        case BUTTON_L5: return NAV_MASK_CHANNELS;
+        case BUTTON_L3: return g_nav_light_mode == NAV_LIGHT_MODE_STEAMING ? NAV_MASK_CHANNELS : 0;
+        case BUTTON_L4: return g_nav_light_mode == NAV_LIGHT_MODE_RUNNING ? NAV_MASK_CHANNELS : 0;
+        case BUTTON_L5: return g_nav_light_mode == NAV_LIGHT_MODE_ANCHORING ? NAV_MASK_CHANNELS : 0;
         case BUTTON_L6: return CHANNEL_INVERTER;
         case BUTTON_R0: return CHANNEL_WATER_PUMP;
         case BUTTON_R1: return CHANNEL_FRIDGE;
@@ -393,6 +389,9 @@ static void toggle_power(void) {
          * dark until the user picks them — predictable startup. */
         set_channels(CHANNEL_MAIN);
     }
+    g_on = !g_on;
+    display_text_set_active(g_on);
+    indicator_set_active(g_on);
 }
 
 static void toggle_relay(Channel channel) {
@@ -402,9 +401,13 @@ static void toggle_relay(Channel channel) {
 /* Same-mode press toggles off; different-mode press switches. The OFF
  * pseudo-mode collapses to "no nav lights" and clears the config error. */
 static void set_nav_light_mode(NavLightMode mode) {
-    NavLightMode new_mode = ((NavLightMode)g_nav_light_mode == mode || mode == NAV_LIGHT_MODE_OFF)
-                                ? NAV_LIGHT_MODE_OFF
-                                : mode;
+    NavLightMode new_mode;
+    if (g_nav_light_mode == mode || mode == NAV_LIGHT_MODE_OFF) {
+        new_mode = NAV_LIGHT_MODE_OFF;
+    }
+    else {
+        new_mode = mode;
+    }
     uint8_t cfg_err = 0;
     uint16_t new_nav_bits = channels_for_nav_mode(new_mode, &cfg_err);
 
@@ -432,65 +435,13 @@ static void set_channels(uint16_t new_target) {
         }
         button_fx_set((ButtonIndex)b, (uint16_t)(new_target & m), m);
     }
-    update_indicator();
 }
 
-/* Sole writer of g_channel_state and g_on. Drives both the per-button
- * pending resolution (via button_fx) and the indicator refresh. */
+/* Sole writer of g_channel_state. */
 static void apply_channel_observation(uint16_t observed) {
     g_channel_state = observed;
-    g_on = (uint8_t)((observed & CHANNEL_MAIN) ? 1u : 0u);
     g_channels_age = 0;
     button_fx_on_channel_state((Channel)observed);
-    update_indicator();
-}
-
-/* ============================================================================
- * Indicator sync
- * ============================================================================
- */
-
-/* Decide which indicator mode to display from the current controller
- * state, then push. Sole caller of indicator_set_* / indicator_clear.
- *
- *   config mode active           → CONFIG (cursor index from config_mode)
- *   panel off                    → CLEAR
- *   nav mode unrealisable        → ERROR (whole ring flashes red)
- *   else                         → ON with enabled / pending / errored bits
- *
- * `enabled`  = nav-light channel bits we WANT on  (target)
- * `pending`  = enabled ∧ not-yet-observed         (target & ~observed)
- * `errored`  = reserved for per-light timeout (none implemented yet);
- *              for now this is always 0 in the ON path. */
-static void update_indicator(void) {
-    if (config_mode_active()) {
-        indicator_set_config(config_mode_nav_cursor());
-        return;
-    }
-    if (!g_on) {
-        indicator_clear();
-        return;
-    }
-    if (g_nav_light_error & NAV_LIGHT_ERROR_CONFIG) {
-        indicator_set_error();
-        return;
-    }
-    uint16_t target_nav = (uint16_t)(g_relay_target & NAV_MASK_CHANNELS);
-    uint16_t observed_nav = (uint16_t)(g_channel_state & NAV_MASK_CHANNELS);
-    NavLights enabled = nav_lights_from_channels(target_nav);
-    NavLights pending = nav_lights_from_channels((uint16_t)(target_nav & ~observed_nav));
-    NavLights errored = (NavLights){.raw = 0};
-    indicator_set_on(enabled, pending, errored);
-}
-
-/* Periodic catch-all for state transitions the controller has no
- * callback for — mainly config_mode_active() flipping when the RA7
- * switch is toggled. Cheap: just rebuilds the indicator arguments and
- * pushes; indicator's own refresh task handles the per-frame animation. */
-static void indicator_sync_task(TaskId id, void* ctx) {
-    (void)id;
-    (void)ctx;
-    update_indicator();
 }
 
 /* ============================================================================
@@ -569,9 +520,6 @@ static void poll_levels_task(TaskId id, void* ctx) {
 static void poll_sensors_task(TaskId id, void* ctx) {
     (void)ctx;
     task_controller_set_interval(g_ctrl, id, poll_interval_for_state());
-    if (!g_on) {
-        return;
-    }
     if (g_sensors_age < STALE_THRESHOLD) {
         g_sensors_age++;
     }
@@ -652,23 +600,28 @@ uint8_t controller_sensors_stale(void) {
     return (uint8_t)(g_sensors_age >= STALE_THRESHOLD);
 }
 
-/* Per-button "is the channel this button represents currently on?"
- * — button_fx renders this as the IDLE-state colour. Routed through
- * action_for_button so per-button logic stays in one place. */
-uint8_t controller_button_base_on(ButtonIndex button) {
-    ActionEvent ev = action_for_button(button);
-    switch (ev.type) {
-        case ACTION_POWER:
-            return g_on;
-        case ACTION_RELAY:
-            return (uint8_t)((g_relay_target & (uint16_t)ev.channel) != 0u);
-        case ACTION_NAV:
-            return (uint8_t)((NavLightMode)g_nav_light_mode == ev.nav_light);
-        case ACTION_MENU:
-        case ACTION_NONE:
-        default:
-            return 0;
-    }
+/* Nav-light state queries — the indicator's refresh task pulls these
+ * each frame to decide what to render. The four are O(1) bit-ops over
+ * the existing globals; no allocation, no I²C. */
+NavLights controller_nav_enabled(void) {
+    return nav_lights_from_channels((uint16_t)(g_relay_target & NAV_MASK_CHANNELS));
+}
+
+NavLights controller_nav_pending(void) {
+    uint16_t target_nav = (uint16_t)(g_relay_target & NAV_MASK_CHANNELS);
+    uint16_t observed_nav = (uint16_t)(g_channel_state & NAV_MASK_CHANNELS);
+    return nav_lights_from_channels((uint16_t)(target_nav & ~observed_nav));
+}
+
+/* Reserved for the per-light timeout that doesn't exist yet — always 0
+ * for now. The indicator already routes errored bits via priority
+ * cascade, so wiring a real source later is a single-line change here. */
+NavLights controller_nav_errored(void) {
+    return (NavLights){.raw = 0};
+}
+
+uint8_t controller_nav_config_error(void) {
+    return (uint8_t)((g_nav_light_error & NAV_LIGHT_ERROR_CONFIG) ? 1u : 0u);
 }
 
 /* ============================================================================

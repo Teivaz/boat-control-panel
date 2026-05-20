@@ -1,6 +1,8 @@
 #include "indicator.h"
 
 #include "config.h"
+#include "config_mode.h"
+#include "controller.h"
 #include "rgbled.h"
 #include "task_ids.h"
 
@@ -9,18 +11,17 @@
  *
  *   0 anchoring, 1 tricolor, 2 steaming, 3 bow, 4 stern
  *
- * The controller pushes a mode via one of the indicator_set_* /
- * indicator_clear entry points; the periodic refresh task computes the
- * per-LED RGB triple and ships it through rgbled_set. The refresh runs
- * at REFRESH_MS regardless of mode so the red-flash and white-pulsate
- * animations keep advancing even when no caller has touched the mode.
+ * The controller owns visibility (indicator_set_active(on)); while
+ * active, the periodic refresh task pulls the current state from
+ * config_mode + controller_nav_* and ships a per-LED RGB triple via
+ * rgbled_set. Phase advances even across stalls so the red-flash and
+ * white-pulsate animations stay smooth.
  *
- * All public entry points run in main-loop context (called from the
- * controller's button / mode dispatch), and refresh_task is a normal
- * cooperative-scheduler task — no INTERRUPT guards are required inside
- * this file. The peak rendering intensity comes from the EEPROM-backed
- * config (CONFIG_ADDR_INDICATOR_BRIGHTNESS) and is re-read every
- * refresh so brightness changes take effect within one frame. */
+ * All public entry points run in main-loop context, and refresh_task is
+ * a normal cooperative-scheduler task — no INTERRUPT guards are required
+ * inside this file. The peak rendering intensity comes from the
+ * EEPROM-backed config (CONFIG_ADDR_INDICATOR_BRIGHTNESS) and is re-read
+ * every refresh so brightness changes take effect within one frame. */
 
 #define LED_COUNT 5
 #define REFRESH_MS 50u
@@ -51,9 +52,9 @@ static const RGBLedData k_error                = {.red = 0xFF, .green = 0x00, .b
 /* CONFIG mode. "Active" = the cursor slot; "inactive" = the other four.
  * "on" / "off" = the nav-enable bit for that slot. */
 static const RGBLedData k_config_active_on     = {.red = 0x00, .green = 0xFF, .blue = 0x00};
-static const RGBLedData k_config_active_off    = {.red = 0xFF, .green = 0x00, .blue = 0x00};
+static const RGBLedData k_config_active_off    = {.red = 0xFF, .green = 0xFF, .blue = 0x00};
 static const RGBLedData k_config_inactive_on   = {.red = 0x00, .green = 0x00, .blue = 0xFF};
-static const RGBLedData k_config_inactive_off  = {.red = 0x00, .green = 0x00, .blue = 0xFF};
+static const RGBLedData k_config_inactive_off  = {.red = 0xFF, .green = 0x00, .blue = 0x00};
 
 /* ON mode — per-LED state, picked in priority order errored > pending
  * > enabled by render_on. */
@@ -61,19 +62,7 @@ static const RGBLedData k_on_enabled           = {.red = 0xFF, .green = 0xFF, .b
 static const RGBLedData k_on_pending           = {.red = 0xFF, .green = 0xFF, .blue = 0xFF};
 static const RGBLedData k_on_errored           = {.red = 0xFF, .green = 0x00, .blue = 0x00};
 
-typedef enum {
-    INDICATOR_MODE_OFF = 0,
-    INDICATOR_MODE_ERROR,
-    INDICATOR_MODE_CONFIG,
-    INDICATOR_MODE_ON,
-} IndicatorMode;
-
-static uint8_t g_mode;
-static uint8_t g_config_selected;
-static NavLights g_on_enabled;
-static NavLights g_on_pending;
-static NavLights g_on_errored;
-
+static uint8_t g_active;
 static RGBLedData g_leds[LED_COUNT];
 static uint16_t g_phase_ms;
 
@@ -82,45 +71,37 @@ static uint8_t dim_brightness(void);
 static uint8_t pulsate_level(void);
 static uint8_t flash_high(void);
 static RGBLedData attenuate(RGBLedData color, uint8_t brightness);
-static void render_off(void);
+static void render_dark(void);
 static void render_error(void);
-static void render_config(void);
-static void render_on(void);
+static void render_config(uint8_t cursor);
+static void render_on(NavLights enabled, NavLights pending, NavLights errored);
 static void refresh_task(TaskId id, void* ctx);
 
 void indicator_init(TaskController* ctrl) {
-    g_mode = INDICATOR_MODE_OFF;
-    g_config_selected = 0;
-    g_on_enabled.raw = 0;
-    g_on_pending.raw = 0;
-    g_on_errored.raw = 0;
+    g_active = 0;
     g_phase_ms = 0;
     for (uint8_t i = 0; i < LED_COUNT; i++) {
-        g_leds[i].red = 0;
-        g_leds[i].green = 0;
-        g_leds[i].blue = 0;
+        g_leds[i] = k_off;
     }
+    /* Ship one dark frame so the WS2812 chain is in a known state before
+     * the first activation. */
+    rgbled_set(g_leds, LED_COUNT);
     task_controller_add(ctrl, TASK_NAV_LIGHTS, REFRESH_MS, refresh_task, 0);
 }
 
-void indicator_set_error(void) {
-    g_mode = INDICATOR_MODE_ERROR;
-}
-
-void indicator_clear(void) {
-    g_mode = INDICATOR_MODE_OFF;
-}
-
-void indicator_set_config(uint8_t selected_idx) {
-    g_config_selected = selected_idx;
-    g_mode = INDICATOR_MODE_CONFIG;
-}
-
-void indicator_set_on(NavLights enabled, NavLights pending, NavLights errored) {
-    g_on_enabled = enabled;
-    g_on_pending = pending;
-    g_on_errored = errored;
-    g_mode = INDICATOR_MODE_ON;
+void indicator_set_active(uint8_t on) {
+    on = on ? 1u : 0u;
+    if (on == g_active) {
+        return;
+    }
+    g_active = on;
+    if (!on) {
+        /* WS2812 has no power-save: latch a dark frame immediately so the
+         * ring goes visibly dark instead of holding the last animation
+         * frame indefinitely. */
+        render_dark();
+        rgbled_set(g_leds, LED_COUNT);
+    }
 }
 
 static uint8_t max_brightness(void) {
@@ -169,7 +150,7 @@ static RGBLedData attenuate(RGBLedData color, uint8_t brightness) {
     return out;
 }
 
-static void render_off(void) {
+static void render_dark(void) {
     for (uint8_t i = 0; i < LED_COUNT; i++) {
         g_leds[i] = k_off;
     }
@@ -186,10 +167,11 @@ static void render_error(void) {
  * (slot disabled); every other LED renders blue with bright/dim
  * indicating enabled/disabled. Reads the enabled mask fresh on each
  * render so an in-flight commit by config_mode is reflected without
- * another indicator_set_config call. */
-static void render_config(void) {
+ * another round-trip. cursor=0xFF (no nav-screen cursor) renders all
+ * five LEDs as non-cursor — useful when the operator is in config mode
+ * but on a different sub-screen. */
+static void render_config(uint8_t cursor) {
     uint8_t enabled = config_get_nav_enabled_mask();
-    uint8_t cursor = g_config_selected;
     uint8_t bright = max_brightness();
     uint8_t dim = dim_brightness();
     /* Pre-attenuate once per frame — these four colours apply to every
@@ -209,7 +191,7 @@ static void render_config(void) {
     }
 }
 
-static void render_on(void) {
+static void render_on(NavLights enabled, NavLights pending, NavLights errored) {
     uint8_t bright = max_brightness();
     /* Pre-attenuate the three per-state colours once per frame so the
      * per-LED loop is just a priority cascade of struct assignments.
@@ -218,16 +200,16 @@ static void render_on(void) {
     RGBLedData enabled_c = attenuate(k_on_enabled, bright);
     RGBLedData pending_c = attenuate(k_on_pending, pulsate_level());
     RGBLedData errored_c = attenuate(k_on_errored, flash_high() ? bright : 0u);
-    uint8_t enabled = g_on_enabled.raw;
-    uint8_t pending = g_on_pending.raw;
-    uint8_t errored = g_on_errored.raw;
+    uint8_t e = enabled.raw;
+    uint8_t p = pending.raw;
+    uint8_t r = errored.raw;
     for (uint8_t i = 0; i < LED_COUNT; i++) {
         uint8_t bit = (uint8_t)(1u << i);
-        if (errored & bit) {
+        if (r & bit) {
             g_leds[i] = errored_c;
-        } else if (pending & bit) {
+        } else if (p & bit) {
             g_leds[i] = pending_c;
-        } else if (enabled & bit) {
+        } else if (e & bit) {
             g_leds[i] = enabled_c;
         } else {
             g_leds[i] = k_off;
@@ -239,25 +221,25 @@ static void refresh_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
 
+    if (!g_active) {
+        return;
+    }
+
     g_phase_ms = (uint16_t)(g_phase_ms + REFRESH_MS);
     if (g_phase_ms >= PHASE_WRAP_MS) {
         g_phase_ms = 0;
     }
 
-    switch ((IndicatorMode)g_mode) {
-        case INDICATOR_MODE_ERROR:
-            render_error();
-            break;
-        case INDICATOR_MODE_CONFIG:
-            render_config();
-            break;
-        case INDICATOR_MODE_ON:
-            render_on();
-            break;
-        case INDICATOR_MODE_OFF:
-        default:
-            render_off();
-            break;
+    /* Priority: config-mode editing wins over normal rendering, and
+     * within normal rendering a config-error (mode unrealisable) flashes
+     * the whole ring red. Otherwise ship per-LED enabled / pending /
+     * errored. */
+    if (config_mode_active()) {
+        render_config(config_mode_nav_cursor());
+    } else if (controller_nav_config_error()) {
+        render_error();
+    } else {
+        render_on(controller_nav_enabled(), controller_nav_pending(), controller_nav_errored());
     }
     rgbled_set(g_leds, LED_COUNT);
 }

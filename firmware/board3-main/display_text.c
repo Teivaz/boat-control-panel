@@ -16,7 +16,7 @@
  * same percentage. Rows are separated by full-width divider lines. Row
  * baselines (16/36/56) are the same as before so the unifont 8x16 cells
  * sit centred in each 21 px row strip. */
-#define REFRESH_MS 250u
+#define REFRESH_MS 100u /* 10 Hz */
 #define LINE_BASELINE_0 16
 #define LINE_BASELINE_1 36
 #define LINE_BASELINE_2 56
@@ -51,7 +51,10 @@
 
 static const uint8_t baselines[3] = {LINE_BASELINE_0, LINE_BASELINE_1, LINE_BASELINE_2};
 
+static uint8_t g_active; /* 1 once the OLED panel has been taken out of power-save */
+
 static void refresh_task(TaskId id, void* ctx);
+static void render_current_frame(u8g2_t* g);
 static void render_normal(u8g2_t* g);
 static void render_config_menu(u8g2_t* g);
 static void render_config_nav(u8g2_t* g);
@@ -64,7 +67,30 @@ static uint8_t append_str(char* out, uint8_t pos, const char* s);
 static uint8_t append_u8(char* out, uint8_t pos, uint16_t value, uint8_t min_digits);
 
 void display_text_init(TaskController* ctrl) {
+    /* Configure the host-side framebuffer (u8g2 is already wired by
+     * display_init) and ship one cleared frame to DDRAM. The panel itself
+     * stays in power-save until display_text_set_active(1) — when that
+     * caller arrives, DDRAM already holds known-good (blank) content so
+     * the first frame after enable is clean even before refresh_task
+     * paints. */
+    g_active = 0;
+    u8g2_t* g = display_u8g2();
+    u8g2_ClearBuffer(g);
+    u8g2_SendBuffer(g);
     task_controller_add(ctrl, TASK_DISPLAY_TEXT, REFRESH_MS, refresh_task, 0);
+}
+
+void display_text_set_active(uint8_t on) {
+    on = on ? 1u : 0u;
+    if (on == g_active) {
+        return;
+    }
+    if (on) {
+        display_enable();
+    } else {
+        display_disable();
+    }
+    g_active = on;
 }
 
 /* ---------------------------------------------------------------------------
@@ -328,11 +354,10 @@ static void render_config_offset(u8g2_t* g) {
  * ---------------------------------------------------------------------------
  */
 
-static void refresh_task(TaskId id, void* ctx) {
-    (void)id;
-    (void)ctx;
-
-    u8g2_t* g = display_u8g2();
+/* Build one frame from the current controller / config-mode state and
+ * ship it to DDRAM. Pure function of the world — same call from
+ * refresh_task or set_active(1) produces the same output. */
+static void render_current_frame(u8g2_t* g) {
     u8g2_ClearBuffer(g);
 
     if (config_mode_active()) {
@@ -357,18 +382,19 @@ static void refresh_task(TaskId id, void* ctx) {
     } else if (controller_power_on()) {
         render_normal(g);
     }
-    /* Disabled normal mode: buffer already cleared, ship it blank. */
+    /* Power off + not in config: cleared buffer ships as a blank frame. */
 
     u8g2_SendBuffer(g);
+}
 
-    /* Take the panel out of power-save *after* the first frame has been
-     * shipped — the SSD1322 powers up with whatever was last in its DDRAM,
-     * and enabling it before SendBuffer lets the user see that noise for
-     * one tick. One-shot flag avoids the redundant command on every
-     * refresh. */
-    static uint8_t panel_enabled = 0;
-    if (!panel_enabled) {
-        display_enable();
-        panel_enabled = 1;
+static void refresh_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
+    /* No work while the panel is dark — DDRAM stays as set_active(0)
+     * left it (cleared), and we save the parallel-bus traffic of
+     * shipping frames nobody can see. */
+    if (!g_active) {
+        return;
     }
+    render_current_frame(display_u8g2());
 }
