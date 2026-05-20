@@ -12,6 +12,289 @@
 
 #include <xc.h>
 
+
+typedef enum {
+    NAV_LIGHT_ERROR_NONE = 0,
+    NAV_LIGHT_ERROR_CONFIG = 1 << 0, // When available lights do not allow setting the desired nav light mode
+    NAV_LIGHT_ERROR_ANCHORING = 1 << 1, // When the anchoring light sttate does not match the actual state of the channel
+    NAV_LIGHT_ERROR_TRICOLOR = 1 << 2, // When the tricolor light sttate does not match the actual state of the channel
+    NAV_LIGHT_ERROR_STEAMING = 1 << 3, // When the steaming light sttate does not match the actual state of the channel
+    NAV_LIGHT_ERROR_BOW = 1 << 4, // When the bow light sttate does not match the actual state of the channel
+    NAV_LIGHT_ERROR_STERN = 1 << 5, // When the stern light sttate does not match the actual state of the channel
+} NavLightError;
+
+typedef enum {
+    NAV_LIGHT_MODE_OFF,
+    NAV_LIGHT_MODE_STEAMING,
+    NAV_LIGHT_MODE_RUNNING,
+    NAV_LIGHT_MODE_ANCHORING,
+} NavLightMode;
+
+typedef enum {
+    ACTION_NONE,
+    ACTION_POWER,
+    ACTION_RELAY,
+    ACTION_MENU,
+    ACTION_NAV,
+} ActionType;
+
+typedef struct {
+    ActionType type;
+    union {
+        NavLightMode nav_light;
+        Channel channel;
+        MenuControl menu;
+    };
+} ActionEvent;
+
+
+static ActionEvent action_for_button(ButtonIndex button);
+static void set_nav_light_mode(NavLightMode nav_mode);
+static void toggle_power(void);
+static void toggle_relay(Channel channel);
+static void set_channels(uint16_t channel);
+static void apply_channel_observation(uint16_t channel);
+
+static uint8_t g_on = false; // Panel starts in off state
+static uint8_t g_config = false; // Panel in config mode
+static uint16_t g_relay_target = 0x0000U;
+static uint16_t g_relay_state = 0x0000U;
+static uint16_t g_channel_state = 0x0000U;
+static uint8_t g_nav_light_error = NAV_LIGHT_ERROR_NONE;
+
+static ActionEvent action_for_button(ButtonIndex button) {
+    /* Config mode is a strict menu-navigation view: only the four left-side
+     * buttons L1..L4 translate to a meaningful event; everything else is
+     * deliberately swallowed so a misclick doesn't toggle a relay while
+     * the operator is reconfiguring something. L0 stays inert here — exit
+     * is via the dedicated RA7 config switch, not via the menu. */
+    if (g_config) {
+        switch (button) {
+            case BUTTON_L1:
+                return (ActionEvent){.type = ACTION_MENU, .menu = MENU_CONTROL_NEXT};
+            case BUTTON_L2:
+                return (ActionEvent){.type = ACTION_MENU, .menu = MENU_CONTROL_PREV};
+            case BUTTON_L3:
+                return (ActionEvent){.type = ACTION_MENU, .menu = MENU_CONTROL_ENTER};
+            case BUTTON_L4:
+                return (ActionEvent){.type = ACTION_MENU, .menu = MENU_CONTROL_EXIT};
+            default:
+                return (ActionEvent){.type = ACTION_NONE};
+        }
+    }
+
+    /* Normal mode. Left panel: power, two helm relays, three nav-light
+     * modes, inverter. Right panel: seven independent house-load relays.
+     * Nav buttons map a *mode* (not a single relay) — the controller's
+     * nav-mode logic projects each mode onto the appropriate set of
+     * RELAY_NAV_* bits. */
+    switch (button) {
+        case BUTTON_L0:
+            return (ActionEvent){.type = ACTION_POWER};
+        case BUTTON_L1:
+            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_INSTRUMENTS};
+        case BUTTON_L2:
+            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_AUTOPILOT};
+        case BUTTON_L3:
+            return (ActionEvent){.type = ACTION_NAV, .nav_light = NAV_LIGHT_MODE_STEAMING};
+        case BUTTON_L4:
+            return (ActionEvent){.type = ACTION_NAV, .nav_light = NAV_LIGHT_MODE_RUNNING};
+        case BUTTON_L5:
+            return (ActionEvent){.type = ACTION_NAV, .nav_light = NAV_LIGHT_MODE_ANCHORING};
+        case BUTTON_L6:
+            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_INVERTER};
+        case BUTTON_R0:
+            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_WATER_PUMP};
+        case BUTTON_R1:
+            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_FRIDGE};
+        case BUTTON_R2:
+            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_DECK_LIGHTS};
+        case BUTTON_R3:
+            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_CABIN_LIGHTS};
+        case BUTTON_R4:
+            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_USB};
+        case BUTTON_R5:
+            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_AUX_1};
+        case BUTTON_R6:
+            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_AUX_2};
+        default:
+            return (ActionEvent){.type = ACTION_NONE};
+    }
+}
+
+void controller_on_button_changed(uint8_t sender, uint8_t button_id, uint8_t pressed, CommButtonMode mode) {
+    if (!g_config && !g_on) {
+        return;
+    }
+
+    ButtonIndex button = button_id;
+    switch (sender) {
+    case COMM_ADDRESS_BUTTON_BOARD_L:
+        break;
+    case COMM_ADDRESS_BUTTON_BOARD_R:
+        button |= 0x8;
+        break;
+#if 0 // Expansion
+    case COMM_ADDRESS_BUTTON_BOARD_L2:
+        button |= 0x10;
+        break;
+    case COMM_ADDRESS_BUTTON_BOARD_R2:
+        button |= 0x18;
+        break;
+#endif
+    }
+
+    ActionEvent action = action_for_button(button);
+
+    switch (action.type) {
+        case ACTION_POWER:
+            toggle_power();
+            break;
+        case ACTION_RELAY:
+            toggle_relay(action.channel);
+            break;
+        case ACTION_MENU:
+            config_mode_on_action(action.menu);
+            break;
+        case ACTION_NAV:
+            set_nav_light_mode(action.nav_light);
+            break;
+        case ACTION_NONE:
+        default:
+            break;
+    }
+}
+
+static void toggle_power(void) {
+    if (g_on) {
+        set_nav_mode(NAV_LIGHT_MODE_OFF);
+        set_channels(0);
+        for (uint8_t b = 0; b < BUTTON_COUNT; b++) {
+            button_fx_clear(b);
+        }
+    }
+    else {
+        set_channels(CHANNEL_MAIN);
+    }
+}
+
+static void set_nav_light_mode(NavLightMode nav_light_mode) {
+    uint8_t nav_light_error = NAV_LIGHT_ERROR_NONE;
+    uint16_t relay_target = g_relay_target;
+    if (g_nav_light_mode == nav_light_mode || nav_light_mode == NAV_LIGHT_MODE_OFF) {
+        nav_light_mode = NAV_LIGHT_MODE_OFF;
+    }
+    else {
+        uint8_t nav_lights_enabled = config_get_nav_enabled_mask();
+        NavResolution r = nav_lights_resolve(nav_light_mode, nav_lights_enabled);
+        if (r.error) {
+            nav_light_error |= NAV_LIGHT_ERROR_CONFIG;
+        }
+
+        /* Walk the five NAV_LIGHT_* bits returned by nav_lights_resolve and
+         * sort them into set/clear masks of CHANNEL_NAV_* bits. The two
+         * encodings aren't interchangeable — NAV_LIGHT_* is the 5-bit UI
+         * layout, CHANNEL_NAV_* is the wire bit position — so each branch
+         * is an explicit translation rather than a shift. Anything not in
+         * r.lights_mask is actively cleared so a mode change always shows
+         * the new lights and nothing left over from the previous mode. */
+        uint16_t set_mask = 0;
+        uint16_t clear_mask = 0;
+        if (r.lights_mask & NAV_LIGHT_ANCHORING) {
+            set_mask |= CHANNEL_NAV_ANCHORING;
+        } else {
+            clear_mask |= CHANNEL_NAV_ANCHORING;
+        }
+        if (r.lights_mask & NAV_LIGHT_TRICOLOR) {
+            set_mask |= CHANNEL_NAV_TRICOLOR;
+        } else {
+            clear_mask |= CHANNEL_NAV_TRICOLOR;
+        }
+        if (r.lights_mask & NAV_LIGHT_STEAMING) {
+            set_mask |= CHANNEL_NAV_STEAMING;
+        } else {
+            clear_mask |= CHANNEL_NAV_STEAMING;
+        }
+        if (r.lights_mask & NAV_LIGHT_BOW) {
+            set_mask |= CHANNEL_NAV_BOW;
+        } else {
+            clear_mask |= CHANNEL_NAV_BOW;
+        }
+        if (r.lights_mask & NAV_LIGHT_STERN) {
+            set_mask |= CHANNEL_NAV_STERN;
+        } else {
+            clear_mask |= CHANNEL_NAV_STERN;
+        }
+        relay_target = (uint16_t)((relay_target | set_mask) & (uint16_t)~clear_mask);
+    }
+    // TODO: g_nav_light_mode = nav_light_mode;
+    // TODO: g_nav_light_error = nav_light_error;
+    set_channels(relay_target);
+}
+
+static void toggle_relay(Channel channel) {
+    set_channels(g_relay_target ^ channel);
+}
+
+static uint16_t mask_for_button(ButtonIndex button) {
+    switch (button)
+    {
+    case BUTTON_L0:
+        return CHANNEL_MAIN;
+    case BUTTON_L1:
+        return CHANNEL_INSTRUMENTS;
+    case BUTTON_L2:
+        return CHANNEL_AUTOPILOT;
+    case BUTTON_L3:
+    case BUTTON_L4:
+    case BUTTON_L5:
+        return CHANNEL_NAV_BOW | CHANNEL_NAV_STERN | CHANNEL_NAV_STEAMING | CHANNEL_NAV_ANCHORING | CHANNEL_NAV_TRICOLOR;
+    case BUTTON_L6:
+        return CHANNEL_INVERTER;
+    case BUTTON_R0:
+        return CHANNEL_WATER_PUMP;
+    case BUTTON_R1:
+        return CHANNEL_FRIDGE;
+    case BUTTON_R2:
+        return CHANNEL_DECK_LIGHTS;
+    case BUTTON_R3:
+        return CHANNEL_CABIN_LIGHTS;
+    case BUTTON_R4:
+        return CHANNEL_USB;
+    case BUTTON_R5:
+        return CHANNEL_AUX_1;
+    case BUTTON_R6:
+        return CHANNEL_AUX_2;
+    default:
+        return 0;
+    }
+}
+
+static void set_channels(uint16_t channel) {
+    for (uint8_t button = 0; button < BUTTON_COUNT; button++) {
+        uint16_t mask = mask_for_button(button);
+        button_fx_set(button, channel & mask, mask);
+    }
+    // TODO: g_relay_target = channel;
+}
+
+static void apply_channel_observation(uint16_t channel) {
+    if (!g_on) {
+        return;
+    }
+    g_channel_state = channel;
+    button_fx_on_channel_state(g_channel_state);
+
+    if (channel & NAV_LIGHT_ANCHORING) {
+        anchoring_on
+    } else {
+        anchoring_off
+    }
+    // TODO: nav_light_indicator update
+}
+
+/// LEGACY
+
 /* ============================================================================
  * Relay assignment — bit position in the 16-bit relay word matches the
  * switching board's wiring (see board1-switching/readme.md "Protocol Bit"
@@ -48,10 +331,10 @@
  */
 
 typedef enum {
-    ACTION_NONE = 0,
-    ACTION_TOGGLE_POWER,
-    ACTION_TOGGLE_RELAY,
-    ACTION_TOGGLE_NAV_MODE,
+    BACTION_NONE = 0,
+    BACTION_TOGGLE_POWER,
+    BACTION_TOGGLE_RELAY,
+    BACTION_TOGGLE_NAV_MODE,
 } ActionKind;
 
 typedef struct {
@@ -305,6 +588,7 @@ void controller_on_channel_changed(uint8_t sender, uint16_t prev_c, uint16_t cur
     (void)prev_s;
     sensor_state = curr_s;
     apply_channel_observation(curr_c);
+    channels_age = 0;
 }
 
 void controller_on_channel_state_response(const CommChannelState* state) {
