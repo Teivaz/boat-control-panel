@@ -20,18 +20,6 @@
 /* RA7 is pulled up via WPUA7; the switch closes to ground when active. */
 #define PIN_ACTIVE() (PORTAbits.RA7 == 0)
 
-/* Button indices on the left board used by the menu. The four logical
- * actions are encoded with disjoint high-nibble flags (0x10 vs 0x20) so
- * the per-screen switches can match all four cases without collision
- * even though every event comes from the same I2C side. */
-#define BTN_UP 1u     /* L1 */
-#define BTN_DOWN 2u   /* L2 */
-#define BTN_SELECT 3u /* L3 — "enter" */
-#define BTN_BACK 4u   /* L4 — "exit" */
-
-#define SIDE_LEFT COMM_ADDRESS_BUTTON_BOARD_L
-#define SIDE_RIGHT COMM_ADDRESS_BUTTON_BOARD_R
-
 #define TIME_FIELD_HOUR 0u
 #define TIME_FIELD_MINUTE 1u
 
@@ -58,10 +46,10 @@ static void exit_config(void);
 static void load_time(void);
 static void enter_offset(uint8_t target);
 static uint8_t offset_address(uint8_t target);
-static void handle_menu(uint8_t btn);
-static void handle_nav(uint8_t btn);
-static void handle_time(uint8_t btn);
-static void handle_offset(uint8_t btn);
+static void handle_menu(MenuControl c);
+static void handle_nav(MenuControl c);
+static void handle_time(MenuControl c);
+static void handle_offset(MenuControl c);
 static void sample_task(TaskId id, void* ctx);
 static void on_set_time_done(uint8_t ok, void* ctx);
 static void on_offset_read_done(uint8_t ok, uint8_t value, void* ctx);
@@ -127,57 +115,45 @@ uint8_t config_mode_offset_value(void) {
     return offset_value;
 }
 
-/* Runs from the I2C rx ISR (via controller dispatch). Keep it brief. */
-void config_mode_on_button_pressed(uint8_t side, uint8_t button_idx) {
+void config_mode_on_action(MenuControl control) {
     if (!active) {
         return;
     }
-    /* Translate (side, button) into the four logical actions. Anything else
-     * is ignored — the menu only listens to the four mapped buttons.
-     * Up/Down get the 0x10 high-nibble flag; Select/Back get 0x20 so the
-     * per-screen switch statements can match without collision. */
-    uint8_t btn;
-    if (side == SIDE_LEFT && (button_idx == BTN_UP || button_idx == BTN_DOWN)) {
-        btn = (uint8_t)(button_idx | 0x10u);
-    } else if (side == SIDE_LEFT && (button_idx == BTN_SELECT || button_idx == BTN_BACK)) {
-        btn = (uint8_t)(button_idx | 0x20u);
-    } else {
-        return;
-    }
-
     switch (screen) {
         case CONFIG_SCREEN_MENU:
-            handle_menu(btn);
+            handle_menu(control);
             break;
         case CONFIG_SCREEN_NAV:
-            handle_nav(btn);
+            handle_nav(control);
             break;
         case CONFIG_SCREEN_TIME:
-            handle_time(btn);
+            handle_time(control);
             break;
         case CONFIG_SCREEN_OFFSET:
-            handle_offset(btn);
+            handle_offset(control);
             break;
         default:
             break;
     }
 }
 
-static void handle_menu(uint8_t btn) {
-    switch (btn) {
-        case 0x10u | BTN_UP:
+static void handle_menu(MenuControl c) {
+    switch (c) {
+        case MENU_CONTROL_NEXT:
+            /* Cursor moves up the list (decrement), wrapping at the top. */
             menu_cursor = (uint8_t)((menu_cursor + CONFIG_MENU_COUNT - 1u) % CONFIG_MENU_COUNT);
             break;
-        case 0x10u | BTN_DOWN:
+        case MENU_CONTROL_PREV:
+            /* Cursor moves down the list, wrapping at the bottom. */
             menu_cursor = (uint8_t)((menu_cursor + 1u) % CONFIG_MENU_COUNT);
             break;
-        case 0x20u | BTN_BACK:
+        case MENU_CONTROL_EXIT:
             /* Back at the top-level menu exits config; commit happens on
              * RA7 release, but we mirror it here so a software exit also
              * persists the working mask. */
             exit_config();
             break;
-        case 0x20u | BTN_SELECT:
+        case MENU_CONTROL_ENTER:
             if (menu_cursor == CONFIG_MENU_NAV) {
                 screen = CONFIG_SCREEN_NAV;
                 nav_cursor = 0;
@@ -196,18 +172,18 @@ static void handle_menu(uint8_t btn) {
     }
 }
 
-static void handle_nav(uint8_t btn) {
-    switch (btn) {
-        case 0x10u | BTN_UP:
+static void handle_nav(MenuControl c) {
+    switch (c) {
+        case MENU_CONTROL_NEXT:
             nav_cursor = (uint8_t)((nav_cursor + 4u) % 5u);
             break;
-        case 0x10u | BTN_DOWN:
+        case MENU_CONTROL_PREV:
             nav_cursor = (uint8_t)((nav_cursor + 1u) % 5u);
             break;
-        case 0x20u | BTN_BACK:
+        case MENU_CONTROL_EXIT:
             screen = CONFIG_SCREEN_MENU;
             break;
-        case 0x20u | BTN_SELECT:
+        case MENU_CONTROL_ENTER:
             working_mask ^= (uint8_t)(1u << nav_cursor);
             working_mask &= NAV_LIGHT_ALL;
             break;
@@ -216,30 +192,32 @@ static void handle_nav(uint8_t btn) {
     }
 }
 
-static void handle_time(uint8_t btn) {
-    switch (btn) {
-        case 0x10u | BTN_UP:
+static void handle_time(MenuControl c) {
+    switch (c) {
+        case MENU_CONTROL_NEXT:
+            /* Bump the active field upward. */
             if (time_field == TIME_FIELD_HOUR) {
                 working_hour = (uint8_t)((working_hour + 1u) % 24u);
             } else {
                 working_minute = (uint8_t)((working_minute + 1u) % 60u);
             }
             break;
-        case 0x10u | BTN_DOWN:
+        case MENU_CONTROL_PREV:
+            /* Bump the active field downward. */
             if (time_field == TIME_FIELD_HOUR) {
                 working_hour = (uint8_t)((working_hour + 23u) % 24u);
             } else {
                 working_minute = (uint8_t)((working_minute + 59u) % 60u);
             }
             break;
-        case 0x20u | BTN_BACK:
+        case MENU_CONTROL_EXIT:
             if (time_field == TIME_FIELD_MINUTE) {
                 time_field = TIME_FIELD_HOUR;
             } else {
                 screen = CONFIG_SCREEN_MENU;
             }
             break;
-        case 0x20u | BTN_SELECT:
+        case MENU_CONTROL_ENTER:
             if (time_field == TIME_FIELD_HOUR) {
                 time_field = TIME_FIELD_MINUTE;
             } else if (!op_busy) {
@@ -262,18 +240,18 @@ static void on_set_time_done(uint8_t ok, void* ctx) {
     op_busy = 0;
 }
 
-static void handle_offset(uint8_t btn) {
-    switch (btn) {
-        case 0x10u | BTN_UP:
+static void handle_offset(MenuControl c) {
+    switch (c) {
+        case MENU_CONTROL_NEXT:
             offset_value = (uint8_t)(offset_value + 1u);
             break;
-        case 0x10u | BTN_DOWN:
+        case MENU_CONTROL_PREV:
             offset_value = (uint8_t)(offset_value - 1u);
             break;
-        case 0x20u | BTN_BACK:
+        case MENU_CONTROL_EXIT:
             screen = CONFIG_SCREEN_MENU;
             break;
-        case 0x20u | BTN_SELECT:
+        case MENU_CONTROL_ENTER:
             /* Commit; on I2C failure stay on the screen so the user can
              * retry. Returns to the menu on success (in completion). */
             if (!op_busy) {

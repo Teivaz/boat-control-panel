@@ -15,7 +15,8 @@
  * Storage layout (internal — protocol addresses are remapped by
  * eeprom_offset_for):
  *   0x00..0x01   magic header
- *   OFF_NAV      1 byte — nav light enabled mask (mirrors protocol 0x10) */
+ *   OFF_NAV      1 byte — nav light enabled mask (mirrors protocol 0x10)
+ *   OFF_BRIGHT   1 byte — indicator RGB peak brightness (mirrors 0x11) */
 #define EEPROM_ADDR_U 0x38
 #define CONFIG_MAGIC_LO 0x5A
 #define CONFIG_MAGIC_HI 0xA5
@@ -23,7 +24,13 @@
 #define OFF_MAGIC_LO 0x00
 #define OFF_MAGIC_HI 0x01
 #define OFF_NAV 0x02
+#define OFF_BRIGHT 0x03
 #define OFF_NONE 0xFF
+
+/* Default brightness seeded on a virgin device. Picked to match the
+ * pre-config compile-time default in indicator.c so behaviour after the
+ * first boot is unchanged. */
+#define INDICATOR_DEFAULT_BRIGHTNESS 0x40
 
 #define WRITE_QUEUE_SIZE 4
 #define WRITE_QUEUE_MASK (WRITE_QUEUE_SIZE - 1)
@@ -112,9 +119,21 @@ uint8_t config_get_nav_enabled_mask(void) {
     return (uint8_t)(v & NAV_LIGHT_ALL);
 }
 
+uint8_t config_get_indicator_brightness(void) {
+    uint8_t v = config_read_byte(CONFIG_ADDR_INDICATOR_BRIGHTNESS);
+    /* 0xFF is the EEPROM erase pattern; treat it as "unset" and return
+     * the seeded default so a virgin / corrupted byte doesn't drive the
+     * LEDs at full intensity. Any other value (including a user-chosen
+     * max) is honoured. */
+    return (v == 0xFF) ? INDICATOR_DEFAULT_BRIGHTNESS : v;
+}
+
 static uint8_t eeprom_offset_for(uint8_t address) {
     if (address == CONFIG_ADDR_NAV_ENABLED_MASK) {
         return OFF_NAV;
+    }
+    if (address == CONFIG_ADDR_INDICATOR_BRIGHTNESS) {
+        return OFF_BRIGHT;
     }
     return OFF_NONE;
 }
@@ -192,4 +211,5 @@ static void nvm_write(uint8_t offset, uint8_t value) {
 
 static void write_defaults(void) {
     nvm_write(OFF_NAV, NAV_LIGHT_ALL);
+    nvm_write(OFF_BRIGHT, INDICATOR_DEFAULT_BRIGHTNESS);
 }

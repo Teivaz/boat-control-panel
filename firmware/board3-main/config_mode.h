@@ -38,6 +38,13 @@ typedef enum {
     CONFIG_MENU_COUNT,
 } ConfigMenuItem;
 
+typedef enum {
+    MENU_CONTROL_NEXT,
+    MENU_CONTROL_PREV,
+    MENU_CONTROL_ENTER,
+    MENU_CONTROL_EXIT,
+} MenuControl;
+
 void config_mode_init(TaskController* ctrl);
 
 uint8_t config_mode_active(void);
@@ -51,9 +58,9 @@ uint8_t config_mode_time_minute(void);
 uint8_t config_mode_offset_target(void); /* 0 = water, 1 = fuel */
 uint8_t config_mode_offset_value(void);
 
-/* Invoked from the button-change dispatch when config mode is active.
- * `side` is the originating button board I2C address; `button_idx` is the
- * index (0..6) of the button whose trigger fired. */
-void config_mode_on_button_pressed(uint8_t side, uint8_t button_idx);
+/* Drive the menu state machine. Called from the controller's button
+ * dispatch when config mode is active; no-ops when inactive. Main-loop
+ * context only. */
+void config_mode_on_action(MenuControl control);
 
 #endif /* CONFIG_MODE_H */

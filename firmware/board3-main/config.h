@@ -8,6 +8,7 @@
 /* Main-board-specific config address map (protocol space).
  * Universal 0x00..0x0F is owned by the module (see CommConfigAddress). */
 #define CONFIG_ADDR_NAV_ENABLED_MASK 0x10
+#define CONFIG_ADDR_INDICATOR_BRIGHTNESS 0x11
 
 /* 5-bit mask: bit N = 1 means light N is physically present and usable.
  *   bit 0 anchoring
@@ -31,5 +32,10 @@ uint8_t config_read_byte(uint8_t address);
 void config_write_byte(uint8_t address, uint8_t value);
 
 uint8_t config_get_nav_enabled_mask(void);
+
+/* Peak per-channel intensity for the nav-indicator RGB ring, 0..255.
+ * Returns the EEPROM default if the byte reads back as the erase
+ * pattern (0xFF) so a virgin / corrupted cell doesn't blast the LEDs. */
+uint8_t config_get_indicator_brightness(void);
 
 #endif /* CONFIG_H */
