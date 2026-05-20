@@ -232,7 +232,7 @@ static void build_button_effect(uint8_t button_group, CommButtonEffect* out) {
             fx.color = COMM_EFFECT_COLOR_WHITE;
         } else {
             fx.color = COMM_EFFECT_COLOR_WHITE;
-            fx.mode = controller_button_base_on(button_group, i) ? COMM_EFFECT_MODE_ENABLED : COMM_EFFECT_MODE_DISABLED;
+            fx.mode = controller_button_base_on(button) ? COMM_EFFECT_MODE_ENABLED : COMM_EFFECT_MODE_DISABLED;
         }
         (void)comm_button_effect_set(out, i, fx);
     }

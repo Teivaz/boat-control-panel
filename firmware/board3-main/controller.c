@@ -3,6 +3,7 @@
 #include "button_fx.h"
 #include "config.h"
 #include "config_mode.h"
+#include "indicator.h"
 #include "libcomm.h"
 #include "libcomm_interface.h"
 #include "nav_lights.h"
@@ -12,15 +13,34 @@
 
 #include <xc.h>
 
+/* ============================================================================
+ * Architecture
+ *
+ *   L1 INPUT     controller_on_button_changed         translate, dispatch
+ *   L1 INTENT    toggle_power / toggle_relay / set_nav_light_mode
+ *   L2 STATE     set_channels(uint16_t)               sole writer of g_relay_target
+ *                apply_channel_observation(uint16_t)  sole writer of g_channel_state
+ *                update_indicator()                   sole caller of indicator_*
+ *   L3 BUS OUT   retry_task, on_relay_state_done
+ *   L3 BUS IN    poll_*_task, on_*_response
+ *
+ * Functions only call adjacent layers. L1 intent never touches the bus or
+ * button_fx directly; L2 set_channels owns the fan-out to button_fx /
+ * indicator / dirty flag; L3 bus paths only ever call back into
+ * apply_channel_observation. There is no separate "intent vs target"
+ * representation — intent functions compute the new channel mask and
+ * hand it to set_channels.
+ *
+ * No power state machine: g_on follows the *observed* main bit. Per-
+ * button "pending → error" feedback is owned by button_fx; per-nav-
+ * light feedback is owned by indicator. Both subsystems receive the new
+ * target / observation through set_channels / apply_channel_observation.
+ * ============================================================================
+ */
 
 typedef enum {
     NAV_LIGHT_ERROR_NONE = 0,
-    NAV_LIGHT_ERROR_CONFIG = 1 << 0, // When available lights do not allow setting the desired nav light mode
-    NAV_LIGHT_ERROR_ANCHORING = 1 << 1, // When the anchoring light sttate does not match the actual state of the channel
-    NAV_LIGHT_ERROR_TRICOLOR = 1 << 2, // When the tricolor light sttate does not match the actual state of the channel
-    NAV_LIGHT_ERROR_STEAMING = 1 << 3, // When the steaming light sttate does not match the actual state of the channel
-    NAV_LIGHT_ERROR_BOW = 1 << 4, // When the bow light sttate does not match the actual state of the channel
-    NAV_LIGHT_ERROR_STERN = 1 << 5, // When the stern light sttate does not match the actual state of the channel
+    NAV_LIGHT_ERROR_CONFIG = 1 << 0, /* requested mode can't be realised with current enabled set */
 } NavLightError;
 
 typedef enum {
@@ -47,104 +67,155 @@ typedef struct {
     };
 } ActionEvent;
 
+#define RETRY_TICK_MS 200u
+#define POLL_TICK_MS 200u
+#define POLL_TICK_SLOW_MS 5000u
+#define INDICATOR_SYNC_TICK_MS 100u
+#define RTC_TICK_MS 250u
+#define STALE_THRESHOLD (10000u / POLL_TICK_MS) /* 10 s */
 
+/* All five nav-light bits in CHANNEL_NAV_* layout. */
+#define NAV_MASK_CHANNELS                                                                                              \
+    ((uint16_t)(CHANNEL_NAV_ANCHORING | CHANNEL_NAV_TRICOLOR | CHANNEL_NAV_STEAMING | CHANNEL_NAV_BOW |                \
+                CHANNEL_NAV_STERN))
+
+/* ----- prototypes ----- */
 static ActionEvent action_for_button(ButtonIndex button);
-static void set_nav_light_mode(NavLightMode nav_mode);
+static uint16_t mask_for_button(ButtonIndex button);
+static uint16_t nav_lights_to_channels(uint8_t nl_mask);
+static uint16_t channels_for_nav_mode(NavLightMode mode, uint8_t* config_error_out);
+static NavLights nav_lights_from_channels(uint16_t channels);
+
 static void toggle_power(void);
 static void toggle_relay(Channel channel);
-static void set_channels(uint16_t channel);
-static void apply_channel_observation(uint16_t channel);
+static void set_nav_light_mode(NavLightMode mode);
 
-static uint8_t g_on = false; // Panel starts in off state
-static uint8_t g_config = false; // Panel in config mode
-static uint16_t g_relay_target = 0x0000U;
-static uint16_t g_relay_state = 0x0000U;
-static uint16_t g_channel_state = 0x0000U;
-static uint8_t g_nav_light_error = NAV_LIGHT_ERROR_NONE;
+static void set_channels(uint16_t new_target);
+static void apply_channel_observation(uint16_t observed);
+static void update_indicator(void);
 
-static ActionEvent action_for_button(ButtonIndex button) {
-    /* Config mode is a strict menu-navigation view: only the four left-side
-     * buttons L1..L4 translate to a meaningful event; everything else is
-     * deliberately swallowed so a misclick doesn't toggle a relay while
-     * the operator is reconfiguring something. L0 stays inert here — exit
-     * is via the dedicated RA7 config switch, not via the menu. */
-    if (g_config) {
-        switch (button) {
-            case BUTTON_L1:
-                return (ActionEvent){.type = ACTION_MENU, .menu = MENU_CONTROL_NEXT};
-            case BUTTON_L2:
-                return (ActionEvent){.type = ACTION_MENU, .menu = MENU_CONTROL_PREV};
-            case BUTTON_L3:
-                return (ActionEvent){.type = ACTION_MENU, .menu = MENU_CONTROL_ENTER};
-            case BUTTON_L4:
-                return (ActionEvent){.type = ACTION_MENU, .menu = MENU_CONTROL_EXIT};
-            default:
-                return (ActionEvent){.type = ACTION_NONE};
-        }
-    }
+static void retry_task(TaskId id, void* ctx);
+static void on_relay_state_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
 
-    /* Normal mode. Left panel: power, two helm relays, three nav-light
-     * modes, inverter. Right panel: seven independent house-load relays.
-     * Nav buttons map a *mode* (not a single relay) — the controller's
-     * nav-mode logic projects each mode onto the appropriate set of
-     * RELAY_NAV_* bits. */
-    switch (button) {
-        case BUTTON_L0:
-            return (ActionEvent){.type = ACTION_POWER};
-        case BUTTON_L1:
-            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_INSTRUMENTS};
-        case BUTTON_L2:
-            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_AUTOPILOT};
-        case BUTTON_L3:
-            return (ActionEvent){.type = ACTION_NAV, .nav_light = NAV_LIGHT_MODE_STEAMING};
-        case BUTTON_L4:
-            return (ActionEvent){.type = ACTION_NAV, .nav_light = NAV_LIGHT_MODE_RUNNING};
-        case BUTTON_L5:
-            return (ActionEvent){.type = ACTION_NAV, .nav_light = NAV_LIGHT_MODE_ANCHORING};
-        case BUTTON_L6:
-            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_INVERTER};
-        case BUTTON_R0:
-            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_WATER_PUMP};
-        case BUTTON_R1:
-            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_FRIDGE};
-        case BUTTON_R2:
-            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_DECK_LIGHTS};
-        case BUTTON_R3:
-            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_CABIN_LIGHTS};
-        case BUTTON_R4:
-            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_USB};
-        case BUTTON_R5:
-            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_AUX_1};
-        case BUTTON_R6:
-            return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_AUX_2};
-        default:
-            return (ActionEvent){.type = ACTION_NONE};
-    }
+static uint16_t poll_interval_for_state(void);
+static void poll_battery_task(TaskId id, void* ctx);
+static void poll_levels_task(TaskId id, void* ctx);
+static void poll_sensors_task(TaskId id, void* ctx);
+static void poll_channels_task(TaskId id, void* ctx);
+static void poll_rtc_task(TaskId id, void* ctx);
+static void on_rtc_read_done(uint8_t ok, const RtcTime* t, void* ctx);
+
+static void indicator_sync_task(TaskId id, void* ctx);
+
+static void on_set_time_write_done(uint8_t ok, void* ctx);
+static void on_set_time_refresh_done(uint8_t ok, const RtcTime* t, void* ctx);
+static void on_ui_config_write_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
+
+/* ----- state ----- */
+/* Single-writer discipline: g_relay_target is only written by set_channels;
+ * g_channel_state and g_on are only written by apply_channel_observation. */
+static uint8_t g_on;                   /* mirrors (g_channel_state & CHANNEL_MAIN) */
+static uint16_t g_relay_target;        /* what we want the bus to be */
+static uint16_t g_channel_state;       /* what we last observed on the bus */
+static uint8_t g_nav_light_mode;       /* NavLightMode */
+static uint8_t g_nav_light_error;      /* NavLightError bitmask */
+
+static uint8_t g_relay_dirty;          /* target diverged from last successful send */
+static uint8_t g_relay_inflight;
+static uint16_t g_relay_inflight_value;
+
+static uint16_t g_battery_mv;
+static uint8_t g_levels[2];
+static uint8_t g_sensor_state;
+static uint16_t g_batt_age;
+static uint16_t g_levels_age;
+static uint16_t g_sensors_age;
+static uint16_t g_channels_age;
+
+static RtcTime g_rtc_shadow;
+static uint8_t g_rtc_valid;
+static uint8_t g_rtc_inflight;
+
+/* Single in-flight UI operation. The menu can only have one menu action
+ * pending at a time, so a single slot suffices. */
+static struct {
+    ControllerOpCompletion op_cb;
+    ControllerReadCompletion read_cb;
+    void* ctx;
+} g_ui_op;
+
+/* Cached for poll-task callbacks so they can adjust their own interval
+ * when the power state changes. */
+static TaskController* g_ctrl;
+
+/* ============================================================================
+ * Init
+ * ============================================================================
+ */
+
+void controller_init(TaskController* ctrl) {
+    g_ctrl = ctrl;
+    g_on = 0;
+    g_relay_target = 0;
+    g_channel_state = 0;
+    g_nav_light_mode = NAV_LIGHT_MODE_OFF;
+    g_nav_light_error = NAV_LIGHT_ERROR_NONE;
+    g_relay_dirty = 0;
+    g_relay_inflight = 0;
+    g_relay_inflight_value = 0;
+    g_battery_mv = 0;
+    g_levels[0] = 0;
+    g_levels[1] = 0;
+    g_sensor_state = 0;
+    g_batt_age = STALE_THRESHOLD;
+    g_levels_age = STALE_THRESHOLD;
+    g_sensors_age = STALE_THRESHOLD;
+    g_channels_age = STALE_THRESHOLD;
+    g_rtc_valid = 0;
+    g_rtc_inflight = 0;
+
+    task_controller_add(ctrl, TASK_COMM_RETRY, RETRY_TICK_MS, retry_task, 0);
+    task_controller_add(ctrl, TASK_POLL_BATTERY, POLL_TICK_MS, poll_battery_task, 0);
+    task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task, 0);
+    task_controller_add(ctrl, TASK_POLL_SENSORS, POLL_TICK_MS, poll_sensors_task, 0);
+    task_controller_add(ctrl, TASK_POLL_CHANNELS, POLL_TICK_MS, poll_channels_task, 0);
+    task_controller_add(ctrl, TASK_INDICATOR_SYNC, INDICATOR_SYNC_TICK_MS, indicator_sync_task, 0);
+    /* RTC poll opt-in — wire when the DS3231 is on the bus. */
+    (void)poll_rtc_task;
+    (void)on_rtc_read_done;
 }
 
+/* ============================================================================
+ * L1 inbound dispatch
+ * ============================================================================
+ */
+
 void controller_on_button_changed(uint8_t sender, uint8_t button_id, uint8_t pressed, CommButtonMode mode) {
-    if (!g_config && !g_on) {
+    /* Trigger filter — fire on HOLD, RELEASE-after-hold, or the press
+     * edge of a CHANGE trigger. */
+    const uint8_t should_trigger = (mode == COMM_BUTTON_MODE_RELEASE) || (mode == COMM_BUTTON_MODE_HOLD) ||
+                                   (mode == COMM_BUTTON_MODE_CHANGE && pressed);
+    if (button_id >= 7u || !should_trigger) {
         return;
     }
 
+    /* Combine the I²C side address into the ButtonIndex encoding (bit 3
+     * = side, low 3 bits = per-side index). */
     ButtonIndex button = button_id;
     switch (sender) {
-    case COMM_ADDRESS_BUTTON_BOARD_L:
-        break;
-    case COMM_ADDRESS_BUTTON_BOARD_R:
-        button |= 0x8;
-        break;
-#if 0 // Expansion
-    case COMM_ADDRESS_BUTTON_BOARD_L2:
-        button |= 0x10;
-        break;
-    case COMM_ADDRESS_BUTTON_BOARD_R2:
-        button |= 0x18;
-        break;
-#endif
+        case COMM_ADDRESS_BUTTON_BOARD_L:
+            break;
+        case COMM_ADDRESS_BUTTON_BOARD_R:
+            button = (ButtonIndex)(button | 0x8u);
+            break;
+        default:
+            return;
     }
 
     ActionEvent action = action_for_button(button);
+    if (!config_mode_active() && !g_on && action.type != ACTION_POWER) {
+        return;
+    }
 
     switch (action.type) {
         case ACTION_POWER:
@@ -165,684 +236,286 @@ void controller_on_button_changed(uint8_t sender, uint8_t button_id, uint8_t pre
     }
 }
 
-static void toggle_power(void) {
-    if (g_on) {
-        set_nav_mode(NAV_LIGHT_MODE_OFF);
-        set_channels(0);
-        for (uint8_t b = 0; b < BUTTON_COUNT; b++) {
-            button_fx_clear(b);
-        }
-    }
-    else {
-        set_channels(CHANNEL_MAIN);
-    }
+void comm_on_channel_changed_received(const CommChannelChanged* event) {
+    g_sensor_state = event->current_sensors;
+    apply_channel_observation(event->current_channels);
 }
 
-static void set_nav_light_mode(NavLightMode nav_light_mode) {
-    uint8_t nav_light_error = NAV_LIGHT_ERROR_NONE;
-    uint16_t relay_target = g_relay_target;
-    if (g_nav_light_mode == nav_light_mode || nav_light_mode == NAV_LIGHT_MODE_OFF) {
-        nav_light_mode = NAV_LIGHT_MODE_OFF;
-    }
-    else {
-        uint8_t nav_lights_enabled = config_get_nav_enabled_mask();
-        NavResolution r = nav_lights_resolve(nav_light_mode, nav_lights_enabled);
-        if (r.error) {
-            nav_light_error |= NAV_LIGHT_ERROR_CONFIG;
-        }
-
-        /* Walk the five NAV_LIGHT_* bits returned by nav_lights_resolve and
-         * sort them into set/clear masks of CHANNEL_NAV_* bits. The two
-         * encodings aren't interchangeable — NAV_LIGHT_* is the 5-bit UI
-         * layout, CHANNEL_NAV_* is the wire bit position — so each branch
-         * is an explicit translation rather than a shift. Anything not in
-         * r.lights_mask is actively cleared so a mode change always shows
-         * the new lights and nothing left over from the previous mode. */
-        uint16_t set_mask = 0;
-        uint16_t clear_mask = 0;
-        if (r.lights_mask & NAV_LIGHT_ANCHORING) {
-            set_mask |= CHANNEL_NAV_ANCHORING;
-        } else {
-            clear_mask |= CHANNEL_NAV_ANCHORING;
-        }
-        if (r.lights_mask & NAV_LIGHT_TRICOLOR) {
-            set_mask |= CHANNEL_NAV_TRICOLOR;
-        } else {
-            clear_mask |= CHANNEL_NAV_TRICOLOR;
-        }
-        if (r.lights_mask & NAV_LIGHT_STEAMING) {
-            set_mask |= CHANNEL_NAV_STEAMING;
-        } else {
-            clear_mask |= CHANNEL_NAV_STEAMING;
-        }
-        if (r.lights_mask & NAV_LIGHT_BOW) {
-            set_mask |= CHANNEL_NAV_BOW;
-        } else {
-            clear_mask |= CHANNEL_NAV_BOW;
-        }
-        if (r.lights_mask & NAV_LIGHT_STERN) {
-            set_mask |= CHANNEL_NAV_STERN;
-        } else {
-            clear_mask |= CHANNEL_NAV_STERN;
-        }
-        relay_target = (uint16_t)((relay_target | set_mask) & (uint16_t)~clear_mask);
-    }
-    // TODO: g_nav_light_mode = nav_light_mode;
-    // TODO: g_nav_light_error = nav_light_error;
-    set_channels(relay_target);
-}
-
-static void toggle_relay(Channel channel) {
-    set_channels(g_relay_target ^ channel);
-}
-
-static uint16_t mask_for_button(ButtonIndex button) {
-    switch (button)
-    {
-    case BUTTON_L0:
-        return CHANNEL_MAIN;
-    case BUTTON_L1:
-        return CHANNEL_INSTRUMENTS;
-    case BUTTON_L2:
-        return CHANNEL_AUTOPILOT;
-    case BUTTON_L3:
-    case BUTTON_L4:
-    case BUTTON_L5:
-        return CHANNEL_NAV_BOW | CHANNEL_NAV_STERN | CHANNEL_NAV_STEAMING | CHANNEL_NAV_ANCHORING | CHANNEL_NAV_TRICOLOR;
-    case BUTTON_L6:
-        return CHANNEL_INVERTER;
-    case BUTTON_R0:
-        return CHANNEL_WATER_PUMP;
-    case BUTTON_R1:
-        return CHANNEL_FRIDGE;
-    case BUTTON_R2:
-        return CHANNEL_DECK_LIGHTS;
-    case BUTTON_R3:
-        return CHANNEL_CABIN_LIGHTS;
-    case BUTTON_R4:
-        return CHANNEL_USB;
-    case BUTTON_R5:
-        return CHANNEL_AUX_1;
-    case BUTTON_R6:
-        return CHANNEL_AUX_2;
-    default:
-        return 0;
-    }
-}
-
-static void set_channels(uint16_t channel) {
-    for (uint8_t button = 0; button < BUTTON_COUNT; button++) {
-        uint16_t mask = mask_for_button(button);
-        button_fx_set(button, channel & mask, mask);
-    }
-    // TODO: g_relay_target = channel;
-}
-
-static void apply_channel_observation(uint16_t channel) {
-    if (!g_on) {
+void comm_on_channel_state_read_response(const CommChannelState* state) {
+    if (!state) {
         return;
     }
-    g_channel_state = channel;
-    button_fx_on_channel_state(g_channel_state);
-
-    if (channel & NAV_LIGHT_ANCHORING) {
-        anchoring_on
-    } else {
-        anchoring_off
-    }
-    // TODO: nav_light_indicator update
+    apply_channel_observation(state->channels);
 }
-
-/// LEGACY
-
-/* ============================================================================
- * Relay assignment — bit position in the 16-bit relay word matches the
- * switching board's wiring (see board1-switching/readme.md "Protocol Bit"
- * column). Callers address via these macros so the layout can be tweaked
- * without touching action logic.
- * ============================================================================
- */
-
-#define RELAY_MAIN 0 /* main contactor — engaged whenever power_on */
-#define RELAY_INSTRUMENTS 1
-#define RELAY_AUTOPILOT 2
-#define RELAY_NAV_BOW 3
-#define RELAY_NAV_STERN 4
-#define RELAY_NAV_STEAMING 5
-#define RELAY_NAV_ANCHORING 6
-#define RELAY_NAV_TRICOLOR 7
-#define RELAY_INVERTER 8
-#define RELAY_WATER_PUMP 9
-#define RELAY_FRIDGE 10
-#define RELAY_DECK_LIGHTS 11
-#define RELAY_CABIN_LIGHTS 12
-#define RELAY_USB 13
-#define RELAY_AUX_1 14
-#define RELAY_AUX_2 15
-
-/* Nav-light bits in the relay word — contiguous at 3..7. */
-#define NAV_MASK_BITS                                                                                                  \
-    ((uint16_t)((1u << RELAY_NAV_BOW) | (1u << RELAY_NAV_STERN) | (1u << RELAY_NAV_STEAMING) |                         \
-                (1u << RELAY_NAV_ANCHORING) | (1u << RELAY_NAV_TRICOLOR)))
 
 /* ============================================================================
  * Button → action mapping
  * ============================================================================
  */
 
-typedef enum {
-    BACTION_NONE = 0,
-    BACTION_TOGGLE_POWER,
-    BACTION_TOGGLE_RELAY,
-    BACTION_TOGGLE_NAV_MODE,
-} ActionKind;
-
-typedef struct {
-    uint8_t kind;
-    uint8_t param;
-} ButtonAction;
-
-/* Left panel (COMM_ADDRESS_BUTTON_BOARD_L = 0x44), buttons 0..6. */
-static const ButtonAction left_actions[7] = {
-    {ACTION_TOGGLE_POWER, 0},
-    {ACTION_TOGGLE_RELAY, RELAY_INSTRUMENTS},
-    {ACTION_TOGGLE_RELAY, RELAY_AUTOPILOT},
-    {ACTION_TOGGLE_NAV_MODE, NAV_MODE_STEAMING},
-    {ACTION_TOGGLE_NAV_MODE, NAV_MODE_RUNNING},
-    {ACTION_TOGGLE_NAV_MODE, NAV_MODE_ANCHORING},
-    {ACTION_TOGGLE_RELAY, RELAY_INVERTER},
-};
-
-/* Right panel (COMM_ADDRESS_BUTTON_BOARD_R = 0x46), buttons 0..6. */
-static const ButtonAction right_actions[7] = {
-    {ACTION_TOGGLE_RELAY, RELAY_WATER_PUMP},  {ACTION_TOGGLE_RELAY, RELAY_FRIDGE},
-    {ACTION_TOGGLE_RELAY, RELAY_DECK_LIGHTS}, {ACTION_TOGGLE_RELAY, RELAY_CABIN_LIGHTS},
-    {ACTION_TOGGLE_RELAY, RELAY_USB},         {ACTION_TOGGLE_RELAY, RELAY_AUX_1},
-    {ACTION_TOGGLE_RELAY, RELAY_AUX_2},
-};
-
-/* ============================================================================
- * Power state machine
- *
- * OFF      ─L0──→ PENDING(target=ON)  ─channel_changed confirms main on──→ ON
- *                                     ─timeout (~2 s)────────────────→ ERROR
- * ON       ─L0──→ PENDING(target=OFF) ─channel_changed confirms main off─→ OFF
- *                                     ─timeout──────────────────────→ ERROR
- * ERROR    ─L0────────────────────────→ OFF
- *          ─late channel_changed (target match)──→ ON / OFF
- *
- * In OFF / PENDING / ERROR the display is blank, the nav-light RGB ring is
- * dark, only L0 is acted on (other button presses ignored), and the
- * battery / level / sensor polls run at a much slower cadence so the
- * inspector still sees freshness on the bus.
- * ============================================================================
- */
-
-typedef enum {
-    PWR_OFF = 0,
-    PWR_PENDING = 1,
-    PWR_ON = 2,
-    PWR_ERROR = 3,
-} PowerState;
-
-static volatile uint8_t power_state;
-static volatile uint8_t power_target;        /* PWR_OFF / PWR_ON — meaningful in PENDING / ERROR */
-static volatile uint16_t power_pending_ticks; /* counted in retry_task at RETRY_TICK_MS */
-
-#define POWER_PENDING_TIMEOUT_TICKS (2000u / RETRY_TICK_MS) /* ~2 s */
-
-static volatile uint8_t nav_mode; /* NavMode                     */
-static volatile uint8_t nav_error;
-static volatile uint16_t relay_intent;  /* user-facing: relays 5..15   */
-static volatile uint16_t relay_target;  /* materialised after policy   */
-static volatile uint16_t channel_state; /* from channel_changed pushes */
-static volatile uint8_t sensor_state;
-static volatile uint8_t relay_dirty; /* target diverged from bus    */
-static volatile uint16_t battery_mv;
-static volatile uint8_t levels[2];
-
-/* Power-off snapshot kept in RAM only (per todo: no EEPROM persistence).
- * Captured on the active -> inactive transition and reapplied when power
- * returns so the user's prior selection of relays and nav mode survives
- * the power toggle without relying on flash wear or boot-time defaults. */
-static uint16_t saved_relay_intent;
-static uint8_t saved_nav_mode;
-
-/* ============================================================================
- * Outbound retry queue
- *
- * Single-slot latest-wins for relay_state: if the target changes again before
- * the previous write landed, we just want to send the latest value. Collapse
- * reduces I2C traffic when a burst of button presses lands in one tick.
- * ============================================================================
- */
-
-#define RETRY_TICK_MS 200u
-#define POLL_TICK_MS 200u
-#define POLL_TICK_SLOW_MS 5000u
-/* RTC ticks once per second; polling at 250 ms keeps the displayed clock
- * within a quarter second of the chip without being wasteful. */
-#define RTC_TICK_MS 250u
-
-/* Mask + expected value of the relay bits an action touched. button_fx uses
- * this to decide what to wait for before the press completes. */
-typedef struct {
-    uint16_t mask;
-    uint16_t value;
-} ActionEffect;
-
-static void retry_task(TaskId id, void* ctx);
-static void poll_battery_task(TaskId id, void* ctx);
-static void poll_levels_task(TaskId id, void* ctx);
-static void poll_sensors_task(TaskId id, void* ctx);
-static void poll_channels_task(TaskId id, void* ctx);
-static void poll_rtc_task(TaskId id, void* ctx);
-static void on_relay_state_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
-static void on_rtc_read_done(uint8_t ok, const RtcTime* t, void* ctx);
-static ActionEffect apply_action(const ButtonAction* a);
-static void recompute_target(void);
-static void apply_channel_observation(uint16_t curr_c);
-
-static volatile RtcTime rtc_shadow;
-static volatile uint8_t rtc_valid;
-
-static volatile uint8_t relay_inflight;
-static volatile uint8_t rtc_inflight;
-static volatile uint16_t relay_inflight_value;
-
-/* Staleness counters: incremented each poll tick (POLL_TICK_MS), reset
- * to 0 on successful response.  When the counter exceeds the threshold
- * the UI should show "error" instead of the stale value. */
-#define STALE_THRESHOLD (10000u / POLL_TICK_MS) /* 10 s */
-
-static volatile uint16_t batt_age;
-static volatile uint16_t levels_age;
-static volatile uint16_t sensors_age;
-static volatile uint16_t channels_age;
-
-/* Cached for the poll-task callbacks so they can adjust their own interval
- * when the power state changes. */
-static TaskController* g_ctrl;
-
-void controller_init(TaskController* ctrl) {
-    g_ctrl = ctrl;
-    power_state = PWR_OFF;
-    power_target = PWR_OFF;
-    power_pending_ticks = 0;
-    nav_mode = NAV_MODE_OFF;
-    nav_error = 0;
-    relay_intent = 0;
-    relay_target = 0;
-    channel_state = 0;
-    sensor_state = 0;
-    relay_dirty = 0;
-    battery_mv = 0;
-    levels[0] = 0;
-    levels[1] = 0;
-    saved_relay_intent = 0;
-    saved_nav_mode = NAV_MODE_OFF;
-    rtc_valid = 0;
-    relay_inflight = 0;
-    rtc_inflight = 0;
-    batt_age = STALE_THRESHOLD;
-    levels_age = STALE_THRESHOLD;
-    sensors_age = STALE_THRESHOLD;
-    channels_age = STALE_THRESHOLD;
-    task_controller_add(ctrl, TASK_COMM_RETRY, RETRY_TICK_MS, retry_task, 0);
-    task_controller_add(ctrl, TASK_POLL_BATTERY, POLL_TICK_MS, poll_battery_task, 0);
-    task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task, 0);
-    task_controller_add(ctrl, TASK_POLL_SENSORS, POLL_TICK_MS, poll_sensors_task, 0);
-    task_controller_add(ctrl, TASK_POLL_CHANNELS, POLL_TICK_MS, poll_channels_task, 0);
-    // task_controller_add(ctrl, TASK_POLL_RTC, RTC_TICK_MS, poll_rtc_task, 0);
-}
-
-/* ============================================================================
- * Inbound
- * ============================================================================
- */
-
-/* Shared convergence path used by both the channel_changed push and the
- * channel_state_read poll response. The push carries sensors too; the poll
- * doesn't. Sensor handling stays at the call site so this helper is purely
- * about the relay-channel word. */
-static void apply_channel_observation(uint16_t curr_c) {
-    channel_state = curr_c;
-
-    /* Power-state confirmation: the main bit reflecting `power_target` is
-     * what unblocks PENDING. ERROR also accepts late-arriving confirmations
-     * as a recovery path (per spec — relay reports power on while we're in
-     * ERROR transitions us to ON). */
-    if (power_state == PWR_PENDING || power_state == PWR_ERROR) {
-        uint8_t main_on = (curr_c & (uint16_t)(1u << RELAY_MAIN)) != 0;
-        if (power_target == PWR_ON && main_on) {
-            power_state = PWR_ON;
-            power_pending_ticks = 0;
-            recompute_target();
-        } else if (power_target == PWR_OFF && !main_on) {
-            power_state = PWR_OFF;
-            power_pending_ticks = 0;
-            recompute_target();
-        }
-    }
-
-    button_fx_on_channel_state(curr_c);
-}
-
-void controller_on_button_changed(uint8_t sender, uint8_t button_id, uint8_t pressed, CommButtonMode mode) {
-    const uint8_t should_trigger = (mode == COMM_BUTTON_MODE_RELEASE) || (mode == COMM_BUTTON_MODE_HOLD) ||
-                                   (mode == COMM_BUTTON_MODE_CHANGE && pressed);
-    if (button_id >= 7 || !should_trigger) {
-        return;
-    }
+/* Config mode is a strict menu-navigation view: only the four left-side
+ * buttons L1..L4 translate to a meaningful event; everything else is
+ * deliberately swallowed so a misclick doesn't toggle a relay while the
+ * operator is reconfiguring something. L0 stays inert here — exit is
+ * via the dedicated RA7 config switch, not via the menu. */
+static ActionEvent action_for_button(ButtonIndex button) {
     if (config_mode_active()) {
-        /* Normal actions are suppressed while configuring; button presses
-         * edit the nav-enabled mask instead. */
-        config_mode_on_button_pressed(sender, button_id);
-        return;
-    }
-
-    /* When the panel isn't fully ON, only L0 (Power) on the L board is
-     * acted on — the user can recover from OFF / PENDING / ERROR but
-     * can't toggle individual channels. */
-    if (power_state != PWR_ON) {
-        if (sender == COMM_ADDRESS_BUTTON_BOARD_L && button_id == 0) {
-            ActionEffect eff = apply_action(&left_actions[0]);
-            if (eff.mask != 0) {
-                button_fx_notify_press(0, 0, eff.mask, eff.value);
-            }
+        switch (button) {
+            case BUTTON_L1:
+                return (ActionEvent){.type = ACTION_MENU, .menu = MENU_CONTROL_NEXT};
+            case BUTTON_L2:
+                return (ActionEvent){.type = ACTION_MENU, .menu = MENU_CONTROL_PREV};
+            case BUTTON_L3:
+                return (ActionEvent){.type = ACTION_MENU, .menu = MENU_CONTROL_ENTER};
+            case BUTTON_L4:
+                return (ActionEvent){.type = ACTION_MENU, .menu = MENU_CONTROL_EXIT};
+            default:
+                return (ActionEvent){.type = ACTION_NONE};
         }
-        return;
     }
 
-    const ButtonAction* table;
-    uint8_t side;
-    switch (sender) {
-        case COMM_ADDRESS_BUTTON_BOARD_L:
-            table = left_actions;
-            side = 0;
-            break;
-        case COMM_ADDRESS_BUTTON_BOARD_R:
-            table = right_actions;
-            side = 1;
-            break;
-        /* L2 / R2 not yet mapped. */
-        default:
-            return;
-    }
-    /* Per readme: a press on a button currently flagged as ERROR clears
-     * the error and turns the channel off. The follow-up apply_action
-     * toggles the intent which — since the prior attempt never landed
-     * physically — converges to OFF. */
-    if (button_fx_is_error(side, button_id)) {
-        button_fx_clear(side, button_id);
-    }
-    ActionEffect eff = apply_action(&table[button_id]);
-    if (eff.mask != 0) {
-        button_fx_notify_press(side, button_id, eff.mask, eff.value);
+    /* Normal mode. Left: power, two helm relays, three nav-light modes,
+     * inverter. Right: seven independent house-load relays. Nav buttons
+     * map a *mode* (not a single relay) — set_nav_light_mode projects it
+     * onto the appropriate set of CHANNEL_NAV_* bits. */
+    switch (button) {
+        case BUTTON_L0: return (ActionEvent){.type = ACTION_POWER};
+        case BUTTON_L1: return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_INSTRUMENTS};
+        case BUTTON_L2: return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_AUTOPILOT};
+        case BUTTON_L3: return (ActionEvent){.type = ACTION_NAV, .nav_light = NAV_LIGHT_MODE_STEAMING};
+        case BUTTON_L4: return (ActionEvent){.type = ACTION_NAV, .nav_light = NAV_LIGHT_MODE_RUNNING};
+        case BUTTON_L5: return (ActionEvent){.type = ACTION_NAV, .nav_light = NAV_LIGHT_MODE_ANCHORING};
+        case BUTTON_L6: return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_INVERTER};
+        case BUTTON_R0: return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_WATER_PUMP};
+        case BUTTON_R1: return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_FRIDGE};
+        case BUTTON_R2: return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_DECK_LIGHTS};
+        case BUTTON_R3: return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_CABIN_LIGHTS};
+        case BUTTON_R4: return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_USB};
+        case BUTTON_R5: return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_AUX_1};
+        case BUTTON_R6: return (ActionEvent){.type = ACTION_RELAY, .channel = CHANNEL_AUX_2};
+        default: return (ActionEvent){.type = ACTION_NONE};
     }
 }
 
-void controller_on_channel_changed(uint8_t sender, uint16_t prev_c, uint16_t curr_c, uint8_t prev_s, uint8_t curr_s) {
-    (void)sender;
-    (void)prev_c;
-    (void)prev_s;
-    sensor_state = curr_s;
-    apply_channel_observation(curr_c);
-    channels_age = 0;
-}
-
-void controller_on_channel_state_response(const CommChannelState* state) {
-    if (!state) {
-        return;
-    }
-    /* Same convergence logic as the push path, but no sensor word here —
-     * sensors are tracked via channel_changed pushes and the dedicated
-     * sensors_read poll. */
-    apply_channel_observation(state->channels);
-    channels_age = 0;
-}
-
-/* ============================================================================
- * Queries
- * ============================================================================
- */
-
-uint8_t controller_power_on(void) {
-    return power_state == PWR_ON;
-}
-NavMode controller_nav_mode(void) {
-    return (NavMode)nav_mode;
-}
-uint8_t controller_nav_error(void) {
-    return nav_error;
-}
-uint16_t controller_relay_target(void) {
-    return relay_target;
-}
-uint16_t controller_channel_state(void) {
-    return channel_state;
-}
-uint8_t controller_nav_lights_active(void) {
-    /* Inverse of nav_lights_to_relay_bits: pull the (possibly non-contiguous)
-     * nav-relay bits out of the channel-state word and re-pack into the 5-bit
-     * NAV_LIGHT_* layout the UI expects. */
-    uint16_t phys = channel_state;
-    uint8_t r = 0;
-    if (phys & (uint16_t)(1u << RELAY_NAV_ANCHORING)) {
-        r |= NAV_LIGHT_ANCHORING;
-    }
-    if (phys & (uint16_t)(1u << RELAY_NAV_TRICOLOR)) {
-        r |= NAV_LIGHT_TRICOLOR;
-    }
-    if (phys & (uint16_t)(1u << RELAY_NAV_STEAMING)) {
-        r |= NAV_LIGHT_STEAMING;
-    }
-    if (phys & (uint16_t)(1u << RELAY_NAV_BOW)) {
-        r |= NAV_LIGHT_BOW;
-    }
-    if (phys & (uint16_t)(1u << RELAY_NAV_STERN)) {
-        r |= NAV_LIGHT_STERN;
-    }
-    return r;
-}
-uint16_t controller_battery_mv(void) {
-    return battery_mv;
-}
-uint8_t controller_level(uint8_t i) {
-    return (i < 2) ? levels[i] : 0;
-}
-uint8_t controller_sensors(void) {
-    return sensor_state;
-}
-uint8_t controller_battery_stale(void) {
-    return batt_age >= STALE_THRESHOLD;
-}
-uint8_t controller_levels_stale(void) {
-    return levels_age >= STALE_THRESHOLD;
-}
-uint8_t controller_sensors_stale(void) {
-    return sensors_age >= STALE_THRESHOLD;
-}
-
-uint8_t controller_button_base_on(uint8_t side, uint8_t button_idx) {
-    /* Buttons per-side are 0..6. */
-    if (button_idx >= 7) {
-        return 0;
-    }
-
-    const ButtonAction* table = 0;
-    if (side == 0) {
-        table = left_actions;
-    } else if (side == 1) {
-        table = right_actions;
-    } else {
-        return 0;
-    }
-
-    const ButtonAction* action = &table[button_idx];
-    switch (action->kind) {
-        case ACTION_TOGGLE_POWER:
-            return (uint8_t)(power_state == PWR_ON);
-        case ACTION_TOGGLE_RELAY: {
-            uint16_t bit = (uint16_t)(1u << action->param);
-            return (uint8_t)((relay_target & bit) != 0);
-        }
-        case ACTION_TOGGLE_NAV_MODE:
-            return (uint8_t)(nav_mode == action->param);
-        default:
-            return 0;
+/* Which channel bit(s) the button represents, for button_fx's pending
+ * mask. Nav buttons map to the whole nav band because one button
+ * controls several lights at once. */
+static uint16_t mask_for_button(ButtonIndex button) {
+    switch (button) {
+        case BUTTON_L0: return CHANNEL_MAIN;
+        case BUTTON_L1: return CHANNEL_INSTRUMENTS;
+        case BUTTON_L2: return CHANNEL_AUTOPILOT;
+        case BUTTON_L3:
+        case BUTTON_L4:
+        case BUTTON_L5: return NAV_MASK_CHANNELS;
+        case BUTTON_L6: return CHANNEL_INVERTER;
+        case BUTTON_R0: return CHANNEL_WATER_PUMP;
+        case BUTTON_R1: return CHANNEL_FRIDGE;
+        case BUTTON_R2: return CHANNEL_DECK_LIGHTS;
+        case BUTTON_R3: return CHANNEL_CABIN_LIGHTS;
+        case BUTTON_R4: return CHANNEL_USB;
+        case BUTTON_R5: return CHANNEL_AUX_1;
+        case BUTTON_R6: return CHANNEL_AUX_2;
+        default: return 0;
     }
 }
 
-/* ============================================================================
- * Action logic
- * ============================================================================
- */
-
-static ActionEffect apply_action(const ButtonAction* a) {
-    ActionEffect eff = {0, 0};
-    switch (a->kind) {
-        case ACTION_TOGGLE_POWER:
-            /* L0 always-on transitions:
-             *   ERROR     → OFF (acknowledge the failure, drop to dark)
-             *   PENDING   → ignore (already mid-transition; user should wait)
-             *   OFF       → PENDING(target=ON), saved intent restored on the
-             *               way through so it's already correct when we land
-             *   ON        → PENDING(target=OFF), snapshotting current intent */
-            if (power_state == PWR_PENDING) {
-                eff.mask = 0;
-                return eff;
-            }
-            if (power_state == PWR_ERROR) {
-                power_state = PWR_OFF;
-                power_target = PWR_OFF;
-                power_pending_ticks = 0;
-            } else if (power_state == PWR_ON) {
-                saved_relay_intent = relay_intent;
-                saved_nav_mode = nav_mode;
-                power_state = PWR_PENDING;
-                power_target = PWR_OFF;
-                power_pending_ticks = 0;
-            } else { /* PWR_OFF */
-                relay_intent = saved_relay_intent;
-                nav_mode = saved_nav_mode;
-                power_state = PWR_PENDING;
-                power_target = PWR_ON;
-                power_pending_ticks = 0;
-            }
-            eff.mask = 0xFFFFu;
-            break;
-
-        case ACTION_TOGGLE_RELAY: {
-            uint16_t bit = (uint16_t)(1u << a->param);
-            relay_intent ^= bit;
-            eff.mask = bit;
-            break;
-        }
-
-        case ACTION_TOGGLE_NAV_MODE: {
-            NavMode requested = (NavMode)a->param;
-            nav_mode = (uint8_t)((nav_mode == requested) ? NAV_MODE_OFF : requested);
-            eff.mask = NAV_MASK_BITS;
-            break;
-        }
-
-        default:
-            return eff;
-    }
-    recompute_target();
-    eff.value = (uint16_t)(relay_target & eff.mask);
-    return eff;
-}
-
-/* Translate the 5-bit NAV_LIGHT_* mask returned by nav_lights_resolve into
- * the relay-word bit positions used on the wire. The two encodings could in
- * principle be aligned (nav lights are now contiguous at relay bits 3..7),
- * but keeping the explicit mapping isolates UI ordering from wiring order. */
-static uint16_t nav_lights_to_relay_bits(uint8_t lights_mask) {
+/* Map nav_lights_resolve's 5-bit NAV_LIGHT_* output to the corresponding
+ * CHANNEL_NAV_* bits. Kept as one isolated function so the encoding-
+ * crossing happens in exactly one place. */
+static uint16_t nav_lights_to_channels(uint8_t nl_mask) {
     uint16_t r = 0;
-    if (lights_mask & NAV_LIGHT_ANCHORING) {
-        r |= (uint16_t)(1u << RELAY_NAV_ANCHORING);
-    }
-    if (lights_mask & NAV_LIGHT_TRICOLOR) {
-        r |= (uint16_t)(1u << RELAY_NAV_TRICOLOR);
-    }
-    if (lights_mask & NAV_LIGHT_STEAMING) {
-        r |= (uint16_t)(1u << RELAY_NAV_STEAMING);
-    }
-    if (lights_mask & NAV_LIGHT_BOW) {
-        r |= (uint16_t)(1u << RELAY_NAV_BOW);
-    }
-    if (lights_mask & NAV_LIGHT_STERN) {
-        r |= (uint16_t)(1u << RELAY_NAV_STERN);
-    }
+    if (nl_mask & NAV_LIGHT_ANCHORING) { r |= CHANNEL_NAV_ANCHORING; }
+    if (nl_mask & NAV_LIGHT_TRICOLOR)  { r |= CHANNEL_NAV_TRICOLOR; }
+    if (nl_mask & NAV_LIGHT_STEAMING)  { r |= CHANNEL_NAV_STEAMING; }
+    if (nl_mask & NAV_LIGHT_BOW)       { r |= CHANNEL_NAV_BOW; }
+    if (nl_mask & NAV_LIGHT_STERN)     { r |= CHANNEL_NAV_STERN; }
     return r;
 }
 
-/* Projects (power_state, nav_mode, relay_intent) onto the 16-bit relay target.
- * Also latches nav_error for UI. The target reflects "what we want the bus
- * to be" — full pattern when ON or PENDING→ON, all-zero when OFF, ERROR, or
- * PENDING→OFF. */
-static void recompute_target(void) {
-    uint16_t t = 0;
-    uint8_t err = 0;
-
-    uint8_t want_on = (power_state == PWR_ON) ||
-                      (power_state == PWR_PENDING && power_target == PWR_ON);
-    if (want_on) {
-        uint8_t enabled = config_get_nav_enabled_mask();
-        NavResolution r = nav_lights_resolve((NavMode)nav_mode, enabled);
-        err = r.error;
-
-        /* Main contactor — gates downstream loads; on whenever we're powered. */
-        t |= (uint16_t)(1u << RELAY_MAIN);
-        t |= nav_lights_to_relay_bits(r.lights_mask);
-        t |= (uint16_t)(relay_intent & ~NAV_MASK_BITS);
+/* Translate a nav mode to the channel-bit pattern that realises it,
+ * given the operator's enabled-lights config. `*config_error_out` is
+ * set to 1 if the requested mode can't be realised with the available
+ * lights (caller decides what to do with it). */
+static uint16_t channels_for_nav_mode(NavLightMode mode, uint8_t* config_error_out) {
+    if (mode == NAV_LIGHT_MODE_OFF) {
+        if (config_error_out) {
+            *config_error_out = 0;
+        }
+        return 0;
     }
-
-    INTERRUPT_PUSH;
-    if (t != relay_target) {
-        relay_target = t;
-        relay_dirty = 1;
+    uint8_t enabled = config_get_nav_enabled_mask();
+    /* The NavMode enum in nav_lights.h is laid out so OFF=0 lines up
+     * with NAV_LIGHT_MODE_OFF=0; the other three values just have
+     * different numeric ids. Pass through directly — same semantic. */
+    NavMode m;
+    switch (mode) {
+        case NAV_LIGHT_MODE_STEAMING:   m = NAV_MODE_STEAMING; break;
+        case NAV_LIGHT_MODE_RUNNING:    m = NAV_MODE_RUNNING; break;
+        case NAV_LIGHT_MODE_ANCHORING:  m = NAV_MODE_ANCHORING; break;
+        default:                        m = NAV_MODE_OFF; break;
     }
-    nav_error = err;
-    INTERRUPT_POP;
+    NavResolution r = nav_lights_resolve(m, enabled);
+    if (config_error_out) {
+        *config_error_out = r.error ? 1u : 0u;
+    }
+    return nav_lights_to_channels(r.lights_mask);
+}
+
+/* Pack the five CHANNEL_NAV_* bits into the indicator's 5-bit NavLights
+ * struct. Inverse of nav_lights_to_channels in spirit but with the
+ * NavLights union layout. */
+static NavLights nav_lights_from_channels(uint16_t channels) {
+    NavLights nl;
+    nl.raw = 0;
+    nl.anchoring = (channels & CHANNEL_NAV_ANCHORING) ? 1u : 0u;
+    nl.tricolor  = (channels & CHANNEL_NAV_TRICOLOR)  ? 1u : 0u;
+    nl.steaming  = (channels & CHANNEL_NAV_STEAMING)  ? 1u : 0u;
+    nl.bow       = (channels & CHANNEL_NAV_BOW)       ? 1u : 0u;
+    nl.stern     = (channels & CHANNEL_NAV_STERN)     ? 1u : 0u;
+    return nl;
 }
 
 /* ============================================================================
- * Outbound sync
+ * L1 intent
  * ============================================================================
  */
 
+static void toggle_power(void) {
+    if (g_on) {
+        /* Going dark: drop every channel, reset nav mode so it doesn't
+         * silently re-arm next time. */
+        g_nav_light_mode = NAV_LIGHT_MODE_OFF;
+        g_nav_light_error = NAV_LIGHT_ERROR_NONE;
+        set_channels(0);
+    } else {
+        /* Waking up: only main goes on. Nav lights and house loads stay
+         * dark until the user picks them — predictable startup. */
+        set_channels(CHANNEL_MAIN);
+    }
+}
+
+static void toggle_relay(Channel channel) {
+    set_channels((uint16_t)(g_relay_target ^ (uint16_t)channel));
+}
+
+/* Same-mode press toggles off; different-mode press switches. The OFF
+ * pseudo-mode collapses to "no nav lights" and clears the config error. */
+static void set_nav_light_mode(NavLightMode mode) {
+    NavLightMode new_mode = ((NavLightMode)g_nav_light_mode == mode || mode == NAV_LIGHT_MODE_OFF)
+                                ? NAV_LIGHT_MODE_OFF
+                                : mode;
+    uint8_t cfg_err = 0;
+    uint16_t new_nav_bits = channels_for_nav_mode(new_mode, &cfg_err);
+
+    g_nav_light_mode = (uint8_t)new_mode;
+    g_nav_light_error = cfg_err ? (uint8_t)NAV_LIGHT_ERROR_CONFIG : (uint8_t)NAV_LIGHT_ERROR_NONE;
+
+    set_channels((uint16_t)((g_relay_target & ~NAV_MASK_CHANNELS) | new_nav_bits));
+}
+
+/* ============================================================================
+ * L2 state mutators
+ * ============================================================================
+ */
+
+/* Sole writer of g_relay_target. Fans out to button_fx (per-button
+ * pending expectations), marks the bus dirty for retry_task, and asks
+ * the indicator to refresh. */
+static void set_channels(uint16_t new_target) {
+    g_relay_target = new_target;
+    g_relay_dirty = 1;
+    for (uint8_t b = 0; b < BUTTON_COUNT; b++) {
+        uint16_t m = mask_for_button((ButtonIndex)b);
+        if (m == 0) {
+            continue;
+        }
+        button_fx_set((ButtonIndex)b, (uint16_t)(new_target & m), m);
+    }
+    update_indicator();
+}
+
+/* Sole writer of g_channel_state and g_on. Drives both the per-button
+ * pending resolution (via button_fx) and the indicator refresh. */
+static void apply_channel_observation(uint16_t observed) {
+    g_channel_state = observed;
+    g_on = (uint8_t)((observed & CHANNEL_MAIN) ? 1u : 0u);
+    g_channels_age = 0;
+    button_fx_on_channel_state((Channel)observed);
+    update_indicator();
+}
+
+/* ============================================================================
+ * Indicator sync
+ * ============================================================================
+ */
+
+/* Decide which indicator mode to display from the current controller
+ * state, then push. Sole caller of indicator_set_* / indicator_clear.
+ *
+ *   config mode active           → CONFIG (cursor index from config_mode)
+ *   panel off                    → CLEAR
+ *   nav mode unrealisable        → ERROR (whole ring flashes red)
+ *   else                         → ON with enabled / pending / errored bits
+ *
+ * `enabled`  = nav-light channel bits we WANT on  (target)
+ * `pending`  = enabled ∧ not-yet-observed         (target & ~observed)
+ * `errored`  = reserved for per-light timeout (none implemented yet);
+ *              for now this is always 0 in the ON path. */
+static void update_indicator(void) {
+    if (config_mode_active()) {
+        indicator_set_config(config_mode_nav_cursor());
+        return;
+    }
+    if (!g_on) {
+        indicator_clear();
+        return;
+    }
+    if (g_nav_light_error & NAV_LIGHT_ERROR_CONFIG) {
+        indicator_set_error();
+        return;
+    }
+    uint16_t target_nav = (uint16_t)(g_relay_target & NAV_MASK_CHANNELS);
+    uint16_t observed_nav = (uint16_t)(g_channel_state & NAV_MASK_CHANNELS);
+    NavLights enabled = nav_lights_from_channels(target_nav);
+    NavLights pending = nav_lights_from_channels((uint16_t)(target_nav & ~observed_nav));
+    NavLights errored = (NavLights){.raw = 0};
+    indicator_set_on(enabled, pending, errored);
+}
+
+/* Periodic catch-all for state transitions the controller has no
+ * callback for — mainly config_mode_active() flipping when the RA7
+ * switch is toggled. Cheap: just rebuilds the indicator arguments and
+ * pushes; indicator's own refresh task handles the per-frame animation. */
+static void indicator_sync_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
+    update_indicator();
+}
+
+/* ============================================================================
+ * L3 bus output — relay_state
+ * ============================================================================
+ */
+
+/* Single-slot latest-wins: when set_channels bumps the target while a
+ * write is in flight we don't queue a second one, just remember that
+ * we're dirty. retry_task re-fires from the next tick. */
 static void retry_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
-
-    /* PENDING-state timeout: tick on every retry slot; trip to ERROR if the
-     * switching board hasn't reflected the target main-bit state in time.
-     * The transition to ERROR keeps the bus quiet — relay_dirty stays
-     * cleared so we don't re-spam the relay_state write while the user
-     * decides whether to retry (L0 → OFF) or wait for a late confirmation. */
-    if (power_state == PWR_PENDING) {
-        if (++power_pending_ticks >= POWER_PENDING_TIMEOUT_TICKS) {
-            power_state = PWR_ERROR;
-            power_pending_ticks = 0;
-        }
-    }
-
-    if (!relay_dirty || relay_inflight) {
+    if (!g_relay_dirty || g_relay_inflight) {
         return;
     }
-
     uint16_t snapshot;
     INTERRUPT_PUSH;
-    snapshot = relay_target;
+    snapshot = g_relay_target;
     INTERRUPT_POP;
 
-    relay_inflight_value = snapshot;
-    relay_inflight = 1;
+    g_relay_inflight_value = snapshot;
+    g_relay_inflight = 1;
     if (comm_send_relay_state(snapshot, on_relay_state_done, 0) != I2C_RESULT_OK) {
-        relay_inflight = 0;
+        g_relay_inflight = 0;
     }
 }
 
@@ -851,42 +524,35 @@ static void on_relay_state_done(I2cResult result, uint8_t* rx, uint8_t rx_len, v
     (void)rx;
     (void)rx_len;
     (void)ctx;
-    /* Clear the dirty flag if the value we actually sent still matches
-     * the current target — a producer could have bumped it while the
-     * transaction was in flight. */
+    /* Clear dirty only if the value we just landed still matches the
+     * current target — a producer could have bumped it between our
+     * snapshot and the completion. */
     INTERRUPT_PUSH;
-    if (relay_target == relay_inflight_value) {
-        relay_dirty = 0;
+    if (g_relay_target == g_relay_inflight_value) {
+        g_relay_dirty = 0;
     }
     INTERRUPT_POP;
-    relay_inflight = 0;
+    g_relay_inflight = 0;
 }
 
 /* ============================================================================
- * Polling tasks — fire-and-forget reads to the switching board.
- * The response arrives via the adopter callback → controller_on_*_response.
- * A staleness counter tracks time since the last successful response;
- * the UI checks controller_*_stale() and shows "error" when it exceeds 10 s.
+ * L3 polling — battery / levels / sensors / channels
  * ============================================================================
  */
 
-/* Pick a poll interval based on the current power state. Returns the new
- * interval; callers re-apply via task_controller_set_interval if it has
- * changed. PENDING uses the slow cadence too — we want the bus quiet while
- * the relay write is in flight. */
+/* Battery + levels are still useful while the panel is "off" (inspector
+ * / config UI may want them), so they poll at the slow cadence in OFF /
+ * PENDING. Sensors are consumer-facing (bilge alarm etc.) and are
+ * skipped entirely when the panel isn't on. */
 static uint16_t poll_interval_for_state(void) {
-    return (power_state == PWR_ON) ? POLL_TICK_MS : POLL_TICK_SLOW_MS;
+    return g_on ? POLL_TICK_MS : POLL_TICK_SLOW_MS;
 }
 
 static void poll_battery_task(TaskId id, void* ctx) {
     (void)ctx;
     task_controller_set_interval(g_ctrl, id, poll_interval_for_state());
-    /* Battery + levels are still useful while the panel is "off" — the
-     * inspector / config UI may want them. Sensors are gated to ON only:
-     * they're consumers (e.g., bilge alarm) that don't need to wake while
-     * the user has the panel idle. */
-    if (batt_age < STALE_THRESHOLD) {
-        batt_age++;
+    if (g_batt_age < STALE_THRESHOLD) {
+        g_batt_age++;
     }
     comm_send_battery_read();
 }
@@ -894,8 +560,8 @@ static void poll_battery_task(TaskId id, void* ctx) {
 static void poll_levels_task(TaskId id, void* ctx) {
     (void)ctx;
     task_controller_set_interval(g_ctrl, id, poll_interval_for_state());
-    if (levels_age < STALE_THRESHOLD) {
-        levels_age++;
+    if (g_levels_age < STALE_THRESHOLD) {
+        g_levels_age++;
     }
     comm_send_levels_read();
 }
@@ -903,61 +569,120 @@ static void poll_levels_task(TaskId id, void* ctx) {
 static void poll_sensors_task(TaskId id, void* ctx) {
     (void)ctx;
     task_controller_set_interval(g_ctrl, id, poll_interval_for_state());
-    if (power_state != PWR_ON) {
+    if (!g_on) {
         return;
     }
-    if (sensors_age < STALE_THRESHOLD) {
-        sensors_age++;
+    if (g_sensors_age < STALE_THRESHOLD) {
+        g_sensors_age++;
     }
     comm_send_sensors_read();
 }
 
+/* The switching board pushes a `channel_changed` message on every
+ * transition, so the shadow is normally fresh without polling. The poll
+ * still earns its keep: it seeds g_channel_state after a main-board
+ * reset (when the switching board hasn't changed anything to push), and
+ * papers over any push lost on the bus. */
 static void poll_channels_task(TaskId id, void* ctx) {
     (void)ctx;
     task_controller_set_interval(g_ctrl, id, poll_interval_for_state());
-    /* The switching board pushes a `channel_changed` message on every
-     * transition, so the shadow is normally fresh without polling. The
-     * read still earns its keep in two cases: it seeds `channel_state`
-     * after a main-board reset (when the switching board hasn't changed
-     * anything to push), and it papers over any push that gets lost on
-     * the bus. */
-    if (channels_age < STALE_THRESHOLD) {
-        channels_age++;
+    if (g_channels_age < STALE_THRESHOLD) {
+        g_channels_age++;
     }
     comm_send_channel_state_read();
 }
 
-/* Response handlers — called from comm.c adopter callbacks. */
+/* ============================================================================
+ * L3 read responses
+ * ============================================================================
+ */
 
 void controller_on_battery_response(const CommBattery* battery) {
     if (battery) {
-        battery_mv = battery->voltage;
-        batt_age = 0;
+        g_battery_mv = battery->voltage;
+        g_batt_age = 0;
     }
 }
 
 void controller_on_levels_response(const CommLevels* lvl) {
     if (lvl) {
-        levels[0] = lvl->level_0;
-        levels[1] = lvl->level_1;
-        levels_age = 0;
+        g_levels[0] = lvl->level_0;
+        g_levels[1] = lvl->level_1;
+        g_levels_age = 0;
     }
 }
 
 void controller_on_sensors_response(const CommSensors* sns) {
     if (sns) {
-        sensor_state = sns->sensors;
-        sensors_age = 0;
+        g_sensor_state = sns->sensors;
+        g_sensors_age = 0;
     }
 }
+
+/* ============================================================================
+ * State queries
+ * ============================================================================
+ */
+
+uint8_t controller_power_on(void) {
+    return g_on;
+}
+
+uint16_t controller_battery_mv(void) {
+    return g_battery_mv;
+}
+
+uint8_t controller_level(uint8_t i) {
+    return (i < 2u) ? g_levels[i] : 0u;
+}
+
+uint8_t controller_sensors(void) {
+    return g_sensor_state;
+}
+
+uint8_t controller_battery_stale(void) {
+    return (uint8_t)(g_batt_age >= STALE_THRESHOLD);
+}
+
+uint8_t controller_levels_stale(void) {
+    return (uint8_t)(g_levels_age >= STALE_THRESHOLD);
+}
+
+uint8_t controller_sensors_stale(void) {
+    return (uint8_t)(g_sensors_age >= STALE_THRESHOLD);
+}
+
+/* Per-button "is the channel this button represents currently on?"
+ * — button_fx renders this as the IDLE-state colour. Routed through
+ * action_for_button so per-button logic stays in one place. */
+uint8_t controller_button_base_on(ButtonIndex button) {
+    ActionEvent ev = action_for_button(button);
+    switch (ev.type) {
+        case ACTION_POWER:
+            return g_on;
+        case ACTION_RELAY:
+            return (uint8_t)((g_relay_target & (uint16_t)ev.channel) != 0u);
+        case ACTION_NAV:
+            return (uint8_t)((NavLightMode)g_nav_light_mode == ev.nav_light);
+        case ACTION_MENU:
+        case ACTION_NONE:
+        default:
+            return 0;
+    }
+}
+
+/* ============================================================================
+ * RTC
+ * ============================================================================
+ */
 
 static void poll_rtc_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
-    if (rtc_inflight) {
+    if (g_rtc_inflight) {
         return;
     }
-    rtc_inflight = 1;
+    g_rtc_inflight = 1;
     rtc_read(on_rtc_read_done, 0);
 }
 
@@ -965,47 +690,40 @@ static void on_rtc_read_done(uint8_t ok, const RtcTime* t, void* ctx) {
     (void)ctx;
     if (ok) {
         INTERRUPT_PUSH;
-        rtc_shadow = *t;
-        rtc_valid = 1;
+        g_rtc_shadow = *t;
+        g_rtc_valid = 1;
         INTERRUPT_POP;
     }
-    rtc_inflight = 0;
+    g_rtc_inflight = 0;
 }
 
 uint8_t controller_time(RtcTime* out) {
-    if (!rtc_valid) {
+    if (!g_rtc_valid) {
         return 0;
     }
     INTERRUPT_PUSH;
-    *out = rtc_shadow;
+    *out = g_rtc_shadow;
     INTERRUPT_POP;
     return 1;
 }
 
-/* Single in-flight UI operation. The menu can only have one menu action
- * pending at a time, so a single slot suffices. */
-static struct {
-    ControllerOpCompletion op_cb;
-    ControllerReadCompletion read_cb;
-    void* ctx;
-} ui_op;
-
-static void on_set_time_write_done(uint8_t ok, void* ctx);
-static void on_set_time_refresh_done(uint8_t ok, const RtcTime* t, void* ctx);
-static void on_ui_config_write_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
+/* ============================================================================
+ * UI ops — async menu actions that need to land safely or report back
+ * ============================================================================
+ */
 
 void controller_set_time(uint8_t hour, uint8_t minute, ControllerOpCompletion cb, void* ctx) {
-    ui_op.op_cb = cb;
-    ui_op.ctx = ctx;
+    g_ui_op.op_cb = cb;
+    g_ui_op.ctx = ctx;
     rtc_write_time(hour, minute, on_set_time_write_done, 0);
 }
 
 static void on_set_time_write_done(uint8_t ok, void* ctx) {
     (void)ctx;
     if (!ok) {
-        ControllerOpCompletion cb = ui_op.op_cb;
-        void* user_ctx = ui_op.ctx;
-        ui_op.op_cb = 0;
+        ControllerOpCompletion cb = g_ui_op.op_cb;
+        void* user_ctx = g_ui_op.ctx;
+        g_ui_op.op_cb = 0;
         if (cb) {
             cb(0, user_ctx);
         }
@@ -1020,23 +738,23 @@ static void on_set_time_refresh_done(uint8_t ok, const RtcTime* t, void* ctx) {
     (void)ctx;
     if (ok) {
         INTERRUPT_PUSH;
-        rtc_shadow = *t;
-        rtc_valid = 1;
+        g_rtc_shadow = *t;
+        g_rtc_valid = 1;
         INTERRUPT_POP;
     }
-    ControllerOpCompletion cb = ui_op.op_cb;
-    void* user_ctx = ui_op.ctx;
-    ui_op.op_cb = 0;
+    ControllerOpCompletion cb = g_ui_op.op_cb;
+    void* user_ctx = g_ui_op.ctx;
+    g_ui_op.op_cb = 0;
     if (cb) {
         cb(1, user_ctx); /* write succeeded; refresh failure is non-fatal */
     }
 }
 
 void controller_read_switching_config(uint8_t address, ControllerReadCompletion cb, void* ctx) {
-    ui_op.read_cb = cb;
-    ui_op.ctx = ctx;
+    g_ui_op.read_cb = cb;
+    g_ui_op.ctx = ctx;
     if (comm_send_config_read(COMM_ADDRESS_SWITCHING, address) != I2C_RESULT_OK) {
-        ui_op.read_cb = 0;
+        g_ui_op.read_cb = 0;
         if (cb) {
             cb(0, 0, ctx);
         }
@@ -1044,19 +762,19 @@ void controller_read_switching_config(uint8_t address, ControllerReadCompletion 
 }
 
 void controller_on_config_read_response(const uint8_t* value) {
-    ControllerReadCompletion cb = ui_op.read_cb;
-    void* user_ctx = ui_op.ctx;
-    ui_op.read_cb = 0;
+    ControllerReadCompletion cb = g_ui_op.read_cb;
+    void* user_ctx = g_ui_op.ctx;
+    g_ui_op.read_cb = 0;
     if (cb) {
-        cb(value != 0, value ? *value : 0, user_ctx);
+        cb(value != 0, value ? *value : 0u, user_ctx);
     }
 }
 
 void controller_write_switching_config(uint8_t address, uint8_t value, ControllerOpCompletion cb, void* ctx) {
-    ui_op.op_cb = cb;
-    ui_op.ctx = ctx;
+    g_ui_op.op_cb = cb;
+    g_ui_op.ctx = ctx;
     if (comm_send_config(COMM_ADDRESS_SWITCHING, address, value, on_ui_config_write_done, 0) != I2C_RESULT_OK) {
-        ui_op.op_cb = 0;
+        g_ui_op.op_cb = 0;
         if (cb) {
             cb(0, ctx);
         }
@@ -1068,10 +786,9 @@ static void on_ui_config_write_done(I2cResult result, uint8_t* rx, uint8_t rx_le
     (void)rx;
     (void)rx_len;
     (void)ctx;
-    /* Completion fires only on success; final-retry failure is silent. */
-    ControllerOpCompletion cb = ui_op.op_cb;
-    void* user_ctx = ui_op.ctx;
-    ui_op.op_cb = 0;
+    ControllerOpCompletion cb = g_ui_op.op_cb;
+    void* user_ctx = g_ui_op.ctx;
+    g_ui_op.op_cb = 0;
     if (cb) {
         cb(1, user_ctx);
     }

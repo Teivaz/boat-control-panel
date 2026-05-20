@@ -25,11 +25,6 @@ void comm_on_button_changed_received(const CommButtonChanged* event) {
     controller_on_button_changed(event->device_address, event->button_id, event->pressed, (CommButtonMode)event->mode);
 }
 
-void comm_on_channel_changed_received(const CommChannelChanged* event) {
-    controller_on_channel_changed(event->device_address, event->prev_channels, event->current_channels,
-                                  event->prev_sensors, event->current_sensors);
-}
-
 void comm_on_config_received(const CommConfig* config) {
     config_write_byte(config->address, config->value);
 }
@@ -107,9 +102,6 @@ void comm_on_button_trigger_read_response(uint8_t addr, CommTriggerConfig* confi
 }
 void comm_on_relay_state_read_response(CommRelayState* state) {
     (void)state;
-}
-void comm_on_channel_state_read_response(CommChannelState* state) {
-    controller_on_channel_state_response(state);
 }
 void comm_on_level_mode_read_response(CommLevelMode* mode) {
     (void)mode;

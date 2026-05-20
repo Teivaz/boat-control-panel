@@ -1,52 +1,43 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
+#include "button_fx.h" /* ButtonIndex / Channel for the public queries below */
 #include "libcomm.h"
-#include "nav_lights.h"
 #include "rtc.h"
 #include "task.h"
 
 #include <stdint.h>
 
 /* Registers the main-board control logic: inbound event hooks, periodic
- * relay-sync task, and outbound retry queue. */
+ * relay-sync task, polling tasks, and indicator sync. */
 void controller_init(TaskController* ctrl);
 
-/* Inbound dispatch hooks. Both are invoked from I2C ISR context — must be
- * non-blocking. Senders are identified by their 7-bit I2C address. */
+/* Inbound dispatch hooks — invoked from comm.c after libcomm parses the
+ * incoming I²C message. All run in main-loop context. */
 void controller_on_button_changed(uint8_t sender, uint8_t button_id, uint8_t pressed, CommButtonMode mode);
-void controller_on_channel_changed(uint8_t sender, uint16_t prev_channels, uint16_t curr_channels,
-                                   uint8_t prev_sensors, uint8_t curr_sensors);
 
 /* Adopter-callback forwarders — called from comm.c when protocol read
- * responses arrive.  Main-loop context.  NULL pointer means I2C error. */
+ * responses arrive. Main-loop context. NULL pointer means I²C error. */
 void controller_on_battery_response(const CommBattery* battery);
 void controller_on_levels_response(const CommLevels* levels);
 void controller_on_sensors_response(const CommSensors* sensors);
-void controller_on_channel_state_response(const CommChannelState* state);
 void controller_on_config_read_response(const uint8_t* value);
 
-/* State queries for UI / display layers. */
+/* State queries for the display / button-fx layers. */
 uint8_t controller_power_on(void);
-NavMode controller_nav_mode(void);
-uint8_t controller_nav_error(void);
-uint16_t controller_relay_target(void);
-uint16_t controller_channel_state(void);
-/* Physically-active nav lights as a NAV_LIGHT_* bitmask (anchoring, tricolor,
- * steaming, bow, stern at bits 0..4). Decouples callers from the relay
- * word's actual bit layout, which is non-contiguous on the wire. */
-uint8_t controller_nav_lights_active(void);
 uint16_t controller_battery_mv(void);
-uint8_t controller_level(uint8_t meter_index); /* 0 or 1 */
+uint8_t controller_level(uint8_t meter_index); /* 0 = water, 1 = fuel */
 uint8_t controller_sensors(void);
 
 /* Returns 1 when the value has not been updated for > 10 s (switching
- * board unresponsive).  UI should show "error" instead of the reading. */
+ * board unresponsive). UI should show "error" instead of the reading. */
 uint8_t controller_battery_stale(void);
 uint8_t controller_levels_stale(void);
 uint8_t controller_sensors_stale(void);
 
-uint8_t controller_button_base_on(uint8_t side, uint8_t button_idx);
+/* button_fx renderer asks this for the per-button "is the channel that
+ * this button represents currently on?" steady-state colour decision. */
+uint8_t controller_button_base_on(ButtonIndex button);
 
 /* Last time read from the DS3231. Returns 1 if the shadow has been
  * populated by at least one successful poll, 0 otherwise. */
@@ -56,13 +47,13 @@ uint8_t controller_time(RtcTime* out);
 typedef void (*ControllerOpCompletion)(uint8_t ok, void* ctx);
 typedef void (*ControllerReadCompletion)(uint8_t ok, uint8_t value, void* ctx);
 
-/* Push hour:minute to the RTC, refresh the shadow on success. cb fires in
- * main context with ok=1 on success, 0 on I2C failure. */
+/* Push hour:minute to the RTC, refresh the shadow on success. cb fires
+ * in main context with ok=1 on success, 0 on I²C failure. */
 void controller_set_time(uint8_t hour, uint8_t minute, ControllerOpCompletion cb, void* ctx);
 
-/* Async read/write of a switching-board config byte (e.g. the per-channel
- * level-meter scale-at-100Ω calibration). Used by the menu UI to calibrate
- * the float meters at runtime. Completion fires in main context. */
+/* Async read/write of a switching-board config byte (e.g. the per-meter
+ * level offset calibration). Used by the menu UI to calibrate the float
+ * meters at runtime. Completion fires in main context. */
 void controller_read_switching_config(uint8_t address, ControllerReadCompletion cb, void* ctx);
 void controller_write_switching_config(uint8_t address, uint8_t value, ControllerOpCompletion cb, void* ctx);
 
