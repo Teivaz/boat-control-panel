@@ -3,16 +3,30 @@
 #include "config.h"
 #include "controller.h"
 #include "libcomm.h"
-#include "rtc.h"
 #include "task_ids.h"
 
 #include <xc.h>
 
-/* Switching-board config-protocol addresses for the level-meter wire
- * offsets. Mirrors board1-switching/config.h — kept local because main
- * does not link against the switching board's sources. */
-#define SWITCHING_OFFSET_WATER 0x10
-#define SWITCHING_OFFSET_FUEL 0x11
+/* Switching-board config-protocol addresses. Mirrors board1-switching/config.h;
+ * kept local because main does not link against the switching board's
+ * sources. Values match `CONFIG_ADDR_*` over there. */
+#define SWITCHING_WATER_CAL 0x10
+#define SWITCHING_FUEL_CAL 0x11
+#define SWITCHING_BATTERY_CAL 0x12
+#define SWITCHING_LEVEL_MODE 0x13
+
+/* Button-board LED brightness address. Mirrors board2-buttons/config.h:
+ *   CONFIG_ADDR_LED_BRIGHTNESS = 0x10 + BUTTON_COUNT(7)*sizeof(CommTriggerConfig)(1)
+ *                              + sizeof(CommButtonEffect)(4) = 0x1B */
+#define BUTTON_LED_BRIGHTNESS 0x1B
+
+/* Main-board indicator brightness — local config addr.  Routed through
+ * controller_read/write_config like remote items; the controller
+ * short-circuits to in-RAM config when the board address is our own. */
+#define MAIN_INDICATOR_BRIGHTNESS CONFIG_ADDR_INDICATOR_BRIGHTNESS
+
+/* Number of distinct level-meter modes (CommMeterMode enum range). */
+#define LEVEL_MODE_COUNT 3u
 
 #define SAMPLE_MS 20u
 #define STABLE_TICKS 3u /* ~60 ms debounce on the RA7 switch */
@@ -20,8 +34,32 @@
 /* RA7 is pulled up via WPUA7; the switch closes to ground when active. */
 #define PIN_ACTIVE() (PORTAbits.RA7 == 0)
 
-#define TIME_FIELD_HOUR 0u
-#define TIME_FIELD_MINUTE 1u
+typedef enum {
+    EDIT_KIND_BYTE,       /* full 8-bit value, wraps 0..255 */
+    EDIT_KIND_LEVEL_MODE, /* 2-bit field inside a packed byte, cycles 0..2 */
+} EditKind;
+
+typedef struct {
+    const char* label;
+    uint8_t board_addr;
+    uint8_t reg;
+    EditKind kind;
+    uint8_t bit_offset; /* for EDIT_KIND_LEVEL_MODE: 0 for meter 0, 2 for meter 1 */
+} EditSpec;
+
+/* One entry per editable ConfigMenuItem.  CONFIG_MENU_NAV has no entry
+ * because it uses its own dedicated screen.  Order matches the
+ * ConfigMenuItem enum so we can index directly with (menu_item - 1). */
+static const EditSpec edit_specs[CONFIG_MENU_COUNT - 1u] = {
+    {"WATER CAL",      COMM_ADDRESS_SWITCHING,      SWITCHING_WATER_CAL,       EDIT_KIND_BYTE,       0},
+    {"FUEL CAL",       COMM_ADDRESS_SWITCHING,      SWITCHING_FUEL_CAL,        EDIT_KIND_BYTE,       0},
+    {"BATTERY CAL",    COMM_ADDRESS_SWITCHING,      SWITCHING_BATTERY_CAL,     EDIT_KIND_BYTE,       0},
+    {"WATER MODE",     COMM_ADDRESS_SWITCHING,      SWITCHING_LEVEL_MODE,      EDIT_KIND_LEVEL_MODE, 0},
+    {"FUEL MODE",      COMM_ADDRESS_SWITCHING,      SWITCHING_LEVEL_MODE,      EDIT_KIND_LEVEL_MODE, 2},
+    {"BRIGHTNESS L",   COMM_ADDRESS_BUTTON_BOARD_L, BUTTON_LED_BRIGHTNESS,     EDIT_KIND_BYTE,       0},
+    {"BRIGHTNESS R",   COMM_ADDRESS_BUTTON_BOARD_R, BUTTON_LED_BRIGHTNESS,     EDIT_KIND_BYTE,       0},
+    {"BRIGHTNESS IND", COMM_ADDRESS_MAIN,           MAIN_INDICATOR_BRIGHTNESS, EDIT_KIND_BYTE,       0},
+};
 
 static volatile uint8_t active;
 static volatile uint8_t raw_last;
@@ -32,39 +70,43 @@ static volatile uint8_t screen;       /* ConfigScreen */
 static volatile uint8_t menu_cursor;  /* 0..CONFIG_MENU_COUNT-1 */
 static volatile uint8_t nav_cursor;   /* 0..4 */
 static volatile uint8_t working_mask; /* live nav-enabled mask */
-static volatile uint8_t time_field;   /* 0=hour, 1=minute */
-static volatile uint8_t working_hour;
-static volatile uint8_t working_minute;
-static volatile uint8_t offset_target; /* 0=water, 1=fuel */
-static volatile uint8_t offset_value;
-/* Set while a menu commit (set_time / config_write / config_read) is in
- * flight. Suppresses re-submission and (cosmetic) is queryable by the UI. */
+
+/* Edit-screen state.  edit_menu_item identifies the item being edited
+ * (>= CONFIG_MENU_WATER_CAL).  edit_value is the user-visible working
+ * value; edit_loaded gates rendering until the initial read response
+ * lands.  edit_stash holds the unmodified bits we need to preserve when
+ * writing back a packed byte (currently just level-mode's other 2 bits). */
+static volatile uint8_t edit_menu_item;
+static volatile uint8_t edit_value;
+static volatile uint8_t edit_loaded;
+static volatile uint8_t edit_stash;
+/* Set while a menu commit (read or write) is in flight. Suppresses
+ * re-submission until the completion fires. */
 static volatile uint8_t op_busy;
 
 static void enter(void);
 static void exit_config(void);
-static void load_time(void);
-static void enter_offset(uint8_t target);
-static uint8_t offset_address(uint8_t target);
+static void enter_edit(uint8_t menu_item);
+static const EditSpec* spec_for(uint8_t menu_item);
+static uint8_t extract_value(const EditSpec* s, uint8_t raw_byte);
+static uint8_t merge_value(const EditSpec* s, uint8_t raw_byte, uint8_t value);
 static void handle_menu(MenuControl c);
 static void handle_nav(MenuControl c);
-static void handle_time(MenuControl c);
-static void handle_offset(MenuControl c);
+static void handle_edit(MenuControl c);
 static void sample_task(TaskId id, void* ctx);
-static void on_set_time_done(uint8_t ok, void* ctx);
-static void on_offset_read_done(uint8_t ok, uint8_t value, void* ctx);
-static void on_offset_write_done(uint8_t ok, void* ctx);
+static void on_edit_read_done(uint8_t ok, uint8_t value, void* ctx);
+static void on_edit_write_done(uint8_t ok, void* ctx);
 
 void config_mode_init(TaskController* ctrl) {
     active = 0;
     screen = CONFIG_SCREEN_MENU;
     menu_cursor = 0;
     nav_cursor = 0;
-    time_field = TIME_FIELD_HOUR;
-    working_hour = 0;
-    working_minute = 0;
-    offset_target = 0;
-    offset_value = 0;
+    edit_menu_item = CONFIG_MENU_WATER_CAL;
+    edit_value = 0;
+    edit_loaded = 0;
+    edit_stash = 0;
+    op_busy = 0;
     working_mask = config_get_nav_enabled_mask();
     raw_last = PIN_ACTIVE() ? 1 : 0;
     raw_stable = raw_last;
@@ -98,24 +140,16 @@ uint8_t config_mode_nav_working_mask(void) {
     return working_mask;
 }
 
-uint8_t config_mode_time_field(void) {
-    return time_field;
+uint8_t config_mode_edit_menu_item(void) {
+    return edit_menu_item;
 }
 
-uint8_t config_mode_time_hour(void) {
-    return working_hour;
+uint8_t config_mode_edit_loaded(void) {
+    return edit_loaded;
 }
 
-uint8_t config_mode_time_minute(void) {
-    return working_minute;
-}
-
-uint8_t config_mode_offset_target(void) {
-    return offset_target;
-}
-
-uint8_t config_mode_offset_value(void) {
-    return offset_value;
+uint8_t config_mode_edit_value(void) {
+    return edit_value;
 }
 
 void config_mode_on_action(MenuControl control) {
@@ -129,11 +163,8 @@ void config_mode_on_action(MenuControl control) {
         case CONFIG_SCREEN_NAV:
             handle_nav(control);
             break;
-        case CONFIG_SCREEN_TIME:
-            handle_time(control);
-            break;
-        case CONFIG_SCREEN_OFFSET:
-            handle_offset(control);
+        case CONFIG_SCREEN_EDIT:
+            handle_edit(control);
             break;
         default:
             break;
@@ -160,14 +191,8 @@ static void handle_menu(MenuControl c) {
             if (menu_cursor == CONFIG_MENU_NAV) {
                 screen = CONFIG_SCREEN_NAV;
                 nav_cursor = 0;
-            } else if (menu_cursor == CONFIG_MENU_TIME) {
-                load_time();
-                time_field = TIME_FIELD_HOUR;
-                screen = CONFIG_SCREEN_TIME;
-            } else if (menu_cursor == CONFIG_MENU_OFFSET_WATER) {
-                enter_offset(0);
-            } else if (menu_cursor == CONFIG_MENU_OFFSET_FUEL) {
-                enter_offset(1);
+            } else {
+                enter_edit(menu_cursor);
             }
             break;
         default:
@@ -195,79 +220,82 @@ static void handle_nav(MenuControl c) {
     }
 }
 
-static void handle_time(MenuControl c) {
-    switch (c) {
-        case MENU_CONTROL_NEXT:
-            /* Bump the active field upward. */
-            if (time_field == TIME_FIELD_HOUR) {
-                working_hour = (uint8_t)((working_hour + 1u) % 24u);
-            } else {
-                working_minute = (uint8_t)((working_minute + 1u) % 60u);
-            }
-            break;
-        case MENU_CONTROL_PREV:
-            /* Bump the active field downward. */
-            if (time_field == TIME_FIELD_HOUR) {
-                working_hour = (uint8_t)((working_hour + 23u) % 24u);
-            } else {
-                working_minute = (uint8_t)((working_minute + 59u) % 60u);
-            }
-            break;
-        case MENU_CONTROL_EXIT:
-            if (time_field == TIME_FIELD_MINUTE) {
-                time_field = TIME_FIELD_HOUR;
-            } else {
-                screen = CONFIG_SCREEN_MENU;
-            }
-            break;
-        case MENU_CONTROL_ENTER:
-            if (time_field == TIME_FIELD_HOUR) {
-                time_field = TIME_FIELD_MINUTE;
-            } else if (!op_busy) {
-                /* Commit; on I2C failure, stay on the field so the user can
-                 * retry. Returns to the menu on success (in completion). */
-                op_busy = 1;
-                controller_set_time(working_hour, working_minute, on_set_time_done, 0);
-            }
-            break;
-        default:
-            break;
-    }
-}
-
-static void on_set_time_done(uint8_t ok, void* ctx) {
-    (void)ctx;
-    if (ok) {
+static void handle_edit(MenuControl c) {
+    const EditSpec* s = spec_for(edit_menu_item);
+    if (!s) {
         screen = CONFIG_SCREEN_MENU;
+        return;
     }
-    op_busy = 0;
-}
-
-static void handle_offset(MenuControl c) {
     switch (c) {
         case MENU_CONTROL_NEXT:
-            offset_value = (uint8_t)(offset_value + 1u);
+            if (!edit_loaded) {
+                return;
+            }
+            if (s->kind == EDIT_KIND_LEVEL_MODE) {
+                edit_value = (uint8_t)((edit_value + 1u) % LEVEL_MODE_COUNT);
+            } else {
+                edit_value = (uint8_t)(edit_value + 1u);
+            }
             break;
         case MENU_CONTROL_PREV:
-            offset_value = (uint8_t)(offset_value - 1u);
+            if (!edit_loaded) {
+                return;
+            }
+            if (s->kind == EDIT_KIND_LEVEL_MODE) {
+                edit_value = (uint8_t)((edit_value + LEVEL_MODE_COUNT - 1u) % LEVEL_MODE_COUNT);
+            } else {
+                edit_value = (uint8_t)(edit_value - 1u);
+            }
             break;
         case MENU_CONTROL_EXIT:
+            /* Cancel: discard working value and return to menu. */
             screen = CONFIG_SCREEN_MENU;
             break;
         case MENU_CONTROL_ENTER:
-            /* Commit; on I2C failure stay on the screen so the user can
+            /* Commit: on I2C failure stay on the screen so the user can
              * retry. Returns to the menu on success (in completion). */
-            if (!op_busy) {
-                op_busy = 1;
-                controller_write_switching_config(offset_address(offset_target), offset_value, on_offset_write_done, 0);
+            if (!edit_loaded || op_busy) {
+                return;
             }
+            op_busy = 1;
+            uint8_t to_write = merge_value(s, edit_stash, edit_value);
+            controller_write_config(s->board_addr, s->reg, to_write, on_edit_write_done, 0);
             break;
         default:
             break;
     }
 }
 
-static void on_offset_write_done(uint8_t ok, void* ctx) {
+static void enter_edit(uint8_t menu_item) {
+    const EditSpec* s = spec_for(menu_item);
+    if (!s) {
+        return;
+    }
+    edit_menu_item = menu_item;
+    edit_value = 0;
+    edit_loaded = 0;
+    edit_stash = 0;
+    screen = CONFIG_SCREEN_EDIT;
+    if (!op_busy) {
+        op_busy = 1;
+        controller_read_config(s->board_addr, s->reg, on_edit_read_done, 0);
+    }
+}
+
+static void on_edit_read_done(uint8_t ok, uint8_t value, void* ctx) {
+    (void)ctx;
+    if (ok) {
+        const EditSpec* s = spec_for(edit_menu_item);
+        if (s) {
+            edit_stash = value;
+            edit_value = extract_value(s, value);
+            edit_loaded = 1;
+        }
+    }
+    op_busy = 0;
+}
+
+static void on_edit_write_done(uint8_t ok, void* ctx) {
     (void)ctx;
     if (ok) {
         screen = CONFIG_SCREEN_MENU;
@@ -275,41 +303,26 @@ static void on_offset_write_done(uint8_t ok, void* ctx) {
     op_busy = 0;
 }
 
-static uint8_t offset_address(uint8_t target) {
-    return (target == 0) ? SWITCHING_OFFSET_WATER : SWITCHING_OFFSET_FUEL;
+static const EditSpec* spec_for(uint8_t menu_item) {
+    if (menu_item == CONFIG_MENU_NAV || menu_item >= CONFIG_MENU_COUNT) {
+        return 0;
+    }
+    return &edit_specs[menu_item - 1u];
 }
 
-static void enter_offset(uint8_t target) {
-    offset_target = target;
-    /* Read the current calibration so the editor starts on the live value.
-     * On I2C failure default to 0 — the user can still set a new value.
-     * Switch to the screen immediately; the value populates when the
-     * completion fires. */
-    offset_value = 0;
-    screen = CONFIG_SCREEN_OFFSET;
-    if (!op_busy) {
-        op_busy = 1;
-        controller_read_switching_config(offset_address(target), on_offset_read_done, 0);
+static uint8_t extract_value(const EditSpec* s, uint8_t raw_byte) {
+    if (s->kind == EDIT_KIND_LEVEL_MODE) {
+        return (uint8_t)((raw_byte >> s->bit_offset) & 0x03u);
     }
+    return raw_byte;
 }
 
-static void on_offset_read_done(uint8_t ok, uint8_t value, void* ctx) {
-    (void)ctx;
-    if (ok) {
-        offset_value = value;
+static uint8_t merge_value(const EditSpec* s, uint8_t raw_byte, uint8_t value) {
+    if (s->kind == EDIT_KIND_LEVEL_MODE) {
+        uint8_t mask = (uint8_t)(0x03u << s->bit_offset);
+        return (uint8_t)((raw_byte & ~mask) | ((value & 0x03u) << s->bit_offset));
     }
-    op_busy = 0;
-}
-
-static void load_time(void) {
-    RtcTime t;
-    if (controller_time(&t)) {
-        working_hour = t.hour;
-        working_minute = t.minute;
-    } else {
-        working_hour = 0;
-        working_minute = 0;
-    }
+    return value;
 }
 
 static void enter(void) {
@@ -317,7 +330,6 @@ static void enter(void) {
     screen = CONFIG_SCREEN_MENU;
     menu_cursor = 0;
     nav_cursor = 0;
-    time_field = TIME_FIELD_HOUR;
     active = 1;
 }
 

@@ -5,7 +5,6 @@
 #include "controller.h"
 #include "display.h"
 #include "i2c_log.h"
-#include "rtc.h"
 #include "task_ids.h"
 #include "u8g2.h"
 
@@ -58,11 +57,9 @@ static void render_current_frame(u8g2_t* g);
 static void render_normal(u8g2_t* g);
 static void render_config_menu(u8g2_t* g);
 static void render_config_nav(u8g2_t* g);
-static void render_config_time(u8g2_t* g);
-static void render_config_offset(u8g2_t* g);
+static void render_config_edit(u8g2_t* g);
 static void format_row_text(char* out, const char* label, uint8_t value);
 static void format_nav_slot(char* out, uint8_t slot, uint8_t enabled, uint8_t cursor);
-static void format_hhmm(char* out, uint8_t hour, uint8_t minute);
 static uint8_t append_str(char* out, uint8_t pos, const char* s);
 static uint8_t append_u8(char* out, uint8_t pos, uint16_t value, uint8_t min_digits);
 
@@ -176,15 +173,6 @@ static void format_nav_slot(char* out, uint8_t slot, uint8_t enabled, uint8_t cu
     out[pos] = '\0';
 }
 
-static void format_hhmm(char* out, uint8_t hour, uint8_t minute) {
-    out[0] = (char)('0' + (hour / 10u));
-    out[1] = (char)('0' + (hour % 10u));
-    out[2] = ':';
-    out[3] = (char)('0' + (minute / 10u));
-    out[4] = (char)('0' + (minute % 10u));
-    out[5] = '\0';
-}
-
 /* ---------------------------------------------------------------------------
  * Per-screen rendering
  * ---------------------------------------------------------------------------
@@ -285,9 +273,14 @@ static void render_normal(u8g2_t* g) {
 static void render_config_menu(u8g2_t* g) {
     static const char* items[CONFIG_MENU_COUNT] = {
         "NAV LIGHTS",
-        "SET TIME",
-        "WATER OFS",
-        "FUEL OFS",
+        "WATER CAL",
+        "FUEL CAL",
+        "BATTERY CAL",
+        "WATER MODE",
+        "FUEL MODE",
+        "BRIGHTNESS L",
+        "BRIGHTNESS R",
+        "BRIGHTNESS IND",
     };
     uint8_t cursor = config_mode_menu_cursor();
     /* Scroll vertically when the cursor would fall off the 3-line window. */
@@ -321,31 +314,57 @@ static void render_config_nav(u8g2_t* g) {
     }
 }
 
-static void render_config_time(u8g2_t* g) {
-    char title[] = "SET TIME";
-    u8g2_DrawStr(g, 0, baselines[0], title);
-    char tbuf[6];
-    format_hhmm(tbuf, config_mode_time_hour(), config_mode_time_minute());
-    u8g2_DrawStr(g, 0, baselines[1], tbuf);
-    /* Underline the field being edited. The unifont cell is 8 px wide, so
-     * hours occupy x=0..15 and minutes x=24..39 with the colon in between. */
-    uint8_t field = config_mode_time_field();
-    uint8_t x = (field == 0) ? 0 : 24;
-    u8g2_DrawHLine(g, x, baselines[1] + 2, 16);
-}
+static void render_config_edit(u8g2_t* g) {
+    /* Edit-screen titles by ConfigMenuItem (NAV has its own screen so
+     * index 0 is unused; CONFIG_MENU_COUNT - 1 entries follow). */
+    static const char* titles[CONFIG_MENU_COUNT] = {
+        "",             /* NAV — unused here */
+        "WATER CAL",
+        "FUEL CAL",
+        "BATTERY CAL",
+        "WATER MODE",
+        "FUEL MODE",
+        "BRIGHTNESS L",
+        "BRIGHTNESS R",
+        "BRIGHTNESS IND",
+    };
+    static const char* mode_names[3] = {"CAL", "0-190", "240-33"};
 
-static void render_config_offset(u8g2_t* g) {
-    const char* title = (config_mode_offset_target() == 0) ? "WATER OFS" : "FUEL OFS";
-    u8g2_DrawStr(g, 0, baselines[0], title);
-    char vbuf[4];
-    /* Always render as 3 zero-padded digits so the field width is stable. */
-    uint8_t v = config_mode_offset_value();
-    vbuf[0] = (char)('0' + (v / 100u));
-    vbuf[1] = (char)('0' + ((v / 10u) % 10u));
-    vbuf[2] = (char)('0' + (v % 10u));
-    vbuf[3] = '\0';
+    uint8_t item = config_mode_edit_menu_item();
+    if (item >= CONFIG_MENU_COUNT) {
+        return;
+    }
+    u8g2_DrawStr(g, 0, baselines[0], titles[item]);
+
+    if (!config_mode_edit_loaded()) {
+        u8g2_DrawStr(g, 0, baselines[1], "...");
+        return;
+    }
+
+    uint8_t v = config_mode_edit_value();
+    char vbuf[8];
+    uint8_t vlen;
+    if (item == CONFIG_MENU_WATER_MODE || item == CONFIG_MENU_FUEL_MODE) {
+        const char* name = (v < 3u) ? mode_names[v] : "?";
+        vlen = 0;
+        while (name[vlen] != '\0' && vlen < sizeof(vbuf) - 1u) {
+            vbuf[vlen] = name[vlen];
+            vlen++;
+        }
+        vbuf[vlen] = '\0';
+    } else {
+        /* Always render byte values as 3 zero-padded digits so the field
+         * width is stable across redraws. */
+        vbuf[0] = (char)('0' + (v / 100u));
+        vbuf[1] = (char)('0' + ((v / 10u) % 10u));
+        vbuf[2] = (char)('0' + (v % 10u));
+        vbuf[3] = '\0';
+        vlen = 3;
+    }
     u8g2_DrawStr(g, 0, baselines[1], vbuf);
-    u8g2_DrawHLine(g, 0, baselines[1] + 2, 24);
+    /* Underline the editable field — width = pixel width of the rendered
+     * value (8 px per unifont cell). */
+    u8g2_DrawHLine(g, 0, baselines[1] + 2, (uint8_t)(vlen * 8u));
 }
 
 /* ---------------------------------------------------------------------------
@@ -368,11 +387,8 @@ static void render_current_frame(u8g2_t* g) {
             case CONFIG_SCREEN_NAV:
                 render_config_nav(g);
                 break;
-            case CONFIG_SCREEN_TIME:
-                render_config_time(g);
-                break;
-            case CONFIG_SCREEN_OFFSET:
-                render_config_offset(g);
+            case CONFIG_SCREEN_EDIT:
+                render_config_edit(g);
                 break;
             default:
                 break;

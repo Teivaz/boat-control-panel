@@ -8,7 +8,6 @@
 #include "libcomm.h"
 #include "libcomm_interface.h"
 #include "nav_lights.h"
-#include "rtc.h"
 #include "task.h"
 #include "task_ids.h"
 
@@ -70,7 +69,6 @@ typedef struct {
 #define RETRY_TICK_MS 200u
 #define POLL_TICK_MS 100u
 #define POLL_TICK_SLOW_MS 5000u
-#define RTC_TICK_MS 250u
 #define STALE_THRESHOLD (10000u / POLL_TICK_MS) /* 10 s */
 
 /* All five nav-light bits in CHANNEL_NAV_* layout. */
@@ -100,11 +98,6 @@ static void poll_battery_task(TaskId id, void* ctx);
 static void poll_levels_task(TaskId id, void* ctx);
 static void poll_sensors_task(TaskId id, void* ctx);
 static void poll_channels_task(TaskId id, void* ctx);
-static void poll_rtc_task(TaskId id, void* ctx);
-static void on_rtc_read_done(uint8_t ok, const RtcTime* t, void* ctx);
-
-static void on_set_time_write_done(uint8_t ok, void* ctx);
-static void on_set_time_refresh_done(uint8_t ok, const RtcTime* t, void* ctx);
 
 /* ----- state ----- */
 /* Single-writer discipline: g_relay_target is only written by set_channels;
@@ -126,10 +119,6 @@ static uint16_t g_batt_age;
 static uint16_t g_levels_age;
 static uint16_t g_sensors_age;
 static uint16_t g_channels_age;
-
-static RtcTime g_rtc_shadow;
-static uint8_t g_rtc_valid;
-static uint8_t g_rtc_inflight;
 
 /* Single in-flight UI operation. The menu can only have one menu action
  * pending at a time, so a single slot suffices. */
@@ -166,17 +155,12 @@ void controller_init(TaskController* ctrl) {
     g_levels_age = STALE_THRESHOLD;
     g_sensors_age = STALE_THRESHOLD;
     g_channels_age = STALE_THRESHOLD;
-    g_rtc_valid = 0;
-    g_rtc_inflight = 0;
 
     task_controller_add(ctrl, TASK_COMM_RETRY, RETRY_TICK_MS, retry_task, 0);
     task_controller_add(ctrl, TASK_POLL_BATTERY, POLL_TICK_MS, poll_battery_task, 0);
     task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task, 0);
     task_controller_add(ctrl, TASK_POLL_SENSORS, POLL_TICK_MS, poll_sensors_task, 0);
     task_controller_add(ctrl, TASK_POLL_CHANNELS, POLL_TICK_MS, poll_channels_task, 0);
-    /* RTC poll opt-in — wire when the DS3231 is on the bus. */
-    (void)poll_rtc_task;
-    (void)on_rtc_read_done;
 }
 
 void comm_on_button_changed_received(CommButtonChanged* event) {
@@ -621,88 +605,23 @@ uint8_t controller_nav_config_error(void) {
 }
 
 /* ============================================================================
- * RTC
- * ============================================================================
- */
-
-static void poll_rtc_task(TaskId id, void* ctx) {
-    (void)id;
-    (void)ctx;
-    if (g_rtc_inflight) {
-        return;
-    }
-    g_rtc_inflight = 1;
-    rtc_read(on_rtc_read_done, 0);
-}
-
-static void on_rtc_read_done(uint8_t ok, const RtcTime* t, void* ctx) {
-    (void)ctx;
-    if (ok) {
-        INTERRUPT_PUSH;
-        g_rtc_shadow = *t;
-        g_rtc_valid = 1;
-        INTERRUPT_POP;
-    }
-    g_rtc_inflight = 0;
-}
-
-uint8_t controller_time(RtcTime* out) {
-    if (!g_rtc_valid) {
-        return 0;
-    }
-    INTERRUPT_PUSH;
-    *out = g_rtc_shadow;
-    INTERRUPT_POP;
-    return 1;
-}
-
-/* ============================================================================
  * UI ops — async menu actions that need to land safely or report back
  * ============================================================================
  */
 
-void controller_set_time(uint8_t hour, uint8_t minute, ControllerOpCompletion cb, void* ctx) {
-    g_ui_op.op_cb = cb;
-    g_ui_op.ctx = ctx;
-    rtc_write_time(hour, minute, on_set_time_write_done, 0);
-}
-
-static void on_set_time_write_done(uint8_t ok, void* ctx) {
-    (void)ctx;
-    if (!ok) {
-        ControllerOpCompletion cb = g_ui_op.op_cb;
-        void* user_ctx = g_ui_op.ctx;
-        g_ui_op.op_cb = 0;
+void controller_read_config(uint8_t board_addr, uint8_t address, ControllerReadCompletion cb, void* ctx) {
+    /* Reading our own config is in-RAM and synchronous; no point routing
+     * through I2C to ourselves.  Fire the cb inline so callers don't need
+     * a special path for local-vs-remote. */
+    if (board_addr == COMM_ADDRESS_MAIN) {
         if (cb) {
-            cb(0, user_ctx);
+            cb(1, config_read_byte(address), ctx);
         }
         return;
     }
-    /* Refresh the shadow immediately so the UI reflects the new time
-     * without waiting for the next poll tick. */
-    rtc_read(on_set_time_refresh_done, 0);
-}
-
-static void on_set_time_refresh_done(uint8_t ok, const RtcTime* t, void* ctx) {
-    (void)ctx;
-    if (ok) {
-        INTERRUPT_PUSH;
-        g_rtc_shadow = *t;
-        g_rtc_valid = 1;
-        INTERRUPT_POP;
-    }
-    ControllerOpCompletion cb = g_ui_op.op_cb;
-    void* user_ctx = g_ui_op.ctx;
-    g_ui_op.op_cb = 0;
-    if (cb) {
-        cb(1, user_ctx); /* write succeeded; refresh failure is non-fatal */
-    }
-}
-
-void controller_read_switching_config(uint8_t address, ControllerReadCompletion cb, void* ctx) {
     g_ui_op.read_cb = cb;
     g_ui_op.ctx = ctx;
-    if (comm_send_config_read(COMM_ADDRESS_SWITCHING, address) != I2C_RESULT_OK) {
+    if (comm_send_config_read(board_addr, address) != I2C_RESULT_OK) {
         g_ui_op.read_cb = 0;
         if (cb) {
             cb(0, 0, ctx);
@@ -720,10 +639,23 @@ void comm_on_config_read_response(uint8_t addr, uint8_t* value) {
     }
 }
 
-void controller_write_switching_config(uint8_t address, uint8_t value, ControllerOpCompletion cb, void* ctx) {
+void controller_write_config(uint8_t board_addr, uint8_t address, uint8_t value, ControllerOpCompletion cb,
+                             void* ctx) {
+    /* Local writes go to the in-RAM shadow + deferred EEPROM queue
+     * directly — no I2C self-loop.  ok=1 here means "queued"; the
+     * EEPROM flush task drains it later, same trust model as the
+     * remote case (where ok=1 means the peer ACKed but its own EEPROM
+     * commit also runs asynchronously). */
+    if (board_addr == COMM_ADDRESS_MAIN) {
+        config_write_byte(address, value);
+        if (cb) {
+            cb(1, ctx);
+        }
+        return;
+    }
     g_ui_op.op_cb = cb;
     g_ui_op.ctx = ctx;
-    if (comm_send_config(COMM_ADDRESS_SWITCHING, address, value) != I2C_RESULT_OK) {
+    if (comm_send_config(board_addr, address, value) != I2C_RESULT_OK) {
         g_ui_op.op_cb = 0;
         if (cb) {
             cb(0, ctx);

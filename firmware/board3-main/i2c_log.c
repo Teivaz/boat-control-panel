@@ -20,6 +20,7 @@ void i2c_log_init(void) {
      * stable symbol in case boot wiring wants a hook in the future. */
 }
 
+#if I2C_LOG_VISIBLE
 static uint8_t crc_valid(const I2cLogEntry* e) {
     /* CR/CT frames store payload + trailing CRC; anything <2 bytes can't be
      * framed, so fail closed. */
@@ -73,8 +74,10 @@ static void format_entry(char* out, const I2cLogEntry* e) {
     }
     out[pos] = '\0';
 }
+#endif /* I2C_LOG_VISIBLE */
 
 void i2c_log_render(u8g2_t* g) {
+#if I2C_LOG_VISIBLE
     I2cLogEntry snapshot[LOG_MAX_LINES];
     uint8_t count = i2c_log_snapshot(snapshot, LOG_MAX_LINES);
 
@@ -90,4 +93,7 @@ void i2c_log_render(u8g2_t* g) {
 
     /* Leave font restored for subsequent draws. */
     u8g2_SetFont(g, u8g2_font_unifont_tr);
+#else
+    (void)g;
+#endif
 }

@@ -8,7 +8,6 @@ enum {
     TASK_POLL_LEVELS,   // levels_read from switching board
     TASK_POLL_SENSORS,  // sensors_read from switching board
     TASK_POLL_CHANNELS, // channel_state_read from switching board (seeds shadow + catches missed pushes)
-    TASK_POLL_RTC,     // DS3231 time read
     TASK_NAV_LIGHTS,   // nav-light mode tick (flashing error, etc.)
     TASK_CONFIG_MODE,  // sample RA7 config-mode switch
     TASK_DISPLAY_TEXT, // repaint the text UI

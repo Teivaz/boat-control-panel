@@ -4,7 +4,6 @@
 #include "button_fx.h" /* ButtonIndex / Channel for the public queries below */
 #include "indicator.h" /* NavLights for the nav-state queries below */
 #include "libcomm.h"
-#include "rtc.h"
 #include "task.h"
 
 #include <stdint.h>
@@ -38,22 +37,16 @@ NavLights controller_nav_pending(void);
 NavLights controller_nav_errored(void);
 uint8_t controller_nav_config_error(void);
 
-/* Last time read from the DS3231. Returns 1 if the shadow has been
- * populated by at least one successful poll, 0 otherwise. */
-uint8_t controller_time(RtcTime* out);
-
 /* Async UI completions (main context). */
 typedef void (*ControllerOpCompletion)(uint8_t ok, void* ctx);
 typedef void (*ControllerReadCompletion)(uint8_t ok, uint8_t value, void* ctx);
 
-/* Push hour:minute to the RTC, refresh the shadow on success. cb fires
- * in main context with ok=1 on success, 0 on I²C failure. */
-void controller_set_time(uint8_t hour, uint8_t minute, ControllerOpCompletion cb, void* ctx);
-
-/* Async read/write of a switching-board config byte (e.g. the per-meter
- * level offset calibration). Used by the menu UI to calibrate the float
- * meters at runtime. Completion fires in main context. */
-void controller_read_switching_config(uint8_t address, ControllerReadCompletion cb, void* ctx);
-void controller_write_switching_config(uint8_t address, uint8_t value, ControllerOpCompletion cb, void* ctx);
+/* Async read/write of any peer board's config byte (e.g. the per-meter
+ * level offset calibration on the switching board, or per-side LED
+ * brightness on a button board). Used by the menu UI to inspect and
+ * adjust runtime parameters. Completion fires in main context.  Only
+ * one config R/W op may be in flight at a time. */
+void controller_read_config(uint8_t board_addr, uint8_t address, ControllerReadCompletion cb, void* ctx);
+void controller_write_config(uint8_t board_addr, uint8_t address, uint8_t value, ControllerOpCompletion cb, void* ctx);
 
 #endif /* CONTROLLER_H */
