@@ -37,7 +37,6 @@ typedef struct {
     uint8_t retries;
     uint8_t tx_done;  /* 1 once write phase has completed, for log phase */
     I2cCompletion cb;
-    void* cb_ctx;
 } MessageTask;
 
 typedef enum {
@@ -391,19 +390,25 @@ void i2c_init(uint8_t addr) {
 
 void i2c_poll(void) {
     I2cCompletion callback = 0;
+    uint8_t addr = 0;
+    uint8_t tx[I2C_TX_MAX];
+    uint8_t tx_len = 0;
     uint8_t rx[I2C_RX_MAX];
     uint8_t rx_len = 0;
-    void* ctx = 0;
     I2cResult result = 0;
 
     INTERRUPT_PUSH;
     if (g_q_head != g_q_tail) {
         uint8_t cur = g_q_head;
         MessageTask* task = &g_queue[cur];
-        ctx = task->cb_ctx;
         result = task->result;
+        addr = task->addr;
         if (task->state == MT_FAILED) {
             callback = task->cb;
+            tx_len = task->tx_len;
+            for (uint8_t i = 0; i < tx_len; i++) {
+                tx[i] = task->tx[i];
+            }
             rx_len = 0;
             /* Emit the WN/RN the error ISRs deferred.  We log from here
              * (main context, inside the critical section) because calling
@@ -421,6 +426,10 @@ void i2c_poll(void) {
         }
         else if (task->state == MT_FINISHED) {
             callback = task->cb;
+            tx_len = task->tx_len;
+            for (uint8_t i = 0; i < tx_len; i++) {
+                tx[i] = task->tx[i];
+            }
             rx_len = task->rx_len;
             for (uint8_t i = 0; i < rx_len; i++) {
                 rx[i] = task->rx[i];
@@ -444,11 +453,11 @@ void i2c_poll(void) {
     INTERRUPT_POP;
 
     if (callback) {
-        callback(result, rx, rx_len, ctx);
+        callback(result, addr, tx_len ? tx : 0, tx_len, rx, rx_len);
     }
 }
 
-I2cResult i2c_submit(uint8_t addr, const uint8_t* tx, uint8_t tx_len, uint8_t rx_len, I2cCompletion cb, void* ctx) {
+I2cResult i2c_submit(uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t rx_len, I2cCompletion cb) {
     if (tx == 0) {
         return I2C_RESULT_BAD_ARG;
     }
@@ -469,7 +478,6 @@ I2cResult i2c_submit(uint8_t addr, const uint8_t* tx, uint8_t tx_len, uint8_t rx
     task->tx_len = tx_len;
     task->rx_len = rx_len;
     task->cb = cb;
-    task->cb_ctx = ctx;
     task->retries = I2C_RETRY_COUNT;
     task->tx_done = 0;
     for (uint8_t i = 0; i < tx_len; i++) {
@@ -497,7 +505,6 @@ static void prepend_completed_task(uint8_t addr, const volatile uint8_t* rx, uin
     task->tx_len = 0;
     task->rx_len = rx_len;
     task->cb = g_cold_rx;
-    task->cb_ctx = 0;
     task->retries = 0;
     for (uint8_t i = 0; i < rx_len; i++) {
         task->rx[i] = rx[i];

@@ -23,6 +23,6 @@
 
 extern const uint8_t crc8_table[256];
 
-uint8_t comm_crc8(const uint8_t* data, uint8_t len);
+uint8_t comm_crc8(uint8_t* data, uint8_t len);
 
 #endif /* LIBCOMM_CRC_H */

@@ -90,10 +90,10 @@ static void toggle_relay(Channel channel);
 static void set_nav_light_mode(NavLightMode mode);
 
 static void set_channels(uint16_t new_target);
+static void clear_channels(void);
 static void apply_channel_observation(uint16_t observed);
 
 static void retry_task(TaskId id, void* ctx);
-static void on_relay_state_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
 
 static uint16_t poll_interval_for_state(void);
 static void poll_battery_task(TaskId id, void* ctx);
@@ -105,7 +105,6 @@ static void on_rtc_read_done(uint8_t ok, const RtcTime* t, void* ctx);
 
 static void on_set_time_write_done(uint8_t ok, void* ctx);
 static void on_set_time_refresh_done(uint8_t ok, const RtcTime* t, void* ctx);
-static void on_ui_config_write_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
 
 /* ----- state ----- */
 /* Single-writer discipline: g_relay_target is only written by set_channels;
@@ -180,14 +179,14 @@ void controller_init(TaskController* ctrl) {
     (void)on_rtc_read_done;
 }
 
-void comm_on_button_changed_received(const CommButtonChanged* event) {
+void comm_on_button_changed_received(CommButtonChanged* event) {
     if (!event) {
         return;
     }
     /* Combine the I²C side address into the ButtonIndex encoding (bit 3
      * = side, low 3 bits = per-side index). */
     ButtonIndex button = event->button_id;
-    switch (sender) {
+    switch (event->device_address) {
         case COMM_ADDRESS_BUTTON_BOARD_L:
             break;
         case COMM_ADDRESS_BUTTON_BOARD_R:
@@ -221,11 +220,12 @@ void comm_on_button_changed_received(const CommButtonChanged* event) {
     }
 }
 
-void comm_on_channel_changed_received(const CommChannelChanged* event) {
+void comm_on_channel_changed_received(CommChannelChanged* event) {
     if (!event) {
         return;
     }
     g_sensor_state = event->current_sensors;
+    g_sensors_age = 0;
     apply_channel_observation(event->current_channels);
 }
 
@@ -370,18 +370,18 @@ static NavLights nav_lights_from_channels(uint16_t channels) {
  */
 
 static void toggle_power(void) {
+    g_on = !g_on;
     if (g_on) {
+        /* Waking up: only main goes on. Nav lights and house loads stay
+         * dark until the user picks them — predictable startup. */
+        set_channels(CHANNEL_MAIN);
+    } else {
         /* Going dark: drop every channel, reset nav mode so it doesn't
          * silently re-arm next time. */
         g_nav_light_mode = NAV_LIGHT_MODE_OFF;
         g_nav_light_error = NAV_LIGHT_ERROR_NONE;
-        set_channels(0);
-    } else {
-        /* Waking up: only main goes on. Nav lights and house loads stay
-         * dark until the user picks them — predictable startup. */
-        set_channels(CHANNEL_MAIN);
+        clear_channels();
     }
-    g_on = !g_on;
     display_text_set_active(g_on);
     indicator_set_active(g_on);
 }
@@ -422,10 +422,16 @@ static void set_channels(uint16_t new_target) {
     g_relay_dirty = 1;
     for (uint8_t b = 0; b < BUTTON_COUNT; b++) {
         uint16_t m = mask_for_button((ButtonIndex)b);
-        if (m == 0) {
-            continue;
-        }
         button_fx_set((ButtonIndex)b, (uint16_t)(new_target & m), m);
+    }
+}
+
+/* Sole writer of g_relay_target. Fans out to button_fx (per-button
+ * pending expectations), marks the bus dirty for retry_task, and asks
+ * the indicator to refresh. */
+static void clear_channels(void) {
+    for (uint8_t b = 0; b < BUTTON_COUNT; b++) {
+        button_fx_clear((ButtonIndex)b);
     }
 }
 
@@ -457,16 +463,14 @@ static void retry_task(TaskId id, void* ctx) {
 
     g_relay_inflight_value = snapshot;
     g_relay_inflight = 1;
-    if (comm_send_relay_state(snapshot, on_relay_state_done, 0) != I2C_RESULT_OK) {
+    if (comm_send_relay_state(snapshot) != I2C_RESULT_OK) {
         g_relay_inflight = 0;
     }
 }
 
-static void on_relay_state_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx) {
+void comm_on_relay_state_completion(I2cResult result, uint16_t relays) {
     (void)result;
-    (void)rx;
-    (void)rx_len;
-    (void)ctx;
+    (void)relays;
     /* Clear dirty only if the value we just landed still matches the
      * current target — a producer could have bumped it between our
      * snapshot and the completion. */
@@ -537,14 +541,14 @@ static void poll_channels_task(TaskId id, void* ctx) {
  * ============================================================================
  */
 
-void comm_on_battery_read_response(const CommBattery* battery) {
+void comm_on_battery_read_response(CommBattery* battery) {
     if (battery) {
         g_battery_mv = battery->voltage;
         g_batt_age = 0;
     }
 }
 
-void comm_on_levels_read_response(const CommLevels* lvl) {
+void comm_on_levels_read_response(CommLevels* lvl) {
     if (lvl) {
         g_levels[0] = lvl->level_0;
         g_levels[1] = lvl->level_1;
@@ -552,7 +556,7 @@ void comm_on_levels_read_response(const CommLevels* lvl) {
     }
 }
 
-void comm_on_sensors_read_response(const CommSensors* sns) {
+void comm_on_sensors_read_response(CommSensors* sns) {
     if (sns) {
         g_sensor_state = sns->sensors;
         g_sensors_age = 0;
@@ -707,6 +711,7 @@ void controller_read_switching_config(uint8_t address, ControllerReadCompletion 
 }
 
 void comm_on_config_read_response(uint8_t addr, uint8_t* value) {
+    (void)addr;
     ControllerReadCompletion cb = g_ui_op.read_cb;
     void* user_ctx = g_ui_op.ctx;
     g_ui_op.read_cb = 0;
@@ -718,7 +723,7 @@ void comm_on_config_read_response(uint8_t addr, uint8_t* value) {
 void controller_write_switching_config(uint8_t address, uint8_t value, ControllerOpCompletion cb, void* ctx) {
     g_ui_op.op_cb = cb;
     g_ui_op.ctx = ctx;
-    if (comm_send_config(COMM_ADDRESS_SWITCHING, address, value, on_ui_config_write_done, 0) != I2C_RESULT_OK) {
+    if (comm_send_config(COMM_ADDRESS_SWITCHING, address, value) != I2C_RESULT_OK) {
         g_ui_op.op_cb = 0;
         if (cb) {
             cb(0, ctx);
@@ -726,15 +731,14 @@ void controller_write_switching_config(uint8_t address, uint8_t value, Controlle
     }
 }
 
-static void on_ui_config_write_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx) {
-    (void)result;
-    (void)rx;
-    (void)rx_len;
-    (void)ctx;
+void comm_on_config_completion(I2cResult result, uint8_t addr, uint8_t config_addr, uint8_t value) {
+    (void)addr;
+    (void)config_addr;
+    (void)value;
     ControllerOpCompletion cb = g_ui_op.op_cb;
     void* user_ctx = g_ui_op.ctx;
     g_ui_op.op_cb = 0;
     if (cb) {
-        cb(1, user_ctx);
+        cb(result == I2C_RESULT_OK, user_ctx);
     }
 }

@@ -21,7 +21,7 @@ void comm_init(void) {
  * ============================================================================
  */
 
-void comm_on_config_received(const CommConfig* config) {
+void comm_on_config_received(CommConfig* config) {
     config_write_byte(config->address, config->value);
 }
 
@@ -30,16 +30,16 @@ void comm_on_reset(void) {
 }
 
 /* Main board does not receive these commands — empty stubs. */
-void comm_on_button_effect_received(const CommButtonEffect* effect) {
+void comm_on_button_effect_received(CommButtonEffect* effect) {
     (void)effect;
 }
-void comm_on_button_trigger_received(const CommButtonTrigger* trigger) {
+void comm_on_button_trigger_received(CommButtonTrigger* trigger) {
     (void)trigger;
 }
-void comm_on_relay_state_received(const CommRelayState* state) {
+void comm_on_relay_state_received(CommRelayState* state) {
     (void)state;
 }
-void comm_on_level_mode_received(const CommLevelMode* mode) {
+void comm_on_level_mode_received(CommLevelMode* mode) {
     (void)mode;
 }
 
@@ -66,14 +66,52 @@ void comm_on_sensors_read_requested(void) {
 }
 
 /* ============================================================================
- * Adopter callbacks: read response handlers (main-loop context)
+ * Adopter callbacks: write completion handlers (main-loop context)
  *
- * Battery, levels, sensors, and config_read are forwarded to the
- * controller which latches the values into its shadow state.
+ * relay_state, config, and button_effect completions are handled in
+ * controller.c / button_fx.c.  The remaining ones are unused on the
+ * main board.
  * ============================================================================
  */
 
-/* Unused on the main board. */
+void comm_on_reset_completion(I2cResult result, uint8_t addr) {
+    (void)result;
+    (void)addr;
+}
+void comm_on_button_changed_completion(I2cResult result, uint8_t button_id, uint8_t pressed, CommButtonMode mode) {
+    (void)result;
+    (void)button_id;
+    (void)pressed;
+    (void)mode;
+}
+void comm_on_button_trigger_completion(I2cResult result, uint8_t addr, uint8_t button_id, CommTriggerConfig config) {
+    (void)result;
+    (void)addr;
+    (void)button_id;
+    (void)config;
+}
+void comm_on_channel_changed_completion(I2cResult result, uint16_t prev_channels, uint16_t current_channels,
+                                        uint8_t prev_sensors, uint8_t current_sensors) {
+    (void)result;
+    (void)prev_channels;
+    (void)current_channels;
+    (void)prev_sensors;
+    (void)current_sensors;
+}
+void comm_on_level_mode_completion(I2cResult result, CommMeterMode mode_0, CommMeterMode mode_1) {
+    (void)result;
+    (void)mode_0;
+    (void)mode_1;
+}
+
+/* ============================================================================
+ * Adopter callbacks: read response handlers (main-loop context)
+ *
+ * Battery, levels, sensors, channel_state, and config_read are handled
+ * in controller.c.  The remaining ones are unused on the main board.
+ * ============================================================================
+ */
+
 void comm_on_button_state_read_response(uint8_t addr, CommButtonState* state) {
     (void)addr;
     (void)state;

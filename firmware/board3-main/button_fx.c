@@ -53,8 +53,6 @@ typedef struct {
 } Slot;
 
 static void refresh_task(TaskId id, void* ctx);
-static void on_effect_done_l(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
-static void on_effect_done_r(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
 static uint8_t effects_differ(const CommButtonEffect* a, const CommButtonEffect* b);
 static void build_button_effect(uint8_t button_group, CommButtonEffect* out);
 
@@ -165,7 +163,7 @@ static void refresh_task(TaskId id, void* ctx) {
         CommButtonEffect effect_l;
         build_button_effect(0, &effect_l);
         if (effects_differ(&effect_l, &g_effect_l)) {
-            if (comm_send_button_effect(COMM_ADDRESS_BUTTON_BOARD_L, &effect_l, on_effect_done_l, 0) == I2C_RESULT_OK) {
+            if (comm_send_button_effect(COMM_ADDRESS_BUTTON_BOARD_L, &effect_l) == I2C_RESULT_OK) {
                 g_inflight_l = 1;
                 g_next_effect_l = effect_l;
             }
@@ -175,7 +173,7 @@ static void refresh_task(TaskId id, void* ctx) {
         CommButtonEffect effect_r;
         build_button_effect(1, &effect_r);
         if (effects_differ(&effect_r, &g_effect_r)) {
-            if (comm_send_button_effect(COMM_ADDRESS_BUTTON_BOARD_R, &effect_r, on_effect_done_r, 0) == I2C_RESULT_OK) {
+            if (comm_send_button_effect(COMM_ADDRESS_BUTTON_BOARD_R, &effect_r) == I2C_RESULT_OK) {
                 g_inflight_r = 1;
                 g_next_effect_r = effect_r;
             }
@@ -183,23 +181,18 @@ static void refresh_task(TaskId id, void* ctx) {
     }
 }
 
-static void on_effect_done_l(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx) {
-    (void)rx;
-    (void)rx_len;
-    (void)ctx;
-    g_inflight_l = 0;
-    if (result == I2C_RESULT_OK) {
-        g_effect_l = g_next_effect_l;
-    }
-}
-
-static void on_effect_done_r(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx) {
-    (void)rx;
-    (void)rx_len;
-    (void)ctx;
-    g_inflight_r = 0;
-    if (result == I2C_RESULT_OK) {
-        g_effect_r = g_next_effect_r;
+void comm_on_button_effect_completion(I2cResult result, uint8_t addr, CommButtonEffect* effect) {
+    (void)effect;
+    if (addr == COMM_ADDRESS_BUTTON_BOARD_L) {
+        g_inflight_l = 0;
+        if (result == I2C_RESULT_OK) {
+            g_effect_l = g_next_effect_l;
+        }
+    } else if (addr == COMM_ADDRESS_BUTTON_BOARD_R) {
+        g_inflight_r = 0;
+        if (result == I2C_RESULT_OK) {
+            g_effect_r = g_next_effect_r;
+        }
     }
 }
 

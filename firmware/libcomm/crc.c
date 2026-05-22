@@ -29,7 +29,7 @@ const uint8_t crc8_table[256] = {
     0xDE, 0xD9, 0xD0, 0xD7, 0xC2, 0xC5, 0xCC, 0xCB, 0xE6, 0xE1, 0xE8, 0xEF, 0xFA, 0xFD, 0xF4, 0xF3,
 };
 
-uint8_t comm_crc8(const uint8_t* data, uint8_t len) {
+uint8_t comm_crc8(uint8_t* data, uint8_t len) {
     /* CRC-8/ROHC: poly 0x07, init 0xFF.  The non-zero init breaks the
      * all-zeros aliasing of an init=0 CRC-8, so a fully-corrupted bus that
      * delivers `00 00 00` no longer validates. Table-driven — each byte

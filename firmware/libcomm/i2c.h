@@ -87,13 +87,21 @@ typedef enum {
 /* Completion callback.  Fired from i2c_poll() (main-loop context) for
  * host transactions, and for cold (client) RX deliveries.
  *   result — I2C_RESULT_OK on success, or the failure reason.
+ *   addr   — for host transactions: the target's I2C address.  For cold
+ *            (client) RX deliveries: 0 (the receiving address is this
+ *            device).
+ *   tx_buf — driver-owned buffer holding the transmitted bytes (host
+ *            transactions only; NULL for cold RX).  Valid only while
+ *            the callback is running.
+ *   tx_len — bytes transmitted.  0 for cold RX.
  *   rx_buf — driver-owned buffer holding received bytes.  Valid only
  *            while the callback is running; copy out anything that
  *            must outlive the callback.
  *   rx_len — bytes received.  0 on write-only success or any failure.
  *            For host reads, callers should treat rx_len == 0 as
  *            failure since the protocol expects > 0 bytes back. */
-typedef void (*I2cCompletion)(I2cResult result, uint8_t* rx_buf, uint8_t rx_len, void* ctx);
+typedef void (*I2cCompletion)(I2cResult result, uint8_t addr, uint8_t* tx_buf, uint8_t tx_len, uint8_t* rx_buf,
+                              uint8_t rx_len);
 
 /* Synchronous cold-RX handler.  Fired from ISR context the moment a
  * client-RX transaction completes (stop or restart), before the next
@@ -158,9 +166,9 @@ I2cResult i2c_set_client_tx(uint8_t* tx, uint8_t tx_len);
 /* Submit a host write or write-then-read.
  *   tx, tx_len  — required (1..I2C_TX_MAX).  Copied into the queue.
  *   rx_len      — write-then-read.  rx_len=0 means write-only.
- *   cb, ctx     — fired from i2c_poll().  cb may be NULL.
+ *   cb          — fired from i2c_poll().  cb may be NULL.
  * Main-loop context only. */
-I2cResult i2c_submit(uint8_t addr, const uint8_t* tx, uint8_t tx_len, uint8_t rx_len, I2cCompletion cb, void* ctx);
+I2cResult i2c_submit(uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t rx_len, I2cCompletion cb);
 
 /* Main-loop poll.  Fires the completion callback for finished ops and
  * starts the next queued op when the bus is free.  O(1) per call. */
