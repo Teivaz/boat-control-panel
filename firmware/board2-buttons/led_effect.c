@@ -1,5 +1,6 @@
 #include "led_effect.h"
 
+#include "config.h"
 #include "rgbled.h"
 #include "task_ids.h"
 
@@ -81,8 +82,16 @@ static void led_effect_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
     phase++;
+    /* Re-read peak intensity each tick — config_read_byte serves from an
+     * in-RAM shadow, so this is effectively a single byte fetch and a
+     * runtime change at CONFIG_ADDR_LED_BRIGHTNESS takes effect within
+     * one frame. Per-LED level is scaled by `bright/255` (rounded) before
+     * the colour swatch is built; uniform across channels keeps hue
+     * unchanged. */
+    uint8_t bright = config_get_led_brightness();
     for (uint8_t i = 0; i < LED_EFFECT_COUNT; i++) {
         uint8_t lvl = level_for_mode(effects[i].mode);
+        lvl = (uint8_t)((((uint16_t)lvl * bright) + 0x80u) >> 8);
         frame[i] = color_for_value(effects[i].color, lvl);
     }
     rgbled_set(frame, LED_EFFECT_COUNT);

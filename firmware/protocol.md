@@ -202,3 +202,33 @@ Both states are 2-byte bitmasks transmitted low byte first: byte 0 = bits 0–7,
 - sensors_read - polled read; returns the state of all 3 on/off sensors
   - write byte 0: command - 0x8B
   - read byte 0: `[7:3]` = 0, `[2]` sensor_2, `[1]` sensor_1, `[0]` sensor_0 — 1 = on, 0 = off
+
+## Configuration
+
+Configuration is per-device byte-addressable storage backed by data EEPROM. `config` writes are persisted across power cycles; `config_read` returns the in-RAM shadow that mirrors EEPROM. A byte that has never been written reads back as 0xFF (the EEPROM erase pattern); accessors with a sensible fallback substitute the per-field default listed below.
+
+Universal addresses 0x00..0x0F are documented in [Common](#common). Device-specific fields:
+
+### Main board configuration (0x40)
+
+| Address | Field | Size | Default | Description |
+|---|---|---|---|---|
+| 0x10 | nav_enabled_mask | 1 | 0x1F | 5-bit mask of physically-installed nav lights — `[0]` anchoring, `[1]` tricolor, `[2]` steaming, `[3]` bow, `[4]` stern. Limits which lights the panel attempts to drive when a nav-mode button is pressed; cleared bits are silently skipped and a mode that requires a missing light raises a config error on the indicator. |
+| 0x11 | indicator_brightness | 1 | 0x7F | Peak per-channel intensity (0..255) for the nav-indicator RGB ring. Re-read each frame so a runtime change takes effect within ~50 ms. |
+
+### Button board configuration (0x44–0x47)
+
+| Address | Field | Size | Default | Description |
+|---|---|---|---|---|
+| 0x10..0x16 | button_trigger[7] | 7 | hold trigger | One CommTriggerConfig (MMEETTTT) per button — same wire format as `button_trigger` command payload. Default mode is `hold` with a 1 ms time on most buttons; the L-board's button 0 defaults to 800 ms. |
+| 0x17..0x1A | button_effect | 4 | disabled / white | Four packed CommButtonEffect bytes (two outputs per byte; upper nibble = odd output, lower nibble = even output) — same wire format as `button_effect` command payload. Default colour is white, mode disabled (LEDs dark). |
+| 0x1B | led_brightness | 1 | 0x7F | Peak per-channel intensity (0..255) for the per-button RGB LEDs. Applied uniformly across R/G/B so hue is preserved; re-read each frame. |
+
+### Switching board configuration (0x42)
+
+| Address | Field | Size | Default | Description |
+|---|---|---|---|---|
+| 0x10 | water_cal | 1 | 100 | Water-level scale factor — byte the channel reports with a 100 Ω reference applied. The ADC processor inverts the factor when displaying Ω so a tolerance-shifted current source / divider just changes this byte. |
+| 0x11 | fuel_cal | 1 | 100 | Fuel-level scale factor — same calibration semantics as `water_cal`. |
+| 0x12 | battery_cal | 1 | 120 | Battery scale factor — byte the channel reports at a 12000 mV reference, in 100 mV units. |
+| 0x13 | level_mode | 1 | 0x05 | Packed CommLevelMode — `[3:2]` mode_1, `[1:0]` mode_0; same layout as `level_mode` command payload. Persists meter mode across reboot. Default 0x05 = both meters in 240–33 Ω mode. |

@@ -21,10 +21,6 @@ void comm_init(void) {
  * ============================================================================
  */
 
-void comm_on_button_changed_received(const CommButtonChanged* event) {
-    controller_on_button_changed(event->device_address, event->button_id, event->pressed, (CommButtonMode)event->mode);
-}
-
 void comm_on_config_received(const CommConfig* config) {
     config_write_byte(config->address, config->value);
 }
@@ -76,20 +72,6 @@ void comm_on_sensors_read_requested(void) {
  * controller which latches the values into its shadow state.
  * ============================================================================
  */
-
-void comm_on_battery_read_response(CommBattery* battery) {
-    controller_on_battery_response(battery);
-}
-void comm_on_levels_read_response(CommLevels* levels) {
-    controller_on_levels_response(levels);
-}
-void comm_on_sensors_read_response(CommSensors* sensors) {
-    controller_on_sensors_response(sensors);
-}
-void comm_on_config_read_response(uint8_t addr, uint8_t* value) {
-    (void)addr;
-    controller_on_config_read_response(value);
-}
 
 /* Unused on the main board. */
 void comm_on_button_state_read_response(uint8_t addr, CommButtonState* state) {

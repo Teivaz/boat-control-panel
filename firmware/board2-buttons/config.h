@@ -13,9 +13,11 @@
  * Payload bytes mirror the on-wire format of their corresponding messages:
  *   BUTTON_TRIGGER  BUTTON_COUNT   bytes, one CommTriggerConfig each
  *   LED_EFFECT      4              bytes, one CommButtonEffect (packed nibbles)
+ *   LED_BRIGHTNESS  1              byte, peak per-channel intensity 0..255
  */
 #define CONFIG_ADDR_BUTTON_TRIGGER 0x10
 #define CONFIG_ADDR_LED_EFFECT (CONFIG_ADDR_BUTTON_TRIGGER + BUTTON_COUNT * sizeof(CommTriggerConfig))
+#define CONFIG_ADDR_LED_BRIGHTNESS (CONFIG_ADDR_LED_EFFECT + sizeof(CommButtonEffect))
 
 /* Registers a periodic task that drains the deferred-write queue to EEPROM.
  * config_write_byte is ISR-safe (enqueues only); the actual cell program
@@ -34,5 +36,10 @@ void config_set_button(uint8_t button_id, CommTriggerConfig cfg);
 
 CommButtonOutputEffect config_get_effect(uint8_t led_id);
 void config_set_effect(uint8_t led_id, CommButtonOutputEffect eff);
+
+/* Peak per-channel intensity for the per-button RGB LEDs, 0..255. Returns
+ * the EEPROM default if the byte reads back as the erase pattern (0xFF)
+ * so a virgin / corrupted cell doesn't blast the LEDs. */
+uint8_t config_get_led_brightness(void);
 
 #endif /* CONFIG_H */

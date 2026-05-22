@@ -20,6 +20,7 @@
  *   0x00..0x01                   magic header
  *   OFF_BUTTONS (BUTTON_COUNT)   array of CommTriggerConfig, one per button
  *   OFF_EFFECTS (4 bytes)        CommButtonEffect — nibbles packed 2 per byte
+ *   OFF_BRIGHT  (1 byte)         peak RGB-LED intensity (mirrors CONFIG_ADDR_LED_BRIGHTNESS)
  */
 #define EEPROM_ADDR_U 0x38
 #define CONFIG_MAGIC_LO 0x5A
@@ -29,7 +30,13 @@
 #define OFF_MAGIC_HI 0x01
 #define OFF_BUTTONS 0x02
 #define OFF_EFFECTS (OFF_BUTTONS + BUTTON_COUNT * sizeof(CommTriggerConfig))
+#define OFF_BRIGHT (OFF_EFFECTS + sizeof(CommButtonEffect))
 #define OFF_NONE 0xFF
+
+/* Default LED brightness seeded on a virgin device — half intensity, kept
+ * in lockstep with board3-main's INDICATOR_DEFAULT_BRIGHTNESS so the panel
+ * lights up at a consistent level after a fresh flash on either board. */
+#define LED_DEFAULT_BRIGHTNESS 0x7F
 
 /* Deferred-write queue. Producer: I2C ISR via config_write_byte.
  * Consumer: flush_task (main context). Power-of-two so wrap is a mask. Size
@@ -154,6 +161,15 @@ void config_set_effect(uint8_t led_id, CommButtonOutputEffect eff) {
     config_write_byte(addr, byte);
 }
 
+uint8_t config_get_led_brightness(void) {
+    uint8_t v = config_read_byte(CONFIG_ADDR_LED_BRIGHTNESS);
+    /* 0xFF is the EEPROM erase pattern; treat it as "unset" and return
+     * the seeded default so a virgin / corrupted byte doesn't drive the
+     * LEDs at full intensity. Any other value (including a user-chosen
+     * max) is honoured. */
+    return (v == 0xFF) ? LED_DEFAULT_BRIGHTNESS : v;
+}
+
 /* CommButtonEffect packs output N's nibble in byte (7 - N) / 2.
  * odd N -> upper nibble, even N -> lower nibble. */
 static uint8_t effect_byte_index(uint8_t led_id) {
@@ -166,6 +182,9 @@ static uint8_t eeprom_offset_for(uint8_t address) {
     }
     if (address >= CONFIG_ADDR_LED_EFFECT && address < CONFIG_ADDR_LED_EFFECT + sizeof(CommButtonEffect)) {
         return (uint8_t)(OFF_EFFECTS + (address - CONFIG_ADDR_LED_EFFECT));
+    }
+    if (address == CONFIG_ADDR_LED_BRIGHTNESS) {
+        return OFF_BRIGHT;
     }
     return OFF_NONE;
 }
@@ -274,4 +293,6 @@ static void write_default_config(void) {
     for (uint8_t i = 0; i < sizeof(CommButtonEffect); i++) {
         nvm_write(OFF_EFFECTS + i, pair);
     }
+
+    nvm_write(OFF_BRIGHT, LED_DEFAULT_BRIGHTNESS);
 }

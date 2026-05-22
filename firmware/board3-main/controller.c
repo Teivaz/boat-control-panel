@@ -17,7 +17,6 @@
 /* ============================================================================
  * Architecture
  *
- *   L1 INPUT     controller_on_button_changed         translate, dispatch
  *   L1 INTENT    toggle_power / toggle_relay / set_nav_light_mode
  *   L2 STATE     set_channels(uint16_t)               sole writer of g_relay_target
  *                apply_channel_observation(uint16_t)  sole writer of g_channel_state
@@ -181,23 +180,13 @@ void controller_init(TaskController* ctrl) {
     (void)on_rtc_read_done;
 }
 
-/* ============================================================================
- * L1 inbound dispatch
- * ============================================================================
- */
-
-void controller_on_button_changed(uint8_t sender, uint8_t button_id, uint8_t pressed, CommButtonMode mode) {
-    /* Trigger filter — fire on HOLD, RELEASE-after-hold, or the press
-     * edge of a CHANGE trigger. */
-    const uint8_t should_trigger = (mode == COMM_BUTTON_MODE_RELEASE) || (mode == COMM_BUTTON_MODE_HOLD) ||
-                                   (mode == COMM_BUTTON_MODE_CHANGE && pressed);
-    if (button_id >= 7u || !should_trigger) {
+void comm_on_button_changed_received(const CommButtonChanged* event) {
+    if (!event) {
         return;
     }
-
     /* Combine the I²C side address into the ButtonIndex encoding (bit 3
      * = side, low 3 bits = per-side index). */
-    ButtonIndex button = button_id;
+    ButtonIndex button = event->button_id;
     switch (sender) {
         case COMM_ADDRESS_BUTTON_BOARD_L:
             break;
@@ -233,6 +222,9 @@ void controller_on_button_changed(uint8_t sender, uint8_t button_id, uint8_t pre
 }
 
 void comm_on_channel_changed_received(const CommChannelChanged* event) {
+    if (!event) {
+        return;
+    }
     g_sensor_state = event->current_sensors;
     apply_channel_observation(event->current_channels);
 }
@@ -545,14 +537,14 @@ static void poll_channels_task(TaskId id, void* ctx) {
  * ============================================================================
  */
 
-void controller_on_battery_response(const CommBattery* battery) {
+void comm_on_battery_read_response(const CommBattery* battery) {
     if (battery) {
         g_battery_mv = battery->voltage;
         g_batt_age = 0;
     }
 }
 
-void controller_on_levels_response(const CommLevels* lvl) {
+void comm_on_levels_read_response(const CommLevels* lvl) {
     if (lvl) {
         g_levels[0] = lvl->level_0;
         g_levels[1] = lvl->level_1;
@@ -560,7 +552,7 @@ void controller_on_levels_response(const CommLevels* lvl) {
     }
 }
 
-void controller_on_sensors_response(const CommSensors* sns) {
+void comm_on_sensors_read_response(const CommSensors* sns) {
     if (sns) {
         g_sensor_state = sns->sensors;
         g_sensors_age = 0;
@@ -714,7 +706,7 @@ void controller_read_switching_config(uint8_t address, ControllerReadCompletion 
     }
 }
 
-void controller_on_config_read_response(const uint8_t* value) {
+void comm_on_config_read_response(uint8_t addr, uint8_t* value) {
     ControllerReadCompletion cb = g_ui_op.read_cb;
     void* user_ctx = g_ui_op.ctx;
     g_ui_op.read_cb = 0;

@@ -13,17 +13,6 @@
  * relay-sync task, polling tasks, and indicator sync. */
 void controller_init(TaskController* ctrl);
 
-/* Inbound dispatch hooks — invoked from comm.c after libcomm parses the
- * incoming I²C message. All run in main-loop context. */
-void controller_on_button_changed(uint8_t sender, uint8_t button_id, uint8_t pressed, CommButtonMode mode);
-
-/* Adopter-callback forwarders — called from comm.c when protocol read
- * responses arrive. Main-loop context. NULL pointer means I²C error. */
-void controller_on_battery_response(const CommBattery* battery);
-void controller_on_levels_response(const CommLevels* levels);
-void controller_on_sensors_response(const CommSensors* sensors);
-void controller_on_config_read_response(const uint8_t* value);
-
 /* State queries for the display / button-fx layers. */
 uint8_t controller_power_on(void);
 uint16_t controller_battery_mv(void);

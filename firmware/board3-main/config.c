@@ -27,10 +27,10 @@
 #define OFF_BRIGHT 0x03
 #define OFF_NONE 0xFF
 
-/* Default brightness seeded on a virgin device. Picked to match the
- * pre-config compile-time default in indicator.c so behaviour after the
- * first boot is unchanged. */
-#define INDICATOR_DEFAULT_BRIGHTNESS 0x40
+/* Default brightness seeded on a virgin device — half intensity, kept
+ * in lockstep with board2-buttons' LED_DEFAULT_BRIGHTNESS so the panel
+ * lights up at a consistent level after a fresh flash on either board. */
+#define INDICATOR_DEFAULT_BRIGHTNESS 0x7F
 
 #define WRITE_QUEUE_SIZE 4
 #define WRITE_QUEUE_MASK (WRITE_QUEUE_SIZE - 1)
