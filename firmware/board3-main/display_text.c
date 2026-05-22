@@ -15,7 +15,7 @@
  * same percentage. Rows are separated by full-width divider lines. Row
  * baselines (16/36/56) are the same as before so the unifont 8x16 cells
  * sit centred in each 21 px row strip. */
-#define REFRESH_MS 100u /* 10 Hz */
+#define REFRESH_MS 50u /* 20 Hz */
 #define LINE_BASELINE_0 16
 #define LINE_BASELINE_1 36
 #define LINE_BASELINE_2 56
@@ -399,6 +399,18 @@ static void render_current_frame(u8g2_t* g) {
         render_normal(g);
     }
     /* Power off + not in config: cleared buffer ships as a blank frame. */
+
+#if 0
+    /* Diagnostic heartbeat: a 2-px square in the top-right corner that
+     * toggles every refresh.  If the corner blinks at ~10 Hz the refresh
+     * task is firing and reaching SendBuffer; if it's frozen the task
+     * scheduler is wedged or SendBuffer is hanging. */
+    static uint8_t s_heartbeat;
+    s_heartbeat ^= 1u;
+    if (s_heartbeat) {
+        u8g2_DrawBox(g, (uint8_t)(DISPLAY_WIDTH - 3), 1, 2, 2);
+    }
+#endif
 
     u8g2_SendBuffer(g);
 }

@@ -165,13 +165,14 @@ static void render_error(void) {
 
 /* Config editor: cursor LED renders green (slot enabled) or dim red
  * (slot disabled); every other LED renders blue with bright/dim
- * indicating enabled/disabled. Reads the enabled mask fresh on each
- * render so an in-flight commit by config_mode is reflected without
- * another round-trip. cursor=0xFF (no nav-screen cursor) renders all
- * five LEDs as non-cursor — useful when the operator is in config mode
- * but on a different sub-screen. */
+ * indicating enabled/disabled. Reads the working mask (live in-RAM
+ * edit buffer in config_mode, not the EEPROM-backed value) so each
+ * toggle is reflected immediately — the working mask only gets
+ * persisted on config-mode exit. cursor=0xFF (no nav-screen cursor)
+ * renders all five LEDs as non-cursor — useful when the operator is in
+ * config mode but on a different sub-screen. */
 static void render_config(uint8_t cursor) {
-    uint8_t enabled = config_get_nav_enabled_mask();
+    uint8_t enabled = config_mode_nav_working_mask();
     uint8_t bright = max_brightness();
     uint8_t dim = dim_brightness();
     /* Pre-attenuate once per frame — these four colours apply to every

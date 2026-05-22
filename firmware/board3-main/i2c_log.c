@@ -32,15 +32,17 @@ static uint8_t crc_valid(const I2cLogEntry* e) {
 
 static const char* kind_label(const I2cLogEntry* e) {
     switch (e->kind) {
-        case I2C_LOG_CR: return crc_valid(e) ? "CR+" : "CR-";
-        case I2C_LOG_CT: return crc_valid(e) ? "CT+" : "CT-";
+        case I2C_LOG_CR: return crc_valid(e) ? "CR+" : "CR!";
+        case I2C_LOG_CT: return crc_valid(e) ? "CT+" : "CT!";
         case I2C_LOG_WA: return "W+";
         case I2C_LOG_WN: return "W-";
-        /* R+ requires both I2C-level ACK (set by the ISR on successful Stop)
-         * AND CRC match on the response payload.  A corrupt response with
-         * an I2C-level ACK is shown as R- so the log matches what
-         * on_*_read_done actually delivered (NULL → caller saw failure). */
-        case I2C_LOG_RA: return crc_valid(e) ? "R+" : "R-";
+        /* Distinguish:
+         *   R+  bus-level ACK on all bytes AND response CRC matches
+         *   R!  bus-level ACK on all bytes BUT response CRC mismatch
+         *       (slave responded with wrong content — often "stale
+         *       g_client_tx leaked through" or "torn shadow read")
+         *   R-  bus-level NACK / abort (address NACK, BTO, collision) */
+        case I2C_LOG_RA: return crc_valid(e) ? "R+" : "R!";
         case I2C_LOG_RN: return "R-";
         default:         return "??";
     }
@@ -57,8 +59,12 @@ static uint8_t append_hex(char* out, uint8_t pos, uint8_t v) {
 }
 
 static void format_entry(char* out, const I2cLogEntry* e) {
-    const char* label = kind_label(e);
     uint8_t pos = 0;
+    /* Per-transaction id (hex, wraps at 0xFF) — WA and RA for a write-
+     * then-read share an id, so the eye can pair them visually. */
+    pos = append_hex(out, pos, e->req_id);
+    out[pos++] = ' ';
+    const char* label = kind_label(e);
     while (*label && pos < LOG_TEXT_MAX) {
         out[pos++] = *label++;
     }

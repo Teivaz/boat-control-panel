@@ -69,6 +69,10 @@ typedef struct {
 #define RETRY_TICK_MS 200u
 #define POLL_TICK_MS 100u
 #define POLL_TICK_SLOW_MS 5000u
+/* Phase offset between the four switching-board polls — keeps each one in
+ * its own scheduler tick so we don't queue a four-shot I²C burst every
+ * POLL_TICK_MS.  4 polls × POLL_STAGGER_MS fits inside POLL_TICK_MS. */
+#define POLL_STAGGER_MS 25u
 #define STALE_THRESHOLD (10000u / POLL_TICK_MS) /* 10 s */
 
 /* All five nav-light bits in CHANNEL_NAV_* layout. */
@@ -157,10 +161,16 @@ void controller_init(TaskController* ctrl) {
     g_channels_age = STALE_THRESHOLD;
 
     task_controller_add(ctrl, TASK_COMM_RETRY, RETRY_TICK_MS, retry_task, 0);
-    task_controller_add(ctrl, TASK_POLL_BATTERY, POLL_TICK_MS, poll_battery_task, 0);
-    task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task, 0);
-    task_controller_add(ctrl, TASK_POLL_SENSORS, POLL_TICK_MS, poll_sensors_task, 0);
-    task_controller_add(ctrl, TASK_POLL_CHANNELS, POLL_TICK_MS, poll_channels_task, 0);
+    /* Stagger the four polls so they don't all queue four I²C ops at the
+     * same scheduler tick.  Each poll's callback calls
+     * task_controller_set_interval(g_ctrl, id, poll_interval_for_state())
+     * on every fire, so the registration `interval_ms` is only the
+     * first-fire delay — after that, all four run at POLL_TICK_MS but
+     * stay phase-offset by POLL_STAGGER_MS. */
+    task_controller_add(ctrl, TASK_POLL_BATTERY,  POLL_STAGGER_MS * 1u, poll_battery_task,  0);
+    task_controller_add(ctrl, TASK_POLL_LEVELS,   POLL_STAGGER_MS * 2u, poll_levels_task,   0);
+    task_controller_add(ctrl, TASK_POLL_SENSORS,  POLL_STAGGER_MS * 3u, poll_sensors_task,  0);
+    task_controller_add(ctrl, TASK_POLL_CHANNELS, POLL_STAGGER_MS * 4u, poll_channels_task, 0);
 }
 
 void comm_on_button_changed_received(CommButtonChanged* event) {

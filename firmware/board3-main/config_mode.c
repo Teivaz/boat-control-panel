@@ -276,10 +276,12 @@ static void enter_edit(uint8_t menu_item) {
     edit_loaded = 0;
     edit_stash = 0;
     screen = CONFIG_SCREEN_EDIT;
-    if (!op_busy) {
-        op_busy = 1;
-        controller_read_config(s->board_addr, s->reg, on_edit_read_done, 0);
-    }
+    /* Always (re)start the read.  Override any leftover op_busy from a
+     * previous edit whose completion never landed (e.g. peer board not
+     * responding) — otherwise that stuck flag would block every
+     * subsequent edit and the screen would sit on "..." forever. */
+    op_busy = 1;
+    controller_read_config(s->board_addr, s->reg, on_edit_read_done, 0);
 }
 
 static void on_edit_read_done(uint8_t ok, uint8_t value, void* ctx) {

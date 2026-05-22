@@ -121,7 +121,10 @@ typedef uint8_t (*I2cSyncColdRxHandler)(uint8_t* data, uint8_t len);
  * activity snapshot the ring from main context via i2c_log_snapshot.
  * kind is one of I2cLogKind; addr is the peer address (0 for client-RX,
  * target address for host ops); data[0..len-1] is the payload (received
- * bytes for CR, tx buffer for WA/WN, rx buffer for RA/RN). */
+ * bytes for CR, tx buffer for WA/WN, rx buffer for RA/RN); req_id is a
+ * driver-assigned per-transaction counter (uint8_t, wraps at 0xFF) so
+ * the two phases of a write-then-read host op share an id and can be
+ * correlated visually. */
 typedef enum {
     I2C_LOG_CR,  /* client received (data = raw message, sender info embedded) */
     I2C_LOG_CT,  /* client transmitted a response (data = framed response + CRC) */
@@ -137,6 +140,7 @@ typedef enum {
 typedef struct {
     uint8_t kind;  /* I2cLogKind */
     uint8_t addr;
+    uint8_t req_id;
     uint8_t len;
     uint8_t data[I2C_LOG_DATA_MAX];
 } I2cLogEntry;

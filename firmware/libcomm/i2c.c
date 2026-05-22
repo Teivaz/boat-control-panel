@@ -36,6 +36,7 @@ typedef struct {
     I2cResult result;
     uint8_t retries;
     uint8_t tx_done;  /* 1 once write phase has completed, for log phase */
+    uint8_t req_id;   /* driver-assigned per-transaction id (wraps at 0xFF) */
     I2cCompletion cb;
 } MessageTask;
 
@@ -66,6 +67,20 @@ static MessageTask g_queue[I2C_QUEUE_SIZE] = {0};
 static volatile uint8_t g_q_head = 0;
 static volatile uint8_t g_q_tail = 0;
 
+/* Monotonic per-transaction id, wraps at 0xFF.  Assigned at i2c_submit
+ * (host transactions), prepend_completed_task (cold-rx delivered as a
+ * pseudo-task), and i2c_set_client_tx (client-mode response).  Lets the
+ * log render correlate WA/RA phases of the same host op via a shared
+ * id, and tag CR/CT in chronological order. */
+static volatile uint8_t g_next_req_id = 0;
+
+static uint8_t next_req_id(void) {
+    INTERRUPT_PUSH;
+    uint8_t id = g_next_req_id++;
+    INTERRUPT_POP;
+    return id;
+}
+
 static void i2c_dma_init(void);
 static void i2c_dma_set_host(MessageTask* task);
 static void i2c_dma_client_rx(void);
@@ -92,7 +107,7 @@ void i2c_set_sync_cold_rx_handler(I2cSyncColdRxHandler handler) {
     g_sync_cold_rx = handler;
 }
 
-static void log_append(I2cLogKind kind, uint8_t addr, const uint8_t* data, uint8_t len) {
+static void log_append(I2cLogKind kind, uint8_t addr, uint8_t req_id, const uint8_t* data, uint8_t len) {
     uint8_t slot;
     if (g_log_count < LOG_CAPACITY) {
         slot = (uint8_t)((g_log_head + g_log_count) & LOG_MASK);
@@ -103,6 +118,7 @@ static void log_append(I2cLogKind kind, uint8_t addr, const uint8_t* data, uint8
     }
     g_log[slot].kind = (uint8_t)kind;
     g_log[slot].addr = addr;
+    g_log[slot].req_id = req_id;
     uint8_t n = (len > I2C_LOG_DATA_MAX) ? (uint8_t)I2C_LOG_DATA_MAX : len;
     g_log[slot].len = n;
     for (uint8_t i = 0; i < n; i++) {
@@ -114,10 +130,10 @@ static void log_host_phase(FSMState phase, I2cResult reason) {
     MessageTask* task = &g_queue[g_q_head];
     if (phase == FSM_HOST_TX) {
         I2cLogKind kind = (reason == I2C_RESULT_OK) ? I2C_LOG_WA : I2C_LOG_WN;
-        log_append(kind, task->addr, task->tx, task->tx_len);
+        log_append(kind, task->addr, task->req_id, task->tx, task->tx_len);
     } else if (phase == FSM_HOST_RX) {
         I2cLogKind kind = (reason == I2C_RESULT_OK) ? I2C_LOG_RA : I2C_LOG_RN;
-        log_append(kind, task->addr, task->rx, task->rx_len);
+        log_append(kind, task->addr, task->req_id, task->rx, task->rx_len);
     }
 }
 
@@ -151,7 +167,7 @@ I2cResult i2c_set_client_tx(uint8_t* tx, uint8_t tx_len) {
     INTERRUPT_POP;
     /* Log the staged response.  tx_len bytes include the trailing CRC
      * appended by comm_respond; the renderer verifies and displays CT+/CT-. */
-    log_append(I2C_LOG_CT, 0, tx, tx_len);
+    log_append(I2C_LOG_CT, 0, next_req_id(), tx, tx_len);
     return I2C_RESULT_OK;
 }
 
@@ -418,9 +434,9 @@ void i2c_poll(void) {
              * read phase failed" (tx_done -> RN).  A pure read-only task
              * (tx_len == 0) also logs RN. */
             if (task->tx_len > 0 && !task->tx_done) {
-                log_append(I2C_LOG_WN, task->addr, task->tx, task->tx_len);
+                log_append(I2C_LOG_WN, task->addr, task->req_id, task->tx, task->tx_len);
             } else if (task->rx_len > 0) {
-                log_append(I2C_LOG_RN, task->addr, task->rx, task->rx_len);
+                log_append(I2C_LOG_RN, task->addr, task->req_id, task->rx, task->rx_len);
             }
             g_q_head = q_next(cur);
         }
@@ -478,10 +494,20 @@ I2cResult i2c_submit(uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t rx_len, 
     task->tx_len = tx_len;
     task->rx_len = rx_len;
     task->cb = cb;
+    task->req_id = g_next_req_id++;
     task->retries = I2C_RETRY_COUNT;
     task->tx_done = 0;
     for (uint8_t i = 0; i < tx_len; i++) {
         task->tx[i] = tx[i];
+    }
+    /* Zero the rx span we're about to read into so that any byte the bus
+     * doesn't actually deliver (DMA short of rx_len, partial completion,
+     * stale slot reuse) reads as 0 — the trampoline's CRC check fails
+     * instead of silently consuming bytes left from a previous use of
+     * this slot.  Otherwise, for fixed-size 2-byte payloads, stale data
+     * could CRC-validate as a valid frame of the wrong type. */
+    for (uint8_t i = 0; i < rx_len; i++) {
+        task->rx[i] = 0;
     }
     task->result = I2C_RESULT_OK;
     task->state = MT_IDLE;
@@ -505,6 +531,7 @@ static void prepend_completed_task(uint8_t addr, const volatile uint8_t* rx, uin
     task->tx_len = 0;
     task->rx_len = rx_len;
     task->cb = g_cold_rx;
+    task->req_id = g_next_req_id++;
     task->retries = 0;
     for (uint8_t i = 0; i < rx_len; i++) {
         task->rx[i] = rx[i];
@@ -722,7 +749,7 @@ static void on_cold_rx_complete(void) {
     if (received == 0) {
         return;
     }
-    log_append(I2C_LOG_CR, 0, (const uint8_t*)g_client_rx, received);
+    log_append(I2C_LOG_CR, 0, next_req_id(), (const uint8_t*)g_client_rx, received);
     /* Invalidate any previous TX response before dispatch. If the request
      * is a read whose write-phase CRC validates, the sync handler will
      * call comm_respond → i2c_set_client_tx, repopulating g_client_tx_len.
