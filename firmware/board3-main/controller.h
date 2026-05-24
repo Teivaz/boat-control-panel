@@ -18,12 +18,6 @@ uint16_t controller_battery_mv(void);
 uint8_t controller_level(uint8_t meter_index); /* 0 = water, 1 = fuel */
 uint8_t controller_sensors(void);
 
-/* Returns 1 when the value has not been updated for > 10 s (switching
- * board unresponsive). UI should show "error" instead of the reading. */
-uint8_t controller_battery_stale(void);
-uint8_t controller_levels_stale(void);
-uint8_t controller_sensors_stale(void);
-
 /* Nav-light state queries — the indicator's refresh task pulls these
  * each frame to decide what to render. All are O(1).
  *   enabled       — slots the user wants lit (target nav bits).

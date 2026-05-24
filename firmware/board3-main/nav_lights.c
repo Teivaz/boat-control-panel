@@ -5,29 +5,29 @@
 /* Each mode has a primary pattern and a fallback. The first pattern whose
  * lights are all enabled wins; otherwise the mode is unrealisable. */
 typedef struct {
-    uint8_t primary;
-    uint8_t fallback;
+    NavLights primary;
+    NavLights fallback;
 } NavPlan;
 
-static const NavPlan plans[] = {
-    [NAV_MODE_OFF] = {0, 0},
-    [NAV_MODE_ANCHORING] = {NAV_LIGHT_ANCHORING, NAV_LIGHT_STEAMING | NAV_LIGHT_STERN},
-    [NAV_MODE_STEAMING] = {NAV_LIGHT_STERN | NAV_LIGHT_BOW | NAV_LIGHT_STEAMING, NAV_LIGHT_BOW | NAV_LIGHT_ANCHORING},
-    [NAV_MODE_RUNNING] = {NAV_LIGHT_STERN | NAV_LIGHT_BOW, NAV_LIGHT_TRICOLOR},
+static const NavPlan k_nav_plan[] = {
+    [NAV_LIGHTS_MODE_OFF] = {0, 0},
+    [NAV_LIGHTS_MODE_ANCHORING] = {(NavLights){.anchoring=1}, (NavLights){.steaming=1, .stern=1}},
+    [NAV_LIGHTS_MODE_STEAMING] = {(NavLights){.stern=1, .bow=1, .steaming=1}, (NavLights){.bow=1, .anchoring=1}},
+    [NAV_LIGHTS_MODE_RUNNING] = {(NavLights){.tricolor=1}, (NavLights){.stern=1, .bow=1}},
 };
 
-NavResolution nav_lights_resolve(NavMode mode, uint8_t enabled_mask) {
+NavResolution nav_lights_resolve(NavLightsMode mode, NavLights available) {
     NavResolution r = {0, 0};
-    if (mode == NAV_MODE_OFF) {
+    if (mode == NAV_LIGHTS_MODE_OFF) {
         return r;
     }
 
-    const NavPlan p = plans[mode];
-    if ((p.primary & enabled_mask) == p.primary) {
+    const NavPlan p = k_nav_plan[mode];
+    if ((p.primary.raw & available.raw) == p.primary.raw) {
         r.lights_mask = p.primary;
         return r;
     }
-    if ((p.fallback & enabled_mask) == p.fallback) {
+    if ((p.fallback.raw & available.raw) == p.fallback.raw) {
         r.lights_mask = p.fallback;
         return r;
     }

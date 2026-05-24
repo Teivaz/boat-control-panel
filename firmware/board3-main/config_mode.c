@@ -62,9 +62,7 @@ static const EditSpec edit_specs[CONFIG_MENU_COUNT - 1u] = {
 };
 
 static volatile uint8_t active;
-static volatile uint8_t raw_last;
-static volatile uint8_t raw_stable;
-static volatile uint8_t stable_ticks;
+static volatile uint8_t g_pin_last;
 
 static volatile uint8_t screen;       /* ConfigScreen */
 static volatile uint8_t menu_cursor;  /* 0..CONFIG_MENU_COUNT-1 */
@@ -108,10 +106,8 @@ void config_mode_init(TaskController* ctrl) {
     edit_stash = 0;
     op_busy = 0;
     working_mask = config_get_nav_enabled_mask();
-    raw_last = PIN_ACTIVE() ? 1 : 0;
-    raw_stable = raw_last;
-    stable_ticks = STABLE_TICKS;
-    if (raw_stable) {
+    g_pin_last = PIN_ACTIVE();
+    if (g_pin_last) {
         enter();
     }
     task_controller_add(ctrl, TASK_CONFIG_MODE, SAMPLE_MS, sample_task, 0);
@@ -153,7 +149,7 @@ uint8_t config_mode_edit_value(void) {
 }
 
 void config_mode_on_action(MenuControl control) {
-    if (!active) {
+    if (!config_mode_active()) {
         return;
     }
     switch (screen) {
@@ -336,7 +332,7 @@ static void enter(void) {
 }
 
 static void exit_config(void) {
-    if (active) {
+    if (config_mode_active()) {
         config_write_byte(CONFIG_ADDR_NAV_ENABLED_MASK, (uint8_t)(working_mask & NAV_LIGHT_ALL));
     }
     active = 0;
@@ -347,20 +343,12 @@ static void sample_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
     uint8_t raw = PIN_ACTIVE() ? 1 : 0;
-    if (raw != raw_last) {
-        raw_last = raw;
-        stable_ticks = 0;
-        return;
-    }
-    if (stable_ticks < STABLE_TICKS) {
-        stable_ticks++;
-        if (stable_ticks == STABLE_TICKS && raw != raw_stable) {
-            raw_stable = raw;
-            if (raw_stable) {
-                enter();
-            } else {
-                exit_config();
-            }
+    if (raw != g_pin_last) {
+        g_pin_last = raw;
+        if (raw) {
+            enter();
+        } else {
+            exit_config();
         }
     }
 }

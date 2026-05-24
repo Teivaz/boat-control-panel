@@ -4,6 +4,7 @@
 #include "libcomm.h"
 #include "libcomm_interface.h"
 #include "task_ids.h"
+#include "config_mode.h"
 
 #include <xc.h>
 
@@ -62,10 +63,6 @@ static Slot g_slots[BUTTON_COUNT];
  * changed. */
 static CommButtonEffect g_effect_l;
 static CommButtonEffect g_effect_r;
-/* Snapshot of the effect submitted on the in-flight write — promoted to
- * g_effect_l/r in the success path of the completion callback. */
-static CommButtonEffect g_next_effect_l;
-static CommButtonEffect g_next_effect_r;
 /* Single in-flight write per side; refresh_task skips a side while its
  * previous write is still on the bus. */
 static uint8_t g_inflight_l;
@@ -76,8 +73,6 @@ void button_fx_init(TaskController* ctrl) {
     g_inflight_r = 0;
     comm_button_effect_init(&g_effect_l);
     comm_button_effect_init(&g_effect_r);
-    comm_button_effect_init(&g_next_effect_l);
-    comm_button_effect_init(&g_next_effect_r);
     for (uint8_t b = 0; b < BUTTON_COUNT; b++) {
         g_slots[b].state = FX_IDLE;
         g_slots[b].deadline_ticks = 0;
@@ -107,35 +102,41 @@ void button_fx_set(ButtonIndex idx, uint16_t value, uint16_t mask) {
      * instead of re-masking. */
     uint16_t masked_value = (uint16_t)(value & mask);
     Slot* slot = &g_slots[idx];
-    if (slot->channel_mask == mask && slot->channel_value == masked_value) {
-        /* Same expectation as last call — don't restart the pending
-         * window. Drop any stale FX_PENDING / FX_ERROR so the steady
-         * colour resumes. */
-        slot->state = FX_IDLE;
-        slot->deadline_ticks = 0;
-    } else {
+    if (slot->channel_mask != mask || slot->channel_value != masked_value || slot->state != FX_IDLE) {
         slot->channel_mask = mask;
         slot->channel_value = masked_value;
-        slot->state = FX_PENDING;
-        slot->deadline_ticks = (uint8_t)(TIMEOUT_MS / TICK_MS);
+        if (masked_value == 0) {
+            // Switching off instantly transitions
+            slot->state = FX_IDLE;
+        }
+        else {
+            slot->state = FX_PENDING;
+            slot->deadline_ticks = (uint8_t)(TIMEOUT_MS / TICK_MS);
+        }
     }
 }
 
 void button_fx_on_channel_state(Channel channels) {
     for (uint8_t b = 0; b < BUTTON_COUNT; b++) {
         Slot* s = &g_slots[b];
-        if (s->state == FX_IDLE) {
-            /* Already idle — no PENDING window to close. Skipping also
-             * means slots that were never armed (mask = value = 0) don't
-             * get spuriously re-touched on every channel update. */
-            continue;
-        }
         uint16_t masked = (uint16_t)((uint16_t)channels & s->channel_mask);
-        if (masked == s->channel_value) {
-            /* Channel reached the expected state — clear PENDING / ERROR
-             * so the base on/off colour resumes on the next refresh. */
-            s->state = FX_IDLE;
-            s->deadline_ticks = 0;
+        uint8_t state_matches = masked == s->channel_value;
+        switch (s->state) {
+        case FX_IDLE:
+            if (!state_matches) {
+                s->state = FX_ERROR;
+            }
+            break;
+        case FX_ERROR:
+            if (state_matches) {
+                s->state = FX_IDLE;
+            }
+            break;
+        case FX_PENDING:
+            if (state_matches) {
+                s->state = FX_IDLE;
+            }
+            break;
         }
     }
 }
@@ -165,7 +166,6 @@ static void refresh_task(TaskId id, void* ctx) {
         if (effects_differ(&effect_l, &g_effect_l)) {
             if (comm_send_button_effect(COMM_ADDRESS_BUTTON_BOARD_L, &effect_l) == I2C_RESULT_OK) {
                 g_inflight_l = 1;
-                g_next_effect_l = effect_l;
             }
         }
     }
@@ -175,24 +175,22 @@ static void refresh_task(TaskId id, void* ctx) {
         if (effects_differ(&effect_r, &g_effect_r)) {
             if (comm_send_button_effect(COMM_ADDRESS_BUTTON_BOARD_R, &effect_r) == I2C_RESULT_OK) {
                 g_inflight_r = 1;
-                g_next_effect_r = effect_r;
             }
         }
     }
 }
 
 void comm_on_button_effect_completion(I2cResult result, uint8_t addr, CommButtonEffect* effect) {
-    (void)effect;
     if (addr == COMM_ADDRESS_BUTTON_BOARD_L) {
+        if (result == I2C_RESULT_OK && effect) {
+            g_effect_l = *effect;
+        }
         g_inflight_l = 0;
-        if (result == I2C_RESULT_OK) {
-            g_effect_l = g_next_effect_l;
-        }
     } else if (addr == COMM_ADDRESS_BUTTON_BOARD_R) {
-        g_inflight_r = 0;
-        if (result == I2C_RESULT_OK) {
-            g_effect_r = g_next_effect_r;
+        if (result == I2C_RESULT_OK && effect) {
+            g_effect_r = *effect;
         }
+        g_inflight_r = 0;
     }
 }
 
@@ -208,10 +206,30 @@ static uint8_t effects_differ(const CommButtonEffect* a, const CommButtonEffect*
  * expansion in controller.c will need to widen this when those panels
  * land. */
 static void build_button_effect(uint8_t button_group, CommButtonEffect* out) {
-    comm_button_effect_init(out);
     if (button_group > 1) {
         return;
     }
+    comm_button_effect_init(out);
+
+    if (config_mode_active()) {
+        if (button_group == 0) {
+            CommButtonOutputEffect fx;
+            fx.mode = COMM_EFFECT_MODE_ENABLED;
+            fx.color = COMM_EFFECT_COLOR_WHITE;
+            comm_button_effect_set(out, 1, fx);
+            fx.mode = COMM_EFFECT_MODE_ENABLED;
+            fx.color = COMM_EFFECT_COLOR_WHITE;
+            comm_button_effect_set(out, 2, fx);
+            fx.mode = COMM_EFFECT_MODE_ENABLED;
+            fx.color = COMM_EFFECT_COLOR_GREEN;
+            comm_button_effect_set(out, 3, fx);
+            fx.mode = COMM_EFFECT_MODE_ENABLED;
+            fx.color = COMM_EFFECT_COLOR_RED;
+            comm_button_effect_set(out, 4, fx);
+        }
+        return;
+    }
+
     uint8_t base = (uint8_t)(button_group << GROUP_BIT_SHIFT);
     for (uint8_t i = 0; i < BUTTONS_PER_GROUP; i++) {
         ButtonIndex button = (ButtonIndex)(base | i);
