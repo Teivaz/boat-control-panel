@@ -33,7 +33,7 @@
  * dispatches them), so no INTERRUPT guards are needed inside this file. */
 
 #define TICK_MS 10u
-#define TIMEOUT_MS 100u
+#define TIMEOUT_MS 1000u
 #define BUTTONS_PER_GROUP 7u
 #define GROUP_BIT_SHIFT 3u /* ButtonIndex encodes its side in bit 3 (L=0, R=8). */
 
@@ -102,7 +102,7 @@ void button_fx_set(ButtonIndex idx, uint16_t value, uint16_t mask) {
      * instead of re-masking. */
     uint16_t masked_value = (uint16_t)(value & mask);
     Slot* slot = &g_slots[idx];
-    if (slot->channel_mask != mask || slot->channel_value != masked_value || slot->state != FX_IDLE) {
+    if (slot->channel_mask != mask || slot->channel_value != masked_value) {
         slot->channel_mask = mask;
         slot->channel_value = masked_value;
         if (masked_value == 0) {

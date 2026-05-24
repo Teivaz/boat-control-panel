@@ -93,12 +93,12 @@ static TaskController* g_ctrl;
 
 static uint16_t interval_for_task(uint8_t task_id) {
     switch (task_id) {
-        case TASK_COMM_RETRY: return 23u;
-        case TASK_POLL_BATTERY: return g_on ? 211u : 2003u;
-        case TASK_POLL_LEVELS: return g_on ? 239u : 2027u;
-        case TASK_POLL_SENSORS: return g_on ? 257u : 2053u;
-        case TASK_POLL_CHANNELS: return g_on ? 181u : 2069u;
-        default: return 199u;
+        case TASK_COMM_RETRY: return 19u;
+        case TASK_POLL_BATTERY: return g_on ? 23u : 211u;
+        case TASK_POLL_LEVELS: return g_on ? 29u : 239u;
+        case TASK_POLL_SENSORS: return g_on ? 31u : 257u;
+        case TASK_POLL_CHANNELS: return g_on ? 37u : 181u;
+        default: return 41u;
     }
 }
 
@@ -341,17 +341,15 @@ static void toggle_relay(Channel channel) {
 /* Same-mode press toggles off; different-mode press switches. The OFF
  * pseudo-mode collapses to "no nav lights" and clears the config error. */
 static void set_nav_light_mode(NavLightsMode mode) {
-    NavLightsMode new_mode;
     if (g_nav_light_mode == mode || mode == NAV_LIGHTS_MODE_OFF) {
-        new_mode = NAV_LIGHTS_MODE_OFF;
+        g_nav_light_mode = NAV_LIGHTS_MODE_OFF;
     }
     else {
-        new_mode = mode;
+        g_nav_light_mode = mode;
     }
     uint8_t cfg_err = 0;
-    uint16_t new_nav_bits = channels_for_nav_mode(new_mode, &cfg_err);
+    uint16_t new_nav_bits = channels_for_nav_mode(g_nav_light_mode, &cfg_err);
 
-    g_nav_light_mode = new_mode;
     g_nav_light_error = cfg_err ? (uint8_t)NAV_LIGHT_ERROR_CONFIG : (uint8_t)NAV_LIGHT_ERROR_NONE;
 
     set_channels((uint16_t)((g_relay_target & ~NAV_MASK_CHANNELS) | new_nav_bits));
@@ -369,7 +367,7 @@ static void set_channels(uint16_t new_target) {
     g_relay_target = new_target;
     for (uint8_t b = 0; b < BUTTON_COUNT; b++) {
         uint16_t m = mask_for_button((ButtonIndex)b);
-        button_fx_set((ButtonIndex)b, (uint16_t)(new_target & m), m);
+        button_fx_set((ButtonIndex)b, new_target, m);
     }
 }
 
