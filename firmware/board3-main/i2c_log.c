@@ -32,18 +32,30 @@ static uint8_t crc_valid(const I2cLogEntry* e) {
 
 static const char* kind_label(const I2cLogEntry* e) {
     switch (e->kind) {
-        case I2C_LOG_CR: return crc_valid(e) ? "CR+" : "CR!";
-        case I2C_LOG_CT: return crc_valid(e) ? "CT+" : "CT!";
-        case I2C_LOG_WA: return "W+";
-        case I2C_LOG_WN: return "W-";
+        case I2C_LOG_CR: return crc_valid(e) ? "c " : "t!";
+        case I2C_LOG_CT: return crc_valid(e) ? "t " : "t!";
+        case I2C_LOG_WA: return "w ";
+
+        case I2C_LOG_WN_BUSY: return "wB";
+        case I2C_LOG_WN_NACK: return "wN";
+        case I2C_LOG_WN_TIMEOUT: return "wT";
+        case I2C_LOG_WN_QUEUE_FULL: return "wQ";
+        case I2C_LOG_WN_BAD_ARG: return "wA";
+
         /* Distinguish:
          *   R+  bus-level ACK on all bytes AND response CRC matches
          *   R!  bus-level ACK on all bytes BUT response CRC mismatch
          *       (slave responded with wrong content — often "stale
          *       g_client_tx leaked through" or "torn shadow read")
          *   R-  bus-level NACK / abort (address NACK, BTO, collision) */
-        case I2C_LOG_RA: return crc_valid(e) ? "R+" : "R!";
-        case I2C_LOG_RN: return "R-";
+        case I2C_LOG_RA: return crc_valid(e) ? "r " : "r!";
+
+        case I2C_LOG_RN_BUSY: return "rB";
+        case I2C_LOG_RN_NACK: return "rN";
+        case I2C_LOG_RN_TIMEOUT: return "rT";
+        case I2C_LOG_RN_QUEUE_FULL: return "rQ";
+        case I2C_LOG_RN_BAD_ARG: return "rA";
+
         default:         return "??";
     }
 }

@@ -129,10 +129,10 @@ static void log_append(I2cLogKind kind, uint8_t addr, uint8_t req_id, const uint
 static void log_host_phase(FSMState phase, I2cResult reason) {
     MessageTask* task = &g_queue[g_q_head];
     if (phase == FSM_HOST_TX) {
-        I2cLogKind kind = (reason == I2C_RESULT_OK) ? I2C_LOG_WA : I2C_LOG_WN;
+        I2cLogKind kind = I2C_LOG_WA + reason;
         log_append(kind, task->addr, task->req_id, task->tx, task->tx_len);
     } else if (phase == FSM_HOST_RX) {
-        I2cLogKind kind = (reason == I2C_RESULT_OK) ? I2C_LOG_RA : I2C_LOG_RN;
+        I2cLogKind kind = reason + I2C_LOG_RA;
         log_append(kind, task->addr, task->req_id, task->rx, task->rx_len);
     }
 }
@@ -440,9 +440,9 @@ void i2c_poll(void) {
              * read phase failed" (tx_done -> RN).  A pure read-only task
              * (tx_len == 0) also logs RN. */
             if (task->tx_len > 0 && !task->tx_done) {
-                log_append(I2C_LOG_WN, task->addr, task->req_id, task->tx, task->tx_len);
+                log_append(I2C_LOG_WA + task->result, task->addr, task->req_id, task->tx, task->tx_len);
             } else if (task->rx_len > 0) {
-                log_append(I2C_LOG_RN, task->addr, task->req_id, task->rx, task->rx_len);
+                log_append(I2C_LOG_RA + task->result, task->addr, task->req_id, task->rx, task->rx_len);
             }
             g_q_head = q_next(cur);
         }
@@ -653,7 +653,7 @@ static void isr_on_transmit_exhausted(void) {
             log_host_phase(FSM_HOST_TX, I2C_RESULT_OK);
             if (task->rx_len > 0) {
                 g_fsm = FSM_HOST_RX;
-                I2C1ADB1 |= 0b1;
+                I2C1ADB1 = (uint8_t)(task->addr << 1) | 0b1;
                 /* Clear RSEN so the 9th-falling of the terminal RX byte
                  * auto-issues Stop (§37.5.1: CNT=0 ∧ RSEN=0) rather than
                  * setting MDR (pause-for-Restart) as RSEN=1 would.  Without

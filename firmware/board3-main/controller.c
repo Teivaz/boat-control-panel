@@ -122,13 +122,7 @@ void controller_init(TaskController* ctrl) {
     g_sensor_state = 0;
 
     task_controller_add(ctrl, TASK_COMM_RETRY, interval_for_task(TASK_COMM_RETRY), retry_task, 0);
-    /* Stagger the four polls so they don't all queue four I²C ops at the
-     * same scheduler tick.  Each poll's callback calls
-     * task_controller_set_interval(g_ctrl, id, poll_interval_for_state())
-     * on every fire, so the registration `interval_ms` is only the
-     * first-fire delay — after that, all four run at POLL_TICK_MS but
-     * stay phase-offset by using prime numbers for interval. */
-    task_controller_add(ctrl, TASK_POLL_BATTERY,  interval_for_task(TASK_POLL_BATTERY), poll_battery_task,  0);
+        task_controller_add(ctrl, TASK_POLL_BATTERY,  interval_for_task(TASK_POLL_BATTERY), poll_battery_task,  0);
     task_controller_add(ctrl, TASK_POLL_LEVELS,   interval_for_task(TASK_POLL_LEVELS), poll_levels_task,   0);
     task_controller_add(ctrl, TASK_POLL_SENSORS,  interval_for_task(TASK_POLL_SENSORS), poll_sensors_task,  0);
     task_controller_add(ctrl, TASK_POLL_CHANNELS, interval_for_task(TASK_POLL_CHANNELS), poll_channels_task, 0);

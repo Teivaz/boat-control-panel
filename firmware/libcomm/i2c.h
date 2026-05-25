@@ -131,9 +131,17 @@ typedef enum {
     I2C_LOG_CR,  /* client received (data = raw message, sender info embedded) */
     I2C_LOG_CT,  /* client transmitted a response (data = framed response + CRC) */
     I2C_LOG_WA,  /* host write acknowledged (data = tx buffer) */
-    I2C_LOG_WN,  /* host write not acknowledged / aborted */
+    I2C_LOG_WN_BUSY,
+    I2C_LOG_WN_NACK,
+    I2C_LOG_WN_TIMEOUT,
+    I2C_LOG_WN_QUEUE_FULL,
+    I2C_LOG_WN_BAD_ARG,
     I2C_LOG_RA,  /* host read acknowledged (data = rx buffer) */
-    I2C_LOG_RN,  /* host read not acknowledged / aborted */
+    I2C_LOG_RN_BUSY,
+    I2C_LOG_RN_NACK,
+    I2C_LOG_RN_TIMEOUT,
+    I2C_LOG_RN_QUEUE_FULL,
+    I2C_LOG_RN_BAD_ARG,
 } I2cLogKind;
 
 #define I2C_LOG_DATA_MAX 9u   /* big enough for the largest framed message
