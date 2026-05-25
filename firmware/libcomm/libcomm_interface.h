@@ -136,22 +136,24 @@ void comm_on_level_mode_completion(I2cResult result, CommMeterMode mode_0, CommM
 /* ============================================================================
  * Adopter-implemented: read response handlers (main-loop context)
  *
- * Called from i2c_poll() when a read response arrives.  On I2C error
- * the parsed-struct pointer is NULL.
+ * Always called from i2c_poll() when a read transaction settles, whether
+ * it succeeded or failed.  `result` carries the outcome (I2C_RESULT_OK on
+ * success, the bus error otherwise, I2C_RESULT_BAD_CRC on a length/CRC
+ * mismatch); the parsed-struct pointer is NULL on any failure.
  *
  * The board must define all of these; use empty stubs for unneeded
  * ones.
  * ============================================================================
  */
 
-void comm_on_button_state_read_response(uint8_t addr, CommButtonState* state);
-void comm_on_button_trigger_read_response(uint8_t addr, CommTriggerConfig* config);
-void comm_on_relay_state_read_response(CommRelayState* state);
-void comm_on_channel_state_read_response(CommChannelState* state);
-void comm_on_battery_read_response(CommBattery* battery);
-void comm_on_levels_read_response(CommLevels* levels);
-void comm_on_level_mode_read_response(CommLevelMode* mode);
-void comm_on_sensors_read_response(CommSensors* sensors);
+void comm_on_button_state_read_response(I2cResult result, uint8_t addr, CommButtonState* state);
+void comm_on_button_trigger_read_response(I2cResult result, uint8_t addr, CommTriggerConfig* config);
+void comm_on_relay_state_read_response(I2cResult result, CommRelayState* state);
+void comm_on_channel_state_read_response(I2cResult result, CommChannelState* state);
+void comm_on_battery_read_response(I2cResult result, CommBattery* battery);
+void comm_on_levels_read_response(I2cResult result, CommLevels* levels);
+void comm_on_level_mode_read_response(I2cResult result, CommLevelMode* mode);
+void comm_on_sensors_read_response(I2cResult result, CommSensors* sensors);
 void comm_on_config_read_response(I2cResult result, uint8_t addr, uint8_t* value);
 
 /* ============================================================================

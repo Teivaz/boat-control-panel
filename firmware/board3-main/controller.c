@@ -166,11 +166,10 @@ void comm_on_channel_changed_received(CommChannelChanged* event) {
     apply_channel_observation(event->current_channels);
 }
 
-void comm_on_channel_state_read_response(CommChannelState* state) {
-    if (!state) {
-        return;
+void comm_on_channel_state_read_response(I2cResult result, CommChannelState* state) {
+    if (result == I2C_RESULT_OK) {
+        apply_channel_observation(state->channels);
     }
-    apply_channel_observation(state->channels);
 }
 
 /* ============================================================================
@@ -440,21 +439,21 @@ static void poll_channels_task(TaskId id, void* ctx) {
  * ============================================================================
  */
 
-void comm_on_battery_read_response(CommBattery* battery) {
-    if (battery) {
+void comm_on_battery_read_response(I2cResult result, CommBattery* battery) {
+    if (result == I2C_RESULT_OK) {
         g_battery_mv = battery->voltage;
     }
 }
 
-void comm_on_levels_read_response(CommLevels* lvl) {
-    if (lvl) {
+void comm_on_levels_read_response(I2cResult result, CommLevels* lvl) {
+    if (result == I2C_RESULT_OK) {
         g_levels[0] = lvl->level_0;
         g_levels[1] = lvl->level_1;
     }
 }
 
-void comm_on_sensors_read_response(CommSensors* sns) {
-    if (sns) {
+void comm_on_sensors_read_response(I2cResult result, CommSensors* sns) {
+    if (result == I2C_RESULT_OK) {
         g_sensor_state = sns->sensors;
     }
 }

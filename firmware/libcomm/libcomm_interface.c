@@ -146,26 +146,34 @@ static void on_button_state_read_done(I2cResult result, uint8_t addr, uint8_t* t
                                       uint8_t rx_len) {
     (void)tx;
     (void)tx_len;
-    if (result != I2C_RESULT_OK || !response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommButtonState))) {
-        comm_on_button_state_read_response(addr, 0);
+    if (result != I2C_RESULT_OK) {
+        comm_on_button_state_read_response(result, addr, 0);
+        return;
+    }
+    if (!response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommButtonState))) {
+        comm_on_button_state_read_response(I2C_RESULT_BAD_CRC, addr, 0);
         return;
     }
     CommButtonState state;
     comm_parse_button_state_response(rx, &state);
-    comm_on_button_state_read_response(addr, &state);
+    comm_on_button_state_read_response(I2C_RESULT_OK, addr, &state);
 }
 
 static void on_button_trigger_read_done(I2cResult result, uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t* rx,
                                         uint8_t rx_len) {
     (void)tx;
     (void)tx_len;
-    if (result != I2C_RESULT_OK || !response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommTriggerConfig))) {
-        comm_on_button_trigger_read_response(addr, 0);
+    if (result != I2C_RESULT_OK) {
+        comm_on_button_trigger_read_response(result, addr, 0);
+        return;
+    }
+    if (!response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommTriggerConfig))) {
+        comm_on_button_trigger_read_response(I2C_RESULT_BAD_CRC, addr, 0);
         return;
     }
     CommTriggerConfig config;
     comm_parse_button_trigger_response(rx, &config);
-    comm_on_button_trigger_read_response(addr, &config);
+    comm_on_button_trigger_read_response(I2C_RESULT_OK, addr, &config);
 }
 
 static void on_relay_state_read_done(I2cResult result, uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t* rx,
@@ -173,13 +181,17 @@ static void on_relay_state_read_done(I2cResult result, uint8_t addr, uint8_t* tx
     (void)addr;
     (void)tx;
     (void)tx_len;
-    if (result != I2C_RESULT_OK || !response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommRelayState))) {
-        comm_on_relay_state_read_response(0);
+    if (result != I2C_RESULT_OK) {
+        comm_on_relay_state_read_response(result, 0);
+        return;
+    }
+    if (!response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommRelayState))) {
+        comm_on_relay_state_read_response(I2C_RESULT_BAD_CRC, 0);
         return;
     }
     CommRelayState state;
     comm_parse_relay_state_response(rx, &state);
-    comm_on_relay_state_read_response(&state);
+    comm_on_relay_state_read_response(I2C_RESULT_OK, &state);
 }
 
 static void on_channel_state_read_done(I2cResult result, uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t* rx,
@@ -187,13 +199,17 @@ static void on_channel_state_read_done(I2cResult result, uint8_t addr, uint8_t* 
     (void)addr;
     (void)tx;
     (void)tx_len;
-    if (result != I2C_RESULT_OK || !response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommChannelState))) {
-        comm_on_channel_state_read_response(0);
+    if (result != I2C_RESULT_OK) {
+        comm_on_channel_state_read_response(result, 0);
+        return;
+    }
+    if (!response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommChannelState))) {
+        comm_on_channel_state_read_response(I2C_RESULT_BAD_CRC, 0);
         return;
     }
     CommChannelState state;
     comm_parse_channel_state_response(rx, &state);
-    comm_on_channel_state_read_response(&state);
+    comm_on_channel_state_read_response(I2C_RESULT_OK, &state);
 }
 
 static void on_battery_read_done(I2cResult result, uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t* rx,
@@ -201,13 +217,17 @@ static void on_battery_read_done(I2cResult result, uint8_t addr, uint8_t* tx, ui
     (void)addr;
     (void)tx;
     (void)tx_len;
-    if (result != I2C_RESULT_OK || !response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommBattery))) {
-        comm_on_battery_read_response(0);
+    if (result != I2C_RESULT_OK) {
+        comm_on_battery_read_response(result, 0);
+        return;
+    }
+    if (!response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommBattery))) {
+        comm_on_battery_read_response(I2C_RESULT_BAD_CRC, 0);
         return;
     }
     CommBattery battery;
     comm_parse_battery_response(rx, &battery);
-    comm_on_battery_read_response(&battery);
+    comm_on_battery_read_response(I2C_RESULT_OK, &battery);
 }
 
 static void on_levels_read_done(I2cResult result, uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t* rx,
@@ -215,13 +235,17 @@ static void on_levels_read_done(I2cResult result, uint8_t addr, uint8_t* tx, uin
     (void)addr;
     (void)tx;
     (void)tx_len;
-    if (result != I2C_RESULT_OK || !response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommLevels))) {
-        comm_on_levels_read_response(0);
+    if (result != I2C_RESULT_OK) {
+        comm_on_levels_read_response(result, 0);
+        return;
+    }
+    if (!response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommLevels))) {
+        comm_on_levels_read_response(I2C_RESULT_BAD_CRC, 0);
         return;
     }
     CommLevels levels;
     comm_parse_levels_response(rx, &levels);
-    comm_on_levels_read_response(&levels);
+    comm_on_levels_read_response(I2C_RESULT_OK, &levels);
 }
 
 static void on_level_mode_read_done(I2cResult result, uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t* rx,
@@ -229,13 +253,17 @@ static void on_level_mode_read_done(I2cResult result, uint8_t addr, uint8_t* tx,
     (void)addr;
     (void)tx;
     (void)tx_len;
-    if (result != I2C_RESULT_OK || !response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommLevelMode))) {
-        comm_on_level_mode_read_response(0);
+    if (result != I2C_RESULT_OK) {
+        comm_on_level_mode_read_response(result, 0);
+        return;
+    }
+    if (!response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommLevelMode))) {
+        comm_on_level_mode_read_response(I2C_RESULT_BAD_CRC, 0);
         return;
     }
     CommLevelMode mode;
     comm_parse_level_mode_response(rx, &mode);
-    comm_on_level_mode_read_response(&mode);
+    comm_on_level_mode_read_response(I2C_RESULT_OK, &mode);
 }
 
 static void on_sensors_read_done(I2cResult result, uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t* rx,
@@ -243,13 +271,17 @@ static void on_sensors_read_done(I2cResult result, uint8_t addr, uint8_t* tx, ui
     (void)addr;
     (void)tx;
     (void)tx_len;
-    if (result != I2C_RESULT_OK || !response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommSensors))) {
-        comm_on_sensors_read_response(0);
+    if (result != I2C_RESULT_OK) {
+        comm_on_sensors_read_response(result, 0);
+        return;
+    }
+    if (!response_crc_ok(rx, rx_len, (uint8_t)sizeof(CommSensors))) {
+        comm_on_sensors_read_response(I2C_RESULT_BAD_CRC, 0);
         return;
     }
     CommSensors sensors;
     comm_parse_sensors_response(rx, &sensors);
-    comm_on_sensors_read_response(&sensors);
+    comm_on_sensors_read_response(I2C_RESULT_OK, &sensors);
 }
 
 static void on_config_read_done(I2cResult result, uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t* rx,

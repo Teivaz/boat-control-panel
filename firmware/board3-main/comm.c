@@ -112,17 +112,21 @@ void comm_on_level_mode_completion(I2cResult result, CommMeterMode mode_0, CommM
  * ============================================================================
  */
 
-void comm_on_button_state_read_response(uint8_t addr, CommButtonState* state) {
+void comm_on_button_state_read_response(I2cResult result, uint8_t addr, CommButtonState* state) {
+    (void)result;
     (void)addr;
     (void)state;
 }
-void comm_on_button_trigger_read_response(uint8_t addr, CommTriggerConfig* config) {
+void comm_on_button_trigger_read_response(I2cResult result, uint8_t addr, CommTriggerConfig* config) {
+    (void)result;
     (void)addr;
     (void)config;
 }
-void comm_on_relay_state_read_response(CommRelayState* state) {
+void comm_on_relay_state_read_response(I2cResult result, CommRelayState* state) {
+    (void)result;
     (void)state;
 }
-void comm_on_level_mode_read_response(CommLevelMode* mode) {
+void comm_on_level_mode_read_response(I2cResult result, CommLevelMode* mode) {
+    (void)result;
     (void)mode;
 }
