@@ -31,16 +31,4 @@ NavLights controller_nav_pending(void);
 NavLights controller_nav_errored(void);
 uint8_t controller_nav_config_error(void);
 
-/* Async UI completions (main context). */
-typedef void (*ControllerOpCompletion)(uint8_t ok, void* ctx);
-typedef void (*ControllerReadCompletion)(uint8_t ok, uint8_t value, void* ctx);
-
-/* Async read/write of any peer board's config byte (e.g. the per-meter
- * level offset calibration on the switching board, or per-side LED
- * brightness on a button board). Used by the menu UI to inspect and
- * adjust runtime parameters. Completion fires in main context.  Only
- * one config R/W op may be in flight at a time. */
-void controller_read_config(uint8_t board_addr, uint8_t address, ControllerReadCompletion cb, void* ctx);
-void controller_write_config(uint8_t board_addr, uint8_t address, uint8_t value, ControllerOpCompletion cb, void* ctx);
-
 #endif /* CONTROLLER_H */

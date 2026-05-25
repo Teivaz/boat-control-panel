@@ -57,7 +57,6 @@ static void apply_channel_observation(uint16_t observed);
 
 static void retry_task(TaskId id, void* ctx);
 
-static uint16_t poll_interval_for_state(void);
 static void poll_battery_task(TaskId id, void* ctx);
 static void poll_levels_task(TaskId id, void* ctx);
 static void poll_sensors_task(TaskId id, void* ctx);
@@ -79,19 +78,12 @@ static uint16_t g_battery_mv;
 static uint8_t g_levels[2];
 static uint8_t g_sensor_state;
 
-/* Single in-flight UI operation. The menu can only have one menu action
- * pending at a time, so a single slot suffices. */
-static struct {
-    ControllerOpCompletion op_cb;
-    ControllerReadCompletion read_cb;
-    void* ctx;
-} g_ui_op;
-
 /* Cached for poll-task callbacks so they can adjust their own interval
  * when the power state changes. */
 static TaskController* g_ctrl;
 
 static uint16_t interval_for_task(uint8_t task_id) {
+    return 2000u + (uint8_t)task_id * 100;
     switch (task_id) {
         case TASK_COMM_RETRY: return 19u;
         case TASK_POLL_BATTERY: return g_on ? 23u : 211u;
@@ -121,11 +113,11 @@ void controller_init(TaskController* ctrl) {
     g_levels[1] = 0;
     g_sensor_state = 0;
 
-    task_controller_add(ctrl, TASK_COMM_RETRY, interval_for_task(TASK_COMM_RETRY), retry_task, 0);
-        task_controller_add(ctrl, TASK_POLL_BATTERY,  interval_for_task(TASK_POLL_BATTERY), poll_battery_task,  0);
-    task_controller_add(ctrl, TASK_POLL_LEVELS,   interval_for_task(TASK_POLL_LEVELS), poll_levels_task,   0);
-    task_controller_add(ctrl, TASK_POLL_SENSORS,  interval_for_task(TASK_POLL_SENSORS), poll_sensors_task,  0);
-    task_controller_add(ctrl, TASK_POLL_CHANNELS, interval_for_task(TASK_POLL_CHANNELS), poll_channels_task, 0);
+    // task_controller_add(ctrl, TASK_COMM_RETRY, interval_for_task(TASK_COMM_RETRY), retry_task, 0);
+    // task_controller_add(ctrl, TASK_POLL_BATTERY,  interval_for_task(TASK_POLL_BATTERY), poll_battery_task,  0);
+    // task_controller_add(ctrl, TASK_POLL_LEVELS,   interval_for_task(TASK_POLL_LEVELS), poll_levels_task,   0);
+    // task_controller_add(ctrl, TASK_POLL_SENSORS,  interval_for_task(TASK_POLL_SENSORS), poll_sensors_task,  0);
+    // task_controller_add(ctrl, TASK_POLL_CHANNELS, interval_for_task(TASK_POLL_CHANNELS), poll_channels_task, 0);
 }
 
 void comm_on_button_changed_received(CommButtonChanged* event) {
@@ -510,75 +502,4 @@ NavLights controller_nav_errored(void) {
 
 uint8_t controller_nav_config_error(void) {
     return (uint8_t)((g_nav_light_error & NAV_LIGHT_ERROR_CONFIG) ? 1u : 0u);
-}
-
-/* ============================================================================
- * UI ops — async menu actions that need to land safely or report back
- * ============================================================================
- */
-
-void controller_read_config(uint8_t board_addr, uint8_t address, ControllerReadCompletion cb, void* ctx) {
-    /* Reading our own config is in-RAM and synchronous; no point routing
-     * through I2C to ourselves.  Fire the cb inline so callers don't need
-     * a special path for local-vs-remote. */
-    if (board_addr == COMM_ADDRESS_MAIN) {
-        if (cb) {
-            cb(1, config_read_byte(address), ctx);
-        }
-        return;
-    }
-    g_ui_op.read_cb = cb;
-    g_ui_op.ctx = ctx;
-    if (comm_send_config_read(board_addr, address) != I2C_RESULT_OK) {
-        g_ui_op.read_cb = 0;
-        if (cb) {
-            cb(0, 0, ctx);
-        }
-    }
-}
-
-void comm_on_config_read_response(uint8_t addr, uint8_t* value) {
-    (void)addr;
-    ControllerReadCompletion cb = g_ui_op.read_cb;
-    void* user_ctx = g_ui_op.ctx;
-    g_ui_op.read_cb = 0;
-    if (cb) {
-        cb(value != 0, value ? *value : 0u, user_ctx);
-    }
-}
-
-void controller_write_config(uint8_t board_addr, uint8_t address, uint8_t value, ControllerOpCompletion cb,
-                             void* ctx) {
-    /* Local writes go to the in-RAM shadow + deferred EEPROM queue
-     * directly — no I2C self-loop.  ok=1 here means "queued"; the
-     * EEPROM flush task drains it later, same trust model as the
-     * remote case (where ok=1 means the peer ACKed but its own EEPROM
-     * commit also runs asynchronously). */
-    if (board_addr == COMM_ADDRESS_MAIN) {
-        config_write_byte(address, value);
-        if (cb) {
-            cb(1, ctx);
-        }
-        return;
-    }
-    g_ui_op.op_cb = cb;
-    g_ui_op.ctx = ctx;
-    if (comm_send_config(board_addr, address, value) != I2C_RESULT_OK) {
-        g_ui_op.op_cb = 0;
-        if (cb) {
-            cb(0, ctx);
-        }
-    }
-}
-
-void comm_on_config_completion(I2cResult result, uint8_t addr, uint8_t config_addr, uint8_t value) {
-    (void)addr;
-    (void)config_addr;
-    (void)value;
-    ControllerOpCompletion cb = g_ui_op.op_cb;
-    void* user_ctx = g_ui_op.ctx;
-    g_ui_op.op_cb = 0;
-    if (cb) {
-        cb(result == I2C_RESULT_OK, user_ctx);
-    }
 }

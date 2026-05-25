@@ -4,6 +4,8 @@
 #include "controller.h"
 #include "libcomm.h"
 #include "task_ids.h"
+#include "libcomm_interface.h"
+#include "i2c.h"
 
 #include <xc.h>
 
@@ -94,6 +96,8 @@ static void handle_edit(MenuControl c);
 static void sample_task(TaskId id, void* ctx);
 static void on_edit_read_done(uint8_t ok, uint8_t value, void* ctx);
 static void on_edit_write_done(uint8_t ok, void* ctx);
+static I2cResult read_config(uint8_t board_addr, uint8_t address);
+static I2cResult write_config(uint8_t board_addr, uint8_t address, uint8_t value);
 
 void config_mode_init(TaskController* ctrl) {
     active = 0;
@@ -255,7 +259,7 @@ static void handle_edit(MenuControl c) {
             }
             op_busy = 1;
             uint8_t to_write = merge_value(s, edit_stash, edit_value);
-            controller_write_config(s->board_addr, s->reg, to_write, on_edit_write_done, 0);
+            write_config(s->board_addr, s->reg, to_write);
             break;
         default:
             break;
@@ -277,20 +281,7 @@ static void enter_edit(uint8_t menu_item) {
      * responding) — otherwise that stuck flag would block every
      * subsequent edit and the screen would sit on "..." forever. */
     op_busy = 1;
-    controller_read_config(s->board_addr, s->reg, on_edit_read_done, 0);
-}
-
-static void on_edit_read_done(uint8_t ok, uint8_t value, void* ctx) {
-    (void)ctx;
-    if (ok) {
-        const EditSpec* s = spec_for(edit_menu_item);
-        if (s) {
-            edit_stash = value;
-            edit_value = extract_value(s, value);
-            edit_loaded = 1;
-        }
-    }
-    op_busy = 0;
+    read_config(s->board_addr, s->reg);
 }
 
 static void on_edit_write_done(uint8_t ok, void* ctx) {
@@ -351,4 +342,43 @@ static void sample_task(TaskId id, void* ctx) {
             exit_config();
         }
     }
+}
+
+static I2cResult read_config(uint8_t board_addr, uint8_t address) {
+    if (board_addr == COMM_ADDRESS_MAIN) {
+        uint8_t value = config_read_byte(address);
+        comm_on_config_read_response(I2C_RESULT_OK, COMM_ADDRESS_MAIN, &value);
+        return I2C_RESULT_OK;
+    }
+    return comm_send_config_read(board_addr, address);
+}
+
+void comm_on_config_read_response(I2cResult result, uint8_t addr, uint8_t* value) {
+    (void)addr;
+    const EditSpec* s = spec_for(edit_menu_item);
+    if (s && result == I2C_RESULT_OK) {
+        edit_stash = *value;
+        edit_value = extract_value(s, *value);
+        edit_loaded = 1;
+    }
+    op_busy = 0;
+}
+
+static I2cResult write_config(uint8_t board_addr, uint8_t address, uint8_t value) {
+    if (board_addr == COMM_ADDRESS_MAIN) {
+        config_write_byte(address, value);
+        comm_on_config_completion(I2C_RESULT_OK, COMM_ADDRESS_MAIN, address, value);
+        return I2C_RESULT_OK;
+    }
+    return comm_send_config(board_addr, address, value);
+}
+
+void comm_on_config_completion(I2cResult result, uint8_t addr, uint8_t config_addr, uint8_t value) {
+    (void)addr;
+    (void)config_addr;
+    (void)value;
+    if (result == I2C_RESULT_OK) {
+        screen = CONFIG_SCREEN_MENU;
+    }
+    op_busy = 0;
 }

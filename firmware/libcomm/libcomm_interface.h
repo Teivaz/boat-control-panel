@@ -152,7 +152,7 @@ void comm_on_battery_read_response(CommBattery* battery);
 void comm_on_levels_read_response(CommLevels* levels);
 void comm_on_level_mode_read_response(CommLevelMode* mode);
 void comm_on_sensors_read_response(CommSensors* sensors);
-void comm_on_config_read_response(uint8_t addr, uint8_t* value);
+void comm_on_config_read_response(I2cResult result, uint8_t addr, uint8_t* value);
 
 /* ============================================================================
  * Adopter-implemented: incoming write handlers (main-loop context)

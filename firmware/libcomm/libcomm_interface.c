@@ -256,13 +256,17 @@ static void on_config_read_done(I2cResult result, uint8_t addr, uint8_t* tx, uin
                                 uint8_t rx_len) {
     (void)tx;
     (void)tx_len;
-    if (result != I2C_RESULT_OK || !response_crc_ok(rx, rx_len, 1 /* value byte */)) {
-        comm_on_config_read_response(addr, 0);
+    if (result != I2C_RESULT_OK) {
+        comm_on_config_read_response(result, addr, 0);
+        return;
+    }
+    if (!response_crc_ok(rx, rx_len, 1 /* value byte */)) {
+        comm_on_config_read_response(I2C_RESULT_BAD_CRC, addr, 0);
         return;
     }
     uint8_t value;
     comm_parse_config_response(rx, &value);
-    comm_on_config_read_response(addr, &value);
+    comm_on_config_read_response(I2C_RESULT_OK, addr, &value);
 }
 
 /* ── Cold-RX dispatchers ───────────────────────────────────────────────

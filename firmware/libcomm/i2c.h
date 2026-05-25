@@ -84,6 +84,7 @@ typedef enum {
     I2C_RESULT_TIMEOUT,    /* software / hardware timeout                */
     I2C_RESULT_QUEUE_FULL, /* i2c_submit rejected — queue full           */
     I2C_RESULT_BAD_ARG,    /* i2c_submit rejected — invalid lengths      */
+    I2C_RESULT_BAD_CRC,
 } I2cResult;
 
 /* Completion callback.  Fired from i2c_poll() (main-loop context) for

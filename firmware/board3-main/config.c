@@ -30,7 +30,7 @@
 /* Default brightness seeded on a virgin device — half intensity, kept
  * in lockstep with board2-buttons' LED_DEFAULT_BRIGHTNESS so the panel
  * lights up at a consistent level after a fresh flash on either board. */
-#define INDICATOR_DEFAULT_BRIGHTNESS 0x7F
+#define INDICATOR_DEFAULT_BRIGHTNESS 0x10
 
 #define WRITE_QUEUE_SIZE 4
 #define WRITE_QUEUE_MASK (WRITE_QUEUE_SIZE - 1)

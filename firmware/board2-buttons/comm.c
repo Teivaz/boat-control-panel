@@ -219,7 +219,8 @@ void comm_on_level_mode_read_response(CommLevelMode* mode) {
 void comm_on_sensors_read_response(CommSensors* sensors) {
     (void)sensors;
 }
-void comm_on_config_read_response(uint8_t addr, uint8_t* value) {
+void comm_on_config_read_response(I2cResult result, uint8_t addr, uint8_t* value) {
+    (void)result;
     (void)addr;
     (void)value;
 }

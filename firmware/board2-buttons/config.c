@@ -36,7 +36,7 @@
 /* Default LED brightness seeded on a virgin device — half intensity, kept
  * in lockstep with board3-main's INDICATOR_DEFAULT_BRIGHTNESS so the panel
  * lights up at a consistent level after a fresh flash on either board. */
-#define LED_DEFAULT_BRIGHTNESS 0x7F
+#define LED_DEFAULT_BRIGHTNESS 0x10
 
 /* Deferred-write queue. Producer: I2C ISR via config_write_byte.
  * Consumer: flush_task (main context). Power-of-two so wrap is a mask. Size
