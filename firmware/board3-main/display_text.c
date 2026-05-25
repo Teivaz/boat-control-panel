@@ -225,7 +225,7 @@ static void render_normal(u8g2_t* g) {
         /* Right-aligned value (skipped in the error case so the bar-side
          * "--- ERROR ---" is unambiguous). For battery, voltage is more
          * actionable than SoC — the bar carries the SoC visually. */
-        if (bar_value <= 100u) {
+        if (bar_value != 255u) {
             if (i == 2) {
                 (void)format_voltage(vbuf, controller_battery_mv());
             } else {
