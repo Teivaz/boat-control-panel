@@ -662,6 +662,7 @@ static void isr_on_transmit_exhausted(void) {
                  * correct ACK/NACK pattern (ACK middle bytes, NACK the
                  * final one) on its own, observed on the wire.  ACKCNT=1
                  * belts-and-braces the terminal NACK. */
+                I2C1CNTL = task->rx_len;
                 I2C1CON0bits.RSEN = 0;
                 I2C1CON1bits.ACKCNT = 1;
                 I2C1CON0bits.S = 1; // Restart (MDR=1 from prior 9th-falling)
@@ -731,13 +732,8 @@ static void isr_on_restart(void) {
     switch(g_fsm) {
         case FSM_IDLE:
             break;
-        case FSM_HOST_RX:
         case FSM_HOST_TX:
-            /* Unexpected restart while we're the host — treat as arbitration
-             * loss / bus glitch; log emitted from i2c_poll on final fail. */
-            g_fsm = FSM_IDLE;
-            disarm_event(I2C_RESULT_BUSY);
-            switch_to_client();
+        case FSM_HOST_RX:
             break;
         case FSM_CLIENT_RX:
             g_fsm = FSM_IDLE;
