@@ -40,6 +40,7 @@
 /* Baud divisor for I2C Fast mode.  The PIC18F I2C host clock is
  * Fosc / (4 * (BAUD + 1)).  At Fosc = 64 MHz:
  *   BAUD = 39 (0x27)  → 400 kHz
+ *   BAUD = 79 (0x4F)  → 200 kHz
  * Fosc / (5 * (BAUD + 1)).  At Fosc = 64 MHz:
  *   BAUD = 127 (0x7F) → 100 kHz
  * Override before compiling if the bus needs a different rate. */
@@ -49,6 +50,7 @@
 
 #if I2C_FME
 #define I2C_BAUD 0x27
+// #define I2C_BAUD 0x4F
 #else
 #define I2C_BAUD 0x7F
 #endif
@@ -70,7 +72,7 @@
 #endif
 
 #ifndef I2C_RETRY_COUNT
-#define I2C_RETRY_COUNT 1
+#define I2C_RETRY_COUNT 2
 #endif
 
 /* ── Types ──────────────────────────────────────────────────────────── */

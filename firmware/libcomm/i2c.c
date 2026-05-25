@@ -388,11 +388,17 @@ void i2c_init(uint8_t addr) {
 
     I2C1BTOC = 0x06;         /* LFINTOSC as BTO clock source */
     I2C1BTObits.TOBY32 = 1;  /* x32 */
-    I2C1BTObits.TOTIME = 35; /* ~35 ms */
+    I2C1BTObits.TOTIME = 20; /* ~20 ms */
 
+    I2C1PIR = 0x00;
+    I2C1ERRbits.BCLIF = 0;
+    I2C1ERRbits.BTOIF = 0;
+    I2C1ERRbits.NACKIF = 0;
     I2C1ERRbits.BCLIE = 1;
     I2C1ERRbits.NACKIE = 1;
     I2C1ERRbits.BTOIE = 1;
+    I2C1STAT1 = 0x00;
+    I2C1STAT1bits.CLRBF = 1;
 
     PIE7bits.I2C1IE = 1;
     PIE7bits.I2C1EIE = 1;
@@ -681,6 +687,8 @@ static void isr_on_transmit_exhausted(void) {
              * the master can't clock the terminal NACK or STOP and the bus
              * hangs until BTO recovers (~36 ms). isr_on_stop /
              * isr_on_restart handle the teardown after the master finishes. */
+            g_client_tx_len = 0;
+            I2C1STAT1bits.CLRBF = 1;
             break;
     }
     I2C1CON0bits.CSTR = 0;
@@ -710,8 +718,11 @@ static void isr_on_nack(void) {
             disarm_event(I2C_RESULT_NACK);
             switch_to_client();
             break;
-        case FSM_CLIENT_RX:
         case FSM_CLIENT_TX:
+            g_client_tx_len = 0;
+            I2C1STAT1bits.CLRBF = 1;
+            break;
+        case FSM_CLIENT_RX:
             break;
     }
 }
@@ -735,6 +746,8 @@ static void isr_on_restart(void) {
             break;
         case FSM_CLIENT_TX:
             g_fsm = FSM_IDLE;
+            g_client_tx_len = 0;
+            I2C1STAT1bits.CLRBF = 1;
             i2c_dma_client_rx();
             break;
     }
@@ -787,6 +800,8 @@ static void isr_on_stop(void) {
             break;
         case FSM_CLIENT_TX:
             g_fsm = FSM_IDLE;
+            g_client_tx_len = 0;
+            I2C1STAT1bits.CLRBF = 1;
             i2c_dma_client_rx();
             break;
     }
@@ -804,6 +819,11 @@ static void isr_on_collision(void) {
             switch_to_client();
             break;
         case FSM_CLIENT_TX:
+            g_fsm = FSM_IDLE;
+            g_client_tx_len = 0;
+            I2C1STAT1bits.CLRBF = 1;
+            i2c_dma_client_rx();
+            break;
         case FSM_CLIENT_RX:
             g_fsm = FSM_IDLE;
             i2c_dma_client_rx();
@@ -823,6 +843,11 @@ static void isr_on_timeout(void) {
         switch_to_client();
         break;
     case FSM_CLIENT_TX:
+        g_fsm = FSM_IDLE;
+        g_client_tx_len = 0;
+        I2C1STAT1bits.CLRBF = 1;
+        i2c_dma_client_rx();
+        break;
     case FSM_CLIENT_RX:
         g_fsm = FSM_IDLE;
         i2c_dma_client_rx();
