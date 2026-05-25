@@ -211,14 +211,17 @@ static void build_button_effect(uint8_t button_group, CommButtonEffect* out) {
     }
     comm_button_effect_init(out);
 
-    if (config_mode_active()) {
+    if (config_mode_active() && controller_power_on()) {
         if (button_group == 0) {
             CommButtonOutputEffect fx;
             fx.mode = COMM_EFFECT_MODE_ENABLED;
             fx.color = COMM_EFFECT_COLOR_WHITE;
+            comm_button_effect_set(out, 0, fx);
+            fx.mode = COMM_EFFECT_MODE_ENABLED;
+            fx.color = COMM_EFFECT_COLOR_BLUE;
             comm_button_effect_set(out, 1, fx);
             fx.mode = COMM_EFFECT_MODE_ENABLED;
-            fx.color = COMM_EFFECT_COLOR_WHITE;
+            fx.color = COMM_EFFECT_COLOR_BLUE;
             comm_button_effect_set(out, 2, fx);
             fx.mode = COMM_EFFECT_MODE_ENABLED;
             fx.color = COMM_EFFECT_COLOR_GREEN;
