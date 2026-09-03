@@ -91,6 +91,17 @@ I2cResult comm_send_channel_changed(uint16_t prev_channels, uint16_t current_cha
                                     uint8_t current_sensors);
 I2cResult comm_send_level_mode(CommMeterMode mode_0, CommMeterMode mode_1);
 
+/* Diagnostic test commands (handled uniformly by every device — see below).
+ *   comm_send_test_echo: write test_echo to `addr`, carrying this device's own
+ *     address (comm_address()) so the target replies with test_echo_response.
+ *   comm_send_test_echo_response: write test_echo_response to `addr` (the
+ *     requester), carrying this device's own address (comm_address()) so the
+ *     requester learns who replied.  Used internally by the dispatcher when a
+ *     test_echo arrives; exposed for symmetry.
+ * Both are fire-and-forget (no completion callback). */
+I2cResult comm_send_test_echo(uint8_t addr, uint8_t value);
+I2cResult comm_send_test_echo_response(uint8_t addr, uint8_t value);
+
 /* ============================================================================
  * Outbound read commands (library-implemented)
  *
@@ -163,6 +174,13 @@ void comm_on_config_read_response(I2cResult result, uint8_t addr, uint8_t* value
  * from i2c_poll() — safe to do non-trivial work, but be aware they run
  * before queued host operations get a chance to start, so heavy work
  * still benefits from being scheduled on a task.
+ *
+ * The diagnostic test commands need no adopter callback — the dispatcher
+ * services them itself: an incoming test_echo auto-sends test_echo_response
+ * back to the requester (main-loop context), and a test_read read-request
+ * auto-stages the echoed value via comm_respond() (ISR context).  A received
+ * test_echo_response is currently dropped; add a callback here if a requester
+ * board needs to observe its own round-trip.
  * ============================================================================
  */
 

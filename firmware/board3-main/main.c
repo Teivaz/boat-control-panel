@@ -83,7 +83,9 @@ void main(void) {
     comm_button_effect_init(&effect);
     comm_button_effect_set(&effect, 1, oe);
 
-    // comm_send_button_effect(COMM_ADDRESS_BUTTON_BOARD_L, &effect);
+    comm_send_config_read(COMM_ADDRESS_SWITCHING, 0x10);
+
+    comm_send_button_effect(COMM_ADDRESS_BUTTON_BOARD_L, &effect);
     while (1) {
         i2c_poll();
         task_controller_poll(&ctrl);

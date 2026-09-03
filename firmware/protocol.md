@@ -51,6 +51,9 @@ Receivers drop any message whose trailing byte doesn't match the computed CRC. P
 | `level_mode` | 0x0A | main → switching board (write) |
 | `level_mode_read` | 0x8A | main → switching board (read) |
 | `sensors_read` | 0x8B | main → switching board (read) |
+| `test_echo` | 0x0C | any → any (write) |
+| `test_echo_response` | 0x0D | any → requester (write) |
+| `test_read` | 0x8C | any → any (read) |
 
 ### Common
 
@@ -76,6 +79,25 @@ The low end of the configuration address space is reserved for universal fields 
 | 0x00 | device_id | read-only | 7-bit I2C address of this device; matches the address used to reach it |
 | 0x01 | hw_revision | read-only | Hardware revision, monotonic per board |
 | 0x02 | sw_revision | read-only | Firmware revision, monotonic per build |
+
+#### Diagnostic test commands
+
+Bus-bring-up / integration-test helpers. Every device services them with no application involvement.
+
+- test_echo - the requester writes its own address and an arbitrary value; the receiver replies with a `test_echo_response` write addressed to that requester, carrying the responder's own address and the same value. The `address` field always identifies the sender, so the requester learns which device answered. Exercises the multi-master write path in both directions (requester and receiver must each act as host).
+  - write byte 0: command - 0x0C
+  - write byte 1: address - requester's own I2C address (where the response is sent)
+  - write byte 2: value - arbitrary value, echoed back unchanged
+
+- test_echo_response - the reply emitted by a device that received a `test_echo`.
+  - write byte 0: command - 0x0D
+  - write byte 1: address - responder's own I2C address
+  - write byte 2: value - the value from the test_echo, unchanged
+
+- test_read - the write phase carries one value byte; the read phase returns that same byte. Exercises the client-TX read-staging path with a single host (no second master needed).
+  - write byte 0: command - 0x8C
+  - write byte 1: value - arbitrary value to be echoed
+  - read byte 0: value - the value from the write phase, unchanged
 
 ### Main board (0x40)
 

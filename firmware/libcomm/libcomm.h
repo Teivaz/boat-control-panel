@@ -56,6 +56,11 @@ typedef enum {
     COMM_LEVEL_MODE_READ = COMM_LEVEL_MODE | 0x80,         /* 0x8A */
     COMM_SENSORS_READ = 0x8B,                              /* main -> switching    */
     COMM_CONFIG_READ = COMM_CONFIG | 0x80,                 /* 0x8E */
+
+    /* Test / diagnostic commands (handled by every device, see libcomm_interface) */
+    COMM_TEST_ECHO = 0x0C,          /* any -> any (write); receiver replies test_echo_response */
+    COMM_TEST_ECHO_RESPONSE = 0x0D, /* receiver -> requester (write) */
+    COMM_TEST_READ = 0x8C,          /* any -> any (read); read phase echoes the write-phase value */
 } CommId;
 
 /* ============================================================================
@@ -234,6 +239,16 @@ typedef struct {
     uint8_t value;
 } CommConfig;
 
+/** test_echo (0x0C) / test_echo_response (0x0D) payload: 2 bytes.
+ *  Diagnostic round-trip.  `address` always carries the *sender's* own
+ *  address: the requester sends test_echo with its address + a value; the
+ *  receiver replies with test_echo_response carrying its own address and the
+ *  same value.  The requester thus learns which device answered. */
+typedef struct {
+    uint8_t address; /* sender's own I2C address */
+    uint8_t value;   /* arbitrary value, echoed back unchanged */
+} CommTestEcho;
+
 /* ============================================================================
  * Universal Message Envelope
  * ============================================================================
@@ -266,6 +281,7 @@ typedef struct __attribute__((packed)) {
         CommLevelMode level_mode;           /* 0x0A: 1 byte  */
         CommSensors sensors;                /* 0x8B: 1 byte  */
         CommConfig config;                  /* 0x0E: 2 bytes */
+        CommTestEcho test_echo;             /* 0x0C/0x0D: 2 bytes */
         uint8_t raw[8];                     /* 7 payload bytes + 1 CRC */
     };
 } CommMessage;
@@ -342,6 +358,18 @@ uint8_t comm_build_config(CommMessage* msg, uint8_t address, uint8_t value);
 /* config_read (0x8E) — main -> any; write phase carries the address byte */
 uint8_t comm_build_config_read(CommMessage* msg, uint8_t address);
 
+/* test_echo (0x0C) — any -> any; `address` is the requester's own address
+ * (where the receiver sends the matching test_echo_response) */
+uint8_t comm_build_test_echo(CommMessage* msg, uint8_t address, uint8_t value);
+
+/* test_echo_response (0x0D) — receiver -> requester; `address` is the
+ * responder's own address so the requester learns who replied */
+uint8_t comm_build_test_echo_response(CommMessage* msg, uint8_t address, uint8_t value);
+
+/* test_read (0x8C) — any -> any; write phase carries the value the read phase
+ * echoes back */
+uint8_t comm_build_test_read(CommMessage* msg, uint8_t value);
+
 /* ============================================================================
  * Inbound payload parsers
  *
@@ -370,6 +398,9 @@ void comm_parse_sensors_response(uint8_t* data, CommSensors* sensors);
 void comm_parse_config_write(uint8_t* data, CommConfig* config);
 void comm_parse_config_read_request(uint8_t* data, uint8_t* address);
 void comm_parse_config_response(uint8_t* data, uint8_t* value);
+void comm_parse_test_echo(uint8_t* data, CommTestEcho* echo); /* test_echo + test_echo_response */
+void comm_parse_test_read_request(uint8_t* data, uint8_t* value);
+void comm_parse_test_read_response(uint8_t* data, uint8_t* value);
 
 /* ============================================================================
  * button_effect helpers

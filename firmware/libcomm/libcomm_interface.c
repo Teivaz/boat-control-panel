@@ -347,6 +347,15 @@ static uint8_t sync_cold_rx_dispatch(uint8_t* data, uint8_t len) {
             }
             break;
 
+        case COMM_TEST_READ:
+            /* Echo the write-phase value straight back as the read response. */
+            if (plen >= 1) {
+                uint8_t value;
+                comm_parse_test_read_request(payload, &value);
+                comm_respond(&value, 1);
+            }
+            break;
+
         case COMM_RELAY_STATE_READ:
             comm_on_relay_state_read_requested();
             break;
@@ -451,6 +460,15 @@ static void cold_rx_dispatch(I2cResult result, uint8_t addr, uint8_t* tx, uint8_
             }
             break;
 
+        case COMM_TEST_ECHO:
+            /* Reply to the requester, echoing its address and value. */
+            if (plen >= 2) {
+                CommTestEcho echo;
+                comm_parse_test_echo(payload, &echo);
+                comm_send_test_echo_response(echo.address, echo.value);
+            }
+            break;
+
         default:
             break;
     }
@@ -512,6 +530,22 @@ I2cResult comm_send_level_mode(CommMeterMode mode_0, CommMeterMode mode_1) {
     CommMessage msg;
     uint8_t len = comm_build_level_mode(&msg, mode_0, mode_1);
     return i2c_submit(COMM_ADDRESS_SWITCHING, (uint8_t*)&msg, len, 0, on_level_mode_done);
+}
+
+/* Diagnostic test commands — fire-and-forget writes (no completion callback). */
+
+I2cResult comm_send_test_echo(uint8_t addr, uint8_t value) {
+    CommMessage msg;
+    uint8_t len = comm_build_test_echo(&msg, comm_address(), value);
+    return i2c_submit(addr, (uint8_t*)&msg, len, 0, 0);
+}
+
+I2cResult comm_send_test_echo_response(uint8_t addr, uint8_t value) {
+    CommMessage msg;
+    /* Payload carries this device's own address so the requester learns who
+     * replied; `addr` is just the destination (the requester). */
+    uint8_t len = comm_build_test_echo_response(&msg, comm_address(), value);
+    return i2c_submit(addr, (uint8_t*)&msg, len, 0, 0);
 }
 
 /* ── Outbound read commands ────────────────────────────────────────────

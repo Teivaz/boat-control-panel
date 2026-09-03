@@ -338,7 +338,7 @@ static FSMState arm_event(void) {
     I2C1ADB1 = (uint8_t)(task->addr << 1);
     if (task->tx_len > 0) {
         I2C1CNTH = 0;
-        I2C1CNTL = task->tx_len;
+        I2C1CNTL = task->tx_len - 1;
         I2C1CON0bits.RSEN = task->rx_len > 0;
         return FSM_HOST_TX;
     }

@@ -92,6 +92,9 @@ static uint8_t expected_body_len(uint8_t id) {
         case COMM_LEVEL_MODE_READ:      return 0;
         case COMM_SENSORS_READ:         return 0;
         case COMM_CONFIG_READ:          return 1; /* address byte */
+        case COMM_TEST_ECHO:            return (uint8_t)sizeof(CommTestEcho);
+        case COMM_TEST_ECHO_RESPONSE:   return (uint8_t)sizeof(CommTestEcho);
+        case COMM_TEST_READ:            return 1; /* value byte (write phase) */
         default:                        return 0xFF;
     }
 }
@@ -377,6 +380,44 @@ void comm_parse_config_read_request(uint8_t* data, uint8_t* address) {
 }
 
 void comm_parse_config_response(uint8_t* data, uint8_t* value) {
+    *value = data[0];
+}
+
+/* ============================================================================
+ * test_echo (0x0C) / test_echo_response (0x0D) / test_read (0x8C) — diagnostics
+ * ============================================================================
+ */
+
+uint8_t comm_build_test_echo(CommMessage* msg, uint8_t address, uint8_t value) {
+    msg->id = COMM_TEST_ECHO;
+    msg->test_echo.address = address;
+    msg->test_echo.value = value;
+    return comm_finalize(msg, (uint8_t)sizeof(CommTestEcho));
+}
+
+uint8_t comm_build_test_echo_response(CommMessage* msg, uint8_t address, uint8_t value) {
+    msg->id = COMM_TEST_ECHO_RESPONSE;
+    msg->test_echo.address = address;
+    msg->test_echo.value = value;
+    return comm_finalize(msg, (uint8_t)sizeof(CommTestEcho));
+}
+
+void comm_parse_test_echo(uint8_t* data, CommTestEcho* echo) {
+    echo->address = data[0];
+    echo->value = data[1];
+}
+
+uint8_t comm_build_test_read(CommMessage* msg, uint8_t value) {
+    msg->id = COMM_TEST_READ;
+    msg->raw[1] = value; /* single write-phase value byte */
+    return comm_finalize(msg, 1);
+}
+
+void comm_parse_test_read_request(uint8_t* data, uint8_t* value) {
+    *value = data[0];
+}
+
+void comm_parse_test_read_response(uint8_t* data, uint8_t* value) {
     *value = data[0];
 }
 

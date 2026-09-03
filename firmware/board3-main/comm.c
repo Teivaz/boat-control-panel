@@ -50,7 +50,8 @@ void comm_on_button_trigger_read_requested(uint8_t button_id) {
     (void)button_id;
 }
 void comm_on_config_read_requested(uint8_t address) {
-    (void)address;
+    uint8_t v = config_read_byte(address);
+    comm_respond(&v, 1);
 }
 void comm_on_relay_state_read_requested(void) {
 }

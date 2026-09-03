@@ -113,7 +113,7 @@ void controller_init(TaskController* ctrl) {
     g_levels[1] = 0;
     g_sensor_state = 0;
 
-    // task_controller_add(ctrl, TASK_COMM_RETRY, interval_for_task(TASK_COMM_RETRY), retry_task, 0);
+    task_controller_add(ctrl, TASK_COMM_RETRY, interval_for_task(TASK_COMM_RETRY), retry_task, 0);
     // task_controller_add(ctrl, TASK_POLL_BATTERY,  interval_for_task(TASK_POLL_BATTERY), poll_battery_task,  0);
     // task_controller_add(ctrl, TASK_POLL_LEVELS,   interval_for_task(TASK_POLL_LEVELS), poll_levels_task,   0);
     // task_controller_add(ctrl, TASK_POLL_SENSORS,  interval_for_task(TASK_POLL_SENSORS), poll_sensors_task,  0);
