@@ -215,7 +215,21 @@ Both states are 2-byte bitmasks transmitted low byte first: byte 0 = bits 0–7,
   - write byte 0: command - 0x0A
   - write byte 1: `[7:4]` = 0, `[3:2]` mode_1, `[1:0]` mode_0
 
-  Mode values: `00` = unknown (default on power-on), `01` = 240–33 Ω, `10` = 0–190 Ω, `11` reserved.
+  Mode values (matching `CommMeterMode` in `libcomm.h` — the wire encoding is
+  the enum value, so these must stay in lockstep):
+
+  | Value | Name | Meaning |
+  |---|---|---|
+  | `00` | `COMM_METER_MODE_CALIBRATION` | Raw Ω passthrough — the reported byte is the calibrated resistance, not a percentage. Selected via the main board's config menu (water/fuel mode items) so the operator can watch the sender's actual resistance while picking the matching `water_cal` / `fuel_cal` byte. |
+  | `01` | `COMM_METER_MODE_0_190` | European, 0–190 Ω; full = high resistance. **Default.** |
+  | `10` | `COMM_METER_MODE_240_33` | American, 240–33 Ω; full = low resistance. |
+  | `11` | — | Reserved. |
+
+  A resistance more than 1.5× beyond the mode's high-resistance end (>360 Ω in
+  `0b10`, >285 Ω in `0b01`) is reported as the over-range sentinel 255 — float
+  disconnected or sender rail open — which the main board renders as an error
+  rather than a level. In `COMM_METER_MODE_CALIBRATION` there is no sentinel:
+  the byte is the raw Ω value clamped to 255, so 255 there means "≥255 Ω".
 
 - level_mode_read - read the operating mode of both level meters
   - write byte 0: command - 0x8A
@@ -236,7 +250,7 @@ Universal addresses 0x00..0x0F are documented in [Common](#common). Device-speci
 | Address | Field | Size | Default | Description |
 |---|---|---|---|---|
 | 0x10 | nav_enabled_mask | 1 | 0x1F | 5-bit mask of physically-installed nav lights — `[0]` anchoring, `[1]` tricolor, `[2]` steaming, `[3]` bow, `[4]` stern. Limits which lights the panel attempts to drive when a nav-mode button is pressed; cleared bits are silently skipped and a mode that requires a missing light raises a config error on the indicator. |
-| 0x11 | indicator_brightness | 1 | 0x7F | Peak per-channel intensity (0..255) for the nav-indicator RGB ring. Re-read each frame so a runtime change takes effect within ~50 ms. |
+| 0x11 | indicator_brightness | 1 | 0x10 | Peak per-channel intensity (0..255) for the nav-indicator RGB ring. Re-read each frame so a runtime change takes effect within ~50 ms. Kept in lockstep with the button board's `led_brightness` so the panel reads uniformly. |
 
 ### Button board configuration (0x44–0x47)
 
@@ -244,7 +258,7 @@ Universal addresses 0x00..0x0F are documented in [Common](#common). Device-speci
 |---|---|---|---|---|
 | 0x10..0x16 | button_trigger[7] | 7 | hold trigger | One CommTriggerConfig (MMEETTTT) per button — same wire format as `button_trigger` command payload. Default mode is `hold` with a 1 ms time on most buttons; the L-board's button 0 defaults to 800 ms. |
 | 0x17..0x1A | button_effect | 4 | disabled / white | Four packed CommButtonEffect bytes (two outputs per byte; upper nibble = odd output, lower nibble = even output) — same wire format as `button_effect` command payload. Default colour is white, mode disabled (LEDs dark). |
-| 0x1B | led_brightness | 1 | 0x7F | Peak per-channel intensity (0..255) for the per-button RGB LEDs. Applied uniformly across R/G/B so hue is preserved; re-read each frame. |
+| 0x1B | led_brightness | 1 | 0x10 | Peak per-channel intensity (0..255) for the per-button RGB LEDs. Applied uniformly across R/G/B so hue is preserved; re-read each frame. Kept in lockstep with the main board's `indicator_brightness` so the panel reads uniformly. |
 
 ### Switching board configuration (0x42)
 
@@ -253,4 +267,4 @@ Universal addresses 0x00..0x0F are documented in [Common](#common). Device-speci
 | 0x10 | water_cal | 1 | 100 | Water-level scale factor — byte the channel reports with a 100 Ω reference applied. The ADC processor inverts the factor when displaying Ω so a tolerance-shifted current source / divider just changes this byte. |
 | 0x11 | fuel_cal | 1 | 100 | Fuel-level scale factor — same calibration semantics as `water_cal`. |
 | 0x12 | battery_cal | 1 | 120 | Battery scale factor — byte the channel reports at a 12000 mV reference, in 100 mV units. |
-| 0x13 | level_mode | 1 | 0x05 | Packed CommLevelMode — `[3:2]` mode_1, `[1:0]` mode_0; same layout as `level_mode` command payload. Persists meter mode across reboot. Default 0x05 = both meters in 240–33 Ω mode. |
+| 0x13 | level_mode | 1 | 0x05 | Packed CommLevelMode — `[3:2]` mode_1, `[1:0]` mode_0; same layout as `level_mode` command payload. Persists meter mode across reboot. Default 0x05 = both meters in 0–190 Ω mode (`COMM_METER_MODE_0_190` in both fields). |

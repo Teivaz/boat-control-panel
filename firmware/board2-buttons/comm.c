@@ -97,10 +97,11 @@ void comm_on_level_mode_received(CommLevelMode* mode) {
 }
 
 /* ============================================================================
- * Adopter callbacks: incoming read-request handlers (main-loop context)
+ * Adopter callbacks: incoming read-request handlers (ISR context)
  *
- * Update the client TX buffer so the response is ready for the next
- * read from this device.
+ * Called from sync_cold_rx_dispatch inside I2C1_ISR, so they must not
+ * block: comm_respond stages the reply before the master's read-phase
+ * address arrives.
  * ============================================================================
  */
 
