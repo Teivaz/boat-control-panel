@@ -172,6 +172,16 @@ I2cResult i2c_set_client_tx(uint8_t* tx, uint8_t tx_len) {
 }
 
 static void i2c_dma_init(void) {
+    /* Aborts are disabled via AIRQEN=0 on every arm, never by parking AIRQ at
+     * 0: DMAnAIRQ holds a *vector number* (DS40002213D Table 16-6) and vector
+     * 0x00 is HLVD, a real peripheral — not a null source.  AIRQ is left at
+     * its 0x00 reset value here purely because AIRQEN gates it.
+     *
+     * Wiring AIRQ to I2C1E (0x3b) would be actively wrong: a terminal NACK is
+     * normal at the end of every host read and client transmit (§37.3.4,
+     * §37.5.8 note 4), and an abort clears DGO, SIRQEN and AIRQEN (§16.3.4.2),
+     * so ordinary successful traffic would silently disarm the channel. */
+
     /* Host TX channel: SFR/GPR -> I2C1TXB, source increments. */
     DMASELECT = DMA_TX_CHANNEL;
     DMAnCON1bits.DMODE = 0b00;
@@ -184,8 +194,7 @@ static void i2c_dma_init(void) {
     DMAnSSZ = 0;
     DMAnSSA = 0;
     DMAnSIRQ = 0x39; /* I2C1TX request */
-    DMAnAIRQ = 0x3b; /* I2C1E */
-    DMAnAIRQ = 0;    /* unwire abort: stale NACK/BTO/BCL must not kill in-flight transfers */
+    DMAnCON0bits.AIRQEN = 0;
     DMAnCON0bits.EN = 1;
 
     /* Host RX channel: I2C1RXB -> GPR, destination increments. */
@@ -200,8 +209,7 @@ static void i2c_dma_init(void) {
     DMAnSSZ = 1;
     DMAnSSA = (uint24_t)&I2C1RXB;
     DMAnSIRQ = 0x38; /* I2C1RX request */
-    DMAnAIRQ = 0x3b; /* I2C1E */
-    DMAnAIRQ = 0;    /* unwire abort: stale NACK/BTO/BCL must not kill in-flight transfers */
+    DMAnCON0bits.AIRQEN = 0;
     DMAnCON0bits.EN = 1;
 
     DMA2PR = 0x02;
@@ -219,7 +227,7 @@ static void i2c_dma_set_host(MessageTask* task) {
         DMAnSSA = (uint24_t)task->tx;
         DMAnSSZ = task->tx_len;
         DMAnCON0bits.SIRQEN = 1;
-        DMAnCON0bits.AIRQEN = 1;
+        DMAnCON0bits.AIRQEN = 0;
         DMAnCON0bits.EN = 1;
     }
     if (task->rx_len) {
@@ -228,7 +236,7 @@ static void i2c_dma_set_host(MessageTask* task) {
         DMAnDSA = (uint16_t)task->rx;
         DMAnDSZ = task->rx_len;
         DMAnCON0bits.SIRQEN = 1;
-        DMAnCON0bits.AIRQEN = 1;
+        DMAnCON0bits.AIRQEN = 0;
         DMAnCON0bits.EN = 1;
     }
     INTERRUPT_POP;
@@ -241,7 +249,7 @@ static void i2c_dma_client_rx(void) {
     DMAnDSA = (uint16_t)g_client_rx;
     DMAnDSZ = I2C_RX_MAX;
     DMAnCON0bits.SIRQEN = 1;
-    DMAnCON0bits.AIRQEN = 1;
+    DMAnCON0bits.AIRQEN = 0;
     DMAnCON0bits.EN = 1;
     INTERRUPT_POP;
 }
@@ -286,6 +294,7 @@ static void i2c_dma_client_tx(void) {
         DMAnSSA = (uint24_t)&g_client_tx[1];
         DMAnSSZ = (uint16_t)(g_client_tx_len - 1u);
         DMAnCON0bits.SIRQEN = 1;
+        DMAnCON0bits.AIRQEN = 0;
         DMAnCON0bits.EN = 1;
     }
     INTERRUPT_POP;
@@ -324,8 +333,17 @@ static void disarm_event(I2cResult reason) {
     DMAnCON0bits.EN = 0;
 }
 
+/* Reset the peripheral's buffer state for the client role and re-arm client RX.
+ *
+ * MODE is deliberately NOT touched: the module stays in Multi-Host 7-bit
+ * (0b110) for its entire life, set once in i2c_init.  Multi-Host is the only
+ * mode where the device is host and client simultaneously (DS40002213D
+ * Table 37-1) — in pure Host mode (0b100) the peripheral performs no client
+ * address matching at all, so every peer that addressed us during a host
+ * transaction would go unanswered.  Staying in 0b110 also keeps I2CxADB1
+ * writable, which pure Client mode (0b0xx) does not (§37.5.15 note 1) —
+ * arm_event depends on that. */
 static void switch_to_client(void) {
-    I2C1CON0bits.MODE = 0b000;
     I2C1CON1bits.ACKCNT = 0;
     I2C1STAT1bits.CLRBF = 1;
     i2c_dma_client_rx();
@@ -351,8 +369,9 @@ static FSMState arm_event(void) {
     return FSM_IDLE;
 }
 
+/* Reset the peripheral's buffer state for the host role.  See
+ * switch_to_client for why MODE is not written here either. */
 static void switch_to_host(void) {
-    I2C1CON0bits.MODE = 0b100;
     I2C1CON1bits.ACKCNT = 0;
     I2C1STAT1bits.CLRBF = 1;
 }
@@ -461,7 +480,21 @@ void i2c_poll(void) {
     }
     if (g_q_head != g_q_tail) {
         MessageTask* task = &g_queue[g_q_head];
-        if (task->state == MT_IDLE && g_fsm == FSM_IDLE) {
+        /* Multi-Host arbitration rule (DS40002213D §37.4.3): "Client hardware
+         * has priority over host hardware in Multi-Host mode.  Host mode
+         * communication can only be initiated when SMA = 0."
+         *
+         * g_fsm alone is not sufficient: it only becomes FSM_CLIENT_RX at
+         * ADRIF, i.e. the 8th falling SCL edge of a matching address
+         * (§37.5.6).  Between another master's START and that edge g_fsm is
+         * still FSM_IDLE, so without the SMA check we would tear down client
+         * mode in the middle of a reception addressed to us.  SMA is set on
+         * that same edge and cleared on any Restart/Stop (§37.5.4), so it
+         * covers the window g_fsm cannot.
+         *
+         * Leaving the task MT_IDLE costs no retry budget — the next
+         * i2c_poll simply tries again once the bus is ours. */
+        if (task->state == MT_IDLE && g_fsm == FSM_IDLE && !I2C1STAT0bits.SMA) {
             switch_to_host();
             g_fsm = arm_event();
             if (g_fsm == FSM_IDLE) {
@@ -607,29 +640,44 @@ static void isr_on_address(void) {
          *   2. i2c_dma_client_tx — writes byte 0 directly to TXB (racing the
          *      peripheral's first TXB->SR move is unreliable, so byte 0 is
          *      off the DMA's critical path) and arms DMA for bytes 1..N-1.
-         *   3. Write CNT = N - 1. The peripheral checks (TXBE && CNT > 0)
-         *      at every 8th SCL falling edge and stretches if true. With CNT
-         *      initialised to N - 1 it decrements to 0 just before the last
-         *      byte's 8th falling — so the last byte's check sees CNT == 0
-         *      and the bus releases cleanly, letting the host clock the 9th
-         *      bit for its terminal NACK + STOP. With CNT = N the last byte
-         *      always stretches until BTO (~36 ms) recovers.
+         *   3. Write CNT = N (the exact byte count).
          *   4. Drop CSTR at end of isr_on_address — peripheral resumes.
          *
-         * Side effect of CNT = N - 1: CNTIF fires after byte N - 2 (not the
-         * last byte). The CLIENT_TX path of isr_on_transmit_exhausted then
-         * runs early; clearing CSTR there is a benign no-op because no
-         * stretch is in effect at that point. End-of-transaction cleanup
-         * happens via PCIF in isr_on_stop, unchanged.
+         * Why CNT must be exactly N, not N - 1 (DS40002213D):
+         *   §37.3.13.4 — "The DMA will continue to load data into I2CxTXB
+         *   until I2CxCNT reaches a zero value. Once I2CxCNT reaches zero and
+         *   the data is transmitted from I2CxTXB, I2CxTXIF will not be set,
+         *   and the DMA will stop loading data."
+         *   §37.3.14.1 — I2CxTXIF is set only when TXBE=1 AND I2CxCNT != 0.
+         *   §37.5.11   — when transmitting, CNT decrements on the 9th falling
+         *                SCL edge, as a byte moves out of TXB.
+         *   §37.3.11.1 — the client-TX stretch check is (TXBE && CNT != 0),
+         *                evaluated on the 8th falling SCL edge.
          *
-         * For N == 1 the initial CNT is 0; the stretch check then trivially
-         * fails on the only byte and the path collapses to the same shape.
+         *   With CNT = N - 1 the counter hits 0 one byte early, TXIF stops
+         *   firing, and the DMA never loads the final byte — which is always
+         *   the CRC appended by comm_respond.  The master then clocks stale
+         *   shift-register content in its place and rejects the frame.  TXU
+         *   cannot flag this because §37.5.2 note 3 only sets TXU when CSD=1,
+         *   and we run CSD=0.
+         *
+         *   CNT = N does NOT stretch the last byte: CNT is decremented for
+         *   byte k on byte k-1's 9th falling edge, so by the time the final
+         *   byte's 8th falling edge arrives CNT is already 0 and the stretch
+         *   condition is false.  The bus releases cleanly and the host clocks
+         *   the 9th bit for its terminal NACK + STOP.
+         *
+         * CNTIF now fires on the last byte (not one early), so the CLIENT_TX
+         * path of isr_on_transmit_exhausted runs at end-of-message.  It must
+         * not clear g_client_tx_len before the byte is on the wire — see the
+         * note there.  End-of-transaction cleanup happens via PCIF in
+         * isr_on_stop, unchanged.
          *
          * CNT write is safe here because CSTR is stretching (DS §37.5.11). */
         I2C1STAT1bits.CLRBF = 1;
         i2c_dma_client_tx();
         I2C1CNTH = 0;
-        I2C1CNTL = (uint8_t)(g_client_tx_len - 1u);
+        I2C1CNTL = g_client_tx_len;
         I2C1CON1bits.ACKDT = 0;
     }
     else if (I2C1STAT0bits.R) {
@@ -682,14 +730,21 @@ static void isr_on_transmit_exhausted(void) {
         case FSM_CLIENT_RX:
             break;
         case FSM_CLIENT_TX:
-            /* CNTIF fires once per client-TX when the last planned byte is
-             * shifted out. The peripheral auto-stretches SCL on CNT=0, so
-             * fall through to the unconditional CSTR=0 below — otherwise
-             * the master can't clock the terminal NACK or STOP and the bus
-             * hangs until BTO recovers (~36 ms). isr_on_stop /
-             * isr_on_restart handle the teardown after the master finishes. */
-            g_client_tx_len = 0;
-            I2C1STAT1bits.CLRBF = 1;
+            /* With CNT = N (see isr_on_address), CNTIF fires on the 9th
+             * falling SCL edge as the LAST byte moves TXB -> shift register
+             * (§37.5.6) — i.e. while that byte is still being clocked onto the
+             * wire over the following eight SCL periods.
+             *
+             * So do NOT tear down here.  CLRBF would clear I2CxTXB (§37.5.5)
+             * and zeroing g_client_tx_len mid-transmission only invites a race
+             * with a fast repeated-start read.  The stretch condition
+             * (TXBE && CNT != 0) is already false at this point, so no stretch
+             * is in effect and the unconditional CSTR=0 below is a harmless
+             * no-op that costs nothing to keep.
+             *
+             * Teardown belongs to isr_on_stop / isr_on_restart, which already
+             * clear g_client_tx_len, CLRBF and re-arm the client RX DMA once
+             * the master has actually finished the transaction. */
             break;
     }
     I2C1CON0bits.CSTR = 0;
