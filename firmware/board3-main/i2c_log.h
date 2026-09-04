@@ -16,7 +16,7 @@
  * config-mode screen for debugging.  Defaults off — the overlay would
  * otherwise crowd the right half of every config screen. */
 #ifndef I2C_LOG_VISIBLE
-#define I2C_LOG_VISIBLE 1
+#define I2C_LOG_VISIBLE 0
 #endif
 
 void i2c_log_init(void);
