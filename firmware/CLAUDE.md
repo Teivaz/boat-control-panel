@@ -27,7 +27,23 @@ To clean:
 make clean CONF=default
 ```
 
-There are no unit tests — validation is done via hardware flashing with a PICkit/ICD programmer.
+## Tests
+
+Host-side unit tests live in `tests/` and need no PIC, simulator or Docker:
+
+```sh
+cd tests && make          # build and run all six binaries
+```
+
+The PIC's special function registers are mocked (`tests/mocks/xc.h` plus a
+generated `pic_sfr_mock.h`), so every module compiles and runs under a desktop
+compiler. Interrupt handlers become ordinary functions a test calls directly.
+Board binaries link a fake I2C driver (`tests/mocks/i2c_fake.c`) so a board can
+be driven from both ends of the bus; the two real drivers are covered in their
+own binaries. See `tests/README.md`.
+
+Hardware validation via PICkit/ICD flashing is still required for anything
+timing- or bus-level.
 
 ## Repository Structure
 
