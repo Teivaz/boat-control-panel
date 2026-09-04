@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.2 Operating Modes — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C7788A51-A155-4AAF-B8EA-D1563AC69EF4.html"/>
+<link rel="next" href="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF.html"/>
+<link rel="up" href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li>32.2 Operating Modes</li></ol>
+  <div class="sib"><span>← <a href="GUID-C7788A51-A155-4AAF-B8EA-D1563AC69EF4.html" rel="prev">Fundamental Operation</a></span><span><a href="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF.html" rel="next">Half Bridge Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__GUID-E4668750-7648-41ED-8DBA-1C04986C973C" style="">32.2 Operating Modes</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-00000033" data-ofbid="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-00000033">The CWG module can operate in six different modes, as specified by
+            the <a class="- topic/xref xref" href="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B.html#ID-00000013" title="CWG Mode"><span><span>MODE</span></span></a>
+            bits:</p>
+        <ul class="- topic/ul ul" id="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__UL_Y32_JQM_PGB" data-ofbid="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__UL_Y32_JQM_PGB">
+            <li class="- topic/li li" id="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-00000034" data-ofbid="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-00000034">Half Bridge mode</li>
+            <li class="- topic/li li" id="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-00000036" data-ofbid="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-00000036">Push-Pull mode</li>
+            <li class="- topic/li li" id="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-00000038" data-ofbid="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-00000038">Asynchronous Steering mode</li>
+            <li class="- topic/li li" id="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-0000003A" data-ofbid="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-0000003A">Synchronous Steering mode</li>
+            <li class="- topic/li li" id="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-0000003C" data-ofbid="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-0000003C">Full Bridge mode, Forward</li>
+            <li class="- topic/li li" id="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-0000003E" data-ofbid="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-0000003E">Full Bridge mode, Reverse</li>
+        </ul>
+        <p class="- topic/p p" id="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-00000040" data-ofbid="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-00000040">All modes accept a single pulse input and provide up to four
+            outputs as described in the following sections.</p>
+        <p class="- topic/p p" id="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-00000041" data-ofbid="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-00000041">All modes include auto-shutdown control as described in the <a class="- topic/xref xref" href="GUID-6197F686-AADF-4660-B041-D3FEDC67F6B4.html">Auto-Shutdown</a>
+            section.</p>
+        <div class="- topic/note note important note_important" id="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-0000004A" data-ofbid="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F__ID-42115-0000004A"><span class="note__title">Important:</span> Except as noted for <a class="- topic/xref xref" href="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44.html">Full Bridge
+                mode</a>, mode changes must only be performed while <a class="- topic/xref xref" href="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B.html#ID-00000005" title="CWG Enable"><span><span>EN</span></span></a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>.</div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF.html">32.2.1 Half Bridge Mode</a></li><li><a href="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A.html">32.2.2 Push-Pull Mode</a></li><li><a href="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44.html">32.2.3 Full Bridge Mode</a></li><li><a href="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289.html">32.2.4 Steering Modes</a></li></ul>
+</nav>
+</body>
+</html>

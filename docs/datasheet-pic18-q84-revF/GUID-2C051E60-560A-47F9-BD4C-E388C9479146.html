@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>25.2.1 Internal Clock Source — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1112BF5B-AFCF-4767-8F54-B15A47EB6DDE.html"/>
+<link rel="next" href="GUID-3685ACC5-7F86-4739-A07E-845182F5DF45.html"/>
+<link rel="up" href="GUID-1112BF5B-AFCF-4767-8F54-B15A47EB6DDE.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html">25 TMR1 - Timer1 Module with Gate Control</a></li><li><a href="GUID-1112BF5B-AFCF-4767-8F54-B15A47EB6DDE.html">25.2 Clock Source Selection</a></li><li>25.2.1 Internal Clock Source</li></ol>
+  <div class="sib"><span>← <a href="GUID-1112BF5B-AFCF-4767-8F54-B15A47EB6DDE.html" rel="prev">Clock Source Selection</a></span><span><a href="GUID-3685ACC5-7F86-4739-A07E-845182F5DF45.html" rel="next">External Clock Source</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__GUID-584C6AC9-39BF-49C1-BFD4-FF5E3E8BD173" style="">25.2.1 Internal Clock Source</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__ID-42141-00000C43" data-ofbid="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__ID-42141-00000C43">When the internal clock source is selected, the <a class="- topic/xref xref" href="GUID-DA7CA9B2-C0D3-44BE-8A93-3861BF3EE7DF.html#GUID-DA7CA9B2-C0D3-44BE-8A93-3861BF3EE7DF" title="TMRx">TMRx</a> register will increment on multiples of F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> as
+            determined by the Timer1 prescaler.</p>
+        <p class="- topic/p p" id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__ID-42141-00000C46" data-ofbid="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__ID-42141-00000C46">When the F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> internal clock source is selected, the
+            TMRx register value will increment by four counts every instruction clock cycle. Due to
+            this condition, a two LSB error in resolution will occur when reading the TMRx value. To
+            utilize the full resolution of Timer1, an asynchronous input signal must be used to gate
+            the Timer1 clock input.</p>
+        <div class="- topic/note note important note_important" id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__ID-42141-00000C6C" data-ofbid="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__ID-42141-00000C6C"><span class="note__title">Important:</span> In Counter mode, a falling edge must be
+            registered by the counter prior to the first incrementing rising edge after any one or
+            more of the following conditions:<ul class="- topic/ul ul" id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__UL_KKT_SPC_11B" data-ofbid="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__UL_KKT_SPC_11B">
+                <li class="- topic/li li" id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__ID-42141-00000C6E" data-ofbid="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__ID-42141-00000C6E">Timer1 enabled after POR</li>
+                <li class="- topic/li li" id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__ID-42141-00000C71" data-ofbid="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__ID-42141-00000C71">Write to TMRxH or TMRxL</li>
+                <li class="- topic/li li" id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__ID-42141-00000C73" data-ofbid="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__ID-42141-00000C73">Timer1 is disabled</li>
+                <li class="- topic/li li" id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__ID-42141-00000C76" data-ofbid="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__ID-42141-00000C76">Timer1 is disabled (<a class="- topic/xref xref" href="GUID-3797E08A-EF99-449F-8DE3-136F554E8BAF.html#ID-0000008E" title="Timer On"><span><span>ON</span></span></a>
+                    = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) when TxCKI is high, then Timer1 is enabled (<a class="- topic/xref xref" href="GUID-3797E08A-EF99-449F-8DE3-136F554E8BAF.html#ID-0000008E" title="Timer On"><span><span>ON</span></span></a>
+                    = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) when TxCKI is low. Refer to the figure below.</li>
+            </ul></div>
+        <figure class="- topic/fig fig fignone" id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__FIG_CCR_MWN_WGB" data-ofbid="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__FIG_CCR_MWN_WGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 25-2. <span id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__GUID-F71490F6-C3CC-45B0-952B-4750BE9127BB" class="fig--title">Timer1 Incrementing Edge</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-8A8DE188-D6CE-4CDD-8061-CCF34600E9AF-high.pdf#toolbar=1" width="450" height="130.52173913043475"></iframe></span>
+            <div class="- topic/note note notype note_notype" id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__GUID-FB139E52-22C2-4A2F-8599-6AE37DCB11CB" data-ofbid="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__GUID-FB139E52-22C2-4A2F-8599-6AE37DCB11CB"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__OL_KQK_NWN_WGB" data-ofbid="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__OL_KQK_NWN_WGB">
+                    <li class="- topic/li li" id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__GUID-260FCAB0-6B13-4661-A667-15DA937B5B68" data-ofbid="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__GUID-260FCAB0-6B13-4661-A667-15DA937B5B68">Arrows indicate counter increments.</li>
+                    <li class="- topic/li li" id="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__GUID-0CD9F96F-1F88-4655-A950-72570CCF6119" data-ofbid="GUID-2C051E60-560A-47F9-BD4C-E388C9479146__GUID-0CD9F96F-1F88-4655-A950-72570CCF6119">In Counter mode, a falling edge must be registered by the counter prior to
+                        the first incrementing rising edge of the clock.</li>
+                </ol>
+            </div>
+        </figure>
+    </div>
+
+</body>
+</html>

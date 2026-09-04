@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>14.2.3 BOR Controlled by Software — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0F7555B6-4A6E-4415-A70A-B1D0D4C47893.html"/>
+<link rel="next" href="GUID-62CD76E0-CE2A-42E4-ABCE-D2C32CE46D95.html"/>
+<link rel="up" href="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F.html">14 Resets</a></li><li><a href="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B.html">14.2 Brown-out Reset (BOR)</a></li><li>14.2.3 BOR Controlled by Software</li></ol>
+  <div class="sib"><span>← <a href="GUID-0F7555B6-4A6E-4415-A70A-B1D0D4C47893.html" rel="prev">BOR Is Off in Sleep</a></span><span><a href="GUID-62CD76E0-CE2A-42E4-ABCE-D2C32CE46D95.html" rel="next">BOR Is Always Off</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-3610216A-E5B3-4AE3-AB84-F30DA513AE9C__GUID-4D69BC98-0A88-4311-A296-455A2CF171C7" style="">14.2.3 BOR Controlled by Software</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-3610216A-E5B3-4AE3-AB84-F30DA513AE9C__ID-42138-000001E1" data-ofbid="GUID-3610216A-E5B3-4AE3-AB84-F30DA513AE9C__ID-42138-000001E1">When the BOREN Configuration bits are programmed to <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-3610216A-E5B3-4AE3-AB84-F30DA513AE9C__ID-42138-000001E2">‘b01</code>, the BOR is controlled by the <a class="- topic/xref xref" href="GUID-0B5C669E-78D7-481C-8AC5-F8B9965DABFC.html#ID-00000005" title="Software Brown-out Reset Enable">SBOREN</a> bit. The device start-up is not delayed by the BOR Ready condition or
+            the V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> level.</p>
+        <p class="- topic/p p" id="GUID-3610216A-E5B3-4AE3-AB84-F30DA513AE9C__ID-42138-000001E4" data-ofbid="GUID-3610216A-E5B3-4AE3-AB84-F30DA513AE9C__ID-42138-000001E4">BOR protection begins as soon as the BOR circuit is ready. The
+            status of the BOR circuit is reflected in the <a class="- topic/xref xref" href="GUID-0B5C669E-78D7-481C-8AC5-F8B9965DABFC.html#ID-0000000F" title="Brown-out Reset Circuit Ready Status">BORRDY</a> bit.</p>
+        <p class="- topic/p p" id="GUID-3610216A-E5B3-4AE3-AB84-F30DA513AE9C__ID-42138-000001E5" data-ofbid="GUID-3610216A-E5B3-4AE3-AB84-F30DA513AE9C__ID-42138-000001E5">BOR protection selected by SBOREN bit is unchanged by Sleep.</p>
+    </div>
+
+</body>
+</html>

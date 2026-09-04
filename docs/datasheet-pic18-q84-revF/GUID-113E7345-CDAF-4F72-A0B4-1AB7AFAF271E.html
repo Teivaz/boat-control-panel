@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>27.1.6.1 Timer Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html"/>
+<link rel="next" href="GUID-C3300C35-E5CA-4A0E-9161-EA705B4B9742.html"/>
+<link rel="up" href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3.html">27 SMT - Signal Measurement Timer</a></li><li><a href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html">27.1 SMT Operation</a></li><li><a href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html">27.1.6 Modes of Operation</a></li><li>27.1.6.1 Timer Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html" rel="prev">Modes of Operation</a></span><span><a href="GUID-C3300C35-E5CA-4A0E-9161-EA705B4B9742.html" rel="next">Gated Timer Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-113E7345-CDAF-4F72-A0B4-1AB7AFAF271E__GUID-05111509-880E-452E-B46F-DBBD0B177F2E" style="">27.1.6.1 Timer Mode</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">Timer mode is the basic mode of operation where the SMTxTMR register is used
+            as a 24-bit timer. No data acquisition takes place in this mode. The timer increments as
+            long as the GO bit has been set by software. No SMT window or SMT signal events affect
+            the GO bit. Everything is synchronized to the SMT clock source. When the timer
+            experiences a period match (SMTxTMR = SMTxPR), the SMTxTMR register is reset and the
+            period match interrupt is set. Refer to the figure below.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-113E7345-CDAF-4F72-A0B4-1AB7AFAF271E__FIG_RDP_TWY_1BB" data-ofbid="GUID-113E7345-CDAF-4F72-A0B4-1AB7AFAF271E__FIG_RDP_TWY_1BB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 27-3. <span id="GUID-113E7345-CDAF-4F72-A0B4-1AB7AFAF271E__GUID-B24F369D-AF38-4D99-9862-DE24F65205EC" class="fig--title">Timer Mode Timing Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-833A9ECF-4A9A-4C95-9BDF-D1B55B33B9C0-high.pdf#toolbar=1" width="450" height="1471.505288852726"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

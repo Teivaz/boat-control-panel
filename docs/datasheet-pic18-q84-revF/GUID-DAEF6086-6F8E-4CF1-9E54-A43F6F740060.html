@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.12 Error Handling — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DA4D7AC7-C1F4-4160-A3DF-D7CDD47B1157.html"/>
+<link rel="next" href="GUID-EFCBD576-D3E5-43D8-BCAB-7520CB41B35D.html"/>
+<link rel="up" href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li>38.12 Error Handling</li></ol>
+  <div class="sib"><span>← <a href="GUID-DA4D7AC7-C1F4-4160-A3DF-D7CDD47B1157.html" rel="prev">Interrupt Flags</a></span><span><a href="GUID-EFCBD576-D3E5-43D8-BCAB-7520CB41B35D.html" rel="next">Bus Diagnostic Registers</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-DAEF6086-6F8E-4CF1-9E54-A43F6F740060__GUID-5849C733-A7F7-4EA3-83A5-EEBB722F4982" style="">38.12 Error Handling</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">Every CAN controller checks the messages on the bus for the following
+            errors: bit, stuff, CRC, form and ACK errors. Whenever the controller detects an error,
+            an error frame is transmitted that deletes the message on the bus. Error frames are
+            always signaled using the nominal bit rate.</p>
+        <p class="- topic/p p">Error detection and fault confinement are described in the ISO11898-1:2015. CxTREC
+            contains the error counters TEC and REC (TERRCNTx, RERRCNTx). CxTREC contains the Error
+            Warning and Error state bits. TEC and REC increment and decrement according to
+            ISO11898-1:2015 specifications.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-DAEF6086-6F8E-4CF1-9E54-A43F6F740060__FIG_K5X_YFK_Q3B"><span>Figure 38-47</span></a> illustrates the different Error states of
+            the CAN FD Protocol module. The module starts in the Error Active state. If the TEC or
+            REC exceeds 127, the module transitions to the Error Passive state. If the TEC exceeds
+            255, the module will transition to the Bus Off state.</p>
+        <p class="- topic/p p">The module transmits active error frames when in an Error Active state. It will transmit
+            passive error frames while in an Error Passive state. When the module is in bus Off, the
+            CxTX pin is always driven high and no dominant bits are transmitted.</p>
+        <p class="- topic/p p">To avoid the module from transitioning to the Error Passive state, the module will alert
+            the application when the TEC or REC reaches 96, using the CERRIF Interrupt Flag (see
+                <a class="- topic/xref xref" href="GUID-742F8D44-8645-48F3-B861-8C49E3549F94.html#GUID-742F8D44-8645-48F3-B861-8C49E3549F94__GUID-9784ED3F-58CB-449A-98DF-1BC4C53DFBC9">CAN Bus Error Interrupt (CERRIF)</a>). This allows the application
+            to take action before it enters the Error Passive state.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-DAEF6086-6F8E-4CF1-9E54-A43F6F740060__FIG_K5X_YFK_Q3B" data-ofbid="GUID-DAEF6086-6F8E-4CF1-9E54-A43F6F740060__FIG_K5X_YFK_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-47. <span id="GUID-DAEF6086-6F8E-4CF1-9E54-A43F6F740060__GUID-CA5794EF-BD2B-4606-8CE8-FE69FD6DFACE" class="fig--title">Error States</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-DAEF6086-6F8E-4CF1-9E54-A43F6F740060__IMAGE_L5X_YFK_Q3B" src="GUID-CE39699A-1EF0-4558-86D3-0B8A490C05B2-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p">The error-free message counter, together with the error counters and error flags, can be
+            used to determine the quality of the bus.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-EFCBD576-D3E5-43D8-BCAB-7520CB41B35D.html">38.12.1 Bus Diagnostic Registers</a></li><li><a href="GUID-C3FCE377-6576-4F9A-9D6B-9D98C83D3773.html">38.12.2 Recovery from Bus Off State</a></li></ul>
+</nav>
+</body>
+</html>

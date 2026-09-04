@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.2.2 BUSY Bit — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7D7846F7-2FF3-48DC-A189-5DA968B26CC8.html"/>
+<link rel="next" href="GUID-348F54FD-8138-4C74-AC65-C7C2BE5908E2.html"/>
+<link rel="up" href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html">36.2 SPI Operation</a></li><li>36.2.2 BUSY Bit</li></ol>
+  <div class="sib"><span>← <a href="GUID-7D7846F7-2FF3-48DC-A189-5DA968B26CC8.html" rel="prev">Enabling and Disabling the SPI Module</a></span><span><a href="GUID-348F54FD-8138-4C74-AC65-C7C2BE5908E2.html" rel="next">Transmit and Receive FIFOs</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-1AE219A5-3DD8-4EA9-8B1C-18771A892FF1" style="">36.2.2 BUSY Bit</h1>
+<div class="- topic/body body">
+<div class="- topic/p p">While a data transfer is in progress, the SPI hardware sets the <a class="- topic/xref xref" href="GUID-D60A9AB9-68EF-4F33-8387-7BA9792E0965.html#GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B" title="SPI Module Busy Status(1)"><span><span>BUSY</span></span></a> bit. This bit can be polled by the user to determine the current
+            status of the SPI module and to know when a communication is complete. The following
+            registers and bits will not be changed by software while the BUSY bit is set:<ul class="- topic/ul ul" id="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__UL_ORM_BVG_SFB" data-ofbid="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__UL_ORM_BVG_SFB">
+                <li class="- topic/li li" id="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-2EF7453F-9318-4CCD-BC2A-6B4F8538D896" data-ofbid="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-2EF7453F-9318-4CCD-BC2A-6B4F8538D896">SPIxTCNT</li>
+                <li class="- topic/li li" id="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-72A5719C-B68E-4282-B276-BA08E43E7A64" data-ofbid="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-72A5719C-B68E-4282-B276-BA08E43E7A64">SPIxTWIDTH</li>
+                <li class="- topic/li li" id="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-2EB221F5-C947-485E-9A76-83DAA9D84086" data-ofbid="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-2EB221F5-C947-485E-9A76-83DAA9D84086">SPIxCON2</li>
+                <li class="- topic/li li" id="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-EC3C8F5C-35E2-46B8-8D33-3DB91A332DD5" data-ofbid="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-EC3C8F5C-35E2-46B8-8D33-3DB91A332DD5">The <a class="- topic/xref xref" href="GUID-9E7E903C-D64D-4CAE-9342-243EC9029553.html#BITFIELD_DQY_N5F_RFB" title="Clear Buffer Control"><span><span>CLB</span></span></a> bit</li>
+            </ul></div>
+        <div class="- topic/note note important note_important" id="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-2ADAC403-DD16-4E21-BCD8-8AD5AD0A80DE" data-ofbid="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-2ADAC403-DD16-4E21-BCD8-8AD5AD0A80DE"><span class="note__title">Important:</span> 
+            <ol class="- topic/ol ol" id="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__OL_YN2_NVG_SFB" data-ofbid="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__OL_YN2_NVG_SFB">
+                <li class="- topic/li li" id="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-7FF84B83-9CBE-4D27-9DB0-2E62FEBE57B8" data-ofbid="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-7FF84B83-9CBE-4D27-9DB0-2E62FEBE57B8">The BUSY bit is subject to
+                    synchronization delay of up to two instruction cycles. The user must wait for it
+                    to set after loading the transmit buffer (SPIxTXB register) before using it to
+                    determine the status of the SPI module.</li>
+                <li class="- topic/li li" id="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-B5B83CE6-33EE-48FB-B5E1-6FA510F3F771" data-ofbid="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009__GUID-B5B83CE6-33EE-48FB-B5E1-6FA510F3F771">It is also not recommended to
+                    read SPIxTCNT while the BUSY bit is set, as the value in the registers may not
+                    be a reliable indicator of the transfer counter. Use the <a class="- topic/xref xref" href="GUID-28CA1CAA-8734-4F85-8A9D-5B7892702B4A.html#BITFIELD_TC3_3JF_RFB" title="Transfer Counter is Zero Interrupt Flag"><span><span>TCZIF</span></span></a> bit to accurately determine that the transfer
+                    counter has reached zero.</li>
+            </ol>
+        </div>
+</div>
+
+</body>
+</html>

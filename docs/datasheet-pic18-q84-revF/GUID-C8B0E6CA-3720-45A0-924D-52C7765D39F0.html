@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.1 I2C Features — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html"/>
+<link rel="next" href="GUID-D4EA6193-4947-4F4D-BAB7-7FDFEC870B3B.html"/>
+<link rel="up" href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li>37.1 I2C Features</li></ol>
+  <div class="sib"><span>← <a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html" rel="prev">I2C - Inter-Integrated Circuit Module</a></span><span><a href="GUID-D4EA6193-4947-4F4D-BAB7-7FDFEC870B3B.html" rel="next">I2C Terminology</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-CA1C56DE-BF25-44BA-A746-04F59BD2F27D" style="">37.1 I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Features</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C supports the following modes and features:</p>
+        <ul class="- topic/ul ul" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__UL_YKZ_BHW_JGB" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__UL_YKZ_BHW_JGB">
+            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-EB76DA25-4966-4257-B7DE-33E74D4847E7" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-EB76DA25-4966-4257-B7DE-33E74D4847E7">Modes<ul class="- topic/ul ul" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__UL_ZKZ_BHW_JGB" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__UL_ZKZ_BHW_JGB">
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-D0F10057-6695-442B-9885-C44F112D6E9E" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-D0F10057-6695-442B-9885-C44F112D6E9E">Host mode</li>
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-ABB7CC61-AF84-4B99-B742-9C6637CB84B3" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-ABB7CC61-AF84-4B99-B742-9C6637CB84B3">Client mode</li>
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-3AD0BA5D-F436-4A4B-81CC-A9837DF008E8" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-3AD0BA5D-F436-4A4B-81CC-A9837DF008E8">Multi-Host mode</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-AEC06FE5-B2D1-45B6-8CD1-FA9A5A25F740" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-AEC06FE5-B2D1-45B6-8CD1-FA9A5A25F740">Features<ul class="- topic/ul ul" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__UL_ALZ_BHW_JGB" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__UL_ALZ_BHW_JGB">
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-71E9DDE8-CDD6-4F29-8AB7-8902D5BE5555" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-71E9DDE8-CDD6-4F29-8AB7-8902D5BE5555">Supports Standard mode (100
+                        kHz), Fast mode (400 kHz) and Fast mode Plus (1 MHz) modes of operation</li>
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-4661837F-30C7-4609-9F3D-1458C3041E9C" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-4661837F-30C7-4609-9F3D-1458C3041E9C">Dedicated Address, Receive,
+                        and Transmit buffers</li>
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-C9F2FFC7-A486-4124-90A0-98BEF2621DC2" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-C9F2FFC7-A486-4124-90A0-98BEF2621DC2">Up to four unique Client
+                        addresses</li>
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-4C86E786-B707-43ED-BDDC-28494E16853A" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-4C86E786-B707-43ED-BDDC-28494E16853A">General Call addressing</li>
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-10F6CC4B-F9FA-4B54-A4D7-BA86AF872FF8" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-10F6CC4B-F9FA-4B54-A4D7-BA86AF872FF8">7-bit and 10-bit addressing
+                        with optional masking</li>
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-525C4745-740E-4AA5-928C-C762FF1BE73C" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-525C4745-740E-4AA5-928C-C762FF1BE73C">Interrupts for:<ul class="- topic/ul ul" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__UL_BLZ_BHW_JGB" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__UL_BLZ_BHW_JGB">
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-A2973812-5FC2-42FE-BB4A-E2FCD16CC912" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-A2973812-5FC2-42FE-BB4A-E2FCD16CC912">Start condition</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-DEC5930C-4611-42EF-BBD7-5D0E9554480C" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-DEC5930C-4611-42EF-BBD7-5D0E9554480C">Restart
+                                condition</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-9ACAEEF9-DA55-4216-8E59-0AEDEC175A94" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-9ACAEEF9-DA55-4216-8E59-0AEDEC175A94">Stop condition</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-9D6B82D8-DA59-45EB-BF74-A53DB87768E0" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-9D6B82D8-DA59-45EB-BF74-A53DB87768E0">Address match</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-378C8B88-2211-491E-BF5B-9B129D4BC609" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-378C8B88-2211-491E-BF5B-9B129D4BC609">Data Write</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-E4F3400D-1A6D-4906-9CB7-A144333F05F9" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-E4F3400D-1A6D-4906-9CB7-A144333F05F9">Acknowledge
+                                Status</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-BD5A072C-4347-4B7F-97BD-BBC53C525BFF" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-BD5A072C-4347-4B7F-97BD-BBC53C525BFF">NACK detection</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-776BEF9F-3A1C-4812-9BD2-9A55F31FBCA0" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-776BEF9F-3A1C-4812-9BD2-9A55F31FBCA0">Data Byte Count</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-5904E300-E22F-4E12-84CD-3F33DAB8EDEF" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-5904E300-E22F-4E12-84CD-3F33DAB8EDEF">Bus Collision</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-658BEE4C-0146-48DA-89CB-78788D12773F" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-658BEE4C-0146-48DA-89CB-78788D12773F">Bus Time-out</li>
+                        </ul></li>
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-D586DCD3-0FBB-4E09-A79B-B0B25DF42782" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-D586DCD3-0FBB-4E09-A79B-B0B25DF42782">Clock Stretching for:<ul class="- topic/ul ul" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__UL_CLZ_BHW_JGB" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__UL_CLZ_BHW_JGB">
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-C242C5EA-F218-4FEF-922F-E31A3BF45347" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-C242C5EA-F218-4FEF-922F-E31A3BF45347">RX buffer full</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-C5F8D571-60EE-4206-A310-4130BB824C97" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-C5F8D571-60EE-4206-A310-4130BB824C97">TX buffer empty</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-62BFA7E8-B10A-49C4-AFD6-6FD111259053" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-62BFA7E8-B10A-49C4-AFD6-6FD111259053">Incoming address
+                                match</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-D28F811D-235F-45AB-8454-BC71FB6AF713" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-D28F811D-235F-45AB-8454-BC71FB6AF713">Data Write</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-0A0520D8-6E2F-4625-966E-D46C32F82DF2" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-0A0520D8-6E2F-4625-966E-D46C32F82DF2">Acknowledge
+                                Status</li>
+                        </ul></li>
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-0608A7B9-297F-4C72-B204-DF287886EEE2" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-0608A7B9-297F-4C72-B204-DF287886EEE2">Bus Collision Detection with
+                        Arbitration</li>
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-535E33B2-CB73-46BC-ACEA-DC3803C1797D" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-535E33B2-CB73-46BC-ACEA-DC3803C1797D">Bus Time-out Detection<ul class="- topic/ul ul" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__UL_YV1_P4J_43B" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__UL_YV1_P4J_43B">
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-0375D5EA-21E2-485A-B386-BA9847F9DD8C" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-0375D5EA-21E2-485A-B386-BA9847F9DD8C">Selectable clock
+                                sources</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-ED553957-7949-4740-B22F-34DCA7247D1D" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-ED553957-7949-4740-B22F-34DCA7247D1D">Clock prescaler</li>
+                        </ul></li>
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-C40FDE45-4FFA-4CE0-B2FC-646879A4D970" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-C40FDE45-4FFA-4CE0-B2FC-646879A4D970">Selectable Serial Data (SDA)
+                        Hold Time </li>
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-122813D2-9D51-44D7-AF4E-6235D090ED56" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-122813D2-9D51-44D7-AF4E-6235D090ED56">Dedicated I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Pad
+                        (I/O) Control<ul class="- topic/ul ul" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__UL_DLZ_BHW_JGB" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__UL_DLZ_BHW_JGB">
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-3628987B-C052-45F5-A28F-573A38E8AE55" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-3628987B-C052-45F5-A28F-573A38E8AE55">Standard GPIO or
+                                    I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C-specific slew rate control</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-47A43F1C-7258-49AE-88AA-3603CF239288" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-47A43F1C-7258-49AE-88AA-3603CF239288">Selectable
+                                    I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C pull-up levels</li>
+                            <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-BF1158EB-4B80-4EDB-93C9-B84CD0B8CC65" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-BF1158EB-4B80-4EDB-93C9-B84CD0B8CC65">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C-specific, SMBus 2.0/3.0, or standard GPIO input
+                                threshold level selections</li>
+                        </ul></li>
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-0489726F-12AF-4832-9C83-4F8C0EDED100" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-0489726F-12AF-4832-9C83-4F8C0EDED100">Integrated Direct Memory
+                        Access (DMA) support</li>
+                    <li class="- topic/li li" id="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-723B4073-6859-48DD-BD55-0566CFFB6D9D" data-ofbid="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0__GUID-723B4073-6859-48DD-BD55-0566CFFB6D9D">Remappable pin locations
+                        using Peripheral Pin Select (PPS)</li>
+                </ul></li>
+        </ul>
+    </div>
+
+</body>
+</html>

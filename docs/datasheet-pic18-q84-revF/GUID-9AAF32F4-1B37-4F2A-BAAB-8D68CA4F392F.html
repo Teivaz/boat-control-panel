@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.5.10 I2CxBAUD — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1104B90B-16AC-4A43-BC76-816D7C449473.html"/>
+<link rel="next" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html"/>
+<link rel="up" href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html">37.5 Register Definitions: I2C Control</a></li><li>37.5.10 I2CxBAUD</li></ol>
+  <div class="sib"><span>← <a href="GUID-1104B90B-16AC-4A43-BC76-816D7C449473.html" rel="prev">I2CxCLK</a></span><span><a href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" rel="next">I2CxCNT</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-9AAF32F4-1B37-4F2A-BAAB-8D68CA4F392F__GUID-A549B57F-F500-4510-8F3D-77CFC9CAA433" style="">37.5.10  I2CxBAUD</h1><section id="GUID-CB7B67FA-354A-4DBE-82B6-5DBB6CBFF8CB" class="- topic/section reference/section sidsc-register/registerDescription ">I2C Baud Rate
+                Prescaler<div class="- topic/note note notype note_notype endnote" id="GUID-9AAF32F4-1B37-4F2A-BAAB-8D68CA4F392F__GUID-7FB2A97B-E9A5-4F93-B308-1531ADD63B54" data-ofbid="GUID-9AAF32F4-1B37-4F2A-BAAB-8D68CA4F392F__GUID-7FB2A97B-E9A5-4F93-B308-1531ADD63B54"><span class="note__title">Note:</span> It is recommended to write this register only when the module is Idle (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code> or <a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_GRY_CQP_LGB" title="Client Mode Active Status">SMA</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) or when the module is clock
+                stretching (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> or <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>).</div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>I2CxBAUD</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x029D</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-9AAF32F4-1B37-4F2A-BAAB-8D68CA4F392F__GUID-7ECC3D2E-367F-4E65-BD77-5F1C32FF0760" data-ofbid="GUID-9AAF32F4-1B37-4F2A-BAAB-8D68CA4F392F__GUID-7ECC3D2E-367F-4E65-BD77-5F1C32FF0760"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-9AAF32F4-1B37-4F2A-BAAB-8D68CA4F392F"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="8">BAUD[7:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-CB7B67FA-354A-4DBE-82B6-5DBB6CBFF8CB" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-8B5D60A3-2FC9-4891-8369-4D14FBBBC21C__GUID-FD73A96E-175B-4C32-8410-91211985AD37" id="GUID-8B5D60A3-2FC9-4891-8369-4D14FBBBC21C">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-8B5D60A3-2FC9-4891-8369-4D14FBBBC21C__GUID-FD73A96E-175B-4C32-8410-91211985AD37" style=""> Bits 7:0 – BAUD[7:0] <span>Baud Rate Prescaler
+            Selection</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-8B5D60A3-2FC9-4891-8369-4D14FBBBC21C__GUID-89A33F63-16BD-417E-927F-90884D4F1FA9" data-ofbid="GUID-8B5D60A3-2FC9-4891-8369-4D14FBBBC21C__GUID-89A33F63-16BD-417E-927F-90884D4F1FA9"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-8B5D60A3-2FC9-4891-8369-4D14FBBBC21C__GUID-E145A6DF-66EE-4A62-BB71-9313F1B9DB6E">n</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-8B5D60A3-2FC9-4891-8369-4D14FBBBC21C__GUID-8564CBAD-1A94-4893-BD22-DFC996090CD8">Prescaled I2C Clock Frequency (F<sub class="+ topic/ph hi-d/sub ph sub">PRECLK</sub>) = <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                                <mrow>
+                                    <mfrac>
+                                        <mrow>
+                                            <mi mathvariant="bold-italic">I</mi>
+                                            <mn mathvariant="bold-italic">2</mn>
+                                            <mi mathvariant="bold-italic">C</mi>
+                                            <mi mathvariant="bold-italic">x</mi>
+                                            <mi mathvariant="bold-italic">C</mi>
+                                            <mi mathvariant="bold-italic">L</mi>
+                                            <mi mathvariant="bold-italic">K</mi>
+                                        </mrow>
+                                        <mrow>
+                                            <mo mathvariant="bold-italic">(</mo>
+                                            <mi mathvariant="bold-italic">B</mi>
+                                            <mi mathvariant="bold-italic">A</mi>
+                                            <mi mathvariant="bold-italic">U</mi>
+                                            <mi mathvariant="bold-italic">D</mi>
+                                            <mo mathvariant="bold-italic">⁢</mo>
+                                            <mtext mathvariant="bold-italic"> </mtext>
+                                            <mo mathvariant="bold-italic">+</mo>
+                                            <mtext mathvariant="bold-italic"> </mtext>
+                                            <mn mathvariant="bold-italic">1</mn>
+                                            <mo mathvariant="bold-italic">)</mo>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </math></td>
+                </tr></tbody></table>
+        </div>
+    </article>It is recommended to write this register only when the module is Idle (MMAHost Mode Active             Status = 0 or SMAClient Mode Active             Status = 0) or when the module is clock
+                stretching (CSTR             Client Clock Stretching(3)          = 1 or MDR             Host Data Request (Host pause)          = 1).
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.10.2 Software Generated Shutdown — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-AB36425C-8263-4F44-9563-BE71F0FC5576.html"/>
+<link rel="next" href="GUID-73C2BE7A-8C5D-4E8C-B045-A795FE1E34E1.html"/>
+<link rel="up" href="GUID-6197F686-AADF-4660-B041-D3FEDC67F6B4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li><a href="GUID-6197F686-AADF-4660-B041-D3FEDC67F6B4.html">32.10 Auto-Shutdown</a></li><li>32.10.2 Software Generated Shutdown</li></ol>
+  <div class="sib"><span>← <a href="GUID-AB36425C-8263-4F44-9563-BE71F0FC5576.html" rel="prev">Shutdown</a></span><span><a href="GUID-73C2BE7A-8C5D-4E8C-B045-A795FE1E34E1.html" rel="next">External Input Source</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-6B7E62D2-06F8-480F-AF12-489AC6550E63__GUID-80906BA1-0D21-446E-8BA3-EF37BCF86367" style="">32.10.2 
+Software Generated Shutdown</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p" id="GUID-6B7E62D2-06F8-480F-AF12-489AC6550E63__ID-42115-00000246" data-ofbid="GUID-6B7E62D2-06F8-480F-AF12-489AC6550E63__ID-42115-00000246">Setting the <a class="- topic/xref xref" href="GUID-AA068E9E-929B-4A65-997C-47FC96B43629.html#ID-00000090" title="Auto-Shutdown Event Status(1,2)">SHUTDOWN</a> bit will force the CWG into the Shutdown state.</div>
+        <p class="- topic/p p" id="GUID-6B7E62D2-06F8-480F-AF12-489AC6550E63__ID-42115-00000247" data-ofbid="GUID-6B7E62D2-06F8-480F-AF12-489AC6550E63__ID-42115-00000247">When the auto-restart is disabled, the Shutdown state will persist
+            as long as the SHUTDOWN bit is set.</p>
+        <p class="- topic/p p" id="GUID-6B7E62D2-06F8-480F-AF12-489AC6550E63__ID-42115-00000248" data-ofbid="GUID-6B7E62D2-06F8-480F-AF12-489AC6550E63__ID-42115-00000248">When auto-restart is enabled, the SHUTDOWN bit will clear
+            automatically and resume operation on the next rising edge event. The SHUTDOWN bit
+            indicates when a Shutdown condition exists. The bit may be set or cleared in software or
+            by hardware.</p>
+    </div>
+
+</body>
+</html>

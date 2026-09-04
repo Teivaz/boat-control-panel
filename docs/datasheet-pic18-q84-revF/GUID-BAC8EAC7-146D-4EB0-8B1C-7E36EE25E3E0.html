@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>40.4 HLVD Start-Up Time — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-81DEED0A-B370-4496-A73F-8DEAD194C51E.html"/>
+<link rel="next" href="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F.html"/>
+<link rel="up" href="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95.html">40 HLVD - High/Low-Voltage Detect</a></li><li>40.4 HLVD Start-Up Time</li></ol>
+  <div class="sib"><span>← <a href="GUID-81DEED0A-B370-4496-A73F-8DEAD194C51E.html" rel="prev">Current Consumption</a></span><span><a href="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F.html" rel="next">Applications</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__GUID-90A91C55-0AE0-47BA-AB64-6AB4546C29FA" style="">40.4 HLVD Start-Up Time</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__ID-42124-00000040" data-ofbid="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__ID-42124-00000040">If the HLVD or other circuits using the internal voltage reference
+         are disabled to lower the device’s current consumption, the reference voltage circuit will
+         require time to become stable before a Low- or High-Voltage condition can be reliably
+         detected. This start-up time, T<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__ID-42124-000003BA">FVRST</sub>, is an interval that
+         is independent of device clock speed. It is specified in the <strong class="+ topic/ph hi-d/b ph b">“Electrical
+            Specifications”</strong> chapter of the device specific data sheet.</p>
+      <p class="- topic/p p" id="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__ID-42124-00000045" data-ofbid="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__ID-42124-00000045">The HLVD interrupt flag is not enabled until T<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__ID-42124-000003BB">FVRST</sub> has expired and a stable reference voltage is
+         reached. For this reason, brief excursions beyond the set point may not be detected during
+         this interval (see the figures below).</p>
+      <figure class="- topic/fig fig fignone" id="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__ID-42124-0000004A" data-ofbid="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__ID-42124-0000004A"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 40-2. <span id="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__GUID-38A9DCCF-043F-44E1-BC07-CDFD412EA14E" class="fig--title">Low-Voltage Detect Operation (INTL =
+               <code class="+ topic/ph pr-d/codeph ph codeph">1</code>)</span></span></figcaption>
+         
+         <span class=""><img class="- topic/image image" id="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__IMAGE_FCT_P5J_11B" src="GUID-41644A46-03F4-4CF8-9765-10A1AA0C621F-high.svg"/></span>
+      </figure>
+      <figure class="- topic/fig fig fignone" id="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__ID-42124-0000004F" data-ofbid="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__ID-42124-0000004F"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 40-3. <span id="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__GUID-4941CEB7-F5DF-4396-B978-A89F8218DCDD" class="fig--title">High-Voltage Detect Operation (INTH =
+               <code class="+ topic/ph pr-d/codeph ph codeph">1</code>)</span></span></figcaption>
+         
+         <span class=""><img class="- topic/image image" id="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0__IMAGE_AQW_Q5J_11B" src="GUID-9312F15D-DB0B-4C47-B76F-75CC35E98BA1-high.svg"/></span>
+      </figure>
+   </div>
+
+</body>
+</html>

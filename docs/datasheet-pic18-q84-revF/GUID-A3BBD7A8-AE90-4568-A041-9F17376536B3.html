@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.8.1 Delayed Receive Interrupt — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-931A27F4-D58D-440C-A6D6-E30F9681BB4F.html"/>
+<link rel="next" href="GUID-F19C980D-B2C3-4290-AEB3-DE26CFEB34FC.html"/>
+<link rel="up" href="GUID-931A27F4-D58D-440C-A6D6-E30F9681BB4F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-931A27F4-D58D-440C-A6D6-E30F9681BB4F.html">35.8 Stop Bits</a></li><li>35.8.1 Delayed Receive Interrupt</li></ol>
+  <div class="sib"><span>← <a href="GUID-931A27F4-D58D-440C-A6D6-E30F9681BB4F.html" rel="prev">Stop Bits</a></span><span><a href="GUID-F19C980D-B2C3-4290-AEB3-DE26CFEB34FC.html" rel="next">Operation After FIFO Overflow</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-A3BBD7A8-AE90-4568-A041-9F17376536B3__GUID-212E2521-206D-4FF2-880E-6C276AB68B8C" style="">35.8.1 Delayed Receive Interrupt</h1>
+<div class="- topic/body body">
+<div class="- topic/p p">When operating in Half Duplex mode, where the microcontroller needs to reverse the transceiver
+      direction after a reception, it may be more convenient to hold off the UxRXIF interrupt until
+      the end of the Stop bits to avoid line contention. The user selects when the UxRXIF interrupt
+      occurs with the <a class="- topic/xref xref" href="GUID-2A8CC206-1569-40FD-9221-4BB29D97CE3C.html#BITFIELD_XWQ_NRL_BBB" title="Stop Bit Detection Mode">STPMD</a> bit. When
+      STPMD is ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span>’, the UxRXIF interrupt occurs at the end of the last Stop bit.
+      When STPMD is ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span>’, the UxRXIF interrupt occurs when the received byte is
+      stored in the receive FIFO. When <a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_K3M_SSL_BBB" title="Stop Bit Mode Control(1)"><span><span>STP</span></span></a> =
+        <span class="+ topic/keyword sw-d/cmdname keyword cmdname">10</span>, the store operation is performed in the middle of the second Stop
+      bit. Otherwise, it is performed in the middle of the first Stop bit.</div>
+        <p class="- topic/p p">The FERIF and PERIF interrupts are not delayed with STPMD. When STPMD is
+            set, the preferred indicator for reversing transceiver direction is the UxRXIF interrupt
+            because it is delayed whereas the others are not.</p>
+</div>
+
+</body>
+</html>

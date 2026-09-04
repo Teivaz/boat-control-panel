@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10.3.3 Word Read — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-26A56168-E3B0-44E5-8510-2B180787A881.html"/>
+<link rel="next" href="GUID-17EED875-D101-43C7-A8B3-1AB08122F073.html"/>
+<link rel="up" href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html">10 NVM - Nonvolatile Memory Module</a></li><li><a href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html">10.3 Program Flash Memory (PFM)</a></li><li>10.3.3 Word Read</li></ol>
+  <div class="sib"><span>← <a href="GUID-26A56168-E3B0-44E5-8510-2B180787A881.html" rel="prev">Page Read</a></span><span><a href="GUID-17EED875-D101-43C7-A8B3-1AB08122F073.html" rel="next">Page Write</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__GUID-9512E5C0-0591-4258-8765-2D4D4B93DD37" style="">10.3.3 Word Read</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p" id="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__ID-42121-00000283" data-ofbid="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__ID-42121-00000283">A single 16-bit word is read by setting the NVMADR registers to
+            the target address and setting the NVMCMD bits to <code class="+ topic/ph pr-d/codeph ph codeph">‘b000</code>. The word is
+            then transferred from PFM to the NVMDAT registers by starting the read operation by
+            setting the GO bit.</p>
+        <p class="- topic/p p" id="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__ID-42121-00000246" data-ofbid="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__ID-42121-00000246">The sequence of events for reading a word of PFM is:</p>
+        <ol class="- topic/ol ol" id="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__GUID-EFDAA95F-C192-42F6-91CD-4985A09D69E8" data-ofbid="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__GUID-EFDAA95F-C192-42F6-91CD-4985A09D69E8">
+            <li class="- topic/li li" id="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__GUID-114F8860-A29D-47E6-91ED-5646F9AA27E4" data-ofbid="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__GUID-114F8860-A29D-47E6-91ED-5646F9AA27E4">Set the <a class="- topic/xref xref" href="GUID-C527108F-A4F1-421C-8804-FCDE70E8924B.html" title="NVMADR">NVMADR</a>
+                registers to the target address.</li>
+            <li class="- topic/li li" id="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__ID-42121-00000247" data-ofbid="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__ID-42121-00000247">Set the <a class="- topic/xref xref" href="GUID-0EEEF66D-6FAA-4BC6-B759-A3A7E60F6A6C.html#BITFIELD_OYT_PF2_KGB" title="NVM Command"><span><span>NVMCMD</span></span></a> control bits to <code class="+ topic/ph pr-d/codeph ph codeph">‘b000</code> (Word Read).</li>
+            <li class="- topic/li li" id="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__GUID-AB5751FD-0758-4CF3-9122-0E5826E751B1" data-ofbid="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__GUID-AB5751FD-0758-4CF3-9122-0E5826E751B1">Set the <a class="- topic/xref xref" href="GUID-E05C5D94-F489-42E8-8DC8-B64719A787B5.html#GUID-B9008A8B-38DB-4CCD-A1FD-5C35D1DE6562" title="Start Operation Control"><span><span>GO</span></span></a> bit to start the PFM word read.</li>
+            <li class="- topic/li li" id="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__GUID-1EFED972-0118-4692-A1FA-25DA656E422C" data-ofbid="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__GUID-1EFED972-0118-4692-A1FA-25DA656E422C">Monitor the GO bit or NVMIF interrupt
+                flag to determine when the read has completed.</li>
+        </ol>
+        <div class="- topic/example example" id="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__GUID-27BBCBAB-DEB3-428E-A8F4-6AA1D35F8F6B" data-ofbid="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9__GUID-27BBCBAB-DEB3-428E-A8F4-6AA1D35F8F6B"><h2 class="- topic/title title sectiontitle">Reading a Word from Program Flash
+                Memory in C</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><em class="hl-comment">// Code sequence to read one word from PFM</em>
+<em class="hl-comment">// PFM target address is specified by WORD_ADDR</em>
+
+<em class="hl-comment">// Variable to store the word value from desired location in PFM</em>
+uint16_t WordValue; 
+
+<em class="hl-comment">// Load NVMADR with the desired word address</em>
+NVMADR = WORD_ADDR;
+NVMCON1bits.CMD = <span class="hl-number">0x00</span>;         <em class="hl-comment">// Set the word read command</em>
+NVMCON0bits.GO = <span class="hl-number">1</span>;             <em class="hl-comment">// Start word read</em>
+<strong class="hl-keyword">while</strong> (NVMCON0bits.GO);         <em class="hl-comment">// Wait for the read operation to complete</em>
+WordValue = NVMDAT;             <em class="hl-comment">// Store the read value to a variable</em></pre>
+        </div>
+    </div>
+
+</body>
+</html>

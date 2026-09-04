@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10.3.5 Word Write — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-17EED875-D101-43C7-A8B3-1AB08122F073.html"/>
+<link rel="next" href="GUID-BC8AF0DC-02A4-412E-A6B4-7687B89E8C23.html"/>
+<link rel="up" href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html">10 NVM - Nonvolatile Memory Module</a></li><li><a href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html">10.3 Program Flash Memory (PFM)</a></li><li>10.3.5 Word Write</li></ol>
+  <div class="sib"><span>← <a href="GUID-17EED875-D101-43C7-A8B3-1AB08122F073.html" rel="prev">Page Write</a></span><span><a href="GUID-BC8AF0DC-02A4-412E-A6B4-7687B89E8C23.html" rel="next">Word Modify</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__GUID-7F66A0FD-A2CD-4069-B9BC-F9553449FD3B" style="">10.3.5 Word Write</h1>
+   <div class="- topic/body concept/conbody body conbody">
+                <p class="- topic/p p" id="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__ID-42121-00000283" data-ofbid="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__ID-42121-00000283">PFM can be written one word at a time to a pre-erased
+         memory location. Refer to the <a class="- topic/xref xref" href="GUID-BC8AF0DC-02A4-412E-A6B4-7687B89E8C23.html">“Word Modify”</a> section for more information on writing to a
+         prewritten memory location.</p>
+                <p class="- topic/p p">A single word is written by setting the NVMADR to the target address and loading
+         NVMDAT with the desired word. The word is then transferred to PFM by setting the NVMCMD
+         bits to <code class="+ topic/ph pr-d/codeph ph codeph">‘b011</code> then executing the unlock sequence and setting the GO
+         bit.</p>
+      <p class="- topic/p p" id="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__ID-42121-0000029C" data-ofbid="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__ID-42121-0000029C">The sequence of events for programming single word to a pre-erased
+         location of PFM is:</p>
+      <ol class="- topic/ol ol" id="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__GUID-04A352F9-D1F6-4ABD-ACE1-159A285C5F3E" data-ofbid="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__GUID-04A352F9-D1F6-4ABD-ACE1-159A285C5F3E">
+         <li class="- topic/li li" id="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__GUID-83D4D70E-EF0B-427B-9D50-E7FE21CCC920" data-ofbid="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__GUID-83D4D70E-EF0B-427B-9D50-E7FE21CCC920">Set the <a class="- topic/xref xref" href="GUID-C527108F-A4F1-421C-8804-FCDE70E8924B.html" title="NVMADR">NVMADR</a>
+            registers to the target address.</li>
+         <li class="- topic/li li" id="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__ID-42121-000002A7" data-ofbid="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__ID-42121-000002A7">Load the <a class="- topic/xref xref" href="GUID-C07AE142-AB00-4870-AD7E-A78E1E2DEAC1.html" title="NVMDAT">NVMDAT</a> with desired word.</li>
+                        <li class="- topic/li li" id="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__ID-42121-00000247" data-ofbid="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__ID-42121-00000247">Set the <a class="- topic/xref xref" href="GUID-0EEEF66D-6FAA-4BC6-B759-A3A7E60F6A6C.html#BITFIELD_OYT_PF2_KGB" title="NVM Command"><span><span>NVMCMD</span></span></a>
+            control bits to <code class="+ topic/ph pr-d/codeph ph codeph">‘b011</code> (Word Write).</li>
+         <li class="- topic/li li" id="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__ID-42121-000002B1" data-ofbid="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__ID-42121-000002B1">Disable all interrupts.</li>
+                        <li class="- topic/li li" id="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__ID-42121-0000024B" data-ofbid="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__ID-42121-0000024B">Perform the unlock sequence as described in the
+                                        <a class="- topic/xref xref" href="GUID-5B2102CA-3255-43DC-B4BA-610CE1880E7D.html">Unlock Sequence</a> section.</li>
+         <li class="- topic/li li" id="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__ID-42121-00000249" data-ofbid="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__ID-42121-00000249">Set the <a class="- topic/xref xref" href="GUID-E05C5D94-F489-42E8-8DC8-B64719A787B5.html#GUID-B9008A8B-38DB-4CCD-A1FD-5C35D1DE6562" title="Start Operation Control"><span><span>GO</span></span></a> bit to start the PFM word write.</li>
+         <li class="- topic/li li" id="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__GUID-1EFED972-0118-4692-A1FA-25DA656E422C" data-ofbid="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__GUID-1EFED972-0118-4692-A1FA-25DA656E422C">Monitor the GO bit or NVMIF interrupt
+            flag to determine when the write has completed.</li>
+                        <li class="- topic/li li" id="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__GUID-D2652CC5-8114-46B8-B56C-E6F6A10D1124" data-ofbid="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__GUID-D2652CC5-8114-46B8-B56C-E6F6A10D1124">Interrupts can be enabled
+                                after the GO bit is clear.</li>
+                        <li class="- topic/li li" id="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__GUID-88124C9B-E945-4FC3-8087-C71453E15BDC" data-ofbid="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__GUID-88124C9B-E945-4FC3-8087-C71453E15BDC">Set the NVMCMD control
+                                bits to <code class="+ topic/ph pr-d/codeph ph codeph">‘b000</code>.</li>
+      </ol>
+      <div class="- topic/example example" id="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__GUID-910BD414-8541-4B95-B055-75E23749AD57" data-ofbid="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77__GUID-910BD414-8541-4B95-B055-75E23749AD57"><h2 class="- topic/title title sectiontitle">Writing a Word of Program Flash
+            Memory in C</h2>
+         
+         <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><em class="hl-comment">// Code sequence to program one word to a pre-erased location in PFM</em>
+<em class="hl-comment">// PFM target address is specified by WORD_ADDR</em>
+<em class="hl-comment">// Target data are specified by WordValue</em>
+
+<em class="hl-comment">// Save interrupt enable bit value</em>
+uint8_t GIEBitValue = INTCON0bits.GIE;
+
+<em class="hl-comment">// Load NVMADR with the target address of the word</em>
+NVMADR = WORD_ADDR;              
+NVMDAT = WordValue;                <em class="hl-comment">// Load NVMDAT with the desired value</em>
+NVMCON1bits.CMD = <span class="hl-number">0x03</span>;            <em class="hl-comment">// Set the word write command</em>
+INTCON0bits.GIE = <span class="hl-number">0</span>;               <em class="hl-comment">// Disable interrupts</em>
+<em class="hl-comment">//––––––––– Required Unlock Sequence ––––––––– </em>
+NVMLOCK = <span class="hl-number">0x55</span>;
+NVMLOCK = <span class="hl-number">0xAA</span>;
+NVMCON0bits.GO = <span class="hl-number">1</span>;                <em class="hl-comment">// Start word write</em>
+<em class="hl-comment">//–––––––––––––––––––––––––––––––––––––––––––––––</em>
+<strong class="hl-keyword">while</strong> (NVMCON0bits.GO);            <em class="hl-comment">// Wait for the write operation to complete</em>
+<em class="hl-comment">// Verify word write operation success and call the recovery function if needed</em>
+<strong class="hl-keyword">if</strong> (NVMCON1bits.WRERR){            
+   WRITE_FAULT_RECOVERY();
+}
+
+INTCON0bits.GIE = GIEBitValue;     <em class="hl-comment">// Restore interrupt enable bit value</em>
+NVMCON1bits.CMD = <span class="hl-number">0x00</span>;            <em class="hl-comment">// Disable writes to memory</em></pre>
+      </div>
+   </div>
+
+</body>
+</html>

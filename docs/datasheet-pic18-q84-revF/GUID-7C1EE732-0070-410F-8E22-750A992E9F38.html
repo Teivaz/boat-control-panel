@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>25.6 Timer1 16-Bit Read/Write Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D91AE7F7-D2B1-4B6A-9EF6-FD5BA1105A30.html"/>
+<link rel="next" href="GUID-BA690294-A6ED-4AE0-86FE-CD2BF16037F8.html"/>
+<link rel="up" href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html">25 TMR1 - Timer1 Module with Gate Control</a></li><li>25.6 Timer1 16-Bit Read/Write Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-D91AE7F7-D2B1-4B6A-9EF6-FD5BA1105A30.html" rel="prev">Reading and Writing TMRx in Asynchronous Counter Mode</a></span><span><a href="GUID-BA690294-A6ED-4AE0-86FE-CD2BF16037F8.html" rel="next">Timer1 Gate</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-7C1EE732-0070-410F-8E22-750A992E9F38__GUID-8862F7F1-EA31-4403-BBBD-5D4413420012" style="">25.6 Timer1 16-Bit Read/Write Mode</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-7C1EE732-0070-410F-8E22-750A992E9F38__ID-42141-00000CAE" data-ofbid="GUID-7C1EE732-0070-410F-8E22-750A992E9F38__ID-42141-00000CAE">Timer1 can be configured to read and write all 16 bits of data to
+            and from the 8-bit TMRxL and TMRxH registers, simultaneously. The 16-bit read and write
+            operations are enabled by setting the <a class="- topic/xref xref" href="GUID-3797E08A-EF99-449F-8DE3-136F554E8BAF.html#ID-00000087" title="16-Bit Read/Write Mode Enable">RD16</a> bit. To accomplish this function, the TMRxH register value is mapped to
+            a buffer register called the TMRxH buffer register. While in 16-bit mode, the TMRxH
+            register is not directly readable or writable and all read and write operations take
+            place through the use of this TMRxH buffer register.</p>
+        <p class="- topic/p p" id="GUID-7C1EE732-0070-410F-8E22-750A992E9F38__ID-42141-00000CB1" data-ofbid="GUID-7C1EE732-0070-410F-8E22-750A992E9F38__ID-42141-00000CB1">When a read from the TMRxL register is requested, the value of the
+            TMRxH register is simultaneously loaded into the TMRxH buffer register. When a read from
+            the TMRxH register is requested, the value is provided from the TMRxH buffer register
+            instead. This provides the user with the ability to accurately read all 16 bits of the
+            Timer1 value from a single instance in time (refer to <a class="- topic/xref xref" href="#GUID-7C1EE732-0070-410F-8E22-750A992E9F38__FIG_QYX_BF4_WGB"><span>Figure 25-3</span></a> for more details). In contrast, when not in 16-bit mode, the user
+            must read each register separately and determine if the values have become invalid due
+            to a rollover that may have occurred between the read operations.</p>
+        <p class="- topic/p p" id="GUID-7C1EE732-0070-410F-8E22-750A992E9F38__ID-42141-00000CB5" data-ofbid="GUID-7C1EE732-0070-410F-8E22-750A992E9F38__ID-42141-00000CB5">When a write request of the TMRxL register is requested, the TMRxH
+            buffer register is simultaneously updated with the contents of the TMRxH register. The
+            value of TMRxH must be preloaded into the TMRxH buffer register prior to the write
+            request for the TMRxL register. This provides the user with the ability to write all 16
+            bits to the <a class="- topic/xref xref" href="GUID-DA7CA9B2-C0D3-44BE-8A93-3861BF3EE7DF.html#GUID-DA7CA9B2-C0D3-44BE-8A93-3861BF3EE7DF" title="TMRx">TMRx</a> register at the same time. Any requests to write to TMRxH
+            directly does not clear the Timer1 prescaler value. The prescaler value is only cleared
+            through write requests to the TMRxL register.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-7C1EE732-0070-410F-8E22-750A992E9F38__FIG_QYX_BF4_WGB" data-ofbid="GUID-7C1EE732-0070-410F-8E22-750A992E9F38__FIG_QYX_BF4_WGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 25-3. <span id="GUID-7C1EE732-0070-410F-8E22-750A992E9F38__GUID-1C335CB0-6832-4BC2-BC2F-46D0AF3FB7F9" class="fig--title">Timer1 16-Bit Read/Write Mode Block Diagram</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-B64F244E-0B9D-4AB4-988C-C7606B5DA655-high.pdf#toolbar=1" width="450" height="432.44897959183675"></iframe></span>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

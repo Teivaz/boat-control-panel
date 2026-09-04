@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.8.2 Receive State Diagram — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-823B78B9-0AED-429A-9BB3-BB082792C8E8.html"/>
+<link rel="next" href="GUID-16221088-ACE2-401A-8D45-E69EDBFBF3D0.html"/>
+<link rel="up" href="GUID-ABE11A28-ACFC-4D60-BEDB-BA3A1CF953C4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-ABE11A28-ACFC-4D60-BEDB-BA3A1CF953C4.html">38.8 Message Reception</a></li><li>38.8.2 Receive State Diagram</li></ol>
+  <div class="sib"><span>← <a href="GUID-823B78B9-0AED-429A-9BB3-BB082792C8E8.html" rel="prev">Reading a Receive Message Object</a></span><span><a href="GUID-16221088-ACE2-401A-8D45-E69EDBFBF3D0.html" rel="next">Resetting RX FIFO</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-3582E1A7-BE9E-4B6A-B81C-7D4D7735286B" style="">38.8.2 Receive State Diagram</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p"><a class="- topic/xref xref" href="#GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__FIG_EG3_CMN_P3B"><span>Figure 38-17</span></a> illustrates how messages are received. It illustrates how the most
+            important receive flags are set and cleared.<ul class="- topic/ul ul" id="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__UL_BGX_QLN_P3B" data-ofbid="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__UL_BGX_QLN_P3B">
+                <li class="- topic/li li" id="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-0C674733-4047-475C-9BFE-E4E24CA782F5" data-ofbid="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-0C674733-4047-475C-9BFE-E4E24CA782F5">The CAN FD Protocol module
+                    remains Idle until a SOF is detected.</li>
+                <li class="- topic/li li" id="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-62B29C46-9667-4C2D-BD3C-742B7CBADBC5" data-ofbid="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-62B29C46-9667-4C2D-BD3C-742B7CBADBC5">After a SOF is detected, the
+                    module will receive the arbitration and control fields.</li>
+                <li class="- topic/li li" id="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-61734FFE-F451-4707-ABC1-AF11C6B4D141" data-ofbid="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-61734FFE-F451-4707-ABC1-AF11C6B4D141">Based on the DNCNTx bits and the
+                    received DLC, acceptance filtering will start. See <a class="- topic/xref xref" href="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735.html#GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__FIG_DQM_J4M_P3B">Figure 4-14</a> for more details.</li>
+                <li class="- topic/li li" id="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-9E28FEEC-5EC6-4E5D-9109-A2CD66D00EDE" data-ofbid="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-9E28FEEC-5EC6-4E5D-9109-A2CD66D00EDE">If none of the filters match, the
+                    message will still be received, but it will not be stored.</li>
+                <li class="- topic/li li" id="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-7E1EA4C2-AAE9-4AC3-9042-096B5FEEE0E6" data-ofbid="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-7E1EA4C2-AAE9-4AC3-9042-096B5FEEE0E6"> If a filter matches, the device
+                    checks whether the receive object the filter points to is full.</li>
+                <li class="- topic/li li" id="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-AD1C86B5-08A6-484B-A23B-5160BAD6C35A" data-ofbid="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-AD1C86B5-08A6-484B-A23B-5160BAD6C35A"> If the receive object is not
+                    full, the rest of the data bytes are received and stored to the receive
+                    object.</li>
+                <li class="- topic/li li" id="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-5A3756F6-8DAB-42AD-B550-91496B57D789" data-ofbid="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-5A3756F6-8DAB-42AD-B550-91496B57D789">If the receive object is full,
+                    the RXOVIF bit will be set.</li>
+                <li class="- topic/li li" id="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-392C6C6B-9A5D-45A0-BB08-02C97166B33A" data-ofbid="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-392C6C6B-9A5D-45A0-BB08-02C97166B33A">If a complete message is
+                    received, the message will be stored, a timestamp will be attached and the
+                    receive flags will be set; the FIFO status flags will be updated and the FIFO
+                    head will be incremented.</li>
+                <li class="- topic/li li" id="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-34504424-7967-44A2-B87E-FA9E169E468A" data-ofbid="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-34504424-7967-44A2-B87E-FA9E169E468A">In case an error is detected
+                    during the reception of a message, an error frame will be transmitted and the
+                    appropriate error flags will be set.</li>
+            </ul></div>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__FIG_EG3_CMN_P3B" data-ofbid="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__FIG_EG3_CMN_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-17. <span id="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__GUID-E52C6417-C05F-488D-A9E5-A74FAC0C4CB8" class="fig--title">Receive State Diagram</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403__IMAGE_FG3_CMN_P3B" src="GUID-217A7981-CBD5-4998-8FC8-94C2D82A1F7F-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.2.5 Input and Output Polarity Control — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1FCAD390-520F-4BF2-8946-3309833D58F5.html"/>
+<link rel="next" href="GUID-38725C10-0F95-484B-825E-B276E4433803.html"/>
+<link rel="up" href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html">36.2 SPI Operation</a></li><li>36.2.5 Input and Output Polarity Control</li></ol>
+  <div class="sib"><span>← <a href="GUID-1FCAD390-520F-4BF2-8946-3309833D58F5.html" rel="prev">LSb vs. MSb-First Operation</a></span><span><a href="GUID-38725C10-0F95-484B-825E-B276E4433803.html" rel="next">Transfer Counter</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-DA7E6AE9-8496-44F1-90AE-35DE7CC899A1" style="">36.2.5 Input and Output Polarity Control</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">SPIxCON1 has three bits that control the polarity of the SPI inputs and
+                outputs:<ul class="- topic/ul ul" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__UL_EZ4_QYG_SFB" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__UL_EZ4_QYG_SFB">
+                <li class="- topic/li li" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-906F879F-66EB-4E0D-BB38-6C37C434B600" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-906F879F-66EB-4E0D-BB38-6C37C434B600">The SDIP bit controls the
+                    polarity of the SDI input</li>
+                <li class="- topic/li li" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-B31F0F6C-EA94-4FDB-8F38-FD70FAB37EA7" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-B31F0F6C-EA94-4FDB-8F38-FD70FAB37EA7">The SDOP bit controls the
+                    polarity of the SDO output</li>
+                <li class="- topic/li li" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-C3AE071A-E69F-4EE0-B8E5-BA4A4B48E368" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-C3AE071A-E69F-4EE0-B8E5-BA4A4B48E368">The SSP bit controls the polarity
+                    of both the client SS input and the host SS output</li>
+            </ul>
+        </div>
+        <div class="- topic/p p">For all three bits, when the bit is clear, the input or output is active-high, and when
+            the bit is set, the input or output is active-low. When the EN bit is cleared, SS_out
+            and SCK_out both revert to the Inactive state dictated by their polarity bits. The SDO
+            Output state, when the EN bit is cleared, is determined by several factors as
+                follows:<ul class="- topic/ul ul" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__UL_LRB_SWG_SFB" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__UL_LRB_SWG_SFB">
+                <li class="- topic/li li" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-B0110665-8FE7-4848-A99D-EE736D769808" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-B0110665-8FE7-4848-A99D-EE736D769808">When the associated TRIS bit for
+                    the SDO pin is cleared and the SPI goes Idle after a transmission, the SDO
+                    output will remain at the last bit level.</li>
+                <li class="- topic/li li" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-9D30391E-778E-40AA-A644-6BAD6FFAFD36" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-9D30391E-778E-40AA-A644-6BAD6FFAFD36">When the associated TRIS bit for
+                    the SDO pin is set, its behavior varies in Client and Host modes:<ul class="- topic/ul ul" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__UL_MRB_SWG_SFB" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__UL_MRB_SWG_SFB">
+                        <li class="- topic/li li" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-24637523-F462-4269-8271-282C584A95F2" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-24637523-F462-4269-8271-282C584A95F2">In Client mode, the SDO
+                            pin tri-states when any of the following is true:<ul class="- topic/ul ul" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__UL_HTJ_CXG_SFB" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__UL_HTJ_CXG_SFB">
+                                <li class="- topic/li li" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-DACD5646-2738-4A9E-9F15-DB336A3A78B1" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-DACD5646-2738-4A9E-9F15-DB336A3A78B1">Client Select is
+                                    inactive</li>
+                                <li class="- topic/li li" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-DD087675-6B65-46D3-8572-0F3D7B0ADDA4" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-DD087675-6B65-46D3-8572-0F3D7B0ADDA4"><a class="- topic/xref xref" href="GUID-CD70C100-5F91-4E6F-86D4-583C754F39BE.html#GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B" title="SPI Enable"><span><span>EN</span></span></a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code></li>
+                                <li class="- topic/li li" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-E9673F72-292C-4AC4-A925-929E724A2555" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-E9673F72-292C-4AC4-A925-929E724A2555"><a class="- topic/xref xref" href="GUID-D60A9AB9-68EF-4F33-8387-7BA9792E0965.html#BITFIELD_DQY_N5F_RFB" title="Transmit Data-Required Control(2)"><span><span>TXR</span></span></a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code></li>
+                            </ul></li>
+                    </ul><ul class="- topic/ul ul" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__UL_GRH_JXG_SFB" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__UL_GRH_JXG_SFB">
+                        <li class="- topic/li li" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-BD4B20BE-85DB-498A-80C4-5D48F70C2AE4" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-BD4B20BE-85DB-498A-80C4-5D48F70C2AE4">In Host mode: <ul class="- topic/ul ul" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__UL_AGR_LXG_SFB" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__UL_AGR_LXG_SFB">
+                                <li class="- topic/li li" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-50A1CBD1-42D6-4D9F-B80E-CC600E6D7FC8" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-50A1CBD1-42D6-4D9F-B80E-CC600E6D7FC8">The SDO pin
+                                    tri-states when <a class="- topic/xref xref" href="GUID-D60A9AB9-68EF-4F33-8387-7BA9792E0965.html#BITFIELD_DQY_N5F_RFB" title="Transmit Data-Required Control(2)"><span><span>TXR</span></span></a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>
+                                </li>
+                                <li class="- topic/li li" id="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-7DB08854-70E5-488D-8203-64E50631AF1B" data-ofbid="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59__GUID-7DB08854-70E5-488D-8203-64E50631AF1B">When <a class="- topic/xref xref" href="GUID-D60A9AB9-68EF-4F33-8387-7BA9792E0965.html#BITFIELD_DQY_N5F_RFB" title="Transmit Data-Required Control(2)"><span><span>TXR</span></span></a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and the SPI goes Idle
+                                    after a transmission, the SDO output will remain at the last bit
+                                    level. The SDO pin will revert to the Idle state when EN is
+                                    cleared.</li>
+                            </ul></li>
+                    </ul></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

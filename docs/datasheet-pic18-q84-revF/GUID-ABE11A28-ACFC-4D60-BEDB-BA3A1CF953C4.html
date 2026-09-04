@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.8 Message Reception — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A97F2FF7-DEC6-4CEE-A24B-855538054389.html"/>
+<link rel="next" href="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6.html"/>
+<link rel="up" href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li>38.8 Message Reception</li></ol>
+  <div class="sib"><span>← <a href="GUID-A97F2FF7-DEC6-4CEE-A24B-855538054389.html" rel="prev">12-Bit Standard ID</a></span><span><a href="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6.html" rel="next">Receive Message Object</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-ABE11A28-ACFC-4D60-BEDB-BA3A1CF953C4__GUID-85EA33A4-E9C3-4F58-AADA-CD7E930CA587" style="">38.8 Message Reception</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The application has to configure the RX FIFO before it can be used for
+            reception (see <a class="- topic/xref xref" href="GUID-FDA6F52B-A276-47A5-A4CF-AB0F0938B4B2.html"><span><span>Receive FIFO Configuration</span></span></a>).
+            In addition, the application has to configure and enable at least one filter (see <a class="- topic/xref xref" href="GUID-87E3C552-4BF9-4001-AFC3-A3DC4D9C102C.html"><span><span>Filter Configuration</span></span></a>).</p>
+        <p class="- topic/p p">The CAN FD Protocol Module continuously monitors the CAN bus. Messages that
+            match a filter are stored in the RX FIFO pointed to by the filter (see <a class="- topic/xref xref" href="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735.html"><span><span>Filtering a Received Message</span></span></a>). The
+            message data are stored in the receive message objects.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6.html">38.8.1 Receive Message Object</a></li><li><a href="GUID-2A47E25C-4708-4333-8D3C-DA11FB01C403.html">38.8.2 Receive State Diagram</a></li><li><a href="GUID-16221088-ACE2-401A-8D45-E69EDBFBF3D0.html">38.8.3 Resetting RX FIFO</a></li><li><a href="GUID-088BDF67-2766-498E-BA34-CD509ECD2FE5.html">38.8.4 Mismatch of DLC and Payload Size During Reception</a></li></ul>
+</nav>
+</body>
+</html>

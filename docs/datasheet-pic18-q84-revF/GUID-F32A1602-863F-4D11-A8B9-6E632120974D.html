@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>4.1 Basic Connection Requirements — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-248C7349-0CF1-4585-B0FE-5311789D4EBE.html"/>
+<link rel="next" href="GUID-87A3898A-29B8-4247-B4FA-F9ED51A1A55F.html"/>
+<link rel="up" href="GUID-248C7349-0CF1-4585-B0FE-5311789D4EBE.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-248C7349-0CF1-4585-B0FE-5311789D4EBE.html">4 Guidelines for Getting Started with PIC18-Q84 Microcontrollers</a></li><li>4.1 Basic Connection Requirements</li></ol>
+  <div class="sib"><span>← <a href="GUID-248C7349-0CF1-4585-B0FE-5311789D4EBE.html" rel="prev">Guidelines for Getting Started with PIC18-Q84 Microcontrollers</a></span><span><a href="GUID-87A3898A-29B8-4247-B4FA-F9ED51A1A55F.html" rel="next">Power Supply Pins</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__GUID-3E868B25-3805-43AB-BFF4-5618ADF83B81" style="">4.1 Basic Connection Requirements</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-0000000E" data-ofbid="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-0000000E">Getting started with the <span class="- topic/ph ph">PIC18-Q84</span> family of 8-bit microcontrollers requires attention to a minimal
+         set of device pin connections before proceeding with development.</p>
+      <p class="- topic/p p" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-0000001B" data-ofbid="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-0000001B">The following pins must always be connected:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-0000001C" data-ofbid="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-0000001C">All V<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000097">DD</sub> and V<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000098">SS</sub> pins (see the <a class="- topic/xref xref" href="GUID-87A3898A-29B8-4247-B4FA-F9ED51A1A55F.html#GUID-87A3898A-29B8-4247-B4FA-F9ED51A1A55F">Power Supply Pins</a> section)</li>
+         <li class="- topic/li li" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000021" data-ofbid="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000021"><span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000023">MCLR</span> pin (see
+            the <a class="- topic/xref xref" href="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419.html#GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419">Master Clear (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span>) Pin</a> section)</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000025" data-ofbid="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000025">These pins must also be connected if they are being used in the end
+         application:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000026" data-ofbid="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000026">ICSPCLK/ICSPDAT pins used for <span class="- topic/tm tm">In-Circuit Serial
+               Programming<span class="- topic/tmmark tmmark ">™</span></span> (<span class="- topic/tm tm">ICSP<span class="- topic/tmmark tmmark ">™</span></span>) and debugging purposes (see the <a class="- topic/xref xref" href="GUID-D4FA6B32-2871-4E49-A386-987C6F608148.html#GUID-D4FA6B32-2871-4E49-A386-987C6F608148">In-Circuit Serial Programming (ICSP) Pins</a> section)</li>
+         <li class="- topic/li li" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000029" data-ofbid="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000029">OSCI and OSCO pins when an external oscillator source is used
+            (see the <a class="- topic/xref xref" href="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF.html#GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF">External Oscillator Pins</a> section)</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-0000002C" data-ofbid="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-0000002C">Additionally, the following pins may be required:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-0000002D" data-ofbid="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-0000002D">V<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000099">REF</sub>+/V<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-0000009A">REF</sub>- pins are used when external voltage reference for
+            analog modules is implemented</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000031" data-ofbid="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000031">The minimum mandatory connections are shown in the figure below.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000033" data-ofbid="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000033"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 4-1. <span id="GUID-F32A1602-863F-4D11-A8B9-6E632120974D__GUID-B1DE7B86-E512-415A-A9A8-7F060873EA24" class="fig--title">Recommended Minimum
+            Connections</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-2BD2C865-8F08-4E67-9EED-9A7FB409EAF6-high.pdf#toolbar=1" width="450" height="480.05833149900946"></iframe></span>
+      </figure>
+      
+   </div>
+
+</body>
+</html>

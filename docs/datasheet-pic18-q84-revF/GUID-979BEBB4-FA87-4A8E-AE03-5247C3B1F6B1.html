@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26.10.4 TxHLT — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DB486ED1-905B-432E-9A30-459FFEFAD858.html"/>
+<link rel="next" href="GUID-5D74F7CB-5C5D-4BBF-A222-6BCF80A21BD2.html"/>
+<link rel="up" href="GUID-F940AF35-787B-4855-87AD-86EAD3ED9BD0.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html">26 TMR2 - Timer2 Module</a></li><li><a href="GUID-F940AF35-787B-4855-87AD-86EAD3ED9BD0.html">26.10 Register Definitions: Timer2 Control</a></li><li>26.10.4 TxHLT</li></ol>
+  <div class="sib"><span>← <a href="GUID-DB486ED1-905B-432E-9A30-459FFEFAD858.html" rel="prev">TxCON</a></span><span><a href="GUID-5D74F7CB-5C5D-4BBF-A222-6BCF80A21BD2.html" rel="next">TxCLKCON</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-0000013F" style="">26.10.4  TxHLT</h1><section id="GUID-9D22AAE8-AE0A-477B-93F5-34F8FAC649B5" class="- topic/section reference/section sidsc-register/registerDescription ">Timer Hardware Limit
+         Control Register<div class="- topic/note note notype note_notype endnote" id="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__GUID-0F89D91D-4E24-48CE-A94C-3A0DF039D61D" data-ofbid="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__GUID-0F89D91D-4E24-48CE-A94C-3A0DF039D61D"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__GUID-A9C583CB-46C9-4F98-9605-A9CCE1598323" data-ofbid="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__GUID-A9C583CB-46C9-4F98-9605-A9CCE1598323">
+               <li class="- topic/li li" id="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-42141-000015E1" data-ofbid="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-42141-000015E1">Setting this bit ensures that reading TxTMR will return a
+                  valid data value.</li>
+               <li class="- topic/li li" id="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-42141-000015E3" data-ofbid="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-42141-000015E3">When this bit is ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’, the Timer cannot
+                  operate in Sleep mode.</li>
+               <li class="- topic/li li" id="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-42141-000015E6" data-ofbid="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-42141-000015E6">CKPOL must not be changed while ON =
+                  <code class="+ topic/ph pr-d/codeph ph codeph">1</code>.</li>
+               <li class="- topic/li li" id="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-42141-000015EA" data-ofbid="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-42141-000015EA">Setting this bit ensures glitch-free operation when the ON
+                  is enabled or disabled.</li>
+               <li class="- topic/li li" id="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-42141-000015EC" data-ofbid="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-42141-000015EC">When this bit is set, then the timer operation will be
+                  delayed by two input clocks after the ON bit is set.</li>
+               <li class="- topic/li li" id="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-42141-000015EE" data-ofbid="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-42141-000015EE">Unless otherwise indicated, all modes start upon ON =
+                     <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and stop upon ON = <code class="+ topic/ph pr-d/codeph ph codeph">0</code> (stops occur without
+                  affecting the value of TxTMR).</li>
+               <li class="- topic/li li" id="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-42141-000015F2" data-ofbid="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__ID-42141-000015F2">When TxTMR = TxPR, the next clock clears TxTMR, regardless
+                  of the operating mode.</li>
+            </ol>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>TxHLT</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x325,0x331,0x33D</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__GUID-EC6BDC03-3736-40B2-9680-E99287DE76CA" data-ofbid="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__GUID-EC6BDC03-3736-40B2-9680-E99287DE76CA"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">PSYNC</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">CPOL</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">CSYNC</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="5">MODE[4:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-9D22AAE8-AE0A-477B-93F5-34F8FAC649B5" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000143__ID-42141-00002064" id="ID-00000143">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000143__ID-42141-00002064" style=""> Bit 7 – PSYNC <span>
+         Timer Prescaler Synchronization Enable<a class="- topic/xref xref" href="#GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__GUID-0F89D91D-4E24-48CE-A94C-3A0DF039D61D"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1, 2)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000143__GUID-2A04938D-44F6-45C3-BF20-E28F7D2BEC5B" data-ofbid="ID-00000143__GUID-2A04938D-44F6-45C3-BF20-E28F7D2BEC5B"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000143__ID-42141-00002066"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000143__GUID-2EB9A595-69E7-4245-97CA-6F431EF4E1BF">Timer
+                  Prescaler Output is synchronized to F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000143__ID-42141-00002069"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000143__GUID-466B0586-BF71-4874-BDF9-6ECA5C30784D">Timer
+                  Prescaler Output is not synchronized to
+                  F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000014A__ID-42141-0000206D" id="ID-0000014A">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000014A__ID-42141-0000206D" style=""> Bit 6 – CPOL <span>
+         Timer Clock Polarity Selection<a class="- topic/xref xref" href="#GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__GUID-0F89D91D-4E24-48CE-A94C-3A0DF039D61D"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(3)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000014A__GUID-99EBC42B-BD2C-4D24-BCB3-3B8848FEBD77" data-ofbid="ID-0000014A__GUID-99EBC42B-BD2C-4D24-BCB3-3B8848FEBD77"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000014A__ID-42141-0000206F"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000014A__GUID-45E4803F-3A8A-4BE1-8B12-073397F0E144">Falling edge
+                  of input clock clocks timer/prescaler</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000014A__ID-42141-00002072"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000014A__GUID-AA53824C-27DE-4F9B-9727-800C670A9216">Rising edge
+                  of input clock clocks timer/prescaler</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000151__ID-42141-00002076" id="ID-00000151">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000151__ID-42141-00002076" style=""> Bit 5 – CSYNC <span>
+         Timer Clock Synchronization Enable<a class="- topic/xref xref" href="#GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__GUID-0F89D91D-4E24-48CE-A94C-3A0DF039D61D"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(4, 5)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000151__GUID-C255F1E7-B48E-40E3-B4DF-EEB7F24151A2" data-ofbid="ID-00000151__GUID-C255F1E7-B48E-40E3-B4DF-EEB7F24151A2"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000151__ID-42141-00002078"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000151__GUID-E7AD3C05-F48C-4436-AD47-5D111A4A1425">ON bit is
+                  synchronized to timer clock input</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000151__ID-42141-0000207B"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000151__GUID-DE711C25-B4E7-49EC-B0EB-373FD8F6CE7E">ON bit is
+                  not synchronized to timer clock input</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000158__ID-42141-00002080" id="ID-00000158">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000158__ID-42141-00002080" style=""> Bits 4:0 – MODE[4:0] <span>
+         Timer Control Mode Selection<a class="- topic/xref xref" href="#GUID-979BEBB4-FA87-4A8E-AE03-5247C3B1F6B1__GUID-0F89D91D-4E24-48CE-A94C-3A0DF039D61D"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(6, 7)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000158__GUID-B11DC082-79CC-4C1A-A9ED-091633345232" data-ofbid="ID-00000158__GUID-B11DC082-79CC-4C1A-A9ED-091633345232"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="ID-00000158__BITFIELDVALUES_YJK_LFM_ZZ" data-ofbid="ID-00000158__BITFIELDVALUES_YJK_LFM_ZZ"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000158__GUID-78B75EA4-02DD-460D-AB79-7C1DE3721DC9"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">00000</code></span> to
+                  <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">11111</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000158__GUID-12E226A4-A4C2-4487-B106-82A8390E2D67">See <a class="- topic/xref xref" href="GUID-B74F7E86-4EB4-45C9-91B7-597023F74CDC.html#GUID-B74F7E86-4EB4-45C9-91B7-597023F74CDC__ID-42141-000011EB"><span>Table 26-1</span></a></td>
+            </tr></tbody></table>
+      </div>
+   </article>
+            
+               Setting this bit ensures that reading TxTMR will return a
+                  valid data value.
+               When this bit is ‘1’, the Timer cannot
+                  operate in Sleep mode.
+               CKPOL must not be changed while ON =
+                  1.
+               Setting this bit ensures glitch-free operation when the ON
+                  is enabled or disabled.
+               When this bit is set, then the timer operation will be
+                  delayed by two input clocks after the ON bit is set.
+               Unless otherwise indicated, all modes start upon ON =
+                     1 and stop upon ON = 0 (stops occur without
+                  affecting the value of TxTMR).
+               When TxTMR = TxPR, the next clock clears TxTMR, regardless
+                  of the operating mode.
+            
+         
+</body>
+</html>

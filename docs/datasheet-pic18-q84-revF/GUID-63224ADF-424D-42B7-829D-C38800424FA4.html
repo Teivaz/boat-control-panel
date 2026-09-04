@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>24.2.4 Programmable Postscaler — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-728C4A82-1DD1-482D-B21F-7B98D3AABDBA.html"/>
+<link rel="next" href="GUID-B0391B0D-349F-44DD-A022-879DF3127CA3.html"/>
+<link rel="up" href="GUID-C43D9745-BC2D-4099-957D-F8E2580DBE5A.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-CF65B906-948A-4657-9750-90DB15690B84.html">24 TMR0 - Timer0 Module</a></li><li><a href="GUID-C43D9745-BC2D-4099-957D-F8E2580DBE5A.html">24.2 Clock Selection</a></li><li>24.2.4 Programmable Postscaler</li></ol>
+  <div class="sib"><span>← <a href="GUID-728C4A82-1DD1-482D-B21F-7B98D3AABDBA.html" rel="prev">Programmable Prescaler</a></span><span><a href="GUID-B0391B0D-349F-44DD-A022-879DF3127CA3.html" rel="next">Timer0 Output and Interrupt</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-63224ADF-424D-42B7-829D-C38800424FA4__GUID-9276665E-E678-42DA-A7E2-6C64A40FDD30" style="">24.2.4 Programmable Postscaler</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-63224ADF-424D-42B7-829D-C38800424FA4__ID-41521-0000294F" data-ofbid="GUID-63224ADF-424D-42B7-829D-C38800424FA4__ID-41521-0000294F">Timer0 has 16 programmable output postscaler options ranging from
+            1:1 to 1:16. The postscaler values are selected using the <a class="- topic/xref xref" href="GUID-6867DAEA-56CD-42EE-8327-6A24F099A27F.html#ID-000000C6" title="TMR0 Output Postscaler (Divider) Select"><span><span>OUTPS</span></span></a> bits.
+            The postscaler divides the output of Timer0 by the selected ratio. The postscaler
+            counter is not directly readable or writable. The postscaler counter is cleared on the
+            following events:</p>
+        <ul class="- topic/ul ul" id="GUID-63224ADF-424D-42B7-829D-C38800424FA4__UL_DQ5_23T_DZ" data-ofbid="GUID-63224ADF-424D-42B7-829D-C38800424FA4__UL_DQ5_23T_DZ">
+            <li class="- topic/li li" id="GUID-63224ADF-424D-42B7-829D-C38800424FA4__ID-41521-00002922" data-ofbid="GUID-63224ADF-424D-42B7-829D-C38800424FA4__ID-41521-00002922">A write to the TMR0L register</li>
+            <li class="- topic/li li" id="GUID-63224ADF-424D-42B7-829D-C38800424FA4__ID-41521-00002924" data-ofbid="GUID-63224ADF-424D-42B7-829D-C38800424FA4__ID-41521-00002924">A write to either the T0CON0 or T0CON1 registers</li>
+            <li class="- topic/li li" id="GUID-63224ADF-424D-42B7-829D-C38800424FA4__ID-41521-00002926" data-ofbid="GUID-63224ADF-424D-42B7-829D-C38800424FA4__ID-41521-00002926">Any device Reset</li>
+        </ul>
+    </div>
+
+</body>
+</html>

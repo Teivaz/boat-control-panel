@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>27.1.7 Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5C3584FE-D312-44A5-A691-6567575810E9.html"/>
+<link rel="next" href="GUID-CE40C3ED-3931-4653-8D3D-177FF169AFF4.html"/>
+<link rel="up" href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3.html">27 SMT - Signal Measurement Timer</a></li><li><a href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html">27.1 SMT Operation</a></li><li>27.1.7 Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-5C3584FE-D312-44A5-A691-6567575810E9.html" rel="prev">Windowed Counter Mode</a></span><span><a href="GUID-CE40C3ED-3931-4653-8D3D-177FF169AFF4.html" rel="next">Operation During Sleep</a> →</span></div>
+</nav>
+
+        <h1 class="- topic/title title topictitle1" id="GUID-1AC330AB-D038-4648-BE96-DCB60337E503__GUID-A4127B40-1114-4E77-817E-29B68A00402B" style="">27.1.7 Interrupts</h1>
+        <div class="- topic/body body">
+                <div class="- topic/p p">The SMT has three interrupts located in one of the PIR registers:
+                                <ul class="- topic/ul ul" id="GUID-1AC330AB-D038-4648-BE96-DCB60337E503__UL_WFM_1FZ_1BB" data-ofbid="GUID-1AC330AB-D038-4648-BE96-DCB60337E503__UL_WFM_1FZ_1BB">
+                                <li class="- topic/li li" id="GUID-1AC330AB-D038-4648-BE96-DCB60337E503__GUID-A7B8D5AC-B07F-4E75-9D93-1CD1ADBA757A" data-ofbid="GUID-1AC330AB-D038-4648-BE96-DCB60337E503__GUID-A7B8D5AC-B07F-4E75-9D93-1CD1ADBA757A"><strong class="+ topic/ph hi-d/b ph b">Pulse-Width
+                                                Acquisition Interrupt (SMTxPWAIF):</strong> Interrupt
+                                        triggers when the SMTxCPW register is updated with the
+                                        SMTxTMR register value.</li>
+                                <li class="- topic/li li" id="GUID-1AC330AB-D038-4648-BE96-DCB60337E503__GUID-F6DC84D0-E93D-4F4E-BE84-0CD1AF02508C" data-ofbid="GUID-1AC330AB-D038-4648-BE96-DCB60337E503__GUID-F6DC84D0-E93D-4F4E-BE84-0CD1AF02508C"><strong class="+ topic/ph hi-d/b ph b">Period
+                                                Acquisition Interrupt (SMTxPRAIF):</strong> Interrupt
+                                        triggers when the SMTxCPR register is updated with the
+                                        SMTxTMR register value.</li>
+                                <li class="- topic/li li" id="GUID-1AC330AB-D038-4648-BE96-DCB60337E503__GUID-6E38D5C0-CC13-4085-8659-2F77B147BEAF" data-ofbid="GUID-1AC330AB-D038-4648-BE96-DCB60337E503__GUID-6E38D5C0-CC13-4085-8659-2F77B147BEAF"><strong class="+ topic/ph hi-d/b ph b">Counter Period
+                                                Match Interrupt (SMTxIF):</strong> Interrupt triggers
+                                        when the SMTxTMR register equals the SMTxPR register.</li>
+                        </ul></div>
+                <p class="- topic/p p">Each of the above interrupts can be enabled/disabled using the
+                        corresponding bits in the PIE register.</p>
+        </div>
+
+</body>
+</html>

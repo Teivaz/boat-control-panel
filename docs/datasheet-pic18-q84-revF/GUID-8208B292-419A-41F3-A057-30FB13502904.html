@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.2 Polynomial Implementation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E7E78751-0F0F-4D8D-8B2A-4C758B6A5D05.html"/>
+<link rel="next" href="GUID-26D53175-1097-43A2-8333-2C02C4211D98.html"/>
+<link rel="up" href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li>13.2 Polynomial Implementation</li></ol>
+  <div class="sib"><span>← <a href="GUID-E7E78751-0F0F-4D8D-8B2A-4C758B6A5D05.html" rel="prev">Module Overview</a></span><span><a href="GUID-26D53175-1097-43A2-8333-2C02C4211D98.html" rel="next">Data Sources</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-8208B292-419A-41F3-A057-30FB13502904__GUID-2E45B1AA-DF00-4501-93D2-0E052A72BCAF" style="">13.2 Polynomial Implementation</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The CRC polynomial equation is user configurable, allowing any polynomial
+            equation to be used for the CRC checksum calculation. The polynomial and accumulator
+            sizes are determined by the <a class="- topic/xref xref" href="GUID-C7B282D4-0BC9-4041-8F81-8CC8E86624D0.html#ID-00000039" title="Polynomial Length"><span><span>PLEN</span></span></a> bits. For an n-bit accumulator, PLEN = n-1 and the corresponding
+            polynomial is n+1 bits. This allows the accumulator to be any size up to 32 bits with a
+            corresponding polynomial up to 33 bits. The MSb and LSb of the polynomial are always
+                ‘<code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-8208B292-419A-41F3-A057-30FB13502904__ID-42114-0000086A">1</code>’ which is forced by hardware. Therefore,
+            the LSb of the <a class="- topic/xref xref" href="GUID-E9C44536-06E7-4270-B08A-FA3F2525E806.html" title="CRCXOR">CRCXOR</a> Low Byte register is hardwired high and always reads as
+                ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’.</p>
+        <p class="- topic/p p">All polynomial bits between the MSb and LSb are specified by the CRCXOR registers. For
+            example, when using the standard CRC32, the polynomial is defined as
+                <code class="+ topic/ph pr-d/codeph ph codeph">0x4C11DB7</code>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                    <mrow>
+                        <mrow>
+                            <mo>(</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>32</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>26</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>23</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>22</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>16</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>12</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>11</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>10</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>8</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>7</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>5</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>4</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>2</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <mi>x</mi>
+                            <mo>+</mo>
+                            <mn>1</mn>
+                            <mo>)</mo>
+                        </mrow>
+                    </mrow>
+                </math>. In this polynomial, the X<sup class="+ topic/ph hi-d/sup ph sup">32</sup> and X<sup class="+ topic/ph hi-d/sup ph sup">0</sup> terms are the MSb
+            and LSb controlled by hardware. The X<sup class="+ topic/ph hi-d/sup ph sup">31</sup> and X<sup class="+ topic/ph hi-d/sup ph sup">1</sup> terms are specified
+            by setting the CRCXOR[31:0] bits with the corresponding polynomial value, which in this
+            example is <code class="+ topic/ph pr-d/codeph ph codeph">0x04C11DB6</code>. Reading the CRCXOR registers will return
+                <code class="+ topic/ph pr-d/codeph ph codeph">0x04C11DB7</code> because the LSb is always ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’. Refer to
+            the following example for more details.</p>
+        <div class="- topic/example example" id="GUID-8208B292-419A-41F3-A057-30FB13502904__GUID-B477D56B-DF50-4916-B2B1-009576F96684" data-ofbid="GUID-8208B292-419A-41F3-A057-30FB13502904__GUID-B477D56B-DF50-4916-B2B1-009576F96684"><h2 class="- topic/title title sectiontitle">CRC32 Example</h2><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Standard
+                    CRC32 Polynomial (33 bits): </strong></p><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                    <mrow>
+                        <mrow>
+                            <mo>(</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>32</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>26</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>23</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>22</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>16</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>12</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>11</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>10</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>8</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>7</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>5</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>4</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>x</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>2</mn>
+                                </mrow>
+                            </msup>
+                            <mo>+</mo>
+                            <mi>x</mi>
+                            <mo>+</mo>
+                            <mn>1</mn>
+                            <mo>)</mo>
+                        </mrow>
+                    </mrow>
+                </math><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Standard 32-bit Polynomial Representation:
+                    </strong><code class="+ topic/ph pr-d/codeph ph codeph">0x04C11DB7</code></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">CRCXORT = 0x04 =
+                    0b00000100</code></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">CRCXORU = 0xC1 =
+                    0b11000001</code></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">CRCXORH = 0x1D =
+                    0b00011101</code></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">CRCXORL = 0xB7 = 0b1011011-
+                        </code><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong></p><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Data Sequence: </strong><code class="+ topic/ph pr-d/codeph ph codeph">0x55,
+                    0x66, 0x77, 0x88</code>
+            </p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">DLEN = 0b00111 // Number of bits written to CRCDATA registers (Data
+                    Length)</code></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">PLEN = 0b11111 // MSb position of the polynomial
+                    (Polynomial Length)</code></p><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Data passed into the
+                    CRC:</strong></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">// SHIFTM = 0(Shift Mode: MSb
+                    first)</code></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">0x55 0x66 0x77 0x88 = 01010101 01100110 01110111
+                    10001000</code></p><p class="- topic/p p"> </p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">// SHIFTM = 1(Shift Mode: LSb
+                    first)</code></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">0x55 0x66 0x77 0x88 = 10101010 01100110 11101110
+                    00010001</code></p><p class="- topic/p p"> </p><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">CRC Check Value (</strong><strong class="+ topic/ph hi-d/b ph b"><code class="+ topic/ph pr-d/codeph ph codeph">ACCM =
+                        1</code></strong><strong class="+ topic/ph hi-d/b ph b">, data are augmented with zeros)</strong></p><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b"><code class="+ topic/ph pr-d/codeph ph codeph">//
+                        When SHIFTM = 0, CRC Result = 0xC60D8323</code></strong></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">CRCOUTT
+                    = 0xC6 = 0b11000110</code></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">CRCOUTU = 0x0D =
+                0b00001101</code></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">CRCOUTH = 0x83 =
+                    0b10000011</code></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">CRCOUTL = 0x23 =
+                        0b00100011</code></p><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b"><code class="+ topic/ph pr-d/codeph ph codeph">// When SHIFTM = 1, CRC Result =
+                        0x843529CC</code></strong></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">CRCOUTT = 0x84 =
+                0b10000100</code></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">CRCOUTU = 0x35 =
+                    0b00110101</code></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">CRCOUTH = 0x29 =
+                    0b00101001</code></p><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">CRCOUTL = 0xCC = 0b11001100</code></p><div class="- topic/note note notype note_notype" id="GUID-8208B292-419A-41F3-A057-30FB13502904__GUID-33DD28BD-C554-4DA4-9F1D-4585D81273AB" data-ofbid="GUID-8208B292-419A-41F3-A057-30FB13502904__GUID-33DD28BD-C554-4DA4-9F1D-4585D81273AB"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-8208B292-419A-41F3-A057-30FB13502904__GUID-1AD0ADF1-A94C-404E-AF60-25907B5A092B" data-ofbid="GUID-8208B292-419A-41F3-A057-30FB13502904__GUID-1AD0ADF1-A94C-404E-AF60-25907B5A092B">
+                    <li class="- topic/li li" id="GUID-8208B292-419A-41F3-A057-30FB13502904__GUID-0309BAD4-4DA7-44EA-AA26-86AFD59308E9" data-ofbid="GUID-8208B292-419A-41F3-A057-30FB13502904__GUID-0309BAD4-4DA7-44EA-AA26-86AFD59308E9">Bit 0 is unimplemented. The
+                        LSb of any CRC polynomial is always ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’ and will always be
+                        treated as a ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’ by the CRC for calculating the CRC check
+                        value. This bit will be read in software as a ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’.</li>
+                </ol>
+            </div></div>
+    </div>
+
+</body>
+</html>

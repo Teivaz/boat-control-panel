@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.3.4.5 Calculation of Required Message Memory — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-FDA6F52B-A276-47A5-A4CF-AB0F0938B4B2.html"/>
+<link rel="next" href="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1.html"/>
+<link rel="up" href="GUID-B6BA9D73-3BDC-4B38-9578-8167E784EE90.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html">38.3 Configuration</a></li><li><a href="GUID-B6BA9D73-3BDC-4B38-9578-8167E784EE90.html">38.3.4 Message Memory Configuration</a></li><li>38.3.4.5 Calculation of Required Message Memory</li></ol>
+  <div class="sib"><span>← <a href="GUID-FDA6F52B-A276-47A5-A4CF-AB0F0938B4B2.html" rel="prev">Receive FIFO Configuration</a></span><span><a href="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1.html" rel="next">CAN FD Message Frames</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__GUID-C3C7181D-AE06-4993-B6D6-9D8D299F47AE" style="">38.3.4.5 Calculation of Required Message Memory</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The size of required RAM depends on the configuration of each FIFO. <a class="- topic/xref xref" href="#GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__EQUATION-FIGURE_QXS_MLG_P3B"><span>Equation 38-17</span></a> through <a class="- topic/xref xref" href="#GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__EQUATION-FIGURE_QQK_1DH_P3B"><span>Equation 38-19</span></a> specify the sizes of the TEF, TXQ and the FIFOs in
+            bytes. The TEF or TXQ is not used if their size is zero.</p>
+        <p class="- topic/p p">Since the size of the integrated RAM is limited, the user must check that
+            the memory configuration fits into RAM. <a class="- topic/xref xref" href="#GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__EQUATION-FIGURE_THR_3DH_P3B"><span>Equation 38-20</span></a> can be used to calculate the total RAM usage in bytes.</p>
+        <p class="- topic/p p">The size of the TEF objects depends on the enabling of timestamping. If TEFTSEN is set,
+            then tefts = 4, else tefts = 0.</p>
+        <p class="- topic/p p">The <em class="+ topic/ph hi-d/i ph i">PayLoad(i)</em> is defined in data bytes.</p>
+        <p class="- topic/p p">The size of a message object of an RX FIFO varies dependent on the enabling
+            of timestamping. If RXTSEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and TXEN = <code class="+ topic/ph pr-d/codeph ph codeph">0</code> for
+                <em class="+ topic/ph hi-d/i ph i">FIFO(i)</em>, then <em class="+ topic/ph hi-d/i ph i">rxts(i)</em> = 4, else <em class="+ topic/ph hi-d/i ph i">rxts(i)</em> = 0.</p>
+        <p class="- topic/p p"><em class="+ topic/ph hi-d/i ph i">N</em> is defined as the number of FIFOs used in addition to the TEF and
+            the TXQ.</p>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__EQUATION-FIGURE_QXS_MLG_P3B" data-ofbid="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__EQUATION-FIGURE_QXS_MLG_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-17. <span id="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__GUID-24BB7D14-DDDE-4FE3-81D0-93A64F86E8E3" class="fig--title">Size of TEF</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi>S</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>T</mi>
+                                    <mi>E</mi>
+                                    <mi>F</mi>
+                                </mrow>
+                            </msub>
+                            <mo>=</mo>
+                            <msub>
+                                <mrow>
+                                    <mi>N</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>E</mi>
+                                    <mi>L</mi>
+                                    <mi>E</mi>
+                                    <mi>M</mi>
+                                    <mi>E</mi>
+                                    <mi>N</mi>
+                                    <mi>T</mi>
+                                    <mi>S</mi>
+                                </mrow>
+                            </msub>
+                            <mo>(</mo>
+                            <mi>T</mi>
+                            <mi>E</mi>
+                            <mi>F</mi>
+                            <mo>)</mo>
+                            <mo>×</mo>
+                            <mo>(</mo>
+                            <mi>t</mi>
+                            <mi>e</mi>
+                            <mi>f</mi>
+                            <mi>t</mi>
+                            <mi>s</mi>
+                            <mo>+</mo>
+                            <mn>8</mn>
+                            <mo>)</mo>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__EQUATION-FIGURE_KGL_QLG_P3B" data-ofbid="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__EQUATION-FIGURE_KGL_QLG_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-18. <span id="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__GUID-517F704A-86AD-488A-BF72-8259D2D6E908" class="fig--title">Size of TXQ</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi>S</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>T</mi>
+                                    <mi>X</mi>
+                                    <mi>Q</mi>
+                                </mrow>
+                            </msub>
+                            <mo>=</mo>
+                            <msub>
+                                <mrow>
+                                    <mi>N</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>E</mi>
+                                    <mi>L</mi>
+                                    <mi>E</mi>
+                                    <mi>M</mi>
+                                    <mi>E</mi>
+                                    <mi>N</mi>
+                                    <mi>T</mi>
+                                    <mi>S</mi>
+                                </mrow>
+                            </msub>
+                            <mo>(</mo>
+                            <mi>T</mi>
+                            <mi>X</mi>
+                            <mi>Q</mi>
+                            <mo>)</mo>
+                            <mo>×</mo>
+                            <mo>(</mo>
+                            <mn>8</mn>
+                            <mo>+</mo>
+                            <mi>P</mi>
+                            <mi>a</mi>
+                            <mi>y</mi>
+                            <mi>L</mi>
+                            <mi>o</mi>
+                            <mi>a</mi>
+                            <mi>d</mi>
+                            <mo>(</mo>
+                            <mi>T</mi>
+                            <mi>X</mi>
+                            <mi>Q</mi>
+                            <mo>)</mo>
+                            <mo>)</mo>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__EQUATION-FIGURE_QQK_1DH_P3B" data-ofbid="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__EQUATION-FIGURE_QQK_1DH_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-19. <span id="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__GUID-D52D0FD7-B064-48BA-A2C6-346643EE5177" class="fig--title">Size of FIFOs</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi>S</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>F</mi>
+                                    <mi>I</mi>
+                                    <mi>F</mi>
+                                    <mi>O</mi>
+                                </mrow>
+                            </msub>
+                            <mo>(</mo>
+                            <mi>i</mi>
+                            <mo>)</mo>
+                            <mo>=</mo>
+                            <msub>
+                                <mrow>
+                                    <mi>N</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>E</mi>
+                                    <mi>L</mi>
+                                    <mi>E</mi>
+                                    <mi>M</mi>
+                                    <mi>E</mi>
+                                    <mi>N</mi>
+                                    <mi>T</mi>
+                                    <mi>S</mi>
+                                </mrow>
+                            </msub>
+                            <mo>(</mo>
+                            <mi>i</mi>
+                            <mo>)</mo>
+                            <mo>×</mo>
+                            <mo>(</mo>
+                            <mi>r</mi>
+                            <mi>x</mi>
+                            <mi>t</mi>
+                            <mi>s</mi>
+                            <mo>(</mo>
+                            <mi>i</mi>
+                            <mo>)</mo>
+                            <mo>+</mo>
+                            <mn>8</mn>
+                            <mo>+</mo>
+                            <mi>P</mi>
+                            <mi>a</mi>
+                            <mi>y</mi>
+                            <mi>L</mi>
+                            <mi>o</mi>
+                            <mi>a</mi>
+                            <mi>d</mi>
+                            <mo>(</mo>
+                            <mi>i</mi>
+                            <mo>)</mo>
+                            <mo>)</mo>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__EQUATION-FIGURE_THR_3DH_P3B" data-ofbid="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__EQUATION-FIGURE_THR_3DH_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-20. <span id="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__GUID-9D368F8A-88A5-4A33-9025-5D3100B16352" class="fig--title">Total RAM Usage</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi>S</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>R</mi>
+                                    <mi>A</mi>
+                                    <mi>M</mi>
+                                </mrow>
+                            </msub>
+                            <mo>=</mo>
+                            <mrow>
+                                <mo>(</mo>
+                                <msub>
+                                    <mrow>
+                                        <mi>S</mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mi>T</mi>
+                                        <mi>E</mi>
+                                        <mi>F</mi>
+                                    </mrow>
+                                </msub>
+                                <mo>+</mo>
+                                <msub>
+                                    <mrow>
+                                        <mi>S</mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mi>T</mi>
+                                        <mi>X</mi>
+                                        <mi>Q</mi>
+                                    </mrow>
+                                </msub>
+                                <mo>+</mo>
+                                <mrow>
+                                    <munderover>
+                                        <mo>∑</mo>
+                                        <mrow>
+                                            <mi>i</mi>
+                                            <mo>=</mo>
+                                            <mn>1</mn>
+                                        </mrow>
+                                        <mrow>
+                                            <mi>N</mi>
+                                        </mrow>
+                                    </munderover>
+                                    <msub>
+                                        <mrow>
+                                            <mi>S</mi>
+                                        </mrow>
+                                        <mrow>
+                                            <mi>F</mi>
+                                            <mi>I</mi>
+                                            <mi>F</mi>
+                                            <mi>O</mi>
+                                        </mrow>
+                                    </msub>
+                                    <mo>(</mo>
+                                    <mi>i</mi>
+                                    <mo>)</mo>
+                                </mrow>
+                                <mo>)</mo>
+                            </mrow>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+        <div class="- topic/p p">For example:<ul class="- topic/ul ul" id="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__UL_E3P_JTL_43B" data-ofbid="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__UL_E3P_JTL_43B">
+                <li class="- topic/li li" id="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__GUID-189E06F9-8A51-4671-A838-9FE6DDE7F9B9" data-ofbid="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__GUID-189E06F9-8A51-4671-A838-9FE6DDE7F9B9"> If TEF is 4 messages deep
+                        (N<sub class="+ topic/ph hi-d/sub ph sub">Elements</sub> (TEF) = 4) and TEFTSEN is clear, then the size of TEF
+                    = S<sub class="+ topic/ph hi-d/sub ph sub">TEF</sub> = 4 x (0 + 8) = 32 bytes</li>
+                <li class="- topic/li li" id="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__GUID-9195595D-21A9-4072-BE9D-908125F42673" data-ofbid="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__GUID-9195595D-21A9-4072-BE9D-908125F42673">If N<sub class="+ topic/ph hi-d/sub ph sub">Elements</sub> (TXQ) =
+                    1, PayLoad (TXQ) = 12, then the size of TXQ = S<sub class="+ topic/ph hi-d/sub ph sub">TXQ</sub> = 1 x (8 + 12) =
+                    20 bytes</li>
+                <li class="- topic/li li" id="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__GUID-65643CBC-41AE-4D6D-B788-B9938027DFAC" data-ofbid="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A__GUID-65643CBC-41AE-4D6D-B788-B9938027DFAC">If N<sub class="+ topic/ph hi-d/sub ph sub">Elements</sub> (FIFO) =
+                    3, PayLoad (FIFO) = 8, then the size of FIFO = S<sub class="+ topic/ph hi-d/sub ph sub">FIFO</sub> = 3 x (8 + 8) =
+                    48 bytes</li>
+            </ul></div>
+        <p class="- topic/p p">Therefore, S<sub class="+ topic/ph hi-d/sub ph sub">RAM</sub> = S<sub class="+ topic/ph hi-d/sub ph sub">TEF</sub> + S<sub class="+ topic/ph hi-d/sub ph sub">TXQ</sub> +
+                S<sub class="+ topic/ph hi-d/sub ph sub">FIFO</sub> = 32 + 20 + 48 = 100 bytes.</p>
+    </div>
+
+</body>
+</html>

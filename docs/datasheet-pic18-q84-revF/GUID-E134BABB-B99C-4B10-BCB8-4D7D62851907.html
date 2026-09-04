@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.4.5.2 Reset Event — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D.html"/>
+<link rel="next" href="GUID-A0D57AB5-909A-46BF-9972-621A49224C58.html"/>
+<link rel="up" href="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html">28.4 UTMR Operation</a></li><li><a href="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF.html">28.4.5 Start, Stop and Reset Events</a></li><li>28.4.5.2 Reset Event</li></ol>
+  <div class="sib"><span>← <a href="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D.html" rel="prev">Start Event</a></span><span><a href="GUID-A0D57AB5-909A-46BF-9972-621A49224C58.html" rel="next">Stop Event</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-F9CBC91C-7E3E-4235-A925-CCA45C8E2195" style="">28.4.5.2 Reset Event</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The Reset event for the counter/timer Reset is selected using the <a class="- topic/xref xref" href="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A.html#ID-0000001A" title="Counter Reset Condition Select(4,5,6,7,8)">RESET</a> bits in the TUxyHLT register. The Reset function dominates
+            the operation of the counter.</div>
+        <p class="- topic/p p"> The available options include:</p>
+        <ol class="- topic/ol ol" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__OL_IYV_YRK_43B" data-ofbid="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__OL_IYV_YRK_43B">
+            <li class="- topic/li li" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-54284265-E3E9-44A2-9174-19294B31A264" data-ofbid="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-54284265-E3E9-44A2-9174-19294B31A264">No hardware Reset: No hardware Reset
+                of the counter/timer. The counter will continue to the full value and roll over to
+                zero.</li>
+            <li class="- topic/li li" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-813D2F29-AAA6-47DD-B6AF-2466ED23DA69" data-ofbid="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-813D2F29-AAA6-47DD-B6AF-2466ED23DA69">ERS = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>
+                (level-triggered): The counter/timer resets at the presence of a logic zero of the
+                ERS signal and/or when the TUxyTMR counter register is equal to the TUxyPR period
+                register. When the <a class="- topic/xref xref" href="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A.html#ID-00000005" title="ERS Polarity Selection">EPOL</a> bit is set, the polarity is inverted and the
+                counter/timer resets at the presence of a logic one of the ERS signal. This prevents
+                any start event from advancing the counter and RUN bit is held at zero. See <a class="- topic/xref xref" href="#GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-32106C9F-26D4-418E-BB26-F8E92740AF04"><span>Figure 28-9</span></a> for an example of a level-triggered ERS Reset.<a class="- topic/xref xref" href="#GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-2C1AD6BA-E8F1-4C0A-AE7A-3402A4BB49D0"><sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b">(2)</strong></sup></a></li>
+            <li class="- topic/li li" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-992D75AB-C3AA-4CA4-8521-4D4CCFFB3E33" data-ofbid="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-992D75AB-C3AA-4CA4-8521-4D4CCFFB3E33">At a start event: The counter/timer
+                resets at the first clock of the counter/timer start and/or when the TUxyTMR counter
+                register is equal to the TUxyPR period register. The number of cycles needed to
+                reach PR match is extended by one. If the Start condition is ERS =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">1</code> (or ERS = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, based on EPOL selection), the
+                Reset will only apply to the leading ERS edge. See <a class="- topic/xref xref" href="#GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__FIG_PF5_HLV_WLB"><span>Figure 28-11</span></a> for an example of Reset at a Start event.<a class="- topic/xref xref" href="#GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-2C1AD6BA-E8F1-4C0A-AE7A-3402A4BB49D0"><sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b">(2)</strong></sup></a></li>
+            <li class="- topic/li li" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-CA64229F-57FB-4892-897F-0E84245554BD" data-ofbid="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-CA64229F-57FB-4892-897F-0E84245554BD">At period match: The counter/timer
+                resets when TUxyTMR counter register is equal to the TUxyPR period register.</li>
+        </ol>
+        <div class="- topic/note note important note_important" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-7FF48CA4-6302-4E56-9C0E-78F547B7EA84" data-ofbid="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-7FF48CA4-6302-4E56-9C0E-78F547B7EA84"><span class="note__title">Important:</span> 
+            <ol class="- topic/ol ol" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__OL_JPX_XRG_TLB" data-ofbid="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__OL_JPX_XRG_TLB">
+                <li class="- topic/li li" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-5BD701EE-F8C1-49C9-B8CC-BB90FEA8CFE1" data-ofbid="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-5BD701EE-F8C1-49C9-B8CC-BB90FEA8CFE1">If the counter is already zero, a
+                    Reset event will not trigger ZIF interrupt.</li>
+                <li class="- topic/li li" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-2C1AD6BA-E8F1-4C0A-AE7A-3402A4BB49D0" data-ofbid="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-2C1AD6BA-E8F1-4C0A-AE7A-3402A4BB49D0">When prescaler &gt; 0, then any
+                    ERS or Start-based Reset event that occurs during a PR match period will reset
+                    the timer counter and prescaler counter immediately, and the pulse output will
+                    not occur. If the Reset event collides with the pulse output (regardless of
+                    prescaler setting), then the pulse output will occur naturally and the counter
+                    will reset at the next prescaler counter naturally.</li>
+                <li class="- topic/li li" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-9A9349C3-9CB3-4C5E-9F4B-2C32A93C53CD" data-ofbid="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-9A9349C3-9CB3-4C5E-9F4B-2C32A93C53CD">In the event of a level-triggered Start/Reset, the active level must be asserted
+                    for at least one timer clock period to ensure proper sampling. If the duration
+                    of the asserted level is less than one timer clock, there is a possibility of
+                    the level trigger being missed and not sampled by the timer module.</li>
+            </ol>
+        </div>
+        <figure class="- topic/fig fig fignone" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__FIG_VKK_Y3R_S3B" data-ofbid="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__FIG_VKK_Y3R_S3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 28-8. <span id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-14615B6C-A018-47BA-A87B-AC05290A6A37" class="fig--title">Coincidental Start and Stop</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-B41E733B-DD45-4B43-8AD1-EA18C34F8E63-high.pdf#toolbar=1" width="491.86" height="556.13"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-32106C9F-26D4-418E-BB26-F8E92740AF04" data-ofbid="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-32106C9F-26D4-418E-BB26-F8E92740AF04"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 28-9. <span id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-8CE93C9C-5153-4C1F-9C82-2530FF523BD8" class="fig--title">ERS = <code class="+ topic/ph pr-d/codeph ph codeph">0</code> Level
+                Reset</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-0D543185-A90B-45CC-8EBD-ACD0D6C017E1-high.pdf#toolbar=1" width="493.03" height="539.46"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__FIG_YRN_CLV_WLB" data-ofbid="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__FIG_YRN_CLV_WLB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 28-10. <span id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-2096DBBD-46E3-4089-90A5-7DB00B499550" class="fig--title">Rising Edge Start and Either Edge Stop</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-1A1C694C-1886-40BE-9F4A-18D69EEC968F-high.pdf#toolbar=1" width="499.24" height="551.37"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__FIG_PF5_HLV_WLB" data-ofbid="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__FIG_PF5_HLV_WLB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 28-11. <span id="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__GUID-7ECB7B27-A00A-49AA-BC4F-F573327C94A4" class="fig--title">Reset at Level Start and Stop at PR Match</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-1A029360-3E06-4ED4-B513-B9F408014B8E-high.pdf#toolbar=1" width="498.49" height="484.95"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16 DMA - Direct Memory Access — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-22095F15-1CF2-472B-9218-C2E70233C9B5.html"/>
+<link rel="next" href="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>16 DMA - Direct Memory Access</li></ol>
+  <div class="sib"><span>← <a href="GUID-22095F15-1CF2-472B-9218-C2E70233C9B5.html" rel="prev">Register Summary - WDT Control</a></span><span><a href="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812.html" rel="next">DMA Registers</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-DF2B4857-8551-40EC-88D6-2DD14C660081" style="">16 DMA - Direct Memory Access</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The Direct Memory Access (DMA) module is designed to service data transfers
+            between different memory regions directly, without intervention from the CPU. By
+            eliminating the need for CPU-intensive management of handling interrupts intended for
+            data transfers, the CPU now can spend more time on other tasks.</p>
+        <p class="- topic/p p">The DMA modules can be independently programmed to transfer data between different memory
+            locations, move different data sizes, and use a wide range of hardware triggers to
+            initiate transfers. The DMA modules can even be programmed to work together, to carry
+            out more complex data transfers without CPU overhead.</p>
+        <div class="- topic/p p">Key features of the DMA module include:<ul class="- topic/ul ul" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__UL_ADX_ZWY_QFB" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__UL_ADX_ZWY_QFB">
+                <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-4CD57E73-D359-4BB4-82D1-A2FE4C64C0D1" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-4CD57E73-D359-4BB4-82D1-A2FE4C64C0D1"> Support access to the following
+                    memory regions:<ul class="- topic/ul ul" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__UL_XCL_1XY_QFB" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__UL_XCL_1XY_QFB">
+                        <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-BED5A501-2FB8-4D22-B32E-BC91F4F4E82B" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-BED5A501-2FB8-4D22-B32E-BC91F4F4E82B">GPR and SFR space
+                            (R/W)</li>
+                        <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-E1AF6007-1C77-44BF-9464-9D0F9FC9C60F" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-E1AF6007-1C77-44BF-9464-9D0F9FC9C60F"> Program Flash memory (R
+                            only)</li>
+                        <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-E530E377-3359-4367-B8FC-B97A6075EDB4" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-E530E377-3359-4367-B8FC-B97A6075EDB4">Data EEPROM memory (R
+                            only)</li>
+                    </ul></li>
+                <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-E78F7680-023B-4AE6-853F-E71A471E8471" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-E78F7680-023B-4AE6-853F-E71A471E8471"> Programmable priority between
+                    the DMA and CPU operations. Refer to the <strong class="+ topic/ph hi-d/b ph b">“System Arbitration”</strong> section in
+                    the <strong class="+ topic/ph hi-d/b ph b">“PIC18 CPU”</strong> chapter for details.</li>
+                <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-44F74B4A-A657-4FE8-B20D-C365F072F774" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-44F74B4A-A657-4FE8-B20D-C365F072F774">Programmable Source and
+                    Destination Address modes:<ul class="- topic/ul ul" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__UL_U1D_FXY_QFB" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__UL_U1D_FXY_QFB">
+                        <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-3A0B1AEA-3659-4388-9278-24302EA727EA" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-3A0B1AEA-3659-4388-9278-24302EA727EA">Fixed address</li>
+                        <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-9C465604-81AC-42C7-8604-5749FFFBFEA1" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-9C465604-81AC-42C7-8604-5749FFFBFEA1">Post-increment
+                            address</li>
+                        <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-C3A0397E-632A-4CC9-86F5-415AD2C2B83E" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-C3A0397E-632A-4CC9-86F5-415AD2C2B83E">Post-decrement
+                            address</li>
+                    </ul></li>
+                <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-0C27141F-D2D5-4154-81E4-CB1836EF1AA7" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-0C27141F-D2D5-4154-81E4-CB1836EF1AA7">Programmable source and
+                    destination sizes</li>
+                <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-3A1D0BC0-8880-42DF-8AA6-7D7C74711A66" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-3A1D0BC0-8880-42DF-8AA6-7D7C74711A66">Source and Destination Pointer
+                    register, dynamically updated and reloadable</li>
+                <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-FFD3CAC3-8796-4E5B-99E7-C99A16E0B5BF" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-FFD3CAC3-8796-4E5B-99E7-C99A16E0B5BF">Source and Destination Count
+                    register, dynamically updated and reloadable</li>
+                <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-D6B6FB40-E9C5-4C9E-AD9B-33A7AE81E867" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-D6B6FB40-E9C5-4C9E-AD9B-33A7AE81E867">Programmable auto-stop based on
+                    source or destination counter</li>
+                <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-1A38C22D-5CCF-4094-8365-9072A8D8AEC9" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-1A38C22D-5CCF-4094-8365-9072A8D8AEC9">Software triggered transfers</li>
+                <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-E6040D76-4C02-4422-944A-538F5A809694" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-E6040D76-4C02-4422-944A-538F5A809694">Multiple user-selectable sources
+                    for hardware triggered transfers</li>
+                <li class="- topic/li li" id="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-1ABA803A-1C57-455D-B2F6-FA36F38B6B29" data-ofbid="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4__GUID-1ABA803A-1C57-455D-B2F6-FA36F38B6B29">Multiple user-selectable sources
+                    for aborting DMA transfers</li>
+            </ul></div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812.html">16.1 DMA Registers</a></li><li><a href="GUID-1050B102-E6EA-4402-9BBA-A02B371CE765.html">16.2 DMA Organization</a></li><li><a href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html">16.3 DMA Interface</a></li><li><a href="GUID-DFAEA367-729B-47CF-94B3-6C25921DA243.html">16.4 Disable DMA Message Transfer Upon Completion</a></li><li><a href="GUID-18D59452-D106-4136-A97B-EDDF86BBCBD6.html">16.5 Types of Hardware Triggers</a></li><li><a href="GUID-EEB7E3B6-C9D8-40A9-BFCB-A9205CAF75DF.html">16.6 Types of Data Transfers</a></li><li><a href="GUID-536ADB7B-6620-40D5-810D-522DB8E6C145.html">16.7 DMA Interrupts</a></li><li><a href="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA.html">16.8 DMA Setup and Operation</a></li><li><a href="GUID-FC895CE6-CE5A-4B6F-A1AA-3B1509C2CEE8.html">16.9 Reset</a></li><li><a href="GUID-0FFDB432-5731-43B9-87D8-438C7F179022.html">16.10 Power-Saving Mode Operation</a></li><li><a href="GUID-98878B67-18C6-4140-B598-558FA35110B2.html">16.11 Example Setup Code</a></li><li><a href="GUID-B05CE25E-9FA9-4293-85A6-CC19942B67BD.html">16.12 Register Overlay</a></li><li><a href="GUID-23F905A7-5019-4E0F-9454-D45A360073DB.html">16.13 Register Definitions: DMA</a></li><li><a href="GUID-1AD585FC-8301-412D-B4FC-484BD52BBBCB.html">16.14 Register Summary - DMA</a></li></ul>
+</nav>
+</body>
+</html>

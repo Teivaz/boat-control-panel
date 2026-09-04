@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>47.2.3.1 Extended Instruction Syntax with Standard PIC18 Commands — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672.html"/>
+<link rel="next" href="GUID-1CCF23CB-4FA5-4227-9302-ECA4AA20708C.html"/>
+<link rel="up" href="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-136E7F45-6464-4E35-80B5-A6E3A67AD53F.html">47 Instruction Set Summary</a></li><li><a href="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9.html">47.2 Extended Instruction Set</a></li><li><a href="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672.html">47.2.3 Byte-Oriented and Bit-Oriented Instructions in Indexed Literal Offset Mode</a></li><li>47.2.3.1 Extended Instruction Syntax with Standard PIC18 Commands</li></ol>
+  <div class="sib"><span>← <a href="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672.html" rel="prev">Byte-Oriented and Bit-Oriented Instructions in Indexed Literal Offset Mode</a></span><span><a href="GUID-1CCF23CB-4FA5-4227-9302-ECA4AA20708C.html" rel="next">Considerations when Enabling the Extended Instruction Set</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-088E2BBE-A48C-47C7-B575-4D6592FB6C3F__GUID-B1ECE1E6-8680-4294-9286-0CB3208061C4" style="">47.2.3.1 Extended Instruction Syntax with Standard PIC18 Commands</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-088E2BBE-A48C-47C7-B575-4D6592FB6C3F__ID-42120-00003D59" data-ofbid="GUID-088E2BBE-A48C-47C7-B575-4D6592FB6C3F__ID-42120-00003D59">When the extended instruction set is enabled, the file register
+         argument, ‘f’, in the standard byte-oriented and bit-oriented commands is replaced with the
+         literal offset value, ‘k’. As already noted, this occurs only when ‘f’ is less than or
+         equal to <code class="+ topic/ph pr-d/codeph ph codeph">5Fh</code>. When an offset value is used, it must be indicated by square
+         brackets (“<code class="+ topic/ph pr-d/codeph ph codeph">[ ]</code>”). As with the extended instructions, the use of brackets
+         indicates to the compiler that the value is to be interpreted as an index or an offset.
+         Omitting the brackets or using a value greater than 5Fh within brackets will generate an
+         error in the MPASM Assembler.</p>
+      <p class="- topic/p p" id="GUID-088E2BBE-A48C-47C7-B575-4D6592FB6C3F__ID-42120-00003D5A" data-ofbid="GUID-088E2BBE-A48C-47C7-B575-4D6592FB6C3F__ID-42120-00003D5A">If the index argument is properly bracketed for Indexed Literal
+         Offset Addressing, the Access RAM argument is never specified; it will automatically be
+         assumed to be ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’. This is in contrast to standard operation (extended
+         instruction set disabled) when ‘a’ is set on the basis of the target address. Declaring the
+         Access RAM bit in this mode will also generate an error in the MPASM Assembler.</p>
+      <p class="- topic/p p" id="GUID-088E2BBE-A48C-47C7-B575-4D6592FB6C3F__ID-42120-00003D5C" data-ofbid="GUID-088E2BBE-A48C-47C7-B575-4D6592FB6C3F__ID-42120-00003D5C">The destination argument, ‘d’, functions as before.</p>
+      <p class="- topic/p p" id="GUID-088E2BBE-A48C-47C7-B575-4D6592FB6C3F__ID-42120-00003D5D" data-ofbid="GUID-088E2BBE-A48C-47C7-B575-4D6592FB6C3F__ID-42120-00003D5D">In the latest versions of the MPASM Assembler, language support for
+         the extended instruction set must be explicitly invoked. This is done with either the
+         command-line option, <code class="+ topic/ph pr-d/codeph ph codeph">/y</code>, or the PE directive in the source listing.</p>
+   </div>
+
+</body>
+</html>

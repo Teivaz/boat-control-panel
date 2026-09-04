@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>5.2.2 Long Bit Names — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-16AA4557-8F6A-4B29-9D6C-D6374ED3419D.html"/>
+<link rel="next" href="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B.html"/>
+<link rel="up" href="GUID-87BF53B6-3719-402C-A05E-D49AFD5D2CE5.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-ADAB72FF-09FA-4F32-AAA9-DEB6E81A5531.html">5 Register and Bit Naming Conventions</a></li><li><a href="GUID-87BF53B6-3719-402C-A05E-D49AFD5D2CE5.html">5.2 Bit Names</a></li><li>5.2.2 Long Bit Names</li></ol>
+  <div class="sib"><span>← <a href="GUID-16AA4557-8F6A-4B29-9D6C-D6374ED3419D.html" rel="prev">Short Bit Names</a></span><span><a href="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B.html" rel="next">Bit Fields</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-485FF055-4C40-49EF-9C61-5A52DF3337F5__GUID-9B460BB2-B726-4877-BFF4-5BBEC5E98272" style="">5.2.2 Long Bit Names</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-485FF055-4C40-49EF-9C61-5A52DF3337F5__ID-42132-0000039D" data-ofbid="GUID-485FF055-4C40-49EF-9C61-5A52DF3337F5__ID-42132-0000039D">Long bit names are constructed by adding a peripheral abbreviation
+         prefix to the short name. The prefix is unique to the peripheral, thereby making every long
+         bit name unique. The long bit name for the ADC enable bit is the ADC prefix, AD, appended
+         with the enable bit short name, ON, resulting in the unique bit name ADON.</p>
+      <p class="- topic/p p" id="GUID-485FF055-4C40-49EF-9C61-5A52DF3337F5__ID-42132-0000039E" data-ofbid="GUID-485FF055-4C40-49EF-9C61-5A52DF3337F5__ID-42132-0000039E">Long bit names are useful in both C and assembly programs. For
+         example, in C the ADCON0 enable bit can be set with the <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-485FF055-4C40-49EF-9C61-5A52DF3337F5__ID-42132-0000039F">ADON
+            = 1</code> instruction. In assembly, this bit can be set with the <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-485FF055-4C40-49EF-9C61-5A52DF3337F5__ID-42132-000003A0">BSF ADCON0,ADON</code> instruction.</p>
+   </div>
+
+</body>
+</html>

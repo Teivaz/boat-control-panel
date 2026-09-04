@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>45.1 Comparator Overview — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-90365EBC-43EB-4517-8E49-99028902B25E.html"/>
+<link rel="next" href="GUID-FFD93E86-5117-4BDB-9254-4C657911903C.html"/>
+<link rel="up" href="GUID-90365EBC-43EB-4517-8E49-99028902B25E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-90365EBC-43EB-4517-8E49-99028902B25E.html">45 CMP - Comparator Module</a></li><li>45.1 Comparator Overview</li></ol>
+  <div class="sib"><span>← <a href="GUID-90365EBC-43EB-4517-8E49-99028902B25E.html" rel="prev">CMP - Comparator Module</a></span><span><a href="GUID-FFD93E86-5117-4BDB-9254-4C657911903C.html" rel="next">Comparator Control</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__GUID-C196AE3E-475A-426F-A7F0-585A587C0D31" style="">45.1 Comparator Overview</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__ID-42111-00000034" data-ofbid="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__ID-42111-00000034">A single comparator is shown in <a class="- topic/xref xref" href="#GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__ID-42111-0000003A"><span>Figure 45-1</span></a> along with the relationship between the analog input
+            levels and the digital output. When the analog voltage at V<sub class="+ topic/ph hi-d/sub ph sub">IN</sub>+ is less than
+            the analog voltage at V<sub class="+ topic/ph hi-d/sub ph sub">IN</sub>-, the output of the comparator is a digital low
+            level. When the analog voltage at V<sub class="+ topic/ph hi-d/sub ph sub">IN</sub>+ is greater than the analog voltage at
+                V<sub class="+ topic/ph hi-d/sub ph sub">IN</sub>-, the output of the comparator is a digital high level.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__ID-42111-0000003A" data-ofbid="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__ID-42111-0000003A"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 45-1. <span id="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__GUID-56DD0852-A510-4F78-9803-B4DB4B5F547D" class="fig--title">Single Comparator</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__IMAGE_YZC_45Q_L3B" src="GUID-A069F47D-AC7D-470A-83FE-C536848A209C-high.svg"/></span>
+            <div class="- topic/note note notype note_notype" id="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__GUID-31246685-DCC7-4D87-B3BF-2CA7419E003D" data-ofbid="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__GUID-31246685-DCC7-4D87-B3BF-2CA7419E003D"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__OL_QPH_BQY_ZZ" data-ofbid="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__OL_QPH_BQY_ZZ">
+                    <li class="- topic/li li" id="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__GUID-5D9680F6-F0BB-4C26-B741-76D78A1BFB61" data-ofbid="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__GUID-5D9680F6-F0BB-4C26-B741-76D78A1BFB61">The black areas of the output
+                        of the comparator represent the uncertainty due to input offsets and
+                        response time.</li>
+                </ol>
+            </div>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__FIG_ASS_RLS_MGB" data-ofbid="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__FIG_ASS_RLS_MGB">
+            <div class="- topic/p p">
+                <figure class="- topic/fig fig fignone" id="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__FIG_XWB_XLS_MGB" data-ofbid="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__FIG_XWB_XLS_MGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 45-2. <span id="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__GUID-F720925A-E897-4F81-853A-1C26024EF76B" class="fig--title">Comparator Module
+                        Simplified Block Diagram</span></span></figcaption>
+                    
+                    <span class=""><iframe src="GUID-01B3129A-A509-415D-9788-B4CC1B807A85-high.pdf#toolbar=1" width="450" height="336.90293999194523"></iframe></span>
+                </figure>
+            </div>
+        </figure>
+    </div>
+
+</body>
+</html>

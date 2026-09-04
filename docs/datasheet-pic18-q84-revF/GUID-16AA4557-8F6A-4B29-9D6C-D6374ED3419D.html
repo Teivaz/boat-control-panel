@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>5.2.1 Short Bit Names — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-87BF53B6-3719-402C-A05E-D49AFD5D2CE5.html"/>
+<link rel="next" href="GUID-485FF055-4C40-49EF-9C61-5A52DF3337F5.html"/>
+<link rel="up" href="GUID-87BF53B6-3719-402C-A05E-D49AFD5D2CE5.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-ADAB72FF-09FA-4F32-AAA9-DEB6E81A5531.html">5 Register and Bit Naming Conventions</a></li><li><a href="GUID-87BF53B6-3719-402C-A05E-D49AFD5D2CE5.html">5.2 Bit Names</a></li><li>5.2.1 Short Bit Names</li></ol>
+  <div class="sib"><span>← <a href="GUID-87BF53B6-3719-402C-A05E-D49AFD5D2CE5.html" rel="prev">Bit Names</a></span><span><a href="GUID-485FF055-4C40-49EF-9C61-5A52DF3337F5.html" rel="next">Long Bit Names</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-16AA4557-8F6A-4B29-9D6C-D6374ED3419D__GUID-CF3C359E-9022-4992-9721-01379A1DF2C7" style="">5.2.1 Short Bit Names</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-16AA4557-8F6A-4B29-9D6C-D6374ED3419D__ID-42132-00000395" data-ofbid="GUID-16AA4557-8F6A-4B29-9D6C-D6374ED3419D__ID-42132-00000395">Short bit names are an abbreviation for the bit function. For example, some peripherals are enabled with the EN bit. The bit names shown in the registers are the short name variant.</p>
+      <p class="- topic/p p" id="GUID-16AA4557-8F6A-4B29-9D6C-D6374ED3419D__ID-42132-00000396" data-ofbid="GUID-16AA4557-8F6A-4B29-9D6C-D6374ED3419D__ID-42132-00000396">Short bit names are useful when accessing bits in C programs. The
+         general format for accessing bits by the short name is RegisterNamebits.ShortName. For
+         example, the enable bit, ON, in the ADCON0 register can be set in C programs with the
+         instruction <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-16AA4557-8F6A-4B29-9D6C-D6374ED3419D__ID-42132-00000399">ADCON0bits.ON = 1</code>.</p>
+      <p class="- topic/p p" id="GUID-16AA4557-8F6A-4B29-9D6C-D6374ED3419D__ID-42132-0000039A" data-ofbid="GUID-16AA4557-8F6A-4B29-9D6C-D6374ED3419D__ID-42132-0000039A">Short names are not useful in assembly programs because the same
+         name may be used by different peripherals in different bit positions. When it occurs,
+         during the include file generation, the short bit name instances are appended with an
+         underscore plus the name of the register where the bit resides, to avoid naming
+         contentions.</p>
+   </div>
+
+</body>
+</html>

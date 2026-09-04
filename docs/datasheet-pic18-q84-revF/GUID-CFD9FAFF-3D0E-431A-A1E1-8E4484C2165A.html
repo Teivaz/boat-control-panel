@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.5 Interrupt Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-05128B98-0576-44E5-A18B-CEA7146F8D9D.html"/>
+<link rel="next" href="GUID-9337F9F0-7F00-428E-A323-2A8B5A6CE8E6.html"/>
+<link rel="up" href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li>11.5 Interrupt Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-05128B98-0576-44E5-A18B-CEA7146F8D9D.html" rel="prev">Natural Order (Hardware) Priority</a></span><span><a href="GUID-9337F9F0-7F00-428E-A323-2A8B5A6CE8E6.html" rel="next">Serving a High- or Low-Priority Interrupt While the Main Routine Code Is Executing</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A__GUID-F42AB6AB-7FE7-4A41-9E48-5C33C3D46B07" style="">11.5 Interrupt Operation</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">All pending interrupts are indicated by their respective flag bit being equal to a
+                ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’ in the PIRx register. All pending interrupts are resolved using
+            the priority scheme explained in the <a class="- topic/xref xref" href="GUID-87A8D44B-D139-4231-AA4C-1BE2B39FD6D0.html">Interrupt
+                Priority</a> section.</p>
+        <p class="- topic/p p">Once the interrupt source to be serviced is resolved, the program execution vectors to
+            the resolved interrupt vector addresses, as explained in <a class="- topic/xref xref" href="GUID-62FC3E7B-300F-4961-9F3E-68300C0CBDBF.html">Interrupt Vector
+                Table</a> section. The vector number is also stored in the WREG register. Most of
+            the flag bits are required to be cleared by the application software, but in some cases,
+            device hardware clears the interrupt automatically. Some flag bits are read-only in the
+            PIRx registers. These flags are a summary of the source interrupts, and the
+            corresponding interrupt flags of the source must be cleared. </p>
+        <p class="- topic/p p">A valid interrupt can be either a high- or low-priority interrupt when in the main
+            routine or a high-priority interrupt when in a low-priority Interrupt Service Routine.
+            Depending on the order of interrupt requests received and their relative timing, the CPU
+            will be in a state of execution indicated by the STAT bit.</p>
+        <p class="- topic/p p">The state machine shown in <a class="- topic/xref xref" href="#GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A__FIG_YQJ_PK5_3GB"><span>Figure 11-1</span></a> and the subsequent sections detail the execution of
+            interrupts when received in different orders.</p>
+        <div class="- topic/note note important note_important" id="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A__GUID-E5116617-A55C-4904-A97F-A3DF1421AD35" data-ofbid="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A__GUID-E5116617-A55C-4904-A97F-A3DF1421AD35"><span class="note__title">Important:</span> The state of GIEH/L is
+            not changed by the hardware when servicing an interrupt. The internal state machine is
+            used to keep track of execution states. These bits can be manipulated in the user code,
+            resulting in transferring execution to the main routine and ignoring existing
+            interrupts. </div>
+        <figure class="- topic/fig fig fignone" id="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A__FIG_YQJ_PK5_3GB" data-ofbid="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A__FIG_YQJ_PK5_3GB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 11-1. <span id="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A__GUID-6830A264-7F7C-44A7-9E57-2D34FA0BDDEB" class="fig--title">Vectored Interrupts State
+                Transition Diagram</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A__IMAGE_ZQJ_PK5_3GB" src="GUID-E44CF252-300C-4DF0-A933-D637B1E81FEF-high.svg"/></span>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-9337F9F0-7F00-428E-A323-2A8B5A6CE8E6.html">11.5.1 Serving a High- or Low-Priority Interrupt While the Main Routine Code Is Executing</a></li><li><a href="GUID-7ACD4743-2BC8-4228-BFCD-CFE0CB43FEC7.html">11.5.2 Serving a High-Priority Interrupt While a Low-Priority Interrupt Is Pending</a></li><li><a href="GUID-2E6F3716-0151-4F82-8FC7-0117A2821C5D.html">11.5.3 Preempting Low-Priority Interrupts</a></li><li><a href="GUID-2C6CA944-184E-4E65-857C-C8E7E0D5DF0C.html">11.5.4 Simultaneous High- and Low-Priority Interrupts</a></li></ul>
+</nav>
+</body>
+</html>

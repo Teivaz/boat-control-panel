@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.6 Configuring the CRC Module — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-EF904F08-55BA-4EEF-888C-4698D605D451.html"/>
+<link rel="next" href="GUID-0D6A5768-E072-478C-9C35-7C9865E19F62.html"/>
+<link rel="up" href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li>13.6 Configuring the CRC Module</li></ol>
+  <div class="sib"><span>← <a href="GUID-EF904F08-55BA-4EEF-888C-4698D605D451.html" rel="prev">CRC Interrupt</a></span><span><a href="GUID-0D6A5768-E072-478C-9C35-7C9865E19F62.html" rel="next">Register Overlay</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-F5B9F9A6-053E-49D7-9AB5-97AC5B820ED2" style="">13.6 Configuring the CRC Module</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p">The following steps illustrate how to properly configure the CRC:<ol class="- topic/ol ol" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__OL_XQT_LMV_K3B" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__OL_XQT_LMV_K3B">
+                <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-452F256E-9291-41DF-9F79-7C622445A9C8" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-452F256E-9291-41DF-9F79-7C622445A9C8">Determine if the automatic
+                    program memory scan will be used with the scanner or if manual calculation will
+                    take place through the SFR interface and perform the actions specified in the
+                    CRC Data Sources section.<ol class="- topic/ol ol" type="a" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__OL_F33_KPL_43B" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__OL_F33_KPL_43B">
+                        <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-C2CE849D-625C-4D94-B10C-B37611317786" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-C2CE849D-625C-4D94-B10C-B37611317786">To configure the scanner
+                            module to be used with CRC, refer to the <a class="- topic/xref xref" href="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE.html">Configuring the Scanner</a> section for more information.</li>
+                    </ol></li>
+                <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-3FC1217D-34D4-4B09-A56D-948B662239E4" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-3FC1217D-34D4-4B09-A56D-948B662239E4">When applicable, seed a starting
+                    CRC value into the <a class="- topic/xref xref" href="GUID-EACD1E2B-D427-41A2-8B8D-F61D5D52B5C5.html" title="CRCOUT">CRCOUT</a> registers.</li>
+                <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-2F691816-B22F-4725-9666-3137FA3B86D9" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-2F691816-B22F-4725-9666-3137FA3B86D9">Program the <a class="- topic/xref xref" href="GUID-E9C44536-06E7-4270-B08A-FA3F2525E806.html" title="CRCXOR">CRCXOR</a>
+                    registers with the desired generator polynomial.</li>
+                <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-A3A8FE49-E170-4E1F-9952-D5708A01D4A3" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-A3A8FE49-E170-4E1F-9952-D5708A01D4A3">Program the <a class="- topic/xref xref" href="GUID-A28EB3E5-010F-47AD-906C-EF2A14282EB1.html#ID-00000033" title="Data Length"><span><span>DLEN</span></span></a>
+                    bits with the length of the data word (refer to <a class="- topic/xref xref" href="GUID-26D53175-1097-43A2-8333-2C02C4211D98.html#GUID-26D53175-1097-43A2-8333-2C02C4211D98__FIG_X3G_GTS_M3B"><span>Figure 13-1</span></a>). This value determines how many times the shifter will
+                    shift into the accumulator for each data word.</li>
+                <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-E886C95F-B4C9-4958-85E7-293CED362224" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-E886C95F-B4C9-4958-85E7-293CED362224">Program the <a class="- topic/xref xref" href="GUID-C7B282D4-0BC9-4041-8F81-8CC8E86624D0.html#ID-00000039" title="Polynomial Length"><span><span>PLEN</span></span></a> bits with the length of the polynomial (refer to <a class="- topic/xref xref" href="GUID-26D53175-1097-43A2-8333-2C02C4211D98.html#GUID-26D53175-1097-43A2-8333-2C02C4211D98__FIG_X3G_GTS_M3B"><span>Figure 13-1</span></a>).</li>
+                <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-62C91FEE-02FE-47AD-B34D-9ACC384E9C01" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-62C91FEE-02FE-47AD-B34D-9ACC384E9C01">Determine whether shifting in
+                    trailing zeroes is desired and set the <a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html#ID-0000001A" title="Accumulator Mode"><span><span>ACCM</span></span></a> bit
+                    accordingly.</li>
+                <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-E7209FC0-9970-4361-8457-BCE9C5C14624" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-E7209FC0-9970-4361-8457-BCE9C5C14624">Determine whether the MSb or LSb
+                    first shifting is desired and write the <a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html#ID-00000021" title="Shift Mode"><span><span>SHIFTM</span></span></a> bit
+                    accordingly.</li>
+                <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-8962F55B-A820-4776-9BCD-E83120BEDD25" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-8962F55B-A820-4776-9BCD-E83120BEDD25">Set the <a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html#ID-0000000C" title="CRC Start"><span><span>GO</span></span></a>
+                    bit to begin the shifting process.</li>
+                <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-BE4D3CBB-E965-473E-957A-8080A5E8CD2E" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-BE4D3CBB-E965-473E-957A-8080A5E8CD2E">If manual SFR entry is used,
+                    monitor the <a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html#ID-00000028" title="Data Path Full Indicator"><span><span>FULL</span></span></a> bit.<ol class="- topic/ol ol" type="a" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__OL_LYV_KNV_K3B" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__OL_LYV_KNV_K3B">
+                        <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-18A5C1DF-EB69-4F4A-8EE6-3602065F8AE3" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-18A5C1DF-EB69-4F4A-8EE6-3602065F8AE3">When FULL =
+                                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, another word of data can be written to the <a class="- topic/xref xref" href="GUID-F3874916-83FF-4A49-99B7-71ADB25F92C9.html" title="CRCDATA">CRCDATA</a> registers. It is important to note that
+                            the Most Significant Byte (CRCDATAH) must be written first if the data
+                            has more than eight bits, as the shifter will begin upon the CRCDATAL
+                            register being written.</li>
+                        <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-14FB0A14-059A-4173-B13B-BDB0CA3DB73E" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-14FB0A14-059A-4173-B13B-BDB0CA3DB73E">If the scanner is used,
+                            it will automatically load words into the CRCDATA registers as needed,
+                            as long as the GO bit is set.</li>
+                    </ol></li>
+                <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-ABAB7B1A-C9C2-4935-B95D-FDC44A99AC36" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-ABAB7B1A-C9C2-4935-B95D-FDC44A99AC36">If using the Flash memory
+                    scanner, monitor the SCANIF bit of the corresponding PIR register to determine
+                    when the scanner has finished pushing data into the CRCDATA registers.<ol class="- topic/ol ol" type="a" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__OL_EQ2_NNV_K3B" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__OL_EQ2_NNV_K3B">
+                        <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-6C5776ED-E5E2-425C-B599-E115E770BF71" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-6C5776ED-E5E2-425C-B599-E115E770BF71">After the scan is
+                            completed, monitor the <a class="- topic/xref xref" href="GUID-954A61C6-F5B6-4625-8868-91C5E0693D11.html#ID-0000009F" title="Scanner GO(3,4)"><span><span>SGO</span></span></a> bit to determine that the CRC has been
+                            completed and the check value can be read from the CRCOUT
+                            registers.</li>
+                        <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-226431AE-7856-4BB2-BAF3-5A3FC43586E5" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-226431AE-7856-4BB2-BAF3-5A3FC43586E5">When both the interrupt
+                            flags are set (or both <a class="- topic/xref xref" href="GUID-954A61C6-F5B6-4625-8868-91C5E0693D11.html#ID-000000BA" title="Scanner Busy Indicator"><span><span>BUSY</span></span></a> and SGO bits are cleared), the completed
+                            CRC calculation can be read from the CRCOUT registers.</li>
+                    </ol></li>
+                <li class="- topic/li li" id="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-4F756D23-050F-47D6-B9FA-267A778414A8" data-ofbid="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789__GUID-4F756D23-050F-47D6-B9FA-267A778414A8">If manual entry is used, monitor
+                    the BUSY bit to determine when the CRCOUT registers hold the valid check
+                    value.</li>
+            </ol></div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-0D6A5768-E072-478C-9C35-7C9865E19F62.html">13.6.1 Register Overlay</a></li></ul>
+</nav>
+</body>
+</html>

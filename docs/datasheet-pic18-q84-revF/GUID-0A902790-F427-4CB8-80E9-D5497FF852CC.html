@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.6 Context Saving — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2C6CA944-184E-4E65-857C-C8E7E0D5DF0C.html"/>
+<link rel="next" href="GUID-B9EC70D9-D35A-4189-A53F-31A19B16011C.html"/>
+<link rel="up" href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li>11.6 Context Saving</li></ol>
+  <div class="sib"><span>← <a href="GUID-2C6CA944-184E-4E65-857C-C8E7E0D5DF0C.html" rel="prev">Simultaneous High- and Low-Priority Interrupts</a></span><span><a href="GUID-B9EC70D9-D35A-4189-A53F-31A19B16011C.html" rel="next">Accessing Shadow Registers</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-0A902790-F427-4CB8-80E9-D5497FF852CC__GUID-CBC93D0B-1FE4-41D8-90E5-EB8AD6D7F665" style="">11.6 Context Saving</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The interrupt controller supports a two-level deep context saving system
+            (main routine context and low ISR context). Refer to the state machine shown in <a class="- topic/xref xref" href="GUID-B9EC70D9-D35A-4189-A53F-31A19B16011C.html#GUID-B9EC70D9-D35A-4189-A53F-31A19B16011C__FIG_DH5_1VV_3GB"><span>Figure 11-6</span></a> for details.</p>
+        <p class="- topic/p p">The Program Counter (PC) is saved on the dedicated device PC stack. The CPU
+            registers saved include STATUS, WREG, BSR, FSR0/1/2, PRODL/H and PCLATH/U. </p>
+        <p class="- topic/p p">After WREG has been saved to the context registers, the resolved vector
+            number of the interrupt source to be serviced is copied into WREG. Context save and
+            restore operation is completed by the interrupt controller based on the current state of
+            the interrupts and the order in which they were sent to the CPU.</p>
+        <p class="- topic/p p">Context save/restore works the same way in both states of MVECEN. When IPEN
+            = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, there is only one level of interrupt active. Hence, only the main
+            context is saved when an interrupt is received.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-B9EC70D9-D35A-4189-A53F-31A19B16011C.html">11.6.1 Accessing Shadow Registers</a></li></ul>
+</nav>
+</body>
+</html>

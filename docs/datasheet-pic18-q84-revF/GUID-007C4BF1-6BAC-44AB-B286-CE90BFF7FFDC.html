@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.2.1 SDA Hold Time — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7CB39276-0096-417A-84BA-4017DE214891.html"/>
+<link rel="next" href="GUID-E4740A38-CADD-4345-AB81-4F87CFD77E65.html"/>
+<link rel="up" href="GUID-7CB39276-0096-417A-84BA-4017DE214891.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li><a href="GUID-7CB39276-0096-417A-84BA-4017DE214891.html">37.3.2 SDA and SCL Pins</a></li><li>37.3.2.1 SDA Hold Time</li></ol>
+  <div class="sib"><span>← <a href="GUID-7CB39276-0096-417A-84BA-4017DE214891.html" rel="prev">SDA and SCL Pins</a></span><span><a href="GUID-E4740A38-CADD-4345-AB81-4F87CFD77E65.html" rel="next">Start Condition</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-007C4BF1-6BAC-44AB-B286-CE90BFF7FFDC__GUID-3DD07A42-A634-47D5-8C34-6791B93A1D67" style="">37.3.2.1 SDA Hold Time</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">SDA hold time refers to the amount of time between the low threshold region of the falling edge
+            of SCL (V<sub class="+ topic/ph hi-d/sub ph sub">IL</sub> ≤ 0.3 V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub>) and either the low threshold region of the
+            rising edge of SDA (V<sub class="+ topic/ph hi-d/sub ph sub">IL</sub> ≤ 0.3 V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub>) or the high threshold region of
+            the falling edge of SDA (V<sub class="+ topic/ph hi-d/sub ph sub">IH</sub> ≥ 0.7 V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub>) (see <a class="- topic/xref xref" href="#GUID-007C4BF1-6BAC-44AB-B286-CE90BFF7FFDC__FIG_KCN_BR2_KGB"><span>Figure 37-3</span></a>). If the SCL fall time is long or close to
+            the maximum allowable time set by the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Specification, data may be sampled
+            in the undefined Logic state between the 70% and 30% region of the falling SCL edge,
+            leading to data corruption. The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C module offers selectable SDA hold times,
+            which can be useful to ensure valid data transfers at various bus data rates and
+            capacitance loads.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-007C4BF1-6BAC-44AB-B286-CE90BFF7FFDC__FIG_KCN_BR2_KGB" data-ofbid="GUID-007C4BF1-6BAC-44AB-B286-CE90BFF7FFDC__FIG_KCN_BR2_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-3. <span id="GUID-007C4BF1-6BAC-44AB-B286-CE90BFF7FFDC__GUID-E2BB804A-320F-4B1A-9DA8-0BD0AAE88C09" class="fig--title">SDA Hold Time</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-007C4BF1-6BAC-44AB-B286-CE90BFF7FFDC__IMAGE_LCN_BR2_KGB" src="GUID-DD0F66EC-9978-4DBC-9CC5-0821CCE686E1-high.svg"/></span>
+        </figure>
+</div>
+
+</body>
+</html>

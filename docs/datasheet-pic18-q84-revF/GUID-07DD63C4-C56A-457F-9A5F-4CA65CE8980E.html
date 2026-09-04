@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.2.7.1 Host Transmission (7-Bit Addressing Mode) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A818A71F-9E88-40C8-8A74-ACE4C46FBE86.html"/>
+<link rel="next" href="GUID-D8A5DED1-9129-4E0D-A171-D08AC5C14DC5.html"/>
+<link rel="up" href="GUID-A818A71F-9E88-40C8-8A74-ACE4C46FBE86.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html">37.4.2 I2C Host Mode Operation</a></li><li><a href="GUID-A818A71F-9E88-40C8-8A74-ACE4C46FBE86.html">37.4.2.7 Host Operation in 7-Bit Addressing Modes</a></li><li>37.4.2.7.1 Host Transmission (7-Bit Addressing Mode)</li></ol>
+  <div class="sib"><span>← <a href="GUID-A818A71F-9E88-40C8-8A74-ACE4C46FBE86.html" rel="prev">Host Operation in 7-Bit Addressing Modes</a></span><span><a href="GUID-D8A5DED1-9129-4E0D-A171-D08AC5C14DC5.html" rel="next">Host Reception (7-Bit Addressing Mode)</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-B4CCAF59-67EC-48B9-B6FB-1631F30E22DA" style="">37.4.2.7.1 Host Transmission (7-Bit Addressing
+        Mode)</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The following section describes the sequence of events that occur when the module is
+            transmitting data in 7-bit Addressing mode:</p>
+        <ol class="- topic/ol ol" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__OL_XFS_MYM_KGB" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__OL_XFS_MYM_KGB">
+            <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-C3695292-E9AD-41A4-9341-9CE58A897426" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-C3695292-E9AD-41A4-9341-9CE58A897426">Depending on the configuration of the
+                Address Buffer Disable (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a>) bit, one of two methods may be used to begin
+                    communication:<ol class="- topic/ol ol" type="a" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__OL_YD2_SYM_KGB" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__OL_YD2_SYM_KGB">
+                    <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-19068001-A9F1-4BD3-8B86-EDB3443902DE" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-19068001-A9F1-4BD3-8B86-EDB3443902DE">When <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> is clear (ABD = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the
+                        address buffer, <a class="- topic/xref xref" href="GUID-51DC1914-5FC6-4DB6-849E-AC7B6E17D460.html" title="I2CxADB1">I2CxADB1</a>, is enabled. In this case, the 7-bit
+                        client address and R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit are loaded into
+                        I2CxADB1, with the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit clear
+                            (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>). The number of data
+                        bytes are loaded into <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>, and the first data byte is loaded into
+                            <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a>. After these registers are loaded, software must set the
+                        Start (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_YPG_M34_LGB" title="Host Start (used only when MODE = 1xx)">S</a>) bit to begin communication. Once the S bit is
+                        set, host hardware waits for the Bus Free (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#GUID-967969A7-72DF-42E8-8CE4-4AD59A4CBE74" title="Bus Free Status(2)">BFRE</a>) bit to be set before transmitting the Start
+                        condition to avoid bus collisions.</li>
+                    <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-661D81C8-AB31-4E8D-84A6-DB1CFF9DDBCA" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-661D81C8-AB31-4E8D-84A6-DB1CFF9DDBCA">When <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> is set (ABD = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the address
+                        buffer is disabled. In this case, the number of data bytes are loaded into
+                            <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>, and the client’s 7-bit address and
+                            R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit are loaded into <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a>. A write to I2CxTXB will cause host hardware to
+                        automatically issue a Start condition once the bus is Idle (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#GUID-967969A7-72DF-42E8-8CE4-4AD59A4CBE74" title="Bus Free Status(2)">BFRE</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). Software writes to the
+                        Start bit are ignored.</li>
+                </ol></li>
+            <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-68A41191-6CF9-4903-99FB-61ECDABE608B" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-68A41191-6CF9-4903-99FB-61ECDABE608B">Host hardware waits for <a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#GUID-967969A7-72DF-42E8-8CE4-4AD59A4CBE74" title="Bus Free Status(2)">BFRE</a> to be set, then shifts out the Start condition. Module
+                hardware sets the Host Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a>) bit and the Start Condition Interrupt Flag (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_W3K_BQV_LGB" title="Start Condition Interrupt Flag(1)">SCIF</a>). If the Start Condition Interrupt Enable (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_CFJ_MWV_LGB" title="Stop Condition Interrupt Enable(1)">SCIE</a>) bit is set, the generic I2CxIF is also set.</li>
+            <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-31A05C1E-061A-4C22-A404-6ECBC808A0BA" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-31A05C1E-061A-4C22-A404-6ECBC808A0BA">Host hardware transmits the 7-bit
+                client address and R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit. </li>
+            <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-41F2266B-52CF-4B7B-A71E-E6B3FE0711C6" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-41F2266B-52CF-4B7B-A71E-E6B3FE0711C6">If upon the 8th falling edge of SCL,
+                    <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> is empty (Transmit Buffer Empty Status (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_KS4_K5P_LGB" title="Transmit Buffer Empty Status(2)">TXBE</a>) = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> is
+                nonzero (I2CxCNT != <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), and the Clock Stretching Disable (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_KNG_JGP_LGB" title="Clock Stretching Disable (used only when MODE = 0xx or MODE = 11x)">CSD</a>) bit is clear (CSD = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>):<ul class="- topic/ul ul" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__UL_IX1_BZM_KGB" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__UL_IX1_BZM_KGB">
+                    <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-01100FFB-0960-4796-9EDD-FAB850819FC8" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-01100FFB-0960-4796-9EDD-FAB850819FC8">The I2C Transmit Interrupt
+                        Flag (I2CxTXIF) is set. If the I2C Transmit Interrupt Enable (I2CxTXIE) bit
+                        is also set, the generic I2CxIF is also set. </li>
+                    <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-138FB768-E510-4DB7-BC25-CAC18FADA043" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-138FB768-E510-4DB7-BC25-CAC18FADA043">The Host Data Request (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a>) bit is set, and the clock is stretched,
+                        allowing time for software to load <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> with new data. Once I2CxTXB has been written, hardware
+                        releases SCL and clears MDR.</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-C736F8B1-D941-4A91-99E1-B71AF2E987A9" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-C736F8B1-D941-4A91-99E1-B71AF2E987A9">Hardware transmits the 9th clock
+                pulse and waits for an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>/NACK response from the client.
+                If the host receives an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>, module hardware transfers the
+                data from <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> into the transmit shift register, and <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> is
+                decremented by one. If the host receives a NACK, hardware will attempt to issue a
+                Stop condition. If the clock is currently being stretched by a client, the host must
+                wait until the bus is free before issuing the Stop.</li>
+            <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-FAD9BC89-8F09-4C8A-9A1C-6E0643EBCA08" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-FAD9BC89-8F09-4C8A-9A1C-6E0643EBCA08">Host hardware checks <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>
+                for a zero value. If I2CxCNT is zero:<ol class="- topic/ol ol" type="a" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__OL_RBY_HZM_KGB" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__OL_RBY_HZM_KGB">
+                    <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-16AA0056-990D-456E-AC50-6474226CB2F1" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-16AA0056-990D-456E-AC50-6474226CB2F1">If <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> is clear (ABD = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), host hardware issues a
+                        Stop condition or sets <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a> if the Restart Enable (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_U3D_1YT_KGB" title="Restart Enable (used only when MODE = 1xx)">RSEN</a>) bit is set and waits for software to set the Start bit to
+                        issue a Restart condition. <a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#GUID-9822260B-0146-4538-BAAB-AC8C3856312F" title="Byte Count Interrupt Flag(1)">CNTIF</a> is set. </li>
+                    <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-1A66BD2B-4CB5-4747-B8F7-9E100ACD8568" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-1A66BD2B-4CB5-4747-B8F7-9E100ACD8568">If <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> is set (ABD = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), host hardware issues a
+                        Stop condition or sets <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a> if <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_U3D_1YT_KGB" title="Restart Enable (used only when MODE = 1xx)">RSEN</a> is set and waits for software to load <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> with a
+                        new client address. <a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#GUID-9822260B-0146-4538-BAAB-AC8C3856312F" title="Byte Count Interrupt Flag(1)">CNTIF</a> is set.</li>
+                </ol></li>
+            <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-B0340258-EC98-4606-981C-8B53F5F931FE" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-B0340258-EC98-4606-981C-8B53F5F931FE">Host hardware transmits the data
+                byte.</li>
+            <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-52B6BC7C-66AB-4A6F-832D-F986285C7D4C" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-52B6BC7C-66AB-4A6F-832D-F986285C7D4C">If upon the 8th falling edge of SCL
+                    <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> is empty (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_KS4_K5P_LGB" title="Transmit Buffer Empty Status(2)">TXBE</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> is
+                nonzero (<a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> != <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), and <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_KNG_JGP_LGB" title="Clock Stretching Disable (used only when MODE = 0xx or MODE = 11x)">CSD</a> is clear (CSD = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>):<ul class="- topic/ul ul" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__UL_Q1N_NZM_KGB" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__UL_Q1N_NZM_KGB">
+                    <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-45F5BFD5-1D2B-463D-AB19-12BE2C7E2904" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-45F5BFD5-1D2B-463D-AB19-12BE2C7E2904">I2CxTXIF is set. If the
+                        I2CxTXIE bit is also set, the generic I2CxIF is also set.</li>
+                    <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-59B0653B-E5E5-45E5-8340-4AA0BFF9B862" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-59B0653B-E5E5-45E5-8340-4AA0BFF9B862">The <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a> bit is set, and the clock is stretched,
+                        allowing time for software to load <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> with new data. Once I2CxTXB has been written, hardware
+                        releases SCL and clears MDR.</li>
+                </ul><div class="- topic/p p">If <a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_KS4_K5P_LGB" title="Transmit Buffer Empty Status(2)">TXBE</a> is set (TXBE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) and <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> is zero (I2CxCNT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>):</div><ul class="- topic/ul ul" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__UL_TD1_TZM_KGB" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__UL_TD1_TZM_KGB">
+                    <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-5B409814-5C7D-414F-B1DD-650CEC001E68" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-5B409814-5C7D-414F-B1DD-650CEC001E68">I2CxTXIF is NOT set.</li>
+                    <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-A4C11976-9B1A-4CAB-805E-86FE4C78A1CD" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-A4C11976-9B1A-4CAB-805E-86FE4C78A1CD"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#GUID-9822260B-0146-4538-BAAB-AC8C3856312F" title="Byte Count Interrupt Flag(1)">CNTIF</a> is set.</li>
+                    <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-FB6BC8B2-8991-4C0C-94EE-0F7B43BBAC03" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-FB6BC8B2-8991-4C0C-94EE-0F7B43BBAC03">Host hardware issues a Stop
+                        condition, setting <a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_BLB_LPV_LGB" title="Stop Condition Interrupt Flag(1)">PCIF</a>.</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-F98CBEB1-4D92-401E-ADDE-160891EE16C7" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-F98CBEB1-4D92-401E-ADDE-160891EE16C7">Repeat Steps 5 – 8 until all data has
+                been transmitted.</li>
+        </ol>
+        <figure class="- topic/fig fig fignone rotatepage" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__FIG_MCH_21N_KGB" data-ofbid="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__FIG_MCH_21N_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-37. <span id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__GUID-6183DCE4-B2D1-46C7-AD7B-4803D19BFBC9" class="fig--title">7-Bit Host Mode
+                Transmission</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E__IMAGE_SQ3_BWM_PGB" src="GUID-F7FA0FE4-7FA2-4F91-97F4-CCA3CED538A4-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

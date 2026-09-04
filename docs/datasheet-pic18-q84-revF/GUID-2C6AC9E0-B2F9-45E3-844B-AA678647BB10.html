@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.5 UTMR Output Modes — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2.html"/>
+<link rel="next" href="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38.html"/>
+<link rel="up" href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li>28.5 UTMR Output Modes</li></ol>
+  <div class="sib"><span>← <a href="GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2.html" rel="prev">Run Status Flag</a></span><span><a href="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38.html" rel="next">Interrupt and DMA Triggers</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10__GUID-BF65AB4C-9859-4A42-A164-3409F302C68B" style="">28.5 UTMR Output Modes</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The UTMR module can generate either a pulsed or level output. When the <a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#ID-00000013" title="Timer Output Mode Select">OM</a>
+            bit in the TUxyCON0 register is set, the output will follow the Run/Stop state of the
+            counter timer (level output), set to indicate that the timer is running and cleared to
+            indicate the timer has stopped. The output remains set through all Reset conditions,
+            except when ERS is holding the timer/counter in a Reset state (RESET =
+                <code class="+ topic/ph pr-d/codeph ph codeph">‘b11</code>, level ERS Reset).</p>
+        <p class="- topic/p p">When the OM bit is cleared, the timer output is pulsed high at every period
+            match (pulse output). The duration of the pulse is one single primary clock period at
+            the end of the counter match period, regardless of the prescaler. This is demonstrated
+            in <a class="- topic/xref xref" href="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB.html#GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__FIG_C5J_2TP_WLB"><span>Figure 28-4</span></a> and <a class="- topic/xref xref" href="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB.html#GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__GUID-E3341B35-113B-4987-8234-18594B978BAA"><span>Figure 28-5</span></a> where the pulse output occurs only during the last timer clock
+            period during the PR match.</p>
+        <div class="- topic/p p">The polarity of the output (pulsed or level) is controlled by the <a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#ID-0000001A" title="Timer Output Polarity Select(5)">OPOL</a> bit in the TUxyCON0 register. When OPOL is set, the output
+            will either pulse low or be held low when timer output is active. When OPOL is cleared,
+            the output will be either pulse high or be held high when timer output is active. The
+            OPOL bit will control the output polarity of the module even when the module is disabled
+            (ON = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>).</div>
+        <div class="- topic/note note important note_important" id="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10__GUID-7A9E9270-F9E3-4B49-8141-48DC6ADEE094" data-ofbid="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10__GUID-7A9E9270-F9E3-4B49-8141-48DC6ADEE094"><span class="note__title">Important:</span> 
+            <ol class="- topic/ol ol" id="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10__OL_QFX_JYG_TLB" data-ofbid="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10__OL_QFX_JYG_TLB">
+                <li class="- topic/li li" id="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10__GUID-4C89DC2F-B336-43A6-A3AE-11D4992CF456" data-ofbid="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10__GUID-4C89DC2F-B336-43A6-A3AE-11D4992CF456">When START =
+                        <code class="+ topic/ph pr-d/codeph ph codeph">‘b01</code> or <code class="+ topic/ph pr-d/codeph ph codeph">‘b10</code> (edge-triggered), the level
+                    output is asserted as soon as the qualified ERS edge is registered without any
+                    synchronization delays (even when CSYNC = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>).</li>
+                <li class="- topic/li li" id="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10__GUID-62BDDEE2-428D-4E7B-8FC9-F4FA966310D2" data-ofbid="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10__GUID-62BDDEE2-428D-4E7B-8FC9-F4FA966310D2">When LIMIT = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the pulse output will assert as indicated and
+                    will remain asserted until the counter changes from PR.</li>
+                <li class="- topic/li li" id="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10__GUID-A314BD50-1C6E-4EB3-96EF-ED92E31EFD0F" data-ofbid="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10__GUID-A314BD50-1C6E-4EB3-96EF-ED92E31EFD0F">The OPOL bit does not affect the polarity of the RUN SFR bit.</li>
+            </ol>
+        </div>
+    </div>
+
+</body>
+</html>

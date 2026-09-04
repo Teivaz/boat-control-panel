@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>41.3.1 FVRCON — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-EE5A4A17-E6D3-4DEB-A795-34F6EC9CB533.html"/>
+<link rel="next" href="GUID-F465CF7A-05D0-4FCB-B0D5-BC73A0F617BA.html"/>
+<link rel="up" href="GUID-EE5A4A17-E6D3-4DEB-A795-34F6EC9CB533.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-0FC4DD39-E0A0-4361-ABD2-0634A67E719C.html">41 FVR - Fixed Voltage Reference</a></li><li><a href="GUID-EE5A4A17-E6D3-4DEB-A795-34F6EC9CB533.html">41.3 Register Definitions: FVR</a></li><li>41.3.1 FVRCON</li></ol>
+  <div class="sib"><span>← <a href="GUID-EE5A4A17-E6D3-4DEB-A795-34F6EC9CB533.html" rel="prev">Register Definitions: FVR</a></span><span><a href="GUID-F465CF7A-05D0-4FCB-B0D5-BC73A0F617BA.html" rel="next">Register Summary - FVR</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-744FDC94-D572-478E-A4E5-4C98AE4E6919" style="">41.3.1  FVRCON</h1><section id="GUID-F403D2B5-8E75-4884-B32F-115F2F48FEB1" class="- topic/section reference/section sidsc-register/registerDescription ">FVR Control
+                Register<div class="- topic/note note important note_important" id="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-1DC085C6-52F0-48D8-A15B-E3A85F9F6B1A" data-ofbid="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-1DC085C6-52F0-48D8-A15B-E3A85F9F6B1A"><span class="note__title">Important:</span> This
+                register is shared between the Fixed Voltage Reference (FVR) module and the
+                temperature indicator module.</div><div class="- topic/note note notype note_notype endnote" id="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-2E4176E8-507F-4DD4-86B2-8E32AF50984C" data-ofbid="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-2E4176E8-507F-4DD4-86B2-8E32AF50984C"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__OL_EZG_3F4_KGB" data-ofbid="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__OL_EZG_3F4_KGB">
+                    <li class="- topic/li li" id="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-B06E774D-8495-4E4F-8134-FCC2B5421458" data-ofbid="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-B06E774D-8495-4E4F-8134-FCC2B5421458">This output goes to the DAC
+                        and comparator modules and to the ADC module as an input channel only.</li>
+                    <li class="- topic/li li" id="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-9BCEEDD0-02F1-4884-9A7E-A01CEDD765C7" data-ofbid="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-9BCEEDD0-02F1-4884-9A7E-A01CEDD765C7">This output goes to the ADC
+                        module as a reference and as an input channel.</li>
+                    <li class="- topic/li li" id="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-4EF38AE8-12C3-4904-A25B-D63DA5C9EF5B" data-ofbid="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-4EF38AE8-12C3-4904-A25B-D63DA5C9EF5B">Fixed Voltage Reference
+                        output cannot exceed V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub>.</li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>FVRCON</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x3D7</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-1C454D2A-029C-428B-B4AD-BA1588023852" data-ofbid="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-1C454D2A-029C-428B-B4AD-BA1588023852"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">EN</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">RDY</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TSEN</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TSRNG</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="2">CDAFVR[1:0]</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="2">ADFVR[1:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">q</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-F403D2B5-8E75-4884-B32F-115F2F48FEB1" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-1C79FAB1-2A96-4E11-9081-8E6B0B1B3A4E__GUID-EA30F461-9CB1-4DB2-9EB5-29AD8ED3AA54" id="GUID-1C79FAB1-2A96-4E11-9081-8E6B0B1B3A4E">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-1C79FAB1-2A96-4E11-9081-8E6B0B1B3A4E__GUID-EA30F461-9CB1-4DB2-9EB5-29AD8ED3AA54" style=""> Bit 7 – EN <span>Fixed Voltage
+            Reference Enable</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-1C79FAB1-2A96-4E11-9081-8E6B0B1B3A4E__GUID-761361F9-F842-41B1-980C-4E1E39A1B3F7" data-ofbid="GUID-1C79FAB1-2A96-4E11-9081-8E6B0B1B3A4E__GUID-761361F9-F842-41B1-980C-4E1E39A1B3F7"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-1C79FAB1-2A96-4E11-9081-8E6B0B1B3A4E__GUID-D875DD2D-9338-4C5C-A58B-7903920668E6">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-1C79FAB1-2A96-4E11-9081-8E6B0B1B3A4E__GUID-49CFE899-929C-4844-AB5E-C7EAAD3FD406">Enables
+                        module</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-1C79FAB1-2A96-4E11-9081-8E6B0B1B3A4E__GUID-D0029904-3CED-42F2-AA98-E6C56E525403">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-1C79FAB1-2A96-4E11-9081-8E6B0B1B3A4E__GUID-C472FE3B-BD1E-45E7-8ECD-115D407C5C57">Disables module</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_QJJ_143_F1B__GUID-6D97E830-C9FC-4A27-BD88-9DBE076205A6" id="BITFIELD_QJJ_143_F1B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_QJJ_143_F1B__GUID-6D97E830-C9FC-4A27-BD88-9DBE076205A6" style=""> Bit 6 – RDY <span>Fixed Voltage Reference Ready
+            Flag</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_QJJ_143_F1B__GUID-7A350DEC-6E28-4958-A79C-E2859442E3A6" data-ofbid="BITFIELD_QJJ_143_F1B__GUID-7A350DEC-6E28-4958-A79C-E2859442E3A6"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_QJJ_143_F1B__GUID-D875DD2D-9338-4C5C-A58B-7903920668E6">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_QJJ_143_F1B__GUID-49CFE899-929C-4844-AB5E-C7EAAD3FD406">Fixed
+                        Voltage Reference output is ready for use</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_QJJ_143_F1B__GUID-D0029904-3CED-42F2-AA98-E6C56E525403">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_QJJ_143_F1B__GUID-C472FE3B-BD1E-45E7-8ECD-115D407C5C57">Fixed
+                        Voltage Reference output is not ready for use or not
+                        enabled</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C__GUID-C3563A83-2B22-4FFB-B1B4-E7BE9BD5C79C" id="GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C__GUID-C3563A83-2B22-4FFB-B1B4-E7BE9BD5C79C" style=""> Bit 5 – TSEN <span>Temperature Indicator
+            Enable</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C__GUID-D587E159-21FD-4C15-A08E-B87747A3512F" data-ofbid="GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C__GUID-D587E159-21FD-4C15-A08E-B87747A3512F"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C__GUID-C15AD8E0-7E51-41B2-9143-2F4FA11BC62F">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C__GUID-56808E58-ABC2-4E3C-95B2-263C646F1430">Temperature Indicator is
+                        enabled</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C__GUID-CE2A2311-CA14-4800-A8F2-F86B7E0A7A45">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C__GUID-67F5866D-21CD-459B-9A0E-3FCA48928034">Temperature Indicator is
+                        disabled</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="UV1_PQ4_3GB__GUID-6D97E830-C9FC-4A27-BD88-9DBE076205A6" id="UV1_PQ4_3GB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="UV1_PQ4_3GB__GUID-6D97E830-C9FC-4A27-BD88-9DBE076205A6" style=""> Bit 4 – TSRNG <span>Temperature Indicator Range
+            Selection</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="UV1_PQ4_3GB__GUID-7A350DEC-6E28-4958-A79C-E2859442E3A6" data-ofbid="UV1_PQ4_3GB__GUID-7A350DEC-6E28-4958-A79C-E2859442E3A6"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="UV1_PQ4_3GB__GUID-D875DD2D-9338-4C5C-A58B-7903920668E6">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="UV1_PQ4_3GB__GUID-49CFE899-929C-4844-AB5E-C7EAAD3FD406">V<sub class="+ topic/ph hi-d/sub ph sub">OUT</sub> = 3V<sub class="+ topic/ph hi-d/sub ph sub">T</sub> (High
+                        Range)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="UV1_PQ4_3GB__GUID-D0029904-3CED-42F2-AA98-E6C56E525403">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="UV1_PQ4_3GB__GUID-C472FE3B-BD1E-45E7-8ECD-115D407C5C57">V<sub class="+ topic/ph hi-d/sub ph sub">OUT</sub> = 2V<sub class="+ topic/ph hi-d/sub ph sub">T</sub> (Low Range)</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="JNV_RQ4_3GB__GUID-6D97E830-C9FC-4A27-BD88-9DBE076205A6" id="JNV_RQ4_3GB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="JNV_RQ4_3GB__GUID-6D97E830-C9FC-4A27-BD88-9DBE076205A6" style=""> Bits 3:2 – CDAFVR[1:0] <span>
+            FVR Buffer 2 Gain Selection<a class="- topic/xref xref" href="#GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-2E4176E8-507F-4DD4-86B2-8E32AF50984C"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong></a>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="JNV_RQ4_3GB__GUID-7A350DEC-6E28-4958-A79C-E2859442E3A6" data-ofbid="JNV_RQ4_3GB__GUID-7A350DEC-6E28-4958-A79C-E2859442E3A6"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="JNV_RQ4_3GB__GUID-D875DD2D-9338-4C5C-A58B-7903920668E6">11</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="JNV_RQ4_3GB__GUID-49CFE899-929C-4844-AB5E-C7EAAD3FD406">FVR
+                        Buffer 2 Gain is 4x, (4.096V)<a class="- topic/xref xref" href="#GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-2E4176E8-507F-4DD4-86B2-8E32AF50984C"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(3)</sup></strong></a></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="JNV_RQ4_3GB__GUID-D0029904-3CED-42F2-AA98-E6C56E525403">10</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="JNV_RQ4_3GB__GUID-C472FE3B-BD1E-45E7-8ECD-115D407C5C57">FVR
+                        Buffer 2 Gain is 2x, (2.048V)<a class="- topic/xref xref" href="#GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-2E4176E8-507F-4DD4-86B2-8E32AF50984C"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(3)</sup></strong></a></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="JNV_RQ4_3GB__GUID-04676A5F-D395-465A-8EB9-B66CB57D1D78">01</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="JNV_RQ4_3GB__GUID-A3F384EF-BDF7-4535-B30F-55CF67A53288">FVR
+                        Buffer 2 Gain is 1x, (1.024V)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="JNV_RQ4_3GB__GUID-D792D69C-CE5D-46F3-8ED6-F58BA67855B0">00</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="JNV_RQ4_3GB__GUID-EC1C083D-C92E-4700-B997-E8FA63FB2C82">FVR
+                        Buffer 2 is OFF</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_IXW_DF4_KGB__GUID-6EDE317E-04C6-46E4-89F7-95031627A329" id="BITFIELD_IXW_DF4_KGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_IXW_DF4_KGB__GUID-6EDE317E-04C6-46E4-89F7-95031627A329" style=""> Bits 1:0 – ADFVR[1:0] <span>
+            FVR Buffer 1 Gain Selection<a class="- topic/xref xref" href="#GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-2E4176E8-507F-4DD4-86B2-8E32AF50984C"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(2)</sup></strong></a>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_IXW_DF4_KGB__BITFIELDDESCRIPTION_JXW_DF4_KGB" data-ofbid="BITFIELD_IXW_DF4_KGB__BITFIELDDESCRIPTION_JXW_DF4_KGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_IXW_DF4_KGB__BITFIELDVALUES_LXW_DF4_KGB" data-ofbid="BITFIELD_IXW_DF4_KGB__BITFIELDVALUES_LXW_DF4_KGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_IXW_DF4_KGB__GUID-936AC69A-D1B9-44D7-B4CF-3B47AB4E21B7">11</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_IXW_DF4_KGB__GUID-6C88FE5A-8827-4EF1-BE38-4D5E2B6AF154">FVR
+                        Buffer 1 Gain is 4x, (4.096V)<a class="- topic/xref xref" href="#GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-2E4176E8-507F-4DD4-86B2-8E32AF50984C"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(3)</sup></strong></a></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_IXW_DF4_KGB__GUID-36FB33B1-BCC6-43B1-95EC-806BA75D9700">10</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_IXW_DF4_KGB__GUID-3DD07CB0-82FD-40A0-9BA6-71E88181AD63">FVR
+                        Buffer 1 Gain is 2x, (2.048V)<a class="- topic/xref xref" href="#GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89__GUID-2E4176E8-507F-4DD4-86B2-8E32AF50984C"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(3)</sup></strong></a></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_IXW_DF4_KGB__GUID-EE3A49D0-FD78-4A5D-955C-3063F7EFEFD8">01</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_IXW_DF4_KGB__GUID-B13072A2-185F-489B-9EC5-E86C02FC2474">FVR
+                        Buffer 1 Gain is 1x, (1.024V)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_IXW_DF4_KGB__GUID-6BB2F780-2E2D-4B8C-B744-BE59F48CFB56">00</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_IXW_DF4_KGB__GUID-CBFF5185-484F-47E1-8579-E3F1A30569AC">FVR
+                        Buffer 1 is OFF</td>
+                </tr></tbody></table>
+        </div>
+    </article>
+                
+                    This output goes to the DAC
+                        and comparator modules and to the ADC module as an input channel only.
+                    This output goes to the ADC
+                        module as a reference and as an input channel.
+                    Fixed Voltage Reference
+                        output cannot exceed VDD.
+                
+            
+</body>
+</html>

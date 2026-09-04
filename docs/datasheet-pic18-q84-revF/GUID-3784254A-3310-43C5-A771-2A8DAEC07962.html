@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.1 Module Overview — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html"/>
+<link rel="next" href="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49.html"/>
+<link rel="up" href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li>38.1 Module Overview</li></ol>
+  <div class="sib"><span>← <a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html" rel="prev">CAN FD - Controller Area Network, Flexible Data-Rate</a></span><span><a href="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49.html" rel="next">Module Functionality</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-0F7D5351-48AC-4691-9D36-2880DC24E1F8" style="">38.1 Module Overview</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The CAN FD module implements several aspects of the CAN FD protocol:</p>
+        <ol class="- topic/ol ol" id="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__OL_X5X_B4P_ZKB" data-ofbid="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__OL_X5X_B4P_ZKB">
+            <li class="- topic/li li" id="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-E6EC5032-D89E-499B-A058-02FEA9A2F714" data-ofbid="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-E6EC5032-D89E-499B-A058-02FEA9A2F714">The Bit Stream Processor (BSP) is an implementation of the Medium Access Control
+                (MAC) of the CAN FD protocol described in ISO 11898-1:2015. It serializes and
+                deserializes the bit stream, encodes and decodes the CAN FD frames, manages the
+                medium access, acknowledges frames, and detects and signals errors.</li>
+            <li class="- topic/li li" id="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-A282384F-E43D-40AE-B5D9-F88B7513EC24" data-ofbid="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-A282384F-E43D-40AE-B5D9-F88B7513EC24">The TX handler prioritizes the messages that are requested for transmission by the
+                transmit FIFOs. It uses the RAM interface to fetch the transmit data from RAM and
+                provides it to the BSP for transmission.</li>
+            <li class="- topic/li li" id="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-6ED6593A-0E96-4B92-90AB-D43AA1B8F0DC" data-ofbid="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-6ED6593A-0E96-4B92-90AB-D43AA1B8F0DC">The BSP provides received messages to the RX handler. The RX handler uses an
+                acceptance filter, which filters the messages that are to be stored in the receive
+                FIFOs. It uses the RAM interface to store received data into the RAM. </li>
+            <li class="- topic/li li" id="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-5F9C66F1-0DF0-4C64-9007-F1ED3F895518" data-ofbid="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-5F9C66F1-0DF0-4C64-9007-F1ED3F895518">Each FIFO can be configured either as a transmit or receive FIFO. The FIFO control
+                keeps track of the FIFO head and tail and calculates the user address. In a TX FIFO,
+                the user address points to the address in RAM where the data for the next transmit
+                message is stored. In an RX FIFO, the user address points to the address in RAM
+                where the data of the next receive message will be read. The user notifies the FIFO
+                that a message is written to or read from RAM by incrementing the head/tail of the
+                FIFO.</li>
+            <li class="- topic/li li" id="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-5AE57632-DA27-47C3-A227-23C01DB088F2" data-ofbid="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-5AE57632-DA27-47C3-A227-23C01DB088F2">The TXQ is a special transmit FIFO that transmits the messages, based on the ID of
+                the messages stored in the queue.</li>
+            <li class="- topic/li li" id="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-2BCEDD72-379B-4177-B5D9-44596773280A" data-ofbid="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-2BCEDD72-379B-4177-B5D9-44596773280A">The TEF stores the message IDs of the transmitted messages.</li>
+            <li class="- topic/li li" id="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-CE2CB013-221E-46B8-A47B-E027DB275A80" data-ofbid="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-CE2CB013-221E-46B8-A47B-E027DB275A80"> A free-running Time Base Counter (TBC) is used to timestamp received messages.
+                Messages in the TEF can also be timestamped. </li>
+            <li class="- topic/li li" id="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-9352F86A-D3AA-4ECE-A166-6F50A75D03DF" data-ofbid="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-9352F86A-D3AA-4ECE-A166-6F50A75D03DF">The CAN FD controller module generates interrupts when new messages are received or
+                when messages are transmitted successfully. </li>
+        </ol>
+        <p class="- topic/p p">The CANRX input pin is selected with the CANRXPPS register. The CANTX output pin is
+            selected with each pin’s RxyPPS register. </p>
+        <div class="- topic/note note notype note_notype" id="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-01FDA7A5-5DD7-4429-B3EA-A322D407FC46" data-ofbid="GUID-3784254A-3310-43C5-A771-2A8DAEC07962__GUID-01FDA7A5-5DD7-4429-B3EA-A322D407FC46"><span class="note__title">Note:</span> The CANRX pin defaults to pin <span class="- topic/ph ph">RB3</span>, but the CANTX
+            has no default location and must be assigned to a pin before CAN transmissions can
+            occur.</div>
+        <p class="- topic/p p">In modes that enable the CANRX pin, the user must ensure that the appropriate
+            TRIS bit for CANRX is set to configure the pin as an input, and the associated ANSEL bit
+            for that pin is cleared to enable the digital input buffer. In addition, in modes that
+            enable the CANTX pin, the appropriate TRIS bit for the associated pin must be cleared to
+            enable pin output. </p>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49.html">38.1.1 Module Functionality</a></li></ul>
+</nav>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.2.5 Clock Switch and Sleep — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-303128D4-96DB-4AB4-9068-7CD2A08AE796.html"/>
+<link rel="next" href="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB.html"/>
+<link rel="up" href="GUID-26C95464-A09C-4F40-954D-AACD69628A0E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-26C95464-A09C-4F40-954D-AACD69628A0E.html">12.2 Clock Switching</a></li><li>12.2.5 Clock Switch and Sleep</li></ol>
+  <div class="sib"><span>← <a href="GUID-303128D4-96DB-4AB4-9068-7CD2A08AE796.html" rel="prev">PLL Input Switch</a></span><span><a href="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB.html" rel="next">Fail-Safe Clock Monitor (FSCM)</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-CA724328-951D-4123-BF7F-3922CE4D1240" style="">12.2.5 Clock Switch and Sleep</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">If the <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a>/<a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GHR_WSL_YGB" title="New Divider Selection Request">NDIV</a> bits are written with new values and the device is put to
+            Sleep before the clock switch completes, the switch will not take place and the device
+            will enter Sleep mode.</div>
+        <p class="- topic/p p">When the device wakes up from Sleep and <a class="- topic/xref xref" href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html#GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE" title="Clock Switch Hold Control">CSWHOLD</a> is clear (CSWHOLD = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>),
+            the clock switch will complete and the device will wake with the new clock active,
+            setting CSWIF.</p>
+        <p class="- topic/p p">When the device wakes from Sleep and <a class="- topic/xref xref" href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html#GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE" title="Clock Switch Hold Control">CSWHOLD</a> is set (CSWHOLD = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the
+            device will wake up with the old clock active, and the new clock source will be
+            requested again.</p>
+        <p class="- topic/p p">If Doze mode is in effect, the clock switch occurs on the next clock cycle
+            regardless of whether or not the CPU is active during that clock cycle.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__FIG_J15_ML4_ZGB" data-ofbid="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__FIG_J15_ML4_ZGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 12-7. <span id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-BADDEA64-3D16-4303-A18A-2204C90075A9" class="fig--title">Clock Switch (CSWHOLD =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">0</code>)</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__IMAGE_K15_ML4_ZGB" src="GUID-71EC9408-79D4-435F-8D8D-BC26CA3DE80A-high.svg"/></span>
+        </figure>
+        <div class="- topic/note note notype note_notype" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-7BB0E72B-95F3-4BE2-93F7-5F688079E564" data-ofbid="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-7BB0E72B-95F3-4BE2-93F7-5F688079E564"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__OL_G3V_QL4_ZGB" data-ofbid="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__OL_G3V_QL4_ZGB">
+                <li class="- topic/li li" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-DC734B6F-5941-4B5B-A11A-273FE63C21C9" data-ofbid="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-DC734B6F-5941-4B5B-A11A-273FE63C21C9">CSWIF is asserted coincident with
+                        <a class="- topic/xref xref" href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html#BITFIELD_QYH_QZH_ZGB" title="New Oscillator is Ready (read-only)(1)">NOSCR</a>; interrupt is serviced at OSC#2
+                    speed.</li>
+                <li class="- topic/li li" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-5781235D-E25C-47C9-939E-C6438D7B543C" data-ofbid="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-5781235D-E25C-47C9-939E-C6438D7B543C">The assertion of <a class="- topic/xref xref" href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html#BITFIELD_QYH_QZH_ZGB" title="New Oscillator is Ready (read-only)(1)">NOSCR</a> may not be seen by the user as it is
+                    only set for the duration of the switch.</li>
+            </ol>
+        </div>
+        <figure class="- topic/fig fig fignone" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__FIG_FZ2_GM4_ZGB" data-ofbid="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__FIG_FZ2_GM4_ZGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 12-8. <span id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-DB2CBA12-AB63-4ADD-A416-4F3423658F2E" class="fig--title">Clock Switch (CSWHOLD =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">1</code>)</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__IMAGE_GZ2_GM4_ZGB" src="GUID-6AD7DB5E-0242-41B6-8A2F-9C6B96B26CB5-high.svg"/></span>
+        </figure>
+        <div class="- topic/note note notype note_notype" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-59166E14-394D-4D2F-BE6B-BA32AEEC543F" data-ofbid="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-59166E14-394D-4D2F-BE6B-BA32AEEC543F"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__OL_CTC_HM4_ZGB" data-ofbid="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__OL_CTC_HM4_ZGB">
+                <li class="- topic/li li" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-A91EBC88-E6A7-4A96-93EC-042E69E6CC77" data-ofbid="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-A91EBC88-E6A7-4A96-93EC-042E69E6CC77">CSWIF may be cleared before or
+                    after clearing <a class="- topic/xref xref" href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html#GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE" title="Clock Switch Hold Control">CSWHOLD</a>.</li>
+            </ol>
+        </div>
+        <figure class="- topic/fig fig fignone" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__FIG_YDN_LM4_ZGB" data-ofbid="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__FIG_YDN_LM4_ZGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 12-9. <span id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-95D381E2-2F4D-4698-BB39-174DC0400A1E" class="fig--title">Clock Switch Abandoned</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__IMAGE_ZDN_LM4_ZGB" src="GUID-EE8BE65E-84DB-4E31-90E7-AFACF4C6451F-high.svg"/></span>
+        </figure>
+        <div class="- topic/note note notype note_notype" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-6EA93A6C-ED36-4500-90E2-D87C9F3E0A4A" data-ofbid="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-6EA93A6C-ED36-4500-90E2-D87C9F3E0A4A"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__OL_JVP_4M4_ZGB" data-ofbid="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__OL_JVP_4M4_ZGB">
+                <li class="- topic/li li" id="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-14D34C5C-3BC8-4382-8F93-58D0BB5CBFE4" data-ofbid="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03__GUID-14D34C5C-3BC8-4382-8F93-58D0BB5CBFE4">CSWIF may be cleared before or
+                    after rewriting <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a>; CSWIF is not automatically
+                    cleared.</li>
+            </ol>
+        </div>
+    </div>
+
+</body>
+</html>

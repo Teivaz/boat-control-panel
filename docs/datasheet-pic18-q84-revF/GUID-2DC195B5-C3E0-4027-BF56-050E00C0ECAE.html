@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>7.1.1 Priority Lock — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA.html"/>
+<link rel="next" href="GUID-09B8283F-6491-4F2B-A97F-64AEBE302567.html"/>
+<link rel="up" href="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html">7 PIC18 CPU</a></li><li><a href="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA.html">7.1 System Arbitration</a></li><li>7.1.1 Priority Lock</li></ol>
+  <div class="sib"><span>← <a href="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA.html" rel="prev">System Arbitration</a></span><span><a href="GUID-09B8283F-6491-4F2B-A97F-64AEBE302567.html" rel="next">Memory Access Scheme</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-2DC195B5-C3E0-4027-BF56-050E00C0ECAE__GUID-7900394E-5A16-4C1C-BC1C-ABECCF5EEE10" style="">7.1.1 Priority Lock</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The system arbiter grants memory access to the peripheral selections (DMAx,
+            Scanner) as long as the <a class="- topic/xref xref" href="GUID-1EDFAC7F-18E9-4F04-AB80-B193AF5652E9.html#GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B" title="PR Register Lock"><span><span>PRLOCKED</span></span></a> bit is set. Priority selections are locked by setting
+            the PRLOCKED bit. Setting and clearing this bit requires a special sequence as an extra
+            precaution against inadvertent changes. The following code examples demonstrate the
+            Priority Lock and Priority Unlock sequences.</p>
+        <div class="- topic/example example" id="GUID-2DC195B5-C3E0-4027-BF56-050E00C0ECAE__GUID-4C4FE13D-1D32-4002-AB21-C4214DB61494" data-ofbid="GUID-2DC195B5-C3E0-4027-BF56-050E00C0ECAE__GUID-4C4FE13D-1D32-4002-AB21-C4214DB61494"><h2 class="- topic/title title sectiontitle">Priority Lock Sequence</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock avrasm"><code>INTCON0bits.GIE = 0; 		// Disable Interrupts;
+PRLOCK = 0x55;
+PRLOCK = 0xAA;
+PRLOCKbits.PRLOCKED = 1; 	// Grant memory access to peripherals;
+INTCON0bits.GIE = 1; 		// Enable Interrupts;</code></pre>
+        </div>
+        <div class="- topic/example example" id="GUID-2DC195B5-C3E0-4027-BF56-050E00C0ECAE__GUID-9F15F00B-CC23-45D0-BFF5-A80FF07C10A7" data-ofbid="GUID-2DC195B5-C3E0-4027-BF56-050E00C0ECAE__GUID-9F15F00B-CC23-45D0-BFF5-A80FF07C10A7"><h2 class="- topic/title title sectiontitle">Priority Unlock Sequence</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock avrasm"><code>INTCON0bits.GIE = 0; 		// Disable Interrupts;
+PRLOCK = 0x55;
+PRLOCK = 0xAA;
+PRLOCKbits.PRLOCKED = 0; 	// Allow changing priority settings;
+INTCON0bits.GIE = 1; 		// Enable Interrupts;</code></pre>
+        </div>
+    </div>
+
+</body>
+</html>

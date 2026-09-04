@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.2.1.8 Asynchronous Transmission Setup — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0F0A7048-ED0D-4495-936C-09C3540266FB.html"/>
+<link rel="next" href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html"/>
+<link rel="up" href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html">35.2 UART Asynchronous Modes</a></li><li><a href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html">35.2.1 UART Asynchronous Transmitter</a></li><li>35.2.1.8 Asynchronous Transmission Setup</li></ol>
+  <div class="sib"><span>← <a href="GUID-0F0A7048-ED0D-4495-936C-09C3540266FB.html" rel="prev">Transmitter Parity Modes</a></span><span><a href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html" rel="next">UART Asynchronous Receiver</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-61349495-4963-4F64-B9A7-BAA45CCCB31D" style="">35.2.1.8 Asynchronous Transmission Setup</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">Use the following steps as a guide for configuring the UART for asynchronous
+            transmissions.</p>
+        <ol class="- topic/ol ol" id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__OL_HZY_W25_BBB" data-ofbid="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__OL_HZY_W25_BBB">
+            <li class="- topic/li li" id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-BBCAA032-05BE-4DF8-82B3-1FAB76C79088" data-ofbid="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-BBCAA032-05BE-4DF8-82B3-1FAB76C79088">Initialize the <a class="- topic/xref xref" href="GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C.html#GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C" title="UxBRG">UxBRG</a> register pair and the <a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_MQF_ZNS_YY" title="Baud Rate Generator Speed Select"><span><span>BRGS</span></span></a> bit to achieve the desired baud rate.</li>
+            <li class="- topic/li li" id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-84EB5BA4-14CB-4D72-B2B4-9A6D4262A81E" data-ofbid="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-84EB5BA4-14CB-4D72-B2B4-9A6D4262A81E">Set the <a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_C5C_R5L_BBB" title="UART Mode Select(1)"><span><span>MODE</span></span></a> bits to the desired Asynchronous mode.</li>
+            <li class="- topic/li li" id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-98E4DC5D-8429-43B3-9598-108B19A0F5E6" data-ofbid="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-98E4DC5D-8429-43B3-9598-108B19A0F5E6">Set the <a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_C5C_R5L_BBB" title="Transmit Control Polarity(1)"><span><span>TXPOL</span></span></a> bit if inverted TX output is desired.</li>
+            <li class="- topic/li li" id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-755C9AF4-C4E8-47FE-AC75-7D5255FF6EF9" data-ofbid="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-755C9AF4-C4E8-47FE-AC75-7D5255FF6EF9">Enable the asynchronous serial port by setting the <a class="- topic/xref xref" href="GUID-AFEE23AF-E917-46D3-BF17-879043534F4E.html#BITFIELD_MQF_ZNS_YY" title="Serial Port Enable"><span><span>ON</span></span></a> bit.</li>
+            <li class="- topic/li li" id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-3A964FD9-C2B9-4D89-B2CB-A65AB26077EE" data-ofbid="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-3A964FD9-C2B9-4D89-B2CB-A65AB26077EE">Enable the transmitter by setting the
+                    <a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_K3M_SSL_BBB" title="Transmit Enable Control(2)"><span><span>TXEN</span></span></a> Control bit. This will cause the UxTXIF Interrupt
+                flag to be set.</li>
+            <li class="- topic/li li" id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-2A0C2C58-148C-4F18-BCB1-6E943DF82992" data-ofbid="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-2A0C2C58-148C-4F18-BCB1-6E943DF82992">If the device has PPS, configure the
+                desired I/O pin RxyPPS register with the code for the TX output.</li>
+            <li class="- topic/li li" id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-0D76CC6E-766C-4922-BEC0-78FB953EF962" data-ofbid="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-0D76CC6E-766C-4922-BEC0-78FB953EF962">If interrupts are desired, set the
+                UxTXIE Interrupt Enable bit in the respective PIE register. An interrupt will occur
+                immediately provided that global interrupts are also enabled.</li>
+            <li class="- topic/li li" id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-86634E03-1C6D-40BE-B497-FDE60A70C2E0" data-ofbid="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-86634E03-1C6D-40BE-B497-FDE60A70C2E0">Write one byte of data into the UxTXB register. This will start the
+                transmission.</li>
+            <li class="- topic/li li" id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-37A4DE0D-63BE-4BB5-A425-0DAAA2A6B9A8" data-ofbid="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-37A4DE0D-63BE-4BB5-A425-0DAAA2A6B9A8">Subsequent bytes may be written when
+                the UxTXIF bit is ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’.</li>
+        </ol>
+        <figure class="- topic/fig fig fignone" id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__FIG_SKN_FJW_QFB" data-ofbid="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__FIG_SKN_FJW_QFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 35-3. <span id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-A7C4FB26-52AE-4DDE-9FB2-C0029B940A27" class="fig--title">UART Asynchronous Transmission</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-5092B334-A67E-4DF5-8A38-6874650AF831-high.pdf#toolbar=1" width="457.79" height="243.24"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__FIG_TQF_GJW_QFB" data-ofbid="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__FIG_TQF_GJW_QFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 35-4. <span id="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4__GUID-B6305933-21E7-4B82-8B69-B6A3C3E88136" class="fig--title">UART Asynchronous Transmission
+                (Back-to-Back)</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-57B4C932-0E4A-4F56-AAE8-2C5EB89B6621-high.pdf#toolbar=1" width="467.49" height="243.24"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

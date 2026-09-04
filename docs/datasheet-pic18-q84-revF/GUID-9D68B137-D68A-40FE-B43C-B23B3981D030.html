@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.7.24 ADCTX — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C6FE20E2-BB9A-4D71-AA26-1C4440D82825.html"/>
+<link rel="next" href="GUID-DA12383C-144A-44CC-A015-02554D000181.html"/>
+<link rel="up" href="GUID-8FD3470F-42C5-4581-A564-B1DDFA17FB4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-8FD3470F-42C5-4581-A564-B1DDFA17FB4B.html">43.7 Register Definitions: ADC Control</a></li><li>43.7.24 ADCTX</li></ol>
+  <div class="sib"><span>← <a href="GUID-C6FE20E2-BB9A-4D71-AA26-1C4440D82825.html" rel="prev">ADCP</a></span><span><a href="GUID-DA12383C-144A-44CC-A015-02554D000181.html" rel="next">ADCSELx</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030__GUID-E05EEC30-BB46-4035-B7DD-DD960F1BACE6" style="">43.7.24  ADCTX</h1><section id="GUID-D885312D-34F2-4089-929A-B25ABFA226D3" class="- topic/section reference/section sidsc-register/registerDescription ">ADC Context Selection
+                Register<div class="- topic/note note notype note_notype endnote" id="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030__GUID-7038DB63-01B5-4226-973A-BB79FEC48F4F" data-ofbid="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030__GUID-7038DB63-01B5-4226-973A-BB79FEC48F4F"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030__OL_AF4_XBM_M3B" data-ofbid="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030__OL_AF4_XBM_M3B">
+                    <li class="- topic/li li" id="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030__GUID-19CC26D9-660D-4BFA-860E-0932AA467EC8" data-ofbid="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030__GUID-19CC26D9-660D-4BFA-860E-0932AA467EC8">The context number is always
+                        one number greater than the value written into the CTX bits. For example,
+                        when the CTX bits are written with zero (CTX = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), Context
+                        1 is in view.</li>
+                    <li class="- topic/li li" id="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030__GUID-F951B481-8EC9-4A76-BC9C-1787F592AA0C" data-ofbid="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030__GUID-F951B481-8EC9-4A76-BC9C-1787F592AA0C">When CTXSW is set, the CTX
+                        bits are read-only and may only be read while context sequencing is enabled
+                            (<a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#BITFIELD_GC3_LYR_M3B" title="ADC Context Scan Enable">CSEN</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>).</li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>ADCTX</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x3FB</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030__GUID-6572227D-4337-49DE-967A-DB728CBD875A" data-ofbid="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030__GUID-6572227D-4337-49DE-967A-DB728CBD875A"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">CTXSW</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="2">CTX[1:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-D885312D-34F2-4089-929A-B25ABFA226D3" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-4795EFC3-BE90-4235-BC07-60CAD3739B79__GUID-043AA21F-0C59-4785-9B2F-B3B627EC031B" id="GUID-4795EFC3-BE90-4235-BC07-60CAD3739B79">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-4795EFC3-BE90-4235-BC07-60CAD3739B79__GUID-043AA21F-0C59-4785-9B2F-B3B627EC031B" style=""> Bit 7 – CTXSW <span>Context Display
+            Select</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-4795EFC3-BE90-4235-BC07-60CAD3739B79__GUID-02F6FC06-7D57-4292-87C8-224A25B46B2B" data-ofbid="GUID-4795EFC3-BE90-4235-BC07-60CAD3739B79__GUID-02F6FC06-7D57-4292-87C8-224A25B46B2B"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-4795EFC3-BE90-4235-BC07-60CAD3739B79__GUID-691AD749-183B-4449-8844-4084C995C776"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-4795EFC3-BE90-4235-BC07-60CAD3739B79__GUID-AFE2E5E8-23EB-4EAC-8266-9611BE90F3EB">The
+                        scanner’s current context number is displayed in the CTX bits; the CTX bits
+                        are read-only<sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b">(2)</strong></sup></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-4795EFC3-BE90-4235-BC07-60CAD3739B79__GUID-BC8788AD-1481-486E-BC20-E4553ACB9A46"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-4795EFC3-BE90-4235-BC07-60CAD3739B79__GUID-E647B800-26AC-4446-9F35-B2E22CB75072">The
+                        user’s current context number is displayed in the CTX bits; the CTX bits are
+                        read/write</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="XQC_SKM_M3B__GUID-0D98271B-0A5C-400E-ADE0-46CDAF713C9C" id="XQC_SKM_M3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="XQC_SKM_M3B__GUID-0D98271B-0A5C-400E-ADE0-46CDAF713C9C" style=""> Bits 1:0 – CTX[1:0] <span>Channel Context
+            Selection</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="XQC_SKM_M3B__GUID-6236E9FA-1791-47D6-99FC-7F65571BF752" data-ofbid="XQC_SKM_M3B__GUID-6236E9FA-1791-47D6-99FC-7F65571BF752"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition"><colgroup><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="XQC_SKM_M3B__GUID-B1BCF849-15F2-4636-8DB4-DC5CA0A32786"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">n</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">CTXSW = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="XQC_SKM_M3B__GUID-FF19DE8A-0E83-47A1-9D60-4F50EA7434E7">Scanner’s current channel context number </td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="XQC_SKM_M3B__GUID-9ED654ED-BE1E-44E8-9832-11C12BCAE5F6"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">n</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">CTXSW = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="XQC_SKM_M3B__GUID-AA4E361C-2A48-448C-AA18-9A2F43FCDC6F">User’s
+                        current channel context number</td>
+                </tr></tbody></table>
+        </div>
+    </article>
+                
+                    The context number is always
+                        one number greater than the value written into the CTX bits. For example,
+                        when the CTX bits are written with zero (CTX = 0), Context
+                        1 is in view.
+                    When CTXSW is set, the CTX
+                        bits are read-only and may only be read while context sequencing is enabled
+                            (CSENADC Context Scan Enable = 1).
+                
+            
+</body>
+</html>

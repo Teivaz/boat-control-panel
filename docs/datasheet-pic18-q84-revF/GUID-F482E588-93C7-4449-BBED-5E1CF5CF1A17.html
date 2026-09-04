@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10.4.5 Operation During Code-Protect and Write-Protect — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-37577268-B29A-4184-9D8F-A5DF2A66B6C6.html"/>
+<link rel="next" href="GUID-1D5FB30C-CDA4-4441-A939-C7EB3FFD8E57.html"/>
+<link rel="up" href="GUID-A8FDF8F5-E9BA-4056-855B-FCA3C7018F18.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html">10 NVM - Nonvolatile Memory Module</a></li><li><a href="GUID-A8FDF8F5-E9BA-4056-855B-FCA3C7018F18.html">10.4 Data Flash Memory (DFM)</a></li><li>10.4.5 Operation During Code-Protect and Write-Protect</li></ol>
+  <div class="sib"><span>← <a href="GUID-37577268-B29A-4184-9D8F-A5DF2A66B6C6.html" rel="prev">DFM Write Verify</a></span><span><a href="GUID-1D5FB30C-CDA4-4441-A939-C7EB3FFD8E57.html" rel="next">Protection Against Spurious Writes</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-F482E588-93C7-4449-BBED-5E1CF5CF1A17__GUID-E3FEB894-ED47-45D0-8D9A-C3E8CC50A10D" style="">10.4.5 Operation During Code-Protect and
+      Write-Protect</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-F482E588-93C7-4449-BBED-5E1CF5CF1A17__ID-42121-00000404" data-ofbid="GUID-F482E588-93C7-4449-BBED-5E1CF5CF1A17__ID-42121-00000404">The DFM can be code-protected using the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CP</span>
+         Configuration bit. In-Circuit Serial Programming read and write operations are disabled
+         when code protection is enabled. However, internal reads operate normally. Internal writes
+         operate normally, provided that write protection is not enabled.</p>
+      <p class="- topic/p p" id="GUID-F482E588-93C7-4449-BBED-5E1CF5CF1A17__ID-42121-00000405" data-ofbid="GUID-F482E588-93C7-4449-BBED-5E1CF5CF1A17__ID-42121-00000405">If the DFM is write-protected or if NVMADR points at an invalid
+         address location, attempts to set the GO bit will fail and the WRERR bit will be set.</p>
+   </div>
+
+</body>
+</html>

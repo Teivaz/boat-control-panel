@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.9.3 Receive FIFO Behavior — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE.html"/>
+<link rel="next" href="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21.html"/>
+<link rel="up" href="GUID-18BE65DA-2E61-49D8-AAE7-AC56D4A9B739.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-18BE65DA-2E61-49D8-AAE7-AC56D4A9B739.html">38.9 FIFO Behavior</a></li><li>38.9.3 Receive FIFO Behavior</li></ol>
+  <div class="sib"><span>← <a href="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE.html" rel="prev">Transmit FIFO Behavior</a></span><span><a href="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21.html" rel="next">Transmit Queue Behavior</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__GUID-38560831-D382-49BD-A697-32BC610D11E3" style="">38.9.3 Receive FIFO Behavior</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">FIFO 2 is configured as an RX FIFO. CxFIFOCON2 is used to control the FIFO.
+            CxFIFOSTA2 contains the status flags and the FIFO index (FIFOCIx). CxFIFOUA2 contains
+            the user address of the next message object to read.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_E44_XCP_P3B"><span>Figure 38-24</span></a> through <a class="- topic/xref xref" href="#GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_OSZ_GDP_P3B"><span>Figure 38-31</span></a> illustrate how the status flags, user address and FIFO
+            index are updated.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_E44_XCP_P3B"><span>Figure 38-24</span></a> shows the status of FIFO 2 after the Reset. Message
+            objects, MO0 to MO15, are empty. All status flags are cleared. The user address and the
+            FIFO index point to MO0.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_E44_XCP_P3B" data-ofbid="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_E44_XCP_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-24. <span id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__GUID-C95801AD-C331-4ACC-9132-C74414BE3332" class="fig--title">FIFO 2 - Initial State</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__IMAGE_F44_XCP_P3B" src="GUID-F3899F43-8249-4844-87CD-DC7C215EEB60-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_X4B_ZCP_P3B"><span>Figure 38-25</span></a> illustrates the status of FIFO 2 after the first message (MSG0) is
+            received. MO0 now contains MSG0. The FIFO index now points to MO1. RFNIF is set since
+            the FIFO is not empty anymore.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_X4B_ZCP_P3B" data-ofbid="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_X4B_ZCP_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-25. <span id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__GUID-679C6802-FFB9-4555-9504-D42887687C7E" class="fig--title">FIFO 2 - First Message Received</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__IMAGE_Y4B_ZCP_P3B" src="GUID-920974A5-6008-4658-8585-C5142B803951-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_M2P_1DP_P3B"><span>Figure 38-26</span></a> illustrates the status of FIFO 2 after MSG0 is read. The user
+            application reads the message from RAM and sets the UINC bit (CxFIFOCON2[8]). The user
+            address increments and points to MO1. The FIFO index is unchanged. The FIFO is empty
+            again. All flags are cleared.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_M2P_1DP_P3B" data-ofbid="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_M2P_1DP_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-26. <span id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__GUID-672A7A34-110E-4213-9D38-2EE8E640F284" class="fig--title">FIFO 2 - First Message Read</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__IMAGE_N2P_1DP_P3B" src="GUID-048F94EF-BFF8-4C50-B9A8-20FCCCFA5123-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_XL5_BDP_P3B"><span>Figure 38-27</span></a> illustrates the status of FIFO 2 after eight more messages are
+            received: MSG1-MSG8. The user address still points to MO1. RFNIF and RFHIF are set
+            because the FIFO is now half full. The FIFO index points to MO9.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_XL5_BDP_P3B" data-ofbid="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_XL5_BDP_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-27. <span id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__GUID-49EDC3EB-BD6D-4BD6-80EB-5465CC9250A8" class="fig--title">FIFO 2 - Half Full</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__IMAGE_YL5_BDP_P3B" src="GUID-ACBC9DFD-CF0A-4F46-8DAC-8881BF25282D-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_PR2_DDP_P3B"><span>Figure 38-28</span></a> illustrates the status of FIFO 2 after ten more messages are
+            received: MSG5-MSG15. The user address still points to MO1. The FIFO index points to
+            MO0. RFNIF and RFHIF are set.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_PR2_DDP_P3B" data-ofbid="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_PR2_DDP_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-28. <span id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__GUID-CC1211FF-C00F-468F-8205-14E5E465AA9F" class="fig--title">FIFO 2 - FIFO Almost Full</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__IMAGE_QR2_DDP_P3B" src="GUID-F9F19F7A-415E-483E-82CF-1386A4BCF517-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_RHG_2DP_P3B"><span>Figure 38-29</span></a> illustrates the status of FIFO 2 after one more message is received:
+            MSG16. All status flags are set because the FIFO is full. The user address and the FIFO
+            index point to MO1.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_RHG_2DP_P3B" data-ofbid="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_RHG_2DP_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-29. <span id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__GUID-7E0770D1-C99A-4524-9F39-531424064A38" class="fig--title">FIFO 2 - FIFO Full</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__IMAGE_SHG_2DP_P3B" src="GUID-037BED0F-09B6-480E-BAE6-76BD871BAB64-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_DSV_FDP_P3B"><span>Figure 38-30</span></a> illustrates the status of FIFO 2 after one more message is received.
+            Since FIFO 2 is already full, an overflow occurs. The message is discarded and RXOVIF is
+            set. The user address and FIFO index has not changed.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_DSV_FDP_P3B" data-ofbid="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_DSV_FDP_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-30. <span id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__GUID-88370778-6B42-43CD-81C2-CD599F3F2DDD" class="fig--title">FIFO 2 - FIFO Overflow</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__IMAGE_ESV_FDP_P3B" src="GUID-2053904A-6D16-4D07-A45B-2F8285E839E5-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_OSZ_GDP_P3B"><span>Figure 38-31</span></a> illustrates the status of FIFO 2 after the application cleared
+            RXOVIF and read two more messages. RFFIF is clear because the FIFO is not full anymore.
+            The user address points to MO3. The FIFO index has not changed.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_OSZ_GDP_P3B" data-ofbid="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__FIG_OSZ_GDP_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-31. <span id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__GUID-A6BCBC96-D538-481A-BAE7-C16E19B0CFBC" class="fig--title">FIFO 2 - Two More Messages Read</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192__IMAGE_PSZ_GDP_P3B" src="GUID-085DE5AA-64CA-42A5-B0C6-5A0E6A7796C8-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

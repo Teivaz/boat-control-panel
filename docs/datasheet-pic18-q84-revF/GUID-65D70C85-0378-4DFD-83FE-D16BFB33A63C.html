@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>4.2.1 Decoupling Capacitors — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-87A3898A-29B8-4247-B4FA-F9ED51A1A55F.html"/>
+<link rel="next" href="GUID-2F64D96F-7A6E-4493-8EB1-126C9357BE7A.html"/>
+<link rel="up" href="GUID-87A3898A-29B8-4247-B4FA-F9ED51A1A55F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-248C7349-0CF1-4585-B0FE-5311789D4EBE.html">4 Guidelines for Getting Started with PIC18-Q84 Microcontrollers</a></li><li><a href="GUID-87A3898A-29B8-4247-B4FA-F9ED51A1A55F.html">4.2 Power Supply Pins</a></li><li>4.2.1 Decoupling Capacitors</li></ol>
+  <div class="sib"><span>← <a href="GUID-87A3898A-29B8-4247-B4FA-F9ED51A1A55F.html" rel="prev">Power Supply Pins</a></span><span><a href="GUID-2F64D96F-7A6E-4493-8EB1-126C9357BE7A.html" rel="next">Tank Capacitors</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__GUID-03A6BC12-54D6-468D-9E3E-314C8A26AC63" style="">4.2.1 Decoupling Capacitors</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__ID-42123-0000003B" data-ofbid="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__ID-42123-0000003B">The use of decoupling capacitors on
+         every pair of power supply pins (V<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__ID-42123-0000009E">DD</sub> and V<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__ID-42123-0000009F">SS</sub>) is required.</p>
+      
+      <p class="- topic/p p" id="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__ID-42123-0000003E" data-ofbid="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__ID-42123-0000003E">Consider the following criteria when using decoupling
+         capacitors:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__ID-42123-0000003F" data-ofbid="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__ID-42123-0000003F">Value and type of capacitor: A 0.1 μF (100 nF), 10-20V capacitor
+            is recommended. The capacitor needs to be a low-ESR device, with a resonance frequency
+            in the range of 200 MHz and higher. Ceramic capacitors are recommended.</li>
+         <li class="- topic/li li" id="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__ID-42123-00000043" data-ofbid="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__ID-42123-00000043">Placement on the printed circuit board: The decoupling
+            capacitors need to be placed as close to the pins as possible. It is recommended to
+            place the capacitors on the same side of the board as the device. If space is
+            constricted, the capacitor can be placed on another layer on the PCB using a via;
+            however, ensure that the trace length from the pin to the capacitor is no greater than
+            0.25 inch (6 mm).</li>
+         <li class="- topic/li li" id="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__ID-42123-00000046" data-ofbid="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__ID-42123-00000046">Handling high-frequency noise: If the board is experiencing
+            high-frequency noise (upward of tens of MHz), add a second ceramic type capacitor in
+            parallel to the above described decoupling capacitor. The value of the second capacitor
+            can be in the range of 0.01 μF to 0.001 μF. Place this second capacitor next to each
+            primary decoupling capacitor. In high-speed circuit designs, consider implementing a
+            decade pair of capacitances as close to the power and ground pins as possible (e.g., 0.1
+            μF in parallel with 0.001 μF).</li>
+         <li class="- topic/li li" id="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__ID-42123-0000004D" data-ofbid="GUID-65D70C85-0378-4DFD-83FE-D16BFB33A63C__ID-42123-0000004D">Maximizing performance: On the board layout from the power
+            supply circuit, run the power and return traces to the decoupling capacitors first and
+            then to the device pins. This ensures that the decoupling capacitors are first in the
+            power chain. Equally important is to keep the trace length between the capacitor and the
+            power pins to a minimum, thereby reducing PCB trace inductance.</li>
+      </ul>
+   </div>
+
+</body>
+</html>

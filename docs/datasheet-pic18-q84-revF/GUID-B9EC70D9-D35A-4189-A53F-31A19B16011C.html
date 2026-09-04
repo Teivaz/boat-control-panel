@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.6.1 Accessing Shadow Registers — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0A902790-F427-4CB8-80E9-D5497FF852CC.html"/>
+<link rel="next" href="GUID-B8E4B3AD-8EAB-460B-B27E-7DB69AD0E852.html"/>
+<link rel="up" href="GUID-0A902790-F427-4CB8-80E9-D5497FF852CC.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li><a href="GUID-0A902790-F427-4CB8-80E9-D5497FF852CC.html">11.6 Context Saving</a></li><li>11.6.1 Accessing Shadow Registers</li></ol>
+  <div class="sib"><span>← <a href="GUID-0A902790-F427-4CB8-80E9-D5497FF852CC.html" rel="prev">Context Saving</a></span><span><a href="GUID-B8E4B3AD-8EAB-460B-B27E-7DB69AD0E852.html" rel="next">Returning from Interrupt Service Routine (ISR)</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-B9EC70D9-D35A-4189-A53F-31A19B16011C__GUID-9658FCB9-792C-425D-A678-BA2DF9FDAF1F" style="">11.6.1 Accessing Shadow Registers</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The interrupt controller automatically saves the context information in the shadow
+            registers. Both the saved context values (i.e., main routine and low ISR) can be
+            accessed using the same set of shadow registers. By clearing SHADLO, the CPU register
+            values saved for main routine context can be accessed. Low ISR context is automatically
+            restored to the CPU registers upon exiting the high ISR. Similarly, the main context is
+            automatically restored to the CPU registers upon exiting the low ISR.</p>
+        <p class="- topic/p p">The shadow registers are readable and writable, so if the user desires to modify the
+            context, then the corresponding shadow register needs to be modified and the value will
+            be restored when exiting the ISR. Depending on the user’s application, other registers
+            may also need to be saved.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-B9EC70D9-D35A-4189-A53F-31A19B16011C__FIG_DH5_1VV_3GB" data-ofbid="GUID-B9EC70D9-D35A-4189-A53F-31A19B16011C__FIG_DH5_1VV_3GB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 11-6. <span id="GUID-B9EC70D9-D35A-4189-A53F-31A19B16011C__GUID-B1E0F056-A302-44A2-A5AA-769AFB70FEF7" class="fig--title">Context Save State Machine
+                Diagram</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-B9EC70D9-D35A-4189-A53F-31A19B16011C__IMAGE_EH5_1VV_3GB" src="GUID-630B0DEE-5768-405D-9699-6169FBCFCF6C-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

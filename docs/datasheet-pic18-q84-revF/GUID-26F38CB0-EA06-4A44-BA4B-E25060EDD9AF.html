@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.5.9.1 CVD Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4.html"/>
+<link rel="next" href="GUID-26402BB5-21F5-4E3F-92CE-C0B83FD6FD5A.html"/>
+<link rel="up" href="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html">43.5 Computation Operation</a></li><li><a href="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4.html">43.5.9 Capacitive Voltage Divider (CVD) Features</a></li><li>43.5.9.1 CVD Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4.html" rel="prev">Capacitive Voltage Divider (CVD) Features</a></span><span><a href="GUID-26402BB5-21F5-4E3F-92CE-C0B83FD6FD5A.html" rel="next">Precharge Control</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-26F38CB0-EA06-4A44-BA4B-E25060EDD9AF__GUID-A9FC7605-16D4-422E-A76B-A1F843047389" style="">43.5.9.1 CVD Operation</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-26F38CB0-EA06-4A44-BA4B-E25060EDD9AF__ID-42107-000003B5" data-ofbid="GUID-26F38CB0-EA06-4A44-BA4B-E25060EDD9AF__ID-42107-000003B5">A CVD operation begins with the ADC’s internal
+            Sample-and-Hold capacitor (C<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-26F38CB0-EA06-4A44-BA4B-E25060EDD9AF__ID-42107-000003B6">HOLD</sub>) being disconnected from the path, which connects it to the external
+            capacitive sensor node. While disconnected, C<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-26F38CB0-EA06-4A44-BA4B-E25060EDD9AF__ID-42107-000003B7">HOLD</sub> is precharged to V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> or discharged to V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub>. The sensor node is either discharged or
+            charged to V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub> or V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub>, respectively to the opposite level of C<sub class="+ topic/ph hi-d/sub ph sub">HOLD</sub>. When the precharge phase is complete, the
+                V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub>/V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub> bias paths for the two nodes are disconnected and the paths between C<sub class="+ topic/ph hi-d/sub ph sub">HOLD</sub> and the external sensor node is reconnected,
+            at which time the acquisition phase of the CVD operation begins. During acquisition, a
+            capacitive voltage divider is formed between the precharged C<sub class="+ topic/ph hi-d/sub ph sub">HOLD</sub> and sensor nodes, which results in a final
+            voltage level setting on C<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-26F38CB0-EA06-4A44-BA4B-E25060EDD9AF__ID-42107-000003C2">HOLD</sub>, which is determined by the capacitances and precharge levels of the two
+            nodes. After acquisition, the ADC converts the voltage level on C<sub class="+ topic/ph hi-d/sub ph sub">HOLD</sub>. This process is then repeated with the
+            selected precharge levels inverted for both the C<sub class="+ topic/ph hi-d/sub ph sub">HOLD</sub> and the sensor nodes. The waveform for two CVD measurements, which is
+            known as differential CVD measurement, is shown in the following figure.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-26F38CB0-EA06-4A44-BA4B-E25060EDD9AF__ID-42107-000003D7" data-ofbid="GUID-26F38CB0-EA06-4A44-BA4B-E25060EDD9AF__ID-42107-000003D7"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 43-8. <span id="GUID-26F38CB0-EA06-4A44-BA4B-E25060EDD9AF__GUID-5DA27CD7-2957-47E3-BC4E-7AE444D613D4" class="fig--title">Differential CVD Measurement Waveform</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-72695B5D-00DF-4BEB-A634-295A200DDED6-high.pdf#toolbar=1" width="450" height="378.93821101940665"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

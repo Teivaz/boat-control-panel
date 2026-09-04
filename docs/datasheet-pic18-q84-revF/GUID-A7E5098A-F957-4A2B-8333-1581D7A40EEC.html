@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>17.2 Sleep Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BD5588AB-E8D5-43E6-BA71-463862EA4BF2.html"/>
+<link rel="next" href="GUID-236895B1-6931-4C63-937F-02D53E8A1158.html"/>
+<link rel="up" href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html">17 Power-Saving Modes</a></li><li>17.2 Sleep Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-BD5588AB-E8D5-43E6-BA71-463862EA4BF2.html" rel="prev">Interrupts During Doze</a></span><span><a href="GUID-236895B1-6931-4C63-937F-02D53E8A1158.html" rel="next">Wake-Up from Sleep</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__GUID-9E40C409-4E43-40F3-8CD2-2B56D1798E8D" style="">17.2 Sleep Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p">Sleep mode provides the greatest power savings because both the CPU and selected
+         peripherals cease to operate. However, some peripheral clocks continue to operate during
+         Sleep. The peripherals that use those clocks also continue to operate. Sleep mode is
+         entered by executing the <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000059">SLEEP</code> instruction, while
+         the <a class="- topic/xref xref" href="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354.html#ID-00000017" title="Idle Enable">IDLEN</a> bit is clear. Upon entering Sleep mode, the following conditions
+         exist:</p>
+      <ol class="- topic/ol ol" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__GUID-24EF5B4E-5FB0-4E90-B04D-1C1F6950B98C" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__GUID-24EF5B4E-5FB0-4E90-B04D-1C1F6950B98C">
+         <li class="- topic/li li" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-0000005C" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-0000005C">The WDT will be cleared, but keeps running if enabled for
+            operation during Sleep.</li>
+         <li class="- topic/li li" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-0000005E" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-0000005E">The <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000060">PD</span> bit of
+            the STATUS register is cleared.</li>
+         <li class="- topic/li li" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000062" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000062">The <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000064">TO</span> bit of
+            the STATUS register is set.</li>
+         <li class="- topic/li li" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000066" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000066">The CPU clock is disabled.</li>
+         <li class="- topic/li li" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000068" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000068">LFINTOSC,<span class="- topic/ph ph"> SOSC,</span>
+            HFINTOSC and ADCRC are unaffected. Peripherals using them may continue operation during
+            Sleep.</li>
+         <li class="- topic/li li" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-0000006A" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-0000006A">I/O ports maintain the status they had before Sleep was executed
+            (driving high, low, or high-impedance).</li>
+         <li class="- topic/li li" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-0000006C" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-0000006C">Resets other than WDT are not affected by Sleep mode.</li>
+      </ol>
+      <div class="- topic/p p" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-0000006E" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-0000006E">
+         <div class="- topic/note note important note_important" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__GUID-B30EF9A1-DC08-4360-9A41-A8241F8A6455" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__GUID-B30EF9A1-DC08-4360-9A41-A8241F8A6455"><span class="note__title">Important:</span> Refer to individual
+            chapters for more details on peripheral operation during Sleep.</div>
+      </div>
+      <p class="- topic/p p" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-0000006F" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-0000006F">To minimize current consumption, consider the following
+         conditions:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000070" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000070">I/O pins must not be floating</li>
+         <li class="- topic/li li" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000072" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000072">External circuitry sinking current from I/O pins</li>
+         <li class="- topic/li li" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000074" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000074">Internal circuitry sourcing current to I/O pins</li>
+         <li class="- topic/li li" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000076" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000076">Current draw from pins with internal weak pull-ups</li>
+         <li class="- topic/li li" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000078" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-00000078">Peripherals using clock source unaffected by Sleep</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-0000007A" data-ofbid="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC__ID-42139-0000007A">I/O pins that are high-impedance inputs need to be pulled to
+            V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> or V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub> externally to avoid switching currents caused by
+         floating inputs. Examples of internal circuitry that might be consuming current include
+         modules such as the DAC and FVR peripherals.</p>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-236895B1-6931-4C63-937F-02D53E8A1158.html">17.2.1 Wake-Up from Sleep</a></li><li><a href="GUID-113F0247-2958-4313-A0FB-FE0D6207A438.html">17.2.2 Wake-Up Using Interrupts</a></li><li><a href="GUID-DBACCDFF-E710-403E-9D4E-23395C209DFB.html">17.2.3 Low-Power Sleep Mode</a></li></ul>
+</nav>
+</body>
+</html>

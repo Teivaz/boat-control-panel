@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.4.1 User (Software) Priority — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-87A8D44B-D139-4231-AA4C-1BE2B39FD6D0.html"/>
+<link rel="next" href="GUID-05128B98-0576-44E5-A18B-CEA7146F8D9D.html"/>
+<link rel="up" href="GUID-87A8D44B-D139-4231-AA4C-1BE2B39FD6D0.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li><a href="GUID-87A8D44B-D139-4231-AA4C-1BE2B39FD6D0.html">11.4 Interrupt Priority</a></li><li>11.4.1 User (Software) Priority</li></ol>
+  <div class="sib"><span>← <a href="GUID-87A8D44B-D139-4231-AA4C-1BE2B39FD6D0.html" rel="prev">Interrupt Priority</a></span><span><a href="GUID-05128B98-0576-44E5-A18B-CEA7146F8D9D.html" rel="next">Natural Order (Hardware) Priority</a> →</span></div>
+</nav>
+
+	<h1 class="- topic/title title topictitle1" id="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-D2415D3F-A497-44C1-BF28-718957E8BD06" style="">11.4.1 User (Software) Priority</h1>
+	<div class="- topic/body body">
+		<p class="- topic/p p">User-assigned interrupt priority is enabled by setting <a class="- topic/xref xref" href="GUID-41BD135E-759C-4716-87B4-2E7DAA2590B1.html#BITFIELD_F2C_4NK_CGB" title="Interrupt Priority Enable">IPEN</a>.
+Each peripheral interrupt source can be assigned a high- or low-priority level by the user. The
+user-assignable interrupt priority control bits for each interrupt are located in the IPRx
+registers, which are device-specific and can be found in the respective data sheet for each
+device.</p>
+		<p class="- topic/p p">The interrupts are serviced based on a predefined interrupt priority scheme detailed below.</p>
+		<ol class="- topic/ol ol" id="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__OL_YG3_3YW_XFB" data-ofbid="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__OL_YG3_3YW_XFB">
+			<li class="- topic/li li" id="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-E49BF54D-7B40-4C8A-9780-9DE0471ACC27" data-ofbid="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-E49BF54D-7B40-4C8A-9780-9DE0471ACC27">Interrupts set by the user as a high-priority
+				interrupt have higher precedence of execution. High-priority interrupts will override a
+				low-priority request when:<ol class="- topic/ol ol" type="a" id="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__OL_WMW_TYW_XFB" data-ofbid="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__OL_WMW_TYW_XFB">
+					<li class="- topic/li li" id="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-BF042931-B06F-400E-A441-9DA9B6B7FFCC" data-ofbid="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-BF042931-B06F-400E-A441-9DA9B6B7FFCC">A low-priority interrupt has been requested
+						or its request is already pending.</li>
+					<li class="- topic/li li" id="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-2E0AD1C8-2D4B-4301-AA7D-522D85A9E819" data-ofbid="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-2E0AD1C8-2D4B-4301-AA7D-522D85A9E819">A low- and high-priority interrupt are
+						triggered concurrently (i.e., on the same instruction cycle).<a class="- topic/xref xref" href="#GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-059F449A-A8DD-4485-AAF2-FC217089E65C"><sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b">(1)</strong></sup></a></li>
+					<li class="- topic/li li" id="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-C78A95DD-5AC9-4AB0-8612-E70FDE802F62" data-ofbid="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-C78A95DD-5AC9-4AB0-8612-E70FDE802F62">A low-priority interrupt was requested and
+						the corresponding Interrupt Service Routine is currently executing. In this case, the lower
+						priority interrupt routine will be interrupted then complete executing after the high-priority
+						interrupt has been serviced.<a class="- topic/xref xref" href="#GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-059F449A-A8DD-4485-AAF2-FC217089E65C"><sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b">(2)</strong></sup></a></li>
+				</ol></li>
+			<li class="- topic/li li" id="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-FAAE769E-6459-411D-BB4B-99A907EF7999" data-ofbid="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-FAAE769E-6459-411D-BB4B-99A907EF7999">Interrupts set by the user as low priority
+				have a lower priority of execution and are preempted by any high-priority interrupt.</li>
+			<li class="- topic/li li" id="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-1DBEBE9C-EAAD-4395-BE7B-95003836CC8D" data-ofbid="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-1DBEBE9C-EAAD-4395-BE7B-95003836CC8D">Interrupts defined with the same software
+				priority cannot preempt or interrupt each other. Concurrent pending interrupts with the same
+				user priority are resolved using the natural order priority (when vectored interrupts are
+				enabled) or in the order the interrupt flag bits are polled in the ISR (when vectored interrupts
+				are disabled).</li>
+		</ol>
+		<div class="- topic/note note important note_important" id="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-059F449A-A8DD-4485-AAF2-FC217089E65C" data-ofbid="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-059F449A-A8DD-4485-AAF2-FC217089E65C"><span class="note__title">Important:</span> 
+			<ol class="- topic/ol ol" id="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__OL_PB1_BBX_XFB" data-ofbid="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__OL_PB1_BBX_XFB">
+				<li class="- topic/li li" id="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-B87F17F6-4405-479D-9687-CDD30F9D4F10" data-ofbid="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-B87F17F6-4405-479D-9687-CDD30F9D4F10">When a high-priority interrupt preempts a
+					concurrent low-priority interrupt, <a class="- topic/xref xref" href="GUID-E940C060-117B-4C3F-926C-C057E18D7103.html">GIEL</a> may be cleared in the high-priority Interrupt Service Routine. If
+					GIEL is cleared, the low-priority interrupt will NOT be serviced, even if it was originally
+					requested. The corresponding interrupt flag needs to be cleared in user code.</li>
+				<li class="- topic/li li" id="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-6BD97934-7A55-49BF-8DD5-E9CF6C699D30" data-ofbid="GUID-544385CC-99BD-4886-B642-781F0A5FAF73__GUID-6BD97934-7A55-49BF-8DD5-E9CF6C699D30">When a high-priority interrupt is requested
+					while a low-priority Interrupt Service Routine is executing, GIEL may be cleared in the
+					high-priority Interrupt Service Routine. The pending low-priority interrupt will resume, even
+					if GIEL is cleared.</li>
+			</ol>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>17.2.3.2 Peripheral Usage in Sleep — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-591A7C8E-C722-431B-B118-7CDE7BD9EE25.html"/>
+<link rel="next" href="GUID-098EAC7E-1225-415B-9FD4-84CC75417CAB.html"/>
+<link rel="up" href="GUID-DBACCDFF-E710-403E-9D4E-23395C209DFB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html">17 Power-Saving Modes</a></li><li><a href="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC.html">17.2 Sleep Mode</a></li><li><a href="GUID-DBACCDFF-E710-403E-9D4E-23395C209DFB.html">17.2.3 Low-Power Sleep Mode</a></li><li>17.2.3.2 Peripheral Usage in Sleep</li></ol>
+  <div class="sib"><span>← <a href="GUID-591A7C8E-C722-431B-B118-7CDE7BD9EE25.html" rel="prev">Sleep Current vs. Wake-Up Time</a></span><span><a href="GUID-098EAC7E-1225-415B-9FD4-84CC75417CAB.html" rel="next">Idle Mode</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8__GUID-39FCAC11-C0FC-45A3-9F5F-7BC8DD71F4B5" style="">17.2.3.2 Peripheral Usage in Sleep</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8__ID-42139-000000E7" data-ofbid="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8__ID-42139-000000E7">Some peripherals that can operate in High-Power Sleep mode (VREGPM =
+            <code class="+ topic/ph pr-d/codeph ph codeph">‘b00</code>) will not operate as intended in the Low-Power Sleep modes (VREGPM
+         = <code class="+ topic/ph pr-d/codeph ph codeph">‘b01</code> and <code class="+ topic/ph pr-d/codeph ph codeph">‘b11</code>). The Low-Power Sleep modes are intended
+         for use with the following peripherals:</p>
+      <ul class="- topic/ul ul" id="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8__UL_BJB_4N4_RLB" data-ofbid="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8__UL_BJB_4N4_RLB">
+         <li class="- topic/li li" id="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8__ID-42139-000000E8" data-ofbid="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8__ID-42139-000000E8">Brown-out Reset (BOR)</li>
+         <li class="- topic/li li" id="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8__ID-42139-000000EA" data-ofbid="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8__ID-42139-000000EA">Windowed Watchdog Timer (WWDT)</li>
+         <li class="- topic/li li" id="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8__ID-42139-000000EC" data-ofbid="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8__ID-42139-000000EC">External interrupt pin/interrupt-on-change pins</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8__ID-42139-000000F0" data-ofbid="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8__ID-42139-000000F0">It is the responsibility of the end user to determine what is
+         acceptable for their application when setting the <a class="- topic/xref xref" href="GUID-C466114D-3092-4435-B901-4A88EC6A3B74.html#ID-00000005" title="Voltage Regulator Power Mode Selection">VREGPM</a>
+         settings to ensure correct operation in Sleep.</p>
+   </div>
+
+</body>
+</html>

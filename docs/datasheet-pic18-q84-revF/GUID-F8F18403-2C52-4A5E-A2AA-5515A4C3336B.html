@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.2.2 Completion of a Conversion — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26.html"/>
+<link rel="next" href="GUID-7839BA35-BB26-42C4-84B1-2ADDF21FB0ED.html"/>
+<link rel="up" href="GUID-88AEA9BE-34C2-44BE-A116-5DAB431A258C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-88AEA9BE-34C2-44BE-A116-5DAB431A258C.html">43.2 ADC Operation</a></li><li>43.2.2 Completion of a Conversion</li></ol>
+  <div class="sib"><span>← <a href="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26.html" rel="prev">Starting a Conversion</a></span><span><a href="GUID-7839BA35-BB26-42C4-84B1-2ADDF21FB0ED.html" rel="next">ADC Operation During Sleep</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__GUID-CA3B2241-C923-49AF-AA50-C7214397B858" style="">43.2.2 Completion of a Conversion</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-00000274" data-ofbid="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-00000274">When any individual conversion is complete, the
+            existing value in <a class="- topic/xref xref" href="GUID-03130209-3BF5-4D2A-B9B0-19A9E1A58C89.html" title="ADRES">ADRES</a> is written into <a class="- topic/xref xref" href="GUID-6964CFCF-6C5B-432B-AD40-F710E7396F3A.html" title="ADPREV">ADPREV</a> (if <a class="- topic/xref xref" href="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D.html#ID-00000048" title="ADC Previous Sample Input Select"><span><span>PSIS</span></span></a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) and the new conversion results appear in ADRES.
+            When the conversion completes, the ADC module will:</p>
+        <ul class="- topic/ul ul" id="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__UL_JS1_D3S_VGB" data-ofbid="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__UL_JS1_D3S_VGB">
+            <li class="- topic/li li" id="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-00000276" data-ofbid="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-00000276">Clear the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000021" title="ADC Conversion Status(1,2)">GO</a> bit (unless the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-0000000C" title="ADC Continuous Operation Enable"><span><span>CONT</span></span></a> bit is set)</li>
+            <li class="- topic/li li" id="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-00000278" data-ofbid="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-00000278">Set the ADIF Interrupt Flag bit</li>
+            <li class="- topic/li li" id="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-0000027A" data-ofbid="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-0000027A">Set the <a class="- topic/xref xref" href="GUID-D37FA911-31F8-4990-9287-79830C2DF08F.html#ID-0000009E" title="ADC Module Computation Status"><span><span>MATH</span></span></a>
+                bit</li>
+            <li class="- topic/li li" id="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-0000027C" data-ofbid="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-0000027C">Update <a class="- topic/xref xref" href="GUID-30FA2F95-1F03-4839-A4EC-7F5EDB3ADED5.html" title="ADACC">ADACC</a></li>
+        </ul>
+        <p class="- topic/p p" id="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-0000027E" data-ofbid="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-0000027E">After every conversion when <a class="- topic/xref xref" href="GUID-91A099AA-6FF5-4C34-ABF1-6C3EFCAF1E11.html#ID-0000003D" title="Double-Sample Enable"><span><span>DSEN</span></span></a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>
+            or after every other conversion when DSEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the following events
+            occur:</p>
+        <ul class="- topic/ul ul" id="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__UL_KS1_D3S_VGB" data-ofbid="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__UL_KS1_D3S_VGB">
+            <li class="- topic/li li" id="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-00000281" data-ofbid="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-00000281"><a class="- topic/xref xref" href="GUID-A9D3BECF-B763-475C-9724-E58BD7D965F1.html" title="ADERR">ADERR</a> is
+                calculated</li>
+            <li class="- topic/li li" id="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-00000283" data-ofbid="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B__ID-42107-00000283">ADC Channel Threshold Interrupt (ADCHxIF)
+                is set if ADERR calculation meets threshold comparison</li>
+        </ul>
+    </div>
+
+</body>
+</html>

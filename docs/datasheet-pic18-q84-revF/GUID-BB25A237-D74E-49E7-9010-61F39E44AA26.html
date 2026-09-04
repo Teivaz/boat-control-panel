@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.2.1 Starting a Conversion — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-88AEA9BE-34C2-44BE-A116-5DAB431A258C.html"/>
+<link rel="next" href="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B.html"/>
+<link rel="up" href="GUID-88AEA9BE-34C2-44BE-A116-5DAB431A258C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-88AEA9BE-34C2-44BE-A116-5DAB431A258C.html">43.2 ADC Operation</a></li><li>43.2.1 Starting a Conversion</li></ol>
+  <div class="sib"><span>← <a href="GUID-88AEA9BE-34C2-44BE-A116-5DAB431A258C.html" rel="prev">ADC Operation</a></span><span><a href="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B.html" rel="next">Completion of a Conversion</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26__GUID-B6EFB6ED-860E-4EFF-81F4-EA8FA5D294F0" style="">43.2.1 Starting a Conversion</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26__ID-42107-0000025D" data-ofbid="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26__ID-42107-0000025D">To enable the ADC module, the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000005" title="ADC Enable"><span><span>ON</span></span></a> bit
+            must be set to ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’. A conversion may be started by any of the
+            following:</p>
+        <ul class="- topic/ul ul" id="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26__UL_BKZ_ZHS_VGB" data-ofbid="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26__UL_BKZ_ZHS_VGB">
+            <li class="- topic/li li" id="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26__ID-42107-0000025F" data-ofbid="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26__ID-42107-0000025F">Software setting the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000021" title="ADC Conversion Status(1,2)"><span><span>GO</span></span></a> bit
+                to ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’</li>
+            <li class="- topic/li li" id="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26__ID-42107-00000262" data-ofbid="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26__ID-42107-00000262">An external trigger (source selected by
+                    <a class="- topic/xref xref" href="GUID-2269ADA0-3675-4C83-86E3-29E20194D5F2.html" title="ADACT">ADACT</a>)</li>
+            <li class="- topic/li li" id="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26__ID-42107-00000265" data-ofbid="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26__ID-42107-00000265">A continuous-mode retrigger (see the
+                    <a class="- topic/xref xref" href="GUID-1E28C159-7362-470B-81E7-355F2B01C339.html">Continuous
+                    Sampling Mode</a> section for more details)</li>
+        </ul>
+        <div class="- topic/note note important note_important" id="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26__ID-42107-0000026F" data-ofbid="GUID-BB25A237-D74E-49E7-9010-61F39E44AA26__ID-42107-0000026F"><span class="note__title">Important:</span> The GO bit needs to not
+            be set in the same instruction that turns on the ADC. Refer to the <a class="- topic/xref xref" href="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5.html">ADC Conversion
+                Procedure (Basic Mode)</a> section for more details.</div>
+    </div>
+
+</body>
+</html>

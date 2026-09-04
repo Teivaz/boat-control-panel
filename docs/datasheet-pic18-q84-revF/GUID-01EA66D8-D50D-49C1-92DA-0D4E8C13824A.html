@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.3.2 Interrupt Vector Table Contents — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-847752F0-4249-4EE5-8276-AA7C6789B6B1.html"/>
+<link rel="next" href="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162.html"/>
+<link rel="up" href="GUID-62FC3E7B-300F-4961-9F3E-68300C0CBDBF.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li><a href="GUID-62FC3E7B-300F-4961-9F3E-68300C0CBDBF.html">11.3 Interrupt Vector Table</a></li><li>11.3.2 Interrupt Vector Table Contents</li></ol>
+  <div class="sib"><span>← <a href="GUID-847752F0-4249-4EE5-8276-AA7C6789B6B1.html" rel="prev">Interrupt Vector Table Base Address (IVTBASE)</a></span><span><a href="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162.html" rel="next">Interrupt Vector Table Address Calculation</a> →</span></div>
+</nav>
+
+	<h1 class="- topic/title title topictitle1" id="GUID-01EA66D8-D50D-49C1-92DA-0D4E8C13824A__GUID-7D60F9B0-204D-41A0-B9A5-93E870E8139F" style="">11.3.2 Interrupt Vector Table Contents</h1>
+	<div class="- topic/body body">
+		<p class="- topic/p p"><u class="+ topic/ph hi-d/u ph u">MVECEN = <code class="+ topic/ph pr-d/codeph ph codeph">0</code></u></p>
+		<p class="- topic/p p">When MVECEN = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, the address location pointed to by <a class="- topic/xref xref" href="GUID-68C0FDF3-7A26-4084-B1D8-A08C90901A11.html" title="IVTBASE">IVTBASE</a> has a
+<code class="+ topic/ph pr-d/codeph ph codeph">GOTO</code> instruction for a high-priority interrupt. Similarly, the corresponding
+low-priority vector also has a <code class="+ topic/ph pr-d/codeph ph codeph">GOTO</code> instruction, which is executed in case of a
+low-priority interrupt.</p>
+		<p class="- topic/p p"><u class="+ topic/ph hi-d/u ph u">MVECEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code></u></p>
+		<p class="- topic/p p">When MVECEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the value in the vector table of each interrupt points to the
+			address location of the first instruction of the Interrupt Service Routine, hence: ISR Location =
+			Interrupt Vector Table entry &lt;&lt; 2.</p>
+	</div>
+
+</body>
+</html>

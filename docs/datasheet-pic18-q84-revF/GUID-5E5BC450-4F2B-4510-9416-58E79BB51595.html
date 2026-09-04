@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.3.2 Transmit Only Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-6482098D-C510-4D19-AD6F-A6330C4A2D03.html"/>
+<link rel="next" href="GUID-DEF856A5-841B-41F3-8544-0C6B420076AA.html"/>
+<link rel="up" href="GUID-58292C67-26C3-49E8-9D78-1E217D2E4B0C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-58292C67-26C3-49E8-9D78-1E217D2E4B0C.html">36.3 Host Mode</a></li><li>36.3.2 Transmit Only Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-6482098D-C510-4D19-AD6F-A6330C4A2D03.html" rel="prev">Full Duplex Mode</a></span><span><a href="GUID-DEF856A5-841B-41F3-8544-0C6B420076AA.html" rel="next">Receive Only Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-5E5BC450-4F2B-4510-9416-58E79BB51595__GUID-613F67F8-1207-4A6A-8B0A-3CEEAF397C2D" style="">36.3.2 Transmit Only Mode</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">When TXR is set and RXR is clear, the SPI host is in Transmit Only mode. In this mode,
+            data transfer triggering is affected by the <a class="- topic/xref xref" href="GUID-CD70C100-5F91-4E6F-86D4-583C754F39BE.html#BITFIELD_DQY_N5F_RFB" title="Bit-Length Mode Select(1)"><span><span>BMODE</span></span></a> bit.</div>
+        <p class="- topic/p p"> When BMODE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, data transfers will occur whenever the transmit FIFO is
+            not empty. Data will be transmitted as soon as the SPIxTXB register is written to,
+            matching the functionality of the SPI (MSSP) modules on previous 8-bit devices. The
+            SPIxTCNT will decrement with each transfer. However, when SPIxTCNT is zero, the next
+            transfer is not inhibited and the corresponding SPIxTCNT decrement will cause the count
+            to roll over to the maximum value. Any data received in this mode is not stored in the
+            receive FIFO. The following figure shows an example of sending a command and then
+            sending a byte of data using this mode.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-5E5BC450-4F2B-4510-9416-58E79BB51595__FIG_IGZ_MC3_SFB" data-ofbid="GUID-5E5BC450-4F2B-4510-9416-58E79BB51595__FIG_IGZ_MC3_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 36-4. <span id="GUID-5E5BC450-4F2B-4510-9416-58E79BB51595__GUID-AB315FA9-ABAE-4DA0-8536-899C29D5866B" class="fig--title">SPI Host Operation - Command+Write
+                Data, TXR = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, RXR = <code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-3DB725E4-03E3-4246-9AFD-E4187D616C95-high.pdf#toolbar=1" width="450" height="725.5940313721048"></iframe></span>
+        </figure>
+        <p class="- topic/p p">When BMODE = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, the transfer counter (SPIxTCNT) must also be
+            written to before transfers will occur, and transfers will cease when the transfer
+            counter reaches ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’.</p>
+        <p class="- topic/p p">For example, if SPIxTXB is written twice and then SPIxTCNTL is written with
+                ‘<code class="+ topic/ph pr-d/codeph ph codeph">3</code>’, the transfer will start with the SPIxTCNTL write. The two
+            bytes in the TXFIFO will be sent after which the transfer will suspend until the third
+            and last byte is written to SPIxTXB.</p>
+    </div>
+
+</body>
+</html>

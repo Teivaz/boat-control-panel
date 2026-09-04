@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>17.3 Idle Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8.html"/>
+<link rel="next" href="GUID-7E3E2299-6D65-4C77-9E50-378947E6652E.html"/>
+<link rel="up" href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html">17 Power-Saving Modes</a></li><li>17.3 Idle Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8.html" rel="prev">Peripheral Usage in Sleep</a></span><span><a href="GUID-7E3E2299-6D65-4C77-9E50-378947E6652E.html" rel="next">Idle and Interrupts</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-098EAC7E-1225-415B-9FD4-84CC75417CAB__GUID-75B9C86B-8287-466E-A06A-61CC63C86435" style="">17.3 Idle Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-098EAC7E-1225-415B-9FD4-84CC75417CAB__ID-42139-0000010E" data-ofbid="GUID-098EAC7E-1225-415B-9FD4-84CC75417CAB__ID-42139-0000010E">When the <a class="- topic/xref xref" href="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354.html#ID-00000017" title="Idle Enable">IDLEN</a> bit is clear, the <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction will put the device
+         into full Sleep mode. When IDLEN is set, the <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction will put
+         the device into Idle mode. In Idle mode, the CPU and memory operations are halted, but the
+         peripheral clocks continue to run. This mode is similar to Doze mode, except that in Idle
+         both the CPU and program memory are shut off.</p>
+      <div class="- topic/note note important note_important" id="GUID-098EAC7E-1225-415B-9FD4-84CC75417CAB__GUID-729DC4F3-068C-4A9C-809C-C4D1D5CAA212" data-ofbid="GUID-098EAC7E-1225-415B-9FD4-84CC75417CAB__GUID-729DC4F3-068C-4A9C-809C-C4D1D5CAA212"><span class="note__title">Important:</span> 
+         <ol class="- topic/ol ol" id="GUID-098EAC7E-1225-415B-9FD4-84CC75417CAB__OL_OXR_YVL_YGB" data-ofbid="GUID-098EAC7E-1225-415B-9FD4-84CC75417CAB__OL_OXR_YVL_YGB">
+            <li class="- topic/li li" id="GUID-098EAC7E-1225-415B-9FD4-84CC75417CAB__GUID-05002808-4EE8-400D-ACD9-0BE3E8209C57" data-ofbid="GUID-098EAC7E-1225-415B-9FD4-84CC75417CAB__GUID-05002808-4EE8-400D-ACD9-0BE3E8209C57">Peripherals using F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>
+               will continue to operate while in Idle (but not in Sleep). Peripherals using
+               HFINTOSC:LFINTOSC will continue running in both Idle and Sleep.</li>
+            <li class="- topic/li li" id="GUID-098EAC7E-1225-415B-9FD4-84CC75417CAB__GUID-4A0BF8AF-D08E-4BAD-BB9B-D313AF2698BA" data-ofbid="GUID-098EAC7E-1225-415B-9FD4-84CC75417CAB__GUID-4A0BF8AF-D08E-4BAD-BB9B-D313AF2698BA">When the Clock Out Enable
+                  (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">CLKOUTEN</span>) Configuration bit is cleared, the CLKOUT pin
+               will continue operating while in Idle.</li>
+         </ol>
+      </div>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-7E3E2299-6D65-4C77-9E50-378947E6652E.html">17.3.1 Idle and Interrupts</a></li><li><a href="GUID-EFD1634A-02A4-41BF-989C-6FCA2081F8CA.html">17.3.2 Idle and WWDT</a></li></ul>
+</nav>
+</body>
+</html>

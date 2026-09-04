@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>7.2.2 Peripheral Priority &gt; ISR Priority &gt; Main Priority — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4A1F5045-1590-4B8F-9E5F-74C45A26F081.html"/>
+<link rel="next" href="GUID-57F4ADD8-2E51-4FC3-90FE-E8F59A5CE346.html"/>
+<link rel="up" href="GUID-09B8283F-6491-4F2B-A97F-64AEBE302567.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html">7 PIC18 CPU</a></li><li><a href="GUID-09B8283F-6491-4F2B-A97F-64AEBE302567.html">7.2 Memory Access Scheme</a></li><li>7.2.2 Peripheral Priority &gt; ISR Priority &gt; Main Priority</li></ol>
+  <div class="sib"><span>← <a href="GUID-4A1F5045-1590-4B8F-9E5F-74C45A26F081.html" rel="prev">ISR Priority &gt; Main Priority &gt; Peripheral Priority</a></span><span><a href="GUID-57F4ADD8-2E51-4FC3-90FE-E8F59A5CE346.html" rel="next">ISR Priority &gt; Peripheral Priority &gt; Main Priority</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-DAF4553A-55C1-4EFD-BCE1-CCD86E4DD5C0__GUID-73D65882-43CC-467C-8A2A-36856F9E0480" style="">7.2.2 Peripheral Priority &gt; ISR Priority &gt; Main Priority</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">When the peripheral priority (DMA, Scanner) is higher than ISR and MAIN
+            priority, the CPU operation is stalled when the peripheral requests memory. The CPU is
+            held in its current state until the peripheral completes its operation. This results in
+            the highest throughput for the peripheral to access the memory, but has the cost of
+            stalling other execution while it occurs.</p>
+    </div>
+
+</body>
+</html>

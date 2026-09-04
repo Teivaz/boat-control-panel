@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.5.7 OSCSTAT — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1EEB4FE6-E7C6-4660-A0D1-7B2F5A722DB3.html"/>
+<link rel="next" href="GUID-49394B12-4B55-44B1-85A7-19080285149B.html"/>
+<link rel="up" href="GUID-C1498132-5FBC-414F-AC9D-CFFF65E4C262.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-C1498132-5FBC-414F-AC9D-CFFF65E4C262.html">12.5 Register Definitions: Oscillator Module</a></li><li>12.5.7 OSCSTAT</li></ol>
+  <div class="sib"><span>← <a href="GUID-1EEB4FE6-E7C6-4660-A0D1-7B2F5A722DB3.html" rel="prev">OSCFRQ</a></span><span><a href="GUID-49394B12-4B55-44B1-85A7-19080285149B.html" rel="next">OSCEN</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-56425695-1C07-4B9A-A4DC-F86CD572BBCC__GUID-93205734-C374-4F33-A519-BF8FF3CE3DCC" style="">12.5.7  OSCSTAT</h1><section id="GUID-621FD25D-EC29-4B04-9A6D-6ABF20B90EC3" class="- topic/section reference/section sidsc-register/registerDescription ">Oscillator Status
+            Register</section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>OSCSTAT</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x0B2</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-56425695-1C07-4B9A-A4DC-F86CD572BBCC__GUID-AB6316EE-2491-468F-80B9-D08422F26014" data-ofbid="GUID-56425695-1C07-4B9A-A4DC-F86CD572BBCC__GUID-AB6316EE-2491-468F-80B9-D08422F26014"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-56425695-1C07-4B9A-A4DC-F86CD572BBCC"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">EXTOR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">HFOR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">MFOR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">LFOR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">SOR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ADOR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">SFOR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">PLLR</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-621FD25D-EC29-4B04-9A6D-6ABF20B90EC3" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-19E8906D-A770-4024-9141-1FC69127057C__GUID-3F32085A-33B9-419D-8507-B9CFF1782233" id="GUID-19E8906D-A770-4024-9141-1FC69127057C">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-19E8906D-A770-4024-9141-1FC69127057C__GUID-3F32085A-33B9-419D-8507-B9CFF1782233" style=""> Bit 7 – EXTOR <span>External Oscillator
+            Ready</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-19E8906D-A770-4024-9141-1FC69127057C__GUID-ABC9E467-53CB-4157-9B4C-29080B24A096" data-ofbid="GUID-19E8906D-A770-4024-9141-1FC69127057C__GUID-ABC9E467-53CB-4157-9B4C-29080B24A096"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-19E8906D-A770-4024-9141-1FC69127057C__GUID-031F86CE-0D42-4BC2-9F24-77901A7DAF50">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-19E8906D-A770-4024-9141-1FC69127057C__GUID-E155BFAB-DFD3-4418-931D-1C7297368142">The
+                        External oscillator is ready for use</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-19E8906D-A770-4024-9141-1FC69127057C__GUID-9DE81A14-E6DC-4C99-ABC4-B082D905A445">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-19E8906D-A770-4024-9141-1FC69127057C__GUID-1D848ED2-178E-49DA-AA1A-089FCCE3A9EB">The
+                        External oscillator is not enabled, or it is not ready for
+                        use</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_FBF_4B3_ZGB__GUID-BFA6B5B9-F6D3-4CC9-900D-FD84BA2CAE4E" id="BITFIELD_FBF_4B3_ZGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_FBF_4B3_ZGB__GUID-BFA6B5B9-F6D3-4CC9-900D-FD84BA2CAE4E" style=""> Bit 6 – HFOR <span>HFINTOSC
+            Ready</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_FBF_4B3_ZGB__BITFIELDDESCRIPTION_GBF_4B3_ZGB" data-ofbid="BITFIELD_FBF_4B3_ZGB__BITFIELDDESCRIPTION_GBF_4B3_ZGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_FBF_4B3_ZGB__BITFIELDVALUES_IFR_TB3_ZGB" data-ofbid="BITFIELD_FBF_4B3_ZGB__BITFIELDVALUES_IFR_TB3_ZGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_FBF_4B3_ZGB__GUID-7D75A124-AEFC-40ED-B407-D9D7CD18EAAB">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_FBF_4B3_ZGB__GUID-12340636-F299-45D7-A35A-A71F9175EB5B">The
+                        HFINTOSC is ready for use</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_FBF_4B3_ZGB__GUID-6F321985-E85B-463E-AADA-6242404B867E">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_FBF_4B3_ZGB__GUID-C7E161AD-1C07-43F7-B24E-4865F5C07180">The
+                        HFINTOSC is not enabled, or it is not ready for
+                        use</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_NYR_XB3_ZGB__GUID-0A4B8D85-B9CB-47EC-8E77-C2C8DBD03F1F" id="BITFIELD_NYR_XB3_ZGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_NYR_XB3_ZGB__GUID-0A4B8D85-B9CB-47EC-8E77-C2C8DBD03F1F" style=""> Bit 5 – MFOR <span>MFINTOSC
+            Ready</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_NYR_XB3_ZGB__BITFIELDDESCRIPTION_OYR_XB3_ZGB" data-ofbid="BITFIELD_NYR_XB3_ZGB__BITFIELDDESCRIPTION_OYR_XB3_ZGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_NYR_XB3_ZGB__BITFIELDVALUES_A4B_BC3_ZGB" data-ofbid="BITFIELD_NYR_XB3_ZGB__BITFIELDVALUES_A4B_BC3_ZGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_NYR_XB3_ZGB__GUID-AC83FC89-2CB4-480F-852E-A6D7A4764402">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_NYR_XB3_ZGB__GUID-44ACC77D-3BA5-4DD4-B74F-65C85FF317CA">The
+                        MFINTOSC is ready for use</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_NYR_XB3_ZGB__GUID-DFB7D00C-1A13-473B-966F-770DEBCD1065">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_NYR_XB3_ZGB__GUID-C76DD1D6-C45C-48F8-9BF5-28821B1CEF69">The
+                        MFINTOSC is not enabled, or it is not ready for
+                        use</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_GHR_FC3_ZGB__GUID-D34EAD6F-4739-456A-ACAD-4EC691BE7928" id="BITFIELD_GHR_FC3_ZGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_GHR_FC3_ZGB__GUID-D34EAD6F-4739-456A-ACAD-4EC691BE7928" style=""> Bit 4 – LFOR <span>LFINTOSC
+            Ready</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_GHR_FC3_ZGB__BITFIELDDESCRIPTION_HHR_FC3_ZGB" data-ofbid="BITFIELD_GHR_FC3_ZGB__BITFIELDDESCRIPTION_HHR_FC3_ZGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_GHR_FC3_ZGB__BITFIELDVALUES_JXM_3C3_ZGB" data-ofbid="BITFIELD_GHR_FC3_ZGB__BITFIELDVALUES_JXM_3C3_ZGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_GHR_FC3_ZGB__GUID-AA5DF71A-6E1F-42E6-B0D3-8763260E4575">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_GHR_FC3_ZGB__GUID-2D0932D9-159E-47BE-AB06-1922CD3ECFDC">The
+                        LFINTOSC is ready for use</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_GHR_FC3_ZGB__GUID-D347B9A8-F9C5-4CF5-B488-78E0BD3528FB">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_GHR_FC3_ZGB__GUID-F80DF662-BC51-4CBA-9261-67C91E7E4A1A">The
+                        LFINTOSC is not enabled, or it is not ready for
+                        use</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_AGH_LC3_ZGB__GUID-ED050E10-D5EC-4B0D-9780-A1F71F190F05" id="BITFIELD_AGH_LC3_ZGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_AGH_LC3_ZGB__GUID-ED050E10-D5EC-4B0D-9780-A1F71F190F05" style=""> Bit 3 – SOR <span>Secondary
+            Oscillator (SOSC) Ready</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_AGH_LC3_ZGB__BITFIELDDESCRIPTION_BGH_LC3_ZGB" data-ofbid="BITFIELD_AGH_LC3_ZGB__BITFIELDDESCRIPTION_BGH_LC3_ZGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_AGH_LC3_ZGB__BITFIELDVALUES_UPR_PC3_ZGB" data-ofbid="BITFIELD_AGH_LC3_ZGB__BITFIELDVALUES_UPR_PC3_ZGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_AGH_LC3_ZGB__GUID-1FE2FCE5-1C33-4104-80BC-469DBC84D91A">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_AGH_LC3_ZGB__GUID-E7FFC1A2-2C2B-417D-864A-3D6E2CE291BE">The
+                        Secondary oscillator is ready for use</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_AGH_LC3_ZGB__GUID-30422BF9-022E-454B-9480-F496B2EA5B35">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_AGH_LC3_ZGB__GUID-819A0A8E-E5B7-40E9-961C-9EE7D39D1AFB">The
+                        Secondary oscillator is not enabled, or it is not ready for
+                        use</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_PWM_JPL_MJB__GUID-BC45930C-28D7-48EE-8C7F-24F80AC25672" id="BITFIELD_PWM_JPL_MJB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_PWM_JPL_MJB__GUID-BC45930C-28D7-48EE-8C7F-24F80AC25672" style=""> Bit 2 – ADOR <span>ADCRC Oscillator Ready</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_PWM_JPL_MJB__BITFIELDDESCRIPTION_QWM_JPL_MJB" data-ofbid="BITFIELD_PWM_JPL_MJB__BITFIELDDESCRIPTION_QWM_JPL_MJB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_PWM_JPL_MJB__BITFIELDVALUES_SWM_JPL_MJB" data-ofbid="BITFIELD_PWM_JPL_MJB__BITFIELDVALUES_SWM_JPL_MJB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_PWM_JPL_MJB__GUID-85BB48BE-2DF3-4F3F-9BA5-77E58F740DE7">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_PWM_JPL_MJB__GUID-B4F9CFC6-0B36-423B-8866-57243FC2B57B">The
+                        ADCRC oscillator is ready for use</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_PWM_JPL_MJB__GUID-2FA0C837-2DC6-4E92-9363-A28971FFFEE2">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_PWM_JPL_MJB__GUID-586268C2-D784-410B-912E-823E0E718F28">The
+                        ADCRC oscillator is not enabled, or it is not ready for
+                        use</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_PWM_JPL_MJBC__GUID-BC45930C-28D7-48EE-8C7F-24F80AC25672" id="BITFIELD_PWM_JPL_MJBC">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_PWM_JPL_MJBC__GUID-BC45930C-28D7-48EE-8C7F-24F80AC25672" style=""> Bit 1 – SFOR <span>SFINTOSC
+            Ready</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_PWM_JPL_MJBC__BITFIELDDESCRIPTION_QWM_JPL_MJB" data-ofbid="BITFIELD_PWM_JPL_MJBC__BITFIELDDESCRIPTION_QWM_JPL_MJB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_PWM_JPL_MJBC__BITFIELDVALUES_SWM_JPL_MJB" data-ofbid="BITFIELD_PWM_JPL_MJBC__BITFIELDVALUES_SWM_JPL_MJB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_PWM_JPL_MJBC__GUID-85BB48BE-2DF3-4F3F-9BA5-77E58F740DE7">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_PWM_JPL_MJBC__GUID-B4F9CFC6-0B36-423B-8866-57243FC2B57B">The
+                        SFINTOSC is ready for use</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_PWM_JPL_MJBC__GUID-2FA0C837-2DC6-4E92-9363-A28971FFFEE2">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_PWM_JPL_MJBC__GUID-586268C2-D784-410B-912E-823E0E718F28">The
+                        SFINTOSC is not enabled, or it is not ready for
+                        use</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_AGS_SC3_ZGB__GUID-8588DC91-0CC0-429B-AE20-FDEBBDB7B587" id="BITFIELD_AGS_SC3_ZGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_AGS_SC3_ZGB__GUID-8588DC91-0CC0-429B-AE20-FDEBBDB7B587" style=""> Bit 0 – PLLR <span>PLL is
+            Ready</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_AGS_SC3_ZGB__BITFIELDDESCRIPTION_BGS_SC3_ZGB" data-ofbid="BITFIELD_AGS_SC3_ZGB__BITFIELDDESCRIPTION_BGS_SC3_ZGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_AGS_SC3_ZGB__BITFIELDVALUES_M3J_WC3_ZGB" data-ofbid="BITFIELD_AGS_SC3_ZGB__BITFIELDVALUES_M3J_WC3_ZGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_AGS_SC3_ZGB__GUID-B7F5C0C1-1AEC-4721-960A-F7A7A344CEB4">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_AGS_SC3_ZGB__GUID-8771C436-A15B-4407-92E6-6DFB8D51590F">The PLL is ready for use</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_AGS_SC3_ZGB__GUID-BC4AF270-21BC-49C1-93FA-FACFE34E3807">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_AGS_SC3_ZGB__GUID-7B410D2B-5E61-4634-8C93-71546FF4CA4F">The PLL is not enabled, the required input source is
+                        not ready, or the PLL is not locked</td>
+                </tr></tbody></table>
+        </div>
+    </article>
+</body>
+</html>

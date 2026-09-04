@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>14 Resets — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-24E042C7-6B0B-44E9-A490-CF439BB5CE99.html"/>
+<link rel="next" href="GUID-E4C37F33-791C-4096-89F9-F67020E8C314.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>14 Resets</li></ol>
+  <div class="sib"><span>← <a href="GUID-24E042C7-6B0B-44E9-A490-CF439BB5CE99.html" rel="prev">Register Summary - CRC</a></span><span><a href="GUID-E4C37F33-791C-4096-89F9-F67020E8C314.html" rel="next">Power-on Reset (POR)</a> →</span></div>
+</nav>
+
+	<h1 class="- topic/title title topictitle1" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__GUID-56DBDCFB-ADCD-41D4-A252-6CD40C2E5091" style="">14 Resets</h1>
+	<div class="- topic/body body">
+		<p class="- topic/p p" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000004" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000004">There are multiple ways to reset the device:</p>
+		<ul class="- topic/ul ul" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__UL_PKT_GLJ_VGB" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__UL_PKT_GLJ_VGB">
+			<li class="- topic/li li" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000005" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000005">Power-on Reset (POR)</li>
+			<li class="- topic/li li" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000007" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000007">Brown-out Reset (BOR)</li>
+			<li class="- topic/li li" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000009" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000009">Low-Power Brown-out Reset (LPBOR)</li>
+			<li class="- topic/li li" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-0000000B" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-0000000B"><span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-0000000D">MCLR</span> Reset</li>
+			<li class="- topic/li li" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-0000000E" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-0000000E">WDT Reset</li>
+			<li class="- topic/li li" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000010" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000010"><code class="+ topic/ph pr-d/codeph ph codeph">RESET</code> instruction</li>
+			<li class="- topic/li li" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000013" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000013">Stack Overflow</li>
+			<li class="- topic/li li" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000015" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000015">Stack Underflow</li>
+			<li class="- topic/li li" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000017" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-00000017">Programming mode exit</li>
+			<li class="- topic/li li" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__GUID-1FC78BBD-37A3-4A4F-8133-3F7E292BBB61" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__GUID-1FC78BBD-37A3-4A4F-8133-3F7E292BBB61">Memory Execution Violation Reset</li>
+			<li class="- topic/li li" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__GUID-C3148F17-9D9D-4605-8887-4C4674B02FFB" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__GUID-C3148F17-9D9D-4605-8887-4C4674B02FFB">Main LDO Voltage Regulator Reset</li>
+			<li class="- topic/li li" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__GUID-BB7D9390-4236-4166-B87D-441FA537A32B" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__GUID-BB7D9390-4236-4166-B87D-441FA537A32B">Configuration Memory Reset</li>
+		</ul>
+		<p class="- topic/p p" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-0000001B" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-0000001B">A simplified block diagram of the On-Chip Reset Circuit is shown in the
+			block diagram below.</p>
+		<figure class="- topic/fig fig fignone" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-0000001D" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__ID-42138-0000001D"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 14-1. <span id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__GUID-206DBD1A-97F6-43CB-B39A-6D9CE8624159" class="fig--title">Simplified Block Diagram of On-Chip Reset
+				Circuit</span></span></figcaption>
+			
+			<span class=""><iframe src="GUID-6B142B24-89A7-4936-8962-7CA5485600B2-high.pdf#toolbar=1" width="508.08" height="376.53"></iframe></span>
+			<div class="- topic/note note notype note_notype" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__GUID-06834F58-9E05-4A10-BD31-7680A556CF3F" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__GUID-06834F58-9E05-4A10-BD31-7680A556CF3F"><span class="note__title">Note:</span> 
+				<ol class="- topic/ol ol" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__OL_NYR_XKQ_VGB" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__OL_NYR_XKQ_VGB">
+					<li class="- topic/li li" id="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__GUID-2E07930C-3EFD-4F87-B6C8-1575332162A9" data-ofbid="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F__GUID-2E07930C-3EFD-4F87-B6C8-1575332162A9">See the BOR Operating Modes table for BOR
+						active conditions.</li>
+				</ol>
+			</div>
+		</figure>
+	</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-E4C37F33-791C-4096-89F9-F67020E8C314.html">14.1 Power-on Reset (POR)</a></li><li><a href="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B.html">14.2 Brown-out Reset (BOR)</a></li><li><a href="GUID-75D2EF46-1461-4B54-9289-F5FB106CF677.html">14.3 Low-Power Brown-out Reset (LPBOR)</a></li><li><a href="GUID-6C45DE18-EED3-4ABA-89EB-B5C3F9FD33AB.html">14.4 MCLR Reset</a></li><li><a href="GUID-4A9CDF3C-B7E0-4E56-ABC3-EE4BFE27F138.html">14.5 Windowed Watchdog Timer (WWDT) Reset</a></li><li><a href="GUID-F4AF3F12-5C05-4130-839C-C24B9E0C771B.html">14.6 RESET Instruction</a></li><li><a href="GUID-9D9D6757-E045-4C17-B764-702CCA3C58D9.html">14.7 Stack Overflow/Underflow Reset</a></li><li><a href="GUID-F7E441A2-D27F-4BDA-B52D-C8F209C2B1AD.html">14.8 Programming Mode Exit</a></li><li><a href="GUID-4B644A64-1829-474D-8AEB-9A682565F48F.html">14.9 Power-up Timer (PWRT)</a></li><li><a href="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD.html">14.10 Start-Up Sequence</a></li><li><a href="GUID-7F8ECE9D-42A1-486A-BD12-AC9DB1FABF1F.html">14.11 Determining the Cause of a Reset</a></li><li><a href="GUID-737412A1-7981-4422-8F60-FFD76D411440.html">14.12 Power Control (PCON0/PCON1) Registers</a></li><li><a href="GUID-55C39281-E961-474D-B83E-86BB37D1FB65.html">14.13 Register Definitions: Power Control</a></li><li><a href="GUID-2FD7872E-3B29-4A33-BB35-F1C1A1BBBF1B.html">14.14 Register Summary - BOR Control and Power Control</a></li></ul>
+</nav>
+</body>
+</html>

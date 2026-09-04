@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>27.1.6.7 Time-of-Flight Measurement Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-CB90F4E1-E55A-4549-A6E9-E9DB8C30D9C9.html"/>
+<link rel="next" href="GUID-24F489F4-64D3-436C-9474-49120F0BC1D6.html"/>
+<link rel="up" href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3.html">27 SMT - Signal Measurement Timer</a></li><li><a href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html">27.1 SMT Operation</a></li><li><a href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html">27.1.6 Modes of Operation</a></li><li>27.1.6.7 Time-of-Flight Measurement Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-CB90F4E1-E55A-4549-A6E9-E9DB8C30D9C9.html" rel="prev">Gated Window Measurement Mode</a></span><span><a href="GUID-24F489F4-64D3-436C-9474-49120F0BC1D6.html" rel="next">Capture Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-B12319E7-842C-47CD-A39C-C70643499D6A__GUID-7F049C13-A69B-4033-BBF5-77D70E6573E3" style="">27.1.6.7 Time-of-Flight Measurement Mode</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">This mode measures the time interval between a rising edge on the SMT_window
+            input and a rising edge on the SMT_signal input. The SMTxTMR register starts
+            incrementing on the rising edge of the window input. The SMTxTMR register value is
+            written to the SMTxCPR register and the SMTxTMR register is reset on a rising edge of
+            the signal input. In the event of two rising edges of the window signal without a signal
+            rising edge, the SMTxCPW register will be written with the current value of the SMTxTMR
+            register, which will then be reset. Refer to the figures below.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-B12319E7-842C-47CD-A39C-C70643499D6A__FIG_CKZ_XBZ_1BB" data-ofbid="GUID-B12319E7-842C-47CD-A39C-C70643499D6A__FIG_CKZ_XBZ_1BB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 27-14. <span id="GUID-B12319E7-842C-47CD-A39C-C70643499D6A__GUID-7BE07B8A-B43C-43A3-9D3F-C5C9B386C38D" class="fig--title">Time-of-Flight Mode, Repeat
+                Acquisition Timing Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-36F47139-88C4-4F42-9AE1-63DF768752EF-high.pdf#toolbar=1" width="450" height="921.9969589457678"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-B12319E7-842C-47CD-A39C-C70643499D6A__FIG_OKK_YBZ_1BB" data-ofbid="GUID-B12319E7-842C-47CD-A39C-C70643499D6A__FIG_OKK_YBZ_1BB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 27-15. <span id="GUID-B12319E7-842C-47CD-A39C-C70643499D6A__GUID-033339FB-DD21-4F20-B8F7-B8C11707546D" class="fig--title">Time-of-Flight Mode, Single
+                Acquisition Timing Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-0F25D3AE-E7EA-4DA5-8248-E65F9212ECD8-high.pdf#toolbar=1" width="450" height="921.9969589457678"></iframe></span>
+        </figure>
+        
+    </div>
+
+</body>
+</html>

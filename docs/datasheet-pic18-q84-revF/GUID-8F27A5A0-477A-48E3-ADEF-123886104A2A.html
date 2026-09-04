@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>46.5.1 Correction by AC Coupling — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-245BCE02-61B9-4188-85E2-1A60578FAD39.html"/>
+<link rel="next" href="GUID-3F920D85-4770-4BAE-A503-C26BACE3BCBE.html"/>
+<link rel="up" href="GUID-245BCE02-61B9-4188-85E2-1A60578FAD39.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2691243F-9E90-401E-8612-0EB77C360C8E.html">46 ZCD - Zero-Cross Detection Module</a></li><li><a href="GUID-245BCE02-61B9-4188-85E2-1A60578FAD39.html">46.5 Correction for ZCPINV Offset</a></li><li>46.5.1 Correction by AC Coupling</li></ol>
+  <div class="sib"><span>← <a href="GUID-245BCE02-61B9-4188-85E2-1A60578FAD39.html" rel="prev">Correction for ZCPINV Offset</a></span><span><a href="GUID-3F920D85-4770-4BAE-A503-C26BACE3BCBE.html" rel="next">Correction by Offset Current</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__GUID-94CF129B-6599-499E-A1F0-5D462486DECD" style="">46.5.1 Correction by AC Coupling</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__ID-42143-00000049" data-ofbid="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__ID-42143-00000049">When the external voltage source is sinusoidal, the effects of the
+            Z<sub class="+ topic/ph hi-d/sub ph sub">CPINV</sub> offset can be eliminated by isolating the external voltage source from
+         the ZCD pin with a capacitor, in addition to the voltage reducing resistor. The capacitor
+         will cause a phase shift resulting in the ZCD output switch in advance of the actual
+         zero-crossing event. The phase shift will be the same for both rising and falling
+         zero-crossings, which can be compensated for by either delaying the CPU response to the ZCD
+         switch by a timer or other means or selecting a capacitor value large enough that the phase
+         shift is negligible.</p>
+      <p class="- topic/p p">To determine the series resistor and capacitor values for this configuration, start by
+         computing the impedance, Z, to obtain a peak current less than the maximum input current
+         (ZC02). Refer to the <strong class="+ topic/ph hi-d/b ph b">"Electrical Specifications"</strong> chapter for more details. Next,
+         arbitrarily select a suitably large nonpolar capacitor and compute its reactance, Xc, at
+         the external voltage source frequency. Finally, compute the series resistor, capacitor peak
+         voltage, and phase shift using the formulas shown below.</p>
+      <p class="- topic/p p" id="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__ID-42143-0000004D" data-ofbid="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__ID-42143-0000004D">When this technique is used and the input signal is not present, the
+         ZCD will tend to oscillate. To avoid this oscillation, connect the ZCD pin to
+            V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> or GND with a high-impedance resistor.</p>
+      <div class="- topic/example example" id="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__GUID-1C044BDB-B18B-4EC6-AFF5-342319FB72E7" data-ofbid="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__GUID-1C044BDB-B18B-4EC6-AFF5-342319FB72E7">
+         <div class="- topic/note note notype note_notype" id="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__GUID-74DF3013-9F0D-4A8F-BB90-3CBD6FC91FCB" data-ofbid="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__GUID-74DF3013-9F0D-4A8F-BB90-3CBD6FC91FCB"><span class="note__title">Note:</span> In this example, the impedance value
+            is calculated for a peak current of 300 μA.</div>
+         <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__EQUATION-DISPLAY_BK4_XLD_P1B" data-ofbid="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__EQUATION-DISPLAY_BK4_XLD_P1B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 46-2. <span id="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__GUID-490A1817-A651-4C00-90BF-A5066DB8ABB6" class="fig--title">R-C Equations</span></span></figcaption>
+            
+            <p class="- topic/p p">V<sub class="+ topic/ph hi-d/sub ph sub">PEAK</sub> = external voltage source peak voltage</p>
+            <p class="- topic/p p">f = external voltage source frequency</p>
+            <p class="- topic/p p">C = series capacitor</p>
+            <p class="- topic/p p">R = series resistor</p>
+            <p class="- topic/p p">V<sub class="+ topic/ph hi-d/sub ph sub">C</sub> = peak capacitor voltage</p>
+            <p class="- topic/p p">Φ = capacitor induced zero-crossing phase advance in radians</p>
+            <p class="- topic/p p">T<sub class="+ topic/ph hi-d/sub ph sub">Φ</sub> = time ZC event occurs before actual zero-crossing</p>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <mi>Z</mi>
+                        <mo>=</mo>
+                        <mfrac>
+                           <mrow>
+                              <msub>
+                                 <mrow>
+                                    <mi>V</mi>
+                                 </mrow>
+                                 <mrow>
+                                    <mi>P</mi>
+                                    <mi>E</mi>
+                                    <mi>A</mi>
+                                    <mi>K</mi>
+                                 </mrow>
+                              </msub>
+                           </mrow>
+                           <mrow>
+                              <mn>3</mn>
+                              <mo>×</mo>
+                              <msup>
+                                 <mrow>
+                                    <mn>10</mn>
+                                 </mrow>
+                                 <mrow>
+                                    <mo>−</mo>
+                                    <mn>4</mn>
+                                 </mrow>
+                              </msup>
+                           </mrow>
+                        </mfrac>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <msub>
+                           <mrow>
+                              <mi>X</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>C</mi>
+                           </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <mfrac>
+                           <mrow>
+                              <mn>1</mn>
+                           </mrow>
+                           <mrow>
+                              <mn>2</mn>
+                              <mi>π</mi>
+                              <mi>f</mi>
+                              <mi>C</mi>
+                           </mrow>
+                        </mfrac>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <mi>R</mi>
+                        <mo>⁢</mo>
+                        <mo>=</mo>
+                        <mtext> </mtext>
+                        <msqrt>
+                           <mrow>
+                              <msup>
+                                 <mrow>
+                                    <mi>Z</mi>
+                                 </mrow>
+                                 <mrow>
+                                    <mn>2</mn>
+                                 </mrow>
+                              </msup>
+                              <mo>−</mo>
+                              <msup>
+                                 <mrow>
+                                    <msub>
+                                       <mrow>
+                                          <mi>X</mi>
+                                       </mrow>
+                                       <mrow>
+                                          <mi>C</mi>
+                                       </mrow>
+                                    </msub>
+                                 </mrow>
+                                 <mrow>
+                                    <mn>2</mn>
+                                 </mrow>
+                              </msup>
+                           </mrow>
+                        </msqrt>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <msub>
+                           <mrow>
+                              <mi>V</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>C</mi>
+                           </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <msub>
+                           <mrow>
+                              <mi>X</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>C</mi>
+                           </mrow>
+                        </msub>
+                        <mrow>
+                           <mo>(</mo>
+                           <mn>3</mn>
+                           <mo>×</mo>
+                           <msup>
+                              <mrow>
+                                 <mn>10</mn>
+                              </mrow>
+                              <mrow>
+                                 <mo>−</mo>
+                                 <mn>4</mn>
+                              </mrow>
+                           </msup>
+                           <mo>)</mo>
+                        </mrow>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <mi mathvariant="normal">Φ</mi>
+                        <mo>=</mo>
+                        <msup>
+                           <mrow>
+                              <mi>tan</mi>
+                              <mo>⁡</mo>
+                           </mrow>
+                           <mrow>
+                              <mn>-1</mn>
+                           </mrow>
+                        </msup>
+                        <mrow>
+                           <mo>(</mo>
+                           <mfrac>
+                              <mrow>
+                                 <msub>
+                                    <mrow>
+                                       <mi>X</mi>
+                                    </mrow>
+                                    <mrow>
+                                       <mi>C</mi>
+                                    </mrow>
+                                 </msub>
+                              </mrow>
+                              <mrow>
+                                 <mi>R</mi>
+                              </mrow>
+                           </mfrac>
+                           <mo>)</mo>
+                        </mrow>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <msub>
+                           <mrow>
+                              <mi>T</mi>
+                           </mrow>
+                           <mrow>
+                              <mi mathvariant="normal">Φ</mi>
+                           </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <mfrac>
+                           <mrow>
+                              <mi mathvariant="normal">Φ</mi>
+                           </mrow>
+                           <mrow>
+                              <mn>2</mn>
+                              <mi>π</mi>
+                              <mi>f</mi>
+                           </mrow>
+                        </mfrac>
+                     </mrow>
+                  </math></div>
+         </figure>
+      </div>
+      <div class="- topic/example example" id="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__GUID-60FCBB66-99B3-46EF-8F7A-E3C7F3BFC878" data-ofbid="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__GUID-60FCBB66-99B3-46EF-8F7A-E3C7F3BFC878">
+         <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__EQUATION-DISPLAY_XVY_YLD_P1B" data-ofbid="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__EQUATION-DISPLAY_XVY_YLD_P1B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 46-3. <span id="GUID-8F27A5A0-477A-48E3-ADEF-123886104A2A__GUID-E54FE34E-3E1F-497E-B7CA-AB995A32A83E" class="fig--title">R-C Calculation Example</span></span></figcaption>
+            
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <msub>
+                           <mrow>
+                              <mi>V</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>r</mi>
+                              <mi>m</mi>
+                              <mi>s</mi>
+                           </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <mn>120</mn>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <msub>
+                           <mrow>
+                              <mi>V</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>P</mi>
+                              <mi>E</mi>
+                              <mi>A</mi>
+                              <mi>K</mi>
+                           </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <msub>
+                           <mrow>
+                              <mi>V</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>r</mi>
+                              <mi>m</mi>
+                              <mi>s</mi>
+                           </mrow>
+                        </msub>
+                        <mo>×</mo>
+                        <msqrt>
+                           <mrow>
+                              <mn>2</mn>
+                           </mrow>
+                        </msqrt>
+                        <mo>=</mo>
+                        <mn>169.7</mn>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <mi>f</mi>
+                        <mo>=</mo>
+                        <mn>60</mn>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>H</mi>
+                        <mi>z</mi>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <mi>C</mi>
+                        <mo>=</mo>
+                        <mn>0.1</mn>
+                        <mo>⁢</mo>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>μ</mi>
+                        <mi>F</mi>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <mi>Z</mi>
+                        <mo>=</mo>
+                        <mfrac>
+                           <mrow>
+                              <msub>
+                                 <mrow>
+                                    <mi>V</mi>
+                                 </mrow>
+                                 <mrow>
+                                    <mi>P</mi>
+                                    <mi>E</mi>
+                                    <mi>A</mi>
+                                    <mi>K</mi>
+                                 </mrow>
+                              </msub>
+                           </mrow>
+                           <mrow>
+                              <mn>3</mn>
+                              <mo>×</mo>
+                              <msup>
+                                 <mrow>
+                                    <mn>10</mn>
+                                 </mrow>
+                                 <mrow>
+                                    <mo>−</mo>
+                                    <mn>4</mn>
+                                 </mrow>
+                              </msup>
+                           </mrow>
+                        </mfrac>
+                        <mo>=</mo>
+                        <mfrac>
+                           <mrow>
+                              <mn>169.7</mn>
+                           </mrow>
+                           <mrow>
+                              <mn>3</mn>
+                              <mo>×</mo>
+                              <msup>
+                                 <mrow>
+                                    <mn>10</mn>
+                                 </mrow>
+                                 <mrow>
+                                    <mo>−</mo>
+                                    <mn>4</mn>
+                                 </mrow>
+                              </msup>
+                           </mrow>
+                        </mfrac>
+                        <mo>=</mo>
+                        <mn>565.7</mn>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>k</mi>
+                        <mi mathvariant="normal">Ω</mi>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <msub>
+                           <mrow>
+                              <mi>X</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>C</mi>
+                           </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <mfrac>
+                           <mrow>
+                              <mn>1</mn>
+                           </mrow>
+                           <mrow>
+                              <mn>2</mn>
+                              <mi>π</mi>
+                              <mi>f</mi>
+                              <mi>C</mi>
+                           </mrow>
+                        </mfrac>
+                        <mo>=</mo>
+                        <mfrac>
+                           <mrow>
+                              <mn>1</mn>
+                           </mrow>
+                           <mrow>
+                              <mn>2</mn>
+                              <mi>π</mi>
+                              <mo>×</mo>
+                              <mn>60</mn>
+                              <mo>×</mo>
+                              <msup>
+                                 <mrow>
+                                    <mn>10</mn>
+                                 </mrow>
+                                 <mrow>
+                                    <mo>−</mo>
+                                    <mn>7</mn>
+                                 </mrow>
+                              </msup>
+                           </mrow>
+                        </mfrac>
+                        <mo>=</mo>
+                        <mn>26.53</mn>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>k</mi>
+                        <mi mathvariant="normal">Ω</mi>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <mi>R</mi>
+                        <mo>⁢</mo>
+                        <mo>=</mo>
+                        <mtext> </mtext>
+                        <msqrt>
+                           <mrow>
+                              <msup>
+                                 <mrow>
+                                    <mi>Z</mi>
+                                 </mrow>
+                                 <mrow>
+                                    <mn>2</mn>
+                                 </mrow>
+                              </msup>
+                              <mo>−</mo>
+                              <msup>
+                                 <mrow>
+                                    <msub>
+                                       <mrow>
+                                          <mi>X</mi>
+                                       </mrow>
+                                       <mrow>
+                                          <mi>C</mi>
+                                       </mrow>
+                                    </msub>
+                                 </mrow>
+                                 <mrow>
+                                    <mn>2</mn>
+                                 </mrow>
+                              </msup>
+                           </mrow>
+                        </msqrt>
+                        <mo>⁢</mo>
+                        <mo>=</mo>
+                        <mn>565.1</mn>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>k</mi>
+                        <mi mathvariant="normal">Ω</mi>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mrow>
+                           <mo>(</mo>
+                           <mi>c</mi>
+                           <mi>o</mi>
+                           <mi>m</mi>
+                           <mi>p</mi>
+                           <mi>u</mi>
+                           <mi>t</mi>
+                           <mi>e</mi>
+                           <mi>d</mi>
+                           <mo>)</mo>
+                        </mrow>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <msub>
+                           <mrow>
+                              <mi>R</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>a</mi>
+                           </mrow>
+                        </msub>
+                        <mo>⁢</mo>
+                        <mo>=</mo>
+                        <mtext> </mtext>
+                        <mn>560</mn>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>k</mi>
+                        <mi mathvariant="normal">Ω</mi>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mrow>
+                           <mo>(</mo>
+                           <mi>u</mi>
+                           <mi>s</mi>
+                           <mi>e</mi>
+                           <mi>d</mi>
+                           <mo>)</mo>
+                        </mrow>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <msub>
+                           <mrow>
+                              <mi>Z</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>R</mi>
+                           </mrow>
+                        </msub>
+                        <mo>⁢</mo>
+                        <mo>=</mo>
+                        <mtext> </mtext>
+                        <msqrt>
+                           <mrow>
+                              <msup>
+                                 <mrow>
+                                    <msub>
+                                       <mrow>
+                                          <mi>R</mi>
+                                       </mrow>
+                                       <mrow>
+                                          <mi>a</mi>
+                                       </mrow>
+                                    </msub>
+                                 </mrow>
+                                 <mrow>
+                                    <mn>2</mn>
+                                 </mrow>
+                              </msup>
+                              <mo>+</mo>
+                              <msup>
+                                 <mrow>
+                                    <msub>
+                                       <mrow>
+                                          <mi>X</mi>
+                                       </mrow>
+                                       <mrow>
+                                          <mi>C</mi>
+                                       </mrow>
+                                    </msub>
+                                 </mrow>
+                                 <mrow>
+                                    <mn>2</mn>
+                                 </mrow>
+                              </msup>
+                           </mrow>
+                        </msqrt>
+                        <mo>⁢</mo>
+                        <mo>=</mo>
+                        <mn>560.6</mn>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>k</mi>
+                        <mi mathvariant="normal">Ω</mi>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <msub>
+                           <mrow>
+                              <mi>I</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>P</mi>
+                              <mi>E</mi>
+                              <mi>A</mi>
+                              <mi>K</mi>
+                           </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <mfrac>
+                           <mrow>
+                              <msub>
+                                 <mrow>
+                                    <mi>V</mi>
+                                 </mrow>
+                                 <mrow>
+                                    <mi>P</mi>
+                                    <mi>E</mi>
+                                    <mi>A</mi>
+                                    <mi>K</mi>
+                                 </mrow>
+                              </msub>
+                           </mrow>
+                           <mrow>
+                              <msub>
+                                 <mrow>
+                                    <mi>Z</mi>
+                                 </mrow>
+                                 <mrow>
+                                    <mi>R</mi>
+                                 </mrow>
+                              </msub>
+                           </mrow>
+                        </mfrac>
+                        <mo>=</mo>
+                        <mn>302.7</mn>
+                        <mo>×</mo>
+                        <msup>
+                           <mrow>
+                              <mn>10</mn>
+                           </mrow>
+                           <mrow>
+                              <mo>−</mo>
+                              <mn>6</mn>
+                           </mrow>
+                        </msup>
+                        <mo>⁢</mo>
+                        <mi>A</mi>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <msub>
+                           <mrow>
+                              <mi>V</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>C</mi>
+                           </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <msub>
+                           <mrow>
+                              <mi>X</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>C</mi>
+                           </mrow>
+                        </msub>
+                        <mo>×</mo>
+                        <msub>
+                           <mrow>
+                              <mi>I</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>P</mi>
+                              <mi>E</mi>
+                              <mi>A</mi>
+                              <mi>K</mi>
+                           </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <mn>8.0</mn>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>V</mi>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <mi mathvariant="normal">Φ</mi>
+                        <mo>=</mo>
+                        <msup>
+                           <mrow>
+                              <mi>tan</mi>
+                              <mo>⁡</mo>
+                           </mrow>
+                           <mrow>
+                              <mn>-1</mn>
+                           </mrow>
+                        </msup>
+                        <mrow>
+                           <mo>(</mo>
+                           <mfrac>
+                              <mrow>
+                                 <msub>
+                                    <mrow>
+                                       <mi>X</mi>
+                                    </mrow>
+                                    <mrow>
+                                       <mi>C</mi>
+                                    </mrow>
+                                 </msub>
+                              </mrow>
+                              <mrow>
+                                 <mi>R</mi>
+                              </mrow>
+                           </mfrac>
+                           <mo>)</mo>
+                        </mrow>
+                        <mo>=</mo>
+                        <mn>0.047</mn>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>r</mi>
+                        <mi>a</mi>
+                        <mi>d</mi>
+                        <mi>i</mi>
+                        <mi>a</mi>
+                        <mi>n</mi>
+                        <mi>s</mi>
+                     </mrow>
+                  </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <msub>
+                           <mrow>
+                              <mi>T</mi>
+                           </mrow>
+                           <mrow>
+                              <mi mathvariant="normal">Φ</mi>
+                           </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <mfrac>
+                           <mrow>
+                              <mi mathvariant="normal">Φ</mi>
+                           </mrow>
+                           <mrow>
+                              <mn>2</mn>
+                              <mi>π</mi>
+                              <mi>f</mi>
+                           </mrow>
+                        </mfrac>
+                        <mo>=</mo>
+                        <mn>125.6</mn>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>μ</mi>
+                        <mi>s</mi>
+                     </mrow>
+                  </math></div>
+         </figure>
+      </div>
+   </div>
+
+</body>
+</html>

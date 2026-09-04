@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>4.5 External Oscillator Pins — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D4FA6B32-2871-4E49-A386-987C6F608148.html"/>
+<link rel="next" href="GUID-B46248BC-A7B5-43B9-98A2-56EB2ECA2904.html"/>
+<link rel="up" href="GUID-248C7349-0CF1-4585-B0FE-5311789D4EBE.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-248C7349-0CF1-4585-B0FE-5311789D4EBE.html">4 Guidelines for Getting Started with PIC18-Q84 Microcontrollers</a></li><li>4.5 External Oscillator Pins</li></ol>
+  <div class="sib"><span>← <a href="GUID-D4FA6B32-2871-4E49-A386-987C6F608148.html" rel="prev">In-Circuit Serial Programming (ICSP) Pins</a></span><span><a href="GUID-B46248BC-A7B5-43B9-98A2-56EB2ECA2904.html" rel="next">Unused I/Os</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__GUID-FCBDD458-7863-46FC-8824-8150E9F8DEB3" style="">4.5 External Oscillator Pins</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000074" data-ofbid="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000074">Many microcontrollers have options for at least two oscillators: A
+         high-frequency primary oscillator and a low-frequency secondary oscillator.</p>
+      <p class="- topic/p p" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000076" data-ofbid="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000076">The oscillator circuit needs to be placed on the same side of the
+         board as the device. Place the oscillator circuit close to the respective oscillator pins
+         with no more than 0.5 inch (12 mm) between the circuit components and the pins. The load
+         capacitors have to be placed next to the oscillator itself, on the same side of the
+         board.</p>
+      <p class="- topic/p p" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000077" data-ofbid="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000077">Use a grounded copper pour around the oscillator circuit to isolate
+         it from surrounding circuits. The grounded copper pour needs to be routed directly to the
+         MCU ground. Do not run any signal traces or power traces inside the ground pour. Also, if
+         using a two-sided board, avoid any traces on the other side of the board where the crystal
+         is placed.</p>
+      <p class="- topic/p p" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000078" data-ofbid="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000078">Layout suggestions are shown in the following figure. In-line
+         packages may be handled with a single-sided layout that completely encompasses the
+         oscillator pins. With fine-pitch packages, it is not always possible to completely surround
+         the pins and components. A suitable solution is to tie the broken guard sections to a
+         mirrored ground layer. In all cases, the guard trace(s) must be returned to ground.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000091" data-ofbid="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000091"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 4-3. <span id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__GUID-B85722A1-F423-405F-BAB3-8E312D57546E" class="fig--title">Suggested Placement of the Oscillator
+            Circuit</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-D9D2321D-75A4-4E22-8B90-41E537D7415C-high.pdf#toolbar=1" width="450" height="982.0872832117427"></iframe></span>
+      </figure>
+      <p class="- topic/p p" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-0000007A" data-ofbid="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-0000007A">In planning the application’s routing and I/O assignments, ensure
+         that adjacent PORT pins and other signals in close proximity to the oscillator are benign
+         (i.e., free of high frequencies, short rise and fall times, and other similar noise).</p>
+      <p class="- topic/p p" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-0000007B" data-ofbid="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-0000007B">For additional information and design guidance on oscillator
+         circuits, refer to these Microchip application notes, available at the corporate website
+            (<a class="- topic/xref xref" href="https://www.microchip.com" target="_blank" rel="external noopener">www.microchip.com</a>):</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-0000007D" data-ofbid="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-0000007D">AN826, <em class="+ topic/ph hi-d/i ph i">“Crystal Oscillator Basics and Crystal Selection for
+               rfPIC™ and PICmicro<sup class="+ topic/ph hi-d/sup ph sup" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000081">®</sup> Devices”</em></li>
+         <li class="- topic/li li" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000083" data-ofbid="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000083">AN849, <em class="+ topic/ph hi-d/i ph i">“Basic PICmicro<sup class="+ topic/ph hi-d/sup ph sup" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000085">®</sup>
+               Oscillator Design”</em></li>
+         <li class="- topic/li li" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000086" data-ofbid="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000086">AN943, <em class="+ topic/ph hi-d/i ph i">“Practical PICmicro<sup class="+ topic/ph hi-d/sup ph sup" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000088">®</sup>
+               Oscillator Analysis and Design”</em></li>
+         <li class="- topic/li li" id="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000089" data-ofbid="GUID-5D17DA01-3A4B-4A78-BE9B-41DB36233AEF__ID-42123-00000089">AN949, <em class="+ topic/ph hi-d/i ph i">“Making Your Oscillator Work”</em></li>
+      </ul>
+   </div>
+
+</body>
+</html>

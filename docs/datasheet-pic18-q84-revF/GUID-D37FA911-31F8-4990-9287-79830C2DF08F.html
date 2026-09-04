@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.7.5 ADSTAT — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C3D871FC-51E7-44E4-A754-55BAA4D71143.html"/>
+<link rel="next" href="GUID-DC4F8FD6-2B16-4E77-B40A-14FAD81553E6.html"/>
+<link rel="up" href="GUID-8FD3470F-42C5-4581-A564-B1DDFA17FB4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-8FD3470F-42C5-4581-A564-B1DDFA17FB4B.html">43.7 Register Definitions: ADC Control</a></li><li>43.7.5 ADSTAT</li></ol>
+  <div class="sib"><span>← <a href="GUID-C3D871FC-51E7-44E4-A754-55BAA4D71143.html" rel="prev">ADCON3</a></span><span><a href="GUID-DC4F8FD6-2B16-4E77-B40A-14FAD81553E6.html" rel="next">ADCLK</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-D37FA911-31F8-4990-9287-79830C2DF08F__ID-00000085" style="">43.7.5  ADSTAT</h1><section class="- topic/section reference/section sidsc-register/registerDescription " id="GUID-82054DC3-2C44-439F-A8C5-4DED2D7D3A69">ADC Status Register<div class="- topic/note note note note_note endnote" id="GUID-D37FA911-31F8-4990-9287-79830C2DF08F__ID-42107-000009C8" data-ofbid="GUID-D37FA911-31F8-4990-9287-79830C2DF08F__ID-42107-000009C8"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-D37FA911-31F8-4990-9287-79830C2DF08F__OL_YYB_CV3_KZ" data-ofbid="GUID-D37FA911-31F8-4990-9287-79830C2DF08F__OL_YYB_CV3_KZ">
+               <li class="- topic/li li" id="GUID-D37FA911-31F8-4990-9287-79830C2DF08F__GUID-90B98F95-30F1-486F-B18B-105E748BBE2F" data-ofbid="GUID-D37FA911-31F8-4990-9287-79830C2DF08F__GUID-90B98F95-30F1-486F-B18B-105E748BBE2F">The MATH bit cannot be cleared by
+                  software while STAT = <code class="+ topic/ph pr-d/codeph ph codeph">‘b100</code>.</li>
+               <li class="- topic/li li" id="GUID-D37FA911-31F8-4990-9287-79830C2DF08F__GUID-FA4134F6-16E2-4A4C-839E-3BD0CDD6F852" data-ofbid="GUID-D37FA911-31F8-4990-9287-79830C2DF08F__GUID-FA4134F6-16E2-4A4C-839E-3BD0CDD6F852">If ADC clock
+                  source is ADCRC and F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> &lt; ADCRC, the
+                  indicated status may not be valid.</li>
+               <li class="- topic/li li" id="GUID-D37FA911-31F8-4990-9287-79830C2DF08F__GUID-DBA365A2-7A1F-406B-B759-1022229759E5" data-ofbid="GUID-D37FA911-31F8-4990-9287-79830C2DF08F__GUID-DBA365A2-7A1F-406B-B759-1022229759E5">STAT = <code class="+ topic/ph pr-d/codeph ph codeph">‘b100</code> appears between the two triggers when DSEN =
+                     <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and CONT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>.</li>
+            </ol>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>ADSTAT</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x3F7</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-D37FA911-31F8-4990-9287-79830C2DF08F__GUID-7D0E14CA-2375-4ABA-9B6C-8C8625D35A68" data-ofbid="GUID-D37FA911-31F8-4990-9287-79830C2DF08F__GUID-7D0E14CA-2375-4ABA-9B6C-8C8625D35A68"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-D37FA911-31F8-4990-9287-79830C2DF08F"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">AOV</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">UTHR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">LTHR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">MATH</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="3">STAT[2:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/C/HS/HC</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HS</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section class="- topic/section reference/section sidsc-register/registerDescription " id="GUID-82054DC3-2C44-439F-A8C5-4DED2D7D3A69"></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000089__ID-42107-00001B00" id="ID-00000089">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000089__ID-42107-00001B00" style=""> Bit 7 – AOV <span>ADC Accumulator Overflow</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000089__GUID-054DD7C5-5E5B-4712-B8B1-8AAAC2DA2EDC" data-ofbid="ID-00000089__GUID-054DD7C5-5E5B-4712-B8B1-8AAAC2DA2EDC"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000089__ID-42107-00001B02">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000089__GUID-C564FD1E-83CE-4D5A-8EF1-A9CB198DE1A5"><a class="- topic/xref xref" href="GUID-30FA2F95-1F03-4839-A4EC-7F5EDB3ADED5.html" title="ADACC">ADACC</a> or
+                     <a class="- topic/xref xref" href="GUID-95F0A495-8BB1-4AFF-B146-349799BF1507.html" title="ADFLTR">ADFLTR</a> or <a class="- topic/xref xref" href="GUID-A9D3BECF-B763-475C-9724-E58BD7D965F1.html" title="ADERR">ADERR</a> registers have overflowed</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000089__ID-42107-00001B05">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000089__GUID-C52327A6-5801-4E64-8D32-7751D9A0F782">ADACC, ADFLTR and ADERR registers
+                  have not overflowed</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000090__ID-42107-00001B09" id="ID-00000090">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000090__ID-42107-00001B09" style=""> Bit 6 – UTHR <span>ADC Module Greater-than Upper Threshold
+         Flag</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000090__GUID-933E289F-B8B5-4929-961E-81147F34CFE4" data-ofbid="ID-00000090__GUID-933E289F-B8B5-4929-961E-81147F34CFE4"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000090__ID-42107-00001B0B">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000090__GUID-F2ABB6CB-4EEA-4464-AC2E-84F02D279BA6"><a class="- topic/xref xref" href="GUID-A9D3BECF-B763-475C-9724-E58BD7D965F1.html" title="ADERR">ADERR </a> &gt; <a class="- topic/xref xref" href="GUID-1567E3D4-04D4-4999-AABF-F90079264948.html" title="ADUTH">ADUTH</a></td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000090__ID-42107-00001B0E">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000090__GUID-53B5985A-4347-4E66-9347-40B371936126">ADERR<span class="- topic/ph ph"> ≤
+                  </span>ADUTH</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000097__ID-42107-00001B12" id="ID-00000097">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000097__ID-42107-00001B12" style=""> Bit 5 – LTHR <span>ADC Module Less-than Lower Threshold Flag</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000097__GUID-BFE98B4E-285B-4F13-8BC4-3BC792D7AB2A" data-ofbid="ID-00000097__GUID-BFE98B4E-285B-4F13-8BC4-3BC792D7AB2A"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000097__ID-42107-00001B14">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000097__GUID-3C65CA25-0938-42D0-8B13-71A30BA9D70D"><a class="- topic/xref xref" href="GUID-A9D3BECF-B763-475C-9724-E58BD7D965F1.html" title="ADERR">ADERR</a><span class="- topic/ph ph">&lt;</span><a class="- topic/xref xref" href="GUID-95F0A495-8BB1-4AFF-B146-349799BF1507.html" title="ADFLTR">ADLTH</a></td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000097__ID-42107-00001B17">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000097__GUID-E6B3BBCC-59D7-4F70-B50D-742AFCE99F69">ADERR<span class="- topic/ph ph">≥</span>ADLTH</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000009E__ID-42107-00001B1B" id="ID-0000009E">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000009E__ID-42107-00001B1B" style=""> Bit 4 – MATH <span>ADC Module Computation Status</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000009E__GUID-8E18B3B5-5548-4FF6-960E-DEFD57904E3C" data-ofbid="ID-0000009E__GUID-8E18B3B5-5548-4FF6-960E-DEFD57904E3C">
+            <p class="- topic/p p">ADC Module Computation Status<sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b"><a class="- topic/xref xref" href="#GUID-D37FA911-31F8-4990-9287-79830C2DF08F__ID-42107-000009C8">(1)</a></strong></sup></p>
+         </section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000009E__ID-42107-00001B1D">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000009E__GUID-EE433B28-CFA9-4F0A-8D1F-B33D5617E502">Registers <a class="- topic/xref xref" href="GUID-30FA2F95-1F03-4839-A4EC-7F5EDB3ADED5.html" title="ADACC">ADACC</a>,
+                     <a class="- topic/xref xref" href="GUID-95F0A495-8BB1-4AFF-B146-349799BF1507.html" title="ADFLTR">ADFLTR</a>, <a class="- topic/xref xref" href="GUID-1567E3D4-04D4-4999-AABF-F90079264948.html" title="ADUTH">ADUTH</a>, <a class="- topic/xref xref" href="GUID-5FA950EC-08A5-4BB6-A2B6-E0EDFB265B8A.html" title="ADLTH">ADLTH</a> and
+                  the AOV bit are updating or have already updated</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000009E__ID-42107-00001B20">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000009E__GUID-2B8DC0A2-326A-4A43-A311-3CC0EA8A7D43">Associated
+                  registers/bits have not changed since this bit was last
+                  cleared</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-000000A5__ID-42107-00001B25" id="ID-000000A5">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-000000A5__ID-42107-00001B25" style=""> Bits 2:0 – STAT[2:0] <span>ADC Module Cycle Multi-Stage Status</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-000000A5__GUID-32078C0A-03C1-40F1-BE04-074008E08F38" data-ofbid="ID-000000A5__GUID-32078C0A-03C1-40F1-BE04-074008E08F38"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-000000A5__ID-42107-00001B27">111</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-000000A5__GUID-7A76D2E2-BDAD-4C99-8637-00D0FDE3A286">ADC module
+                  is in 2<sup class="+ topic/ph hi-d/sup ph sup">nd</sup> conversion stage</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-000000A5__ID-42107-00001B2A">110</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-000000A5__GUID-CB792AA8-DD9C-4CF8-933D-6DA46BA07127">ADC module
+                  is in 2<sup class="+ topic/ph hi-d/sup ph sup">nd</sup> acquisition stage</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-000000A5__ID-42107-00001B2D">101</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-000000A5__GUID-E3ABD255-96BB-4EA3-9C06-2C29DCAEAE16">ADC module
+                  is in 2<sup class="+ topic/ph hi-d/sup ph sup">nd</sup> precharge stage</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-000000A5__ID-42107-00001B30">100</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-000000A5__GUID-DD944EDB-6A4C-4698-B196-B2643944C329">ADC computation is suspended
+                  between 1st and 2nd sample; the computation results are incomplete and awaiting
+                  data from the 2nd sample<sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b"><a class="- topic/xref xref" href="#GUID-D37FA911-31F8-4990-9287-79830C2DF08F__ID-42107-000009C8">(2,3)</a></strong></sup></td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-000000A5__ID-42107-00001B33">011</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-000000A5__GUID-447220F8-A290-4591-BFD4-1728BE0726B3">ADC module
+                  is in 1<sup class="+ topic/ph hi-d/sup ph sup">st</sup> conversion stage</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-000000A5__ID-42107-00001B36">010</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-000000A5__GUID-9E98E192-0CC9-48AC-AD9F-5FAB06C6DB25">ADC module
+                  is in 1<sup class="+ topic/ph hi-d/sup ph sup">st</sup> acquisition stage</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-000000A5__ID-42107-00001B39">001</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-000000A5__GUID-764A73DD-9EC5-43EE-9EDA-3D4F469C2EC7">ADC module
+                  is in 1<sup class="+ topic/ph hi-d/sup ph sup">st</sup> precharge stage</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-000000A5__ID-42107-00001B3C">000</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-000000A5__GUID-730BF8F5-77FA-4FFB-8828-68442B09961A">ADC module
+                  is not converting</td>
+            </tr></tbody></table>
+      </div>
+   </article>
+            
+               The MATH bit cannot be cleared by
+                  software while STAT = ‘b100.
+               If ADC clock
+                  source is ADCRC and FOSC &lt; ADCRC, the
+                  indicated status may not be valid.
+               STAT = ‘b100 appears between the two triggers when DSEN =
+                     1 and CONT = 0.
+            
+         
+</body>
+</html>

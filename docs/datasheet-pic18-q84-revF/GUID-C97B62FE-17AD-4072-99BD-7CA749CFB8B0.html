@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.3.4.2.2 Hardware Trigger, AIRQ — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F372DA90-43D6-446D-B023-BE2E548B186C.html"/>
+<link rel="next" href="GUID-83F2D308-1537-4FAC-B2A0-856AB66E027B.html"/>
+<link rel="up" href="GUID-EBD671AC-0CCE-4BF8-9852-B901310EC575.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li><a href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html">16.3 DMA Interface</a></li><li><a href="GUID-129A63BF-383B-4E30-91DE-858C4D6CC236.html">16.3.4 DMA Message Transfers</a></li><li><a href="GUID-EBD671AC-0CCE-4BF8-9852-B901310EC575.html">16.3.4.2 Stopping DMA Message Transfers</a></li><li>16.3.4.2.2 Hardware Trigger, AIRQ</li></ol>
+  <div class="sib"><span>← <a href="GUID-F372DA90-43D6-446D-B023-BE2E548B186C.html" rel="prev">User Software Control</a></span><span><a href="GUID-83F2D308-1537-4FAC-B2A0-856AB66E027B.html" rel="next">Source Count Reload</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-C97B62FE-17AD-4072-99BD-7CA749CFB8B0__GUID-DC7C7E28-7069-4963-9080-6B3F042E4D4C" style="">16.3.4.2.2 Hardware Trigger, AIRQ</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The <a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#UV1_PQ4_3GB" title="Abort of Transfer Interrupt Request Enable"><span><span>AIRQEN</span></span></a> bit is used to enable sampling of external interrupt
+            triggers by which a DMA transaction can be aborted.</p>
+        <p class="- topic/p p">Once an abort interrupt request has been received, the DMA will perform a
+            soft-stop by clearing the DGO bit, as well as clearing the SIRQEN bit so overruns do not
+            occur. The AIRQEN bit is also cleared to prevent additional abort signals from
+            triggering false aborts.</p>
+        <p class="- topic/p p">If desired, the DGO bit can be set again and the DMA will resume operation
+            from where it left off after the soft stop had occurred, as none of the DMA state
+            information is changed in the event of an abort.</p>
+    </div>
+
+</body>
+</html>

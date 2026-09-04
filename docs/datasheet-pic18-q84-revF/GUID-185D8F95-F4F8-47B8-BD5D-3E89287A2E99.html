@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>31.2 Period Timer — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-680366FE-C544-46CA-9AF0-B225E0834466.html"/>
+<link rel="next" href="GUID-EBE71BD9-6F4A-46C8-B43F-1D6A5142632A.html"/>
+<link rel="up" href="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE.html">31 PWM - Pulse-Width Modulator with Compare</a></li><li>31.2 Period Timer</li></ol>
+  <div class="sib"><span>← <a href="GUID-680366FE-C544-46CA-9AF0-B225E0834466.html" rel="prev">Push-Pull Mode</a></span><span><a href="GUID-EBE71BD9-6F4A-46C8-B43F-1D6A5142632A.html" rel="next">Clock Sources</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-185D8F95-F4F8-47B8-BD5D-3E89287A2E99__GUID-530CA92F-4B55-4606-90DE-13F9C02A945B" style="">31.2 Period Timer</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">All slices in a PWM instance operate with the same period. The value written to the
+                <a class="- topic/xref xref" href="GUID-C1F9BD6D-E025-4776-83F6-3015A6A6F093.html" title="PWMxPR">PWMxPR</a> register is one less than the number of prescaled PWM clock periods
+            (PWM_clk) in the PWM period.</p>
+        <p class="- topic/p p">The PWMxPR register is double-buffered. When the PWM is operating, writes to the PWMxPR
+            register are transferred to the period buffer only after the <a class="- topic/xref xref" href="GUID-0D5C847B-F70B-49A7-ADF9-3CCCF3193A17.html#ID-0000000C" title="Reload Registers"><span><span>LD</span></span></a> bit is
+            set or an external load event occurs. The transfer occurs at the next period Reset
+            event. If the LD bit is set less than three PWM clock periods before the end of the
+            period, then the transfer may be one full period later.</p>
+        <p class="- topic/p p">Loading the buffers of multiple PWM instances can be coordinated using the PWMLOAD
+            register. See the <a class="- topic/xref xref" href="GUID-4AF3530B-864D-4647-8384-64437383C175.html">Buffered Period and Parameter Registers</a> section for more details.</p>
+</div>
+
+</body>
+</html>

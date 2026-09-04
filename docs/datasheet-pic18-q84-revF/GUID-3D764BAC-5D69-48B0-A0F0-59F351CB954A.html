@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26.8.4 Level Triggered Hardware Limit Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-23B7D427-51B5-4C99-9210-91D688BC8273.html"/>
+<link rel="next" href="GUID-3AFB730D-BB78-40B0-909E-CCC8367D5F1A.html"/>
+<link rel="up" href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html">26 TMR2 - Timer2 Module</a></li><li><a href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html">26.8 Operation Examples</a></li><li>26.8.4 Level Triggered Hardware Limit Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-23B7D427-51B5-4C99-9210-91D688BC8273.html" rel="prev">Edge Triggered Hardware Limit Mode</a></span><span><a href="GUID-3AFB730D-BB78-40B0-909E-CCC8367D5F1A.html" rel="next">Software Start One Shot Mode</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__GUID-192617E7-C41A-480F-B788-48A7D61FA6E3" style="">26.8.4 Level Triggered Hardware Limit Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__ID-42141-000013DC" data-ofbid="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__ID-42141-000013DC">In the Level Triggered Hardware Limit Timer modes the counter is
+         reset by high or low levels of the external signal TMRx_ers, as shown in <a class="- topic/xref xref" href="#GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__ID-42141-000013E4"><span>Figure 26-6</span></a>. Selecting MODE = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__ID-42141-000013DE">‘b00110</code> will cause the timer to reset on a low-level
+         external signal. Selecting MODE = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__ID-42141-000013DF">‘b00111</code> will
+         cause the timer to reset on a high-level external signal. In the example, the counter is
+         reset while TMRx_ers = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__ID-42141-000013E0">1</code>. ON is controlled by
+            <code class="+ topic/ph pr-d/codeph ph codeph">BSF</code> and <code class="+ topic/ph pr-d/codeph ph codeph">BCF</code> instructions. When ON = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__ID-42141-000013E1">0</code>, the external signal is ignored.</p>
+      <p class="- topic/p p" id="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__ID-42141-000013E2" data-ofbid="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__ID-42141-000013E2">When the CCP uses the timer as the PWM time base, then the PWM
+         output will be set high when the timer starts counting and then set low only when the timer
+         count matches the CCPRx value. The timer is reset when either the timer count matches the
+         TxPR value or two clock periods after the external Reset signal goes true and stays
+         true.</p>
+      <p class="- topic/p p" id="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__ID-42141-000013E3" data-ofbid="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__ID-42141-000013E3">The timer starts counting, and the PWM output is set high on either
+         the clock following the TxPR match or two clocks after the external Reset signal
+         relinquishes the Reset. The PWM output will remain high until the timer counts up to match
+         the CCPRx pulse-width value. If the external Reset signal goes true while the PWM output is
+         high, then the PWM output will remain high until the Reset signal is released allowing the
+         timer to count up to match the CCPRx value.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__ID-42141-000013E4" data-ofbid="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__ID-42141-000013E4"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 26-6. <span id="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A__GUID-6582094C-02C9-432E-9397-F64171D42F01" class="fig--title">Level Triggered Hardware Limit Mode
+            Timing Diagram (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b00111</code>)</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-4754AB40-C01C-4464-9B63-2B58DE44BF4E-high.pdf#toolbar=1" width="450" height="280.3045685279188"></iframe></span>
+      </figure>
+      
+   </div>
+
+</body>
+</html>

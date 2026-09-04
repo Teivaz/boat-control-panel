@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.8.1 Aborting Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046.html"/>
+<link rel="next" href="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22.html"/>
+<link rel="up" href="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li><a href="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046.html">11.8 Interrupt Latency</a></li><li>11.8.1 Aborting Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046.html" rel="prev">Interrupt Latency</a></span><span><a href="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22.html" rel="next">Interrupt Setup Procedure</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-3707A074-AF85-44E8-B73B-4C7A5CAEB6A9__GUID-FCC10922-3DC0-4DC3-A1B0-68ED43622C9B" style="">11.8.1 Aborting Interrupts</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">If the last instruction before the interrupt controller vectors to the ISR
+            from the main routine clears the GIE, PIE, or PIR bit associated with the interrupt, the
+            controller executes one forced <code class="+ topic/ph pr-d/codeph ph codeph">NOP</code> instruction cycle before it returns
+            to the main routine.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-3707A074-AF85-44E8-B73B-4C7A5CAEB6A9__FIG_IWY_1YV_3GB"><span>Figure 11-10</span></a> illustrates the sequence of events when a peripheral
+            interrupt is asserted and then cleared on the last executed instruction cycle.</p>
+        <p class="- topic/p p">If the GIE, PIE or PIR bit associated with the interrupt is cleared prior to
+            vectoring to the ISR, then the controller continues executing the main routine. </p>
+        <figure class="- topic/fig fig fignone" id="GUID-3707A074-AF85-44E8-B73B-4C7A5CAEB6A9__FIG_IWY_1YV_3GB" data-ofbid="GUID-3707A074-AF85-44E8-B73B-4C7A5CAEB6A9__FIG_IWY_1YV_3GB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 11-10. <span id="GUID-3707A074-AF85-44E8-B73B-4C7A5CAEB6A9__GUID-B33946F8-8B61-465C-BADC-ABE3FC5EEC43" class="fig--title">Interrupt Timing Diagram: Aborting
+                Interrupts</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-3707A074-AF85-44E8-B73B-4C7A5CAEB6A9__IMAGE_JWY_1YV_3GB" src="GUID-6D70ACDD-E19A-4F23-95D5-FAC5B43E95FC-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.2 SDA and SCL Pins — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4AF26B1E-964C-44CF-88FF-2107D47A7521.html"/>
+<link rel="next" href="GUID-007C4BF1-6BAC-44AB-B286-CE90BFF7FFDC.html"/>
+<link rel="up" href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li>37.3.2 SDA and SCL Pins</li></ol>
+  <div class="sib"><span>← <a href="GUID-4AF26B1E-964C-44CF-88FF-2107D47A7521.html" rel="prev">Byte Format</a></span><span><a href="GUID-007C4BF1-6BAC-44AB-B286-CE90BFF7FFDC.html" rel="next">SDA Hold Time</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-517E4CB4-761A-4B8C-87C7-340468C82041" style="">37.3.2 SDA and SCL Pins</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The SDA and SCL pins must be configured as open-drain outputs. Open-drain configuration
+            is accomplished by setting the appropriate bits in the Open-Drain Control (ODCONx)
+            registers, while output direction configuration is handled by clearing the appropriate
+            bits in the Tri-State Control (TRISx) registers. Input threshold, slew rate, and
+            internal pull-up settings are configured using the RxyI2C registers. The RxyI2C
+            registers are used exclusively on the default I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C pin locations and provide
+            the following selections:</p>
+        <ul class="- topic/ul ul" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__UL_IWP_YSW_JGB" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__UL_IWP_YSW_JGB">
+            <li class="- topic/li li" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-57C13CC5-977C-40EA-AE0B-8D4BEE9BFA1D" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-57C13CC5-977C-40EA-AE0B-8D4BEE9BFA1D">Input threshold levels: <ul class="- topic/ul ul" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__UL_JWP_YSW_JGB" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__UL_JWP_YSW_JGB">
+                    <li class="- topic/li li" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-9EE5C1EB-A2E2-4C86-91E3-54923314F86D" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-9EE5C1EB-A2E2-4C86-91E3-54923314F86D">SMBus 3.0 (1.35V) input threshold </li>
+                    <li class="- topic/li li" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-B021620E-2C6E-40F5-9961-5164DC37A2F9" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-B021620E-2C6E-40F5-9961-5164DC37A2F9">SMBus 2.0 (2.1V) input threshold</li>
+                    <li class="- topic/li li" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-EBCE8409-0BAD-4E9C-BD29-47B6A3ABBEED" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-EBCE8409-0BAD-4E9C-BD29-47B6A3ABBEED">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C-specific input thresholds </li>
+                    <li class="- topic/li li" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-D355960C-0795-4F57-A9FE-1DC491AA585F" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-D355960C-0795-4F57-A9FE-1DC491AA585F">Standard GPIO input thresholds (controlled by the Input Level Control
+                        (INLVLx) registers)</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-B31BF649-F2DB-4AB4-A1F8-D92B61216CEB" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-B31BF649-F2DB-4AB4-A1F8-D92B61216CEB">Slew rate limiting:<ul class="- topic/ul ul" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__UL_KWP_YSW_JGB" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__UL_KWP_YSW_JGB">
+                    <li class="- topic/li li" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-3579FF26-F69D-46C5-8BAB-9716EF257567" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-3579FF26-F69D-46C5-8BAB-9716EF257567">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C-specific slew rate limiting</li>
+                    <li class="- topic/li li" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-A74F8963-82F2-47EE-A044-5C846EAA1903" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-A74F8963-82F2-47EE-A044-5C846EAA1903">Standard GPIO slew rate (controlled by the Slew Rate Control (SLRCONx)
+                        registers)</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-90135EFB-F122-4155-B065-4B26D28BEBBA" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-90135EFB-F122-4155-B065-4B26D28BEBBA">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C pull-ups:<ul class="- topic/ul ul" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__UL_LWP_YSW_JGB" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__UL_LWP_YSW_JGB">
+                    <li class="- topic/li li" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-6984A9EC-6044-400B-8152-FDCB094EACBD" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-6984A9EC-6044-400B-8152-FDCB094EACBD">Programmable ten or two times
+                        the current of the standard internal pull-up</li>
+                    <li class="- topic/li li" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-2B612CBD-A593-4EA1-8473-726385BE345C" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-2B612CBD-A593-4EA1-8473-726385BE345C">Standard GPIO pull-up (controlled by the Weak Pull-Up Control (WPUx)
+                        registers)</li>
+                </ul></li>
+        </ul>
+        <div class="- topic/note note important note_important" id="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-7CB39276-0096-417A-84BA-4017DE214891__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> The pin locations for
+            SDA and SCL are remappable through the Peripheral Pin Select (PPS) registers. If new pin
+            locations for SDA and SCL are desired, user software must configure the INLVLx, SLRCONx,
+            ODCONx, and TRISx registers for each new pin location. The RxyI2C registers cannot be
+            used since they are dedicated to the default pin locations. Additionally, the internal
+            pull-ups for non-I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C pins are not strong enough to drive the pins; therefore,
+            external pull-up resistors must be used.</div>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-007C4BF1-6BAC-44AB-B286-CE90BFF7FFDC.html">37.3.2.1 SDA Hold Time</a></li></ul>
+</nav>
+</body>
+</html>

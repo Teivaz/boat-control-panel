@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>17.5.1 CPUDOZE — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1A5629B4-332A-4EA4-98FB-3D07370D8C21.html"/>
+<link rel="next" href="GUID-C466114D-3092-4435-B901-4A88EC6A3B74.html"/>
+<link rel="up" href="GUID-1A5629B4-332A-4EA4-98FB-3D07370D8C21.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html">17 Power-Saving Modes</a></li><li><a href="GUID-1A5629B4-332A-4EA4-98FB-3D07370D8C21.html">17.5 Register Definitions: Power-Savings Control</a></li><li>17.5.1 CPUDOZE</li></ol>
+  <div class="sib"><span>← <a href="GUID-1A5629B4-332A-4EA4-98FB-3D07370D8C21.html" rel="prev">Register Definitions: Power-Savings Control</a></span><span><a href="GUID-C466114D-3092-4435-B901-4A88EC6A3B74.html" rel="next">VREGCON</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354__ID-00000013" style="">17.5.1  CPUDOZE </h1><section id="GUID-561A8E49-F741-492E-9C3A-89E1C770E706" class="- topic/section reference/section sidsc-register/registerDescription ">
+         <p class="- topic/p p">Doze and Idle Register</p>
+         <div class="- topic/p p">
+            <div class="- topic/note note notype note_notype endnote" id="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354__GUID-D7CC5CE2-C77D-43CF-8126-8674E71FAC0F" data-ofbid="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354__GUID-D7CC5CE2-C77D-43CF-8126-8674E71FAC0F"><span class="note__title">Note:</span> 
+               <ol class="- topic/ol ol" id="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354__OL_OH3_XCX_P1B" data-ofbid="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354__OL_OH3_XCX_P1B">
+                  <li class="- topic/li li" id="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354__GUID-15957D61-B518-49D9-9FEE-54F4FA33D04B" data-ofbid="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354__GUID-15957D61-B518-49D9-9FEE-54F4FA33D04B">When <a class="- topic/xref xref" href="#ID-00000025" title="Recover-on-Interrupt(1)">ROI</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> or <a class="- topic/xref xref" href="#ID-0000002C" title="Doze-on-Exit(1)">DOE</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>.</li>
+               </ol>
+            </div>
+         </div>
+      </section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>CPUDOZE</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x4F2</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354__GUID-FA9867B5-405E-4EB4-8D4A-A1FFC679F23A" data-ofbid="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354__GUID-FA9867B5-405E-4EB4-8D4A-A1FFC679F23A"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">IDLEN</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">DOZEN</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ROI</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">DOE</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="3">DOZE[2:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HC/HS</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HC/HS</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-561A8E49-F741-492E-9C3A-89E1C770E706" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000017__ID-42139-00006446" id="ID-00000017">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000017__ID-42139-00006446" style=""> Bit 7 – IDLEN <span>Idle Enable</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000017__GUID-429F5936-794F-4A49-8B60-7BDD94FBCA03" data-ofbid="ID-00000017__GUID-429F5936-794F-4A49-8B60-7BDD94FBCA03"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000017__ID-42139-00006448"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000017__GUID-03EC2003-32F7-4453-BBFE-811EB6CFCCB5">
+                  <p class="- topic/p p" id="ID-00000017__ID-42139-00006449" data-ofbid="ID-00000017__ID-42139-00006449">A <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction places device into
+                     Idle mode</p>
+               </td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000017__ID-42139-0000644B"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000017__GUID-204F57C3-5887-40DE-9217-CDB473C8C8EE">
+                  <p class="- topic/p p" id="ID-00000017__ID-42139-0000644C" data-ofbid="ID-00000017__ID-42139-0000644C">A <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction places the device
+                     into Sleep mode</p>
+               </td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000001E__ID-42139-0000644F" id="ID-0000001E">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000001E__ID-42139-0000644F" style=""> Bit 6 – DOZEN <span>
+         Doze Enable<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354__GUID-15957D61-B518-49D9-9FEE-54F4FA33D04B">1</a>)</sup></strong>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000001E__GUID-D2E598CC-74BC-4130-A819-DA604F63FBD8" data-ofbid="ID-0000001E__GUID-D2E598CC-74BC-4130-A819-DA604F63FBD8"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000001E__ID-42139-00006451"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000001E__GUID-D4ACA7BF-CADA-45AE-B63D-9A1AD78B0563">
+                  <p class="- topic/p p" id="ID-0000001E__ID-42139-00006452" data-ofbid="ID-0000001E__ID-42139-00006452">Places devices into Doze setting</p>
+               </td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000001E__ID-42139-00006454"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000001E__GUID-A365BBB9-CA53-4DC6-8251-08F92C51FB0D">
+                  <p class="- topic/p p" id="ID-0000001E__ID-42139-00006455" data-ofbid="ID-0000001E__ID-42139-00006455">Places devices into Normal mode</p>
+               </td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000025__ID-42139-00006458" id="ID-00000025">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000025__ID-42139-00006458" style=""> Bit 5 – ROI <span>
+         Recover-on-Interrupt<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354__GUID-15957D61-B518-49D9-9FEE-54F4FA33D04B">1</a>)</sup></strong>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000025__GUID-D8B840A3-933B-4698-9829-0FB966C414B8" data-ofbid="ID-00000025__GUID-D8B840A3-933B-4698-9829-0FB966C414B8"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000025__ID-42139-0000645A"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000025__GUID-35C93429-E6FA-40BC-A9DE-9CEAD7F83FF7">
+                  <p class="- topic/p p" id="ID-00000025__ID-42139-0000645B" data-ofbid="ID-00000025__ID-42139-0000645B">Entering the Interrupt Service Routine (ISR) makes DOZEN
+                     = <code class="+ topic/ph pr-d/codeph ph codeph">0</code></p>
+               </td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000025__ID-42139-0000645D"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000025__GUID-1ADEFFB4-63CA-45FF-9430-89639301E12E">
+                  <p class="- topic/p p" id="ID-00000025__ID-42139-0000645E" data-ofbid="ID-00000025__ID-42139-0000645E">Entering the Interrupt Service Routine (ISR) does not
+                     change DOZEN</p>
+               </td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000002C__ID-42139-00006461" id="ID-0000002C">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000002C__ID-42139-00006461" style=""> Bit 4 – DOE <span>
+         Doze-on-Exit<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354__GUID-15957D61-B518-49D9-9FEE-54F4FA33D04B">1</a>)</sup></strong>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000002C__GUID-C0CE1FA5-1B37-4304-B8A2-48D39017C6E6" data-ofbid="ID-0000002C__GUID-C0CE1FA5-1B37-4304-B8A2-48D39017C6E6"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000002C__ID-42139-00006463"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000002C__GUID-955C7567-5376-4908-8397-76CA4924C206">
+                  <p class="- topic/p p" id="ID-0000002C__ID-42139-00006464" data-ofbid="ID-0000002C__ID-42139-00006464">Exiting the ISR makes DOZEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code></p>
+               </td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000002C__ID-42139-00006466"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000002C__GUID-2EF53EB4-7154-4DFE-9667-C4D98048F804">
+                  <p class="- topic/p p" id="ID-0000002C__ID-42139-00006467" data-ofbid="ID-0000002C__ID-42139-00006467">Exiting the ISR does not change DOZEN</p>
+               </td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000033__ID-42139-0000646B" id="ID-00000033">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000033__ID-42139-0000646B" style=""> Bits 2:0 – DOZE[2:0] <span>Ratio of CPU Instruction Cycles to Peripheral
+         Instruction Cycles</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000033__GUID-41B9A1C0-3B91-4F56-9799-CF70D4FD6ED6" data-ofbid="ID-00000033__GUID-41B9A1C0-3B91-4F56-9799-CF70D4FD6ED6"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000033__ID-42139-0000646D"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">111</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000033__GUID-F94B0A5A-86C8-4317-A3B1-719267862A41">
+                  <p class="- topic/p p" id="ID-00000033__ID-42139-0000646E" data-ofbid="ID-00000033__ID-42139-0000646E">1:256</p>
+               </td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000033__ID-42139-00006470"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">110</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000033__GUID-D66ACABD-FE74-48C3-AF03-8711FB029A66">
+                  <p class="- topic/p p" id="ID-00000033__ID-42139-00006471" data-ofbid="ID-00000033__ID-42139-00006471">1:128</p>
+               </td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000033__ID-42139-00006473"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">101</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000033__GUID-4D8C55D3-2F5F-4DC0-B608-179E5F3382B1">
+                  <p class="- topic/p p" id="ID-00000033__ID-42139-00006474" data-ofbid="ID-00000033__ID-42139-00006474">1:64</p>
+               </td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000033__ID-42139-00006476"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">100</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000033__GUID-D5107886-E2AC-4511-B662-1DB6E5639898">
+                  <p class="- topic/p p" id="ID-00000033__ID-42139-00006477" data-ofbid="ID-00000033__ID-42139-00006477">1:32</p>
+               </td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000033__ID-42139-00006479"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">011</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000033__GUID-FBEFEA46-3137-4535-B598-CB627EB96047">
+                  <p class="- topic/p p" id="ID-00000033__ID-42139-0000647A" data-ofbid="ID-00000033__ID-42139-0000647A">1:16</p>
+               </td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000033__ID-42139-0000647C"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">010</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000033__GUID-EA13C718-64FA-43B8-ADA8-D0E7E7E9D6FD">
+                  <p class="- topic/p p" id="ID-00000033__ID-42139-0000647D" data-ofbid="ID-00000033__ID-42139-0000647D">1:8</p>
+               </td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000033__ID-42139-0000647F"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">001</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000033__GUID-7CD7D86A-7D8B-4FD8-835F-A9379B3A8E15">
+                  <p class="- topic/p p" id="ID-00000033__ID-42139-00006480" data-ofbid="ID-00000033__ID-42139-00006480">1:4</p>
+               </td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000033__ID-42139-00006482"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">000</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000033__GUID-B0D4B325-4797-4CA3-80CD-CCA6A6E1FB5E">
+                  <p class="- topic/p p" id="ID-00000033__ID-42139-00006483" data-ofbid="ID-00000033__ID-42139-00006483">1:2</p>
+               </td>
+            </tr></tbody></table>
+      </div>
+   </article>
+               
+                  When ROI          Recover-on-Interrupt(1)        = 1 or DOE          Doze-on-Exit(1)        = 1.
+               
+            
+</body>
+</html>

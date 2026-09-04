@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.5.1 I2CxCON0 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html"/>
+<link rel="next" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html"/>
+<link rel="up" href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html">37.5 Register Definitions: I2C Control</a></li><li>37.5.1 I2CxCON0</li></ol>
+  <div class="sib"><span>← <a href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html" rel="prev">Register Definitions: I2C Control</a></span><span><a href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html" rel="next">I2CxCON1</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-C624286B-7B9A-4909-9B90-8BDB049E9859" style="">37.5.1  I2CxCON0</h1><section id="GUID-12F9EB70-72F7-44F6-8647-E1DCAC9E6B91" class="- topic/section reference/section sidsc-register/registerDescription ">I2C Control Register
+                0<div class="- topic/note note notype note_notype endnote" id="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-10750CBB-CF32-4C4A-9DA0-66519D2B24BD" data-ofbid="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-10750CBB-CF32-4C4A-9DA0-66519D2B24BD"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__OL_BXK_XW4_LGB" data-ofbid="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__OL_BXK_XW4_LGB">
+                    <li class="- topic/li li" id="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-0EA6C85A-8A17-4253-8B48-A4765CD8309F" data-ofbid="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-0EA6C85A-8A17-4253-8B48-A4765CD8309F">SDA and SCL pins must be
+                        configured as open-drain I/Os and use either internal or external pull-up
+                        resistors.</li>
+                    <li class="- topic/li li" id="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-0BF6CFC4-60A2-4FF3-9959-AD237537867C" data-ofbid="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-0BF6CFC4-60A2-4FF3-9959-AD237537867C">SDA and SCL signals must
+                        configure both the input and output PPS registers for each signal.</li>
+                    <li class="- topic/li li" id="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-7C2670BE-CCB4-4AA6-A019-72E2F55AA02C" data-ofbid="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-7C2670BE-CCB4-4AA6-A019-72E2F55AA02C">CSTR can be set by multiple
+                        hardware sources; all sources must be addressed by user software before the
+                        SCL line can be released.</li>
+                    <li class="- topic/li li" id="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-9EB0CAB1-9966-497B-A432-3A01679A7C83" data-ofbid="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-9EB0CAB1-9966-497B-A432-3A01679A7C83"><a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_GRY_CQP_LGB" title="Client Mode Active Status">SMA</a> is set on the same SCL edge as CSTR for a
+                        matching received address.</li>
+                    <li class="- topic/li li" id="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-735024BE-2DFB-4AFD-AD06-EBBCF5BB0296" data-ofbid="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-735024BE-2DFB-4AFD-AD06-EBBCF5BB0296">In this mode, <a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_LFC_QSV_LGB" title="Address Interrupt and Hold Enable(1,4)">ADRIE</a> needs to be set, allowing an interrupt to
+                        clear the <a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_PNL_CHV_LGB" title="Bus Collision Detect Interrupt Flag(1)">BCLIF</a> condition and the
+                            <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span> of a matching address.</li>
+                    <li class="- topic/li li" id="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-A4F6BE73-E074-41CE-A88C-A624802E67A0" data-ofbid="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-A4F6BE73-E074-41CE-A88C-A624802E67A0">In 10-bit Client mode (when
+                            <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), CSTR will be set when
+                        the high address has not been read from <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> before the low address is shifted in.</li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>I2CxCON0</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x0294</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-69E71BEC-863D-4EA8-8479-3722821DBB67" data-ofbid="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767__GUID-69E71BEC-863D-4EA8-8479-3722821DBB67"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">EN</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">RSEN</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">S</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">CSTR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">MDR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="3">MODE[2:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HS/HC</td><td class="- topic/entry entry colsep-0 rowsep-0">R/C/HS/HC</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-12F9EB70-72F7-44F6-8647-E1DCAC9E6B91" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-D8276955-4B27-4695-84A0-B62682574196__GUID-7725F1F3-F440-4DF4-B4E8-789CA1DB33C8" id="GUID-D8276955-4B27-4695-84A0-B62682574196">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-D8276955-4B27-4695-84A0-B62682574196__GUID-7725F1F3-F440-4DF4-B4E8-789CA1DB33C8" style=""> Bit 7 – EN <span>
+            I2C Module Enable<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1,2)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-D8276955-4B27-4695-84A0-B62682574196__GUID-F2984C2C-4CF3-44EF-9809-DBE72A97A8A2" data-ofbid="GUID-D8276955-4B27-4695-84A0-B62682574196__GUID-F2984C2C-4CF3-44EF-9809-DBE72A97A8A2"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-D8276955-4B27-4695-84A0-B62682574196__GUID-C0A21CBB-F6B0-4181-B250-96DEFC014C07"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-D8276955-4B27-4695-84A0-B62682574196__GUID-6C11DFD2-C26D-475E-AA05-429EA997BF12">The
+                            I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C module is enabled</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-D8276955-4B27-4695-84A0-B62682574196__GUID-8CBE2EA7-3E25-4918-9D7B-EA4BA4D1F20E"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-D8276955-4B27-4695-84A0-B62682574196__GUID-ECED8D84-88F2-4B26-8D5F-7ED5CC78F01B">The
+                            I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C module is disabled</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_U3D_1YT_KGB__GUID-FA4AA34C-2F82-4EB2-A308-F75F2B77D135" id="BITFIELD_U3D_1YT_KGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_U3D_1YT_KGB__GUID-FA4AA34C-2F82-4EB2-A308-F75F2B77D135" style=""> Bit 6 – RSEN <span>
+            Restart Enable (<em class="+ topic/ph hi-d/i ph i">used only when MODE = <code class="+ topic/ph pr-d/codeph ph codeph">1xx</code></em>)
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_U3D_1YT_KGB__BITFIELDDESCRIPTION_V3D_1YT_KGB" data-ofbid="BITFIELD_U3D_1YT_KGB__BITFIELDDESCRIPTION_V3D_1YT_KGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_U3D_1YT_KGB__BITFIELDVALUES_GBT_NZT_KGB" data-ofbid="BITFIELD_U3D_1YT_KGB__BITFIELDVALUES_GBT_NZT_KGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_U3D_1YT_KGB__GUID-F7B4ECA1-069F-4279-8D77-067D6F2ED551"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_U3D_1YT_KGB__GUID-A9807B7C-89B5-4661-B702-A88293397597">Hardware sets MDR on 9th falling SCL edge (when <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code> or <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_CM5_PDP_LGB" title="Acknowledge Status (Transmission only)">ACKSTAT</a> =
+                        <code class="+ topic/ph pr-d/codeph ph codeph">1</code>)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_U3D_1YT_KGB__GUID-9663A9F5-7ED9-415C-921C-DE8AEB7A4ED7"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_U3D_1YT_KGB__GUID-E9DFA439-DF67-4396-9E57-5EDBF4E9D9ED">Hardware issues Stop condition on 9th falling SCL edge (when I2CxCNT =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">0</code> or ACKSTAT =
+                        <code class="+ topic/ph pr-d/codeph ph codeph">1</code>)</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_YPG_M34_LGB__GUID-DA100AFF-7CEC-4B63-B81E-257080FBCE34" id="BITFIELD_YPG_M34_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_YPG_M34_LGB__GUID-DA100AFF-7CEC-4B63-B81E-257080FBCE34" style=""> Bit 5 – S <span>
+            Host Start (<em class="+ topic/ph hi-d/i ph i">used only when MODE = <code class="+ topic/ph pr-d/codeph ph codeph">1xx</code></em>)
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_YPG_M34_LGB__BITFIELDDESCRIPTION_ZPG_M34_LGB" data-ofbid="BITFIELD_YPG_M34_LGB__BITFIELDDESCRIPTION_ZPG_M34_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition" id="BITFIELD_YPG_M34_LGB__BITFIELDVALUES_VFJ_144_LGB" data-ofbid="BITFIELD_YPG_M34_LGB__BITFIELDVALUES_VFJ_144_LGB"><colgroup><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_YPG_M34_LGB__GUID-E84958F9-20F0-4FE8-9913-BF2157CE67D9"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph"><a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a> =
+                        <code class="+ topic/ph pr-d/codeph ph codeph">0</code>:</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_YPG_M34_LGB__GUID-E9566563-3391-460D-A836-627C60A05621">Set by
+                        write to <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> or S bit, hardware issues Start
+                        condition</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_YPG_M34_LGB__GUID-D22D0EEF-A931-4069-AC1A-85610BEF4396"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">MMA = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>:</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_YPG_M34_LGB__GUID-C674A822-D6BC-4180-AE3C-F853DA8FF383">Cleared
+                        by hardware after sending Start condition</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_YPG_M34_LGB__GUID-2B230896-C0FC-4DA1-A288-38868F0E040A"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">MMA = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and MDR =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">1</code>:</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_YPG_M34_LGB__GUID-295A6AC0-7C8F-402C-9302-8065CACB7378">Set by
+                        write to <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> or S bit, communication resumes with a
+                        Restart condition</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_YPG_M34_LGB__GUID-E9E35CDA-2474-4DA2-ADD6-3B628D7B67B7"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">MMA = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and MDR =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">1</code>:</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_YPG_M34_LGB__GUID-9BD66D60-126A-4D26-990E-F165B4FB5713">Cleared
+                        by hardware after sending Restart condition</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_LMJ_QP4_LGB__GUID-ABFA5B37-72ED-4B99-899D-E1A6B8F4B6B5" id="BITFIELD_LMJ_QP4_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_LMJ_QP4_LGB__GUID-ABFA5B37-72ED-4B99-899D-E1A6B8F4B6B5" style=""> Bit 4 – CSTR <span>
+            Client Clock Stretching<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(3)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_LMJ_QP4_LGB__BITFIELDDESCRIPTION_MMJ_QP4_LGB" data-ofbid="BITFIELD_LMJ_QP4_LGB__BITFIELDDESCRIPTION_MMJ_QP4_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition" id="BITFIELD_LMJ_QP4_LGB__BITFIELDVALUES_RZY_DQ4_LGB" data-ofbid="BITFIELD_LMJ_QP4_LGB__BITFIELDVALUES_RZY_DQ4_LGB"><colgroup><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LMJ_QP4_LGB__GUID-C0B8B194-C656-4AA3-AB2E-58EBE6C15C8A"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LMJ_QP4_LGB__GUID-426D5071-E1B7-4B47-9804-B41F614768AF">Clock
+                        is held low (clock stretching)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LMJ_QP4_LGB__GUID-B508012A-1D5F-4AAD-87A5-50625D9963EA"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LMJ_QP4_LGB__GUID-4791F257-0A4A-435C-8ABC-603A1770193D">Enable
+                        clocking, SCL control is released</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LMJ_QP4_LGB__GUID-6E046CB8-38C4-44C5-BB21-34CC59FCB7A9"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LMJ_QP4_LGB__GUID-AD2AA2A3-7E0B-4D14-9976-3A1AF5064900"></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LMJ_QP4_LGB__GUID-7407A733-BEEF-434A-859C-7B3F5F962137"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph"><a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_GRY_CQP_LGB" title="Client Mode Active Status">SMA</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and <a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a> =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">1</code><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(6)</sup></strong>:</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LMJ_QP4_LGB__GUID-B39EE9C9-7961-46DC-AA13-DFDB08F8B806">Set by
+                        hardware on 7th falling SCL edge<p class="- topic/p p">User must read <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> and clear CSTR to release
+                        SCL</p></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LMJ_QP4_LGB__GUID-EE129012-3B0D-4EC5-8D7F-56DE1EA0C2A4"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">SMA = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and <a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_KS4_K5P_LGB" title="Transmit Buffer Empty Status(2)">TXBE</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> != <code class="+ topic/ph pr-d/codeph ph codeph">0</code>:</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LMJ_QP4_LGB__GUID-22C8CF1D-AE7B-4619-B57C-F421FB6C83BC"> Set by
+                        hardware on 8th falling SCL edge<p class="- topic/p p">User must write to <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> and clear CSTR to release
+                        SCL</p></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LMJ_QP4_LGB__GUID-F5F5DC5F-7BFD-44C0-9305-A55CA6703BAA"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">when <a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_LFC_QSV_LGB" title="Address Interrupt and Hold Enable(1,4)">ADRIE</a> =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">1</code><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(4)</sup></strong>:</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LMJ_QP4_LGB__GUID-46FF45CF-794B-4F93-B57D-4E17A4215808">Set by
+                        hardware on 8th falling edge of matching received address<p class="- topic/p p">User must clear
+                            CSTR to release SCL</p></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LMJ_QP4_LGB__GUID-B5DC8896-BBD8-48CD-BF81-24763676135D"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">SMA = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and <a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_SDM_CSV_LGB" title="Data Write Interrupt and Hold Enable(1,3)">WRIE</a> =
+                        <code class="+ topic/ph pr-d/codeph ph codeph">1</code>:</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LMJ_QP4_LGB__GUID-9E8AE27E-88D4-43BB-9FFD-0593771EBCA9">Set by
+                        hardware on 8th falling SCL edge of received data byte<p class="- topic/p p">User must clear
+                            CSTR to release SCL</p></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LMJ_QP4_LGB__GUID-D390EAC2-CE3B-4C6C-B4DE-A1C7319757E4"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">SMA = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and <a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_VMW_1RV_LGB" title="Acknowledge Status Time Interrupt and Hold Enable(1,2)">ACKTIE</a> =
+                        <code class="+ topic/ph pr-d/codeph ph codeph">1</code>:</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LMJ_QP4_LGB__GUID-C9E5A5C3-8F3A-48A0-8B22-B0BDC65F90FF">Set by
+                        hardware on 9th falling SCL edge<p class="- topic/p p">User must clear CSTR to release
+                        SCL</p></td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_P3J_BS4_LGB__GUID-5CCDF312-0792-4A9F-A24E-94A4EB600EF4" id="BITFIELD_P3J_BS4_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_P3J_BS4_LGB__GUID-5CCDF312-0792-4A9F-A24E-94A4EB600EF4" style=""> Bit 3 – MDR <span>
+            Host Data Request (<em class="+ topic/ph hi-d/i ph i">Host pause</em>)
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_P3J_BS4_LGB__BITFIELDDESCRIPTION_Q3J_BS4_LGB" data-ofbid="BITFIELD_P3J_BS4_LGB__BITFIELDDESCRIPTION_Q3J_BS4_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition" id="BITFIELD_P3J_BS4_LGB__BITFIELDVALUES_IKT_TS4_LGB" data-ofbid="BITFIELD_P3J_BS4_LGB__BITFIELDVALUES_IKT_TS4_LGB"><colgroup><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_P3J_BS4_LGB__GUID-91C795A0-068C-4D5B-B7FD-5ED272EC6C7B"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_P3J_BS4_LGB__GUID-4DB3EC57-CA11-4D40-9D34-23CE5AF9A210">Host
+                        state machine pauses until data are read/written (SCL is held
+                        low)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_P3J_BS4_LGB__GUID-0512F0BD-43BD-40B8-BF74-389D366FAE09"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_P3J_BS4_LGB__GUID-A39C76BE-613C-49FD-B8EE-CCD85CE45273">Host
+                        clocking of data is enabled</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_P3J_BS4_LGB__GUID-15FA18F6-ACE0-4A9A-BB6C-912A258A0734"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_P3J_BS4_LGB__GUID-ED680988-8AD9-4FE5-94C2-A7497C8D6C4C"></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_P3J_BS4_LGB__GUID-094D46D2-3F57-4188-A7C8-F5B1F0DC8E71"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph"><a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and <a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> (<em class="+ topic/ph hi-d/i ph i">pause for
+                            RX</em>):</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_P3J_BS4_LGB__GUID-9506380A-59D2-4C57-B2B5-CB3A78861964">Set by
+                        hardware on 7th falling SCL edge<p class="- topic/p p">User must read <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> to release SCL</p></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_P3J_BS4_LGB__GUID-F6D01FB7-A5CD-4A74-BC9C-7E014EF049C8"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph"><a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and <a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_KS4_K5P_LGB" title="Transmit Buffer Empty Status(2)">TXBE</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> != <code class="+ topic/ph pr-d/codeph ph codeph">0</code> (<em class="+ topic/ph hi-d/i ph i">pause for
+                        TX</em>):</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_P3J_BS4_LGB__GUID-979A92A4-DC1C-401B-A08F-5048791CE746">Set by
+                        hardware on the 8th falling SCL edge<p class="- topic/p p">User must write to <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> to release SCL</p></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_P3J_BS4_LGB__GUID-2E7C4C04-8479-453B-9A2A-AEBCC34BD3A8"></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">RSEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and <a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and (<a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code> or <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_CM5_PDP_LGB" title="Acknowledge Status (Transmission only)">ACKSTAT</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) (<em class="+ topic/ph hi-d/i ph i">pause for
+                                Restart</em>):</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_P3J_BS4_LGB__GUID-5998D03C-3CB6-460A-826D-564F3C282BDD">Set by
+                        hardware on 9th falling SCL edge<p class="- topic/p p">User must set S bit or write to <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> to release SCL and issue a Restart
+                        condition</p></td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_MST_254_LGB__GUID-5D451DB6-07AF-453D-98DB-D1AE32389555" id="BITFIELD_MST_254_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_MST_254_LGB__GUID-5D451DB6-07AF-453D-98DB-D1AE32389555" style=""> Bits 2:0 – MODE[2:0] <span>
+            I2C Mode Select
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_MST_254_LGB__BITFIELDDESCRIPTION_NST_254_LGB" data-ofbid="BITFIELD_MST_254_LGB__BITFIELDDESCRIPTION_NST_254_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_MST_254_LGB__BITFIELDVALUES_L52_M54_LGB" data-ofbid="BITFIELD_MST_254_LGB__BITFIELDVALUES_L52_M54_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_MST_254_LGB__GUID-1F37DC76-06A3-446B-A7DB-5718D57D43F6"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">111</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_MST_254_LGB__GUID-E70C831D-F118-4B98-B0B9-FDF3B4B690AB">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Multi-Host mode (SMBus 2.0
+                        Host)<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(5)</sup></strong></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_MST_254_LGB__GUID-A1C11C7F-918C-41D5-8404-ED3CF1E4AC41"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">110</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_MST_254_LGB__GUID-405F9B7E-9685-4838-8EFE-7BABA140813A">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Multi-Host mode (SMBus 2.0
+                        Host)<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(5)</sup></strong></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_MST_254_LGB__GUID-C5FFA705-A5EA-46C3-8926-5754FC6EB306"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">101</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_MST_254_LGB__GUID-B292D3E0-827C-4F00-B329-B930F60C2242">I<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">2</sup></strong>C Host mode, 10-bit
+                        address</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_MST_254_LGB__GUID-D6761790-6A89-4638-B77B-7025CE393615"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">100</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_MST_254_LGB__GUID-0D6C6267-5B8D-4965-B186-698C23E789C6">I<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">2</sup></strong>C Host mode, 7-bit
+                        address</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_MST_254_LGB__GUID-0F79FE02-2A05-45D7-A550-F272B8CE2A56"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">011</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_MST_254_LGB__GUID-7A6A6F2A-0C08-4DFD-90E8-7BCFDE83461F">I<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">2</sup></strong>C Client mode, one 10-bit address with
+                        masking</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_MST_254_LGB__GUID-7E5EA945-247F-4675-9686-4E6610211DC0"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">010</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_MST_254_LGB__GUID-3A8C03E2-7E2D-4FA6-94F2-AB9F586042CE">I<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">2</sup></strong>C Client mode, two 10-bit
+                        addresses</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_MST_254_LGB__GUID-D319FD42-A03E-414E-9CC1-2325E035EEFC"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">001</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_MST_254_LGB__GUID-92535450-6856-490D-B2D3-F799E34BC337">I<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">2</sup></strong>C Client mode, two 7-bit addresses with
+                        masking</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_MST_254_LGB__GUID-DD164ADE-60B5-4A3B-9A0E-3D469AEAE26E"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">000</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_MST_254_LGB__GUID-62CE47B7-1859-46D7-9467-A2F3A5C874EB">I<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">2</sup></strong>C Client mode, four 7-bit
+                        addresses</td>
+                </tr></tbody></table>
+        </div>
+    </article>
+                
+                    SDA and SCL pins must be
+                        configured as open-drain I/Os and use either internal or external pull-up
+                        resistors.
+                    SDA and SCL signals must
+                        configure both the input and output PPS registers for each signal.
+                    CSTR can be set by multiple
+                        hardware sources; all sources must be addressed by user software before the
+                        SCL line can be released.
+                    SMAClient Mode Active             Status is set on the same SCL edge as CSTR for a
+                        matching received address.
+                    In this mode, ADRIE             Address Interrupt and Hold Enable(1,4)          needs to be set, allowing an interrupt to
+                        clear the BCLIF             Bus Collision Detect Interrupt Flag(1)          condition and the
+                            ACK of a matching address.
+                    In 10-bit Client mode (when
+                            ABDAddress Buffer             Disable = 1), CSTR will be set when
+                        the high address has not been read from I2CxRXBI2CxRXB before the low address is shifted in.
+                
+            
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.14.6 CWGxAS0 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F964ED4F-48F4-4C57-891C-01456B83F23E.html"/>
+<link rel="next" href="GUID-9DFD4E36-B662-42E5-A4A5-DCB02106F04B.html"/>
+<link rel="up" href="GUID-E594CFDB-0B54-4A0C-A473-ECD012AE3CAC.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li><a href="GUID-E594CFDB-0B54-4A0C-A473-ECD012AE3CAC.html">32.14 Register Definitions: CWG Control</a></li><li>32.14.6 CWGxAS0</li></ol>
+  <div class="sib"><span>← <a href="GUID-F964ED4F-48F4-4C57-891C-01456B83F23E.html" rel="prev">CWGxSTR</a></span><span><a href="GUID-9DFD4E36-B662-42E5-A4A5-DCB02106F04B.html" rel="next">CWGxAS1</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-AA068E9E-929B-4A65-997C-47FC96B43629__ID-00000087" style="">32.14.6  CWGxAS0</h1><section id="GUID-471CBE92-2573-458E-B699-31D20F8BF8EC" class="- topic/section reference/section sidsc-register/registerDescription ">CWG Auto-Shutdown Control Register 0<div class="- topic/note note note note_note endnote" id="GUID-AA068E9E-929B-4A65-997C-47FC96B43629__ID-42115-00000785" data-ofbid="GUID-AA068E9E-929B-4A65-997C-47FC96B43629__ID-42115-00000785"><span class="note__title">Note:</span> 
+ <ol class="- topic/ol ol" id="GUID-AA068E9E-929B-4A65-997C-47FC96B43629__OL_YZL_ZTJ_5Z" data-ofbid="GUID-AA068E9E-929B-4A65-997C-47FC96B43629__OL_YZL_ZTJ_5Z">
+ <li class="- topic/li li" id="GUID-AA068E9E-929B-4A65-997C-47FC96B43629__GUID-DCC8D50B-46BA-45D8-B585-E0320D32DFA3" data-ofbid="GUID-AA068E9E-929B-4A65-997C-47FC96B43629__GUID-DCC8D50B-46BA-45D8-B585-E0320D32DFA3">This bit may be written while <a class="- topic/xref xref" href="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B.html#ID-00000005" title="CWG Enable">EN</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, to place the outputs into the shutdown
+                  configuration.</li>
+ <li class="- topic/li li" id="GUID-AA068E9E-929B-4A65-997C-47FC96B43629__GUID-A6C4961F-461E-4A86-8159-09BC9338C0DD" data-ofbid="GUID-AA068E9E-929B-4A65-997C-47FC96B43629__GUID-A6C4961F-461E-4A86-8159-09BC9338C0DD">The outputs will remain in Auto-Shutdown state
+                  until the next rising edge of the CWG data input after this bit is cleared.</li>
+ </ol>
+ </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>CWGxAS0</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x3C2,0x3CB,0x3D4</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-AA068E9E-929B-4A65-997C-47FC96B43629__GUID-F11A25D1-E99D-4F92-B10C-7C892CCDE2AF" data-ofbid="GUID-AA068E9E-929B-4A65-997C-47FC96B43629__GUID-F11A25D1-E99D-4F92-B10C-7C892CCDE2AF"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-AA068E9E-929B-4A65-997C-47FC96B43629"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">SHUTDOWN</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">REN</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="2">LSBD[1:0]</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="2">LSAC[1:0]</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HS/HC</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-471CBE92-2573-458E-B699-31D20F8BF8EC" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000090__ID-42115-00000D1F" id="ID-00000090">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000090__ID-42115-00000D1F" style=""> Bit 7 – SHUTDOWN <span>
+         Auto-Shutdown Event Status<a class="- topic/xref xref" href="#GUID-AA068E9E-929B-4A65-997C-47FC96B43629__ID-42115-00000785"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1,2)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000090__GUID-B5785E24-8C20-449D-8DC8-4F57484B9F5C" data-ofbid="ID-00000090__GUID-B5785E24-8C20-449D-8DC8-4F57484B9F5C"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000090__ID-42115-00000D21">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000090__GUID-48522842-0229-4AFE-A34E-071DF4578AF8">An
+                  Auto-Shutdown state is in effect</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000090__ID-42115-00000D24">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000090__GUID-83B0B687-5907-4193-8831-60E80CEA45D4">No
+                  auto-shutdown event has occurred</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000097__ID-42115-00000D28" id="ID-00000097">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000097__ID-42115-00000D28" style=""> Bit 6 – REN <span>Auto-Restart
+         Enable</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000097__GUID-F26D55B2-0DA7-47F1-9ACF-6195000E8EE5" data-ofbid="ID-00000097__GUID-F26D55B2-0DA7-47F1-9ACF-6195000E8EE5"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000097__ID-42115-00000D2A">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000097__GUID-BFD2B1F7-B097-4D2D-8623-B78506D23A2A">Auto-restart
+                  is enabled</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000097__ID-42115-00000D2D">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000097__GUID-C2BC8EA7-0C40-4B0B-AA1D-5061D7723C1A">Auto-restart
+                  is disabled</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_PVX_5S2_VZ__GUID-DB86E380-B2C1-4272-BC8A-685CE5200B63" id="BITFIELD_PVX_5S2_VZ">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_PVX_5S2_VZ__GUID-DB86E380-B2C1-4272-BC8A-685CE5200B63" style=""> Bits 5:4 – LSBD[1:0] <span>CWGxB and CWGxD
+         Auto-Shutdown State Control</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_PVX_5S2_VZ__GUID-5BB7C8A3-49A4-4FB4-88E9-F82DAEFC3075" data-ofbid="BITFIELD_PVX_5S2_VZ__GUID-5BB7C8A3-49A4-4FB4-88E9-F82DAEFC3075"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_PVX_5S2_VZ__BITFIELDVALUES_RVX_5S2_VZ" data-ofbid="BITFIELD_PVX_5S2_VZ__BITFIELDVALUES_RVX_5S2_VZ"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_PVX_5S2_VZ__GUID-DFCB4688-9F10-4CD6-A228-209531E9FA17">11</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_PVX_5S2_VZ__GUID-E6F70745-7A34-447E-AAD0-1E8D30BAE2CC">A logic
+                     ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’ is placed on CWGxB/D when an auto-shutdown event
+                  occurs</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_PVX_5S2_VZ__GUID-8215E1B6-5A54-4B6E-943A-D564B4134C69">10</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_PVX_5S2_VZ__GUID-6D64F9AF-C20A-48EC-B4C7-87131A09929F">A logic
+                     ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’ is placed on CWGxB/D when an auto-shutdown event
+                  occurs</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_PVX_5S2_VZ__GUID-02E3785F-3ECF-430E-82B6-81C51DB2C22D">01</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_PVX_5S2_VZ__GUID-DF282CD6-633F-4E5B-8595-8A4C0EC890A2">Pin is
+                  tri-stated on CWGxB/D when an auto-shutdown event
+                  occurs</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_PVX_5S2_VZ__GUID-10305B72-C522-41CE-BC00-E1BC82ED979F">00</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_PVX_5S2_VZ__GUID-7E60F921-CDB0-4EAC-9795-A590B8915D21">The Inactive
+                  state of the pin, including polarity, is placed on CWGxB/D after the required
+                  dead-band interval when an auto-shutdown event occurs</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_FCR_ZS2_VZ__GUID-818CF16C-934C-4770-B066-6CF13B0A50F2" id="BITFIELD_FCR_ZS2_VZ">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_FCR_ZS2_VZ__GUID-818CF16C-934C-4770-B066-6CF13B0A50F2" style=""> Bits 3:2 – LSAC[1:0] <span>CWGxA and CWGxC
+         Auto-Shutdown State Control</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_FCR_ZS2_VZ__GUID-84C31FE0-64C4-4DF2-BAA0-4692E401D6F7" data-ofbid="BITFIELD_FCR_ZS2_VZ__GUID-84C31FE0-64C4-4DF2-BAA0-4692E401D6F7"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_FCR_ZS2_VZ__BITFIELDVALUES_HCR_ZS2_VZ" data-ofbid="BITFIELD_FCR_ZS2_VZ__BITFIELDVALUES_HCR_ZS2_VZ"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_FCR_ZS2_VZ__GUID-10B06C1E-5DA4-4B04-B258-9A1BAC822F93">11</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_FCR_ZS2_VZ__GUID-C4F69A51-6473-41A3-8AFB-552C95B7B929">A logic
+                     ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’ is placed on CWGxA/C when an auto-shutdown event
+                  occurs</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_FCR_ZS2_VZ__GUID-BB352E64-2DD4-46DC-BCDB-678444385570">10</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_FCR_ZS2_VZ__GUID-4C05DAD8-ED91-4932-B2F4-FF1D4FA34230">A logic
+                     ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’ is placed on CWGxA/C when an auto-shutdown event
+                  occurs</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_FCR_ZS2_VZ__GUID-DB4ACE17-F4E0-4D3F-B99C-703617B6114C">01</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_FCR_ZS2_VZ__GUID-C60BF177-6652-439F-8650-7A52B86DEDC5">Pin is
+                  tri-stated on CWGxA/C when an auto-shutdown event
+                  occurs</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_FCR_ZS2_VZ__GUID-2378CB35-C9D8-429E-892A-239CC29CE01F">00</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_FCR_ZS2_VZ__GUID-494E2937-E0E6-45C8-814F-B7FA3167D41F">The Inactive
+                  state of the pin, including polarity, is placed on CWGxA/C after the required
+                  dead-band interval when an auto-shutdown event occurs</td>
+            </tr></tbody></table>
+      </div>
+   </article>
+ 
+ This bit may be written while ENCWG Enable = 0, to place the outputs into the shutdown
+                  configuration.
+ The outputs will remain in Auto-Shutdown state
+                  until the next rising edge of the CWG data input after this bit is cleared.
+ 
+ 
+</body>
+</html>

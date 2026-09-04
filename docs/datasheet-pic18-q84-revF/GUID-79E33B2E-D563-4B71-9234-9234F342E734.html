@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.5.3 Accumulate Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-6C515FAA-6FA1-4BFA-B46D-9DE2F2885321.html"/>
+<link rel="next" href="GUID-EA700A3A-26FB-4D85-AFB7-70D1AEF82F85.html"/>
+<link rel="up" href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html">43.5 Computation Operation</a></li><li>43.5.3 Accumulate Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-6C515FAA-6FA1-4BFA-B46D-9DE2F2885321.html" rel="prev">Basic Mode</a></span><span><a href="GUID-EA700A3A-26FB-4D85-AFB7-70D1AEF82F85.html" rel="next">Average Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-79E33B2E-D563-4B71-9234-9234F342E734__GUID-7BCFC38F-5EBD-48DF-ADE3-07FA14086CC9" style="">43.5.3 Accumulate Mode</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p" id="GUID-79E33B2E-D563-4B71-9234-9234F342E734__ID-42107-0000055C" data-ofbid="GUID-79E33B2E-D563-4B71-9234-9234F342E734__ID-42107-0000055C">In Accumulate mode (<a class="- topic/xref xref" href="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D.html#ID-00000061" title="ADC Operating Mode Selection(4)"><span><span>MD</span></span></a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-79E33B2E-D563-4B71-9234-9234F342E734__ID-42107-0000055D">‘b001</code>),
+            after every conversion, the ADC result is added to the <a class="- topic/xref xref" href="GUID-30FA2F95-1F03-4839-A4EC-7F5EDB3ADED5.html" title="ADACC">ADACC</a>
+            register. The ADACC register is right shifted by the value of the <a class="- topic/xref xref" href="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D.html#ID-0000004F" title="ADC Accumulated Calculation Right Shift Select"><span><span>CRS</span></span></a> bits.
+            This right shifted value is copied in to the <a class="- topic/xref xref" href="GUID-95F0A495-8BB1-4AFF-B146-349799BF1507.html" title="ADFLTR">ADFLTR</a>
+            register. The Formatting mode does not affect the right justification of the ADACC or
+            ADFLTR values. Upon each sample, <a class="- topic/xref xref" href="GUID-C8E93DB7-E488-4F28-82A5-7B2AEBD489A6.html" title="ADCNT">ADCNT</a> is incremented, counting the number of samples
+            accumulated. After each sample and accumulation, the ADFLTR value has a threshold
+            comparison performed on it (see <a class="- topic/xref xref" href="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1.html">Threshold Comparison</a> section) and the ADCHxIF interrupt may
+            trigger.</div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32 CWG - Complementary Waveform Generator Module — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-57229884-88A4-4629-88CD-23A9B2F60358.html"/>
+<link rel="next" href="GUID-C7788A51-A155-4AAF-B8EA-D1563AC69EF4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>32 CWG - Complementary Waveform Generator Module</li></ol>
+  <div class="sib"><span>← <a href="GUID-57229884-88A4-4629-88CD-23A9B2F60358.html" rel="prev">Register Summary - PWM</a></span><span><a href="GUID-C7788A51-A155-4AAF-B8EA-D1563AC69EF4.html" rel="next">Fundamental Operation</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__GUID-B3C77B4C-64C0-48F9-BED1-D6C0984CF5C0" style="">32 CWG - Complementary Waveform Generator
+        Module</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000004" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000004">The Complementary Waveform Generator (CWG) produces half-bridge,
+            full-bridge, and steering of PWM waveforms. It is backward compatible with previous CCP
+            functions.</p>
+        <p class="- topic/p p" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000009" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000009">The CWG has the following features:</p>
+        <ul class="- topic/ul ul" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__UL_XHG_RPM_PGB" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__UL_XHG_RPM_PGB">
+            <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-0000000A" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-0000000A">Six Operating modes:<ul class="- topic/ul ul" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__UL_YHG_RPM_PGB" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__UL_YHG_RPM_PGB">
+                    <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-0000000C" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-0000000C">Synchronous Steering mode</li>
+                    <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-0000000E" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-0000000E">Asynchronous Steering mode</li>
+                    <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000010" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000010">Full Bridge mode, Forward</li>
+                    <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000012" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000012">Full Bridge mode, Reverse</li>
+                    <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000014" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000014">Half Bridge mode</li>
+                    <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000016" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000016">Push-Pull mode</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000018" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000018">Output Polarity Control</li>
+            <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-0000001A" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-0000001A">Output Steering</li>
+            <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-0000001C" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-0000001C">Independent 6-bit Rising and Falling Event Dead-Band
+                    Timers:<ul class="- topic/ul ul" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__UL_ZHG_RPM_PGB" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__UL_ZHG_RPM_PGB">
+                    <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-0000001E" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-0000001E">Clocked dead band</li>
+                    <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000020" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000020">Independent rising and falling dead-band enables</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000022" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000022">Auto-Shutdown Control with:<ul class="- topic/ul ul" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__UL_A3G_RPM_PGB" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__UL_A3G_RPM_PGB">
+                    <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000024" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000024">Selectable shutdown sources</li>
+                    <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000026" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000026">Auto-restart option</li>
+                    <li class="- topic/li li" id="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000028" data-ofbid="GUID-2679393F-C4DB-4ABD-A420-9E6652175168__ID-42115-00000028">Auto-shutdown pin override control</li>
+                </ul></li>
+        </ul>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-C7788A51-A155-4AAF-B8EA-D1563AC69EF4.html">32.1 Fundamental Operation</a></li><li><a href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html">32.2 Operating Modes</a></li><li><a href="GUID-DC92098C-F21A-4298-AAD7-5213E3A2BCFC.html">32.3 Clock Source</a></li><li><a href="GUID-22B9E23C-C529-4271-BF88-9EF9E7A71CF7.html">32.4 Selectable Input Sources</a></li><li><a href="GUID-AB0C0D0F-1330-4F9A-99EC-462259E044C3.html">32.5 Output Control</a></li><li><a href="GUID-5C04399A-2325-4ADC-8B5A-800341DB32CE.html">32.6 Dead-Band Control</a></li><li><a href="GUID-02BFEFB4-65CE-4F19-BD84-A6D591607D40.html">32.7 Rising Edge and Reverse Dead Band</a></li><li><a href="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682.html">32.8 Falling Edge and Forward Dead Band</a></li><li><a href="GUID-50ECCA95-BC5C-48C4-8F7C-F2444CD552E6.html">32.9 Dead-Band Jitter</a></li><li><a href="GUID-6197F686-AADF-4660-B041-D3FEDC67F6B4.html">32.10 Auto-Shutdown</a></li><li><a href="GUID-07C5206E-0EF8-41BB-8E13-E7220C799003.html">32.11 Auto-Shutdown Restart</a></li><li><a href="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF.html">32.12 Operation During Sleep</a></li><li><a href="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B.html">32.13 Configuring the CWG</a></li><li><a href="GUID-E594CFDB-0B54-4A0C-A473-ECD012AE3CAC.html">32.14 Register Definitions: CWG Control</a></li><li><a href="GUID-B3637608-7E2A-4555-9968-54F3EDD4BF33.html">32.15 Register Summary - CWG</a></li></ul>
+</nav>
+</body>
+</html>

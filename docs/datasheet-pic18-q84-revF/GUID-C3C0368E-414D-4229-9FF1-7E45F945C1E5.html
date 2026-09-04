@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.2.2.1 Enabling the Receiver — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html"/>
+<link rel="next" href="GUID-2966F8A6-816E-45CF-87A6-FB4C876E377D.html"/>
+<link rel="up" href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html">35.2 UART Asynchronous Modes</a></li><li><a href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html">35.2.2 UART Asynchronous Receiver</a></li><li>35.2.2.1 Enabling the Receiver</li></ol>
+  <div class="sib"><span>← <a href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html" rel="prev">UART Asynchronous Receiver</a></span><span><a href="GUID-2966F8A6-816E-45CF-87A6-FB4C876E377D.html" rel="next">Receiving Data</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-CBAA0077-B37A-44FF-B20E-729A542C4D88" style="">35.2.2.1 Enabling the Receiver</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The UART receiver is enabled for asynchronous operation by configuring the
+            following control bits:</p>
+        <ul class="- topic/ul ul" id="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__UL_Z33_3G5_BBB" data-ofbid="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__UL_Z33_3G5_BBB">
+            <li class="- topic/li li" id="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-E0C11307-E7A0-49AD-9920-00F5CC64FD99" data-ofbid="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-E0C11307-E7A0-49AD-9920-00F5CC64FD99"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_BYJ_N5L_BBB" title="Receive Enable Control(2)"><span><span>RXEN</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+            <li class="- topic/li li" id="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-6E329E81-4330-4990-985A-42B2829BEA3C" data-ofbid="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-6E329E81-4330-4990-985A-42B2829BEA3C"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_C5C_R5L_BBB" title="UART Mode Select(1)"><span><span>MODE</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0000</span> through
+                    <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0011</span></li>
+            <li class="- topic/li li" id="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-3AEB1736-E3AB-4A27-98EA-D9F79C036317" data-ofbid="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-3AEB1736-E3AB-4A27-98EA-D9F79C036317"><a class="- topic/xref xref" href="GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C.html#GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C" title="UxBRG">UxBRG</a> = desired baud rate</li>
+            <li class="- topic/li li" id="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-85108678-C036-4059-9E34-A8FE6ACC23ED" data-ofbid="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-85108678-C036-4059-9E34-A8FE6ACC23ED"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_MQF_ZNS_YY" title="Baud Rate Generator Speed Select"><span><span>BRGS</span></span></a> = desired baud rate multiplier</li>
+            <li class="- topic/li li" id="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-57C78C3A-2A68-4965-ACE8-CE834630F8DA" data-ofbid="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-57C78C3A-2A68-4965-ACE8-CE834630F8DA">RXPPS = code for desired input pin</li>
+            <li class="- topic/li li" id="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-3A832AE0-3D1F-4AD5-BC74-65BFC5C9D479" data-ofbid="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-3A832AE0-3D1F-4AD5-BC74-65BFC5C9D479">Input pin ANSEL bit =
+                    <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span></li>
+            <li class="- topic/li li" id="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-F3E2139F-7F53-4B5B-ACB5-9C43183F8C5C" data-ofbid="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-F3E2139F-7F53-4B5B-ACB5-9C43183F8C5C"><a class="- topic/xref xref" href="GUID-AFEE23AF-E917-46D3-BF17-879043534F4E.html#BITFIELD_MQF_ZNS_YY" title="Serial Port Enable"><span><span>ON</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+        </ul>
+        <p class="- topic/p p">All other UART control bits are assumed to be in their default state.</p>
+        <p class="- topic/p p">Setting the RXEN bit enables the receiver circuitry of the UART. Setting the
+            MODE bits configures the UART for the desired Asynchronous mode. Setting the ON bit
+            enables the UART. The TRIS bit corresponding to the selected RX I/O pin must be set to
+            configure the pin as an input.</p>
+        <div class="- topic/note note important note_important" id="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> If the RX function is
+            on an analog pin, the corresponding ANSEL bit must be cleared for the receiver to
+            function.</div>
+    </div>
+
+</body>
+</html>

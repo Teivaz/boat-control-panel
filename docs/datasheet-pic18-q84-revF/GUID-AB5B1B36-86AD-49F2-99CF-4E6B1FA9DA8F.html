@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>27.1.6.4 High and Low Measurement Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DC9F6824-4CD1-4A0A-8DCB-DBF8EE5E3347.html"/>
+<link rel="next" href="GUID-7E85A348-2DC5-42EF-8398-8CE490CC36DE.html"/>
+<link rel="up" href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3.html">27 SMT - Signal Measurement Timer</a></li><li><a href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html">27.1 SMT Operation</a></li><li><a href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html">27.1.6 Modes of Operation</a></li><li>27.1.6.4 High and Low Measurement Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-DC9F6824-4CD1-4A0A-8DCB-DBF8EE5E3347.html" rel="prev">Period and Duty Cycle Measurement Mode</a></span><span><a href="GUID-7E85A348-2DC5-42EF-8398-8CE490CC36DE.html" rel="next">Windowed Measurement Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-AB5B1B36-86AD-49F2-99CF-4E6B1FA9DA8F__GUID-D0741A94-AEFD-47D1-8DD1-5475769C23A2" style="">27.1.6.4 High and Low Measurement Mode</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">This mode measures the high and low pulse time of the SMT_signal, relative to
+            the SMT clock. The SMTxTMR register starts incrementing on a rising edge of the input
+            signal. On the falling edge, the SMTxTMR register value is written to the SMTxCPW
+            register. The SMTxTMR register is then reset and continues to increment. On the next
+            rising edge, the SMTxTMR register value is written to the SMTxCPR register. The SMTxTMR
+            register is then reset and continues to increment. Refer to the figures below.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-AB5B1B36-86AD-49F2-99CF-4E6B1FA9DA8F__FIG_J42_31Z_1BB" data-ofbid="GUID-AB5B1B36-86AD-49F2-99CF-4E6B1FA9DA8F__FIG_J42_31Z_1BB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 27-8. <span id="GUID-AB5B1B36-86AD-49F2-99CF-4E6B1FA9DA8F__GUID-17016C50-FDCD-4754-9592-0BA3F5CB0F46" class="fig--title">High and Low Measurement Mode,
+                Repeat Acquisition Timing Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-04640D4F-853F-4F1F-B39D-CA81228A4400-high.pdf#toolbar=1" width="450" height="1077.8753709198813"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-AB5B1B36-86AD-49F2-99CF-4E6B1FA9DA8F__FIG_VVJ_31Z_1BB" data-ofbid="GUID-AB5B1B36-86AD-49F2-99CF-4E6B1FA9DA8F__FIG_VVJ_31Z_1BB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 27-9. <span id="GUID-AB5B1B36-86AD-49F2-99CF-4E6B1FA9DA8F__GUID-4CBB464D-BCFF-4732-A14D-A051D7B2FB64" class="fig--title">High and Low Measurement Mode,
+                Single Acquisition Timing Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-3CE7A024-F1D1-4AD2-A828-293656F1D532-high.pdf#toolbar=1" width="450" height="1077.8753709198813"></iframe></span>
+        </figure>
+        
+    </div>
+
+</body>
+</html>

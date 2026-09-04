@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.5.2 Serving a High-Priority Interrupt While a Low-Priority Interrupt Is Pending — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-9337F9F0-7F00-428E-A323-2A8B5A6CE8E6.html"/>
+<link rel="next" href="GUID-2E6F3716-0151-4F82-8FC7-0117A2821C5D.html"/>
+<link rel="up" href="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li><a href="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A.html">11.5 Interrupt Operation</a></li><li>11.5.2 Serving a High-Priority Interrupt While a Low-Priority Interrupt Is Pending</li></ol>
+  <div class="sib"><span>← <a href="GUID-9337F9F0-7F00-428E-A323-2A8B5A6CE8E6.html" rel="prev">Serving a High- or Low-Priority Interrupt While the Main Routine Code Is Executing</a></span><span><a href="GUID-2E6F3716-0151-4F82-8FC7-0117A2821C5D.html" rel="next">Preempting Low-Priority Interrupts</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-7ACD4743-2BC8-4228-BFCD-CFE0CB43FEC7__GUID-5ED09E90-7EDD-4479-8E8E-1215B7BA41F1" style="">11.5.2 Serving a High-Priority Interrupt While a
+        Low-Priority Interrupt Is Pending</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">A high priority interrupt request will always take precedence over any
+            interrupt of a lower priority. The high-priority interrupt is acknowledged first, then
+            the low-priority interrupt is acknowledged. Upon a return from the high-priority ISR (by
+            executing the <code class="+ topic/ph pr-d/codeph ph codeph">RETFIE</code> instruction), the low-priority interrupt is
+            serviced.</p>
+        <p class="- topic/p p">If any other high-priority interrupts are pending and enabled, they are
+            serviced before servicing the pending low-priority interrupt. If no other high-priority
+            interrupt requests are active, the low-priority interrupt is serviced. </p>
+        <figure class="- topic/fig fig fignone" id="GUID-7ACD4743-2BC8-4228-BFCD-CFE0CB43FEC7__FIG_KRQ_H5V_3GB" data-ofbid="GUID-7ACD4743-2BC8-4228-BFCD-CFE0CB43FEC7__FIG_KRQ_H5V_3GB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 11-3. <span id="GUID-7ACD4743-2BC8-4228-BFCD-CFE0CB43FEC7__GUID-EFFC9B5D-1896-4817-8FC6-A8BBBF6396A4" class="fig--title">Interrupt Execution: High-Priority
+                Interrupt with a Low-Priority Interrupt Pending</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-7ACD4743-2BC8-4228-BFCD-CFE0CB43FEC7__IMAGE_LRQ_H5V_3GB" src="GUID-854A24AF-6ADE-4BC5-9C33-C568DC89B4EA-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

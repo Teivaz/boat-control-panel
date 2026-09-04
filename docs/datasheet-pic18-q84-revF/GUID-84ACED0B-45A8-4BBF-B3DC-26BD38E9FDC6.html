@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.6.3 SPI Status Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4082AA01-0523-4E49-A1E9-EEBEB47027D8.html"/>
+<link rel="next" href="GUID-A5FF50FE-F787-44DC-961B-8F38ACD5A388.html"/>
+<link rel="up" href="GUID-3B049106-A068-4D06-BD06-17396A19D766.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-3B049106-A068-4D06-BD06-17396A19D766.html">36.6 SPI Interrupts</a></li><li>36.6.3 SPI Status Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-4082AA01-0523-4E49-A1E9-EEBEB47027D8.html" rel="prev">SPI Transmit Interrupt</a></span><span><a href="GUID-A5FF50FE-F787-44DC-961B-8F38ACD5A388.html" rel="next">Shift Register Empty Interrupt</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__GUID-3E4D997C-EEB9-45B2-BBFC-629416AA6707" style="">36.6.3 SPI Status Interrupts</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The SPIxIF flag is located in one of the PIR registers. This flag is set when any of the
+            individual status flags in SPIxINTF and their respective SPIxINTE bits are set. For any
+            specific interrupt flag to interrupt normal program flow, both the SPIxIE bit in the PIE
+            register corresponding to the PIR register and the specific bit in SPIxINTE associated
+            with that interrupt must be set.</p>
+        <p class="- topic/p p">The Status Interrupts include the following:</p>
+        <ul class="- topic/ul ul" id="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__UL_H1J_4ZW_SFB" data-ofbid="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__UL_H1J_4ZW_SFB">
+            <li class="- topic/li li" id="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__GUID-50F2B8F5-9E59-4A2C-863C-CA624ACED558" data-ofbid="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__GUID-50F2B8F5-9E59-4A2C-863C-CA624ACED558">Shift Register Empty (SRMTIF)</li>
+            <li class="- topic/li li" id="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__GUID-F26F4B38-1E8D-4693-8355-1351971A5310" data-ofbid="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__GUID-F26F4B38-1E8D-4693-8355-1351971A5310">Transfer Counter is Zero (TCZIF)</li>
+            <li class="- topic/li li" id="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__GUID-347EDE46-82F9-4F24-9D66-A7567EB3481B" data-ofbid="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__GUID-347EDE46-82F9-4F24-9D66-A7567EB3481B">Start of Client Select (SOSIF)</li>
+            <li class="- topic/li li" id="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__GUID-8D339458-72F3-45AC-859A-8ED526905E98" data-ofbid="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__GUID-8D339458-72F3-45AC-859A-8ED526905E98">End of Client Select (EOSIF)</li>
+            <li class="- topic/li li" id="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__GUID-8069DE1A-0B7B-4152-848B-E029502C14C2" data-ofbid="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__GUID-8069DE1A-0B7B-4152-848B-E029502C14C2">Receiver Overflow (RXOIF)</li>
+            <li class="- topic/li li" id="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__GUID-61BF1526-2721-4A83-AB76-0644AE7ECB56" data-ofbid="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6__GUID-61BF1526-2721-4A83-AB76-0644AE7ECB56">Transmitter Underflow (TXUIF)</li>
+        </ul>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-A5FF50FE-F787-44DC-961B-8F38ACD5A388.html">36.6.3.1 Shift Register Empty Interrupt</a></li><li><a href="GUID-5A8B8E2D-CB38-4F0D-B728-CC470D137110.html">36.6.3.2 Transfer Counter Is Zero Interrupt</a></li><li><a href="GUID-E9A5E389-63E6-40A1-B1C5-FF0C5AA93D19.html">36.6.3.3 Start of Client Select and End of Client Select Interrupts</a></li><li><a href="GUID-BD915424-ADFE-4FA4-AC43-AE06159F88E7.html">36.6.3.4 Receiver Overflow and Transmitter Underflow Interrupts</a></li></ul>
+</nav>
+</body>
+</html>

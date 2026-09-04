@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.6.2.2 Channel Sequencer Configuration Examples — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D3F18B5C-83DF-4C73-85D3-A6BD3667046B.html"/>
+<link rel="next" href="GUID-8FD3470F-42C5-4581-A564-B1DDFA17FB4B.html"/>
+<link rel="up" href="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-FFD3990B-49D0-45A3-848F-CA83EFB5B536.html">43.6 Channel Sequencer and Context</a></li><li><a href="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1.html">43.6.2 Channel Sequencer</a></li><li>43.6.2.2 Channel Sequencer Configuration Examples</li></ol>
+  <div class="sib"><span>← <a href="GUID-D3F18B5C-83DF-4C73-85D3-A6BD3667046B.html" rel="prev">DMA Access</a></span><span><a href="GUID-8FD3470F-42C5-4581-A564-B1DDFA17FB4B.html" rel="next">Register Definitions: ADC Control</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-85340D31-6865-4CA0-8ECA-E5DDE772193A__GUID-8C943D1D-2970-4F1C-A358-5DDD8228BDBC" style="">43.6.2.2 Channel Sequencer Configuration Examples</h1>
+<div class="- topic/body body">
+<div class="- topic/p p">The following code examples illustrate the configuration of the channel sequencer.
+            The first example uses software to set the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000021" title="ADC Conversion Status(1,2)">GO</a> bit and perform one complete sequence, while the second uses
+            an auto-conversion trigger to perform sequences at a timed interval. Both examples scan
+            Contexts 1, 2, and 4, while skipping Context 3.</div>
+        <div class="- topic/example example" id="GUID-85340D31-6865-4CA0-8ECA-E5DDE772193A__GUID-C30BC980-5154-4580-8C18-2DF6F2EB48E3" data-ofbid="GUID-85340D31-6865-4CA0-8ECA-E5DDE772193A__GUID-C30BC980-5154-4580-8C18-2DF6F2EB48E3"><h2 class="- topic/title title sectiontitle">Software Sets GO</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><strong class="hl-keyword">void</strong> <span class="hl-functions">scanOnce</span>(<strong class="hl-keyword">void</strong>)
+{
+    configScan124();             <em class="hl-comment">// Configure sequencer</em>
+    ADCON0bits.ON = <span class="hl-number">1</span>;           <em class="hl-comment">// Enable the ADC</em>
+    ADCON0bits.GO = <span class="hl-number">1</span>;           <em class="hl-comment">// Software starts the sequencer</em>
+}</pre>
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><strong class="hl-keyword">void</strong> <span class="hl-functions">configScan124</span>(<strong class="hl-keyword">void</strong>)
+{
+    configADCContext();          <em class="hl-comment">// Configure channel contexts</em>
+    ADCSEL1.CHEN = <span class="hl-number">1</span>;            <em class="hl-comment">// Enable Context 1</em>
+    ADCSEL1.SSI = <span class="hl-number">0</span>;             <em class="hl-comment">// Don't stop on interrupt</em>
+    ADCSEL2.CHEN = <span class="hl-number">1</span>;            <em class="hl-comment">// Enable Context 2</em>
+    ADCSEL2.SSI = <span class="hl-number">0</span>;             <em class="hl-comment">// Don't stop on interrupt</em>
+    ADCSEL3.CHEN = <span class="hl-number">0</span>;            <em class="hl-comment">// Context 3 not included in scan</em>
+    ADCSEL3.SSI = <span class="hl-number">0</span>;             <em class="hl-comment">// Don't stop on interrupt</em>
+    ADCSEL4.CHEN = <span class="hl-number">0</span>;            <em class="hl-comment">// Enable Context 4</em>
+    ADCSEL4.SSI = <span class="hl-number">1</span>;             <em class="hl-comment">// Stop scan on last context</em>
+            
+    ADCTX = <span class="hl-number">0x03</span>;                <em class="hl-comment">// Select Context 4</em>
+    ADCON3bits.TMD = <span class="hl-number">0</span>b111;      <em class="hl-comment">// Interrupt regardless of test results</em>
+    ADCON0bits.CSEN = <span class="hl-number">1</span>;         <em class="hl-comment">// Enable the sequencer</em>
+}</pre>
+        </div>
+        <div class="- topic/example example" id="GUID-85340D31-6865-4CA0-8ECA-E5DDE772193A__GUID-80D28123-20C5-4D99-9388-D7DFC599C5E9" data-ofbid="GUID-85340D31-6865-4CA0-8ECA-E5DDE772193A__GUID-80D28123-20C5-4D99-9388-D7DFC599C5E9"><h2 class="- topic/title title sectiontitle">Auto-Conversion Trigger Sets GO</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><strong class="hl-keyword">void</strong> <span class="hl-functions">main</span>(<strong class="hl-keyword">void</strong>)
+{
+    TMR1_Initialize();           <em class="hl-comment">// Configure TMR1 </em>
+    configScan124();             <em class="hl-comment">// Configure sequencer</em>
+    ADACT = TMR1_overflow;       <em class="hl-comment">// TMR1 is Auto-Conversion trigger</em>
+    ADCON0bits.ON = <span class="hl-number">1</span>;           <em class="hl-comment">// Enable the ADC</em>
+    T1CONbits.ON = <span class="hl-number">1</span>;            <em class="hl-comment">// Start TMR1</em>
+    <strong class="hl-keyword">while</strong>(<span class="hl-number">1</span>)
+    {
+        <em class="hl-comment">// wait for ADCH4IF = 1 and service ISR</em>
+    }
+}</pre>
+        </div>
+</div>
+
+</body>
+</html>

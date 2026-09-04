@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.5.8.2 Double Sample Conversion — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1E28C159-7362-470B-81E7-355F2B01C339.html"/>
+<link rel="next" href="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4.html"/>
+<link rel="up" href="GUID-B68D364C-3063-48D9-A9B1-6585E91E01B3.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html">43.5 Computation Operation</a></li><li><a href="GUID-B68D364C-3063-48D9-A9B1-6585E91E01B3.html">43.5.8 Repetition and Sampling Options</a></li><li>43.5.8.2 Double Sample Conversion</li></ol>
+  <div class="sib"><span>← <a href="GUID-1E28C159-7362-470B-81E7-355F2B01C339.html" rel="prev">Continuous Sampling Mode</a></span><span><a href="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4.html" rel="next">Capacitive Voltage Divider (CVD) Features</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-D9791A02-9160-4988-B2CD-76CF73B2F3B0__GUID-2DCD1D99-3886-40BF-B7AE-46964BCDE7A3" style="">43.5.8.2 Double Sample Conversion</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-D9791A02-9160-4988-B2CD-76CF73B2F3B0__ID-42107-000005A6" data-ofbid="GUID-D9791A02-9160-4988-B2CD-76CF73B2F3B0__ID-42107-000005A6">Double sampling is enabled by setting the <a class="- topic/xref xref" href="GUID-91A099AA-6FF5-4C34-ABF1-6C3EFCAF1E11.html#ID-0000003D" title="Double-Sample Enable"><span><span>DSEN</span></span></a> bit. When this bit is set, two conversions are required before the
+            module calculates the threshold error. Each conversion must be triggered separately when
+                <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-0000000C" title="ADC Continuous Operation Enable"><span><span>CONT</span></span></a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, but will repeat
+            automatically form a single trigger when CONT = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>. The first conversion
+            will set the <a class="- topic/xref xref" href="GUID-D37FA911-31F8-4990-9287-79830C2DF08F.html#ID-0000009E" title="ADC Module Computation Status"><span><span>MATH</span></span></a> bit and update the <a class="- topic/xref xref" href="GUID-30FA2F95-1F03-4839-A4EC-7F5EDB3ADED5.html" title="ADACC">ADACC</a> register, but will not calculate <a class="- topic/xref xref" href="GUID-A9D3BECF-B763-475C-9724-E58BD7D965F1.html" title="ADERR">ADERR</a> or trigger ADCHxIF. When the second conversion completes, the first
+            value is transferred to <a class="- topic/xref xref" href="GUID-6964CFCF-6C5B-432B-AD40-F710E7396F3A.html" title="ADPREV">ADPREV</a> (depending on the setting of <a class="- topic/xref xref" href="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D.html#ID-00000048" title="ADC Previous Sample Input Select"><span><span>PSIS</span></span></a>) and the value of the second conversion is placed into <a class="- topic/xref xref" href="GUID-03130209-3BF5-4D2A-B9B0-19A9E1A58C89.html" title="ADRES">ADRES</a>. Only upon the completion of the second conversion is ADERR calculated
+            and ADCHxIF triggered (depending on the value of <a class="- topic/xref xref" href="GUID-C3D871FC-51E7-44E4-A754-55BAA4D71143.html#BITFIELD_KWK_JT3_KZ" title="ADC Error Calculation Mode Select">CALC</a>).</p>
+    </div>
+
+</body>
+</html>

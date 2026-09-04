@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.5.1 Serving a High- or Low-Priority Interrupt While the Main Routine Code Is Executing — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A.html"/>
+<link rel="next" href="GUID-7ACD4743-2BC8-4228-BFCD-CFE0CB43FEC7.html"/>
+<link rel="up" href="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li><a href="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A.html">11.5 Interrupt Operation</a></li><li>11.5.1 Serving a High- or Low-Priority Interrupt While the Main Routine Code Is Executing</li></ol>
+  <div class="sib"><span>← <a href="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A.html" rel="prev">Interrupt Operation</a></span><span><a href="GUID-7ACD4743-2BC8-4228-BFCD-CFE0CB43FEC7.html" rel="next">Serving a High-Priority Interrupt While a Low-Priority Interrupt Is Pending</a> →</span></div>
+</nav>
+
+            <h1 class="- topic/title title topictitle1" id="GUID-9337F9F0-7F00-428E-A323-2A8B5A6CE8E6__GUID-60441CE5-E100-483E-88FB-14419F22A053" style="">11.5.1 Serving a High- or Low-Priority
+                        Interrupt While the Main Routine Code Is Executing</h1>
+            <div class="- topic/body body">
+                        <p class="- topic/p p">When a high- or low-priority interrupt is requested while
+                                    the main routine code is executing, the main routine execution
+                                    is halted and the ISR is addressed. Upon a return from the ISR
+                                    (by executing the <code class="+ topic/ph pr-d/codeph ph codeph">RETFIE</code> instruction), the main
+                                    routine resumes execution. </p>
+                        <figure class="- topic/fig fig fignone" id="GUID-9337F9F0-7F00-428E-A323-2A8B5A6CE8E6__FIG_DF1_D5V_3GB" data-ofbid="GUID-9337F9F0-7F00-428E-A323-2A8B5A6CE8E6__FIG_DF1_D5V_3GB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 11-2. <span id="GUID-9337F9F0-7F00-428E-A323-2A8B5A6CE8E6__GUID-3BD8A2C6-EF3E-420C-86CC-65F4CDB80790" class="fig--title">Interrupt
+                                                Execution: High/Low-Priority Interrupt While
+                                                Executing Main Routine</span></span></figcaption>
+                                    
+                                    <span class=""><img class="- topic/image image" id="GUID-9337F9F0-7F00-428E-A323-2A8B5A6CE8E6__IMAGE_EF1_D5V_3GB" src="GUID-73280618-6A60-43A7-9691-005A81C4DC64-high.svg"/></span>
+                        </figure>
+            </div>
+
+</body>
+</html>

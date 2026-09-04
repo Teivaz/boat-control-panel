@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>7.4.1 Instruction Flow/Pipelining — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-14DFAAAF-B702-4D1F-8136-9925B6B4DA46.html"/>
+<link rel="next" href="GUID-E49D160C-D43F-4754-AFBE-2A057A93B1C2.html"/>
+<link rel="up" href="GUID-14DFAAAF-B702-4D1F-8136-9925B6B4DA46.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html">7 PIC18 CPU</a></li><li><a href="GUID-14DFAAAF-B702-4D1F-8136-9925B6B4DA46.html">7.4 PIC18 Instruction Cycle</a></li><li>7.4.1 Instruction Flow/Pipelining</li></ol>
+  <div class="sib"><span>← <a href="GUID-14DFAAAF-B702-4D1F-8136-9925B6B4DA46.html" rel="prev">PIC18 Instruction Cycle</a></span><span><a href="GUID-E49D160C-D43F-4754-AFBE-2A057A93B1C2.html" rel="next">Instructions in Program Memory</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-1484957A-097D-40E7-93BC-4ABB03BE6346__GUID-31FC4B4D-B7BF-4D91-9D23-1155141F0C70" style="">7.4.1 Instruction Flow/Pipelining</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-1484957A-097D-40E7-93BC-4ABB03BE6346__ID-42129-00000657" data-ofbid="GUID-1484957A-097D-40E7-93BC-4ABB03BE6346__ID-42129-00000657">An “Instruction Cycle” consists of four cycles of the oscillator
+         clock. The instruction fetch and execute are pipelined in such a manner that a fetch takes
+         one instruction cycle, while the decode and execute take another instruction cycle.
+         However, due to the pipelining, each instruction effectively executes in one cycle. If an
+         instruction causes the Program Counter (PC) to change (e.g., <code class="+ topic/ph pr-d/codeph ph codeph">GOTO</code>), then
+         two cycles are required to complete the instruction (<a class="- topic/xref xref" href="#GUID-1484957A-097D-40E7-93BC-4ABB03BE6346__FIG_HKB_PQF_YGB"><span>Figure 7-3</span></a>).</p>
+      <p class="- topic/p p" id="GUID-1484957A-097D-40E7-93BC-4ABB03BE6346__ID-42129-0000065A" data-ofbid="GUID-1484957A-097D-40E7-93BC-4ABB03BE6346__ID-42129-0000065A">A fetch cycle begins with the Program Counter (PC) incrementing
+         followed by the execution cycle. In the execution cycle, the fetched instruction is latched
+         onto the Instruction Register (IR). This instruction is then decoded and executed during
+         the next few oscillator clock cycles. Data memory is read (operand read) and written
+         (destination write) during the execution cycle as well. </p>
+      <div class="- topic/p p">
+         <figure class="- topic/fig fig fignone" id="GUID-1484957A-097D-40E7-93BC-4ABB03BE6346__FIG_HKB_PQF_YGB" data-ofbid="GUID-1484957A-097D-40E7-93BC-4ABB03BE6346__FIG_HKB_PQF_YGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 7-3. <span id="GUID-1484957A-097D-40E7-93BC-4ABB03BE6346__GUID-DB27B16C-159A-4AD7-8DCC-412BA864242A" class="fig--title">Instruction Pipeline Flow</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-1249EB41-1BF4-4742-BC96-4390FC895FD9-high.pdf#toolbar=1" width="627" height="207.75"></iframe></span>
+         </figure>
+      </div>
+      <div class="- topic/p p">
+         <div class="- topic/note note note note_note" id="GUID-1484957A-097D-40E7-93BC-4ABB03BE6346__GUID-9F2F34C4-DC54-497F-935A-8842ABB3601A" data-ofbid="GUID-1484957A-097D-40E7-93BC-4ABB03BE6346__GUID-9F2F34C4-DC54-497F-935A-8842ABB3601A"><span class="note__title">Note:</span> There are some
+            instructions that take multiple cycles to execute. Refer to the <strong class="+ topic/ph hi-d/b ph b">“Instruction Set
+               Summary”</strong> chapter for details.</div>
+      </div>
+   </div>
+
+</body>
+</html>

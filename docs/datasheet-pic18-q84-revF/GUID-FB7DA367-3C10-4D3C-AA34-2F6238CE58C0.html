@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>31.7.1.1 Period Interrupt Postscaler — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-27E3F34F-7B8E-4231-AC64-8943373993E7.html"/>
+<link rel="next" href="GUID-0354F40E-9306-4D77-9C3E-1CFFB655C108.html"/>
+<link rel="up" href="GUID-27E3F34F-7B8E-4231-AC64-8943373993E7.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE.html">31 PWM - Pulse-Width Modulator with Compare</a></li><li><a href="GUID-23C3750C-DF66-47DA-9966-AF83570509D4.html">31.7 Interrupts</a></li><li><a href="GUID-27E3F34F-7B8E-4231-AC64-8943373993E7.html">31.7.1 Period Interrupt</a></li><li>31.7.1.1 Period Interrupt Postscaler</li></ol>
+  <div class="sib"><span>← <a href="GUID-27E3F34F-7B8E-4231-AC64-8943373993E7.html" rel="prev">Period Interrupt</a></span><span><a href="GUID-0354F40E-9306-4D77-9C3E-1CFFB655C108.html" rel="next">Parameter Interrupts</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-FB7DA367-3C10-4D3C-AA34-2F6238CE58C0__GUID-83EA5D30-6735-46EA-B2BF-CAE93AB06BA8" style="">31.7.1.1 Period Interrupt Postscaler</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The frequency of the period interrupt events can be reduced with the period interrupt postscaler.
+            A postscaler counter suppresses period interrupts until the postscale count is reached.
+            Only one PWM period interrupt is generated for every postscale counts. There are 256
+            postscale selections from 1:1 to 1:256.</p>
+        <p class="- topic/p p">The <a class="- topic/xref xref" href="GUID-97B23DDE-26DF-415F-824D-F3ADD0D35739.html#ID-00000005" title="Period Interrupt Postscale Value"><span><span>PIPOS</span></span></a> bits select the postscale value. Changes to the postscale value take
+            effect immediately. Clearing the EN bit before making postscaler changes is recommended
+            to avoid unexpected behavior. The postscale counter is reset when the EN bit is
+            cleared.</p>
+</div>
+
+</body>
+</html>

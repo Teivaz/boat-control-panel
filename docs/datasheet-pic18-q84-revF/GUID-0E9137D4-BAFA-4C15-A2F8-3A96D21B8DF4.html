@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.8.1 Source Stop — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA.html"/>
+<link rel="next" href="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49.html"/>
+<link rel="up" href="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li><a href="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA.html">16.8 DMA Setup and Operation</a></li><li>16.8.1 Source Stop</li></ol>
+  <div class="sib"><span>← <a href="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA.html" rel="prev">DMA Setup and Operation</a></span><span><a href="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49.html" rel="next">Destination Stop</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4__GUID-ED905533-DF76-4671-AE03-7CAC0756F713" style="">16.8.1 Source Stop</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">When the Source Stop bit is set (SSTP = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) and the DMAnSCNT
+            register reloads, the DMA clears the SIRQEN bit to stop receiving new start interrupt
+            request signals and sets the DMAnSCNTIF flag. Refer to the figure below for more
+            details.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4__FIG_NFQ_5WW_SFB" data-ofbid="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4__FIG_NFQ_5WW_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 16-6. <span id="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4__GUID-7B8F0247-0E22-4483-BD03-9CBC98DBB087" class="fig--title">GPR-GPR Transactions with Hardware
+                Triggers, SSTP = <code class="+ topic/ph pr-d/codeph ph codeph"><strong class="+ topic/ph hi-d/b ph b">1</strong></code></span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-EFEB45DD-2FD6-4FF1-92E5-468174517FC3-high.pdf#toolbar=1" width="623.55" height="427.47"></iframe></span>
+        </figure>
+        <div class="- topic/note note notype note_notype" id="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4__GUID-32EE912A-D0E7-4C52-9770-2287506C15E9" data-ofbid="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4__GUID-32EE912A-D0E7-4C52-9770-2287506C15E9"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4__OL_YPV_ZFX_SFB" data-ofbid="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4__OL_YPV_ZFX_SFB">
+                <li class="- topic/li li" id="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4__GUID-7AFA8CC7-C5EB-48C1-AD8A-335ED68D1A76" data-ofbid="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4__GUID-7AFA8CC7-C5EB-48C1-AD8A-335ED68D1A76">SR - Source Read</li>
+                <li class="- topic/li li" id="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4__GUID-1881D40C-679C-4EDD-8F48-30EBB494E736" data-ofbid="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4__GUID-1881D40C-679C-4EDD-8F48-30EBB494E736">DW - Destination Write</li>
+            </ol>
+        </div>
+        
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>33.1.4 Increment Registers — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-FE305690-330C-452E-89E8-11C351327392.html"/>
+<link rel="next" href="GUID-7AA8B1F3-F0B1-469F-941B-32ABE2B69C0F.html"/>
+<link rel="up" href="GUID-BF999A68-24B9-4C97-B8FD-EDB8B60EB037.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574.html">33 NCO - Numerically Controlled Oscillator Module</a></li><li><a href="GUID-BF999A68-24B9-4C97-B8FD-EDB8B60EB037.html">33.1 NCO Operation</a></li><li>33.1.4 Increment Registers</li></ol>
+  <div class="sib"><span>← <a href="GUID-FE305690-330C-452E-89E8-11C351327392.html" rel="prev">Adder</a></span><span><a href="GUID-7AA8B1F3-F0B1-469F-941B-32ABE2B69C0F.html" rel="next">Fixed Duty Cycle Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-8BA1A58B-BA4E-4991-BCB5-B9F3A8324306__GUID-C72B0DD3-627A-40CA-B06F-3E82F317065E" style="">33.1.4 Increment Registers</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p">The increment value is stored in three registers making up a 20-bit word. In order of LSB
+            to MSB, they are:<ul class="- topic/ul ul" id="GUID-8BA1A58B-BA4E-4991-BCB5-B9F3A8324306__UL_DHR_JX5_T1B" data-ofbid="GUID-8BA1A58B-BA4E-4991-BCB5-B9F3A8324306__UL_DHR_JX5_T1B">
+                <li class="- topic/li li" id="GUID-8BA1A58B-BA4E-4991-BCB5-B9F3A8324306__GUID-46E54EFF-E193-4A1B-9B13-30D4E806F2D1" data-ofbid="GUID-8BA1A58B-BA4E-4991-BCB5-B9F3A8324306__GUID-46E54EFF-E193-4A1B-9B13-30D4E806F2D1">NCOxINCL</li>
+                <li class="- topic/li li" id="GUID-8BA1A58B-BA4E-4991-BCB5-B9F3A8324306__GUID-59C0FAF7-6064-4D37-9216-0719BF3FA810" data-ofbid="GUID-8BA1A58B-BA4E-4991-BCB5-B9F3A8324306__GUID-59C0FAF7-6064-4D37-9216-0719BF3FA810">NCOxINCH</li>
+                <li class="- topic/li li" id="GUID-8BA1A58B-BA4E-4991-BCB5-B9F3A8324306__GUID-C71B97F1-5340-421B-96E9-C76494B52F0D" data-ofbid="GUID-8BA1A58B-BA4E-4991-BCB5-B9F3A8324306__GUID-C71B97F1-5340-421B-96E9-C76494B52F0D">NCOxINCU </li>
+            </ul></div>
+        <p class="- topic/p p">The increment registers are readable and writable and are double-buffered to
+            allow value changes to be made without first disabling the NCO module.</p>
+        <p class="- topic/p p">When the NCO module is enabled, the NCOxINCU and NCOxINCH registers will be written
+            first, followed by the NCOxINCL register. Writing to the NCOxINCL register initiates the
+            increment buffer registers to be loaded simultaneously on the second rising edge of the
+            NCO_clk signal. </p>
+        <div class="- topic/p p">When the NCO module is disabled, the increment buffers are loaded immediately
+            after a write to the increment registers.<div class="- topic/note note important note_important" id="GUID-8BA1A58B-BA4E-4991-BCB5-B9F3A8324306__GUID-BDCA12D2-5BDF-47EB-85A0-F016E266435A" data-ofbid="GUID-8BA1A58B-BA4E-4991-BCB5-B9F3A8324306__GUID-BDCA12D2-5BDF-47EB-85A0-F016E266435A"><span class="note__title">Important:</span> The increment buffer registers are
+                not user-accessible.</div></div>
+    </div>
+
+</body>
+</html>

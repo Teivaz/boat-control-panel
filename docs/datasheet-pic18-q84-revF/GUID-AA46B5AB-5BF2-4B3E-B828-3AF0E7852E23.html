@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.3.4.2 Transmit Queue Configuration — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-FC42289D-0F0B-4874-8B32-66AF38226186.html"/>
+<link rel="next" href="GUID-CCB0145D-1356-445D-B22B-9E319C32F3EA.html"/>
+<link rel="up" href="GUID-B6BA9D73-3BDC-4B38-9578-8167E784EE90.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html">38.3 Configuration</a></li><li><a href="GUID-B6BA9D73-3BDC-4B38-9578-8167E784EE90.html">38.3.4 Message Memory Configuration</a></li><li>38.3.4.2 Transmit Queue Configuration</li></ol>
+  <div class="sib"><span>← <a href="GUID-FC42289D-0F0B-4874-8B32-66AF38226186.html" rel="prev">Transmit Event FIFO Configuration</a></span><span><a href="GUID-CCB0145D-1356-445D-B22B-9E319C32F3EA.html" rel="next">Transmit FIFO Configuration</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-AA46B5AB-5BF2-4B3E-B828-3AF0E7852E23__GUID-006148DC-3E5D-4F24-951A-434459D64338" style="">38.3.4.2 Transmit Queue Configuration</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">To reserve space in RAM for the TXQ, the TXQEN bit (C1CON[19]) has to be set. The number
+            of message objects in the TXQ is configured using the FSIZE[4:0] bits (C1TXQCON[27:23]).
+            All objects in the TXQ use the same payload size (number of data bytes), which is
+            configured using the PLSIZE[2:0] bits (C1TXQCON[30:28]).</p>
+    </div>
+
+</body>
+</html>

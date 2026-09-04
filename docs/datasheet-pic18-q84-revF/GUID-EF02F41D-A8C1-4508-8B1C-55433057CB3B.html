@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26.1.1 Free-Running Period Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F.html"/>
+<link rel="next" href="GUID-E08EBFED-6878-4B4C-99E4-81ECC83FAC4D.html"/>
+<link rel="up" href="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html">26 TMR2 - Timer2 Module</a></li><li><a href="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F.html">26.1 Timer2 Operation</a></li><li>26.1.1 Free-Running Period Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F.html" rel="prev">Timer2 Operation</a></span><span><a href="GUID-E08EBFED-6878-4B4C-99E4-81ECC83FAC4D.html" rel="next">One Shot Mode</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-EF02F41D-A8C1-4508-8B1C-55433057CB3B__GUID-DF308895-66FA-45CE-97F3-1857D0C89E34" style="">26.1.1 Free-Running Period Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-EF02F41D-A8C1-4508-8B1C-55433057CB3B__ID-42141-000011D0" data-ofbid="GUID-EF02F41D-A8C1-4508-8B1C-55433057CB3B__ID-42141-000011D0">The value of T2TMR is compared to that of the period register, T2PR,
+         on each clock cycle. When the two values match, the comparator resets the value of T2TMR to
+            <code class="+ topic/ph pr-d/codeph ph codeph">0x00</code> on the next cycle and increments the output postscaler counter.
+         When the postscaler count equals the value in the <a class="- topic/xref xref" href="GUID-DB486ED1-905B-432E-9A30-459FFEFAD858.html#ID-0000012A" title="Timer Output Postscaler Select">OUTPS</a> bits of the
+         T2CON register, a one clock period wide pulse occurs on the TMR2_postscaled output, and the
+         postscaler count is cleared.</p>
+   </div>
+
+</body>
+</html>

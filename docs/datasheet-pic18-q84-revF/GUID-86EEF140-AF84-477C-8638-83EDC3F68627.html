@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.13.6 7/10-Bit Client Reception — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-6664201D-5C25-44C8-B811-CA06B16AF8B5.html"/>
+<link rel="next" href="GUID-B34AF77F-5737-430A-89C1-C8F50ADCD660.html"/>
+<link rel="up" href="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li><a href="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9.html">37.3.13 DMA Integration</a></li><li>37.3.13.6 7/10-Bit Client Reception</li></ol>
+  <div class="sib"><span>← <a href="GUID-6664201D-5C25-44C8-B811-CA06B16AF8B5.html" rel="prev">10-Bit Client Transmission</a></span><span><a href="GUID-B34AF77F-5737-430A-89C1-C8F50ADCD660.html" rel="next">Interrupts</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-86EEF140-AF84-477C-8638-83EDC3F68627__GUID-AE71EE57-481E-466D-AD1A-22AAAD332BF9" style="">37.3.13.6 7/10-Bit Client Reception</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">When address buffers are enabled (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), client hardware loads <a class="- topic/xref xref" href="GUID-E7CC5B44-63E1-40F0-8F67-30D643607BC5.html">I2CxADB0</a>/<a class="- topic/xref xref" href="GUID-51DC1914-5FC6-4DB6-849E-AC7B6E17D460.html" title="I2CxADB1">1</a> with the
+            matching address, while all data are received by <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a>. Once
+            the client loads I2CxRXB with a received data byte, hardware sets I2CxRXIF, which
+            triggers the DMA to read I2CxRXB. The DMA will continue to read I2CxRXB whenever
+            I2CxRXIF is set.</p>
+        <p class="- topic/p p">When address buffers are disabled (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the client loads I2CxRXB with the matching
+            address byte(s) as they are received. Each received address byte sets I2CxRXIF, which
+            triggers the DMA to read I2CxRXB. The DMA will continue to read I2CxRXB whenever
+            I2CxRXIF is set.</p>
+    </div>
+
+</body>
+</html>

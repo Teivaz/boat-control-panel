@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.5.8 I2CxERR — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html"/>
+<link rel="next" href="GUID-1104B90B-16AC-4A43-BC76-816D7C449473.html"/>
+<link rel="up" href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html">37.5 Register Definitions: I2C Control</a></li><li>37.5.8 I2CxERR</li></ol>
+  <div class="sib"><span>← <a href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html" rel="prev">I2CxPIE</a></span><span><a href="GUID-1104B90B-16AC-4A43-BC76-816D7C449473.html" rel="next">I2CxCLK</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__GUID-5A179C28-F915-4D79-95F9-F692EE3BA972" style="">37.5.8  I2CxERR</h1><section id="GUID-141ED762-21E8-46D0-8F77-B4286DDA0219" class="- topic/section reference/section sidsc-register/registerDescription ">I2C Error Register<div class="- topic/note note notype note_notype endnote" id="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__GUID-321382B1-A573-4985-B213-629527F355BB" data-ofbid="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__GUID-321382B1-A573-4985-B213-629527F355BB"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__OL_YFD_DJV_LGB" data-ofbid="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__OL_YFD_DJV_LGB">
+                    <li class="- topic/li li" id="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__GUID-39E55E52-2863-4220-ABB9-967D774D802C" data-ofbid="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__GUID-39E55E52-2863-4220-ABB9-967D774D802C">Enabled error interrupt flags
+                        are OR’ed to produce the PIRx[I2CxEIF] bit.</li>
+                    <li class="- topic/li li" id="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__GUID-AABDF30D-5350-44F7-ACD0-EA493D9F3AEC" data-ofbid="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__GUID-AABDF30D-5350-44F7-ACD0-EA493D9F3AEC">User software must select the
+                        bus time-out source in the <a class="- topic/xref xref" href="GUID-0148F891-DCB6-4528-85A5-066F0AE5F70D.html" title="I2CxBTOC">I2CxBTOC</a> register.</li>
+                    <li class="- topic/li li" id="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__GUID-B8AC7681-F212-4680-9C82-EED8AFEA44CB" data-ofbid="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__GUID-B8AC7681-F212-4680-9C82-EED8AFEA44CB">NACKIF is also set when any
+                        of the <a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#GUID-7A9B3629-D7FD-432A-AE45-E8A97DD638CA" title="Transmit Write Error Status(1)">TXWE</a>, <a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_BDH_V5P_LGB" title="Receive Read Error Status(1)">RXRE</a>, <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_ZKN_TFP_LGB" title="Transmit Underflow Status (used only when MODE = 0xx or MODE = 11x)(3)">TXU</a>, or <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_H5T_P2P_LGB" title="Receive Overflow Status (used only when MODE = 0xx or MODE = 11x)(3)">RXO</a> bits are set.</li>
+                    <li class="- topic/li li" id="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__GUID-02F5E59F-4795-43BB-990F-F0440DB5B42E" data-ofbid="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__GUID-02F5E59F-4795-43BB-990F-F0440DB5B42E">NACKIF is not set for the
+                        NACK response to a nonmatching client address.</li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>I2CxERR</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x0297</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__GUID-B7A5B6DB-7CBE-442C-8D5A-6CE3380DBCB8" data-ofbid="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055__GUID-B7A5B6DB-7CBE-442C-8D5A-6CE3380DBCB8"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">BTOIF</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">BCLIF</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">NACKIF</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">BTOIE</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">BLCIE</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">NACKIE</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HS</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HS</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HS</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-141ED762-21E8-46D0-8F77-B4286DDA0219" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4__GUID-75A7D0F1-3972-4A4C-8438-2ADB87B90875" id="GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4__GUID-75A7D0F1-3972-4A4C-8438-2ADB87B90875" style=""> Bit 6 – BTOIF <span>
+            Bus Time-Out Interrupt Flag<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1,2)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4__GUID-A4F2A939-311C-4022-A782-6C180997F291" data-ofbid="GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4__GUID-A4F2A939-311C-4022-A782-6C180997F291"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4__GUID-DCD6848A-EA7A-4B6B-9AB2-F0AFD6A47A74"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4__GUID-1AD62FE9-9393-4742-B59A-684383DDB1FE">Bus
+                        time-out event occurred</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4__GUID-95F18561-6193-4691-BBB7-8B77E90E8E66"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4__GUID-6A91F298-4EF9-4C34-8C24-3909B6CBA77E">No bus
+                        time-out event occurred</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_PNL_CHV_LGB__GUID-213C83C7-4E20-4367-9983-D1D12E32712E" id="BITFIELD_PNL_CHV_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_PNL_CHV_LGB__GUID-213C83C7-4E20-4367-9983-D1D12E32712E" style=""> Bit 5 – BCLIF <span>
+            Bus Collision Detect Interrupt Flag<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_PNL_CHV_LGB__BITFIELDDESCRIPTION_QNL_CHV_LGB" data-ofbid="BITFIELD_PNL_CHV_LGB__BITFIELDDESCRIPTION_QNL_CHV_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_PNL_CHV_LGB__BITFIELDVALUES_FGC_3HV_LGB" data-ofbid="BITFIELD_PNL_CHV_LGB__BITFIELDVALUES_FGC_3HV_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_PNL_CHV_LGB__GUID-4147F1B2-A375-45E6-91F2-13B604D960CB"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_PNL_CHV_LGB__GUID-4FF917F6-DE31-4852-8168-214F1290359B">Bus
+                        collision detected</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_PNL_CHV_LGB__GUID-FE5D38B7-AF72-48EC-91F0-4C5DB7C2127A"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_PNL_CHV_LGB__GUID-ACCDA2BF-32B8-4A24-86ED-14B8B3F6E55B">No bus
+                        collision occurred</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_YQQ_P3V_LGB__GUID-1C4A7F4E-B64B-4D5C-B6B7-2FCE4F183F36" id="BITFIELD_YQQ_P3V_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_YQQ_P3V_LGB__GUID-1C4A7F4E-B64B-4D5C-B6B7-2FCE4F183F36" style=""> Bit 4 – NACKIF <span>
+            NACK Detect Interrupt Flag<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1,3,4)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_YQQ_P3V_LGB__BITFIELDDESCRIPTION_ZQQ_P3V_LGB" data-ofbid="BITFIELD_YQQ_P3V_LGB__BITFIELDDESCRIPTION_ZQQ_P3V_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_YQQ_P3V_LGB__BITFIELDVALUES_TN1_53V_LGB" data-ofbid="BITFIELD_YQQ_P3V_LGB__BITFIELDVALUES_TN1_53V_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_YQQ_P3V_LGB__GUID-11DEEE20-C8CC-4F8C-A623-671658416C16"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_YQQ_P3V_LGB__GUID-B6B1E05B-C920-43B3-9E92-88E7FBE784DF">NACK
+                        detected on the bus (when <a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_GRY_CQP_LGB" title="Client Mode Active Status">SMA</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> or <a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a> =
+                        <code class="+ topic/ph pr-d/codeph ph codeph">1</code>)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_YQQ_P3V_LGB__GUID-DF673030-FB5F-4D62-9059-6F0062720775"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_YQQ_P3V_LGB__GUID-04D1E448-E694-4A2B-9319-C4FF80A3E7A0">No NACK
+                        detected on the bus</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_WB5_BKV_LGB__GUID-4724BAE5-551D-4F33-8BF7-232BA58E255D" id="BITFIELD_WB5_BKV_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_WB5_BKV_LGB__GUID-4724BAE5-551D-4F33-8BF7-232BA58E255D" style=""> Bit 2 – BTOIE <span>Bus Time-Out
+            Interrupt Enable</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_WB5_BKV_LGB__BITFIELDDESCRIPTION_XB5_BKV_LGB" data-ofbid="BITFIELD_WB5_BKV_LGB__BITFIELDDESCRIPTION_XB5_BKV_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_WB5_BKV_LGB__BITFIELDVALUES_KNG_GKV_LGB" data-ofbid="BITFIELD_WB5_BKV_LGB__BITFIELDVALUES_KNG_GKV_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_WB5_BKV_LGB__GUID-6A81A683-FC8C-4613-8E24-A26B854E1930"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_WB5_BKV_LGB__GUID-A66C409C-4DC1-454B-AD2B-6BDE0DC76293">Enable
+                        bus time-out interrupts</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_WB5_BKV_LGB__GUID-B9BD34BE-80C4-49A9-855D-9425104C4ABE"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_WB5_BKV_LGB__GUID-2ACF96CA-542B-4274-9B29-5E4396003741">Disable
+                        bus time-out interrupts</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_LSV_KKV_LGB__GUID-ED4B2A01-2CD6-45BE-A4CA-A9CE89792263" id="BITFIELD_LSV_KKV_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_LSV_KKV_LGB__GUID-ED4B2A01-2CD6-45BE-A4CA-A9CE89792263" style=""> Bit 1 – BLCIE <span>Bus Collision
+            Detect Interrupt Enable</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_LSV_KKV_LGB__BITFIELDDESCRIPTION_MSV_KKV_LGB" data-ofbid="BITFIELD_LSV_KKV_LGB__BITFIELDDESCRIPTION_MSV_KKV_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_LSV_KKV_LGB__BITFIELDVALUES_IDF_4KV_LGB" data-ofbid="BITFIELD_LSV_KKV_LGB__BITFIELDVALUES_IDF_4KV_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LSV_KKV_LGB__GUID-83AA92AC-80EE-40FA-A064-3763F7898954"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LSV_KKV_LGB__GUID-35682D23-1EF6-4B00-93B3-537AEAC3D475">Enable
+                        Bus Collision interrupts</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LSV_KKV_LGB__GUID-D3D15B28-B4DF-48E5-80F2-A236D914929B"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LSV_KKV_LGB__GUID-444CE42D-9671-43E9-82DF-FD9E6E67C307">Disable
+                        Bus Collision interrupts</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_YLC_SKV_LGB__GUID-99C7AD35-3343-4FE7-93C5-553C78CE8C0F" id="BITFIELD_YLC_SKV_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_YLC_SKV_LGB__GUID-99C7AD35-3343-4FE7-93C5-553C78CE8C0F" style=""> Bit 0 – NACKIE <span>NACK Detect
+            Interrupt Enable</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_YLC_SKV_LGB__BITFIELDDESCRIPTION_ZLC_SKV_LGB" data-ofbid="BITFIELD_YLC_SKV_LGB__BITFIELDDESCRIPTION_ZLC_SKV_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_YLC_SKV_LGB__BITFIELDVALUES_NMP_VKV_LGB" data-ofbid="BITFIELD_YLC_SKV_LGB__BITFIELDVALUES_NMP_VKV_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_YLC_SKV_LGB__GUID-2004C823-A917-4FE6-8AE9-344717B10FFE"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_YLC_SKV_LGB__GUID-2BF36019-0DE3-4165-81A8-2A2946DB269B">Enable
+                        NACK detect interrupts</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_YLC_SKV_LGB__GUID-EF48D76E-DF79-4F0F-AFB2-8C0AF14FF4DB"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_YLC_SKV_LGB__GUID-38F880CE-5561-4534-8859-129C14AE8CBB">Disable
+                        NACK detect interrupts</td>
+                </tr></tbody></table>
+        </div>
+    </article>
+                
+                    Enabled error interrupt flags
+                        are OR’ed to produce the PIRx[I2CxEIF] bit.
+                    User software must select the
+                        bus time-out source in the I2CxBTOCI2CxBTOC register.
+                    NACKIF is also set when any
+                        of the TXWE             Transmit Write Error Status(1)         , RXRE             Receive Read Error Status(1)         , TXU             Transmit Underflow Status (used only when MODE = 0xx or MODE = 11x)(3)         , or RXO             Receive Overflow Status (used only when MODE = 0xx or MODE =                         11x)(3)          bits are set.
+                    NACKIF is not set for the
+                        NACK response to a nonmatching client address.
+                
+            
+</body>
+</html>

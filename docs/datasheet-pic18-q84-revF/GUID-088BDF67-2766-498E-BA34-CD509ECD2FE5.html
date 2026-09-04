@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.8.4 Mismatch of DLC and Payload Size During Reception — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-16221088-ACE2-401A-8D45-E69EDBFBF3D0.html"/>
+<link rel="next" href="GUID-18BE65DA-2E61-49D8-AAE7-AC56D4A9B739.html"/>
+<link rel="up" href="GUID-ABE11A28-ACFC-4D60-BEDB-BA3A1CF953C4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-ABE11A28-ACFC-4D60-BEDB-BA3A1CF953C4.html">38.8 Message Reception</a></li><li>38.8.4 Mismatch of DLC and Payload Size During Reception</li></ol>
+  <div class="sib"><span>← <a href="GUID-16221088-ACE2-401A-8D45-E69EDBFBF3D0.html" rel="prev">Resetting RX FIFO</a></span><span><a href="GUID-18BE65DA-2E61-49D8-AAE7-AC56D4A9B739.html" rel="next">FIFO Behavior</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-088BDF67-2766-498E-BA34-CD509ECD2FE5__GUID-0D9E8680-21EB-4C85-B6E1-451C7AD447A8" style="">38.8.4 Mismatch of DLC and Payload Size During Reception</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p">The PLSIZEx bits reserve a certain number of bytes in the receive message
+            object. The module handles mismatches between DLC and payload size as follows:<ul class="- topic/ul ul" id="GUID-088BDF67-2766-498E-BA34-CD509ECD2FE5__UL_JSF_RRN_P3B" data-ofbid="GUID-088BDF67-2766-498E-BA34-CD509ECD2FE5__UL_JSF_RRN_P3B">
+                <li class="- topic/li li" id="GUID-088BDF67-2766-498E-BA34-CD509ECD2FE5__GUID-1C4B5BF4-C02B-4DA5-961E-1C18D9D97338" data-ofbid="GUID-088BDF67-2766-498E-BA34-CD509ECD2FE5__GUID-1C4B5BF4-C02B-4DA5-961E-1C18D9D97338">If the number of bytes specified by the DLC is smaller than the number of bytes
+                    specified by the PLSIZEx bits, the received message bytes will be stored in the
+                    message object, without any padding.</li>
+                <li class="- topic/li li" id="GUID-088BDF67-2766-498E-BA34-CD509ECD2FE5__GUID-B2B8AB78-EDB8-4901-8197-57AE175D6429" data-ofbid="GUID-088BDF67-2766-498E-BA34-CD509ECD2FE5__GUID-B2B8AB78-EDB8-4901-8197-57AE175D6429">If the number of bytes specified
+                    by the DLC is bigger than the number of bytes specified by the PLSIZEx bits, the
+                    data bytes that fit in the receive message object are stored and the other data
+                    bytes that do not fit are discarded. The module ensures that the next message
+                    object in RAM does not get overwritten. The module will store the message in the
+                    receive object and the RX FIFO status flags will be updated. In addition, the
+                    IVMIF (CxINT[15]) and DLCMM flags (CxBDIAG1[31]) will be set.</li>
+            </ul></div>
+    </div>
+
+</body>
+</html>

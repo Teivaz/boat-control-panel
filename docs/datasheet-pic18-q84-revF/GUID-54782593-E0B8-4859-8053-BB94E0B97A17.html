@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.2.1.4 Transmit Interrupt Flag — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D01C8272-ABE3-46A6-A3E2-B07684BF0B1F.html"/>
+<link rel="next" href="GUID-6599B422-E143-4E2A-89C1-65103827840E.html"/>
+<link rel="up" href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html">35.2 UART Asynchronous Modes</a></li><li><a href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html">35.2.1 UART Asynchronous Transmitter</a></li><li>35.2.1.4 Transmit Interrupt Flag</li></ol>
+  <div class="sib"><span>← <a href="GUID-D01C8272-ABE3-46A6-A3E2-B07684BF0B1F.html" rel="prev">Transmit Data Polarity</a></span><span><a href="GUID-6599B422-E143-4E2A-89C1-65103827840E.html" rel="next">TSR Status</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-54782593-E0B8-4859-8053-BB94E0B97A17__GUID-1514A749-E362-485D-A322-F246818D348E" style="">35.2.1.4 Transmit Interrupt Flag</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The UxTXIF Interrupt Flag bit in the PIR register is set whenever the UART
+            transmitter is enabled and no character is being held for transmission in the UxTXB
+            register. In other words, the UxTXIF bit is clear only when the TSR is busy with a
+            character and a new character has been queued for transmission in the UxTXB
+            register.</p>
+        <p class="- topic/p p">The UxTXIF interrupt is enabled by setting the UxTXIE Interrupt Enable bit in
+            the PIE register. However, the UxTXIF Flag bit will be set whenever the UxTXB register
+            is empty, regardless of the state of the UxTXIE Enable bit. The UxTXIF bit is read-only
+            and cannot be set or cleared by software.</p>
+        <p class="- topic/p p">To use interrupts when transmitting data, set the UxTXIE bit only when there
+            is more data to send. Clear the UxTXIE Interrupt Enable bit upon writing the UxTXB
+            register with the last character of the transmission.</p>
+</div>
+
+</body>
+</html>

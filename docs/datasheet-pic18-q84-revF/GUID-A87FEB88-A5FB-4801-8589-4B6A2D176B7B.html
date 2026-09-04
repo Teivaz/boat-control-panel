@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.16.1 Auto-Baud Detect — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5D554793-676E-4F0B-8022-67C65136118D.html"/>
+<link rel="next" href="GUID-9CEC6C92-D5A5-4F5F-9852-B7DC8DA60801.html"/>
+<link rel="up" href="GUID-5D554793-676E-4F0B-8022-67C65136118D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-5D554793-676E-4F0B-8022-67C65136118D.html">35.16 UART Baud Rate Generator</a></li><li>35.16.1 Auto-Baud Detect</li></ol>
+  <div class="sib"><span>← <a href="GUID-5D554793-676E-4F0B-8022-67C65136118D.html" rel="prev">UART Baud Rate Generator</a></span><span><a href="GUID-9CEC6C92-D5A5-4F5F-9852-B7DC8DA60801.html" rel="next">Auto-Baud Overflow</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__GUID-8C77C38C-132B-4C2E-93A1-6113E27E65C6" style="">35.16.1 Auto-Baud Detect</h1><div class="- topic/body body"><p class="- topic/p p">The UART module supports automatic detection and calibration of the baud rate in the
+            8-bit Asynchronous and LIN modes. However, setting ABDEN to start auto-baud detection is
+            neither necessary, nor possible in LIN mode because that mode supports auto-baud
+            detection automatically at the beginning of every data packet. Enabling auto-baud detect
+            with the ABDEN bit applies to the Asynchronous modes only.</p><p class="- topic/p p">When Auto-Baud Detect (ABD) is active, the clock to the BRG is reversed.
+            Rather than the BRG clocking the incoming RX signal, the RX signal is timing the BRG.
+            The Baud Rate Generator is used to time the period of a received <span class="+ topic/keyword sw-d/cmdname keyword cmdname">55h</span> (ASCII “U”), which is the Sync character for the LIN bus. The unique
+            feature of this character is that it has five falling edges, including the Start bit
+            edge, and five rising edges, including the Stop bit edge.</p><div class="- topic/p p">In 8-bit Asynchronous mode, setting the <a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_XWQ_NRL_BBB" title="Auto-Baud Detect Enable(3)"><span><span>ABDEN</span></span></a> bit enables the auto-baud calibration sequence. The first falling edge of the RX
+            input after ABDEN is set will start the auto-baud calibration sequence. While the ABD
+            sequence takes place, the UART state machine is held in Idle. On the first falling edge
+            of the receive line, the UxBRG begins counting up using the BRG counter clock, as shown
+            in the following figure. The fifth falling edge will occur on the RX pin at the
+            beginning of the bit 7 period. At that time, an accumulated value totaling the proper
+            BRG period is left in the <a class="- topic/xref xref" href="GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C.html#GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C" title="UxBRG">UxBRG</a> register pair, the ABDEN bit is automatically cleared and
+            the <a class="- topic/xref xref" href="GUID-6FE1EBC7-3CDD-4B04-B97B-84C683051951.html#BITFIELD_XWQ_NRL_BBB" title="Auto-Baud Detect Interrupt"><span><span>ABDIF</span></span></a> interrupt flag is set. ABDIF must be cleared by software.</div><figure class="- topic/fig fig fignone" id="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__FIG_Q5W_1S2_DBB" data-ofbid="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__FIG_Q5W_1S2_DBB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 35-12. <span id="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__GUID-D39B1883-7D00-4863-AA47-C0ADDC6F42F5" class="fig--title">Automatic Baud Rate
+                Calibration</span></span></figcaption><span class=""><iframe src="GUID-50671401-3EB9-4D52-87A9-86A8F6152F25-high.pdf#toolbar=1" width="471.79" height="294.58000000000004"></iframe></span></figure><p class="- topic/p p"><a class="- topic/xref xref" href="GUID-2A8CC206-1569-40FD-9221-4BB29D97CE3C.html#BITFIELD_C5C_R5L_BBB" title="Receive Pin Idle Status"><span><span>RXIDL</span></span></a> indicates that the sync input is active. RXIDL will go
+            low on the first falling edge and go high on the fifth rising edge.</p><div class="- topic/p p">The BRG auto-baud clock is determined by the BRGS bit, as shown in the
+            following table. <div class="table-container"><table class="- topic/table table" id="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__TABLE_MFP_SR2_DBB" data-ofbid="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__TABLE_MFP_SR2_DBB" data-cols="3"><caption class="- topic/title title tablecap" data-caption-side="top" data-is-repeated="true"><span class="table--title-label"><span class="table--title-label">Table 35-3. </span></span><span class="table--title" id="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__GUID-8BC22CE8-2470-4E0E-98C5-04DAA37C6972">BRG Counter Clock
+                    Rates</span></caption><colgroup><col/><col/><col/></colgroup><thead class="- topic/thead thead"><tr class="- topic/row"><th class="- topic/entry entry align-center colsep-0 rowsep-0" id="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__TABLE_MFP_SR2_DBB__entry__1">BRGS</th><th class="- topic/entry entry align-center colsep-0 rowsep-0" id="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__TABLE_MFP_SR2_DBB__entry__2">BRG Base Clock</th><th class="- topic/entry entry align-center colsep-0 rowsep-0" id="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__TABLE_MFP_SR2_DBB__entry__3">BRG ABD Clock</th></tr></thead><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-0 rowsep-0" headers="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__TABLE_MFP_SR2_DBB__entry__1"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></td><td class="- topic/entry entry align-center colsep-0 rowsep-0" headers="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__TABLE_MFP_SR2_DBB__entry__2">Fosc/4</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" headers="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__TABLE_MFP_SR2_DBB__entry__3">Fosc/32</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-0 rowsep-0" headers="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__TABLE_MFP_SR2_DBB__entry__1"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></td><td class="- topic/entry entry align-center colsep-0 rowsep-0" headers="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__TABLE_MFP_SR2_DBB__entry__2">Fosc/16</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" headers="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__TABLE_MFP_SR2_DBB__entry__3">Fosc/128</td></tr></tbody></table></div></div><p class="- topic/p p">During ABD, the internal BRG register is used as a 16-bit counter. However,
+            the UxBRG registers retain the previous BRG value until the auto-baud process is
+            successfully completed. While calibrating the baud rate period, the internal BRG
+            register is clocked at 1/8th the BRG base clock rate. The resulting byte measurement is
+            the average bit time when clocked at full speed and is transferred to the UxBRG
+            registers when complete.</p><div class="- topic/note note important note_important" id="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__GUID-BF691482-AD41-4796-9496-43152EB1AF9E" data-ofbid="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__GUID-BF691482-AD41-4796-9496-43152EB1AF9E"><span class="note__title">Important:</span> 
+            <ol class="- topic/ol ol" id="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__OL_M2X_ZCF_DBB" data-ofbid="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__OL_M2X_ZCF_DBB"><li class="- topic/li li" id="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__GUID-29C7C3AF-945C-417B-B471-E75A48DCDEF2" data-ofbid="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__GUID-29C7C3AF-945C-417B-B471-E75A48DCDEF2">When both the WUE and ABDEN bits
+                    are set, the auto-baud detection will occur on the byte following the Break
+                    character (see the <a class="- topic/xref xref" href="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907.html#GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907">Auto Wake-on-Break</a> section).</li><li class="- topic/li li" id="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__GUID-028417AB-2986-4CA0-BC29-A55AD08A314B" data-ofbid="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B__GUID-028417AB-2986-4CA0-BC29-A55AD08A314B">It is up to the user to verify
+                    that the incoming character baud rate is within the range of the selected BRG
+                    clock source. Some combinations of oscillator frequency and UART baud rates are
+                    not possible.</li></ol>
+        </div></div>
+</body>
+</html>

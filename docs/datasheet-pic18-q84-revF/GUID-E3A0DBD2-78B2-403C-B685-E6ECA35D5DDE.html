@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>22.5 Operation During Sleep — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4BD3F670-14E5-4D79-A96E-C0A5220E2113.html"/>
+<link rel="next" href="GUID-DB026086-8715-477A-866D-27D205A738B8.html"/>
+<link rel="up" href="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812.html">22 CLC - Configurable Logic Cell</a></li><li>22.5 Operation During Sleep</li></ol>
+  <div class="sib"><span>← <a href="GUID-4BD3F670-14E5-4D79-A96E-C0A5220E2113.html" rel="prev">Output Mirror Copies</a></span><span><a href="GUID-DB026086-8715-477A-866D-27D205A738B8.html" rel="next">CLC Setup Steps</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-E3A0DBD2-78B2-403C-B685-E6ECA35D5DDE__GUID-FCAA9C2C-DF5F-4E2E-B999-8E12D4E5FE9C" style="">22.5 Operation During Sleep</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The CLC module operates independently from the system clock and will continue
+            to run during Sleep, provided that the input sources selected remain Active.</p>
+        <p class="- topic/p p">The HFINTOSC remains Active during Sleep when the CLC module is
+            enabled and the HFINTOSC is selected as an input source, regardless of the system clock
+            source selected.</p>
+        <p class="- topic/p p">In other words, if the HFINTOSC is simultaneously selected as both the
+            system clock and as a CLC input source then, when the CLC is enabled, the CPU will go
+            Idle during Sleep, but the CLC will continue to operate and the HFINTOSC will remain
+            Active. This will have a direct effect on the Sleep mode current.</p>
+</div>
+
+</body>
+</html>

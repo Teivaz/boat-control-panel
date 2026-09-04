@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.9.7 TUxyPR (16-bit) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1C842ECB-8121-47AA-B989-2538383C51DD.html"/>
+<link rel="next" href="GUID-CC2BF5B6-6455-4D42-AE6F-ABD8553D1876.html"/>
+<link rel="up" href="GUID-7463E9BA-CF26-4B25-8FCB-C8F606187580.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-7463E9BA-CF26-4B25-8FCB-C8F606187580.html">28.9 Register Definitions: Universal Timer</a></li><li>28.9.7 TUxyPR (16-bit)</li></ol>
+  <div class="sib"><span>← <a href="GUID-1C842ECB-8121-47AA-B989-2538383C51DD.html" rel="prev">TU16yCR</a></span><span><a href="GUID-CC2BF5B6-6455-4D42-AE6F-ABD8553D1876.html" rel="next">TUxyCLK</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-513D983A-C829-4339-B223-A92A5F968225__ID-000001AC" style="">28.9.7  TUxyPR (16-bit)</h1><section class="- topic/section reference/section sidsc-register/registerDescription " id="GUID-3FB448B3-A357-4D8F-8AD4-564E808C0AEB">Timer Period Register for 16-bit version of
+         UTMR module.<div class="- topic/note note notype note_notype endnote" id="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-DE108235-C68E-4948-84B7-42963D0C6BB6" data-ofbid="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-DE108235-C68E-4948-84B7-42963D0C6BB6"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-513D983A-C829-4339-B223-A92A5F968225__OL_ELT_T5W_NHB" data-ofbid="GUID-513D983A-C829-4339-B223-A92A5F968225__OL_ELT_T5W_NHB">
+               <li class="- topic/li li" id="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-E102F511-02F0-4C0A-9699-3EFC3DD56FDB" data-ofbid="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-E102F511-02F0-4C0A-9699-3EFC3DD56FDB">This register is double-buffered;
+                  effective PR value is loaded as defined by <a class="- topic/xref xref" href="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD.html">Timer Period Register</a>.</li>
+               <li class="- topic/li li" id="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-0F85377B-7F93-4F28-90C6-3EFA290C1FAB" data-ofbid="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-0F85377B-7F93-4F28-90C6-3EFA290C1FAB">Data written to higher bytes is
+                  buffered; data written to LSB is also buffered and arms the effective PR value to
+                  be loaded at the next Reset or CLR event.</li>
+               <li class="- topic/li li" id="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-458A3AF7-1E8E-4CFF-8583-CA0945A665C7" data-ofbid="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-458A3AF7-1E8E-4CFF-8583-CA0945A665C7">Reading this register returns the
+                  data most-recently written, not necessarily the current PR setting.</li>
+               <li class="- topic/li li" id="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-48B76F60-1241-4233-A621-8525AC91DCDC" data-ofbid="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-48B76F60-1241-4233-A621-8525AC91DCDC">The individual bytes in this
+                  multibyte register can be accessed with the following register names:<ul class="- topic/ul ul" id="GUID-513D983A-C829-4339-B223-A92A5F968225__UL_Z3G_V5W_NHB" data-ofbid="GUID-513D983A-C829-4339-B223-A92A5F968225__UL_Z3G_V5W_NHB">
+                     <li class="- topic/li li" id="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-6F783CF6-B6BF-4398-9233-CF676CF4AC97" data-ofbid="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-6F783CF6-B6BF-4398-9233-CF676CF4AC97">TUxyPRH: Accesses the high
+                        byte TUxyPR[15:8]</li>
+                     <li class="- topic/li li" id="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-2BE18504-6BFB-4064-83D4-917251F7BE20" data-ofbid="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-2BE18504-6BFB-4064-83D4-917251F7BE20">TUxyPRL: Accesses the low
+                        byte TUxyPR[7:0]</li>
+                  </ul></li>
+            </ol>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>TU16yPR</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x38D,0x399</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-7DE51F67-AF0E-4D93-9339-4884C261D58A" data-ofbid="GUID-513D983A-C829-4339-B223-A92A5F968225__GUID-7DE51F67-AF0E-4D93-9339-4884C261D58A"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-513D983A-C829-4339-B223-A92A5F968225"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">15</td><td class="- topic/entry entry colsep-0 rowsep-0">14</td><td class="- topic/entry entry colsep-0 rowsep-0">13</td><td class="- topic/entry entry colsep-0 rowsep-0">12</td><td class="- topic/entry entry colsep-0 rowsep-0">11</td><td class="- topic/entry entry colsep-0 rowsep-0">10</td><td class="- topic/entry entry colsep-0 rowsep-0">9</td><td class="- topic/entry entry colsep-0 rowsep-0">8</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="8">PR[15:8]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="8">PR[7:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section class="- topic/section reference/section sidsc-register/registerDescription " id="GUID-3FB448B3-A357-4D8F-8AD4-564E808C0AEB"></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-000001B0__ID-42107-00001C2F" id="ID-000001B0">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-000001B0__ID-42107-00001C2F" style=""> Bits 15:0 – PR[15:0] <span>Period value</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-000001B0__GUID-B36A7F0D-3CCA-4F2E-A3E0-0491ACF861E1" data-ofbid="ID-000001B0__GUID-B36A7F0D-3CCA-4F2E-A3E0-0491ACF861E1">The period of the
+            timer.</section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  1111111111111111</td></tr><tr><td>All Other Resets  =  uuuuuuuuuuuuuuuu</td></tr></tbody></table></td></tr></tbody></table>
+      </div>
+   </article>
+            
+               This register is double-buffered;
+                  effective PR value is loaded as defined by Timer Period Register.
+               Data written to higher bytes is
+                  buffered; data written to LSB is also buffered and arms the effective PR value to
+                  be loaded at the next Reset or CLR event.
+               Reading this register returns the
+                  data most-recently written, not necessarily the current PR setting.
+               The individual bytes in this
+                  multibyte register can be accessed with the following register names:
+                     TUxyPRH: Accesses the high
+                        byte TUxyPR[15:8]
+                     TUxyPRL: Accesses the low
+                        byte TUxyPR[7:0]
+                  
+            
+         
+</body>
+</html>

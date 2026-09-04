@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.10 External Interrupt Pins — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22.html"/>
+<link rel="next" href="GUID-A9B7278E-252A-4D54-944F-66DF8C09F2C9.html"/>
+<link rel="up" href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li>11.10 External Interrupt Pins</li></ol>
+  <div class="sib"><span>← <a href="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22.html" rel="prev">Interrupt Setup Procedure</a></span><span><a href="GUID-A9B7278E-252A-4D54-944F-66DF8C09F2C9.html" rel="next">Wake-Up from Sleep</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-E98B1C2D-60D5-468A-9746-B11F5A70B05D__GUID-51C6FF56-A19F-4DCE-8554-196604E4DA72" style="">11.10 External Interrupt Pins</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">Devices may have several external interrupt sources that can be assigned to pins on
+            different ports based on PPS settings. Refer to the <strong class="+ topic/ph hi-d/b ph b">“PPS - Peripheral Pin Select
+                Module”</strong> chapter for possible routing options for these external interrupts. The
+            external interrupt sources are edge-triggered. If the corresponding INTxEDG bit in
+            INTCON0 is set, the interrupt is triggered by a rising edge. If the bit is clear, the
+            trigger is on the falling edge. </p>
+        <p class="- topic/p p">When a valid edge appears on the INTx pin, the corresponding flag bit (INTxF in the PIRx
+            registers) is set. This interrupt can be disabled by clearing the corresponding enable
+            bit, INTxE. The flag bit INTxF must be cleared by software in the Interrupt Service
+            Routine before re-enabling the interrupt.</p>
+        <p class="- topic/p p">All external interrupts can wake up the processor from Idle or Sleep modes if the INTxE
+            bit was set prior to going into those modes. If GIE/GIEH bit is set, the processor will
+            branch to the interrupt vector following wake-up. Interrupt priority is determined by
+            the value contained in the respective INTxIP interrupt priority bits of the IPRx
+            registers.</p>
+    </div>
+
+</body>
+</html>

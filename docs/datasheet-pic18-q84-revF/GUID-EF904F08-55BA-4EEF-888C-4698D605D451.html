@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.5 CRC Interrupt — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0FEB002C-D681-41BD-84AE-7B028F94EDED.html"/>
+<link rel="next" href="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789.html"/>
+<link rel="up" href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li>13.5 CRC Interrupt</li></ol>
+  <div class="sib"><span>← <a href="GUID-0FEB002C-D681-41BD-84AE-7B028F94EDED.html" rel="prev">CRC Check Value</a></span><span><a href="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789.html" rel="next">Configuring the CRC Module</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-EF904F08-55BA-4EEF-888C-4698D605D451__GUID-ECEDBD09-AA04-4BCD-BEB7-28DCF9F2C407" style="">13.5 CRC Interrupt</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The CRC module will generate an interrupt when the <a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html#ID-00000013" title="CRC Busy"><span><span>BUSY</span></span></a> bit transitions from
+        ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’ to ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’. The CRC Interrupt Flag (CRCIF) bit of the
+      corresponding PIR register will be set every time the BUSY bit transitions, whether or not the
+      CRC Interrupt Enable (CRCIE) has been set. The CRCIF bit must be cleared by software by the
+      user. If the user has the CRCIE bit set, then the CPU will jump to the Interrupt Service
+      Routine (ISR) every time that the CRCIF bit is set. </p>
+</div>
+
+</body>
+</html>

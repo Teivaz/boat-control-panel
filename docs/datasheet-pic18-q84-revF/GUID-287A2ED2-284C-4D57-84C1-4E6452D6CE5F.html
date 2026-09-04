@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>40.5 Applications — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0.html"/>
+<link rel="next" href="GUID-8A8BEE0D-A866-4FAE-A768-6FA81969AABE.html"/>
+<link rel="up" href="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95.html">40 HLVD - High/Low-Voltage Detect</a></li><li>40.5 Applications</li></ol>
+  <div class="sib"><span>← <a href="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0.html" rel="prev">HLVD Start-Up Time</a></span><span><a href="GUID-8A8BEE0D-A866-4FAE-A768-6FA81969AABE.html" rel="next">Operation During Sleep</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F__GUID-84AE8FE0-EB62-4FAE-B8D8-DE49DA617F8B" style="">40.5 Applications</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F__ID-42124-00000057" data-ofbid="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F__ID-42124-00000057">In many applications, it is desirable to detect a drop below or rise
+         above a particular voltage threshold. For example, the HLVD module can be periodically
+         enabled to detect Universal Serial Bus (USB) attach or detach. This assumes the device is
+         powered by a lower voltage source than the USB when detached. An attach indicates a
+         High-Voltage Detect from, for example, 3.3V to 5V (the voltage on USB) and vice versa for a
+         detach. This feature can save a design a few extra components and an attach signal (input
+         pin).</p>
+      <p class="- topic/p p" id="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F__ID-42124-00000058" data-ofbid="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F__ID-42124-00000058">For general battery applications, the figure below shows a possible
+         voltage curve. Over time, the device voltage decreases. When the device voltage reaches
+         voltage, V<sub class="+ topic/ph hi-d/sub ph sub">A</sub>, the HLVD logic generates an interrupt at time, T<sub class="+ topic/ph hi-d/sub ph sub">A</sub>. The
+         interrupt can cause the execution of an Interrupt Service Routine (ISR), which will allow
+         the application to perform “housekeeping tasks” and a controlled shutdown before the device
+         voltage exits the valid operating range at T<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F__ID-42124-000003BF">B</sub>. This will
+         give the application a time window, represented by the difference between T<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F__ID-42124-000003C0">A</sub> and T<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F__ID-42124-000003C1">B</sub>, to safely
+         exit.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F__ID-42124-0000005F" data-ofbid="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F__ID-42124-0000005F"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 40-4. <span id="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F__GUID-AC6D6F7A-DC5D-4E39-964B-B69C58BD7D5F" class="fig--title">Typical Low-Voltage Detect
+            Application</span></span></figcaption>
+         
+         <span class=""><img class="- topic/image image" id="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F__IMAGE_FMP_W5J_11B" src="GUID-E8A3D713-61CE-4388-ADB6-149D56626733-high.svg"/></span>
+      </figure>
+   </div>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.11.1.6 Transmit Event FIFO Interrupts (TEFIF) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-648062D6-4CB0-4E6A-AFDA-1FCDDFF8196A.html"/>
+<link rel="next" href="GUID-AFCAA80F-EF1D-4E55-A921-9F0294FCB890.html"/>
+<link rel="up" href="GUID-E84F6F7C-8A43-425D-BD4C-3BF6D52B7772.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197.html">38.11 Interrupts</a></li><li><a href="GUID-E84F6F7C-8A43-425D-BD4C-3BF6D52B7772.html">38.11.1 FIFO Individual Interrupts</a></li><li>38.11.1.6 Transmit Event FIFO Interrupts (TEFIF)</li></ol>
+  <div class="sib"><span>← <a href="GUID-648062D6-4CB0-4E6A-AFDA-1FCDDFF8196A.html" rel="prev">Transmit FIFO Attempt Interrupt (TXATIF)</a></span><span><a href="GUID-AFCAA80F-EF1D-4E55-A921-9F0294FCB890.html" rel="next">FIFO Combined Interrupts</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-72AAFFEF-B61D-4170-8937-AAEB44CA03F0__GUID-44444E55-5DDB-4BEF-AC30-6A18D9A1A3E9" style="">38.11.1.6 Transmit Event FIFO Interrupts (TEFIF)</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p">The TEF interrupts occur when there is a change in the status of the TEF.
+            There are four interrupt sources:<ul class="- topic/ul ul" id="GUID-72AAFFEF-B61D-4170-8937-AAEB44CA03F0__UL_ZVK_V2J_Q3B" data-ofbid="GUID-72AAFFEF-B61D-4170-8937-AAEB44CA03F0__UL_ZVK_V2J_Q3B">
+                <li class="- topic/li li" id="GUID-72AAFFEF-B61D-4170-8937-AAEB44CA03F0__GUID-8E82D548-0DA9-49F7-A68E-07A896FF4FAC" data-ofbid="GUID-72AAFFEF-B61D-4170-8937-AAEB44CA03F0__GUID-8E82D548-0DA9-49F7-A68E-07A896FF4FAC">TEF Full Interrupt Flag (TEFFIF)</li>
+                <li class="- topic/li li" id="GUID-72AAFFEF-B61D-4170-8937-AAEB44CA03F0__GUID-20EC2A76-1949-4999-950D-BACCFE589689" data-ofbid="GUID-72AAFFEF-B61D-4170-8937-AAEB44CA03F0__GUID-20EC2A76-1949-4999-950D-BACCFE589689">TEF Half Full Interrupt Flag (TEFHIF)</li>
+                <li class="- topic/li li" id="GUID-72AAFFEF-B61D-4170-8937-AAEB44CA03F0__GUID-44151360-24B7-4B6B-A03F-8B8D55B824D5" data-ofbid="GUID-72AAFFEF-B61D-4170-8937-AAEB44CA03F0__GUID-44151360-24B7-4B6B-A03F-8B8D55B824D5">TEF Not Empty Interrupt Flag (TEFNEIF)</li>
+                <li class="- topic/li li" id="GUID-72AAFFEF-B61D-4170-8937-AAEB44CA03F0__GUID-22A2F0A9-FFBA-4AAF-B1FB-6C46B22BBE5F" data-ofbid="GUID-72AAFFEF-B61D-4170-8937-AAEB44CA03F0__GUID-22A2F0A9-FFBA-4AAF-B1FB-6C46B22BBE5F">TEF Overrun Interrupt Flag (TEFOVIF)</li>
+            </ul></div>
+        <p class="- topic/p p">The TEF interrupts work similarly to the receive FIFO interrupts. All four interrupts can
+            be enabled individually.</p>
+        <p class="- topic/p p">TEFFIF, TEFHIF and TEFNEIF cannot be cleared by the application; they will be cleared
+            when the status of the FIFO terminates.</p>
+        <p class="- topic/p p">The TEFOVIF must be cleared by the application.</p>
+        <p class="- topic/p p">The four interrupt sources are OR’d together and reflected in the TEFIF flag
+            (C1INT[4]).</p>
+    </div>
+
+</body>
+</html>

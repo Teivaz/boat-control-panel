@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.1.2 Channel Selection — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E18F1B67-1E6D-43B2-B7EB-3165ECABFDFF.html"/>
+<link rel="next" href="GUID-1855B188-E7A3-4F88-8D4B-FB5AC4260FED.html"/>
+<link rel="up" href="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52.html">43.1 ADC Configuration</a></li><li>43.1.2 Channel Selection</li></ol>
+  <div class="sib"><span>← <a href="GUID-E18F1B67-1E6D-43B2-B7EB-3165ECABFDFF.html" rel="prev">Port Configuration</a></span><span><a href="GUID-1855B188-E7A3-4F88-8D4B-FB5AC4260FED.html" rel="next">ADC Voltage Reference</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-491F8B72-3B5F-4763-9D6B-4425023BF48E__GUID-D7306F83-70B5-4911-BC68-47A6BFAB6437" style="">43.1.2 Channel Selection</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-491F8B72-3B5F-4763-9D6B-4425023BF48E__ID-42107-0000008A" data-ofbid="GUID-491F8B72-3B5F-4763-9D6B-4425023BF48E__ID-42107-0000008A">The <a class="- topic/xref xref" href="GUID-C34246F1-ACA0-46D5-9115-561D08C8C4DA.html" title="ADPCH">ADPCH</a> register determines which channel is connected to the Sample-and-Hold
+            circuit for conversion. When switching channels, it is recommended to have some
+            acquisition time (<a class="- topic/xref xref" href="GUID-9019A40D-315C-4781-9A92-C91B17B335B1.html" title="ADACQ">ADACQ</a> register) before starting the next conversion. Refer to the <a class="- topic/xref xref" href="GUID-88AEA9BE-34C2-44BE-A116-5DAB431A258C.html">ADC
+                Operation</a> section for more information.</p>
+        <div class="- topic/note note important note_important" id="GUID-491F8B72-3B5F-4763-9D6B-4425023BF48E__ID-42107-00000094" data-ofbid="GUID-491F8B72-3B5F-4763-9D6B-4425023BF48E__ID-42107-00000094"><span class="note__title">Important:</span> To reduce the chance of
+            measurement error, it is recommended to discharge the Sample-and-Hold capacitor when
+            switching between ADC channels by starting a conversion on a channel connected to V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub> and terminating the conversion after the
+            acquisition time has elapsed. If the ADC does not have a dedicated V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub> input channel, the V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub> selection through the DAC output channel can
+            be used. If the DAC is in use, a free input channel can be connected to V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub> and can be used in place of the DAC.</div>
+    </div>
+
+</body>
+</html>

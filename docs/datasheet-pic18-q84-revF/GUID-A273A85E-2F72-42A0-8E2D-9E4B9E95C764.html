@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.3.2 DMX Receiver — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585.html"/>
+<link rel="next" href="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37.html"/>
+<link rel="up" href="GUID-E4BC67C8-357E-4AFA-9C34-F15D26034B13.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-E4BC67C8-357E-4AFA-9C34-F15D26034B13.html">35.3 DMX Mode (Full-Featured UARTs Only)</a></li><li>35.3.2 DMX Receiver</li></ol>
+  <div class="sib"><span>← <a href="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585.html" rel="prev">DMX Controller</a></span><span><a href="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37.html" rel="next">LIN Modes (Full-Featured UARTs Only)</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-E689BB31-F898-4DFD-81DB-905FB62E0443" style="">35.3.2 DMX Receiver</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The DMX Receiver mode is configured with the following settings:</p>
+        <ul class="- topic/ul ul" id="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__UL_SDX_CHW_CBB" data-ofbid="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__UL_SDX_CHW_CBB">
+            <li class="- topic/li li" id="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-2A0A5DDA-9E73-4332-A6D6-1A889FABD061" data-ofbid="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-2A0A5DDA-9E73-4332-A6D6-1A889FABD061"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_C5C_R5L_BBB" title="UART Mode Select(1)"><span><span>MODE</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1010</span></li>
+            <li class="- topic/li li" id="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-4548BFD3-6F26-4329-8678-46D3DA15BE2F" data-ofbid="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-4548BFD3-6F26-4329-8678-46D3DA15BE2F"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_K3M_SSL_BBB" title="Transmit Enable Control(2)"><span><span>TXEN</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span></li>
+            <li class="- topic/li li" id="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-E73CFF1F-7CE3-4AB9-8521-A6E241C92E03" data-ofbid="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-E73CFF1F-7CE3-4AB9-8521-A6E241C92E03"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_BYJ_N5L_BBB" title="Receive Enable Control(2)"><span><span>RXEN</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+            <li class="- topic/li li" id="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-5A18545B-97B1-4B82-B8EB-91DC94958010" data-ofbid="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-5A18545B-97B1-4B82-B8EB-91DC94958010"><a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_XWQ_NRL_BBB" title="Receive Polarity Control">RXPOL</a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span></li>
+            <li class="- topic/li li" id="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-EE38D903-5E98-4365-9FBF-6504F92B070D" data-ofbid="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-EE38D903-5E98-4365-9FBF-6504F92B070D"><a class="- topic/xref xref" href="GUID-DAF4A4A9-A3FB-4388-ADEA-5A0AB193AFBA.html#GUID-DAF4A4A9-A3FB-4388-ADEA-5A0AB193AFBA" title="UxP2">UxP2</a> = number of first byte to receive</li>
+            <li class="- topic/li li" id="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-5722C26B-D518-4616-8A10-14276DB9B0D7" data-ofbid="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-5722C26B-D518-4616-8A10-14276DB9B0D7"><a class="- topic/xref xref" href="GUID-464C2505-8799-4461-A95B-5A3F19590F27.html#GUID-464C2505-8799-4461-A95B-5A3F19590F27" title="UxP3">UxP3</a> = number of last byte to receive</li>
+            <li class="- topic/li li" id="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-6897AFE7-6F7E-493A-A9B6-36B0043B2232" data-ofbid="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-6897AFE7-6F7E-493A-A9B6-36B0043B2232"><a class="- topic/xref xref" href="GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C.html#GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C" title="UxBRG">UxBRG</a> = value to achieve 250K baud rate</li>
+            <li class="- topic/li li" id="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-8A98228F-B63F-45D2-8F6B-50AB9BC4FBFE" data-ofbid="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-8A98228F-B63F-45D2-8F6B-50AB9BC4FBFE"><a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_K3M_SSL_BBB" title="Stop Bit Mode Control(1)"><span><span>STP</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">10</span> for two Stop
+                bits</li>
+            <li class="- topic/li li" id="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-41E73446-57BD-41AE-9ED3-68D5CE6CCBDC" data-ofbid="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-41E73446-57BD-41AE-9ED3-68D5CE6CCBDC"><a class="- topic/xref xref" href="GUID-AFEE23AF-E917-46D3-BF17-879043534F4E.html#BITFIELD_MQF_ZNS_YY" title="Serial Port Enable"><span><span>ON</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+            <li class="- topic/li li" id="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-05CFBCAD-F49F-49DC-88DC-E28E86C636B3" data-ofbid="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-05CFBCAD-F49F-49DC-88DC-E28E86C636B3">UxRXPPS = code for desired input
+                pin</li>
+            <li class="- topic/li li" id="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-A36173F0-A342-4098-8A0D-9EBD7547B634" data-ofbid="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764__GUID-A36173F0-A342-4098-8A0D-9EBD7547B634">Input pin ANSEL bit = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span></li>
+        </ul>
+        <p class="- topic/p p">When configured as a DMX Receiver, the UART listens for a Break character
+            that is at least 23 bit periods wide. If the Break is shorter than 23 bit times, the
+            Break is ignored and the DMX state machine remains in Idle mode. Upon receiving the
+            Break, the DMX counters will be reset to align with the incoming data stream.
+            Immediately after the Break, the UART will see the “Mark after Break” (MAB). This space
+            is ignored by the UART. The Start Code follows the MAB and will always be stored in the
+            receive FIFO.</p>
+        <p class="- topic/p p">After the Start Code, the first through the 512th byte will be received, but not all of
+            them are stored in the receive FIFO. The UART ignores all received bytes until the bytes
+            of interest are received. This is done using the UxP2 and UxP3 registers. The UxP2
+            register holds the value of the byte number to start the receive process. The byte
+            counter starts at ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’ for the first byte after the Start Code. For
+            example, to receive four bytes starting at the 10th byte after the Start Code, write
+            009h (9 decimal) to UxP2H:L and 00Ch (12 decimal) to UxP3H:L. The receive FIFO depth is
+            limited, therefore the bytes must be retrieved by reading UxRXB as they come in to avoid
+            a receive FIFO Overrun condition.</p>
+        <p class="- topic/p p">Typically, two Stop bits are inserted between bytes. If either Stop bit is detected as a
+                ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’, the framing error for that byte will be set.</p>
+        <p class="- topic/p p">Since the DMX sequence always starts with a Break, the software can verify that it is in
+            sync with the sequence by monitoring the RXBKIF flag to ensure that the next byte
+            received after the RXBKIF flag is processed as the Start Code and subsequent bytes are
+            processed as the expected data.</p>
+    </div>
+
+</body>
+</html>

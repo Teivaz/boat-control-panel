@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>48.2 Low-Voltage Programming Entry Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3379755C-39BE-4C53-B002-0EDF89FD7DA9.html"/>
+<link rel="next" href="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3.html"/>
+<link rel="up" href="GUID-731B2320-D4A5-422C-B689-2C4EC7D428E5.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-731B2320-D4A5-422C-B689-2C4EC7D428E5.html">48 ICSP™ - In-Circuit Serial Programming™</a></li><li>48.2 Low-Voltage Programming Entry Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-3379755C-39BE-4C53-B002-0EDF89FD7DA9.html" rel="prev">High-Voltage Programming Entry Mode</a></span><span><a href="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3.html" rel="next">Common Programming Interfaces</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__GUID-D21CF53F-FCAC-43E6-AA36-4E2F24C9E4F0" style="">48.2 Low-Voltage Programming Entry Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000022" data-ofbid="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000022">The Low-Voltage Programming Entry mode allows the PIC<sup class="+ topic/ph hi-d/sup ph sup" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000023">®</sup> Flash MCUs to be programmed using V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> only,
+         without high voltage. When the LVP Configuration bit is set to ‘<code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000025">1</code>’, the low-voltage ICSP programming entry is enabled.
+         To disable the Low-Voltage ICSP mode, the LVP bit must be programmed to ‘<code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000026">0</code>’.</p>
+      <p class="- topic/p p" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000027" data-ofbid="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000027">Entry into the Low-Voltage Programming Entry mode requires the following steps:</p>
+      <ol class="- topic/ol ol" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__GUID-1F1E5766-D394-41BC-A8A6-472E0B180445" data-ofbid="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__GUID-1F1E5766-D394-41BC-A8A6-472E0B180445">
+         <li class="- topic/li li" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000028" data-ofbid="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000028"><span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-0000002A">MCLR</span> is brought
+            to V<sub class="+ topic/ph hi-d/sub ph sub">IL</sub>.</li>
+         <li class="- topic/li li" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-0000002C" data-ofbid="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-0000002C">A 32-bit key sequence is presented on ICSPDAT, while clocking ICSPCLK.</li>
+      </ol>
+      <p class="- topic/p p" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-0000002E" data-ofbid="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-0000002E">Once the key sequence is complete, <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-0000002F">MCLR</span> must be held at V<sub class="+ topic/ph hi-d/sub ph sub">IL</sub> for as long as
+         Program/Verify mode is to be maintained.</p>
+      <p class="- topic/p p" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000031" data-ofbid="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000031">If low-voltage programming is enabled (LVP = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000032">1</code>), the <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000033">MCLR</span> Reset function is automatically enabled and cannot be disabled. See
+         the <em class="+ topic/ph hi-d/i ph i"><span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span></em> section for more information.</p>
+      <p class="- topic/p p" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000037" data-ofbid="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000037">The LVP bit can only be reprogrammed to ‘<code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A__ID-42125-00000038">0</code>’ by using the High-Voltage Programming mode.</p>
+   </div>
+
+</body>
+</html>

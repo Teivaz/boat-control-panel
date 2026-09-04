@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.13.5 10-Bit Client Transmission — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-90C0EC15-958C-406C-8BED-C83ED99B8DB4.html"/>
+<link rel="next" href="GUID-86EEF140-AF84-477C-8638-83EDC3F68627.html"/>
+<link rel="up" href="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li><a href="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9.html">37.3.13 DMA Integration</a></li><li>37.3.13.5 10-Bit Client Transmission</li></ol>
+  <div class="sib"><span>← <a href="GUID-90C0EC15-958C-406C-8BED-C83ED99B8DB4.html" rel="prev">7-Bit Client Transmission</a></span><span><a href="GUID-86EEF140-AF84-477C-8638-83EDC3F68627.html" rel="next">7/10-Bit Client Reception</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-6664201D-5C25-44C8-B811-CA06B16AF8B5__GUID-957F2AC0-A912-4E47-A86F-5D3039F969D2" style="">37.3.13.5 10-Bit Client Transmission</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">In 10-bit Client Transmission mode, the state of <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> is ignored. If there is no data in <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> after
+            the client has received the address high byte with the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit
+            set, hardware sets I2CxTXIF, triggering the DMA to load I2CxTXB. The DMA will continue
+            to load data into I2CxTXB until <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> reaches a zero value. Once I2CxCNT reaches zero and the
+            data are transmitted from I2CxTXB, I2CxTXIF will not be set, and the DMA will stop
+            loading data.</p>
+    </div>
+
+</body>
+</html>

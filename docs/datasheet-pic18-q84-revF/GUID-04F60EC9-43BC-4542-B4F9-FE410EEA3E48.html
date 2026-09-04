@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>22.2 CLC Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-CAF8855C-7FAE-4F73-84F0-78E3B3A2397F.html"/>
+<link rel="next" href="GUID-BDB528D3-6BAD-44EE-8E31-3EDB9EF2427B.html"/>
+<link rel="up" href="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812.html">22 CLC - Configurable Logic Cell</a></li><li>22.2 CLC Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-CAF8855C-7FAE-4F73-84F0-78E3B3A2397F.html" rel="prev">Output Polarity</a></span><span><a href="GUID-BDB528D3-6BAD-44EE-8E31-3EDB9EF2427B.html" rel="next">Effects of a Reset</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-04F60EC9-43BC-4542-B4F9-FE410EEA3E48__GUID-9F127FC2-5A49-42D1-8295-6F46B5363700" style="">22.2 CLC Interrupts</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">An interrupt will be generated upon a change in the output value of the CLCx when
+            the appropriate interrupt enables are set. A rising edge detector and a falling edge
+            detector are present in each CLC for this purpose.</p>
+        <p class="- topic/p p">The CLCxIF bit of the associated PIR register will be set
+            when either edge detector is triggered and its associated enable bit is set. The <a class="- topic/xref xref" href="GUID-6E6A675F-E2D8-4427-B904-FF1F59785627.html#BITFIELD_LVQ_M43_F1B" title="Configurable Logic Cell Positive Edge Going Interrupt Enable"><span><span>INTP</span></span></a> bit enables rising edge interrupts and the <a class="- topic/xref xref" href="GUID-6E6A675F-E2D8-4427-B904-FF1F59785627.html#BITFIELD_LSJ_543_F1B" title="Configurable Logic Cell Negative Edge Going Interrupt Enable"><span><span>INTN</span></span></a> bit enables falling edge interrupts.</p>
+        <div class="- topic/p p">To fully enable the interrupt, set the following bits:
+                <ul class="- topic/ul ul" id="GUID-04F60EC9-43BC-4542-B4F9-FE410EEA3E48__UL_IDM_JGQ_MGB" data-ofbid="GUID-04F60EC9-43BC-4542-B4F9-FE410EEA3E48__UL_IDM_JGQ_MGB">
+                <li class="- topic/li li" id="GUID-04F60EC9-43BC-4542-B4F9-FE410EEA3E48__GUID-6F5321B9-E510-4CED-B88D-1FB7EC933380" data-ofbid="GUID-04F60EC9-43BC-4542-B4F9-FE410EEA3E48__GUID-6F5321B9-E510-4CED-B88D-1FB7EC933380">The CLCxIE
+                    bit of the respective PIE register</li>
+                <li class="- topic/li li" id="GUID-04F60EC9-43BC-4542-B4F9-FE410EEA3E48__GUID-53AD04D7-BB17-4C16-A931-231608E29F06" data-ofbid="GUID-04F60EC9-43BC-4542-B4F9-FE410EEA3E48__GUID-53AD04D7-BB17-4C16-A931-231608E29F06">The <a class="- topic/xref xref" href="GUID-6E6A675F-E2D8-4427-B904-FF1F59785627.html#BITFIELD_LVQ_M43_F1B" title="Configurable Logic Cell Positive Edge Going Interrupt Enable"><span><span>INTP</span></span></a> bit (for a rising edge detection)</li>
+                <li class="- topic/li li" id="GUID-04F60EC9-43BC-4542-B4F9-FE410EEA3E48__GUID-B61E4E4B-A2A7-46D2-8E34-952FB389A634" data-ofbid="GUID-04F60EC9-43BC-4542-B4F9-FE410EEA3E48__GUID-B61E4E4B-A2A7-46D2-8E34-952FB389A634">The <a class="- topic/xref xref" href="GUID-6E6A675F-E2D8-4427-B904-FF1F59785627.html#BITFIELD_LSJ_543_F1B" title="Configurable Logic Cell Negative Edge Going Interrupt Enable"><span><span>INTN</span></span></a> bit (for a falling edge detection)</li>
+            </ul></div>
+        
+    
+    
+        <p class="- topic/p p">The CLCxIF bit of the respective PIR register must be
+            cleared in software as part of the interrupt service. If another edge is detected while
+            this flag is being cleared, the flag will still be set at the end of the sequence.</p>
+</div>
+
+</body>
+</html>

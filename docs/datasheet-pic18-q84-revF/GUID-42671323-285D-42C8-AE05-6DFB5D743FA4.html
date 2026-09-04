@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26.8.6 Edge Triggered One Shot Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3AFB730D-BB78-40B0-909E-CCC8367D5F1A.html"/>
+<link rel="next" href="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB.html"/>
+<link rel="up" href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html">26 TMR2 - Timer2 Module</a></li><li><a href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html">26.8 Operation Examples</a></li><li>26.8.6 Edge Triggered One Shot Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-3AFB730D-BB78-40B0-909E-CCC8367D5F1A.html" rel="prev">Software Start One Shot Mode</a></span><span><a href="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB.html" rel="next">Edge Triggered Hardware Limit One Shot Mode</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__GUID-8F2B27A0-4280-4D08-9B10-066D0BCF103C" style="">26.8.6 Edge Triggered One Shot Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-000013F6" data-ofbid="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-000013F6">The Edge Triggered One Shot modes start the timer on an edge from
+         the external signal input after the ON bit is set and clear the ON bit when the timer
+         matches the TxPR period value. The following edges will start the timer:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-000013F7" data-ofbid="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-000013F7">Rising edge (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b01001</code>)</li>
+         <li class="- topic/li li" id="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-000013FA" data-ofbid="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-000013FA">Falling edge (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b01010</code>)</li>
+         <li class="- topic/li li" id="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-000013FD" data-ofbid="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-000013FD">Rising or Falling edge (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b01011</code>)</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-00001400" data-ofbid="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-00001400">If the timer is halted by clearing the ON bit, then another TMRx_ers
+         edge is required after the ON bit is set to resume counting. <a class="- topic/xref xref" href="#GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-00001403"><span>Figure 26-8</span></a> illustrates operation in the rising edge One Shot
+         mode.</p>
+      <p class="- topic/p p" id="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-00001402" data-ofbid="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-00001402">When Edge Triggered One Shot mode is used in conjunction with the
+         CCP, then the edge-trigger will activate the PWM drive and the PWM drive will deactivate
+         when the timer matches the CCPRx pulse-width value and stay deactivated when the timer
+         halts at the TxPR period count match.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-00001403" data-ofbid="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__ID-42141-00001403"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 26-8. <span id="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4__GUID-0DCD34C3-E3A4-4274-A646-F662B4283339" class="fig--title">Edge Triggered One Shot Mode Timing
+            Diagram (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b01001</code>)</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-0C0D6B15-36A8-4540-9085-6339362A861E-high.pdf#toolbar=1" width="450" height="295.53299492385787"></iframe></span>
+      </figure>
+      
+   </div>
+
+</body>
+</html>

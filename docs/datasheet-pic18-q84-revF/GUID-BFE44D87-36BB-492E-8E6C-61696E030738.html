@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>29.2.3 Software Interrupt Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DF94A9DA-C5AA-4211-A20E-FBDA0ABAD572.html"/>
+<link rel="next" href="GUID-974B2E44-00AB-4E06-B007-19461C81B9F1.html"/>
+<link rel="up" href="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html">29 CCP - Capture/Compare/PWM Module</a></li><li><a href="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063.html">29.2 Capture Mode</a></li><li>29.2.3 Software Interrupt Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-DF94A9DA-C5AA-4211-A20E-FBDA0ABAD572.html" rel="prev">Timer1 Mode for Capture</a></span><span><a href="GUID-974B2E44-00AB-4E06-B007-19461C81B9F1.html" rel="next">CCP Prescaler</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-BFE44D87-36BB-492E-8E6C-61696E030738__GUID-2FF451CB-26EE-4016-B998-6BEEB12F7D02" style="">29.2.3 Software Interrupt Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-BFE44D87-36BB-492E-8E6C-61696E030738__ID-42109-0000061E" data-ofbid="GUID-BFE44D87-36BB-492E-8E6C-61696E030738__ID-42109-0000061E">When the Capture mode is changed, a false capture interrupt may be
+         generated. The user will keep the CCPxIE Interrupt Enable bit of the PIEx register clear to
+         avoid false interrupts. Additionally, the user will clear the CCPxIF Interrupt Flag bit of
+         the PIRx register following any change in Operating mode.</p>
+      <div class="- topic/note note important note_important" id="GUID-BFE44D87-36BB-492E-8E6C-61696E030738__ID-42109-00000629" data-ofbid="GUID-BFE44D87-36BB-492E-8E6C-61696E030738__ID-42109-00000629"><span class="note__title">Important:</span> Clocking Timer1 from the system clock
+            (F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>) must not be used in Capture mode. For Capture mode to recognize the
+         trigger event on the CCPx pin, Timer1 must be clocked from the instruction clock
+            (F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4) or from an external clock source.</div>
+   </div>
+
+</body>
+</html>

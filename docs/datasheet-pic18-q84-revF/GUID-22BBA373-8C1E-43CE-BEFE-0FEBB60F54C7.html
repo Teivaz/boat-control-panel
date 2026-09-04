@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>7.5 STATUS Register — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-73955031-F3F4-4CB0-AE41-0E9BAF402DAC.html"/>
+<link rel="next" href="GUID-1B1BFBF8-62C9-4CEC-9907-8B22E8ECAF37.html"/>
+<link rel="up" href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html">7 PIC18 CPU</a></li><li>7.5 STATUS Register</li></ol>
+  <div class="sib"><span>← <a href="GUID-73955031-F3F4-4CB0-AE41-0E9BAF402DAC.html" rel="prev">Multi-Word Instructions</a></span><span><a href="GUID-1B1BFBF8-62C9-4CEC-9907-8B22E8ECAF37.html" rel="next">Call Shadow Register</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-22BBA373-8C1E-43CE-BEFE-0FEBB60F54C7__GUID-B03AEF0F-554A-4446-8645-8D67D8DB9E8C" style="">7.5 STATUS Register</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-22BBA373-8C1E-43CE-BEFE-0FEBB60F54C7__ID-42129-00006487" data-ofbid="GUID-22BBA373-8C1E-43CE-BEFE-0FEBB60F54C7__ID-42129-00006487">The <a class="- topic/xref xref" href="GUID-06A816BE-05BC-452E-AE33-7D4FD59DE5FD.html#GUID-06A816BE-05BC-452E-AE33-7D4FD59DE5FD" title="STATUS">STATUS</a> register contains the arithmetic status of the
+         ALU. As with any other SFR, it can be the operand for any instruction. If the STATUS
+         register is the destination for an instruction that affects the Z, DC, C, OV or N bits, the
+         results of the instruction are not written; instead, the STATUS register is updated
+         according to the instruction performed. Therefore, the result of an instruction with the
+         STATUS register as its destination may be different than intended. As an example,
+            <code class="+ topic/ph pr-d/codeph ph codeph">CLRF STATUS</code> will set the Z bit and leave the remaining Status bits
+         unchanged (‘<code class="+ topic/ph pr-d/codeph ph codeph">000u u1uu</code>’).</p>
+      <p class="- topic/p p" id="GUID-22BBA373-8C1E-43CE-BEFE-0FEBB60F54C7__ID-42129-0000648C" data-ofbid="GUID-22BBA373-8C1E-43CE-BEFE-0FEBB60F54C7__ID-42129-0000648C">It is recommended that only <code class="+ topic/ph pr-d/codeph ph codeph">BCF</code>,
+            <code class="+ topic/ph pr-d/codeph ph codeph">BSF</code>, <code class="+ topic/ph pr-d/codeph ph codeph">SWAPF</code>, <code class="+ topic/ph pr-d/codeph ph codeph">MOVFF</code> and
+            <code class="+ topic/ph pr-d/codeph ph codeph">MOVWF</code> instructions are used to alter the STATUS register, because these
+         instructions do not affect the Z, C, DC, OV or N bits in the STATUS register. For other
+         instructions that do not affect Status bits, see the instruction set summaries.</p>
+      <div class="- topic/note note important note_important" id="GUID-22BBA373-8C1E-43CE-BEFE-0FEBB60F54C7__ID-42129-0000649C" data-ofbid="GUID-22BBA373-8C1E-43CE-BEFE-0FEBB60F54C7__ID-42129-0000649C"><span class="note__title">Important:</span> The C and DC bits operate as the <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-22BBA373-8C1E-43CE-BEFE-0FEBB60F54C7__ID-42129-0000649E">Borrow</span> and <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-22BBA373-8C1E-43CE-BEFE-0FEBB60F54C7__ID-42129-0000649F">Digit
+            Borrow</span> bits, respectively, in subtraction.</div>
+   </div>
+
+</body>
+</html>

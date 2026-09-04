@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.2.1.5 TSR Status — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-54782593-E0B8-4859-8053-BB94E0B97A17.html"/>
+<link rel="next" href="GUID-0628CCBD-CB7B-4711-905E-32E25F2FC450.html"/>
+<link rel="up" href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html">35.2 UART Asynchronous Modes</a></li><li><a href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html">35.2.1 UART Asynchronous Transmitter</a></li><li>35.2.1.5 TSR Status</li></ol>
+  <div class="sib"><span>← <a href="GUID-54782593-E0B8-4859-8053-BB94E0B97A17.html" rel="prev">Transmit Interrupt Flag</a></span><span><a href="GUID-0628CCBD-CB7B-4711-905E-32E25F2FC450.html" rel="next">Transmitter 7-Bit Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-6599B422-E143-4E2A-89C1-65103827840E__GUID-3E5FC142-164C-47A9-B877-1BCC57A5692C" style="">35.2.1.5 TSR Status</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The <a class="- topic/xref xref" href="GUID-0335D11B-CDF0-4C1B-B750-F220FDA16575.html#BITFIELD_MQF_ZNS_YY" title="Transmit Shift Register Empty Interrupt Flag"><span><span>TXMTIF</span></span></a>
+            bit indicates the status of the TSR. This is a read-only bit. The TXMTIF bit is set when
+            the TSR is empty and Idle. The TXMTIF bit is cleared when a character is transferred to
+            the TSR from the UxTXB. The TXMTIF bit remains clear until all bits, including the Stop
+            bits, have been shifted out of the TSR and a byte is not waiting in the UxTXB
+            register.</p>
+        <p class="- topic/p p">The TXMTIF will generate a summary UxEIF interrupt when the <a class="- topic/xref xref" href="GUID-BCAA4B97-CF3B-483A-B40D-EFFFD716B63A.html#BITFIELD_MQF_ZNS_YY" title="Transmit Shift Register Empty Interrupt Enable"><span><span>TXMTIE</span></span></a> bit is set.</p>
+        <div class="- topic/note note important note_important" id="GUID-6599B422-E143-4E2A-89C1-65103827840E__GUID-238CEF01-CAEB-4038-8274-272F982A5E2F" data-ofbid="GUID-6599B422-E143-4E2A-89C1-65103827840E__GUID-238CEF01-CAEB-4038-8274-272F982A5E2F"><span class="note__title">Important:</span> The TSR is not mapped in data memory, so it is not available to the
+            user.</div>
+</div>
+
+</body>
+</html>

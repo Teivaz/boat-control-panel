@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.5.1 Transmit Message Object — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html"/>
+<link rel="next" href="GUID-8578FFBD-AD4F-4BC1-95B8-DCDA19DDF3F8.html"/>
+<link rel="up" href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html">38.5 Message Transmission</a></li><li>38.5.1 Transmit Message Object</li></ol>
+  <div class="sib"><span>← <a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html" rel="prev">Message Transmission</a></span><span><a href="GUID-8578FFBD-AD4F-4BC1-95B8-DCDA19DDF3F8.html" rel="next">Loading Messages into Transmit FIFO</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-61A93D72-6656-42E9-B605-A10384AEB777" style="">38.5.1 Transmit Message Object</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p"><a class="- topic/xref xref" href="GUID-2CA3B0CB-194E-4DB3-8CE0-91E2D97BB56C.html#GUID-2CA3B0CB-194E-4DB3-8CE0-91E2D97BB56C__TABLE_FRZ_BTH_P3B"><span>Table 38-7</span></a> specifies the transmit message object used by the TXQ and the
+            transmit FIFOs. The transmit objects contain the message ID, control bits and
+                payload.<ul class="- topic/ul ul" id="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__UL_CLY_BVL_43B" data-ofbid="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__UL_CLY_BVL_43B">
+                <li class="- topic/li li" id="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-2713582C-707A-4FC2-8074-5610016E3D7D" data-ofbid="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-2713582C-707A-4FC2-8074-5610016E3D7D"><strong class="+ topic/ph hi-d/b ph b">SID</strong>: Standard Identifier
+                    or Base Identifier.</li>
+                <li class="- topic/li li" id="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-8B65A54F-AA07-436B-A253-088AFA7423A1" data-ofbid="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-8B65A54F-AA07-436B-A253-088AFA7423A1">
+                    <strong class="+ topic/ph hi-d/b ph b">EID</strong>: Extended Identifier.</li>
+                <li class="- topic/li li" id="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-C135FFDA-73BC-40BE-8449-31BCFFB04F74" data-ofbid="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-C135FFDA-73BC-40BE-8449-31BCFFB04F74"><strong class="+ topic/ph hi-d/b ph b">DLC</strong>: Data Length Code;
+                    specifies the number of data bytes to transmit (see <a class="- topic/xref xref" href="GUID-E3A641D3-CD93-4D89-B4FE-7D723EF2523B.html"><span><span>DLC Encoding</span></span></a>).</li>
+                <li class="- topic/li li" id="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-DFAC2376-FD96-42D1-B4F2-A4A275BF8580" data-ofbid="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-DFAC2376-FD96-42D1-B4F2-A4A275BF8580"><strong class="+ topic/ph hi-d/b ph b">IDE</strong>: Identifier Extension;
+                    clearing this bit will transmit a base frame, setting this bit will transmit an
+                    extended frame.</li>
+                <li class="- topic/li li" id="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-7B58821E-CCF4-4437-9445-08766F9D50F8" data-ofbid="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-7B58821E-CCF4-4437-9445-08766F9D50F8"><strong class="+ topic/ph hi-d/b ph b">RTR</strong>: Remote Transmit
+                    Request; this bit is only specified in CAN 2.0 frames. Setting this bit will
+                    request a transmission of a receiving node.</li>
+                <li class="- topic/li li" id="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-70ADFCB2-C491-4703-8DED-E105FB0A6979" data-ofbid="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-70ADFCB2-C491-4703-8DED-E105FB0A6979"><strong class="+ topic/ph hi-d/b ph b">FDF</strong>: FD Format; if this
+                    bit is set, a CAN FD frame will be transmitted; otherwise, a CAN 2.0 frame will
+                    be transmitted. If Normal CAN 2.0 mode is selected, this bit is ignored and only
+                    CAN 2.0 frames are transmitted.</li>
+                <li class="- topic/li li" id="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-04CFDD08-8736-4E91-9392-A2FE0185199F" data-ofbid="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-04CFDD08-8736-4E91-9392-A2FE0185199F"><strong class="+ topic/ph hi-d/b ph b">BRS</strong>: Bit Rate Switch; the
+                    data phase of a CAN FD frame will be transmitted using DBR if this bit is set.
+                    If the bit is clear, the whole frame will be transmitted using NBR.</li>
+                <li class="- topic/li li" id="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-8FB5614F-BC13-4A46-98A2-3B8AB66E5062" data-ofbid="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-8FB5614F-BC13-4A46-98A2-3B8AB66E5062"><strong class="+ topic/ph hi-d/b ph b">ESI</strong>: Error State
+                    Indicator; normally, the ESI bit reflects the error status of the transmitting
+                    node. A recessive ESI bit in a CAN FD frame indicates that the transmitting node
+                    is error passive; a dominant bit shows that the transmitting node is error
+                    active. If ESIGM (C1CON[17]) = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, this bit in the object is
+                    ignored. If ESIGM = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the ESI bit in the transmitted message
+                    will be transmitted recessive if the CAN FD Protocol Module is error passive, or
+                    if the ESI bit in the message object is set. A gateway application would use it
+                    to signal that the ESI bit of the transmitting node is set.</li>
+                <li class="- topic/li li" id="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-2111F9B6-B539-4AF7-8C47-A8A752F1B726" data-ofbid="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-2111F9B6-B539-4AF7-8C47-A8A752F1B726"><strong class="+ topic/ph hi-d/b ph b">SEQ</strong>: Sequence Number; SEQ
+                    is not transmitted on the CAN bus. It is used to keep track of the transmitted
+                    messages. SEQ is stored in the TEF message object.</li>
+                <li class="- topic/li li" id="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-6BBA4BB1-C4A3-4502-8CA1-29A6604362CE" data-ofbid="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8__GUID-6BBA4BB1-C4A3-4502-8CA1-29A6604362CE"><strong class="+ topic/ph hi-d/b ph b">Transmit Buffer Data</strong>:
+                    Contains the payload of the message. Only the number of data bytes specified by
+                    the DLC are transmitted. Byte 0 is transmitted first, followed by 1, 2 and so
+                    on.</li>
+            </ul></div>
+    </div>
+
+</body>
+</html>

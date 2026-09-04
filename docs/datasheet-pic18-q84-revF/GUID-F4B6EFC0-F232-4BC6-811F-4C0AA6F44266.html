@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>29.1.1 CCP Modules and Timer Resources — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-67CCFC50-2FE7-420F-A27D-98C128458F6D.html"/>
+<link rel="next" href="GUID-8DB62217-10F4-4743-B0B6-90704FC9CBD6.html"/>
+<link rel="up" href="GUID-67CCFC50-2FE7-420F-A27D-98C128458F6D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html">29 CCP - Capture/Compare/PWM Module</a></li><li><a href="GUID-67CCFC50-2FE7-420F-A27D-98C128458F6D.html">29.1 CCP Module Configuration</a></li><li>29.1.1 CCP Modules and Timer Resources</li></ol>
+  <div class="sib"><span>← <a href="GUID-67CCFC50-2FE7-420F-A27D-98C128458F6D.html" rel="prev">CCP Module Configuration</a></span><span><a href="GUID-8DB62217-10F4-4743-B0B6-90704FC9CBD6.html" rel="next">Open-Drain Output Option</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__GUID-2B6302DE-174D-4124-AEA2-4F492B684809" style="">29.1.1 CCP Modules and Timer Resources</h1><div class="- topic/body concept/conbody body conbody"><p class="- topic/p p" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-0000001F" data-ofbid="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-0000001F">The CCP modules utilize Timers 1 through <span class="- topic/ph ph">6</span> that vary with the selected mode. Various timers
+         are available to the CCP modules in Capture, Compare or PWM modes, as shown in the table
+         below.</p><div class="table-container"><table class="- topic/table table nozebra" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-00000025" data-ofbid="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-00000025" data-cols="2"><caption class="- topic/title title tablecap" data-caption-side="top" data-is-repeated="true"><span class="table--title-label"><span class="table--title-label">Table 29-1. </span></span><span class="table--title" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__GUID-4C8F7836-C23C-463D-B4F3-657B5DDBF0C6">CCP Mode - Timer
+                                Resources</span></caption><colgroup><col/><col/></colgroup><thead class="- topic/thead thead" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-00000029"><tr class="- topic/row" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-0000002A"><th class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-0000002B">CCP Mode</th><th class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-0000002D">Timer
+                                                  Resource</th></tr></thead><tbody class="- topic/tbody tbody" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-0000002F"><tr class="- topic/row" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-00000030"><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-00000031" headers="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-0000002B">Capture</td><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-00000033" headers="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-0000002D" rowspan="2">Timer1, Timer3 or Timer5</td></tr><tr class="- topic/row" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-00000038"><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-00000039" headers="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-0000002B">Compare</td></tr><tr class="- topic/row" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-0000003B"><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-0000003C" headers="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-0000002B">PWM</td><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-top" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-0000003E" headers="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-0000002D">Timer2, Timer4 or
+                                                  Timer6</td></tr></tbody></table></div><p class="- topic/p p" id="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-00000043" data-ofbid="GUID-F4B6EFC0-F232-4BC6-811F-4C0AA6F44266__ID-42109-00000043">The assignment of a particular timer to a module is selected as
+         shown in the <strong class="+ topic/ph hi-d/b ph b">“Capture, Compare, and PWM Timers Selection”</strong> chapter. All of the
+         modules may be active at once and may share the same timer resource if they are configured
+         to operate in the same mode (Capture/Compare or PWM) at the same time.</p></div>
+</body>
+</html>

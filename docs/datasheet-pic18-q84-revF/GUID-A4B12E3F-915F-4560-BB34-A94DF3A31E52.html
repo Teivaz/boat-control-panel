@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.1 ADC Configuration — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html"/>
+<link rel="next" href="GUID-E18F1B67-1E6D-43B2-B7EB-3165ECABFDFF.html"/>
+<link rel="up" href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li>43.1 ADC Configuration</li></ol>
+  <div class="sib"><span>← <a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html" rel="prev">ADC - Analog-to-Digital Converter with Computation and Context Module</a></span><span><a href="GUID-E18F1B67-1E6D-43B2-B7EB-3165ECABFDFF.html" rel="next">Port Configuration</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__GUID-B7311E4B-357E-48ED-BFE2-493DA3C88A48" style="">43.1 ADC Configuration</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000032" data-ofbid="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000032">When configuring the ADC the following
+            functions must be considered:</p>
+        <ul class="- topic/ul ul" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__UL_ONL_5GS_VGB" data-ofbid="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__UL_ONL_5GS_VGB">
+            <li class="- topic/li li" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000033" data-ofbid="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000033">Port Configuration</li>
+            <li class="- topic/li li" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000035" data-ofbid="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000035">Channel Selection</li>
+            <li class="- topic/li li" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000037" data-ofbid="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000037">ADC Voltage Reference Selection</li>
+            <li class="- topic/li li" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000039" data-ofbid="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000039">ADC Conversion Clock Source</li>
+            <li class="- topic/li li" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-0000003B" data-ofbid="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-0000003B">Interrupt Control</li>
+            <li class="- topic/li li" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-0000003D" data-ofbid="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-0000003D">Result Formatting</li>
+            <li class="- topic/li li" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-0000003F" data-ofbid="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-0000003F">Conversion Trigger Selection</li>
+            <li class="- topic/li li" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000041" data-ofbid="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000041">ADC Acquisition Time</li>
+            <li class="- topic/li li" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000043" data-ofbid="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000043">ADC Precharge Time</li>
+            <li class="- topic/li li" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000045" data-ofbid="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000045">Additional Sample-and-Hold Capacitor</li>
+            <li class="- topic/li li" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000047" data-ofbid="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000047">Single/Double Sample Conversion</li>
+            <li class="- topic/li li" id="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000049" data-ofbid="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52__ID-42107-00000049">Guard Ring Outputs</li>
+        </ul>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-E18F1B67-1E6D-43B2-B7EB-3165ECABFDFF.html">43.1.1 Port Configuration</a></li><li><a href="GUID-491F8B72-3B5F-4763-9D6B-4425023BF48E.html">43.1.2 Channel Selection</a></li><li><a href="GUID-1855B188-E7A3-4F88-8D4B-FB5AC4260FED.html">43.1.3 ADC Voltage Reference</a></li><li><a href="GUID-4609D2B7-0888-46E9-B7C3-48E31E2B8788.html">43.1.4 Conversion Clock</a></li><li><a href="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA.html">43.1.5 Interrupts</a></li><li><a href="GUID-271ECB8F-050A-4C81-86D4-94A6E902E3FC.html">43.1.6 Result Formatting</a></li></ul>
+</nav>
+</body>
+</html>

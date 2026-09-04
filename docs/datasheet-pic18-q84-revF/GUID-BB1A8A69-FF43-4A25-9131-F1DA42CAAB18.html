@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.2.2 COSC and CDIV Bits — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-EE6A06F4-A04B-4D85-BA51-9C9047654FE5.html"/>
+<link rel="next" href="GUID-62590B6D-4A64-4135-B351-CBBCFF83B793.html"/>
+<link rel="up" href="GUID-26C95464-A09C-4F40-954D-AACD69628A0E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-26C95464-A09C-4F40-954D-AACD69628A0E.html">12.2 Clock Switching</a></li><li>12.2.2 COSC and CDIV Bits</li></ol>
+  <div class="sib"><span>← <a href="GUID-EE6A06F4-A04B-4D85-BA51-9C9047654FE5.html" rel="prev">NOSC and NDIV Bits</a></span><span><a href="GUID-62590B6D-4A64-4135-B351-CBBCFF83B793.html" rel="next">CSWHOLD</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-BB1A8A69-FF43-4A25-9131-F1DA42CAAB18__GUID-52C1F5A6-25D4-4FA8-BB5F-D5EE3123737B" style="">12.2.2 COSC and CDIV Bits</h1>
+<div class="- topic/body body">
+<div class="- topic/p p">The Current Oscillator Source Select (<a class="- topic/xref xref" href="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7.html#GUID-97A74ABE-A6FE-4387-88C8-D2D02745E246" title="Current Oscillator Source Select (read-only)(1)">COSC</a>) bits and the
+                                    Current Divider Select (<a class="- topic/xref xref" href="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7.html#DMW_BTH_ZGB" title="Current Divider Select (read-only)">CDIV</a>) bits
+                                    indicate the current oscillator source and clock divider,
+                                    respectively. When a new oscillator or divider is requested via
+                                    the <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a>/<a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GHR_WSL_YGB" title="New Divider Selection Request">NDIV</a> bits, the
+                                    COSC and CDIV bits remain unchanged until the clock switch
+                                    actually occurs. When the switch actually occurs, hardware
+                                    copies the NOSC and NDIV values into COSC and CDIV, the
+                                    Oscillator Ready (<a class="- topic/xref xref" href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html#BITFIELD_WSY_YYH_ZGB" title="Oscillator Ready (read-only)">ORDY</a>) bit is set,
+                                    and the <a class="- topic/xref xref" href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html#BITFIELD_QYH_QZH_ZGB" title="New Oscillator is Ready (read-only)(1)">NOSCR</a> bit is
+                                    cleared by hardware, indicating that the clock switch is
+                                    complete.</div>
+</div>
+
+</body>
+</html>

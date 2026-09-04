@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>34.2 Carrier Synchronization — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-55D1B005-FE73-46D6-9E16-549BED69E0AB.html"/>
+<link rel="next" href="GUID-969FE2CF-9F59-48B1-9782-8F64EB67BFB7.html"/>
+<link rel="up" href="GUID-603ABC72-93B7-44DB-B870-8C221F15CD0A.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-603ABC72-93B7-44DB-B870-8C221F15CD0A.html">34 DSM - Data Signal Modulator Module</a></li><li>34.2 Carrier Synchronization</li></ol>
+  <div class="sib"><span>← <a href="GUID-55D1B005-FE73-46D6-9E16-549BED69E0AB.html" rel="prev">Carrier Signal Sources</a></span><span><a href="GUID-969FE2CF-9F59-48B1-9782-8F64EB67BFB7.html" rel="next">Carrier Source Polarity Select</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__GUID-BB1C41FF-0DA4-4C3E-960F-BA290635C036" style="">34.2 Carrier Synchronization</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__ID-42117-00000899" data-ofbid="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__ID-42117-00000899">During the time when the DSM switches between carrier high and
+         carrier low signal sources, the carrier data in the modulated output signal can become
+         truncated. To prevent this, the carrier signal can be synchronized to the modulator signal.
+         When synchronization is enabled, the carrier pulse that is being mixed at the time of the
+         transition is allowed to transition low before the DSM switches over to the next carrier
+         source.</p>
+      <p class="- topic/p p" id="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__ID-42117-0000089A" data-ofbid="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__ID-42117-0000089A">Synchronization is enabled separately for the carrier high and
+         carrier low signal sources. Synchronization for the carrier high signal is enabled by
+         setting the <a class="- topic/xref xref" href="GUID-8279B34D-A8A6-4277-9AF1-65191BB85193.html#ID-00000029" title="Modulator High Carrier Synchronization Enable">CHSYNC</a> bit. Synchronization for the carrier low signal
+         is enabled by setting the <a class="- topic/xref xref" href="GUID-8279B34D-A8A6-4277-9AF1-65191BB85193.html#ID-00000037" title="Modulator Low Carrier Synchronization Enable">CLSYNC</a> bit. The figures below show the timing diagrams of using various
+         synchronization methods.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__FIG_E5B_NS3_ZGB" data-ofbid="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__FIG_E5B_NS3_ZGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 34-2. <span id="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__GUID-C76B4BD8-9CFA-42DE-8090-396704715346" class="fig--title">On-Off Keying (OOK)
+            Synchronization</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-7A7C88B8-1F51-4EFE-8DBB-3C00482CA553-high.pdf#toolbar=1" width="474.75" height="259.5"></iframe></span>
+      </figure>
+      <figure class="- topic/fig fig fignone" id="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__FIG_VQL_4S3_ZGB" data-ofbid="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__FIG_VQL_4S3_ZGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 34-3. <span id="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__GUID-0B96F11C-F484-4B8A-85FB-297AF6E8A927" class="fig--title">No Synchronization (CHSYNC =
+               <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, CLSYNC = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>)</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-96BDB7D0-729D-4E06-8AFB-23697146B1DF-high.pdf#toolbar=1" width="464.25" height="207"></iframe></span>
+      </figure>
+      <figure class="- topic/fig fig fignone" id="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__FIG_S11_H53_ZGB" data-ofbid="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__FIG_S11_H53_ZGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 34-4. <span id="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__GUID-22BD5CA5-8356-4A84-ACDF-5DAC23B1B1B3" class="fig--title">Carrier High Synchronization (CHSYNC
+            = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, CLSYNC = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>)</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-FBBAD0DD-1002-4084-B794-A65A57ABE691-high.pdf#toolbar=1" width="450" height="141.90954773869345"></iframe></span>
+      </figure>
+      <figure class="- topic/fig fig fignone" id="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__FIG_AYK_QS3_ZGB" data-ofbid="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__FIG_AYK_QS3_ZGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 34-5. <span id="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__GUID-98611315-8205-4311-88FA-7F425CFE6E8E" class="fig--title">Carrier Low Synchronization (CHSYNC =
+               <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, CLSYNC = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>)</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-59EACBAA-2EF9-4125-B7CA-140EEAEF3E00-high.pdf#toolbar=1" width="450" height="146.0281195079086"></iframe></span>
+      </figure>
+      <figure class="- topic/fig fig fignone" id="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__FIG_VKG_RS3_ZGB" data-ofbid="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__FIG_VKG_RS3_ZGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 34-6. <span id="GUID-73A4961A-478A-4BD3-95F3-5B406143748C__GUID-92C47F81-D807-4518-9368-D4DB5F0BEC20" class="fig--title">Full Synchronization (CHSYNC =
+               <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, CLSYNC = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>)</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-970ED4B1-35A1-4CC9-A7F2-1833BB949096-high.pdf#toolbar=1" width="450" height="132.1105527638191"></iframe></span>
+      </figure>
+   </div>
+
+</body>
+</html>

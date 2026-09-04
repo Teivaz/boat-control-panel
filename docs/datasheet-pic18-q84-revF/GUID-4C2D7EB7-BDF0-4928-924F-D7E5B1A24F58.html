@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.1.3 Client Operation in 7-Bit Addressing Modes — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5C20C65D-EA1D-44BC-AA74-89E186EBD8D4.html"/>
+<link rel="next" href="GUID-5993543F-8135-4D75-800F-4506664ED525.html"/>
+<link rel="up" href="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC.html">37.4.1 I2C Client Mode Operation</a></li><li>37.4.1.3 Client Operation in 7-Bit Addressing Modes</li></ol>
+  <div class="sib"><span>← <a href="GUID-5C20C65D-EA1D-44BC-AA74-89E186EBD8D4.html" rel="prev">General Call Addressing Support</a></span><span><a href="GUID-5993543F-8135-4D75-800F-4506664ED525.html" rel="next">Client Transmission (7-Bit Addressing Mode)</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-4C2D7EB7-BDF0-4928-924F-D7E5B1A24F58__GUID-8DAA1AD6-9926-4CEC-8670-A30BDD8730C4" style="">37.4.1.3 Client Operation in 7-Bit Addressing
+        Modes</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The upper seven bits of an address byte are used to determine a client’s address, while
+            the LSb of the address byte is reserved as the Read/not Write
+                (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span>) bit. When R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> is set
+                (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the host device intends to read
+            data from the client. When R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> is clear
+                (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the host device intends to
+            write data to the client. When an address match occurs, the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span>
+            bit is copied to the Read Information (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_VMJ_FSP_LGB" title="Read Information(1)">R</a>) bit, and the 7-bit address is copied to <a class="- topic/xref xref" href="GUID-E7CC5B44-63E1-40F0-8F67-30D643607BC5.html">I2CxADB0</a>.</div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-5993543F-8135-4D75-800F-4506664ED525.html">37.4.1.3.1 Client Transmission (7-Bit Addressing Mode)</a></li><li><a href="GUID-0CE63B54-2CC4-49E3-A21A-393D95521A7D.html">37.4.1.3.2 Client Reception (7-Bit Addressing Mode)</a></li></ul>
+</nav>
+</body>
+</html>

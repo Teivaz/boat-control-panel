@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>19.14.1 PORTx — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D3680739-69E1-4BC6-8FED-0F0AE91735AB.html"/>
+<link rel="next" href="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26.html"/>
+<link rel="up" href="GUID-D3680739-69E1-4BC6-8FED-0F0AE91735AB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html">19 I/O Ports</a></li><li><a href="GUID-D3680739-69E1-4BC6-8FED-0F0AE91735AB.html">19.14 Register Definitions: Port Control</a></li><li>19.14.1 PORTx</li></ol>
+  <div class="sib"><span>← <a href="GUID-D3680739-69E1-4BC6-8FED-0F0AE91735AB.html" rel="prev">Register Definitions: Port Control</a></span><span><a href="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26.html" rel="next">LATx</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__ID-00000001" style="">19.14.1  PORTx</h1><section id="GUID-6E3C282D-B52E-4DDD-A1D7-E4A4A964D93B" class="- topic/section reference/section sidsc-register/registerDescription ">PORTx Register<div class="- topic/note note important note_important endnote" id="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__ID-42127-000000E9" data-ofbid="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__ID-42127-000000E9"><span class="note__title">Important:</span> 
+            <ul class="- topic/ul ul">
+               <li class="- topic/li li" id="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__GUID-1BBF55DE-5CDD-4ED7-B353-DFAB4D5F1990" data-ofbid="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__GUID-1BBF55DE-5CDD-4ED7-B353-DFAB4D5F1990">Writes to PORTx are actually
+                  written to the corresponding LATx register. Reads from PORTx register return
+                  actual I/O pin values.</li>
+               <li class="- topic/li li" id="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__GUID-4CD1CFF0-FFF5-42AB-A1E4-87ABA806560B" data-ofbid="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__GUID-4CD1CFF0-FFF5-42AB-A1E4-87ABA806560B">The PORT bit associated with the
+                     <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span> pin is read-only and will read
+                     ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’ when the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span> function is enabled
+                  (LVP = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> or (LVP = <code class="+ topic/ph pr-d/codeph ph codeph">0</code> and MCLRE =
+                     <code class="+ topic/ph pr-d/codeph ph codeph">1</code>))</li>
+               <li class="- topic/li li" id="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__GUID-0FFE3653-1959-49B8-B873-6F61D4314EBF" data-ofbid="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__GUID-0FFE3653-1959-49B8-B873-6F61D4314EBF">Refer to the <strong class="+ topic/ph hi-d/b ph b">“Pin Allocation
+                     Table”</strong> for details about <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span> pin and pin
+                  availability per port</li>
+               <li class="- topic/li li" id="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__GUID-6A7DC88C-FA37-4254-9CCC-F6EEB1BB189E" data-ofbid="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__GUID-6A7DC88C-FA37-4254-9CCC-F6EEB1BB189E">Unimplemented bits will read back
+                  as ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’</li>
+               <li class="- topic/li li" id="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__GUID-59A888C8-0FCF-44D4-9ECB-FC8385EF3116" data-ofbid="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__GUID-59A888C8-0FCF-44D4-9ECB-FC8385EF3116">Bits RB6 and RB7 read
+                     <code class="+ topic/ph pr-d/codeph ph codeph">‘1’</code> while in Debug mode</li>
+            </ul>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>PORTx</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__GUID-1E9C042F-FFC8-48DF-BF6C-42575ED77BF5" data-ofbid="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0__GUID-1E9C042F-FFC8-48DF-BF6C-42575ED77BF5"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">Rx7</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">Rx6</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">Rx5</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">Rx4</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">Rx3</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">Rx2</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">Rx1</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">Rx0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-6E3C282D-B52E-4DDD-A1D7-E4A4A964D93B" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000005__ID-42127-00001603" id="ID-00000005">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000005__ID-42127-00001603" style=""> Bits 0, 1, 2, 3, 4, 5, 6, 7 – Rxn <span>Port I/O Value</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription endnote" id="ID-00000005__GUID-952BC0E6-1B79-4099-877E-C5CE4D59142B" data-ofbid="ID-00000005__GUID-952BC0E6-1B79-4099-877E-C5CE4D59142B"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  xxxxxxxx</td></tr><tr><td>All Other Resets  =  uuuuuuuu</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="ID-00000005__BITFIELDVALUES_WC3_T3Q_PZ" data-ofbid="ID-00000005__BITFIELDVALUES_WC3_T3Q_PZ"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000005__ID-42127-00001605">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000005__GUID-A40D5D91-8989-4FDE-BE70-F74CF05FC49C">
+                  <p class="- topic/p p" id="ID-00000005__ID-42127-00001606" data-ofbid="ID-00000005__ID-42127-00001606">PORT pin is ≥ V<sub class="+ topic/ph hi-d/sub ph sub">IH</sub></p>
+               </td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000005__ID-42127-00001608">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000005__GUID-BD46E1DF-1D00-4870-A115-01B6B9F99DF6">
+                  <p class="- topic/p p" id="ID-00000005__ID-42127-00001609" data-ofbid="ID-00000005__ID-42127-00001609">PORT pin is ≤ V<sub class="+ topic/ph hi-d/sub ph sub">IL</sub></p>
+               </td>
+            </tr></tbody></table>
+      </div>
+   </article>
+            
+               Writes to PORTx are actually
+                  written to the corresponding LATx register. Reads from PORTx register return
+                  actual I/O pin values.
+               The PORT bit associated with the
+                     MCLR pin is read-only and will read
+                     ‘1’ when the MCLR function is enabled
+                  (LVP = 1 or (LVP = 0 and MCLRE =
+                     1))
+               Refer to the “Pin Allocation
+                     Table” for details about MCLR pin and pin
+                  availability per port
+               Unimplemented bits will read back
+                  as ‘0’
+               Bits RB6 and RB7 read
+                     ‘1’ while in Debug mode
+            
+         
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.3.6.2 Clock and Data Change Alignment — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2ABD6306-0047-4E69-A008-45E1CD0A4E82.html"/>
+<link rel="next" href="GUID-566437A9-A65C-40D1-A9E2-BDBEB0F20D7C.html"/>
+<link rel="up" href="GUID-FAB3070C-BF7D-4A6F-8883-4BF0A5307358.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-58292C67-26C3-49E8-9D78-1E217D2E4B0C.html">36.3 Host Mode</a></li><li><a href="GUID-FAB3070C-BF7D-4A6F-8883-4BF0A5307358.html">36.3.6 Host Mode SPI Clock Configuration</a></li><li>36.3.6.2 Clock and Data Change Alignment</li></ol>
+  <div class="sib"><span>← <a href="GUID-2ABD6306-0047-4E69-A008-45E1CD0A4E82.html" rel="prev">SPI Clock Selection</a></span><span><a href="GUID-566437A9-A65C-40D1-A9E2-BDBEB0F20D7C.html" rel="next">SCK Start-Up Delay</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__GUID-7F55FB1A-49C1-4A89-AA7F-C875E0CD1144" style="">36.3.6.2 Clock and Data Change Alignment</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The CKP, CKE and SMP bits control the relationship between the SCK clock output, SDO
+            output data changes, and SDI input data sampling. The bit functions are as follows:<ul class="- topic/ul ul" id="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__UL_W1V_V53_SFB" data-ofbid="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__UL_W1V_V53_SFB">
+                <li class="- topic/li li" id="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__GUID-F507C311-B992-4348-A730-D68B0BACB100" data-ofbid="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__GUID-F507C311-B992-4348-A730-D68B0BACB100">CKP controls SCK output
+                    polarity</li>
+                <li class="- topic/li li" id="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__GUID-93EF151D-9423-4C4E-9B08-9F92C310D4FC" data-ofbid="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__GUID-93EF151D-9423-4C4E-9B08-9F92C310D4FC">CKE controls SDO output change
+                    relative to the SCK clock</li>
+                <li class="- topic/li li" id="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__GUID-84ECDB33-76CD-4FD5-AB98-143AF96EC96B" data-ofbid="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__GUID-84ECDB33-76CD-4FD5-AB98-143AF96EC96B">SMP controls SDI input sampling
+                    relative to the clock edges</li>
+            </ul></div>
+        <p class="- topic/p p">The CKE bit, when set, inverts the low Idle state of the SCK output to a
+            high Idle state.</p>
+        <div class="- topic/p p">The following figures illustrate the eight possible combinations of the CKP, CKE and SMP
+            bit selections.<div class="- topic/note note important note_important" id="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__GUID-6D0B9B6F-5BF0-4B31-AAA2-026AC6728A8A" data-ofbid="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__GUID-6D0B9B6F-5BF0-4B31-AAA2-026AC6728A8A"><span class="note__title">Important:</span> All
+                timing diagrams assume the <a class="- topic/xref xref" href="GUID-CD70C100-5F91-4E6F-86D4-583C754F39BE.html#BITFIELD_TC3_3JF_RFB" title="LSb-First Data Exchange Select(1)"><span><span>LSBF</span></span></a> bit is cleared.</div></div>
+        <figure class="- topic/fig fig fignone" id="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__FIG_CW5_2V3_SFB" data-ofbid="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__FIG_CW5_2V3_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 36-7. <span id="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__GUID-530188F7-87E7-40DF-8C8E-2AC28374B762" class="fig--title">Clocking Detail - Host Mode, CKE =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, SMP = <code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-D86FEE07-2129-4E6A-AD24-FEA6F1EB146E-high.pdf#toolbar=1" width="450" height="973.0387451135633"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__FIG_D21_LV3_SFB" data-ofbid="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__FIG_D21_LV3_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 36-8. <span id="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__GUID-036FEA9A-DF62-4B51-87F9-94183E941D1A" class="fig--title">Clocking Detail - Host Mode, CKE =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, SMP = <code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-8E5FE641-6BBB-4936-BF13-ADD7CBBC8607-high.pdf#toolbar=1" width="450" height="973.6741973840666"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__FIG_JKC_LV3_SFB" data-ofbid="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__FIG_JKC_LV3_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 36-9. <span id="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__GUID-81046812-79CF-4EDF-AB14-E2A4827BD409" class="fig--title">Clocking Detail - Host Mode, CKE =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, SMP = <code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-73226799-6BFD-4C5F-A66A-6CB08DAABA68-high.pdf#toolbar=1" width="450" height="973.6741973840666"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__FIG_DND_LV3_SFB" data-ofbid="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__FIG_DND_LV3_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 36-10. <span id="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C__GUID-5CCC0162-24D3-4AD4-9F99-0115554A8942" class="fig--title">Clocking Detail - Host Mode, CKE =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, SMP = <code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></span></figcaption>
+            
+        </figure>
+        <span class=""><iframe src="GUID-9DF9F80A-E61C-4F4D-A260-178E2810568A-high.pdf#toolbar=1" width="450" height="973.6741973840666"></iframe></span>
+    </div>
+
+</body>
+</html>

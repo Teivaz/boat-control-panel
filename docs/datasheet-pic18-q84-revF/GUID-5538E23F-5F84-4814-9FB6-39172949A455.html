@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.6 Transmit Event FIFO (TEF) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-03D254D4-58DD-4C26-B1E7-D38F9B1B9C67.html"/>
+<link rel="next" href="GUID-AE1D2BFE-614E-473A-B7E1-55FFA1126E87.html"/>
+<link rel="up" href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li>38.6 Transmit Event FIFO (TEF)</li></ol>
+  <div class="sib"><span>← <a href="GUID-03D254D4-58DD-4C26-B1E7-D38F9B1B9C67.html" rel="prev">Resetting Transmit Queue</a></span><span><a href="GUID-AE1D2BFE-614E-473A-B7E1-55FFA1126E87.html" rel="next">Reading a TEF Object</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-5538E23F-5F84-4814-9FB6-39172949A455__GUID-2E61B10B-E99D-439C-8BC3-A431EB7E0E64" style="">38.6 Transmit Event FIFO (TEF)</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The TEF allows the application to keep track of the order and time in which
+            the messages are transmitted. The TEF works similarly to a receive FIFO. Instead of
+            storing received messages, it stores transmitted messages. Messages are only saved if
+            STEF (CxCON[19]) is set. The sequence number (SEQ) of the transmitted message is copied
+            into the TEF object. The payload data are not stored. Transmitted messages are
+            timestamped if TEFTSEN is set.</p>
+        <p class="- topic/p p">
+            <a class="- topic/xref xref" href="GUID-70D40675-3B21-4E8C-8934-FEA80F0A1FE8.html#GUID-70D40675-3B21-4E8C-8934-FEA80F0A1FE8__TABLE_UHC_NXH_P3B"><span>Table 38-8</span></a> specifies the TEF object. The first two words of the
+            TEF object are a copy of the transmit message object. Optionally, the TEF object
+            contains the timestamp when the message is transmitted.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-AE1D2BFE-614E-473A-B7E1-55FFA1126E87.html">38.6.1 Reading a TEF Object</a></li></ul>
+</nav>
+</body>
+</html>

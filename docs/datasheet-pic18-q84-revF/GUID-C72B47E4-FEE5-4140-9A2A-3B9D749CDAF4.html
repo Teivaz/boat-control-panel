@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.2 SPI Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F613FDFA-618D-4059-987D-D7124FEB8454.html"/>
+<link rel="next" href="GUID-7D7846F7-2FF3-48DC-A189-5DA968B26CC8.html"/>
+<link rel="up" href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li>36.2 SPI Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-F613FDFA-618D-4059-987D-D7124FEB8454.html" rel="prev">SPI Controls</a></span><span><a href="GUID-7D7846F7-2FF3-48DC-A189-5DA968B26CC8.html" rel="next">Enabling and Disabling the SPI Module</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-A84BDEC1-EC4A-43A0-96F3-6C515CFADD23" style="">36.2 SPI Operation</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">When initializing the SPI, several options need to be specified. This is done by
+            programming the appropriate control bits of the SPIxCON0, SPIxCON1 and SPIxCON2
+            registers. These control bits allow the following to be configured:<ul class="- topic/ul ul" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__UL_I15_1SG_SFB" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__UL_I15_1SG_SFB">
+                <li class="- topic/li li" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-6AB00D85-EC15-4713-A503-86C2E57B5F6C" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-6AB00D85-EC15-4713-A503-86C2E57B5F6C">Host mode (SCK is the clock
+                    output)</li>
+                <li class="- topic/li li" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-6D8F0E4C-F814-4730-8D11-2095D53400FB" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-6D8F0E4C-F814-4730-8D11-2095D53400FB">Client mode (SCK is the clock
+                    input)</li>
+                <li class="- topic/li li" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-A57560FF-768F-47C4-AD4F-34C9B13BD2B4" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-A57560FF-768F-47C4-AD4F-34C9B13BD2B4">Clock Polarity (Idle state of
+                    SCK)</li>
+                <li class="- topic/li li" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-F4E0690F-653C-409E-8C42-BBC29CC92AC3" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-F4E0690F-653C-409E-8C42-BBC29CC92AC3">Input, Output, and Client Select
+                    Polarity</li>
+                <li class="- topic/li li" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-4C3E3633-97C5-4A4D-B0CD-7CF1E07F207B" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-4C3E3633-97C5-4A4D-B0CD-7CF1E07F207B">Data Input Sample Phase (middle
+                    or end of data output time)</li>
+                <li class="- topic/li li" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-38E66A67-0B51-402F-B1AE-0EDFD6E01627" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-38E66A67-0B51-402F-B1AE-0EDFD6E01627">Clock Edge (output data on
+                    first/second edge of SCK)</li>
+                <li class="- topic/li li" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-798CF4FE-3FC0-4CEB-9796-52CD86328E77" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-798CF4FE-3FC0-4CEB-9796-52CD86328E77">Clock Rate (Host mode only)</li>
+                <li class="- topic/li li" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-1F1B8E3A-E97C-43D9-95B9-0A402547F813" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-1F1B8E3A-E97C-43D9-95B9-0A402547F813">Client Select mode (Host or
+                    Client mode)</li>
+                <li class="- topic/li li" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-681970F0-B816-475E-8F01-83DA140C356B" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-681970F0-B816-475E-8F01-83DA140C356B">MSB-First or LSB-First</li>
+                <li class="- topic/li li" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-F2FC242F-C63A-41F3-9E79-9C6CA99049A0" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-F2FC242F-C63A-41F3-9E79-9C6CA99049A0">Receive/Transmit modes:<ul class="- topic/ul ul" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__UL_J15_1SG_SFB" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__UL_J15_1SG_SFB">
+                        <li class="- topic/li li" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-19B7F700-EA11-4D37-AA2D-E1A60088ACAA" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-19B7F700-EA11-4D37-AA2D-E1A60088ACAA">Full Duplex</li>
+                        <li class="- topic/li li" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-A9A35C35-FF58-42C9-B969-B6AAABB7351C" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-A9A35C35-FF58-42C9-B969-B6AAABB7351C">Receive Only (receive
+                            without transmit)</li>
+                        <li class="- topic/li li" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-6913E37F-32B1-40B3-B19E-A831B4EA4704" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-6913E37F-32B1-40B3-B19E-A831B4EA4704">Transmit Only (transmit
+                            without receive)</li>
+                    </ul></li>
+                <li class="- topic/li li" id="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-564EF992-86BA-4E3B-B26F-F0D6A6C78D5A" data-ofbid="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4__GUID-564EF992-86BA-4E3B-B26F-F0D6A6C78D5A">Transfer Counter mode (only
+                    available in Transmit Only mode)</li>
+            </ul></div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-7D7846F7-2FF3-48DC-A189-5DA968B26CC8.html">36.2.1 Enabling and Disabling the SPI Module</a></li><li><a href="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009.html">36.2.2 BUSY Bit</a></li><li><a href="GUID-348F54FD-8138-4C74-AC65-C7C2BE5908E2.html">36.2.3 Transmit and Receive FIFOs</a></li><li><a href="GUID-1FCAD390-520F-4BF2-8946-3309833D58F5.html">36.2.4 LSb vs. MSb-First Operation</a></li><li><a href="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59.html">36.2.5 Input and Output Polarity Control</a></li><li><a href="GUID-38725C10-0F95-484B-825E-B276E4433803.html">36.2.6 Transfer Counter</a></li></ul>
+</nav>
+</body>
+</html>

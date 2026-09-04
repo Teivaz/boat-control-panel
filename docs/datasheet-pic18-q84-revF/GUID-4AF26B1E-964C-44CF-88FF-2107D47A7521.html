@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.1 Byte Format — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html"/>
+<link rel="next" href="GUID-7CB39276-0096-417A-84BA-4017DE214891.html"/>
+<link rel="up" href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li>37.3.1 Byte Format</li></ol>
+  <div class="sib"><span>← <a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html" rel="prev">I2C Module Overview</a></span><span><a href="GUID-7CB39276-0096-417A-84BA-4017DE214891.html" rel="next">SDA and SCL Pins</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-4AF26B1E-964C-44CF-88FF-2107D47A7521__GUID-2AE194DC-7F46-4516-8CEF-2C9CA3FD65DB" style="">37.3.1 Byte Format</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">As previously mentioned, all I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C communication is performed in 9-bit segments.
+            The transmitting device sends a byte to a receiver, and once the byte is processed by
+            the receiver, the receiver returns an Acknowledge bit. There are no limits to the amount
+            of data bytes in a I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C transmission. </p>
+        <p class="- topic/p p">After the 8<sup class="+ topic/ph hi-d/sup ph sup">th</sup> falling edge of the SCL line, the transmitting device releases
+            control of the SDA line to allow the receiver to respond with either an Acknowledge
+                (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>) sequence or a Not Acknowledge (NACK) sequence. At
+            this point, if the receiving device is a client, it can hold the SCL line low (clock
+            stretch) to allow itself time to process the incoming byte. Once the byte has been
+            processed, the receiving device releases the SCL line, allowing the host device to
+            provide the 9<sup class="+ topic/ph hi-d/sup ph sup">th</sup> clock pulse, within which the client responds with either an
+                <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span> or a NACK sequence. If the receiving device is a host,
+            it may also hold the SCL line low until it has processed the received byte. Once the
+            byte has been processed, the host device will generate the 9<sup class="+ topic/ph hi-d/sup ph sup">th</sup> clock pulse
+            and transmit the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span> or NACK sequence. </p>
+        <p class="- topic/p p">Data are valid to change only while the SCL signal is in a Low state and sampled on the
+            rising edge of SCL. Changes on the SDA line while the SCL line is high indicate either a
+            Start or Stop condition.</p>
+    </div>
+
+</body>
+</html>

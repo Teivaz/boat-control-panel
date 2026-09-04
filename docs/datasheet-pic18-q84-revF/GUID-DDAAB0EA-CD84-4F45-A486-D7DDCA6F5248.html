@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.2.6 Stop Condition Timing — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76.html"/>
+<link rel="next" href="GUID-A818A71F-9E88-40C8-8A74-ACE4C46FBE86.html"/>
+<link rel="up" href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html">37.4.2 I2C Host Mode Operation</a></li><li>37.4.2.6 Stop Condition Timing</li></ol>
+  <div class="sib"><span>← <a href="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76.html" rel="prev">Restart Condition Timing</a></span><span><a href="GUID-A818A71F-9E88-40C8-8A74-ACE4C46FBE86.html" rel="next">Host Operation in 7-Bit Addressing Modes</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__GUID-44956911-7E85-4795-8FC8-65E4D913C4A4" style="">37.4.2.6 Stop Condition Timing</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">A Stop condition occurs when SDA transitions from an Active state to an Idle state while
+            SCL is Idle. Host hardware will issue a Stop condition when it has completed its current
+            transmission and is ready to release control of the bus. A Stop condition is also issued
+            after an Error condition occurs, such as a bus time-out, or when a NACK condition is
+            detected on the bus. User software may also generate a Stop condition by setting the
+            Stop (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_GHZ_PXK_43B" title="Host Stop(4)">P</a>) bit.</div>
+        <div class="- topic/p p">After the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>/NACK sequence of the final byte of the
+            transmitted/received packet, hardware pulls SCL low for half of an SCL period
+                (T<sub class="+ topic/ph hi-d/sub ph sub">SCL</sub>/2) (see <a class="- topic/xref xref" href="#GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__FIG_OPT_JXM_KGB"><span>Figure 37-36</span></a>). After the half SCL period, hardware releases SCL, then samples SCL
+            to ensure it is in an Idle state (SCL = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). Host hardware then waits
+            the duration of the Stop condition setup time (T<sub class="+ topic/ph hi-d/sub ph sub">SU:STO</sub>) and releases SDA,
+            setting the Stop Condition Interrupt Flag (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_BLB_LPV_LGB" title="Stop Condition Interrupt Flag(1)">PCIF</a>). If the Stop Condition Interrupt Enable (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_L5G_XSV_LGB" title="Stop Condition Interrupt Enable(1)">PCIE</a>) bit is also set, the generic I2CxIF is also set. </div>
+        <div class="- topic/note note important note_important" id="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> At least one SCL low
+            period must appear before a Stop condition is valid. If the SDA line transitions low and
+            then high again while SCL is high, the Stop condition is ignored, and a Start condition
+            will be detected by the receiver.</div>
+        <figure class="- topic/fig fig fignone" id="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__FIG_OPT_JXM_KGB" data-ofbid="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__FIG_OPT_JXM_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-36. <span id="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__GUID-DE1AD187-820B-4B84-8161-0B240AF95EE3" class="fig--title">Stop Condition Timing</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__IMAGE_WH5_LRM_PGB" src="GUID-05EC1ABE-7552-460A-A6A3-97A958B5607F-high.svg"/></span>
+            <div class="- topic/note note important note_important" id="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__GUID-7DA4CDEE-425F-43E4-BC7B-F6B34FC89259" data-ofbid="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__GUID-7DA4CDEE-425F-43E4-BC7B-F6B34FC89259"><span class="note__title">Important:</span> 
+                <ol class="- topic/ol ol" id="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__OL_BM4_XQM_PGB" data-ofbid="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__OL_BM4_XQM_PGB">
+                    <li class="- topic/li li" id="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__GUID-81FFD70F-1C70-4672-98CB-A73AF8F4C6B3" data-ofbid="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__GUID-81FFD70F-1C70-4672-98CB-A73AF8F4C6B3">At least one SCL low period
+                        must appear before a Stop is valid.</li>
+                    <li class="- topic/li li" id="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__GUID-4B134AD6-2147-4024-9B62-28886473980F" data-ofbid="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248__GUID-4B134AD6-2147-4024-9B62-28886473980F">See the device data sheet
+                        Electrical Specifications for Stop condition setup and hold times.</li>
+                </ol>
+            </div>
+        </figure>
+    </div>
+
+</body>
+</html>

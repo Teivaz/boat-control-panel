@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>9.5.3.2 FSR Registers and POSTINC, POSTDEC, PREINC and PLUSW — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-ECE40AEB-FA62-4D3D-9AA5-BB545091F1FB.html"/>
+<link rel="next" href="GUID-92E32A36-BE2C-435D-B029-6081EC6F4A65.html"/>
+<link rel="up" href="GUID-24755C96-A501-40D0-B59F-23E781F10FCB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2BAB2696-5102-45C6-8EF2-0812A58B9EC7.html">9 Memory Organization</a></li><li><a href="GUID-D6ED03D2-3DA7-4418-9192-E7A83494ECF4.html">9.5 Data Addressing Modes</a></li><li><a href="GUID-24755C96-A501-40D0-B59F-23E781F10FCB.html">9.5.3 Indirect Addressing</a></li><li>9.5.3.2 FSR Registers and POSTINC, POSTDEC, PREINC and PLUSW</li></ol>
+  <div class="sib"><span>← <a href="GUID-ECE40AEB-FA62-4D3D-9AA5-BB545091F1FB.html" rel="prev">FSR Registers and the INDF Operand</a></span><span><a href="GUID-92E32A36-BE2C-435D-B029-6081EC6F4A65.html" rel="next">Operations by FSRs on FSRs</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__GUID-D63FEAEC-F61A-42BE-B421-BD619708C0F6" style="">9.5.3.2 FSR Registers and POSTINC, POSTDEC, PREINC and PLUSW</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-000065F2" data-ofbid="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-000065F2">In addition to the INDF operand, each FSR register pair also has
+         four additional indirect operands. Like INDF, these are “virtual” registers that cannot be
+         directly read or written. Accessing these registers actually accesses the location to which
+         the associated FSR register pair points and also performs a specific action on the FSR
+         value. They are:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-000065F3" data-ofbid="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-000065F3">POSTDEC: Accesses the location to which the FSR points, then
+            automatically decrements the FSR by 1 afterwards</li>
+         <li class="- topic/li li" id="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-000065F5" data-ofbid="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-000065F5">POSTINC: Accesses the location to which the FSR points, then
+            automatically increments the FSR by 1 afterwards</li>
+         <li class="- topic/li li" id="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-000065F7" data-ofbid="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-000065F7">PREINC: Automatically increments the FSR by one, then uses the
+            location to which the FSR points in the operation</li>
+         <li class="- topic/li li" id="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-000065F9" data-ofbid="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-000065F9">PLUSW: Adds the signed value of the W register (range of -127 to
+            128) to that of the FSR and uses the location to which the result points in the
+            operation.</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-000065FB" data-ofbid="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-000065FB">In this context, accessing an INDF register uses the value in the
+         associated FSR register without changing it. Similarly, accessing a PLUSW register gives
+         the FSR value an offset in the W register; however, neither W nor the FSR is actually
+         changed in the operation. Accessing the other virtual registers changes the value of the
+         FSR register.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-000065FC" data-ofbid="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-000065FC"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 9-5. <span id="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__GUID-33CA83C9-ED57-4654-910E-E0394EF7DFAC" class="fig--title">Indirect Addressing</span></span></figcaption>
+         
+         <span class=""><img class="- topic/image image" id="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__IMAGE_N3J_GX1_GHB" src="GUID-77294843-B523-4FA0-AE2C-E2BE757CE3DA-high.svg"/></span>
+      </figure>
+      <p class="- topic/p p" id="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-00006600" data-ofbid="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-00006600">Operations on the FSRs with POSTDEC, POSTINC and PREINC affect the entire register pair; that is, rollovers of the FSRnL register from FFh to 00h carry over to the
+         FSRnH register. On the other hand, results of these operations do not change the value of any flags in the STATUS register (e.g., Z, N, OV, etc.).</p>
+      <p class="- topic/p p" id="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-00006601" data-ofbid="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596__ID-42129-00006601">The PLUSW register can be used to implement a form of Indexed
+         Addressing in the data memory space. By manipulating the value in the W register, users can
+         reach addresses that are fixed offsets from pointer addresses. In some applications, this
+         can be used to implement some powerful program control structure, such as software stacks,
+         inside of data memory.</p>
+   </div>
+
+</body>
+</html>

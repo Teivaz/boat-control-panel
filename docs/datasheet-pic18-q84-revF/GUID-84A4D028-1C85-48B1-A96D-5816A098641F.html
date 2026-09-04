@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.2 Modes of Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49.html"/>
+<link rel="next" href="GUID-3860E9DB-B154-461D-A7F6-A3F312ED98FD.html"/>
+<link rel="up" href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li>38.2 Modes of Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49.html" rel="prev">Module Functionality</a></span><span><a href="GUID-3860E9DB-B154-461D-A7F6-A3F312ED98FD.html" rel="next">Mode Change</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-66276B7B-33F9-4292-A60E-BB69202E5176" style="">38.2 Modes of Operation</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The CAN FD Protocol Module has eight modes of operation:</p>
+        <ul class="- topic/ul ul" id="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__UL_FZJ_XMK_43B" data-ofbid="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__UL_FZJ_XMK_43B">
+            <li class="- topic/li li" id="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-E0C65B80-2790-4E8C-9905-E9700CCA6699" data-ofbid="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-E0C65B80-2790-4E8C-9905-E9700CCA6699">Configuration mode</li>
+            <li class="- topic/li li" id="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-1E6663D5-F336-46B4-9A16-795F6CFD40D3" data-ofbid="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-1E6663D5-F336-46B4-9A16-795F6CFD40D3">Normal CAN FD mode: Supports mixing
+                of CAN FD and CAN 2.0 messages.</li>
+            <li class="- topic/li li" id="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-FD14FF46-2339-4FD5-9F16-DB4E801A25AF" data-ofbid="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-FD14FF46-2339-4FD5-9F16-DB4E801A25AF">Normal CAN 2.0 mode: Will generate
+                error frames when receiving CAN FD messages. The FDF bit is forced to zero and only
+                CAN 2.0 frames are sent, even if the FDF bit is set in the transmit message
+                object.</li>
+            <li class="- topic/li li" id="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-04B6DBDA-9BCA-46F9-B6A1-6D2BD9EA5055" data-ofbid="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-04B6DBDA-9BCA-46F9-B6A1-6D2BD9EA5055">Disable mode</li>
+            <li class="- topic/li li" id="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-C4FE563A-BDBF-4FF8-AB05-581DC8C8A6F3" data-ofbid="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-C4FE563A-BDBF-4FF8-AB05-581DC8C8A6F3">Listen Only mode</li>
+            <li class="- topic/li li" id="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-705A6323-5CA2-4BF0-99EA-18F7E5E2C8C1" data-ofbid="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-705A6323-5CA2-4BF0-99EA-18F7E5E2C8C1">Restricted Operation mode</li>
+            <li class="- topic/li li" id="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-B0726653-F58F-428A-A441-3B985512C897" data-ofbid="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-B0726653-F58F-428A-A441-3B985512C897">Internal Loopback mode</li>
+            <li class="- topic/li li" id="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-61C57755-1B1B-4770-BC94-B37037590FA9" data-ofbid="GUID-84A4D028-1C85-48B1-A96D-5816A098641F__GUID-61C57755-1B1B-4770-BC94-B37037590FA9">External Loopback mode</li>
+        </ul>
+        <p class="- topic/p p"> The modes of operations can be grouped into four main groups:
+            Configuration, Normal, Sleep and Debug (see <a class="- topic/xref xref" href="GUID-F4B5E92A-8014-4F2E-8363-62819F9B7434.html#GUID-F4B5E92A-8014-4F2E-8363-62819F9B7434__FIG_AWD_GDT_43B"><span>Figure 38-2</span></a>).</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-3860E9DB-B154-461D-A7F6-A3F312ED98FD.html">38.2.1 Mode Change</a></li><li><a href="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961.html">38.2.2 Configuration Mode</a></li><li><a href="GUID-C3CA0F66-2DB3-422A-8A2A-AFDDBFEF8D96.html">38.2.3 Normal Modes</a></li><li><a href="GUID-07C5FBF2-79D9-4818-A75B-FC8A01B27A88.html">38.2.4 Disable Mode</a></li><li><a href="GUID-4B942552-FED7-4E5B-83F4-F59C1AB2AD2F.html">38.2.5 Debug Modes</a></li><li><a href="GUID-F59E6799-E0FC-4E23-8D95-8C4E523375A6.html">38.2.6 Low-Power Modes</a></li></ul>
+</nav>
+</body>
+</html>

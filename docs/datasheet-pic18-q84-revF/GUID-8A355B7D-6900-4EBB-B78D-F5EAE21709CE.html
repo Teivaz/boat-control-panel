@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.9 Configuring the Scanner — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A2E82686-5D12-45A0-9101-4E5D90C11C19.html"/>
+<link rel="next" href="GUID-818792B5-4FD7-4372-8116-66FAF96D44BE.html"/>
+<link rel="up" href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li>13.9 Configuring the Scanner</li></ol>
+  <div class="sib"><span>← <a href="GUID-A2E82686-5D12-45A0-9101-4E5D90C11C19.html" rel="prev">WWDT Interaction</a></span><span><a href="GUID-818792B5-4FD7-4372-8116-66FAF96D44BE.html" rel="next">Scanner Interrupt</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-2FB85112-A98F-4EB8-9830-46DBF75D905B" style="">13.9 Configuring the Scanner</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The scanner module may be used in conjunction with the CRC module to perform a CRC
+            calculation over a range of program memory or Data EEPROM addresses. To set up the
+            scanner to work with the CRC, perform the following steps:<ol class="- topic/ol ol" id="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__OL_LR5_L5X_SHB" data-ofbid="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__OL_LR5_L5X_SHB">
+                <li class="- topic/li li" id="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-37C0F279-170F-40B1-9CBF-C5585BA0DF61" data-ofbid="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-37C0F279-170F-40B1-9CBF-C5585BA0DF61">Set up the CRC module (see the
+                        <a class="- topic/xref xref" href="GUID-4BF3DC5D-ABD3-47DC-80AC-E5F6A405A789.html">Configuring the CRC Module</a> section) and enable the scanner module by
+                    setting the <a class="- topic/xref xref" href="GUID-954A61C6-F5B6-4625-8868-91C5E0693D11.html#ID-00000091" title="Scanner Enable(1)"><span><span>EN</span></span></a> bit in the
+                        <a class="- topic/xref xref" href="GUID-954A61C6-F5B6-4625-8868-91C5E0693D11.html" title="SCANCON0">SCANCON0</a> register.</li>
+                <li class="- topic/li li" id="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-DC8E5AB8-4A7C-4D65-9BD6-61A128F2994B" data-ofbid="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-DC8E5AB8-4A7C-4D65-9BD6-61A128F2994B">Choose which memory region the
+                    scanner module needs to operate on and set the <a class="- topic/xref xref" href="GUID-954A61C6-F5B6-4625-8868-91C5E0693D11.html#ID-000000A6" title="Scanner Memory Region Select(2)"><span><span>MREG</span></span></a>
+                    bit appropriately.</li>
+                <li class="- topic/li li" id="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-896B80E1-3558-4C15-91BD-341254546986" data-ofbid="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-896B80E1-3558-4C15-91BD-341254546986">If trigger is used for scanner
+                    operation, set the <a class="- topic/xref xref" href="GUID-954A61C6-F5B6-4625-8868-91C5E0693D11.html#ID-00000098" title="Scanner Trigger Enable(2,5)"><span><span>TRIGEN</span></span></a>
+                    bit and select the trigger source using the <a class="- topic/xref xref" href="GUID-AF0AC22C-3AC3-4DDC-AE37-2ACD17C25EC0.html" title="SCANTRIG">SCANTRIG</a> register. Select the trigger source using the SCANTRIG
+                    register and then set the TRIGEN bit.</li>
+                <li class="- topic/li li" id="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-6F3E3165-36A6-4BDA-AE9A-3DAD03BB3D21" data-ofbid="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-6F3E3165-36A6-4BDA-AE9A-3DAD03BB3D21">If Burst mode of operation is
+                    desired, set the <a class="- topic/xref xref" href="GUID-954A61C6-F5B6-4625-8868-91C5E0693D11.html#ID-000000AD" title="Scanner Burst Mode(5)"><span><span>BURSTMD</span></span></a>
+                    bit.</li>
+                <li class="- topic/li li" id="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-51976934-6182-4798-A14E-859A5FA00CAB" data-ofbid="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-51976934-6182-4798-A14E-859A5FA00CAB">Set the <a class="- topic/xref xref" href="GUID-8356FF95-2A59-4EE2-81F2-C36C1BA3097F.html" title="SCANLADR">SCANLADR</a> and <a class="- topic/xref xref" href="GUID-78E3E2CA-5569-4BCC-99C6-0088CED621FA.html" title="SCANHADR">SCANHADR</a> registers with the beginning and ending
+                    locations in memory that are to be scanned.</li>
+                <li class="- topic/li li" id="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-FC20F68F-106C-4DC1-89A7-6CA4EE4DA9E9" data-ofbid="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-FC20F68F-106C-4DC1-89A7-6CA4EE4DA9E9">Select the priority level for the
+                    scanner module (refer to the <strong class="+ topic/ph hi-d/b ph b">“System Arbitration”</strong> and the <strong class="+ topic/ph hi-d/b ph b">“Priority
+                        Lock”</strong> sections for more details). <div class="- topic/p p">
+                        <div class="- topic/note note notype note_notype" id="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-515CE579-33BB-4627-A5B5-2D245DD4FB1A" data-ofbid="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-515CE579-33BB-4627-A5B5-2D245DD4FB1A"><span class="note__title">Note:</span> The default priority
+                            levels of the system arbiter may need to be changed to ensure the
+                            scanner operates as intended and that a memory access request is granted
+                            when it occurs. </div>
+                    </div></li>
+                <li class="- topic/li li" id="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-E58EF1F3-F0EA-49DB-9D5C-01A996C110F9" data-ofbid="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE__GUID-E58EF1F3-F0EA-49DB-9D5C-01A996C110F9">Both <a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html#ID-00000005" title="CRC Enable"><span><span>EN</span></span></a>
+                    and <a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html#ID-0000000C" title="CRC Start"><span><span>GO</span></span></a> bits in the <a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html" title="CRCCON0">CRCCON0</a> register must be enabled to use the scanner. Setting the
+                        <a class="- topic/xref xref" href="GUID-954A61C6-F5B6-4625-8868-91C5E0693D11.html#ID-0000009F" title="Scanner GO(3,4)">SGO</a> bit will start the scanner operation.</li>
+            </ol></div>
+    </div>
+
+</body>
+</html>

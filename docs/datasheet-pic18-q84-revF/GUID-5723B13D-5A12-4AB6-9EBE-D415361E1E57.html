@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.2.4 Acknowledge Sequence Timing — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977.html"/>
+<link rel="next" href="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76.html"/>
+<link rel="up" href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html">37.4.2 I2C Host Mode Operation</a></li><li>37.4.2.4 Acknowledge Sequence Timing</li></ol>
+  <div class="sib"><span>← <a href="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977.html" rel="prev">Start Condition Timing</a></span><span><a href="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76.html" rel="next">Restart Condition Timing</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57__GUID-463E3FF7-B81E-4572-8628-964E1402EC7D" style="">37.4.2.4 Acknowledge Sequence Timing</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The 9th SCL pulse for any transferred address/data byte is reserved for the Acknowledge
+                (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>) sequence. During an Acknowledge sequence, the
+            transmitting device relinquishes control of the SDA line to the receiving device. At
+            this time, the receiving device must decide whether to pull the SDA line low
+                (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>) or allow the line to float high (NACK).</p>
+        <div class="- topic/p p">An Acknowledge sequence is enabled automatically by module hardware following an
+            address/data byte reception. On the 8th falling edge of SCL, the value of either the
+                <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_TCX_VCP_LGB" title="Acknowledge Data(1,2)">ACKDT</a> or <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#GUID-F2D33B25-A469-4E33-B952-D4813928CD27" title="Acknowledge End of Count(2)">ACKCNT</a> bits are copied to the SDA output, depending on the
+            state of <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>. When I2CxCNT holds a nonzero value (I2CxCNT != <code class="+ topic/ph pr-d/codeph ph codeph">0</code>),
+            the value of ACKDT is copied to SDA (see <a class="- topic/xref xref" href="#GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57__FIG_ESC_TTM_KGB"><span>Figure 37-33</span></a>). When I2CxCNT reaches a zero count (I2CxCNT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>),
+            the value of ACKCNT is copied to SDA (see <a class="- topic/xref xref" href="#GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57__FIG_WNM_T5M_KGB"><span>Figure 37-34</span></a>). In most applications, the value of ACKDT needs to be zero (ACKDT =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), which represents an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>, while the
+            value of ACKCNT needs to be one (ACKCNT = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), which represents a
+            NACK.</div>
+        <figure class="- topic/fig fig fignone" id="GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57__FIG_ESC_TTM_KGB" data-ofbid="GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57__FIG_ESC_TTM_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-33. <span id="GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57__GUID-D7190682-7272-471A-868D-D40B0087F553" class="fig--title">Acknowledge
+                    (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>) Sequence Timing</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57__IMAGE_FSC_TTM_KGB" src="GUID-8AFAA09B-3FE7-4C28-B2A4-D541461DD53A-high.svg"/></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57__FIG_WNM_T5M_KGB" data-ofbid="GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57__FIG_WNM_T5M_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-34. <span id="GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57__GUID-F2CC1614-F96D-4527-A7C5-2112C0D74368" class="fig--title">Not Acknowledge (NACK) Sequence
+                Timing</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57__IMAGE_XNM_T5M_KGB" src="GUID-B904957F-19C9-4A02-921D-9D8FF37DEFEB-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

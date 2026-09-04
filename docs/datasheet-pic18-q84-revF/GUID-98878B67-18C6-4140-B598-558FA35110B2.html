@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.11 Example Setup Code — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BD7F66E6-6131-4673-9A97-51DFB176BB37.html"/>
+<link rel="next" href="GUID-B05CE25E-9FA9-4293-85A6-CC19942B67BD.html"/>
+<link rel="up" href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li>16.11 Example Setup Code</li></ol>
+  <div class="sib"><span>← <a href="GUID-BD7F66E6-6131-4673-9A97-51DFB176BB37.html" rel="prev">Peripheral Module Disable</a></span><span><a href="GUID-B05CE25E-9FA9-4293-85A6-CC19942B67BD.html" rel="next">Register Overlay</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-98878B67-18C6-4140-B598-558FA35110B2__GUID-B456C486-0FCF-4D99-962C-73BB71B43AEB" style="">16.11 Example Setup Code</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">This code example illustrates using DMA1 to transfer 10 bytes of data from
+            0x1000 in Flash memory to the UART transmit buffer.</p>
+        
+        <div class="- topic/example example" id="GUID-98878B67-18C6-4140-B598-558FA35110B2__GUID-A75E7822-A3BB-4311-9765-2F67ECC0E6D3" data-ofbid="GUID-98878B67-18C6-4140-B598-558FA35110B2__GUID-A75E7822-A3BB-4311-9765-2F67ECC0E6D3">
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><strong class="hl-keyword">void</strong> <span class="hl-functions">initializeDMA</span>(){
+<em class="hl-comment">//Select DMA1 by setting DMASELECT register to 0x00</em>
+    DMASELECT = <span class="hl-number">0x00</span>;
+<em class="hl-comment">//DMAnCON1 - DPTR remains, Source Memory Region PFM, SPTR increments, SSTP</em>
+    DMAnCON1 = <span class="hl-number">0x0B</span>;
+<em class="hl-comment">//Source registers</em>
+<em class="hl-comment">//Source size</em>
+    DMAnSSZH = <span class="hl-number">0x00</span>;
+    DMAnSSZL = <span class="hl-number">0x0A</span>;
+<em class="hl-comment">//Source start address, 0x1000</em>
+    DMAnSSAU = <span class="hl-number">0x00</span>;
+    DMAnSSAH = <span class="hl-number">0x10</span>;
+    DMAnSSAL = <span class="hl-number">0x00</span>;
+<em class="hl-comment">//Destination registers</em>
+<em class="hl-comment">//Destination size</em>
+    DMAnDSZH = <span class="hl-number">0x00</span>;
+    DMAnDSZL = <span class="hl-number">0x01</span>;
+<em class="hl-comment">//Destination start address, </em>
+    DMAnDSA = &amp;U1TXB;
+<em class="hl-comment">//Start trigger source U1TX. Refer the datasheet for the correct code </em>
+    DMAnSIRQ = <span class="hl-number">0</span>xnn;
+<em class="hl-comment">//Change arbiter priority if needed and perform lock operation</em>
+    DMA1PR = <span class="hl-number">0x01</span>;        <em class="hl-comment">// Change the priority only if needed</em>
+    PRLOCK = <span class="hl-number">0x55</span>;            <em class="hl-comment">// This sequence </em>
+    PRLOCK = <span class="hl-number">0xAA</span>;            <em class="hl-comment">// is mandatory </em>
+    PRLOCKbits.PRLOCKED = <span class="hl-number">1</span>;  <em class="hl-comment">// for DMA operation</em>
+<em class="hl-comment">//Enable the DMA &amp; the trigger to start DMA transfer</em>
+    DMAnCON0 = <span class="hl-number">0xC0</span>; 
+}</pre>
+        </div>
+    </div>
+
+</body>
+</html>

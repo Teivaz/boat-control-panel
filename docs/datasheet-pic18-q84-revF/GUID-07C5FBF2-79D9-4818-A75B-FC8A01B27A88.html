@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.2.4 Disable Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E268B76B-B02A-448D-A2F8-6FD729D6C1BE.html"/>
+<link rel="next" href="GUID-4B942552-FED7-4E5B-83F4-F59C1AB2AD2F.html"/>
+<link rel="up" href="GUID-84A4D028-1C85-48B1-A96D-5816A098641F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-84A4D028-1C85-48B1-A96D-5816A098641F.html">38.2 Modes of Operation</a></li><li>38.2.4 Disable Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-E268B76B-B02A-448D-A2F8-6FD729D6C1BE.html" rel="prev">Normal CAN 2.0 Mode</a></span><span><a href="GUID-4B942552-FED7-4E5B-83F4-F59C1AB2AD2F.html" rel="next">Debug Modes</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-07C5FBF2-79D9-4818-A75B-FC8A01B27A88__GUID-483B029C-2BDB-4C6E-A663-F3E8A8C72C21" style="">38.2.4 Disable Mode</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">Disable mode is similar to Configuration mode, except the error counters are not Reset.
+            Disable mode is requested by setting REQOP[2:0] = <code class="+ topic/ph pr-d/codeph ph codeph">001</code>. The CAN module
+            will not be allowed to enter Disable mode while a transmission or reception is taking
+            place to prevent causing errors on the CAN bus. The module will enter Disable mode when
+            the current message completes.</p>
+        <p class="- topic/p p">The OPMODx bits indicate whether the module successfully entered Disable mode. The
+            application software needs to use this bit field as a handshake indication for the
+            Disable mode request. The CxTX pin will stay in the recessive state while the module is
+            in Disable mode to prevent inadvertent CAN bus errors.</p>
+    </div>
+
+</body>
+</html>

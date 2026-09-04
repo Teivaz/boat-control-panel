@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>CxFIFOSTA3 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B37803F7-86B1-4BC7-A76E-D0189B81116D.html"/>
+<link rel="next" href="GUID-4D8CA6BA-3BCA-4317-8584-21E34425BF09.html"/>
+<link rel="up" href="unfiled-registers.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>CxFIFOSTA3</li></ol>
+  <div class="sib"><span>← <a href="GUID-B37803F7-86B1-4BC7-A76E-D0189B81116D.html" rel="prev">CxFIFOSTA2</a></span><span><a href="GUID-4D8CA6BA-3BCA-4317-8584-21E34425BF09.html" rel="next">CxFIFOUAy</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-6525EA9A-A26E-4C23-B33E-850285D9AFE5" style="">CxFIFOSTA3</h1><section id="GUID-D8707A5A-C549-4B78-82E2-ABEFEA211623" class="- topic/section reference/section sidsc-register/registerDescription ">CAN FIFO Status Register
+                3<div class="- topic/note note notype note_notype endnote" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-BC77BA22-44B9-4E09-8B1C-A82FBA07C47B" data-ofbid="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-BC77BA22-44B9-4E09-8B1C-A82FBA07C47B"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__OL_L4C_MRM_K3B" data-ofbid="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__OL_L4C_MRM_K3B">
+                    <li class="- topic/li li" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-4643F261-E1F4-4006-8700-DDB3310F9AF5" data-ofbid="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-4643F261-E1F4-4006-8700-DDB3310F9AF5">The individual bytes in this
+                        multibyte register can be accessed with the following register names:<ul class="- topic/ul ul" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__UL_CBZ_1GR_J3B" data-ofbid="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__UL_CBZ_1GR_J3B">
+                            <li class="- topic/li li" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-BB632D95-F0AF-4934-8E3E-ECA80B78AD80" data-ofbid="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-BB632D95-F0AF-4934-8E3E-ECA80B78AD80">CxFIFOSTAyT: Accesses
+                                the top byte FIFOSTAy[31:24]</li>
+                            <li class="- topic/li li" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-3A83301D-F6F9-4588-BAA5-B8AE7E4DD30B" data-ofbid="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-3A83301D-F6F9-4588-BAA5-B8AE7E4DD30B">CxFIFOSTAyU: Accesses
+                                the upper byte FIFOSTAy[23:16]</li>
+                            <li class="- topic/li li" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-7019AD89-914E-4B6A-9EA2-F7458167D9E5" data-ofbid="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-7019AD89-914E-4B6A-9EA2-F7458167D9E5">CxFIFOSTAyH: Accesses
+                                the high byte FIFOSTAy[15:8]</li>
+                            <li class="- topic/li li" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-30919A5B-4C6C-4464-AD94-400141784875" data-ofbid="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-30919A5B-4C6C-4464-AD94-400141784875">CxFIFOSTAyL: Accesses
+                                the low byte FIFOSTAy[7:0]</li>
+                        </ul></li>
+                    <li class="- topic/li li" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-F75EE633-E39D-4FCA-955D-40EF3E5AD3BF" data-ofbid="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-F75EE633-E39D-4FCA-955D-40EF3E5AD3BF">[y] denotes FIFO number, from
+                        1 to <span class="- topic/ph ph">3</span>.</li>
+                    <li class="- topic/li li" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-9E8DEB0A-AABF-4DE0-B155-62E0F7EDCE6F" data-ofbid="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-9E8DEB0A-AABF-4DE0-B155-62E0F7EDCE6F">FIFOCI[4:0] gives a
+                        zero-indexed value to the message in the FIFO. If the FIFO is four message
+                        deep (FSIZE = 3), FIFOCIx will take on a value of 0 to 3, depending on the
+                        state of the FIFO.</li>
+                    <li class="- topic/li li" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-AD1B81EC-BCBF-4233-98F5-34D297E8CCD6" data-ofbid="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-AD1B81EC-BCBF-4233-98F5-34D297E8CCD6">This bit is updated when a
+                        message completes (or aborts) or when the FIFO is reset.</li>
+                    <li class="- topic/li li" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-E386E710-9CAF-4A78-A891-B7F2FA3E08FD" data-ofbid="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-E386E710-9CAF-4A78-A891-B7F2FA3E08FD">This bit is reset on any read
+                        of this register or when the TXQ is reset.</li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>CxFIFOSTA3</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x0178</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-244DFB54-B2F2-40A3-B1D6-F852EB19242B" data-ofbid="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564__GUID-244DFB54-B2F2-40A3-B1D6-F852EB19242B"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-70FC5CB9-34A2-4581-9CF4-40F1DEE0C564"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">31</td><td class="- topic/entry entry colsep-0 rowsep-0">30</td><td class="- topic/entry entry colsep-0 rowsep-0">29</td><td class="- topic/entry entry colsep-0 rowsep-0">28</td><td class="- topic/entry entry colsep-0 rowsep-0">27</td><td class="- topic/entry entry colsep-0 rowsep-0">26</td><td class="- topic/entry entry colsep-0 rowsep-0">25</td><td class="- topic/entry entry colsep-0 rowsep-0">24</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">23</td><td class="- topic/entry entry colsep-0 rowsep-0">22</td><td class="- topic/entry entry colsep-0 rowsep-0">21</td><td class="- topic/entry entry colsep-0 rowsep-0">20</td><td class="- topic/entry entry colsep-0 rowsep-0">19</td><td class="- topic/entry entry colsep-0 rowsep-0">18</td><td class="- topic/entry entry colsep-0 rowsep-0">17</td><td class="- topic/entry entry colsep-0 rowsep-0">16</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">15</td><td class="- topic/entry entry colsep-0 rowsep-0">14</td><td class="- topic/entry entry colsep-0 rowsep-0">13</td><td class="- topic/entry entry colsep-0 rowsep-0">12</td><td class="- topic/entry entry colsep-0 rowsep-0">11</td><td class="- topic/entry entry colsep-0 rowsep-0">10</td><td class="- topic/entry entry colsep-0 rowsep-0">9</td><td class="- topic/entry entry colsep-0 rowsep-0">8</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="5">FIFOCI[4:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">[R</td><td class="- topic/entry entry colsep-0 rowsep-0">[R</td><td class="- topic/entry entry colsep-0 rowsep-0">[R</td><td class="- topic/entry entry colsep-0 rowsep-0">[R</td><td class="- topic/entry entry colsep-0 rowsep-0">[R</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TXABT</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TXLARB</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TXERR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TXATIF</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">RXOVIF</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TFERFFIF</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TFHRFHIF</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TFNRFNIF</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">HS/C</td><td class="- topic/entry entry colsep-0 rowsep-0">HS/C</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-D8707A5A-C549-4B78-82E2-ABEFEA211623" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-73B35C65-F56F-43CE-ACC7-DF1DBF67286C__GUID-9F313407-D056-4617-AC80-EE67FB508AB3" id="GUID-73B35C65-F56F-43CE-ACC7-DF1DBF67286C">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-73B35C65-F56F-43CE-ACC7-DF1DBF67286C__GUID-9F313407-D056-4617-AC80-EE67FB508AB3" style=""> Bits 12:8 – FIFOCI[4:0] <span>
+            FIFO Message Index
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-73B35C65-F56F-43CE-ACC7-DF1DBF67286C__GUID-0C11EFCD-0A3C-4941-A5A7-23CFD7DD250C" data-ofbid="GUID-73B35C65-F56F-43CE-ACC7-DF1DBF67286C__GUID-0C11EFCD-0A3C-4941-A5A7-23CFD7DD250C"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span>(FIFO
+                        configured as a transmit buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-73B35C65-F56F-43CE-ACC7-DF1DBF67286C__GUID-FCD717E3-A41A-4325-B7C1-A3B60B7F6151">A read
+                        of this register will return an index to the message that the FIFO will next
+                        attempt to transmit</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span>(FIFO
+                        configured as a receive buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-73B35C65-F56F-43CE-ACC7-DF1DBF67286C__GUID-F8D5CEB4-7B48-467F-B4BD-6D4E8B1EC44B">A read
+                        of this register will return an index to the message that the FIFO will use
+                        to save the next message</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="OFF_DBN_M3B__GUID-25967629-F7FE-4056-9616-E1DF2BD6B2BB" id="OFF_DBN_M3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="OFF_DBN_M3B__GUID-25967629-F7FE-4056-9616-E1DF2BD6B2BB" style=""> Bit 7 – TXABT <span>
+            Message Aborted Status
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="OFF_DBN_M3B__GUID-7B80561F-F79D-4460-B8E8-8B6F3373A24B" data-ofbid="OFF_DBN_M3B__GUID-7B80561F-F79D-4460-B8E8-8B6F3373A24B"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="OFF_DBN_M3B__GUID-20537AB3-73B4-40F6-9130-9AEBD81C7DB2">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="OFF_DBN_M3B__GUID-F221FE30-D0DD-4308-8825-CF511EEB8732">Message
+                        was aborted</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="OFF_DBN_M3B__GUID-DEB45936-5449-455A-9EBB-69E33876C4AC">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="OFF_DBN_M3B__GUID-A2DC62BA-688E-44A6-8417-E8CC964E50AC">Message
+                        completed successfully</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="KGX_KBN_M3B__GUID-66ADFF8A-CB2D-4EBC-912D-81E0D4F08E5C" id="KGX_KBN_M3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="KGX_KBN_M3B__GUID-66ADFF8A-CB2D-4EBC-912D-81E0D4F08E5C" style=""> Bit 6 – TXLARB <span>
+            Message Lost Arbitration Status
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="KGX_KBN_M3B__GUID-1F5D8F62-7793-4170-84F1-540E8D0D4D78" data-ofbid="KGX_KBN_M3B__GUID-1F5D8F62-7793-4170-84F1-540E8D0D4D78"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="KGX_KBN_M3B__GUID-EF7C45C7-92F7-4C7E-B876-51BF5C88A329">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="KGX_KBN_M3B__GUID-2C89E4D9-5FC8-42FB-98DF-9CEA5E4540C9">Message
+                        lost arbitration while being sent</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="KGX_KBN_M3B__GUID-57703C41-6182-49F9-AF26-59586B5B5525">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="KGX_KBN_M3B__GUID-E12AA2AD-7BC7-45B5-B7E8-A7885BC74808">Message
+                        did not lose arbitration while being sent</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="IYW_2CN_M3B__GUID-660E7429-1D4C-4740-BF11-4AD919BE7670" id="IYW_2CN_M3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="IYW_2CN_M3B__GUID-660E7429-1D4C-4740-BF11-4AD919BE7670" style=""> Bit 5 – TXERR <span>
+            Error Detected During Transmission
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="IYW_2CN_M3B__GUID-AB6A8611-7D40-4DBD-85B2-ADBDE87265CA" data-ofbid="IYW_2CN_M3B__GUID-AB6A8611-7D40-4DBD-85B2-ADBDE87265CA"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="IYW_2CN_M3B__GUID-C10DA1AE-915D-4B40-BD8A-999CCE0CB3FB">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="IYW_2CN_M3B__GUID-FB6F4989-6B16-4EA4-8A88-B9D743BC0398">A bus
+                        error occurred while the message was being sent</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="IYW_2CN_M3B__GUID-ED8F722C-3D84-4C06-B185-FCF6F7304E0C">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="IYW_2CN_M3B__GUID-615F78B0-9095-4331-A5E6-3C2F4C0BC0BA">A bus
+                        error did not occur while the message was being
+                        sent</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="CZY_MCN_M3B__GUID-32AE7525-90A9-483F-A602-2B9979888A6B" id="CZY_MCN_M3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="CZY_MCN_M3B__GUID-32AE7525-90A9-483F-A602-2B9979888A6B" style=""> Bit 4 – TXATIF <span>Transmit Attempts
+            Exhausted Interrupt Pending</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="CZY_MCN_M3B__GUID-0C888C43-1534-4996-AC20-8D8507216271" data-ofbid="CZY_MCN_M3B__GUID-0C888C43-1534-4996-AC20-8D8507216271"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition"><colgroup><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="CZY_MCN_M3B__GUID-2E6BD8BD-AC7C-4AFD-B2E2-686B2A02326D">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span>(FIFO
+                        configured as a transmit buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="CZY_MCN_M3B__GUID-FCD717E3-A41A-4325-B7C1-A3B60B7F6151">Interrupt is pending</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="CZY_MCN_M3B__GUID-733A7A5C-C003-425F-862A-AA35907BBF92">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span>(FIFO
+                        configured as a transmit buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="CZY_MCN_M3B__GUID-F8D5CEB4-7B48-467F-B4BD-6D4E8B1EC44B">Interrupt is not pending</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="CZY_MCN_M3B__GUID-DC6FC397-46B0-4CBD-87A9-A397C7DE5516">x</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span>(FIFO
+                        configured as a receive buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="CZY_MCN_M3B__GUID-8C8B7A76-C573-4790-AD24-AF3C52485039">Unused,
+                        reads as ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="P1S_1DN_M3B__GUID-6D5760E0-78AB-4F87-955D-BEA66624D0DB" id="P1S_1DN_M3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="P1S_1DN_M3B__GUID-6D5760E0-78AB-4F87-955D-BEA66624D0DB" style=""> Bit 3 – RXOVIF <span>Receive FIFO
+            Overflow Interrupt Flag</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="P1S_1DN_M3B__GUID-78088CE8-9107-4292-8B66-C51FAADF939E" data-ofbid="P1S_1DN_M3B__GUID-78088CE8-9107-4292-8B66-C51FAADF939E"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition"><colgroup><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="P1S_1DN_M3B__GUID-6A87A780-2CBB-4F13-B35A-F666E6A42E02">x</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span>(FIFO
+                        configured as a transmit buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="P1S_1DN_M3B__GUID-FCD717E3-A41A-4325-B7C1-A3B60B7F6151">Unused,
+                        reads as ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="P1S_1DN_M3B__GUID-895CBBCB-725F-4672-9DDC-005E7253A388">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span>(FIFO
+                        configured as a receive buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="P1S_1DN_M3B__GUID-F8D5CEB4-7B48-467F-B4BD-6D4E8B1EC44B">Overflow event has occurred</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="P1S_1DN_M3B__GUID-E820DCF6-3BEC-4A91-82D8-D6118D550A37">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span>(FIFO
+                        configured as a receive buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="P1S_1DN_M3B__GUID-E81E6573-EEDC-49DD-A564-0F4E69C330EE">No
+                        overflow event occurred</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="DCQ_BVR_M3B__GUID-4F0CBFA5-48D1-4DEC-AD0B-13E687974BA8" id="DCQ_BVR_M3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="DCQ_BVR_M3B__GUID-4F0CBFA5-48D1-4DEC-AD0B-13E687974BA8" style=""> Bit 2 – TFERFFIF <span>Transmit/Receive
+            FIFO Empty/Full Interrupt Flag</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="DCQ_BVR_M3B__GUID-7F6BF083-F50B-4C1A-9E1B-CC43EB82CDF8" data-ofbid="DCQ_BVR_M3B__GUID-7F6BF083-F50B-4C1A-9E1B-CC43EB82CDF8"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition"><colgroup><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="DCQ_BVR_M3B__GUID-59FE4951-0982-4678-810A-4239BA66B7E7">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span>(FIFO
+                        configured as a transmit buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="DCQ_BVR_M3B__GUID-FCD717E3-A41A-4325-B7C1-A3B60B7F6151">FIFO is
+                        empty</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="DCQ_BVR_M3B__GUID-99DD4D80-93FE-48B9-A1A7-C643497DB867">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span>(FIFO
+                        configured as a transmit buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="DCQ_BVR_M3B__GUID-9BB5AD8A-4C1C-4B87-96EC-B66A407A3B63">FIFO is
+                        not empty, at least one message is queued to be
+                        transmitted</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="DCQ_BVR_M3B__GUID-D359D56D-FCC8-49FE-A587-7A71A389E8D0">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span>(FIFO
+                        configured as a receive buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="DCQ_BVR_M3B__GUID-F8D5CEB4-7B48-467F-B4BD-6D4E8B1EC44B">FIFO is
+                        full</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="DCQ_BVR_M3B__GUID-57751A92-B8E8-4155-8A15-A10E9C85E812">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span>(FIFO
+                        configured as a receive buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="DCQ_BVR_M3B__GUID-703B95B2-65B2-4140-86CF-BAF72CFE1786">FIFO is
+                        not full</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ZKZ_CVR_M3B__GUID-70365C3E-9BBA-4471-8B48-64BB9D0556C6" id="ZKZ_CVR_M3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ZKZ_CVR_M3B__GUID-70365C3E-9BBA-4471-8B48-64BB9D0556C6" style=""> Bit 1 – TFHRFHIF <span>Transmit/Receive
+            FIFO Half Empty/Half Full Interrupt Flag</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ZKZ_CVR_M3B__GUID-0D5B843F-C26A-47E4-84E2-E381180D725A" data-ofbid="ZKZ_CVR_M3B__GUID-0D5B843F-C26A-47E4-84E2-E381180D725A"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition"><colgroup><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ZKZ_CVR_M3B__GUID-9E95B924-AE4C-4EEE-9E5C-D8196BAC8641">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span>(FIFO
+                        configured as a transmit buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ZKZ_CVR_M3B__GUID-FCD717E3-A41A-4325-B7C1-A3B60B7F6151">FIFO is
+                        less than or equal to half full</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ZKZ_CVR_M3B__GUID-D8DEA993-23B7-4E5D-82EA-D3D502C69EF7">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span>(FIFO
+                        configured as a transmit buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ZKZ_CVR_M3B__GUID-DE357518-ABCE-4D41-964C-B551896DA1D5">FIFO is
+                        greater than half full</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ZKZ_CVR_M3B__GUID-485FB753-7C5E-4962-AFE2-A37CF62DF403">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span>(FIFO
+                        configured as a receive buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ZKZ_CVR_M3B__GUID-F8D5CEB4-7B48-467F-B4BD-6D4E8B1EC44B">FIFO is
+                        greater than or equal to half full</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ZKZ_CVR_M3B__GUID-30A6383F-8FC3-4E40-B2F3-3A89AAA07E62">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span>(FIFO
+                        configured as a receive buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ZKZ_CVR_M3B__GUID-9B948C8B-B7B3-4EF8-B74D-AB8E41023474">FIFO is
+                        less than half full</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="QQY_DVR_M3B__GUID-D3E703A2-F519-4584-B7BE-F5326FC73363" id="QQY_DVR_M3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="QQY_DVR_M3B__GUID-D3E703A2-F519-4584-B7BE-F5326FC73363" style=""> Bit 0 – TFNRFNIF <span>Transmit/Receive
+            FIFO Not Full/Not Empty Interrupt Flag</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="QQY_DVR_M3B__GUID-98CFDABB-794D-42B9-A7B5-0C09C52F6D42" data-ofbid="QQY_DVR_M3B__GUID-98CFDABB-794D-42B9-A7B5-0C09C52F6D42"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition"><colgroup><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="QQY_DVR_M3B__GUID-2C9B5D82-3322-4B03-AC8A-95E6D7503558">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span>(FIFO
+                        configured as a transmit buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="QQY_DVR_M3B__GUID-FCD717E3-A41A-4325-B7C1-A3B60B7F6151">FIFO is
+                        not full</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="QQY_DVR_M3B__GUID-9147EACB-7154-4FBD-9872-897BDA332B4B">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span>(FIFO
+                        configured as a transmit buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="QQY_DVR_M3B__GUID-1E5F9D65-5A1E-4531-85C2-0D0A3437F396">FIFO is
+                        full</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="QQY_DVR_M3B__GUID-FD64F174-F84D-4955-A7E8-0B8DC63DE49E">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span>(FIFO
+                        configured as a receive buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="QQY_DVR_M3B__GUID-F8D5CEB4-7B48-467F-B4BD-6D4E8B1EC44B">FIFO is
+                        not empty, has at least one message</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="QQY_DVR_M3B__GUID-B7C9C029-135D-4996-8E79-07C22DBCA165">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">TXEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span>(FIFO
+                        configured as a receive buffer)</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="QQY_DVR_M3B__GUID-1160F9B9-437F-44BC-B0F9-9C87E3709BA5">FIFO is
+                        empty</td>
+                </tr></tbody></table>
+        </div>
+    </article>
+                
+                    The individual bytes in this
+                        multibyte register can be accessed with the following register names:
+                            CxFIFOSTAyT: Accesses
+                                the top byte FIFOSTAy[31:24]
+                            CxFIFOSTAyU: Accesses
+                                the upper byte FIFOSTAy[23:16]
+                            CxFIFOSTAyH: Accesses
+                                the high byte FIFOSTAy[15:8]
+                            CxFIFOSTAyL: Accesses
+                                the low byte FIFOSTAy[7:0]
+                        
+                    [y] denotes FIFO number, from
+                        1 to 3.
+                    FIFOCI[4:0] gives a
+                        zero-indexed value to the message in the FIFO. If the FIFO is four message
+                        deep (FSIZE = 3), FIFOCIx will take on a value of 0 to 3, depending on the
+                        state of the FIFO.
+                    This bit is updated when a
+                        message completes (or aborts) or when the FIFO is reset.
+                    This bit is reset on any read
+                        of this register or when the TXQ is reset.
+                
+            
+</body>
+</html>

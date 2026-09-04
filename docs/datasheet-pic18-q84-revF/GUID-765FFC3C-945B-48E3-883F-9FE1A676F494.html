@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26.2 Timer2 Output — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7A11840C-02D1-41B3-914E-0E7242BD6357.html"/>
+<link rel="next" href="GUID-58A80DC9-1DD4-4044-AF13-1D07A0B84159.html"/>
+<link rel="up" href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html">26 TMR2 - Timer2 Module</a></li><li>26.2 Timer2 Output</li></ol>
+  <div class="sib"><span>← <a href="GUID-7A11840C-02D1-41B3-914E-0E7242BD6357.html" rel="prev">Monostable Mode</a></span><span><a href="GUID-58A80DC9-1DD4-4044-AF13-1D07A0B84159.html" rel="next">External Reset Sources</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-765FFC3C-945B-48E3-883F-9FE1A676F494__GUID-BAA60166-03AF-4085-B2E7-4A900FF577F2" style="">26.2 Timer2 Output</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-765FFC3C-945B-48E3-883F-9FE1A676F494__ID-42141-000011D9" data-ofbid="GUID-765FFC3C-945B-48E3-883F-9FE1A676F494__ID-42141-000011D9">The Timer2 module’s primary output is TMR2_postscaled, which pulses
+         for a single TMR2_clk period upon each match of the postscaler counter and the OUTPS bits
+         of the T2CON register. The postscaler is incremented each time the T2TMR value matches the
+         T2PR value. This signal can also be selected as an input to other Core Independent
+         Peripherals.</p>
+      <p class="- topic/p p" id="GUID-765FFC3C-945B-48E3-883F-9FE1A676F494__ID-42141-000011DE" data-ofbid="GUID-765FFC3C-945B-48E3-883F-9FE1A676F494__ID-42141-000011DE">In addition, the Timer2 is also used by the CCP module for pulse
+         generation in PWM mode. See the “<strong class="+ topic/ph hi-d/b ph b">PWM Overview</strong>” and “<strong class="+ topic/ph hi-d/b ph b">PWM Period</strong>” sections in
+         the <strong class="+ topic/ph hi-d/b ph b">“CCP - Capture/Compare/PWM Module”</strong> chapter for more details on setting up Timer2
+         for use with the CCP and PWM modules.</p>
+   </div>
+
+</body>
+</html>

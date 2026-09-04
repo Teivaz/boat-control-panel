@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>27.1.6.8 Capture Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B12319E7-842C-47CD-A39C-C70643499D6A.html"/>
+<link rel="next" href="GUID-E4E7EA2D-8E4B-49CB-82F1-1FB31F11AD50.html"/>
+<link rel="up" href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3.html">27 SMT - Signal Measurement Timer</a></li><li><a href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html">27.1 SMT Operation</a></li><li><a href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html">27.1.6 Modes of Operation</a></li><li>27.1.6.8 Capture Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-B12319E7-842C-47CD-A39C-C70643499D6A.html" rel="prev">Time-of-Flight Measurement Mode</a></span><span><a href="GUID-E4E7EA2D-8E4B-49CB-82F1-1FB31F11AD50.html" rel="next">Counter Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-24F489F4-64D3-436C-9474-49120F0BC1D6__GUID-B38C2678-6751-4798-9C26-B7E97C05607F" style="">27.1.6.8 Capture Mode</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">This mode captures the SMTxTMR register value based on a rising or falling
+            edge of the SMT_window input and triggers an interrupt. This mimics the capture feature
+            of a CCP module. The timer begins incrementing upon the GO bit being set. The SMTxTMR
+            register value is written to the SMTxCPR register on each rising edge of the SMT_window
+            input. The SMTxTMR register value is written to the SMTxCPW register on each falling
+            edge of the SMT_window input. The timer is not reset by any hardware conditions in this
+            mode and must be reset by software, if desired. Refer to the figures below.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-24F489F4-64D3-436C-9474-49120F0BC1D6__FIG_F1P_X1Z_1BB" data-ofbid="GUID-24F489F4-64D3-436C-9474-49120F0BC1D6__FIG_F1P_X1Z_1BB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 27-16. <span id="GUID-24F489F4-64D3-436C-9474-49120F0BC1D6__GUID-26303358-97F1-4F25-BEB9-E8AE8840C272" class="fig--title">Capture Mode, Repeat Acquisition
+                Timing Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-56C53B5C-F6A4-48A7-9F5C-F148B06FC166-high.pdf#toolbar=1" width="450" height="1068.3857566765578"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-24F489F4-64D3-436C-9474-49120F0BC1D6__FIG_MCY_X1Z_1BB" data-ofbid="GUID-24F489F4-64D3-436C-9474-49120F0BC1D6__FIG_MCY_X1Z_1BB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 27-17. <span id="GUID-24F489F4-64D3-436C-9474-49120F0BC1D6__GUID-7ABF0C19-206D-4BC3-9ED8-7A2813FF18D4" class="fig--title">Capture Mode, Single Acquisition
+                Timing Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-70ABA409-2258-41B5-A13B-D071D2777AC0-high.pdf#toolbar=1" width="450" height="1068.652818991098"></iframe></span>
+        </figure>
+        
+    </div>
+
+</body>
+</html>

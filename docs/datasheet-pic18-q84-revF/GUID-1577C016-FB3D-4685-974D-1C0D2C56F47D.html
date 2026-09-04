@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.7.3 ADCON2 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-91A099AA-6FF5-4C34-ABF1-6C3EFCAF1E11.html"/>
+<link rel="next" href="GUID-C3D871FC-51E7-44E4-A754-55BAA4D71143.html"/>
+<link rel="up" href="GUID-8FD3470F-42C5-4581-A564-B1DDFA17FB4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-8FD3470F-42C5-4581-A564-B1DDFA17FB4B.html">43.7 Register Definitions: ADC Control</a></li><li>43.7.3 ADCON2</li></ol>
+  <div class="sib"><span>← <a href="GUID-91A099AA-6FF5-4C34-ABF1-6C3EFCAF1E11.html" rel="prev">ADCON1</a></span><span><a href="GUID-C3D871FC-51E7-44E4-A754-55BAA4D71143.html" rel="next">ADCON3</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__ID-00000044" style="">43.7.3  ADCON2</h1><section class="- topic/section reference/section sidsc-register/registerDescription " id="GUID-85D923C5-2AC4-429D-942B-9FD46EAD5F03">ADC Control Register 2<div class="- topic/note note notype note_notype endnote" id="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-B9009610-9F3A-45D6-B982-AFB62B74834E" data-ofbid="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-B9009610-9F3A-45D6-B982-AFB62B74834E"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__OL_VQL_3LH_KZ" data-ofbid="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__OL_VQL_3LH_KZ">
+               <li class="- topic/li li" id="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-5FAC2FC2-A300-4BB2-A6D8-FE63D1EFCB82" data-ofbid="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-5FAC2FC2-A300-4BB2-A6D8-FE63D1EFCB82">To correctly
+                  calculate an average, the number of samples (set in <a class="- topic/xref xref" href="GUID-4EB6CD17-6360-49E7-AB97-1C468A16614B.html" title="ADRPT">ADRPT</a>)
+                  must be 2<sup class="+ topic/ph hi-d/sup ph sup">CRS</sup>.</li>
+               <li class="- topic/li li" id="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-36BAC70B-7A18-410A-A44D-60260DA510DD" data-ofbid="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-36BAC70B-7A18-410A-A44D-60260DA510DD">CRS = <code class="+ topic/ph pr-d/codeph ph codeph">‘b111</code> and <code class="+ topic/ph pr-d/codeph ph codeph">‘b000</code> are reserved.</li>
+               <li class="- topic/li li" id="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-2ECBD8B0-CD26-4222-8879-88653E7F5713" data-ofbid="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-2ECBD8B0-CD26-4222-8879-88653E7F5713">This bit is
+                  cleared by hardware when the accumulator operation is complete; depending on
+                  oscillator selections, the delay may be many instructions.</li>
+               <li class="- topic/li li" id="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-B8C611A7-0560-4A41-ADD6-B10C039FFA46" data-ofbid="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-B8C611A7-0560-4A41-ADD6-B10C039FFA46">See the  section for full
+                  mode descriptions.</li>
+            </ol>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>ADCON2</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x3F5</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-D5911BEB-36EF-4C66-BE39-C372BD200F41" data-ofbid="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-D5911BEB-36EF-4C66-BE39-C372BD200F41"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">PSIS</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="3">CRS[2:0]</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ACLR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="3">MD[2:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HC</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section class="- topic/section reference/section sidsc-register/registerDescription " id="GUID-85D923C5-2AC4-429D-942B-9FD46EAD5F03"></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000048__ID-42107-00001AB2" id="ID-00000048">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000048__ID-42107-00001AB2" style=""> Bit 7 – PSIS <span>ADC Previous Sample Input Select</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000048__GUID-6746402C-8CD7-4843-B4DF-CAD6E7F7FE5B" data-ofbid="ID-00000048__GUID-6746402C-8CD7-4843-B4DF-CAD6E7F7FE5B"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000048__ID-42107-00001AB4">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000048__GUID-B6B50F22-DB23-4586-AA89-A4B08BBE60F0"><a class="- topic/xref xref" href="GUID-95F0A495-8BB1-4AFF-B146-349799BF1507.html" title="ADFLTR">ADFLTR</a> is transferred to <a class="- topic/xref xref" href="GUID-6964CFCF-6C5B-432B-AD40-F710E7396F3A.html" title="ADPREV">ADPREV</a> at the start of conversion</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000048__ID-42107-00001AB7">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000048__GUID-FF9088EF-2660-4952-A932-177B51376CC2"><a class="- topic/xref xref" href="GUID-03130209-3BF5-4D2A-B9B0-19A9E1A58C89.html" title="ADRES">ADRES</a> is transferred to ADPREV at the start of
+                  conversion</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000004F__ID-42107-00001ABC" id="ID-0000004F">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000004F__ID-42107-00001ABC" style=""> Bits 6:4 – CRS[2:0] <span>ADC Accumulated Calculation Right Shift
+         Select</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000004F__GUID-50994CB1-1D78-4A83-B4B8-DFB3A5A03603" data-ofbid="ID-0000004F__GUID-50994CB1-1D78-4A83-B4B8-DFB3A5A03603"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition" id="ID-0000004F__BITFIELDVALUES_KCJ_1TH_B1B" data-ofbid="ID-0000004F__BITFIELDVALUES_KCJ_1TH_B1B"><colgroup><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000004F__GUID-ABAA997F-2C28-40DF-9E5F-BFAEE97ADC65">1 to 6</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">MD = <code class="+ topic/ph pr-d/codeph ph codeph">‘b100</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000004F__GUID-ED3D1828-A104-445F-A246-E3A807331E1F">Low-pass filter time constant is
+                     2<sup class="+ topic/ph hi-d/sup ph sup">CRS</sup>, filter gain is 1:1<a class="- topic/xref xref" href="#GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-B9009610-9F3A-45D6-B982-AFB62B74834E"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(2)</sup></strong></a></td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000004F__GUID-66FE8443-4A6E-489C-BBAC-01C3B8A01CE4">1 to 6</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">MD = <code class="+ topic/ph pr-d/codeph ph codeph">‘b011</code> to <code class="+ topic/ph pr-d/codeph ph codeph">‘b001</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000004F__GUID-CD6B76ED-BCF7-4E15-A8FF-A1EC5EA6EF5F">The accumulated value is right
+                  shifted by CRS (divided by 2<sup class="+ topic/ph hi-d/sup ph sup">CRS</sup>)<a class="- topic/xref xref" href="#GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-B9009610-9F3A-45D6-B982-AFB62B74834E"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1,2)</sup></strong></a></td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000004F__GUID-8144C650-5F50-4BC6-A342-A491CD503376">x</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">MD = <code class="+ topic/ph pr-d/codeph ph codeph">‘b000</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000004F__GUID-A5D066CB-0352-4BE1-B8FB-C7BEFFBA8F69">These bits are ignored</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000005A__ID-42107-00001ABF" id="ID-0000005A">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000005A__ID-42107-00001ABF" style=""> Bit 3 – ACLR <span>
+         A/D Accumulator Clear Command<a class="- topic/xref xref" href="#GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-B9009610-9F3A-45D6-B982-AFB62B74834E"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(3)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000005A__GUID-F8B9CBB9-5501-40A7-8F90-906B049637DB" data-ofbid="ID-0000005A__GUID-F8B9CBB9-5501-40A7-8F90-906B049637DB"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000005A__ID-42107-00001AC4">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000005A__GUID-3BE2B38B-B5DA-4A73-8BDF-D0ACA9C5D1C7">Registers <a class="- topic/xref xref" href="GUID-30FA2F95-1F03-4839-A4EC-7F5EDB3ADED5.html" title="ADACC">ADACC</a>,
+                     <a class="- topic/xref xref" href="GUID-C8E93DB7-E488-4F28-82A5-7B2AEBD489A6.html" title="ADCNT">ADCNT</a> and the <a class="- topic/xref xref" href="GUID-D37FA911-31F8-4990-9287-79830C2DF08F.html#ID-00000089" title="ADC Accumulator Overflow">AOV</a> bit are cleared</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000005A__ID-42107-00001AC1">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000005A__GUID-1FEC0552-6E52-4B1B-BE33-FF6162DCB5AC">Clearing
+                  action is complete (or not started)</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000061__ID-42107-00001AC9" id="ID-00000061">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000061__ID-42107-00001AC9" style=""> Bits 2:0 – MD[2:0] <span>
+         ADC Operating Mode Selection<a class="- topic/xref xref" href="#GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D__GUID-B9009610-9F3A-45D6-B982-AFB62B74834E"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(4)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000061__GUID-DF559E85-0937-498F-BBF1-CFDEF0B8890C" data-ofbid="ID-00000061__GUID-DF559E85-0937-498F-BBF1-CFDEF0B8890C"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="ID-00000061__BITFIELDVALUES_WZ3_1SH_B1B" data-ofbid="ID-00000061__BITFIELDVALUES_WZ3_1SH_B1B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000061__GUID-BC87F0EC-AFC0-4BCF-B580-EDCD9C38B441">111-101</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000061__GUID-346B0F2C-634F-417E-B1C9-4A5E490704E3">Reserved</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000061__GUID-879D1F12-659D-43F3-8F9C-A1FCAEA94753">100</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000061__GUID-E4721564-7D3A-402A-9B15-4121AC235963">Low-Pass Filter
+                  mode</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000061__GUID-96164009-3E18-4526-A1EC-AEB9C0AA1990">011</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000061__GUID-10650A08-2864-408D-B365-483304AC385F">Burst Average mode </td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000061__GUID-C62B07F4-97EB-4B06-933F-A2867613137C">010</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000061__GUID-81089CB3-B4CB-425E-B498-56633D75BD2C">Average mode</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000061__GUID-D179843D-3127-4AC3-ADD6-F63C7F97F701">001</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000061__GUID-73218708-99F3-4E3F-9EC6-CC680C9471F0">Accumulate mode</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000061__GUID-C9AED69E-2288-4355-9D11-0000C7B9BEEB">000</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000061__GUID-2AFFD0B8-B3BF-4C53-8C42-621F07C40609">Basic (Legacy) mode</td>
+            </tr></tbody></table>
+      </div>
+   </article>
+            
+               To correctly
+                  calculate an average, the number of samples (set in ADRPTADRPT)
+                  must be 2CRS.
+               CRS = ‘b111 and ‘b000 are reserved.
+               This bit is
+                  cleared by hardware when the accumulator operation is complete; depending on
+                  oscillator selections, the delay may be many instructions.
+               See the  section for full
+                  mode descriptions.
+            
+         
+</body>
+</html>

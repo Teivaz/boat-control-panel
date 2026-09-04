@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>18.4.1 PMD0 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DEC17E5E-B125-46B2-9A35-870F6A57D531.html"/>
+<link rel="next" href="GUID-BAE37A3A-C2FB-4401-B6C7-DCA28A21654C.html"/>
+<link rel="up" href="GUID-DEC17E5E-B125-46B2-9A35-870F6A57D531.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-81E09780-BB75-46CA-BA38-1BA2102FED0F.html">18 PMD - Peripheral Module Disable</a></li><li><a href="GUID-DEC17E5E-B125-46B2-9A35-870F6A57D531.html">18.4 Register Definitions: Peripheral Module Disable</a></li><li>18.4.1 PMD0</li></ol>
+  <div class="sib"><span>← <a href="GUID-DEC17E5E-B125-46B2-9A35-870F6A57D531.html" rel="prev">Register Definitions: Peripheral Module Disable</a></span><span><a href="GUID-BAE37A3A-C2FB-4401-B6C7-DCA28A21654C.html" rel="next">PMD1</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-5215781F-DB31-4170-9887-B836458667D7__ID-00000001" style="">18.4.1  PMD0 </h1><section id="GUID-74F805BD-D5A3-437A-8175-79544CEE0E1A" class="- topic/section reference/section sidsc-register/registerDescription ">PMD Control Register
+            0<div class="- topic/note note notype note_notype endnote" id="GUID-5215781F-DB31-4170-9887-B836458667D7__GUID-732D6252-4C4F-4E07-B604-35D79EAAD1A9" data-ofbid="GUID-5215781F-DB31-4170-9887-B836458667D7__GUID-732D6252-4C4F-4E07-B604-35D79EAAD1A9"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-5215781F-DB31-4170-9887-B836458667D7__OL_TW1_KNK_1HB" data-ofbid="GUID-5215781F-DB31-4170-9887-B836458667D7__OL_TW1_KNK_1HB">
+               <li class="- topic/li li" id="GUID-5215781F-DB31-4170-9887-B836458667D7__GUID-FE4E1FFB-5BC0-4929-9CC5-B752DBEB6420" data-ofbid="GUID-5215781F-DB31-4170-9887-B836458667D7__GUID-FE4E1FFB-5BC0-4929-9CC5-B752DBEB6420">Clearing the SYSCMD bit disables
+                  the system clock (F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>) to peripherals, however peripherals clocked by
+                     F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4 are not affected.</li>
+            </ol>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>PMD0</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x060</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-5215781F-DB31-4170-9887-B836458667D7__GUID-C6836088-1CF6-4AAB-A7CD-676169CA350B" data-ofbid="GUID-5215781F-DB31-4170-9887-B836458667D7__GUID-C6836088-1CF6-4AAB-A7CD-676169CA350B"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-5215781F-DB31-4170-9887-B836458667D7"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">SYSCMD</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">FVRMD</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">HLVDMD</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">CRCMD</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">SCANMD</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">CLKRMD</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">IOCMD</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-74F805BD-D5A3-437A-8175-79544CEE0E1A" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000005__ID-42134-00000947" id="ID-00000005">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000005__ID-42134-00000947" style=""> Bit 7 – SYSCMD <span>
+         Disable Peripheral System Clock Network<a class="- topic/xref xref" href="#GUID-5215781F-DB31-4170-9887-B836458667D7__GUID-732D6252-4C4F-4E07-B604-35D79EAAD1A9"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000005__GUID-337E8041-C97D-4068-8244-992BEAC10EC5" data-ofbid="ID-00000005__GUID-337E8041-C97D-4068-8244-992BEAC10EC5"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="ID-00000005__BITFIELDVALUES_XJK_DGK_1HB" data-ofbid="ID-00000005__BITFIELDVALUES_XJK_DGK_1HB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000005__ID-42134-0000099A">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000005__GUID-3917B19C-FF30-4DE6-B39E-AE67258515A8">System clock
+                  network disabled (F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>)</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000005__ID-42134-0000099D">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000005__GUID-8436405A-74E9-4080-B8FD-8DC2656D4A97">System clock
+                  network enabled</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000000C__ID-42134-00000950" id="ID-0000000C">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000000C__ID-42134-00000950" style=""> Bit 6 – FVRMD <span>Disable Fixed Voltage
+         Reference</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000000C__GUID-FE993898-3308-4187-8B16-DB365DD6FABA" data-ofbid="ID-0000000C__GUID-FE993898-3308-4187-8B16-DB365DD6FABA">Disable Fixed Voltage
+            Reference</section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="ID-0000000C__BITFIELDVALUES_AXK_JHK_1HB" data-ofbid="ID-0000000C__BITFIELDVALUES_AXK_JHK_1HB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000000C__GUID-26DDAFBE-4E28-4AE0-A7B8-E873503D744C">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000000C__GUID-E2B8A14F-FA15-4982-9FB3-A3380B39E15B">FVR module
+                  disabled</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000000C__GUID-87698D61-74A8-4701-B56C-11A6AE9455C3">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000000C__GUID-A8D37832-BE88-4C46-BD1F-2852350D9545">FVR module
+                  enabled</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_YV3_KFH_WGB__GUID-A6E3EB51-D087-4FFD-8CD6-C7EE02D20E46" id="BITFIELD_YV3_KFH_WGB">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_YV3_KFH_WGB__GUID-A6E3EB51-D087-4FFD-8CD6-C7EE02D20E46" style=""> Bit 5 – HLVDMD <span>Disable
+         High/Low-Voltage Detect</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_YV3_KFH_WGB__BITFIELDDESCRIPTION_ZV3_KFH_WGB" data-ofbid="BITFIELD_YV3_KFH_WGB__BITFIELDDESCRIPTION_ZV3_KFH_WGB"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_YV3_KFH_WGB__BITFIELDVALUES_P5C_J3K_1HB" data-ofbid="BITFIELD_YV3_KFH_WGB__BITFIELDVALUES_P5C_J3K_1HB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_YV3_KFH_WGB__GUID-E48D5934-ACE5-4E25-8FBA-A1CD6AE19E44">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_YV3_KFH_WGB__GUID-B5D68971-F582-493A-A382-16989F6EBDCB">HLVD module
+                  disabled</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_YV3_KFH_WGB__GUID-1D9460CA-82D6-47D2-A416-A13F117F3D17">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_YV3_KFH_WGB__GUID-CEE9EC9C-6FF1-44E3-9BA2-FDB4F24B2457">HLVD module
+                  enabled</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_NCM_LFH_WGB__GUID-09042DCC-6F73-405A-9E83-4470EEA76D8E" id="BITFIELD_NCM_LFH_WGB">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_NCM_LFH_WGB__GUID-09042DCC-6F73-405A-9E83-4470EEA76D8E" style=""> Bit 4 – CRCMD <span>Disable CRC
+         Module</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_NCM_LFH_WGB__BITFIELDDESCRIPTION_OCM_LFH_WGB" data-ofbid="BITFIELD_NCM_LFH_WGB__BITFIELDDESCRIPTION_OCM_LFH_WGB"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_NCM_LFH_WGB__BITFIELDVALUES_BSP_K3K_1HB" data-ofbid="BITFIELD_NCM_LFH_WGB__BITFIELDVALUES_BSP_K3K_1HB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_NCM_LFH_WGB__GUID-E0F817B4-0AA7-4CB6-BB74-88A16ECB706A">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_NCM_LFH_WGB__GUID-45F4D6BA-9FCA-4BDF-8AEF-E52B7F57958B">CRC module
+                  disabled</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_NCM_LFH_WGB__GUID-71CDA364-1D46-4B80-9932-9AF369C45F68">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_NCM_LFH_WGB__GUID-8C4E0C04-CB99-4B4A-A9E2-4B5440058141">CRC module
+                  enabled</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_K5W_MFH_WGB__GUID-EC1DEDE8-3EF3-4B35-885E-C2C37B616A28" id="BITFIELD_K5W_MFH_WGB">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_K5W_MFH_WGB__GUID-EC1DEDE8-3EF3-4B35-885E-C2C37B616A28" style=""> Bit 3 – SCANMD <span>Disable NVM Memory
+         Scanner</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_K5W_MFH_WGB__BITFIELDDESCRIPTION_L5W_MFH_WGB" data-ofbid="BITFIELD_K5W_MFH_WGB__BITFIELDDESCRIPTION_L5W_MFH_WGB"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_K5W_MFH_WGB__BITFIELDVALUES_P3R_PJK_1HB" data-ofbid="BITFIELD_K5W_MFH_WGB__BITFIELDVALUES_P3R_PJK_1HB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_K5W_MFH_WGB__GUID-6BEAFD9D-C652-4E6F-BFBD-73E0026E12D4">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_K5W_MFH_WGB__GUID-978159BD-C9AA-4652-9935-690540E014BD">NVM memory
+                  scanner module disabled</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_K5W_MFH_WGB__GUID-6428F0A1-9E5F-421F-8768-C5762ADEB849">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_K5W_MFH_WGB__GUID-9DD47BD1-5ACE-465D-9D7B-3A03E88F7185">NVM memory
+                  scanner module enabled</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000002F__ID-42134-0000097D" id="ID-0000002F">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000002F__ID-42134-0000097D" style=""> Bit 1 – CLKRMD <span>Disable Clock
+         Reference</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000002F__GUID-D28D4A62-9B3C-4536-B729-789B58EEB23B" data-ofbid="ID-0000002F__GUID-D28D4A62-9B3C-4536-B729-789B58EEB23B"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="ID-0000002F__BITFIELDVALUES_QMM_2KK_1HB" data-ofbid="ID-0000002F__BITFIELDVALUES_QMM_2KK_1HB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000002F__GUID-1D641B37-0D6D-40DD-B5F8-CB7B7303A479">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000002F__GUID-644EC16D-F16D-47B6-8974-0EE0B18E8B6E">Clock
+                  reference module disabled</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000002F__GUID-3A4F3132-8711-4D35-A30B-7003D99038F1">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000002F__GUID-0331624B-3778-4B1F-A727-6665418B2FDD">Clock
+                  reference module enabled</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000036__ID-42134-00000986" id="ID-00000036">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000036__ID-42134-00000986" style=""> Bit 0 – IOCMD <span>Disable
+         Interrupt-on-Change</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000036__GUID-3FE33257-9B69-43CE-9CEC-C71414A56982" data-ofbid="ID-00000036__GUID-3FE33257-9B69-43CE-9CEC-C71414A56982"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="ID-00000036__BITFIELDVALUES_PKK_PKK_1HB" data-ofbid="ID-00000036__BITFIELDVALUES_PKK_PKK_1HB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000036__GUID-733CC251-B7AA-4392-99AF-D15389561C0C">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000036__GUID-853FF23C-3D74-4100-967C-380C10AE38F9">Interrupt-on-change module is disabled</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000036__GUID-497412E2-CBD5-4477-930D-397E190C8543">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000036__GUID-D6E5D9B0-5AAA-435C-98AD-4E0021703A4F">Interrupt-on-change module is enabled</td>
+            </tr></tbody></table>
+      </div>
+   </article>
+            
+               Clearing the SYSCMD bit disables
+                  the system clock (FOSC) to peripherals, however peripherals clocked by
+                     FOSC/4 are not affected.
+            
+         
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.3.6.1 SPI Clock Selection — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-FAB3070C-BF7D-4A6F-8883-4BF0A5307358.html"/>
+<link rel="next" href="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C.html"/>
+<link rel="up" href="GUID-FAB3070C-BF7D-4A6F-8883-4BF0A5307358.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-58292C67-26C3-49E8-9D78-1E217D2E4B0C.html">36.3 Host Mode</a></li><li><a href="GUID-FAB3070C-BF7D-4A6F-8883-4BF0A5307358.html">36.3.6 Host Mode SPI Clock Configuration</a></li><li>36.3.6.1 SPI Clock Selection</li></ol>
+  <div class="sib"><span>← <a href="GUID-FAB3070C-BF7D-4A6F-8883-4BF0A5307358.html" rel="prev">Host Mode SPI Clock Configuration</a></span><span><a href="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C.html" rel="next">Clock and Data Change Alignment</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-2ABD6306-0047-4E69-A008-45E1CD0A4E82__GUID-391FB1B2-7797-41FA-8BDE-4CBDAB87234A" style="">36.3.6.1 SPI Clock Selection</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The clock source for SPI Host modes is selected by the SPIxCLK register.</p>
+        <p class="- topic/p p">The SPIxBAUD register allows for dividing this clock. The frequency of the SCK output is
+            defined by the following equation:</p>
+        <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-2ABD6306-0047-4E69-A008-45E1CD0A4E82__EQUATION-DISPLAY_GCD_KS3_SFB" data-ofbid="GUID-2ABD6306-0047-4E69-A008-45E1CD0A4E82__EQUATION-DISPLAY_GCD_KS3_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 36-1. <span id="GUID-2ABD6306-0047-4E69-A008-45E1CD0A4E82__GUID-551CF1E4-04B0-4B83-BDDA-F396303F89E4" class="fig--title">SCK Output Frequency</span></span></figcaption>
+            
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi>F</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>B</mi>
+                                    <mi>A</mi>
+                                    <mi>U</mi>
+                                    <mi>D</mi>
+                                </mrow>
+                            </msub>
+                            <mo>=</mo>
+                            <mfrac>
+                                <mrow>
+                                    <msub>
+                                        <mrow>
+                                            <mi>F</mi>
+                                        </mrow>
+                                        <mrow>
+                                            <mi>C</mi>
+                                            <mi>S</mi>
+                                            <mi>E</mi>
+                                            <mi>L</mi>
+                                        </mrow>
+                                    </msub>
+                                </mrow>
+                                <mrow>
+                                    <mn>2</mn>
+                                    <mo>×</mo>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mi>B</mi>
+                                        <mi>A</mi>
+                                        <mi>U</mi>
+                                        <mi>D</mi>
+                                        <mo>⁢</mo>
+                                        <mo>+</mo>
+                                        <mn>1</mn>
+                                        <mo>)</mo>
+                                    </mrow>
+                                </mrow>
+                            </mfrac>
+                        </mrow>
+                    </math></div>
+        </figure>
+        <p class="- topic/p p">where F<sub class="+ topic/ph hi-d/sub ph sub">BAUD</sub> is the baud rate frequency output on the SCK pin, F<sub class="+ topic/ph hi-d/sub ph sub">CSEL</sub>
+            is the frequency of the input clock selected by the SPIxCLK register, and BAUD is the
+            value contained in the SPIxBAUD register.</p>
+</div>
+
+</body>
+</html>

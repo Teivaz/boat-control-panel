@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.12.2 Receive Checksum Method — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-84EB6CB2-BA93-4247-A626-3136023AEF0F.html"/>
+<link rel="next" href="GUID-FB70590D-C48B-40AB-81CA-DC488BCBEB4E.html"/>
+<link rel="up" href="GUID-CF86A33F-3619-4700-9C22-AB4609BA462F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-CF86A33F-3619-4700-9C22-AB4609BA462F.html">35.12 Checksum (Full-Featured UARTs Only)</a></li><li>35.12.2 Receive Checksum Method</li></ol>
+  <div class="sib"><span>← <a href="GUID-84EB6CB2-BA93-4247-A626-3136023AEF0F.html" rel="prev">Transmit Checksum Method</a></span><span><a href="GUID-FB70590D-C48B-40AB-81CA-DC488BCBEB4E.html" rel="next">Collision Detection (Full-Featured UARTs Only)</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__GUID-4DA7F75C-15FB-4D56-A5EC-D83C2175E005" style="">35.12.2 Receive Checksum Method</h1>
+<div class="- topic/body body">
+        <ol class="- topic/ol ol" id="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__OL_Z1C_KF2_DBB" data-ofbid="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__OL_Z1C_KF2_DBB">
+            <li class="- topic/li li" id="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__GUID-E897A6BE-712E-4B7D-8A62-BD59E716D6A5" data-ofbid="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__GUID-E897A6BE-712E-4B7D-8A62-BD59E716D6A5">Clear the UxRXCHK register.</li>
+            <li class="- topic/li li" id="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__GUID-F0034B33-2EA1-439A-9126-924FDA13F545" data-ofbid="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__GUID-F0034B33-2EA1-439A-9126-924FDA13F545">Set the C0EN bit.</li>
+            <li class="- topic/li li" id="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__GUID-4DC79F92-0BF0-49BF-9908-A8B75C41A980" data-ofbid="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__GUID-4DC79F92-0BF0-49BF-9908-A8B75C41A980">Receive all bytes in the transaction including the checksum byte.</li>
+            <li class="- topic/li li" id="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__GUID-72BE6ACE-ED02-49D8-A23E-9B8340E070B5" data-ofbid="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__GUID-72BE6ACE-ED02-49D8-A23E-9B8340E070B5">Set MSb of UxRXCHK if 7-bit mode is selected.</li>
+            <li class="- topic/li li" id="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__GUID-6709C423-DDC6-46AC-BE34-04803CE3EAC3" data-ofbid="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__GUID-6709C423-DDC6-46AC-BE34-04803CE3EAC3">Add ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’ to
+                UxRXCHK.</li>
+            <li class="- topic/li li" id="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__GUID-0763556C-4D1E-45E1-B9B8-816E2911A652" data-ofbid="GUID-051AA398-00F4-481C-8760-C91CD51B3D48__GUID-0763556C-4D1E-45E1-B9B8-816E2911A652">If the result is
+                ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’, the checksum passes, otherwise it fails.</li>
+        </ol>
+        <p class="- topic/p p">The CERIF Checksum Interrupt flag is not active in any mode other than
+            LIN.</p>
+    </div>
+
+</body>
+</html>

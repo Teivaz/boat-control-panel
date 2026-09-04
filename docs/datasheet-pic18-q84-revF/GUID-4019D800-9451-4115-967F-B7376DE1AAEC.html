@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.8.3 TRIGEN = x, BURSTMD = 1 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7AFF5AA4-8623-4B63-87A1-DF953B2CEB35.html"/>
+<link rel="next" href="GUID-A2E82686-5D12-45A0-9101-4E5D90C11C19.html"/>
+<link rel="up" href="GUID-D8123462-0B96-47F2-BA93-C5845670024E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li><a href="GUID-D8123462-0B96-47F2-BA93-C5845670024E.html">13.8 Scanning Modes</a></li><li>13.8.3 TRIGEN = x, BURSTMD = 1</li></ol>
+  <div class="sib"><span>← <a href="GUID-7AFF5AA4-8623-4B63-87A1-DF953B2CEB35.html" rel="prev">TRIGEN = 1, BURSTMD = 0</a></span><span><a href="GUID-A2E82686-5D12-45A0-9101-4E5D90C11C19.html" rel="next">WWDT Interaction</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-4019D800-9451-4115-967F-B7376DE1AAEC__GUID-2B19950F-039A-4B12-9F99-0D64FDAFE34E" style="">13.8.3 TRIGEN = <code class="+ topic/ph pr-d/codeph ph codeph">x</code>, BURSTMD =
+            <code class="+ topic/ph pr-d/codeph ph codeph">1</code></h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">In this case, the memory access is always requested by the scanner. The memory access
+            request is granted to the scanner if no other higher priority source is requesting
+            access. The memory access cycles will not be granted to lower priority sources than the
+            scanner until it completes operation, i.e. SGO = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>.</p>
+        <div class="- topic/note note important note_important" id="GUID-4019D800-9451-4115-967F-B7376DE1AAEC__GUID-1B1914B3-73AF-4F38-BCDE-D6635A58B376" data-ofbid="GUID-4019D800-9451-4115-967F-B7376DE1AAEC__GUID-1B1914B3-73AF-4F38-BCDE-D6635A58B376"><span class="note__title">Important:</span> If <a class="- topic/xref xref" href="GUID-954A61C6-F5B6-4625-8868-91C5E0693D11.html#ID-00000098" title="Scanner Trigger Enable(2,5)"><span><span>TRIGEN</span></span></a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and <a class="- topic/xref xref" href="GUID-954A61C6-F5B6-4625-8868-91C5E0693D11.html#ID-000000AD" title="Scanner Burst Mode(5)"><span><span>BURSTMD</span></span></a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the user needs to ensure that the trigger source is active for
+            the scanner operation to complete.</div>
+    </div>
+
+</body>
+</html>

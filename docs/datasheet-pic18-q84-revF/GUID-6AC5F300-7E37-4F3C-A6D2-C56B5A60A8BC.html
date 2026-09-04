@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.1.3 Oscillator Status and Manual Enable — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C6E2BFC0-7FC1-4630-BA0C-7ED5D66E319D.html"/>
+<link rel="next" href="GUID-26C95464-A09C-4F40-954D-AACD69628A0E.html"/>
+<link rel="up" href="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A.html">12.1 Clock Source Types</a></li><li>12.1.3 Oscillator Status and Manual Enable</li></ol>
+  <div class="sib"><span>← <a href="GUID-C6E2BFC0-7FC1-4630-BA0C-7ED5D66E319D.html" rel="prev">ADCRC</a></span><span><a href="GUID-26C95464-A09C-4F40-954D-AACD69628A0E.html" rel="next">Clock Switching</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-F199CA01-68CC-4C75-AC72-72ABBF04BC18" style="">12.1.3 Oscillator Status and Manual Enable</h1>
+<div class="- topic/body body">
+<div class="- topic/p p">The Oscillator Status (<a class="- topic/xref xref" href="GUID-56425695-1C07-4B9A-A4DC-F86CD572BBCC.html" title="OSCSTAT">OSCSTAT</a>) register displays the Ready status for each of the
+            following oscillators:<ul class="- topic/ul ul" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__UL_I3B_MCY_XGB" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__UL_I3B_MCY_XGB">
+                <li class="- topic/li li" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-D4F4A2D5-2673-4C47-B980-D1B62DFB75D7" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-D4F4A2D5-2673-4C47-B980-D1B62DFB75D7">External oscillator</li>
+                <li class="- topic/li li" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-F3847602-35C1-4561-85AA-77EF913863B4" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-F3847602-35C1-4561-85AA-77EF913863B4">HFINTOSC</li>
+                <li class="- topic/li li" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-2C7B4E70-82CF-4C33-BD8A-B9F351CF4A2E" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-2C7B4E70-82CF-4C33-BD8A-B9F351CF4A2E">MFINTOSC</li>
+                <li class="- topic/li li" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-0E7F48ED-B233-40E8-836E-8EBD548240F3" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-0E7F48ED-B233-40E8-836E-8EBD548240F3">LFINTOSC</li>
+                <li class="- topic/li li" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-177540C6-4B48-4C0B-907D-CC2584F73F9B" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-177540C6-4B48-4C0B-907D-CC2584F73F9B">SOSC</li>
+                <li class="- topic/li li" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-56835A0B-2815-41C0-81B7-337E8BF24286" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-56835A0B-2815-41C0-81B7-337E8BF24286">ADCRC</li>
+            </ul>The <a class="- topic/xref xref" href="GUID-56425695-1C07-4B9A-A4DC-F86CD572BBCC.html" title="OSCSTAT">OSCSTAT</a> register also displays the Ready status for the 4xPLL.</div>
+        <p class="- topic/p p">The HFINTOSC Oscillator Ready (<a class="- topic/xref xref" href="GUID-56425695-1C07-4B9A-A4DC-F86CD572BBCC.html#BITFIELD_FBF_4B3_ZGB" title="HFINTOSC Ready">HFOR</a>)
+            and MFINTOSC Oscillator Ready (<a class="- topic/xref xref" href="GUID-56425695-1C07-4B9A-A4DC-F86CD572BBCC.html#BITFIELD_NYR_XB3_ZGB" title="MFINTOSC Ready">MFOR</a>)
+            Status bits indicate whether the respective oscillators are ready for use. Both clock
+            sources are available for use at any time but may require a finite amount of time before
+            they have reached the specified accuracy levels. When the HFINTOSC or MFINTOSC are ready
+            and achieved the specified accuracy, module hardware sets the HFOR/MFOR bits,
+            respectively.</p>
+        <p class="- topic/p p">When a new value is loaded into the <a class="- topic/xref xref" href="GUID-1EEB4FE6-E7C6-4660-A0D1-7B2F5A722DB3.html" title="OSCFRQ">OSCFRQ</a> register, the <a class="- topic/xref xref" href="GUID-56425695-1C07-4B9A-A4DC-F86CD572BBCC.html#BITFIELD_FBF_4B3_ZGB" title="HFINTOSC Ready">HFOR</a> and <a class="- topic/xref xref" href="GUID-56425695-1C07-4B9A-A4DC-F86CD572BBCC.html#BITFIELD_NYR_XB3_ZGB" title="MFINTOSC Ready">MFOR</a>
+            bits are cleared by hardware and will be set again once the respective oscillator is
+            ready. During pending OSCFRQ changes, the MFINTOSC will stall at either a high or a low
+            state until the HFINTOSC locks in the new frequency and resumes operation.</p>
+        <div class="- topic/p p">The Oscillator Enable (<a class="- topic/xref xref" href="GUID-49394B12-4B55-44B1-85A7-19080285149B.html" title="OSCEN">OSCEN</a>) register can be used to manually enable the following oscillators:<ul class="- topic/ul ul" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__UL_KKJ_GDY_XGB" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__UL_KKJ_GDY_XGB">
+                <li class="- topic/li li" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-2D144405-674F-4020-BA88-B551C91FCE4A" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-2D144405-674F-4020-BA88-B551C91FCE4A">External oscillator</li>
+                <li class="- topic/li li" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-45D92D87-E20D-4FEE-8734-FB4BF2862470" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-45D92D87-E20D-4FEE-8734-FB4BF2862470">HFINTOSC</li>
+                <li class="- topic/li li" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-56027317-DA9A-4253-88D8-FF2E6F8D63BB" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-56027317-DA9A-4253-88D8-FF2E6F8D63BB">MFINTOSC</li>
+                <li class="- topic/li li" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-CCE842B8-1A99-48D9-91A7-69EE61E25FA7" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-CCE842B8-1A99-48D9-91A7-69EE61E25FA7">LFINTOSC</li>
+                <li class="- topic/li li" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-6C7AC0A0-FDC2-4BE2-8E65-A7FD0B8FB1A5" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-6C7AC0A0-FDC2-4BE2-8E65-A7FD0B8FB1A5">SOSC</li>
+                <li class="- topic/li li" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-70769A51-600D-4DD7-B6FA-9A9059837C62" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-70769A51-600D-4DD7-B6FA-9A9059837C62">ADCRC</li>
+            </ul><div class="- topic/note note important note_important" id="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-F6FF7AC6-FB32-42B1-A57F-75903D93C10A" data-ofbid="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC__GUID-F6FF7AC6-FB32-42B1-A57F-75903D93C10A"><span class="note__title">Important:</span> <a class="- topic/xref xref" href="GUID-49394B12-4B55-44B1-85A7-19080285149B.html" title="OSCEN">OSCEN</a> cannot be used to manually enable the
+            4xPLL.</div></div>
+</div>
+
+</body>
+</html>

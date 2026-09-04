@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>42.2 Temperature Calculation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-71C37078-FCB8-4976-8535-F225800AF523.html"/>
+<link rel="next" href="GUID-D2B439A3-AC7E-48C4-B7D7-9DD27A1B2CB9.html"/>
+<link rel="up" href="GUID-3A66BF7F-43AE-483F-8EE3-3C694F3DAFF8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-3A66BF7F-43AE-483F-8EE3-3C694F3DAFF8.html">42 Temperature Indicator Module</a></li><li>42.2 Temperature Calculation</li></ol>
+  <div class="sib"><span>← <a href="GUID-71C37078-FCB8-4976-8535-F225800AF523.html" rel="prev">Minimum Operating VDD</a></span><span><a href="GUID-D2B439A3-AC7E-48C4-B7D7-9DD27A1B2CB9.html" rel="next">Higher-Order Calibration</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__GUID-349A1982-009D-4294-B195-2EE6B03CFF61" style="">42.2 Temperature Calculation</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p">This section describes the steps involved in calculating the die
+            temperature, T<sub class="+ topic/ph hi-d/sub ph sub">MEAS</sub>: <ol class="- topic/ol ol" id="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__OL_OS4_LLY_WBB" data-ofbid="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__OL_OS4_LLY_WBB">
+                <li class="- topic/li li" id="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__GUID-652D6D2E-B049-4883-AEE7-A521A2588C0B" data-ofbid="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__GUID-652D6D2E-B049-4883-AEE7-A521A2588C0B">Obtain the ADC count value of the
+                    measured analog voltage: The analog output voltage, V<sub class="+ topic/ph hi-d/sub ph sub">MEAS</sub>, is
+                    converted to a digital count value by the Analog-to-Digital Converter (ADC) and
+                    is referred to as ADC<sub class="+ topic/ph hi-d/sub ph sub">MEAS</sub>.</li>
+                <li class="- topic/li li" id="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__GUID-5F687081-2A0E-4F15-8256-D5ED2EB43097" data-ofbid="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__GUID-5F687081-2A0E-4F15-8256-D5ED2EB43097">Obtain the Gain value from the
+                    DIA table. This parameter is TSLR1 for the low range setting or TSHR1 for the
+                    high range setting of the temperature indicator module. Refer to the DIA table
+                    in the <strong class="+ topic/ph hi-d/b ph b">“Memory Organization”</strong> chapter for more details.</li>
+                <li class="- topic/li li" id="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__GUID-79B85B80-FD90-4267-B567-548DFFEDC409" data-ofbid="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__GUID-79B85B80-FD90-4267-B567-548DFFEDC409">Obtain the Offset value from the
+                    DIA table. This parameter is TSLR3 for the low range setting or TSHR3 for the
+                    high range setting of the temperature indicator module. Refer to the DIA table
+                    in the <strong class="+ topic/ph hi-d/b ph b">“Memory Organization”</strong> chapter for more details.</li>
+            </ol></div>
+        <p class="- topic/p p">The following equation provides an estimate for the die temperature based on
+            the above parameters:</p>
+        <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__EQUATION-DISPLAY_QR2_S2T_S1B" data-ofbid="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__EQUATION-DISPLAY_QR2_S2T_S1B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 42-1. <span id="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__GUID-673FD639-09FC-45CF-BDFF-2381399C2360" class="fig--title">Sensor Temperature (in ℃)</span></span></figcaption>
+            
+            <div class="+ topic/div equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi>T</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>M</mi>
+                                    <mi>E</mi>
+                                    <mi>A</mi>
+                                    <mi>S</mi>
+                                </mrow>
+                            </msub>
+                            <mo>=</mo>
+                            <mfrac>
+                                <mrow>
+                                    <mfrac>
+                                        <mrow>
+                                            <mo>(</mo>
+                                            <msub>
+                                                <mrow>
+                                                  <mi>A</mi>
+                                                  <mi>D</mi>
+                                                  <mi>C</mi>
+                                                </mrow>
+                                                <mrow>
+                                                  <mi>M</mi>
+                                                  <mi>E</mi>
+                                                  <mi>A</mi>
+                                                  <mi>S</mi>
+                                                </mrow>
+                                            </msub>
+                                            <mo>×</mo>
+                                            <mi>G</mi>
+                                            <mi>a</mi>
+                                            <mi>i</mi>
+                                            <mi>n</mi>
+                                            <mo>)</mo>
+                                        </mrow>
+                                        <mrow>
+                                            <mn>256</mn>
+                                        </mrow>
+                                    </mfrac>
+                                    <mo>+</mo>
+                                    <mi>O</mi>
+                                    <mi>f</mi>
+                                    <mi>f</mi>
+                                    <mi>s</mi>
+                                    <mi>e</mi>
+                                    <mi>t</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>10</mn>
+                                </mrow>
+                            </mfrac>
+                        </mrow>
+                    </math></div>
+        </figure>
+        <section class="- topic/section section" id="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__SECTION_KRJ_PP2_MGB" data-ofbid="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__SECTION_KRJ_PP2_MGB">Where: <p class="- topic/p p">ADC<sub class="+ topic/ph hi-d/sub ph sub">MEAS</sub> = ADC reading at temperature
+                being estimated</p><p class="- topic/p p">Gain = Gain value stored in the DIA table</p><p class="- topic/p p">Offset =
+                Offset value stored in the DIA table</p></section>
+        <div class="- topic/note note notype note_notype" id="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__GUID-39A8EB23-A2C1-4F27-87F3-DF160433E869" data-ofbid="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__GUID-39A8EB23-A2C1-4F27-87F3-DF160433E869"><span class="note__title">Note:</span> It is recommended to take the average
+            of ten measurements of ADC<sub class="+ topic/ph hi-d/sub ph sub">MEAS</sub> to reduce noise and improve accuracy.</div>
+        <div class="- topic/example example" id="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__GUID-CBCF1DC6-3EC7-485C-B571-EF0E02264075" data-ofbid="GUID-36A5D16A-6DAC-46EB-AD77-2C65F56CA9CA__GUID-CBCF1DC6-3EC7-485C-B571-EF0E02264075"><h2 class="- topic/title title sectiontitle">Temperature Calculation
+                (C)</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><em class="hl-comment">// offset is int16_t data type</em>
+<em class="hl-comment">// gain is int16_t data type</em>
+<em class="hl-comment">// ADC_MEAS is uint16_t data type</em>
+<em class="hl-comment">// Temp_in_C is int24_t data type</em>
+
+ADC_MEAS = ((ADRESH &lt;&lt; <span class="hl-number">8</span>) + ADRESL);      <em class="hl-comment">// Store the ADC Result</em>
+Temp_in_C = (int24_t)(ADC_MEAS) * gain;   <em class="hl-comment">// Multiply the ADC Result by</em>
+                                          <em class="hl-comment">// Gain and store the result in a</em>
+                                          <em class="hl-comment">// signed variable</em>
+Temp_in_C = Temp_in_C / <span class="hl-number">256</span>;              <em class="hl-comment">// Divide (ADC Result * Gain) by 256</em>
+Temp_in_C = Temp_in_C + offset;           <em class="hl-comment">// Add (Offset) to the result</em>
+Temp_in_C = Temp_in_C / <span class="hl-number">10</span>;               <em class="hl-comment">// Divide the result by 10 and store</em>
+                                          <em class="hl-comment">// the calculated temperature</em></pre>
+        </div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-D2B439A3-AC7E-48C4-B7D7-9DD27A1B2CB9.html">42.2.1 Higher-Order Calibration</a></li></ul>
+</nav>
+</body>
+</html>

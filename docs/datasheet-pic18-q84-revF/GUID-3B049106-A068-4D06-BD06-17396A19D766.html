@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.6 SPI Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-91B41471-A63D-47AD-82C5-71EE3D07157F.html"/>
+<link rel="next" href="GUID-E7A8FDD1-E1CA-47FA-840F-F0BF78F34417.html"/>
+<link rel="up" href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li>36.6 SPI Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-91B41471-A63D-47AD-82C5-71EE3D07157F.html" rel="prev">SPI Operation in Sleep Mode</a></span><span><a href="GUID-E7A8FDD1-E1CA-47FA-840F-F0BF78F34417.html" rel="next">SPI Receive Interrupt</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-3B049106-A068-4D06-BD06-17396A19D766__GUID-4B14A3A2-5C17-4308-A64B-46CF96E05569" style="">36.6 SPI Interrupts</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">There are three top level SPI interrupts in the PIRx register:</p>
+        <ul class="- topic/ul ul" id="GUID-3B049106-A068-4D06-BD06-17396A19D766__UL_EJB_3XW_SFB" data-ofbid="GUID-3B049106-A068-4D06-BD06-17396A19D766__UL_EJB_3XW_SFB">
+            <li class="- topic/li li" id="GUID-3B049106-A068-4D06-BD06-17396A19D766__GUID-0BEA409A-6D07-4F07-8DF8-117A4D8B6EF0" data-ofbid="GUID-3B049106-A068-4D06-BD06-17396A19D766__GUID-0BEA409A-6D07-4F07-8DF8-117A4D8B6EF0">SPI Transmit (SPIxTXIF)</li>
+            <li class="- topic/li li" id="GUID-3B049106-A068-4D06-BD06-17396A19D766__GUID-C6CF7C8A-D936-4590-AC76-8EDB6265E4A7" data-ofbid="GUID-3B049106-A068-4D06-BD06-17396A19D766__GUID-C6CF7C8A-D936-4590-AC76-8EDB6265E4A7">SPI Receive (SPIxRXIF)</li>
+            <li class="- topic/li li" id="GUID-3B049106-A068-4D06-BD06-17396A19D766__GUID-EED186D0-B92F-4023-8818-279F65A3C38A" data-ofbid="GUID-3B049106-A068-4D06-BD06-17396A19D766__GUID-EED186D0-B92F-4023-8818-279F65A3C38A">SPI Module status (SPIxIF)</li>
+        </ul>
+        <p class="- topic/p p">The SPI Module status interrupts are enabled at the module level in the SPIxINTE
+            register. Only enabled status interrupts will cause the single top level SPIxIF flag to
+            be set.</p>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-E7A8FDD1-E1CA-47FA-840F-F0BF78F34417.html">36.6.1 SPI Receive Interrupt</a></li><li><a href="GUID-4082AA01-0523-4E49-A1E9-EEBEB47027D8.html">36.6.2 SPI Transmit Interrupt</a></li><li><a href="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6.html">36.6.3 SPI Status Interrupts</a></li></ul>
+</nav>
+</body>
+</html>

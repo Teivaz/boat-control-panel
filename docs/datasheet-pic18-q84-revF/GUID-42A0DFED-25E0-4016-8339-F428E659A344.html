@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.5.7 I2CxPIE — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html"/>
+<link rel="next" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html"/>
+<link rel="up" href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html">37.5 Register Definitions: I2C Control</a></li><li>37.5.7 I2CxPIE</li></ol>
+  <div class="sib"><span>← <a href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html" rel="prev">I2CxPIR</a></span><span><a href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html" rel="next">I2CxERR</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-42A0DFED-25E0-4016-8339-F428E659A344__GUID-589B1BD2-B770-4F41-B840-B1A4BC69A7A8" style="">37.5.7  I2CxPIE</h1><section id="GUID-78C8C938-B218-48B3-B62A-497407546652" class="- topic/section reference/section sidsc-register/registerDescription ">I2C Interrupt and Hold
+            Enable Register<div class="- topic/note note notype note_notype endnote" id="GUID-42A0DFED-25E0-4016-8339-F428E659A344__GUID-D553ED1D-1FCC-46FE-9E00-602BB7C3A9A4" data-ofbid="GUID-42A0DFED-25E0-4016-8339-F428E659A344__GUID-D553ED1D-1FCC-46FE-9E00-602BB7C3A9A4"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-42A0DFED-25E0-4016-8339-F428E659A344__OL_C5F_QQV_LGB" data-ofbid="GUID-42A0DFED-25E0-4016-8339-F428E659A344__OL_C5F_QQV_LGB">
+                    <li class="- topic/li li" id="GUID-42A0DFED-25E0-4016-8339-F428E659A344__GUID-64F7108C-743B-4A86-B673-2383A25451D5" data-ofbid="GUID-42A0DFED-25E0-4016-8339-F428E659A344__GUID-64F7108C-743B-4A86-B673-2383A25451D5">Enabled interrupt flags are
+                        OR’ed to produce the PIRx[I2CxIF] bit.</li>
+                    <li class="- topic/li li" id="GUID-42A0DFED-25E0-4016-8339-F428E659A344__GUID-7AC771E0-247E-4865-B98C-3D4A999DF7B6" data-ofbid="GUID-42A0DFED-25E0-4016-8339-F428E659A344__GUID-7AC771E0-247E-4865-B98C-3D4A999DF7B6">When ACKTIE is set (ACKTIE =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) and <a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_KCQ_HNV_LGB" title="Acknowledge Status Time Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1,2)">ACKTIF</a> becomes set (ACKTIF =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), if an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span> is generated,
+                            <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a> is also set. If a NACK is
+                        generated, CSTR remains unchanged.</li>
+                    <li class="- topic/li li" id="GUID-42A0DFED-25E0-4016-8339-F428E659A344__GUID-24AC9F45-E9DE-4302-BC91-577B96634F75" data-ofbid="GUID-42A0DFED-25E0-4016-8339-F428E659A344__GUID-24AC9F45-E9DE-4302-BC91-577B96634F75">When WRIE is set (WRIE =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) and <a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_ALR_G4V_LGB" title="Data Write Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1)">WRIF</a> becomes set (WRIF =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a> is also set.</li>
+                    <li class="- topic/li li" id="GUID-42A0DFED-25E0-4016-8339-F428E659A344__GUID-67795DDE-0940-4F69-A33C-ABAC85AC2592" data-ofbid="GUID-42A0DFED-25E0-4016-8339-F428E659A344__GUID-67795DDE-0940-4F69-A33C-ABAC85AC2592">When ADRIE is set (ADRIE =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) and <a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_ONC_54V_LGB" title="Address Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1)">ADRIF</a> becomes set (ADRIF =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a> is also set.</li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>I2CxPIE</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x029B</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-42A0DFED-25E0-4016-8339-F428E659A344__GUID-2D64F542-F06C-466B-A401-EC9AEC10271F" data-ofbid="GUID-42A0DFED-25E0-4016-8339-F428E659A344__GUID-2D64F542-F06C-466B-A401-EC9AEC10271F"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-42A0DFED-25E0-4016-8339-F428E659A344"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">CNTIE</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ACKTIE</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">WRIE</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ADRIE</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">PCIE</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">RSCIE</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">SCIE</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-78C8C938-B218-48B3-B62A-497407546652" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-EF2AF3F6-8F65-4C9E-AD90-D05B3A27F0CB__GUID-AB7F1C31-1767-4331-96CE-B19F124036B1" id="GUID-EF2AF3F6-8F65-4C9E-AD90-D05B3A27F0CB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-EF2AF3F6-8F65-4C9E-AD90-D05B3A27F0CB__GUID-AB7F1C31-1767-4331-96CE-B19F124036B1" style=""> Bit 7 – CNTIE <span>
+            Byte Count Interrupt Enable<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-EF2AF3F6-8F65-4C9E-AD90-D05B3A27F0CB__GUID-E227BFC8-CE45-4D83-AA4C-36535DF13822" data-ofbid="GUID-EF2AF3F6-8F65-4C9E-AD90-D05B3A27F0CB__GUID-E227BFC8-CE45-4D83-AA4C-36535DF13822"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-EF2AF3F6-8F65-4C9E-AD90-D05B3A27F0CB__GUID-DF96E614-9CF2-424F-B162-D3BE6AB15F9C"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-EF2AF3F6-8F65-4C9E-AD90-D05B3A27F0CB__GUID-2857BB68-235D-4BF6-BF7F-EFE4BC255EB0">Enables
+                        Byte Count interrupts</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-EF2AF3F6-8F65-4C9E-AD90-D05B3A27F0CB__GUID-BFD20203-F335-402C-9F14-332513A11008"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-EF2AF3F6-8F65-4C9E-AD90-D05B3A27F0CB__GUID-188A89A8-BFE6-4843-AE97-A6B8D6477E14">Disables Byte Count interrupts</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_VMW_1RV_LGB__GUID-413EBDF5-46C7-421D-BCC8-C85199B6060B" id="BITFIELD_VMW_1RV_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_VMW_1RV_LGB__GUID-413EBDF5-46C7-421D-BCC8-C85199B6060B" style=""> Bit 6 – ACKTIE <span>
+            Acknowledge Status Time Interrupt and Hold
+                Enable<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1,2)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_VMW_1RV_LGB__BITFIELDDESCRIPTION_WMW_1RV_LGB" data-ofbid="BITFIELD_VMW_1RV_LGB__BITFIELDDESCRIPTION_WMW_1RV_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_VMW_1RV_LGB__BITFIELDVALUES_ZGZ_NRV_LGB" data-ofbid="BITFIELD_VMW_1RV_LGB__BITFIELDVALUES_ZGZ_NRV_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_VMW_1RV_LGB__GUID-CE65798C-42C3-4AC3-A7AF-6C3152B04065"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_VMW_1RV_LGB__GUID-4C8C4F09-D6E7-4743-AB54-21E5C6A8A6F0">Enables
+                        Acknowledge Status Time Interrupt and Hold
+                        condition</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_VMW_1RV_LGB__GUID-CD7441E2-E179-4699-AFBB-0F96762C7E64"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_VMW_1RV_LGB__GUID-6D61621D-A4A7-49CA-AAC0-A76C1565B83F">Disables Acknowledge Status Time Interrupt and Hold
+                        condition</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_SDM_CSV_LGB__GUID-73B23599-2125-4975-846F-4D23E266D85C" id="BITFIELD_SDM_CSV_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_SDM_CSV_LGB__GUID-73B23599-2125-4975-846F-4D23E266D85C" style=""> Bit 4 – WRIE <span>
+            Data Write Interrupt and Hold Enable<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1,3)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_SDM_CSV_LGB__BITFIELDDESCRIPTION_TDM_CSV_LGB" data-ofbid="BITFIELD_SDM_CSV_LGB__BITFIELDDESCRIPTION_TDM_CSV_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_SDM_CSV_LGB__BITFIELDVALUES_VSS_LSV_LGB" data-ofbid="BITFIELD_SDM_CSV_LGB__BITFIELDVALUES_VSS_LSV_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_SDM_CSV_LGB__GUID-8F14FF10-1E20-4DF1-939C-DC1A3E60645B"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_SDM_CSV_LGB__GUID-A7230B64-C2EE-482E-A758-D0D53004CB04">Enables Data Write Interrupt and Hold condition
+                    </td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_SDM_CSV_LGB__GUID-D082DE8E-E47A-4563-ACB4-585C7873B2B1"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_SDM_CSV_LGB__GUID-44D8D895-2A5D-4A2E-90D9-0073C0B8EFC0">Disables Data Write Interrupt and Hold
+                        condition</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_LFC_QSV_LGB__GUID-C7D9B75A-09CE-4EBC-BA80-ECC2D5CEA4EF" id="BITFIELD_LFC_QSV_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_LFC_QSV_LGB__GUID-C7D9B75A-09CE-4EBC-BA80-ECC2D5CEA4EF" style=""> Bit 3 – ADRIE <span>
+            Address Interrupt and Hold Enable<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1,4)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_LFC_QSV_LGB__BITFIELDDESCRIPTION_MFC_QSV_LGB" data-ofbid="BITFIELD_LFC_QSV_LGB__BITFIELDDESCRIPTION_MFC_QSV_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_LFC_QSV_LGB__BITFIELDVALUES_CNQ_TSV_LGB" data-ofbid="BITFIELD_LFC_QSV_LGB__BITFIELDVALUES_CNQ_TSV_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LFC_QSV_LGB__GUID-37BCD97F-FFC4-441E-A339-0B3F5AEB2C1C"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LFC_QSV_LGB__GUID-57856044-4991-4834-92DA-47A940BD6F2A">Enables Address Interrupt and Hold
+                        condition</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LFC_QSV_LGB__GUID-B092D00C-1B1C-4EE7-9A48-56533258CB3D"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LFC_QSV_LGB__GUID-FE8DF23A-4E08-4034-BF58-D55B31E58E97">Disables Address Interrupt and Hold
+                        condition</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_L5G_XSV_LGB__GUID-A56019AB-9833-4DE5-A27C-40FA66FD974C" id="BITFIELD_L5G_XSV_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_L5G_XSV_LGB__GUID-A56019AB-9833-4DE5-A27C-40FA66FD974C" style=""> Bit 2 – PCIE <span>
+            Stop Condition Interrupt Enable<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_L5G_XSV_LGB__BITFIELDDESCRIPTION_M5G_XSV_LGB" data-ofbid="BITFIELD_L5G_XSV_LGB__BITFIELDDESCRIPTION_M5G_XSV_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_L5G_XSV_LGB__BITFIELDVALUES_NMP_XVV_LGB" data-ofbid="BITFIELD_L5G_XSV_LGB__BITFIELDVALUES_NMP_XVV_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_L5G_XSV_LGB__GUID-4EAC6E6A-C4A5-4788-9B08-493498B48224"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_L5G_XSV_LGB__GUID-554B55DA-47B8-44C8-898F-4FF9DC68E8CD">Enables interrupt on the detection of a Stop
+                        condition</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_L5G_XSV_LGB__GUID-FD0966F9-25FA-45CA-B36F-FD279EF3F868"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_L5G_XSV_LGB__GUID-044C3D77-251A-40A2-8CBC-5E7D6D0E000D">Disables interrupt on the detection of a Stop
+                        condition</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_QYX_CWV_LGB__GUID-88A27B5A-3993-4FE5-A5B5-21704B2F0E24" id="BITFIELD_QYX_CWV_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_QYX_CWV_LGB__GUID-88A27B5A-3993-4FE5-A5B5-21704B2F0E24" style=""> Bit 1 – RSCIE <span>
+            Restart Condition Interrupt Enable<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_QYX_CWV_LGB__BITFIELDDESCRIPTION_RYX_CWV_LGB" data-ofbid="BITFIELD_QYX_CWV_LGB__BITFIELDDESCRIPTION_RYX_CWV_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_QYX_CWV_LGB__BITFIELDVALUES_ZQQ_HWV_LGB" data-ofbid="BITFIELD_QYX_CWV_LGB__BITFIELDVALUES_ZQQ_HWV_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_QYX_CWV_LGB__GUID-DD9032AE-9FF3-4E91-8646-9BCE5F2F53C3"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_QYX_CWV_LGB__GUID-D28548F6-5DEE-4732-9021-3FBFCDB3AEA6">Enables interrupt on the detection of a Restart
+                        condition</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_QYX_CWV_LGB__GUID-3F862B4F-4418-4B1C-BCF4-CF5314860054"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_QYX_CWV_LGB__GUID-D35E4FC7-2B06-4440-9EAF-2DF461B788D4">Disables interrupt on the detection of a Restart
+                        condition</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_CFJ_MWV_LGB__GUID-78A4F314-DEA4-4DB3-87E4-47BB17C3CF60" id="BITFIELD_CFJ_MWV_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_CFJ_MWV_LGB__GUID-78A4F314-DEA4-4DB3-87E4-47BB17C3CF60" style=""> Bit 0 – SCIE <span>
+            Stop Condition Interrupt Enable<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_CFJ_MWV_LGB__BITFIELDDESCRIPTION_DFJ_MWV_LGB" data-ofbid="BITFIELD_CFJ_MWV_LGB__BITFIELDDESCRIPTION_DFJ_MWV_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_CFJ_MWV_LGB__BITFIELDVALUES_EHF_RWV_LGB" data-ofbid="BITFIELD_CFJ_MWV_LGB__BITFIELDVALUES_EHF_RWV_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_CFJ_MWV_LGB__GUID-584BE02F-19D3-4EEC-9AA8-22C79F26E409"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_CFJ_MWV_LGB__GUID-B58DF5C0-1FCC-43BA-8215-571324FA87E0">Enables interrupt on the detection of a Start
+                        condition</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_CFJ_MWV_LGB__GUID-931FB2D5-C0D2-4BBA-980E-D96A37FBB356"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_CFJ_MWV_LGB__GUID-9A44C759-980A-4EF0-BDDB-93E60221AEBC">Disables interrupt on the detection of a Start
+                        condition</td>
+                </tr></tbody></table>
+        </div>
+    </article>
+                
+                    Enabled interrupt flags are
+                        OR’ed to produce the PIRx[I2CxIF] bit.
+                    When ACKTIE is set (ACKTIE =
+                            1) and ACKTIF             Acknowledge Status Time Interrupt Flag (used only when MODE = 0xx or MODE =                         11x)(1,2)          becomes set (ACKTIF =
+                            1), if an ACK is generated,
+                            CSTR             Client Clock Stretching(3)          is also set. If a NACK is
+                        generated, CSTR remains unchanged.
+                    When WRIE is set (WRIE =
+                            1) and WRIF             Data Write Interrupt Flag (used only when MODE = 0xx or MODE =                         11x)(1)          becomes set (WRIF =
+                            1), CSTR             Client Clock Stretching(3)          is also set.
+                    When ADRIE is set (ADRIE =
+                            1) and ADRIF             Address Interrupt Flag (used only when MODE = 0xx or MODE =                         11x)(1)          becomes set (ADRIF =
+                            1), CSTR             Client Clock Stretching(3)          is also set.
+                
+            
+</body>
+</html>

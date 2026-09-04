@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.5.9 Capacitive Voltage Divider (CVD) Features — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D9791A02-9160-4988-B2CD-76CF73B2F3B0.html"/>
+<link rel="next" href="GUID-26F38CB0-EA06-4A44-BA4B-E25060EDD9AF.html"/>
+<link rel="up" href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html">43.5 Computation Operation</a></li><li>43.5.9 Capacitive Voltage Divider (CVD) Features</li></ol>
+  <div class="sib"><span>← <a href="GUID-D9791A02-9160-4988-B2CD-76CF73B2F3B0.html" rel="prev">Double Sample Conversion</a></span><span><a href="GUID-26F38CB0-EA06-4A44-BA4B-E25060EDD9AF.html" rel="next">CVD Operation</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-ADAEDDA1-0DD2-48CE-8AC0-F0965F414179" style="">43.5.9 Capacitive Voltage Divider (CVD) Features</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-000003A6" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-000003A6">The ADC module contains several features that
+            allow the user to perform a relative capacitance measurement on any ADC channel using
+            the internal ADC Sample-and-Hold capacitance as a reference. This relative capacitance
+            measurement can be used to implement capacitive touch or proximity sensing applications.
+            The following figure shows the basic block diagram of the CVD portion of the ADC
+            module.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-000003AF" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-000003AF"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 43-7. <span id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-69055F54-874C-489A-9854-451954D41B51" class="fig--title">Hardware
+                Capacitive Voltage Divider Block Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-F83E2611-7BDC-45A2-99FD-5192FFF7A2F2-high.pdf#toolbar=1" width="514.87" height="322.87"></iframe></span>
+        </figure>
+        <div class="- topic/p p">This is an example to configure ADC for CVD operation:<ol class="- topic/ol ol" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-B873A9FF-E20A-4422-B023-09CD25DA61AF" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-B873A9FF-E20A-4422-B023-09CD25DA61AF">
+                <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-00000310" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-00000310">Configure Port:<ol class="- topic/ol ol" type="a" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__OL_J1T_XQ2_B1B" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__OL_J1T_XQ2_B1B">
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-A1957513-B7BC-49FD-99E4-1DE070315E59" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-A1957513-B7BC-49FD-99E4-1DE070315E59">Disable pin output driver (refer to the TRISx register)</li>
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-860DFD75-F842-458A-8604-50C0F2ADC805" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-860DFD75-F842-458A-8604-50C0F2ADC805">Configure pin as analog (refer to the ANSELx register)</li>
+                    </ol></li>
+                <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-00000316" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-00000316">Configure the ADC module:<ol class="- topic/ol ol" type="a" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__OL_THR_ZQ2_B1B" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__OL_THR_ZQ2_B1B">
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-21C2D5FA-D8E6-4A40-B064-1F0AA4A42D57" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-21C2D5FA-D8E6-4A40-B064-1F0AA4A42D57">Select ADC conversion clock</li>
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-6A2DC5D8-C7D0-401B-8C26-824CA876EA7B" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-6A2DC5D8-C7D0-401B-8C26-824CA876EA7B">Configure voltage reference</li>
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-1626A3C0-FFEF-4BAE-AF6C-EEE7D5ED28EA" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-1626A3C0-FFEF-4BAE-AF6C-EEE7D5ED28EA">Select ADC input channel</li>
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-B4C5FE7B-E49E-4471-8DAA-5E63AEC48939" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-B4C5FE7B-E49E-4471-8DAA-5E63AEC48939">Configure precharge (<a class="- topic/xref xref" href="GUID-DB7AC91C-B964-41FD-9F32-82FE0962180A.html" title="ADPRE">ADPRE</a>) and acquisition (<a class="- topic/xref xref" href="GUID-9019A40D-315C-4781-9A92-C91B17B335B1.html" title="ADACQ">ADACQ</a>) time period</li>
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-8617F0B4-0033-46B0-B505-37C4B84E4BDC" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-8617F0B4-0033-46B0-B505-37C4B84E4BDC">Select precharge polarity (<a class="- topic/xref xref" href="GUID-91A099AA-6FF5-4C34-ABF1-6C3EFCAF1E11.html#BITFIELD_GRT_BFH_KZ" title="Precharge Polarity"><span><span>PPOL</span></span></a>)</li>
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-BF155D87-1F44-42DA-A385-41CCBC984B4C" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-BF155D87-1F44-42DA-A385-41CCBC984B4C">Enable Double Sampling (<a class="- topic/xref xref" href="GUID-91A099AA-6FF5-4C34-ABF1-6C3EFCAF1E11.html#ID-0000003D" title="Double-Sample Enable"><span><span>DSEN</span></span></a>)</li>
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-2454FAB9-BC4D-4021-A801-24A7E42F2D54" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-2454FAB9-BC4D-4021-A801-24A7E42F2D54">Turn
+                            on ADC module</li>
+                    </ol></li>
+                <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-00000320" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-00000320">Configure ADC interrupt
+                        (optional):<ol class="- topic/ol ol" type="a" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__OL_JZH_CR2_B1B" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__OL_JZH_CR2_B1B">
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-310491BE-485B-4982-969F-106D24A5003C" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-310491BE-485B-4982-969F-106D24A5003C">Clear
+                            the ADC interrupt flag</li>
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-1C41CD7F-7079-4E3C-A319-B39E22331976" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-1C41CD7F-7079-4E3C-A319-B39E22331976">Enable the ADC interrupt</li>
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-140399B5-C523-46A5-85B4-FDAC6A2C3959" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-140399B5-C523-46A5-85B4-FDAC6A2C3959">Enable global interrupt (GIE bit)<a class="- topic/xref xref" href="#GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-F98E7549-9779-41E7-9082-6B3407F7777A"><sup class="+ topic/ph hi-d/sup ph sup" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-0000032A">(1)</sup></a></li>
+                    </ol></li>
+                <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-00000330" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-00000330">Start double sample conversion by
+                    setting the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000021" title="ADC Conversion Status(1,2)"><span><span>GO</span></span></a> bit.</li>
+                <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-00000332" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-00000332">Wait for ADC conversion to complete
+                    by one of the following:<ul class="- topic/ul ul" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__UL_JVH_5BN_YGB" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__UL_JVH_5BN_YGB">
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-C770619D-9FD2-4D70-92BA-8E7FCF22C6C1" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-C770619D-9FD2-4D70-92BA-8E7FCF22C6C1">Polling the GO bit</li>
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-C67CDA37-192E-4ECE-8E63-200CB9208A19" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-C67CDA37-192E-4ECE-8E63-200CB9208A19">Waiting for the ADC interrupt (if interrupt is enabled)</li>
+                    </ul></li>
+                <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-A2633B68-1F31-4C9C-8163-C88B05CBFBF5" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-A2633B68-1F31-4C9C-8163-C88B05CBFBF5">Second ADC conversion depends on the state of <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-0000000C" title="ADC Continuous Operation Enable"><span><span>CONT</span></span></a>:<ol class="- topic/ol ol" type="a" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__OL_MBH_4HH_BHB" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__OL_MBH_4HH_BHB">
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-2FDBBF9B-91B3-47A9-B01E-66CD9A9C1A0A" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-2FDBBF9B-91B3-47A9-B01E-66CD9A9C1A0A">If CONT =
+                                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, both conversion will repeat automatically form a
+                            single trigger.</li>
+                        <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-54B9E627-276F-479D-8F06-423E20C6C8CF" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-54B9E627-276F-479D-8F06-423E20C6C8CF">If CONT =
+                                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, each conversion must be triggered
+                            separately.</li>
+                    </ol></li>
+                <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-D8D5EC57-801C-4643-A172-E570BB5262EA" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-D8D5EC57-801C-4643-A172-E570BB5262EA"><a class="- topic/xref xref" href="GUID-A9D3BECF-B763-475C-9724-E58BD7D965F1.html" title="ADERR">ADERR</a> register contains the CVD result</li>
+                <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-0000033A" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-0000033A">Clear the ADC interrupt flag (if
+                    interrupt is enabled).</li>
+            </ol></div>
+        <div class="- topic/note note note note_note" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-F98E7549-9779-41E7-9082-6B3407F7777A" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-F98E7549-9779-41E7-9082-6B3407F7777A"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-51CCE3DA-5A49-4322-AFF0-B2EBD015713D" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__GUID-51CCE3DA-5A49-4322-AFF0-B2EBD015713D">
+                <li class="- topic/li li" id="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-00000343" data-ofbid="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4__ID-42107-00000343">With global interrupts disabled (GIE
+                    = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the device will wake from Sleep, but will not enter an
+                    Interrupt Service Routine.</li>
+            </ol>
+        </div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-26F38CB0-EA06-4A44-BA4B-E25060EDD9AF.html">43.5.9.1 CVD Operation</a></li><li><a href="GUID-26402BB5-21F5-4E3F-92CE-C0B83FD6FD5A.html">43.5.9.2 Precharge Control</a></li><li><a href="GUID-64BA12F2-9F30-4FF0-9A5F-371074EE0217.html">43.5.9.3 Acquisition Control for CVD (ADPRE &gt; 0)</a></li><li><a href="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496.html">43.5.9.4 Guard Ring Outputs</a></li><li><a href="GUID-A5E34262-6007-477B-99FF-1F47A8A8F059.html">43.5.9.5 Additional Sample-and-Hold Capacitance</a></li></ul>
+</nav>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>39.3 Boundary Scan Register (BSR) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-82E90A52-A555-4066-92F2-EDA1C5B5CC81.html"/>
+<link rel="next" href="GUID-BF430D6E-A48C-4276-A722-22ED9AD41623.html"/>
+<link rel="up" href="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF.html">39 JTAG Boundary Scan</a></li><li>39.3 Boundary Scan Register (BSR)</li></ol>
+  <div class="sib"><span>← <a href="GUID-82E90A52-A555-4066-92F2-EDA1C5B5CC81.html" rel="prev">Data Registers</a></span><span><a href="GUID-BF430D6E-A48C-4276-A722-22ED9AD41623.html" rel="next">Boundary Scan Cell (BSC)</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC__GUID-FD9DF0B1-75D1-4FA4-9E08-3F8AFF4D42C7" style="">39.3 Boundary Scan Register (BSR)</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The BSR is a large shift register that is comprised of all the I/O Boundary Scan Cells
+            (BSCs), daisy-chained together (<a class="- topic/xref xref" href="#GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC__FIG_SNW_J4G_R3B"><span>Figure 39-5</span></a>). Each
+            I/O pin has one BSC, each containing three BSC registers: An input cell, an output cell
+            and a control cell. When the <code class="+ topic/ph pr-d/codeph ph codeph">SAMPLE/PRELOAD</code> or <code class="+ topic/ph pr-d/codeph ph codeph">EXTEST</code>
+            instructions are active, the BSR is placed between the TDI and TDO pins, with the TDI
+            pin as the input and the TDO pin as the output. The size of the BSR depends on the
+            number of I/O pins on the device. For example, the <span class="- topic/ph ph">PIC18F57Q84</span> has <span class="- topic/ph ph">44</span> I/O pins. Removing the 4 TAP
+            control pins leaves <span class="- topic/ph ph">40</span> I/O pins with BSCs. With three
+            BSC registers for each of the <span class="- topic/ph ph">40</span> I/Os, this yields a
+            Boundary Scan register length of <span class="- topic/ph ph">120</span> bits.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC__FIG_SNW_J4G_R3B" data-ofbid="GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC__FIG_SNW_J4G_R3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 39-5. <span id="GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC__GUID-33E20ADB-5D35-443E-8BA8-8BF674609074" class="fig--title">Daisy-Chained Boundary Scan
+                    Cell Registers on a PIC18F Microcontroller</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC__IMAGE_TNW_J4G_R3B" src="GUID-66BCA852-3A08-4C05-A8F6-7291888D2928-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-BF430D6E-A48C-4276-A722-22ED9AD41623.html">39.3.1 Boundary Scan Cell (BSC)</a></li></ul>
+</nav>
+</body>
+</html>

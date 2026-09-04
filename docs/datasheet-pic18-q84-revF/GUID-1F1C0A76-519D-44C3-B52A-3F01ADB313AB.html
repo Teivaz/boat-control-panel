@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26.8.7 Edge Triggered Hardware Limit One Shot Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4.html"/>
+<link rel="next" href="GUID-4F7E4ED0-2008-429C-972A-E171F29D79A1.html"/>
+<link rel="up" href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html">26 TMR2 - Timer2 Module</a></li><li><a href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html">26.8 Operation Examples</a></li><li>26.8.7 Edge Triggered Hardware Limit One Shot Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4.html" rel="prev">Edge Triggered One Shot Mode</a></span><span><a href="GUID-4F7E4ED0-2008-429C-972A-E171F29D79A1.html" rel="next">Level Reset, Edge Triggered Hardware Limit One Shot Modes</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__GUID-7D1B032F-491D-4832-A285-958D444712B6" style="">26.8.7 Edge Triggered Hardware Limit One Shot
+      Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__ID-42141-0000140A" data-ofbid="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__ID-42141-0000140A">In Edge Triggered Hardware Limit One Shot modes, the timer starts on
+         the first external signal edge after the ON bit is set and resets on all subsequent edges.
+         Only the first edge after the ON bit is set is needed to start the timer. The counter will
+         resume counting automatically two clocks after all subsequent external Reset edges. Edge
+         triggers are as follows:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__ID-42141-0000140B" data-ofbid="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__ID-42141-0000140B">Rising edge start and Reset (MODE =
+            <code class="+ topic/ph pr-d/codeph ph codeph">‘b01100</code>)</li>
+         <li class="- topic/li li" id="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__ID-42141-0000140E" data-ofbid="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__ID-42141-0000140E">Falling edge start and Reset (MODE =
+            <code class="+ topic/ph pr-d/codeph ph codeph">‘b01101</code>)</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__ID-42141-00001411" data-ofbid="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__ID-42141-00001411">The timer resets and clears the ON bit when the timer value matches
+         the TxPR period value. External signal edges will have no effect until after software sets
+         the ON bit. <a class="- topic/xref xref" href="#GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__ID-42141-00001414"><span>Figure 26-9</span></a> illustrates the rising edge hardware limit one-shot operation.</p>
+      <p class="- topic/p p" id="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__ID-42141-00001413" data-ofbid="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__ID-42141-00001413">When this mode is used in conjunction with the CCP, the first
+         starting edge trigger and all subsequent Reset edges will activate the PWM drive. The PWM
+         drive will deactivate when the timer matches the CCPRx pulse-width value and stay
+         deactivated until the timer halts at the TxPR period match unless an external signal edge
+         resets the timer before the match occurs.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__ID-42141-00001414" data-ofbid="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__ID-42141-00001414"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 26-9. <span id="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB__GUID-C7CC5E72-247A-4F15-B210-8FB10B3CF6F3" class="fig--title">Edge Triggered Hardware Limit One
+            Shot Mode Timing Diagram (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b01100</code>)</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-2768A51E-4F37-4624-87D2-5D0F2F43988A-high.pdf#toolbar=1" width="501" height="333.75"></iframe></span>
+      </figure>
+      
+   </div>
+
+</body>
+</html>

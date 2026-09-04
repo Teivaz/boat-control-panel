@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.2.8 Host Operation in 10-Bit Addressing Modes — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D8A5DED1-9129-4E0D-A171-D08AC5C14DC5.html"/>
+<link rel="next" href="GUID-33D9D29E-8924-4A62-866E-7F7DE0D1C365.html"/>
+<link rel="up" href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html">37.4.2 I2C Host Mode Operation</a></li><li>37.4.2.8 Host Operation in 10-Bit Addressing Modes</li></ol>
+  <div class="sib"><span>← <a href="GUID-D8A5DED1-9129-4E0D-A171-D08AC5C14DC5.html" rel="prev">Host Reception (7-Bit Addressing Mode)</a></span><span><a href="GUID-33D9D29E-8924-4A62-866E-7F7DE0D1C365.html" rel="next">Host Transmission (10-Bit)</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-CB37BA3E-2338-4295-A2F3-534ACB1DACF0__GUID-DFEBA829-F197-4552-96A8-302354D962FB" style="">37.4.2.8 Host Operation in 10-Bit Addressing
+        Modes</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">In Host 10-bit Addressing modes, the client’s 10-bit address and
+                R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit value are loaded into either the <a class="- topic/xref xref" href="GUID-E7CC5B44-63E1-40F0-8F67-30D643607BC5.html">I2CxADB0</a> and
+                <a class="- topic/xref xref" href="GUID-51DC1914-5FC6-4DB6-849E-AC7B6E17D460.html" title="I2CxADB1">I2CxADB1</a>
+            registers (when <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) or <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> (when ABD =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). When the host intends to read data from the client, it must
+            first transmit the full 10-bit address with the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit clear
+                (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), issue a Restart condition, then
+            transmit the address high byte with the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit set
+                (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). When the host intends to write
+            data to the client, it must transmit the full 10-bit address with the
+                R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit clear (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>).</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-33D9D29E-8924-4A62-866E-7F7DE0D1C365.html">37.4.2.8.1 Host Transmission (10-Bit)</a></li><li><a href="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F.html">37.4.2.8.2 Host Reception (10-Bit Addressing Mode)</a></li></ul>
+</nav>
+</body>
+</html>

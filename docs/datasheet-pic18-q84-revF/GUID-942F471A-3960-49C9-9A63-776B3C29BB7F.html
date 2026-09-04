@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>34.9.1 MDxCON0 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5E7C72FC-66D7-4631-94A5-93178B993E0A.html"/>
+<link rel="next" href="GUID-8279B34D-A8A6-4277-9AF1-65191BB85193.html"/>
+<link rel="up" href="GUID-5E7C72FC-66D7-4631-94A5-93178B993E0A.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-603ABC72-93B7-44DB-B870-8C221F15CD0A.html">34 DSM - Data Signal Modulator Module</a></li><li><a href="GUID-5E7C72FC-66D7-4631-94A5-93178B993E0A.html">34.9 Register Definitions: Modulation Control</a></li><li>34.9.1 MDxCON0</li></ol>
+  <div class="sib"><span>← <a href="GUID-5E7C72FC-66D7-4631-94A5-93178B993E0A.html" rel="prev">Register Definitions: Modulation Control</a></span><span><a href="GUID-8279B34D-A8A6-4277-9AF1-65191BB85193.html" rel="next">MDxCON1</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-942F471A-3960-49C9-9A63-776B3C29BB7F__ID-00000001" style="">34.9.1  MDxCON0</h1><section id="GUID-1963659A-14F8-4F34-8F7F-27538EBF0443" class="- topic/section reference/section sidsc-register/registerDescription ">Modulation Control
+         Register 0<div class="- topic/note note notype note_notype endnote" id="GUID-942F471A-3960-49C9-9A63-776B3C29BB7F__GUID-640397E7-1DC7-4B7A-812E-E67AACAD5A94" data-ofbid="GUID-942F471A-3960-49C9-9A63-776B3C29BB7F__GUID-640397E7-1DC7-4B7A-812E-E67AACAD5A94"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-942F471A-3960-49C9-9A63-776B3C29BB7F__OL_YBV_LFY_HZ" data-ofbid="GUID-942F471A-3960-49C9-9A63-776B3C29BB7F__OL_YBV_LFY_HZ">
+               <li class="- topic/li li" id="GUID-942F471A-3960-49C9-9A63-776B3C29BB7F__GUID-EE24E32D-8322-4550-B321-62E2AD81D727" data-ofbid="GUID-942F471A-3960-49C9-9A63-776B3C29BB7F__GUID-EE24E32D-8322-4550-B321-62E2AD81D727">The modulated output frequency can
+                  be greater and asynchronous from the clock that updates this register bit. The bit
+                  value may not be valid for higher speed modulator or carrier signals.</li>
+               <li class="- topic/li li" id="GUID-942F471A-3960-49C9-9A63-776B3C29BB7F__GUID-1707BF43-E565-4FCD-9217-EF5AE3272613" data-ofbid="GUID-942F471A-3960-49C9-9A63-776B3C29BB7F__GUID-1707BF43-E565-4FCD-9217-EF5AE3272613">MDBIT must be selected as the
+                  modulation source in the MDxSRC register for this operation.</li>
+            </ol>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>MDxCON0</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x6A</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-942F471A-3960-49C9-9A63-776B3C29BB7F__GUID-AE25B963-8486-41E3-A435-6974E909792A" data-ofbid="GUID-942F471A-3960-49C9-9A63-776B3C29BB7F__GUID-AE25B963-8486-41E3-A435-6974E909792A"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-942F471A-3960-49C9-9A63-776B3C29BB7F"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">EN</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">OUT</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">OPOL</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">BIT</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-1963659A-14F8-4F34-8F7F-27538EBF0443" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000005__ID-42117-0000092A" id="ID-00000005">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000005__ID-42117-0000092A" style=""> Bit 7 – EN <span>Modulator Module
+         Enable</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000005__GUID-4CFA6656-935A-4AA1-B63F-1A619111353A" data-ofbid="ID-00000005__GUID-4CFA6656-935A-4AA1-B63F-1A619111353A"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000005__ID-42117-0000092C"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000005__GUID-A55F3531-F009-4381-82D6-64D487E4DF81"><p class="- topic/p p" id="ID-00000005__ID-42117-0000092D" data-ofbid="ID-00000005__ID-42117-0000092D">DSM is enabled and mixing input signals</p></td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000005__ID-42117-0000092F"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000005__GUID-F867508F-A2D8-46F6-9F3E-4BC820CA1F1F"><p class="- topic/p p" id="ID-00000005__ID-42117-00000930" data-ofbid="ID-00000005__ID-42117-00000930">DSM is disabled and has no output</p></td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000000C__ID-42117-00000933" id="ID-0000000C">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000000C__ID-42117-00000933" style=""> Bit 5 – OUT <span>
+         Modulator Output<a class="- topic/xref xref" href="#GUID-942F471A-3960-49C9-9A63-776B3C29BB7F__GUID-640397E7-1DC7-4B7A-812E-E67AACAD5A94"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000000C__GUID-B27AC89F-CC34-4162-8BB3-0E324A2A55F1" data-ofbid="ID-0000000C__GUID-B27AC89F-CC34-4162-8BB3-0E324A2A55F1"><p class="- topic/p p" id="ID-0000000C__ID-00000011" data-ofbid="ID-0000000C__ID-00000011">Displays the current DSM_out value</p></section>
+         
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000012__ID-42117-00000936" id="ID-00000012">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000012__ID-42117-00000936" style=""> Bit 4 – OPOL <span>Modulator Output Polarity
+         Select</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000012__GUID-80B5B4E4-3A49-495B-B114-ECDB8306C458" data-ofbid="ID-00000012__GUID-80B5B4E4-3A49-495B-B114-ECDB8306C458"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000012__ID-42117-00000938"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000012__GUID-E848093A-9B0C-4E69-8EF8-D26BC92583D4"><p class="- topic/p p" id="ID-00000012__ID-42117-00000939" data-ofbid="ID-00000012__ID-42117-00000939">DSM output signal is inverted; idle high output</p></td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000012__ID-42117-0000093B"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000012__GUID-C488596C-59C3-413B-988B-F323A3D09E28"><p class="- topic/p p" id="ID-00000012__ID-42117-0000093C" data-ofbid="ID-00000012__ID-42117-0000093C">DSM output signal is not inverted; idle low output</p></td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000019__ID-42117-0000093F" id="ID-00000019">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000019__ID-42117-0000093F" style=""> Bit 0 – BIT <span>
+         Modulation Source Signal<a class="- topic/xref xref" href="#GUID-942F471A-3960-49C9-9A63-776B3C29BB7F__GUID-640397E7-1DC7-4B7A-812E-E67AACAD5A94"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(2)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000019__GUID-274278B6-1D26-4ECC-AAC5-227A6C19DA77" data-ofbid="ID-00000019__GUID-274278B6-1D26-4ECC-AAC5-227A6C19DA77">
+            <p class="- topic/p p">Allows direct software control of the modulation signal</p>
+         </section>
+         
+      </div>
+   </article>
+            
+               The modulated output frequency can
+                  be greater and asynchronous from the clock that updates this register bit. The bit
+                  value may not be valid for higher speed modulator or carrier signals.
+               MDBIT must be selected as the
+                  modulation source in the MDxSRC register for this operation.
+            
+         
+</body>
+</html>

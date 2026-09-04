@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.2.4 LSb vs. MSb-First Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-348F54FD-8138-4C74-AC65-C7C2BE5908E2.html"/>
+<link rel="next" href="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59.html"/>
+<link rel="up" href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html">36.2 SPI Operation</a></li><li>36.2.4 LSb vs. MSb-First Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-348F54FD-8138-4C74-AC65-C7C2BE5908E2.html" rel="prev">Transmit and Receive FIFOs</a></span><span><a href="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59.html" rel="next">Input and Output Polarity Control</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-1FCAD390-520F-4BF2-8946-3309833D58F5__GUID-74FF7B27-A530-4267-B136-505096AC8111" style="">36.2.4 LSb vs. MSb-First Operation</h1><div class="- topic/body body"><div class="- topic/p p">Typically, the SPI communication outputs the Most Significant bit first, but some devices or buses may not conform to this standard. In this case, the LSBF bit may be used to alter the order in which bits are shifted out during the data exchange. In both Host and Client mode, the <a class="- topic/xref xref" href="GUID-CD70C100-5F91-4E6F-86D4-583C754F39BE.html#BITFIELD_TC3_3JF_RFB" title="LSb-First Data Exchange Select(1)"><span><span>LSBF</span></span></a> bit controls whether data are shifted to the MSb or LSb first. Clearing the bit (default) configures the data to transfer to the MSb first, which conforms to traditional SPI operation, while setting the bit configures the data to transfer to the LSb first.</div></div>
+</body>
+</html>

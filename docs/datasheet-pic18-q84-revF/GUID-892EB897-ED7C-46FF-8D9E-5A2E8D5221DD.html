@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26.8.2 Hardware Gate Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1CC48BA7-A6F8-4E4A-8CC0-5A5B412F9B77.html"/>
+<link rel="next" href="GUID-23B7D427-51B5-4C99-9210-91D688BC8273.html"/>
+<link rel="up" href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html">26 TMR2 - Timer2 Module</a></li><li><a href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html">26.8 Operation Examples</a></li><li>26.8.2 Hardware Gate Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-1CC48BA7-A6F8-4E4A-8CC0-5A5B412F9B77.html" rel="prev">Software Gate Mode</a></span><span><a href="GUID-23B7D427-51B5-4C99-9210-91D688BC8273.html" rel="next">Edge Triggered Hardware Limit Mode</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD__GUID-F7395A32-07AF-4E7F-AD55-D13DDCCAC053" style="">26.8.2 Hardware Gate Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD__ID-42141-000013B7" data-ofbid="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD__ID-42141-000013B7">The Hardware Gate modes operate the same as the Software Gate mode,
+         except the TMRx_ers external signal can also gate the timer. When used with the CCP, the
+         gating extends the PWM period. If the timer is stopped when the PWM output is high, then
+         the duty cycle is also extended.</p>
+      <p class="- topic/p p" id="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD__ID-42141-000013B8" data-ofbid="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD__ID-42141-000013B8">When MODE = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD__ID-42141-000013B9">‘b00001</code>, then
+         the timer is stopped when the external signal is high. When MODE = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD__ID-42141-000013BA">‘b00010</code>, then the timer is stopped when the external
+         signal is low.</p>
+      <p class="- topic/p p" id="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD__ID-42141-000013BB" data-ofbid="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD__ID-42141-000013BB"><a class="- topic/xref xref" href="#GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD__ID-42141-000013BE"><span>Figure 26-4</span></a> illustrates the Hardware Gating mode for MODE = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD__ID-42141-000013BD">‘b00001</code> in which a high input level starts the counter.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD__ID-42141-000013BE" data-ofbid="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD__ID-42141-000013BE"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 26-4. <span id="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD__GUID-BA3030C9-87A5-47AE-BF27-68A8A7C33475" class="fig--title">Hardware Gate Mode Timing Diagram
+            (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b00001</code>)</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-A7D5234F-971E-42C7-9A7C-22A850404D9B-high.pdf#toolbar=1" width="450" height="247.32251521298176"></iframe></span>
+      </figure>
+   </div>
+
+</body>
+</html>

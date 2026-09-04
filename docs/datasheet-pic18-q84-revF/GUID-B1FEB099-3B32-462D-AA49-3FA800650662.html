@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.18 Receiving a Break — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-170B7BEC-5D31-4D5B-B3B7-8B4F40A32614.html"/>
+<link rel="next" href="GUID-5564A67A-D2D9-4F71-9D93-90FFC832D26F.html"/>
+<link rel="up" href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li>35.18 Receiving a Break</li></ol>
+  <div class="sib"><span>← <a href="GUID-170B7BEC-5D31-4D5B-B3B7-8B4F40A32614.html" rel="prev">Transmitting a Break</a></span><span><a href="GUID-5564A67A-D2D9-4F71-9D93-90FFC832D26F.html" rel="next">UART Operation During Sleep</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-B1FEB099-3B32-462D-AA49-3FA800650662__GUID-5E48423F-68BF-42AB-8801-8575AEBB3F50" style="">35.18 Receiving a Break</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The UART has counters to detect when the RX input remains in the Space state for an
+            extended period of time. When this happens, the <a class="- topic/xref xref" href="GUID-0335D11B-CDF0-4C1B-B750-F220FDA16575.html#BITFIELD_MXQ_2FM_BBB" title="Break Reception Interrupt Flag"><span><span>RXBKIF</span></span></a> bit is set.</p>
+        <p class="- topic/p p">A Break is detected when the RX input remains in the Space state for 11 bit periods for
+            asynchronous and LIN modes and 23 bit periods for DMX mode.</p>
+        <p class="- topic/p p">The user can select to receive the Break interrupt as soon as the Break is
+            detected or at the end of the Break, when the RX input returns to the Idle state. When
+            the <a class="- topic/xref xref" href="GUID-AFEE23AF-E917-46D3-BF17-879043534F4E.html#BITFIELD_K3M_SSL_BBB" title="Receive Break Interrupt Mode Select"><span><span>RXBIMD</span></span></a> bit is ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span>’, then RXBKIF
+            is set immediately upon Break detection. When RXBIMD is ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span>’, then RXBKIF is set when the RX input returns to the Idle state.</p>
+</div>
+
+</body>
+</html>

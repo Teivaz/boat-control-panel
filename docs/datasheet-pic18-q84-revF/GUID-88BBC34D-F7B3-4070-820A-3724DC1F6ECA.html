@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.12 CRC-on-Boot Module Overview — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1EF9B9DB-7161-43E0-A021-09F756202BA7.html"/>
+<link rel="next" href="GUID-37B69890-7934-493A-94CD-D8CEA8A0C8BF.html"/>
+<link rel="up" href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li>13.12 CRC-on-Boot Module Overview</li></ol>
+  <div class="sib"><span>← <a href="GUID-1EF9B9DB-7161-43E0-A021-09F756202BA7.html" rel="prev">Peripheral Module Disable</a></span><span><a href="GUID-37B69890-7934-493A-94CD-D8CEA8A0C8BF.html" rel="next">Enabling the Module</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-79EE08B1-F576-421F-8F60-8329B36AC156" style="">13.12 CRC-on-Boot Module Overview</h1>
+
+<div class="- topic/body body"><p class="- topic/shortdesc shortdesc"></p>
+        <p class="- topic/p p">The CRC-on-boot module performs a CRC (Cyclic Redundancy Check) on user-defined segments
+            of nonvolatile memory on device power-up and compares the resulting values to
+            predetermined expected values. This check acts independent of program memory and
+            executes before any user code. If a mismatch occurs, the CRC-on-boot module can be
+            configured to indicate this mismatch in several configurable ways.</p>
+        <p class="- topic/p p">The CRC-on-boot has the following features:</p>
+        <ul class="- topic/ul ul" id="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__UL_XVP_4MS_HKB" data-ofbid="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__UL_XVP_4MS_HKB">
+            <li class="- topic/li li" id="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-9CC2C270-0547-44FB-8208-229B97D69F35" data-ofbid="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-9CC2C270-0547-44FB-8208-229B97D69F35">Scanning Program Memory Boot Block</li>
+            <li class="- topic/li li" id="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-A4E3AB6F-1D58-418F-AF8D-5E8883BFD9B2" data-ofbid="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-A4E3AB6F-1D58-418F-AF8D-5E8883BFD9B2">Scanning Non-Boot Block Nonvolatile
+                    Memory<ul class="- topic/ul ul" id="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__UL_YVP_4MS_HKB" data-ofbid="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__UL_YVP_4MS_HKB">
+                    <li class="- topic/li li" id="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-ABC4AC73-5A42-4564-AF77-A582F5C4CA23" data-ofbid="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-ABC4AC73-5A42-4564-AF77-A582F5C4CA23">Program Memory Application
+                        Block</li>
+                    <li class="- topic/li li" id="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-FBC88616-2B81-4610-A3D2-EB59BC5FFF9D" data-ofbid="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-FBC88616-2B81-4610-A3D2-EB59BC5FFF9D">Program Memory SAF
+                        segment</li>
+                    <li class="- topic/li li" id="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-409740D1-1BB0-4792-BFCF-6A186B11DE74" data-ofbid="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-409740D1-1BB0-4792-BFCF-6A186B11DE74">Configuration Words</li>
+                    <li class="- topic/li li" id="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-87570383-3183-44F6-A381-9C5D05A0AB58" data-ofbid="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-87570383-3183-44F6-A381-9C5D05A0AB58">Data EEPROM</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-9CF5522B-A4A0-4E30-A4EF-F9EF5BF214DF" data-ofbid="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-9CF5522B-A4A0-4E30-A4EF-F9EF5BF214DF">Ability to either halt the device on
+                mismatch or continue to user code execution</li>
+            <li class="- topic/li li" id="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-9F6B2DE8-8D38-4F6F-8AED-DF785A41A752" data-ofbid="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA__GUID-9F6B2DE8-8D38-4F6F-8AED-DF785A41A752">Mismatch indicating the output can be
+                enabled/disabled, relocated and configured as open-drain</li>
+        </ul>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-37B69890-7934-493A-94CD-D8CEA8A0C8BF.html">13.12.1 Enabling the Module</a></li><li><a href="GUID-DCAEBAF1-75B2-4843-AB0D-8ED6FDBB227B.html">13.12.2 Polynomial, Seed, and Expected Values</a></li><li><a href="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706.html">13.12.3 Memory Selection</a></li><li><a href="GUID-B1C6E55B-82A3-4756-BC46-26EEC54FD7B8.html">13.12.4 Output Pin Setup</a></li><li><a href="GUID-478F5C1C-3D45-4B20-9516-C1B762D14FF8.html">13.12.5 CRC Calculation</a></li><li><a href="GUID-F546D623-7E89-45E0-8489-1817163148C0.html">13.12.6 Mismatch Condition</a></li></ul>
+</nav>
+</body>
+</html>

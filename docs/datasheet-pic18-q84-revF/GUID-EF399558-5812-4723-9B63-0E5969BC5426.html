@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.3.3.1 Sample Point — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1D45D3A2-247B-4C23-ACD6-4131BDF1900C.html"/>
+<link rel="next" href="GUID-07A72FEC-A3BF-4E8F-9780-FBEE206FCAFB.html"/>
+<link rel="up" href="GUID-1D45D3A2-247B-4C23-ACD6-4131BDF1900C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html">38.3 Configuration</a></li><li><a href="GUID-1D45D3A2-247B-4C23-ACD6-4131BDF1900C.html">38.3.3 CAN FD Bit Time Configuration</a></li><li>38.3.3.1 Sample Point</li></ol>
+  <div class="sib"><span>← <a href="GUID-1D45D3A2-247B-4C23-ACD6-4131BDF1900C.html" rel="prev">CAN FD Bit Time Configuration</a></span><span><a href="GUID-07A72FEC-A3BF-4E8F-9780-FBEE206FCAFB.html" rel="next">Propagation Delay</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-EF399558-5812-4723-9B63-0E5969BC5426__GUID-6903603E-E268-484C-A5A8-218684B353D9" style="">38.3.3.1 Sample Point</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The sample point is the point in the bit time at which the logic level of
+            the bit is read and interpreted. The sample point in percent can be calculated using
+                <a class="- topic/xref xref" href="#GUID-EF399558-5812-4723-9B63-0E5969BC5426__EQUATION-FIGURE_WWG_W11_P3B"><span>Equation 38-7</span></a> and <a class="- topic/xref xref" href="#GUID-EF399558-5812-4723-9B63-0E5969BC5426__EQUATION-FIGURE_BPH_1B1_P3B"><span>Equation 38-8</span></a>.</p>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-EF399558-5812-4723-9B63-0E5969BC5426__EQUATION-FIGURE_WWG_W11_P3B" data-ofbid="GUID-EF399558-5812-4723-9B63-0E5969BC5426__EQUATION-FIGURE_WWG_W11_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-7. <span id="GUID-EF399558-5812-4723-9B63-0E5969BC5426__GUID-66411FCE-1247-4632-AD33-C764E3DFCD4B" class="fig--title">Nominal Sample Point
+                    (%)</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <mi mathvariant="italic">N</mi>
+                            <mi mathvariant="italic">S</mi>
+                            <mi mathvariant="italic">P</mi>
+                            <mo mathvariant="italic">=</mo>
+                            <mfrac>
+                                <mrow>
+                                    <mn mathvariant="italic">1</mn>
+                                    <mo mathvariant="italic">+</mo>
+                                    <mi mathvariant="italic">N</mi>
+                                    <mi mathvariant="italic">T</mi>
+                                    <mi mathvariant="italic">S</mi>
+                                    <mi mathvariant="italic">E</mi>
+                                    <mi mathvariant="italic">G</mi>
+                                    <mn mathvariant="italic">1</mn>
+                                </mrow>
+                                <mrow>
+                                    <mfrac>
+                                        <mrow>
+                                            <mi mathvariant="italic">N</mi>
+                                            <mi mathvariant="italic">B</mi>
+                                            <mi mathvariant="italic">T</mi>
+                                        </mrow>
+                                        <mrow>
+                                            <mi mathvariant="italic">N</mi>
+                                            <mi mathvariant="italic">T</mi>
+                                            <mi mathvariant="italic">Q</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </mfrac>
+                            <mo mathvariant="italic">×</mo>
+                            <mn mathvariant="italic">100</mn>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-EF399558-5812-4723-9B63-0E5969BC5426__EQUATION-FIGURE_BPH_1B1_P3B" data-ofbid="GUID-EF399558-5812-4723-9B63-0E5969BC5426__EQUATION-FIGURE_BPH_1B1_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-8. <span id="GUID-EF399558-5812-4723-9B63-0E5969BC5426__GUID-9E6DD9E0-A310-492B-B478-41332CCC6D51" class="fig--title">Data Sample Point (%)</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <mi mathvariant="italic">D</mi>
+                            <mi mathvariant="italic">S</mi>
+                            <mi mathvariant="italic">P</mi>
+                            <mo mathvariant="italic">=</mo>
+                            <mfrac>
+                                <mrow>
+                                    <mn mathvariant="italic">1</mn>
+                                    <mo mathvariant="italic">+</mo>
+                                    <mi mathvariant="italic">D</mi>
+                                    <mi mathvariant="italic">T</mi>
+                                    <mi mathvariant="italic">S</mi>
+                                    <mi mathvariant="italic">E</mi>
+                                    <mi mathvariant="italic">G</mi>
+                                    <mn mathvariant="italic">1</mn>
+                                </mrow>
+                                <mrow>
+                                    <mfrac>
+                                        <mrow>
+                                            <mi mathvariant="italic">D</mi>
+                                            <mi mathvariant="italic">B</mi>
+                                            <mi mathvariant="italic">T</mi>
+                                        </mrow>
+                                        <mrow>
+                                            <mi mathvariant="italic">D</mi>
+                                            <mi mathvariant="italic">T</mi>
+                                            <mi mathvariant="italic">Q</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </mfrac>
+                            <mo mathvariant="italic">×</mo>
+                            <mn mathvariant="italic">100</mn>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

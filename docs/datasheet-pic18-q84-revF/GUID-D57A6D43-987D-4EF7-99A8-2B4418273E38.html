@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.6 Interrupt and DMA Triggers — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10.html"/>
+<link rel="next" href="GUID-301A5CE2-A3DB-4622-8072-4704E042FCCF.html"/>
+<link rel="up" href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li>28.6 Interrupt and DMA Triggers</li></ol>
+  <div class="sib"><span>← <a href="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10.html" rel="prev">UTMR Output Modes</a></span><span><a href="GUID-301A5CE2-A3DB-4622-8072-4704E042FCCF.html" rel="next">Operation During Sleep</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-0C0D9ADE-EBE8-4928-9E4B-C20091B1FBB9" style="">28.6 Interrupt and DMA Triggers</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The Universal Timer module provides three interrupt sources – Period
+            Register match, Zero and Capture.</p>
+        <ol class="- topic/ol ol" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__OL_LX4_Y5N_R3B" data-ofbid="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__OL_LX4_Y5N_R3B">
+            <li class="- topic/li li" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-6A7B4037-B982-47AF-A499-435BD75CA24C" data-ofbid="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-6A7B4037-B982-47AF-A499-435BD75CA24C">A PR match interrupt occurs and the
+                    <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#BITFIELD_OY3_RV4_33B" title="Period Match Interrupt Flag(10,11,12)">PRIF</a> interrupt flag in the TUxyCON1 register
+                is set when the TUxyTMR counter register increments and becomes equal to the TUxyPR
+                period register. The PRIF interrupt will not occur if the user writes the PR value
+                to the TUxyTMR counter register directly.</li>
+            <li class="- topic/li li" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-6BC1B105-FCB0-4D86-9C8A-3E55E73984EB" data-ofbid="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-6BC1B105-FCB0-4D86-9C8A-3E55E73984EB">A zero interrupt occurs and the <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#BITFIELD_MYN_VV4_33B" title="Zero Interrupt Flag(10,11)">ZIF</a> interrupt flag in the TUxyCON1 register is
+                set when the TUxyTMR counter register becomes equal to zero. This occurs when:<ul class="- topic/ul ul" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__UL_Y2D_VZV_3LB" data-ofbid="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__UL_Y2D_VZV_3LB">
+                    <li class="- topic/li li" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-E94BBEE6-EE9E-4D1E-BCC6-D25A33BDCFA2" data-ofbid="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-E94BBEE6-EE9E-4D1E-BCC6-D25A33BDCFA2">A Reset condition resets the counter to zero, or</li>
+                    <li class="- topic/li li" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-E2BE27B1-45A0-49FB-B8DC-9A81C18A1365" data-ofbid="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-E2BE27B1-45A0-49FB-B8DC-9A81C18A1365">Software sets the <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#ID-00000013" title="Timer Counter “Clear” Command(5,6)"><span><span>CLR</span></span></a> command bit, or</li>
+                    <li class="- topic/li li" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-91BF56A2-8B3B-48A2-B1C5-6D4E4A047F4D" data-ofbid="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-91BF56A2-8B3B-48A2-B1C5-6D4E4A047F4D">Counter naturally overflows to zero, or</li>
+                    <li class="- topic/li li" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-F727EAE5-E391-49EB-96B3-A37E91B8AF04" data-ofbid="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-F727EAE5-E391-49EB-96B3-A37E91B8AF04">User writes zero to the
+                        TUxyTMR counter register directly</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-7248D770-AE4F-430A-B1AA-E38C4C8ED27B" data-ofbid="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-7248D770-AE4F-430A-B1AA-E38C4C8ED27B">A capture interrupt occurs and the
+                    <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#BITFIELD_YLR_VV4_33B" title="Capture Interrupt Flag(10,11,13)">CIF</a> interrupt flag in the TUxyCON1 register is
+                set whenever a capture event occurs, and the TUxyCR capture register is updated with
+                the counter value. See <a class="- topic/xref xref" href="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0.html">Timer Counter and Capture Registers</a> for a list
+                of capture event conditions. The CIF interrupt trigger requires a running
+                timer.</li>
+        </ol>
+        <div class="- topic/p p">Each interrupt has a corresponding enable bit (<a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#BITFIELD_OY3_RV4_33B" title="Period Match Interrupt Enable(9,10)">PRIE</a>, <a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#BITFIELD_MYN_VV4_33B" title="Zero Interrupt Enable(9)">ZIE</a> and <a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#BITFIELD_YLR_VV4_33B" title="Capture Interrupt Enable(9,11)">CIE</a>) in the TUxyCON0 register. Setting any of the three interrupt enable
+            bits will allow the module to generate a corresponding interrupt. The interrupt flags
+                (<a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#BITFIELD_OY3_RV4_33B" title="Period Match Interrupt Flag(10,11,12)">PRIF</a>, <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#BITFIELD_MYN_VV4_33B" title="Zero Interrupt Flag(10,11)">ZIF</a> and <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#BITFIELD_YLR_VV4_33B" title="Capture Interrupt Flag(10,11,13)">CIF</a>) will set even if the corresponding interrupt is disabled.</div>
+        <p class="- topic/p p">All the three interrupt flags are combined together to form one single, top system level
+            TUxyIF interrupt flag in the PIRx register, as shown in <a class="- topic/xref xref" href="#GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__FIG_UZB_SBL_Q3B"><span>Figure 28-13</span></a>. The TUxyIF interrupt flag is a read-only bit in the PIRx register,
+            which is automatically cleared when all the three interrupt flags (PRIF, ZIF and CIF)
+            are cleared.</p>
+        <p class="- topic/p p">The Universal Timer module also provides the three interrupt sources to
+            trigger DMA transfers (PRIF, ZIF and CIF conditions). The TUxyPR period register is also
+            double-buffered to facilitate DMA loading of the register in response to a CIF interrupt
+            trigger.</p>
+        <div class="- topic/p p">
+            <div class="- topic/note note important note_important" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-5ED62424-0C5E-4764-9D75-BA66317B757A" data-ofbid="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-5ED62424-0C5E-4764-9D75-BA66317B757A"><span class="note__title">Important:</span> 
+                <ol class="- topic/ol ol" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__OL_KJS_GWN_R3B" data-ofbid="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__OL_KJS_GWN_R3B">
+                    <li class="- topic/li li" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-EDFA5705-9FDD-408B-BDB0-46B101098019" data-ofbid="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-EDFA5705-9FDD-408B-BDB0-46B101098019">The interrupts need not be
+                        enabled with their associated enable bits to be used as triggers for DMA
+                        transfer.</li>
+                    <li class="- topic/li li" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-27DFE8C6-5BB6-45D8-80D5-43286B584E4A" data-ofbid="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-27DFE8C6-5BB6-45D8-80D5-43286B584E4A">The interrupts must be
+                        enabled for the TUxyIF flag to be set in the PIRx register as shown in <a class="- topic/xref xref" href="#GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__FIG_UZB_SBL_Q3B"><span>Figure 28-13</span></a>.</li>
+                </ol>
+            </div>
+            <figure class="- topic/fig fig fignone" id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__FIG_UZB_SBL_Q3B" data-ofbid="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__FIG_UZB_SBL_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 28-13. <span id="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38__GUID-14567CED-E2F2-408A-8CC4-D47E7B64294A" class="fig--title">Interrupt and DMA Trigger</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-F19B6FAF-C682-4463-B2D0-666B43191028-high.pdf#toolbar=1" width="450" height="363.80434782608694"></iframe></span>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

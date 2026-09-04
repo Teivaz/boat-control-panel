@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.10.1 Sleep Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0FFDB432-5731-43B9-87D8-438C7F179022.html"/>
+<link rel="next" href="GUID-2C5B104A-672B-47CE-93F8-AEFC6F4BBA87.html"/>
+<link rel="up" href="GUID-0FFDB432-5731-43B9-87D8-438C7F179022.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li><a href="GUID-0FFDB432-5731-43B9-87D8-438C7F179022.html">16.10 Power-Saving Mode Operation</a></li><li>16.10.1 Sleep Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-0FFDB432-5731-43B9-87D8-438C7F179022.html" rel="prev">Power-Saving Mode Operation</a></span><span><a href="GUID-2C5B104A-672B-47CE-93F8-AEFC6F4BBA87.html" rel="next">Idle Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-7991DEE1-6919-4D00-9DBB-05E545E27601__GUID-ABFF341F-BAA5-4AE8-8D7F-B9ADF8E8C3C1" style="">16.10.1 Sleep Mode</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">When the device enters Sleep mode, the system clock to the module is shut down, therefore
+            no DMA operation is supported in Sleep. Once the system clock is disabled, the requisite
+            read and write clocks are also disabled, without which the DMA cannot perform any of its
+            tasks.</p>
+        <p class="- topic/p p">Any transfers that may be in progress are resumed on exiting from Sleep mode. Register
+            contents are not affected by the device entering or leaving Sleep mode. It is
+            recommended that DMA transactions be allowed to finish before entering Sleep mode.</p>
+    </div>
+
+</body>
+</html>

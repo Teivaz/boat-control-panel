@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>29.4.5 PWM Duty Cycle — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03.html"/>
+<link rel="next" href="GUID-945E0F3E-3F33-4C8F-B057-B2956F4FA16B.html"/>
+<link rel="up" href="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html">29 CCP - Capture/Compare/PWM Module</a></li><li><a href="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE.html">29.4 PWM Overview</a></li><li>29.4.5 PWM Duty Cycle</li></ol>
+  <div class="sib"><span>← <a href="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03.html" rel="prev">PWM Period</a></span><span><a href="GUID-945E0F3E-3F33-4C8F-B057-B2956F4FA16B.html" rel="next">PWM Resolution</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__GUID-2B246EF8-E7EC-44B6-87CD-D7DB33452EA4" style="">29.4.5 PWM Duty Cycle</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__ID-42109-000006FA" data-ofbid="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__ID-42109-000006FA">The PWM duty cycle is specified by writing a 10-bit value to the
+         CCPRx register. The alignment of the 10-bit value is determined by the <a class="- topic/xref xref" href="GUID-B5E1B30C-10E2-4929-B5C4-0F271B634DD1.html#ID-00000011" title="CCPxRH:L Value Alignment (PWM mode)">FMT</a>
+         bit (see <a class="- topic/xref xref" href="#GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__ID-42109-00000700"><span>Figure 29-5</span></a>). The CCPRx register
+         can be written to at any time. However, the duty cycle value is not latched onto the 10-bit
+         buffer until after a match between T2PR and T2TMR.</p>
+      <p class="- topic/p p" id="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__ID-42109-000006FC" data-ofbid="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__ID-42109-000006FC"> The equations below are used to calculate the PWM pulse width and
+         the PWM duty cycle ratio.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__ID-42109-00000700" data-ofbid="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__ID-42109-00000700"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 29-5. <span id="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__GUID-4EE0BA50-81F4-4454-891E-A63B75387C5A" class="fig--title">PWM 10-Bit Alignment</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-6A72CF39-CEDD-4D8F-97E0-D7F4E504CB41-high.pdf#toolbar=1" width="450" height="344.7750865051903"></iframe></span>
+      </figure>
+      <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__EQUATION-DISPLAY_XRD_BF4_N1B" data-ofbid="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__EQUATION-DISPLAY_XRD_BF4_N1B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 29-2. <span id="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__GUID-70437A12-95C0-4B04-A223-45EB0EED9B09" class="fig--title">Pulse Width</span></span></figcaption>
+         
+         <div class="+ topic/div equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                  <mrow>
+                     <mi>P</mi>
+                     <mi>u</mi>
+                     <mi>l</mi>
+                     <mi>s</mi>
+                     <mi>e</mi>
+                     <mo>⁢</mo>
+                     <mtext> </mtext>
+                     <mi>W</mi>
+                     <mi>i</mi>
+                     <mi>d</mi>
+                     <mi>t</mi>
+                     <mi>h</mi>
+                     <mo>⁢</mo>
+                     <mo>=</mo>
+                     <mtext> </mtext>
+                     <mrow>
+                        <mo>(</mo>
+                        <mi>C</mi>
+                        <mi>C</mi>
+                        <mi>P</mi>
+                        <mi>R</mi>
+                        <mi>x</mi>
+                        <mi>H</mi>
+                        <mo>:</mo>
+                        <mi>C</mi>
+                        <mi>C</mi>
+                        <mi>P</mi>
+                        <mi>R</mi>
+                        <mi>x</mi>
+                        <mi>L</mi>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>r</mi>
+                        <mi>e</mi>
+                        <mi>g</mi>
+                        <mi>i</mi>
+                        <mi>s</mi>
+                        <mi>t</mi>
+                        <mi>e</mi>
+                        <mi>r</mi>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>v</mi>
+                        <mi>a</mi>
+                        <mi>l</mi>
+                        <mi>u</mi>
+                        <mi>e</mi>
+                        <mo>)</mo>
+                        <mtext> </mtext>
+                        <mo>•</mo>
+                        <mtext> </mtext>
+                        <msub>
+                           <mrow>
+                              <mi>T</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>O</mi>
+                              <mi>S</mi>
+                              <mi>C</mi>
+                           </mrow>
+                        </msub>
+                     </mrow>
+                     <mo>⁢</mo>
+                     <mtext> </mtext>
+                     <mo>•</mo>
+                     <mtext> </mtext>
+                     <mrow>
+                        <mo>(</mo>
+                        <mi>T</mi>
+                        <mi>M</mi>
+                        <mi>R</mi>
+                        <mn>2</mn>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>Pr</mi>
+                        <mi>e</mi>
+                        <mi>s</mi>
+                        <mi>c</mi>
+                        <mi>a</mi>
+                        <mi>l</mi>
+                        <mi>e</mi>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>V</mi>
+                        <mi>a</mi>
+                        <mi>l</mi>
+                        <mi>u</mi>
+                        <mi>e</mi>
+                        <mo>)</mo>
+                     </mrow>
+                  </mrow>
+               </math></div>
+      </figure>
+      <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__EQUATION-DISPLAY_GMZ_ZQS_N1B" data-ofbid="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__EQUATION-DISPLAY_GMZ_ZQS_N1B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 29-3. <span id="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__GUID-657DC80F-D5BE-4091-938B-462BA02E32D2" class="fig--title">Duty Cycle</span></span></figcaption>
+         
+         <div class="+ topic/div equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                  <mrow>
+                     <mi>D</mi>
+                     <mi>u</mi>
+                     <mi>t</mi>
+                     <mi>y</mi>
+                     <mo>⁢</mo>
+                     <mi>C</mi>
+                     <mi>y</mi>
+                     <mi>c</mi>
+                     <mi>l</mi>
+                     <mi>e</mi>
+                     <mi>R</mi>
+                     <mi>a</mi>
+                     <mi>t</mi>
+                     <mi>i</mi>
+                     <mi>o</mi>
+                     <mo>⁢</mo>
+                     <mo>=</mo>
+                     <mfrac>
+                        <mrow>
+                           <mo>(</mo>
+                           <mi>C</mi>
+                           <mi>C</mi>
+                           <mi>P</mi>
+                           <mi>R</mi>
+                           <mi>x</mi>
+                           <mi>H</mi>
+                           <mo>:</mo>
+                           <mi>C</mi>
+                           <mi>C</mi>
+                           <mi>P</mi>
+                           <mi>R</mi>
+                           <mi>x</mi>
+                           <mi>L</mi>
+                           <mo>⁢</mo>
+                           <mtext> </mtext>
+                           <mo>⁢</mo>
+                           <mi>r</mi>
+                           <mi>e</mi>
+                           <mi>g</mi>
+                           <mi>i</mi>
+                           <mi>s</mi>
+                           <mi>t</mi>
+                           <mi>e</mi>
+                           <mi>r</mi>
+                           <mo>⁢</mo>
+                           <mtext> </mtext>
+                           <mi>v</mi>
+                           <mi>a</mi>
+                           <mi>l</mi>
+                           <mi>u</mi>
+                           <mi>e</mi>
+                           <mo>)</mo>
+                        </mrow>
+                        <mrow>
+                           <mn>4</mn>
+                           <mrow>
+                              <mo>(</mo>
+                              <mi>T</mi>
+                              <mn>2</mn>
+                              <mi>P</mi>
+                              <mi>R</mi>
+                              <mo>⁢</mo>
+                              <mo>+</mo>
+                              <mn>1</mn>
+                              <mo>)</mo>
+                           </mrow>
+                        </mrow>
+                     </mfrac>
+                  </mrow>
+               </math></div>
+      </figure>
+      <p class="- topic/p p" id="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__ID-42109-0000070E" data-ofbid="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__ID-42109-0000070E">The CCPRx register is used to double buffer the PWM duty cycle. This
+         double buffering is essential for glitchless PWM operation.</p>
+      <p class="- topic/p p" id="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__ID-42109-0000070F" data-ofbid="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__ID-42109-0000070F">The 8-bit timer T2TMR register is concatenated with either the 2-bit
+         internal system clock (F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>), or two bits of the prescaler, to create the 10-bit
+         time base. The system clock is used if the Timer2 prescaler is set to 1:1.</p>
+      <p class="- topic/p p" id="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__ID-42109-00000711" data-ofbid="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C__ID-42109-00000711">When the 10-bit time base matches the CCPRx register, then the CCPx
+         pin is cleared (see <a class="- topic/xref xref" href="GUID-C148635E-2BAC-4402-A159-F2C3B83BB78A.html#GUID-C148635E-2BAC-4402-A159-F2C3B83BB78A__ID-42109-000006AE"><span>Figure 29-4</span></a>).</p>
+   </div>
+
+</body>
+</html>

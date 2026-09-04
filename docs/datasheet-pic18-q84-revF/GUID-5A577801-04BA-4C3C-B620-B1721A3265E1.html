@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.2.6.3 Transfer Counter in Client Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3F03B3CC-533E-4185-8B1B-11516F2B93C0.html"/>
+<link rel="next" href="GUID-58292C67-26C3-49E8-9D78-1E217D2E4B0C.html"/>
+<link rel="up" href="GUID-38725C10-0F95-484B-825E-B276E4433803.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html">36.2 SPI Operation</a></li><li><a href="GUID-38725C10-0F95-484B-825E-B276E4433803.html">36.2.6 Transfer Counter</a></li><li>36.2.6.3 Transfer Counter in Client Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-3F03B3CC-533E-4185-8B1B-11516F2B93C0.html" rel="prev">Variable Transfer Size Mode (BMODE = 1)</a></span><span><a href="GUID-58292C67-26C3-49E8-9D78-1E217D2E4B0C.html" rel="next">Host Mode</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-5A577801-04BA-4C3C-B620-B1721A3265E1__GUID-48548E78-0E87-4E2C-8B98-5CDF702949B0" style="">36.2.6.3 Transfer Counter in Client Mode</h1><div class="- topic/body body"><p class="- topic/p p">In Client mode, the transfer counter will still decrement as data are shifted into and out of the SPI module, but it will not control data transfers. The BMODE bit along with the transfer counter is used to determine when the device will look for Client Select faults.</p><p class="- topic/p p">When BMODE = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, the <a class="- topic/xref xref" href="GUID-D60A9AB9-68EF-4F33-8387-7BA9792E0965.html#BITFIELD_TC3_3JF_RFB" title="SS_in Fault Status"><span><span>SSFLT</span></span></a> bit will be set if Client Select transitions from its Active to Inactive state during bytes of data or if it transitions before the last bit sent during the final byte (if SPIxTWIDTH ≠ <code class="+ topic/ph pr-d/codeph ph codeph">0</code>). </p><p class="- topic/p p">When BMODE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the SSFLT bit will be set if Client Select transitions from its Active to Inactive state before the final bit of each individual transfer is completed. </p><div class="- topic/p p"><div class="- topic/note note notype note_notype" id="GUID-5A577801-04BA-4C3C-B620-B1721A3265E1__GUID-2ACA720F-9FC1-438F-A49D-66DC22D97FCB" data-ofbid="GUID-5A577801-04BA-4C3C-B620-B1721A3265E1__GUID-2ACA720F-9FC1-438F-A49D-66DC22D97FCB"><span class="note__title">Note:</span> SSFLT does not have an associated interrupt, so it will be checked in the software. An ideal time to do this is when the End of Client Select Interrupt (EOSIF) is triggered (see the <a class="- topic/xref xref" href="GUID-E9A5E389-63E6-40A1-B1C5-FF0C5AA93D19.html">Start of Client Select and End of Client Select Interrupts</a> section).</div></div></div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.4 ADC Charge Pump — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-27235A57-0619-428A-86DB-257BEE32FC2F.html"/>
+<link rel="next" href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html"/>
+<link rel="up" href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li>43.4 ADC Charge Pump</li></ol>
+  <div class="sib"><span>← <a href="GUID-27235A57-0619-428A-86DB-257BEE32FC2F.html" rel="prev">ADC Acquisition Requirements</a></span><span><a href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html" rel="next">Computation Operation</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-9895C085-9A4F-4B3E-8AB9-CCFC96B8CA87__GUID-3FF1D64D-FBE1-4309-8D89-62CBAEE492E1" style="">43.4 ADC Charge Pump</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The ADC module has a dedicated charge pump which can be controlled through
+            the <a class="- topic/xref xref" href="GUID-C6FE20E2-BB9A-4D71-AA26-1C4440D82825.html" title="ADCP">ADCP</a> register. The primary purpose of the charge pump is to supply a
+            constant voltage to the gates of transistor devices in the Analog-to-Digital Converter,
+            signal and reference input pass-gates, to prevent degradation of transistor performance
+            at low operating voltage.</p>
+        <p class="- topic/p p">The charge pump can be enabled by setting the <a class="- topic/xref xref" href="GUID-C6FE20E2-BB9A-4D71-AA26-1C4440D82825.html#BITFIELD_MTD_T5G_WGB" title="Charge Pump On Control"><span><span>CPON</span></span></a> bit. Once enabled, the pump will undergo a start-up time to stabilize the charge pump
+            output. Once the output stabilizes and is ready for use, the <a class="- topic/xref xref" href="GUID-C6FE20E2-BB9A-4D71-AA26-1C4440D82825.html#BITFIELD_E3G_T5G_WGB" title="Charge Pump Ready Status"><span><span>CPRDY</span></span></a> bit will be set.</p>
+    </div>
+
+</body>
+</html>

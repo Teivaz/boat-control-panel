@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>33.1 NCO Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574.html"/>
+<link rel="next" href="GUID-2013A30E-6E87-4480-991F-F4F9EDB0D782.html"/>
+<link rel="up" href="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574.html">33 NCO - Numerically Controlled Oscillator Module</a></li><li>33.1 NCO Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574.html" rel="prev">NCO - Numerically Controlled Oscillator Module</a></span><span><a href="GUID-2013A30E-6E87-4480-991F-F4F9EDB0D782.html" rel="next">NCO Clock Sources</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-BF999A68-24B9-4C97-B8FD-EDB8B60EB037__GUID-7B7D9092-940F-469D-B287-4927853DF44B" style="">33.1 NCO Operation</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The NCO operates by repeatedly adding a fixed value to an accumulator.
+            Additions occur at the input clock rate. The accumulator will overflow with a carry
+            periodically, which is the raw NCO output (NCO_overflow). This effectively reduces the
+            input clock by the ratio of the addition value to the maximum accumulator value. See the
+            following equation.</p>
+        <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-BF999A68-24B9-4C97-B8FD-EDB8B60EB037__EQUATION-DISPLAY_UH2_XXX_41B" data-ofbid="GUID-BF999A68-24B9-4C97-B8FD-EDB8B60EB037__EQUATION-DISPLAY_UH2_XXX_41B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 33-1. <span id="GUID-BF999A68-24B9-4C97-B8FD-EDB8B60EB037__GUID-344E0031-92EE-4F95-9793-F0F8AB5E9342" class="fig--title">NCO Overflow Frequency</span></span></figcaption>
+            
+            <div class="+ topic/div equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi>F</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>O</mi>
+                                    <mi>V</mi>
+                                    <mi>E</mi>
+                                    <mi>R</mi>
+                                    <mi>F</mi>
+                                    <mi>L</mi>
+                                    <mi>O</mi>
+                                    <mi>W</mi>
+                                </mrow>
+                            </msub>
+                            <mtext> </mtext>
+                            <mo>=</mo>
+                            <mtext> </mtext>
+                            <mfrac>
+                                <mrow>
+                                    <mi>N</mi>
+                                    <mi>C</mi>
+                                    <mi>O</mi>
+                                    <mo>⁢</mo>
+                                    <mtext> </mtext>
+                                    <mi>C</mi>
+                                    <mi>l</mi>
+                                    <mi>o</mi>
+                                    <mi>c</mi>
+                                    <mi>k</mi>
+                                    <mo>⁢</mo>
+                                    <mtext> </mtext>
+                                    <mi>F</mi>
+                                    <mi>r</mi>
+                                    <mi>e</mi>
+                                    <mi>q</mi>
+                                    <mi>u</mi>
+                                    <mi>e</mi>
+                                    <mi>n</mi>
+                                    <mi>c</mi>
+                                    <mi>y</mi>
+                                    <mo>⁢</mo>
+                                    <mtext> </mtext>
+                                    <mtext> </mtext>
+                                    <mo>×</mo>
+                                    <mtext> </mtext>
+                                    <mtext> </mtext>
+                                    <mi>I</mi>
+                                    <mi>n</mi>
+                                    <mi>c</mi>
+                                    <mi>r</mi>
+                                    <mi>e</mi>
+                                    <mi>m</mi>
+                                    <mi>e</mi>
+                                    <mi>n</mi>
+                                    <mi>t</mi>
+                                    <mo>⁢</mo>
+                                    <mtext> </mtext>
+                                    <mi>V</mi>
+                                    <mi>a</mi>
+                                    <mi>l</mi>
+                                    <mi>u</mi>
+                                    <mi>e</mi>
+                                </mrow>
+                                <mrow>
+                                    <msup>
+                                        <mrow>
+                                            <mn>2</mn>
+                                        </mrow>
+                                        <mrow>
+                                            <mn>20</mn>
+                                        </mrow>
+                                    </msup>
+                                </mrow>
+                            </mfrac>
+                            <mtext> </mtext>
+                        </mrow>
+                    </math></div>
+        </figure>
+        <p class="- topic/p p">It is apparent from the equation that there is a linear relationship between the
+            increment value and the overflow frequency. This linear advantage over divide-by-n
+            timers comes at the cost of output jitter. However, the jitter is always plus or minus
+            one NCO clock period that occurs periodically, depending on the division remainder. For
+            example, there is no jitter when there is no division remainder, whereas a division
+            remainder of 0.5 will result in a jitter frequency one half of the overflow
+            frequency.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-2013A30E-6E87-4480-991F-F4F9EDB0D782.html">33.1.1 NCO Clock Sources</a></li><li><a href="GUID-C7F1DC5F-87C4-4A95-8870-8010A772B781.html">33.1.2 Accumulator</a></li><li><a href="GUID-FE305690-330C-452E-89E8-11C351327392.html">33.1.3 Adder</a></li><li><a href="GUID-8BA1A58B-BA4E-4991-BCB5-B9F3A8324306.html">33.1.4 Increment Registers</a></li></ul>
+</nav>
+</body>
+</html>

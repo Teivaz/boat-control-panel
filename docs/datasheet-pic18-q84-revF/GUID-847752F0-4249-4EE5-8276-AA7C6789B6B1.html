@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.3.1 Interrupt Vector Table Base Address (IVTBASE) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-62FC3E7B-300F-4961-9F3E-68300C0CBDBF.html"/>
+<link rel="next" href="GUID-01EA66D8-D50D-49C1-92DA-0D4E8C13824A.html"/>
+<link rel="up" href="GUID-62FC3E7B-300F-4961-9F3E-68300C0CBDBF.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li><a href="GUID-62FC3E7B-300F-4961-9F3E-68300C0CBDBF.html">11.3 Interrupt Vector Table</a></li><li>11.3.1 Interrupt Vector Table Base Address (IVTBASE)</li></ol>
+  <div class="sib"><span>← <a href="GUID-62FC3E7B-300F-4961-9F3E-68300C0CBDBF.html" rel="prev">Interrupt Vector Table</a></span><span><a href="GUID-01EA66D8-D50D-49C1-92DA-0D4E8C13824A.html" rel="next">Interrupt Vector Table Contents</a> →</span></div>
+</nav>
+
+	<h1 class="- topic/title title topictitle1" id="GUID-847752F0-4249-4EE5-8276-AA7C6789B6B1__GUID-9D4AF29B-8203-4022-B9C2-7EF01130F7EB" style="">11.3.1 Interrupt Vector Table Base Address
+		(IVTBASE)</h1>
+	<div class="- topic/body body">
+		<p class="- topic/p p">The start address of the vector table is user-programmable through the <a class="- topic/xref xref" href="GUID-68C0FDF3-7A26-4084-B1D8-A08C90901A11.html" title="IVTBASE">IVTBASE</a>. The user must ensure
+the start address is such that it can encompass the entire vector table inside the program
+memory.</p>
+		<p class="- topic/p p">Each vector address is a 16-bit word (or two address locations on PIC18 devices). For ‘n’
+			interrupt sources, there are ‘2n’ address locations necessary to hold the table, starting from
+			IVTBASE as the first location. Thus, the starting address needs to be chosen such that the
+			address range from IVTBASE to “IVTBASE+2n-1” can be encompassed within the program Flash
+			memory.</p>
+		<p class="- topic/p p">For example, if the highest vector number was 81, IVTBASE needs to be chosen such that
+			“IVTBASE+0xA1” is less than the last memory location in program Flash memory.</p>
+		<p class="- topic/p p">A programmable vector table base address is useful in situations to switch between different
+			sets of vector tables, depending on the application. It can also be used when the application
+			program needs to update the existing vector table (vector address values).</p>
+		<div class="- topic/note note important note_important" id="GUID-847752F0-4249-4EE5-8276-AA7C6789B6B1__GUID-E630BF0F-9E7A-4CA3-852C-2E83D7ED6B11" data-ofbid="GUID-847752F0-4249-4EE5-8276-AA7C6789B6B1__GUID-E630BF0F-9E7A-4CA3-852C-2E83D7ED6B11"><span class="note__title">Important:</span> It is required that the user
+			assign an even address to IVTBASE for correct operation.</div>
+	</div>
+
+</body>
+</html>

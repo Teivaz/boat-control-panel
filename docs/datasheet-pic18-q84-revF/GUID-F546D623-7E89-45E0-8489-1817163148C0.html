@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.12.6 Mismatch Condition — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-478F5C1C-3D45-4B20-9516-C1B762D14FF8.html"/>
+<link rel="next" href="GUID-242EC896-6FB9-4F38-9D02-9BCA7E732B5F.html"/>
+<link rel="up" href="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li><a href="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA.html">13.12 CRC-on-Boot Module Overview</a></li><li>13.12.6 Mismatch Condition</li></ol>
+  <div class="sib"><span>← <a href="GUID-478F5C1C-3D45-4B20-9516-C1B762D14FF8.html" rel="prev">CRC Calculation</a></span><span><a href="GUID-242EC896-6FB9-4F38-9D02-9BCA7E732B5F.html" rel="next">Register Definitions: CRC and Scanner Control</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-F546D623-7E89-45E0-8489-1817163148C0__GUID-D80EAE42-1A93-44A1-ABBA-EC020EECF98D" style="">13.12.6 Mismatch Condition</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">If the CRC-on-boot module detects a mismatch between the calculated check value and the
+            expected value for the boot section, three events occur:</p>
+        <ul class="- topic/ul ul" id="GUID-F546D623-7E89-45E0-8489-1817163148C0__UL_BXQ_115_HKB" data-ofbid="GUID-F546D623-7E89-45E0-8489-1817163148C0__UL_BXQ_115_HKB">
+            <li class="- topic/li li" id="GUID-F546D623-7E89-45E0-8489-1817163148C0__GUID-FB0C9061-872A-4C04-8FBA-B26F87AE931E" data-ofbid="GUID-F546D623-7E89-45E0-8489-1817163148C0__GUID-FB0C9061-872A-4C04-8FBA-B26F87AE931E">The output pin of the CRC-on-boot
+                module (if any is selected) remains driven low.</li>
+            <li class="- topic/li li" id="GUID-F546D623-7E89-45E0-8489-1817163148C0__GUID-AD2FE334-2F60-4715-BD74-6A2D94A12C3A" data-ofbid="GUID-F546D623-7E89-45E0-8489-1817163148C0__GUID-AD2FE334-2F60-4715-BD74-6A2D94A12C3A">The <a class="- topic/xref xref" href="GUID-354E7733-7B7B-446E-BD91-FBAAF79F1166.html#BITFIELD_NR5_4SP_3KB" title="CRC-on-Boot Output 0">B0</a> bit of the <a class="- topic/xref xref" href="GUID-354E7733-7B7B-446E-BD91-FBAAF79F1166.html" title="BOOTREG">BOOTREG</a>
+                register remains ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’.</li>
+            <li class="- topic/li li" id="GUID-F546D623-7E89-45E0-8489-1817163148C0__GUID-F1E237D5-BAF0-46FE-9099-21CBE08293E4" data-ofbid="GUID-F546D623-7E89-45E0-8489-1817163148C0__GUID-F1E237D5-BAF0-46FE-9099-21CBE08293E4">The module checks the BCOE
+                Configuration bit. If it is clear, the module will continue to the non-boot CRC
+                check (if enabled), otherwise, it will continue to user code. If it is set, the
+                module will halt and not execute any further code.</li>
+        </ul>
+        <p class="- topic/p p">If the CRC-on-boot module detects a mismatch between the calculated check value and the
+            expected value for the non-boot section, three events occur:</p>
+        <ul class="- topic/ul ul" id="GUID-F546D623-7E89-45E0-8489-1817163148C0__UL_CXQ_115_HKB" data-ofbid="GUID-F546D623-7E89-45E0-8489-1817163148C0__UL_CXQ_115_HKB">
+            <li class="- topic/li li" id="GUID-F546D623-7E89-45E0-8489-1817163148C0__GUID-DE141F50-0D7A-456F-B64D-4EDB7EA0ACD0" data-ofbid="GUID-F546D623-7E89-45E0-8489-1817163148C0__GUID-DE141F50-0D7A-456F-B64D-4EDB7EA0ACD0">The output pin of the CRC-on-boot
+                module (if any is selected) remains driven low</li>
+            <li class="- topic/li li" id="GUID-F546D623-7E89-45E0-8489-1817163148C0__GUID-FC1B1DF6-7DD4-450A-B51C-699681901A31" data-ofbid="GUID-F546D623-7E89-45E0-8489-1817163148C0__GUID-FC1B1DF6-7DD4-450A-B51C-699681901A31">The <a class="- topic/xref xref" href="GUID-354E7733-7B7B-446E-BD91-FBAAF79F1166.html#BITFIELD_HXV_YQP_3KB" title="CRC-on-Boot Output 1">B1</a> bit of the <a class="- topic/xref xref" href="GUID-354E7733-7B7B-446E-BD91-FBAAF79F1166.html" title="BOOTREG">BOOTREG</a>
+                register remains ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’.</li>
+            <li class="- topic/li li" id="GUID-F546D623-7E89-45E0-8489-1817163148C0__GUID-16922EBB-99A0-47BD-A99F-BF1717D531EA" data-ofbid="GUID-F546D623-7E89-45E0-8489-1817163148C0__GUID-16922EBB-99A0-47BD-A99F-BF1717D531EA">The module checks the COE
+                Configuration bit. If it is clear, the module will continue to user code. If it is
+                set, the module will halt and not execute any further code. </li>
+        </ul>
+        <p class="- topic/p p">If a mismatch is not detected in a section (or if scanning of that section is disabled),
+            the associated bit of <a class="- topic/xref xref" href="GUID-354E7733-7B7B-446E-BD91-FBAAF79F1166.html" title="BOOTREG">BOOTREG</a> associated with that section (<a class="- topic/xref xref" href="GUID-354E7733-7B7B-446E-BD91-FBAAF79F1166.html#BITFIELD_NR5_4SP_3KB" title="CRC-on-Boot Output 0">B0</a> for boot, <a class="- topic/xref xref" href="GUID-354E7733-7B7B-446E-BD91-FBAAF79F1166.html#BITFIELD_HXV_YQP_3KB" title="CRC-on-Boot Output 1">B1</a> for non-boot) will be set. If all calculated CRC check values match their
+            expected values, the output pin of the CRC-on-boot module (if any is selected) will be
+            either driven high or released (depending on the ODCON Configuration bit) and user code
+            will be executed beginning from the Reset vector. </p>
+</div>
+
+</body>
+</html>

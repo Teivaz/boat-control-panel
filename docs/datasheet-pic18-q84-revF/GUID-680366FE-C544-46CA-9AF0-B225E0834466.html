@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>31.1.3 Push-Pull Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5ED05BFA-A754-45A2-8095-4822077209DE.html"/>
+<link rel="next" href="GUID-185D8F95-F4F8-47B8-BD5D-3E89287A2E99.html"/>
+<link rel="up" href="GUID-EDAB9182-6E78-4A05-8B19-C26925E4D20D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE.html">31 PWM - Pulse-Width Modulator with Compare</a></li><li><a href="GUID-EDAB9182-6E78-4A05-8B19-C26925E4D20D.html">31.1 Output Slices</a></li><li>31.1.3 Push-Pull Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-5ED05BFA-A754-45A2-8095-4822077209DE.html" rel="prev">Toggled Compare</a></span><span><a href="GUID-185D8F95-F4F8-47B8-BD5D-3E89287A2E99.html" rel="next">Period Timer</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-680366FE-C544-46CA-9AF0-B225E0834466__GUID-61B8BB74-3DB6-471A-AD51-1288C4EDA8AA" style="">31.1.3 Push-Pull Mode</h1>
+<div class="- topic/body body">
+<div class="- topic/p p">The Push-Pull mode is enabled by setting the <a class="- topic/xref xref" href="GUID-A2658F96-7A3A-4149-B5C5-623B6B3E974F.html#ID-0000000C" title="Push-Pull Mode Enable"><span><span>PPEN</span></span></a> bit.
+            Push-Pull operates only in the Left Aligned and Right Aligned modes. In the Push-Pull
+            mode, the outputs are Active every other PWM period. PWMx_SaP1_out is Active when the
+            PWMx_SaP2_out is not and the PWMx_SaP2_out is Active when the PWMx_SaP1_out is not. When
+            the parameter value (P1 or P2) is greater than the period value (PR), then the
+            corresponding output is Active for one full PWM period. The following figures illustrate
+            timing examples of Left and Right Aligned Push-Pull modes. <figure class="- topic/fig fig fignone" id="GUID-680366FE-C544-46CA-9AF0-B225E0834466__FIG_B2J_4WQ_VGB" data-ofbid="GUID-680366FE-C544-46CA-9AF0-B225E0834466__FIG_B2J_4WQ_VGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 31-13. <span id="GUID-680366FE-C544-46CA-9AF0-B225E0834466__GUID-9F8A60F7-FAC8-4E28-9E68-409158A25A9B" class="fig--title">Left Aligned Push-Pull Mode
+                    Timing Diagram</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-342B1CBE-0E61-4B42-B284-F80E7144D26B-high.pdf#toolbar=1" width="609.52" height="313.4"></iframe></span>
+            </figure><figure class="- topic/fig fig fignone" id="GUID-680366FE-C544-46CA-9AF0-B225E0834466__FIG_LW4_PWQ_VGB" data-ofbid="GUID-680366FE-C544-46CA-9AF0-B225E0834466__FIG_LW4_PWQ_VGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 31-14. <span id="GUID-680366FE-C544-46CA-9AF0-B225E0834466__GUID-DF1955D2-CA9E-4C11-8105-956A1217DBD0" class="fig--title">Right Aligned Push-Pull Mode
+                    Timing Diagram</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-8C7B18CB-257B-4349-B06D-01F52EDCD3D7-high.pdf#toolbar=1" width="609.52" height="313.4"></iframe></span>
+            </figure></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>45.9 Analog Input Connection Considerations — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BC9AC0B3-20AC-46EF-9A2C-5DCA61D227B6.html"/>
+<link rel="next" href="GUID-A6B8240F-2993-4A04-B92C-102E48C43DF2.html"/>
+<link rel="up" href="GUID-90365EBC-43EB-4517-8E49-99028902B25E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-90365EBC-43EB-4517-8E49-99028902B25E.html">45 CMP - Comparator Module</a></li><li>45.9 Analog Input Connection Considerations</li></ol>
+  <div class="sib"><span>← <a href="GUID-BC9AC0B3-20AC-46EF-9A2C-5DCA61D227B6.html" rel="prev">Comparator Response Time</a></span><span><a href="GUID-A6B8240F-2993-4A04-B92C-102E48C43DF2.html" rel="next">Operation in Sleep Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__GUID-DE1F7118-07DD-4A97-A8CC-61B050030A93" style="">45.9 Analog Input Connection
+        Considerations</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__ID-42111-00000528" data-ofbid="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__ID-42111-00000528">A simplified circuit for an analog input is shown in <a class="- topic/xref xref" href="#GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__ID-42111-0000053C"><span>Figure 45-3</span></a>. Since the analog input pins share their connection
+            with a digital input, they have reverse biased ESD protection diodes to V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub>
+            and V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub>. The analog input, therefore, must be between V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub> and
+                V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub>. If the input voltage deviates from this range by more than 0.6V in
+            either direction, one of the diodes is forward biased and abnormal behavior may
+            occur.</p>
+        <p class="- topic/p p" id="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__ID-42111-0000052E" data-ofbid="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__ID-42111-0000052E">A maximum source impedance of 10 kΩ is recommended for the analog
+            sources. Also, any external component connected to an analog input pin, such as a
+            capacitor or a Zener diode, will have very little leakage current to minimize corrupting
+            the result.</p>
+        <div class="- topic/note note note note_note" id="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__GUID-CDD2D6F2-B080-40E3-B98A-FDBA3C420C96" data-ofbid="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__GUID-CDD2D6F2-B080-40E3-B98A-FDBA3C420C96"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__GUID-A4B2B216-4B92-4018-BE5E-F7E2B2920419" data-ofbid="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__GUID-A4B2B216-4B92-4018-BE5E-F7E2B2920419">
+                <li class="- topic/li li" id="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__ID-42111-00000537" data-ofbid="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__ID-42111-00000537">When reading a PORT register, all pins configured as
+                    analog inputs will read as a ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’. Pins configured as digital
+                    inputs will convert as an analog input, according to the input
+                    specification.</li>
+                <li class="- topic/li li" id="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__ID-42111-0000053A" data-ofbid="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__ID-42111-0000053A">Analog levels on any pin defined as a digital input may
+                    cause the input buffer to consume more current than specified.</li>
+            </ol>
+        </div>
+        <figure class="- topic/fig fig fignone" id="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__ID-42111-0000053C" data-ofbid="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__ID-42111-0000053C"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 45-3. <span id="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915__GUID-CC0D270D-4375-4BB9-AFCC-D22528DA36A8" class="fig--title">Analog Input Model</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-2795F2FF-1AA6-41A5-9E7B-B3F86CB7CAAF-high.pdf#toolbar=1" width="450" height="272.0132255694342"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

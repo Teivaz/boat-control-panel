@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10.3.10.1 Table Pointer Register — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4.html"/>
+<link rel="next" href="GUID-8757CFCA-3AA4-47D5-8F28-08585B19439F.html"/>
+<link rel="up" href="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html">10 NVM - Nonvolatile Memory Module</a></li><li><a href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html">10.3 Program Flash Memory (PFM)</a></li><li><a href="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4.html">10.3.10 Table Pointer Operations</a></li><li>10.3.10.1 Table Pointer Register</li></ol>
+  <div class="sib"><span>← <a href="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4.html" rel="prev">Table Pointer Operations</a></span><span><a href="GUID-8757CFCA-3AA4-47D5-8F28-08585B19439F.html" rel="next">Table Latch Register</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-D1A9B600-9EF4-4B28-80CC-8114E2B5C04F__GUID-C1BD43BE-CFD1-4230-B147-F746CE688618" style="">10.3.10.1 Table Pointer Register</h1><div class="- topic/body concept/conbody body conbody"><p class="- topic/p p" id="GUID-D1A9B600-9EF4-4B28-80CC-8114E2B5C04F__ID-42121-000001AE" data-ofbid="GUID-D1A9B600-9EF4-4B28-80CC-8114E2B5C04F__ID-42121-000001AE">The Table Pointer (<a class="- topic/xref xref" href="GUID-23BF27B8-E95B-449C-B987-532E5840650F.html" title="TBLPTR">TBLPTR</a>) register
+         addresses a byte within the program memory. The TBLPTR comprises three SFR registers: Table
+         Pointer Upper Byte, Table Pointer High Byte and Table Pointer Low Byte
+         (TBLPTRU:TBLPTRH:TBLPTRL). These three registers join to form a 22-bit wide pointer (bits 0
+         through 21). The bits 0 through 20 allow the device to address up to 2 Mbytes of program
+         memory space. Bit 21 allows access to the Device ID, the User ID, Configuration bits as
+         well as the DIA and DCI.</p><p class="- topic/p p" id="GUID-D1A9B600-9EF4-4B28-80CC-8114E2B5C04F__ID-42121-000001B0" data-ofbid="GUID-D1A9B600-9EF4-4B28-80CC-8114E2B5C04F__ID-42121-000001B0">The Table Pointer register, TBLPTR, is used by the <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-D1A9B600-9EF4-4B28-80CC-8114E2B5C04F__ID-42121-000001B1">TBLRD</code> and <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-D1A9B600-9EF4-4B28-80CC-8114E2B5C04F__ID-42121-000001B2">TBLWT</code>
+         instructions. These instructions can increment and decrement TBLPTR, depending on specific
+         appended characters shown in the following table. The increment and decrement operations on
+         the TBLPTR affect only bits 0 through 20.</p><div class="table-container"><table class="- topic/table table" id="GUID-D1A9B600-9EF4-4B28-80CC-8114E2B5C04F__TABLE_GBM_QJK_WZ" data-ofbid="GUID-D1A9B600-9EF4-4B28-80CC-8114E2B5C04F__TABLE_GBM_QJK_WZ" data-cols="2"><caption class="- topic/title title tablecap" data-caption-side="top" data-is-repeated="true"><span class="table--title-label"><span class="table--title-label">Table 10-3. </span></span><span class="table--title" id="GUID-D1A9B600-9EF4-4B28-80CC-8114E2B5C04F__GUID-9F0A3B4D-C307-47B1-9DB8-594E60E22AD3">Table Pointer Operations with
+               <code class="+ topic/ph pr-d/codeph ph codeph">TBLRD</code> and <code class="+ topic/ph pr-d/codeph ph codeph">TBLWT</code> Instructions</span></caption><colgroup><col/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle">Example</td><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle">Operation on Table
+                     Pointer</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle"><code class="+ topic/ph pr-d/codeph ph codeph">TBLRD*</code><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">TBLWT*</code></p></td><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle">TBLPTR is not modified</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle"><code class="+ topic/ph pr-d/codeph ph codeph">TBLRD*+</code><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">TBLWT*+</code></p></td><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle">TBLPTR is incremented after the
+                     read/write</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle"><code class="+ topic/ph pr-d/codeph ph codeph">TBLRD*-</code><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">TBLWT*-</code></p></td><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle">TBLPTR is decremented after the
+                     read/write</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle"><code class="+ topic/ph pr-d/codeph ph codeph">TBLRD+*</code><p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">TBLWT+*</code></p></td><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle">TBLPTR is incremented before
+                     the read/write</td></tr></tbody></table></div></div>
+</body>
+</html>

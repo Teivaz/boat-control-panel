@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.5.7 Threshold Comparison — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1A758A56-0E61-4224-9CA4-D3CE2AAD110B.html"/>
+<link rel="next" href="GUID-B68D364C-3063-48D9-A9B1-6585E91E01B3.html"/>
+<link rel="up" href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html">43.5 Computation Operation</a></li><li>43.5.7 Threshold Comparison</li></ol>
+  <div class="sib"><span>← <a href="GUID-1A758A56-0E61-4224-9CA4-D3CE2AAD110B.html" rel="prev">Low-Pass Filter Mode</a></span><span><a href="GUID-B68D364C-3063-48D9-A9B1-6585E91E01B3.html" rel="next">Repetition and Sampling Options</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__GUID-A8EAD09A-DE52-4C91-ACF5-1CE7E024255A" style="">43.5.7 Threshold Comparison</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000570" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000570">At the end of each computation:</p>
+        <ul class="- topic/ul ul" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__UL_PCX_NLS_VGB" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__UL_PCX_NLS_VGB">
+            <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000571" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000571">The conversion results are captured at
+                the end-of-conversion.</li>
+            <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000573" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000573">The error (<a class="- topic/xref xref" href="GUID-A9D3BECF-B763-475C-9724-E58BD7D965F1.html" title="ADERR">ADERR</a>) is
+                calculated based on a difference calculation which is selected by the <a class="- topic/xref xref" href="GUID-C3D871FC-51E7-44E4-A754-55BAA4D71143.html#BITFIELD_KWK_JT3_KZ" title="ADC Error Calculation Mode Select"><span><span>CALC</span></span></a> bits. The value can be one of the following calculations:<ul class="- topic/ul ul" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__UL_QCX_NLS_VGB" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__UL_QCX_NLS_VGB">
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000576" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000576">The first derivative of single
+                        measurements</li>
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000578" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000578">The CVD result when double
+                        sampling is enabled</li>
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000057A" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000057A">The current result vs. setpoint
+                        value in the <a class="- topic/xref xref" href="GUID-B10EE856-D1EF-4424-A440-9E0BB0BB7CBC.html" title="ADSTPT">ADSTPT</a> register</li>
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000057C" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000057C">The current result vs. the
+                        filtered/average result</li>
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000057E" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000057E">The first derivative of the
+                        filtered/average value</li>
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000580" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000580">Filtered/average value vs.
+                        setpoint value in the ADSTPT register</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000582" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000582">The result of the calculation (<a class="- topic/xref xref" href="GUID-A9D3BECF-B763-475C-9724-E58BD7D965F1.html" title="ADERR">ADERR</a>) is compared to the upper and lower thresholds, <a class="- topic/xref xref" href="GUID-1567E3D4-04D4-4999-AABF-F90079264948.html" title="ADUTH">ADUTH</a> and <a class="- topic/xref xref" href="GUID-5FA950EC-08A5-4BB6-A2B6-E0EDFB265B8A.html" title="ADLTH">ADLTH</a> registers, to set the <a class="- topic/xref xref" href="GUID-D37FA911-31F8-4990-9287-79830C2DF08F.html#ID-00000090" title="ADC Module Greater-than Upper Threshold Flag"><span><span>UTHR</span></span></a> and <a class="- topic/xref xref" href="GUID-D37FA911-31F8-4990-9287-79830C2DF08F.html#ID-00000097" title="ADC Module Less-than Lower Threshold Flag"><span><span>LTHR</span></span></a> flag bits. The threshold logic is selected by the <a class="- topic/xref xref" href="GUID-C3D871FC-51E7-44E4-A754-55BAA4D71143.html#ID-00000078" title="Threshold Interrupt Mode Select"><span><span>TMD</span></span></a> bits. The threshold trigger option can be one of the
+                    following:<ul class="- topic/ul ul" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__UL_RCX_NLS_VGB" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__UL_RCX_NLS_VGB">
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000584" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000584">Never interrupt</li>
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000586" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000586">Error is less than lower
+                        threshold</li>
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000588" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000588">Error is greater than or equal to
+                        lower threshold</li>
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000058A" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000058A">Error is between thresholds
+                        (inclusive)</li>
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000058C" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000058C">Error is outside of
+                        thresholds</li>
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000058E" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000058E">Error is less than or equal to
+                        upper threshold</li>
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000590" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000590">Error is greater than upper
+                        threshold</li>
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000592" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000592">Always interrupt regardless of
+                        threshold test results</li>
+                    <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000594" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-00000594">If the threshold condition is
+                        met, the channel threshold interrupt flag ADCHxIF is set.</li>
+                </ul></li>
+        </ul>
+        <div class="- topic/note note important note_important" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__GUID-C6F20CFE-0008-43B4-A597-5069F0249C23" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__GUID-C6F20CFE-0008-43B4-A597-5069F0249C23"><span class="note__title">Important:</span> 
+            <ul class="- topic/ul ul" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__UL_LRJ_XKQ_XGB" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__UL_LRJ_XKQ_XGB">
+                <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000059D" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000059D">The threshold tests are signed
+                    operations.</li>
+                <li class="- topic/li li" id="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000059F" data-ofbid="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1__ID-42107-0000059F">If the <a class="- topic/xref xref" href="GUID-D37FA911-31F8-4990-9287-79830C2DF08F.html#ID-00000089" title="ADC Accumulator Overflow">AOV</a> bit is set, a threshold interrupt is signaled. It is
+                    good practice for threshold interrupt handlers to verify the validity of the
+                    threshold by checking the AOV bit.</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

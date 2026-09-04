@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.2.1.1 Enabling the Transmitter — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html"/>
+<link rel="next" href="GUID-EB6D11AD-9E35-45D3-BEB3-E8E3DAC2D623.html"/>
+<link rel="up" href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html">35.2 UART Asynchronous Modes</a></li><li><a href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html">35.2.1 UART Asynchronous Transmitter</a></li><li>35.2.1.1 Enabling the Transmitter</li></ol>
+  <div class="sib"><span>← <a href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html" rel="prev">UART Asynchronous Transmitter</a></span><span><a href="GUID-EB6D11AD-9E35-45D3-BEB3-E8E3DAC2D623.html" rel="next">Transmitting Data</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-B013089A-6999-49EB-A17B-A3280DEEE2FA" style="">35.2.1.1 Enabling the Transmitter</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The UART transmitter is enabled for asynchronous operations by configuring the
+            following control bits:</p>
+        <ul class="- topic/ul ul" id="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__UL_JBM_QWT_BBB" data-ofbid="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__UL_JBM_QWT_BBB">
+            <li class="- topic/li li" id="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-0CAB229B-AE84-4CBF-9CFA-D1C9F9AEDC59" data-ofbid="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-0CAB229B-AE84-4CBF-9CFA-D1C9F9AEDC59"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_K3M_SSL_BBB" title="Transmit Enable Control(2)"><span><span>TXEN</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+            <li class="- topic/li li" id="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-63D53A78-81F1-485E-8E65-1A6BCA421B29" data-ofbid="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-63D53A78-81F1-485E-8E65-1A6BCA421B29"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_C5C_R5L_BBB" title="UART Mode Select(1)"><span><span>MODE</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0000</span> through
+                    <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0011</span></li>
+            <li class="- topic/li li" id="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-6C0C9F71-892D-4BD0-8ABF-FBAD644A4A91" data-ofbid="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-6C0C9F71-892D-4BD0-8ABF-FBAD644A4A91"><a class="- topic/xref xref" href="GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C.html#GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C" title="UxBRG">UxBRG</a> = desired baud rate</li>
+            <li class="- topic/li li" id="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-85108678-C036-4059-9E34-A8FE6ACC23ED" data-ofbid="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-85108678-C036-4059-9E34-A8FE6ACC23ED"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_MQF_ZNS_YY" title="Baud Rate Generator Speed Select"><span><span>BRGS</span></span></a> = desired baud rate multiplier</li>
+            <li class="- topic/li li" id="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-2A2FA59B-FD8E-4E2A-9347-3B47BAF95926" data-ofbid="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-2A2FA59B-FD8E-4E2A-9347-3B47BAF95926">RxyPPS = code for desired output pin</li>
+            <li class="- topic/li li" id="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-07EF9F8F-476B-4D27-9453-90DED9106B75" data-ofbid="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-07EF9F8F-476B-4D27-9453-90DED9106B75"><a class="- topic/xref xref" href="GUID-AFEE23AF-E917-46D3-BF17-879043534F4E.html#BITFIELD_MQF_ZNS_YY" title="Serial Port Enable"><span><span>ON</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+        </ul>
+        <p class="- topic/p p">All other UART control bits are assumed to be in their default state.</p>
+        <p class="- topic/p p">Setting the TXEN bit enables the transmitter circuitry of the UART. The MODE bits select
+            the desired mode. Setting the ON bit enables the UART. When TXEN is set and the
+            transmitter is not Idle, the TX pin is automatically configured as an output. When the
+            transmitter is Idle, the TX pin drive is relinquished to the port TRIS control. If the
+            TX pin is shared with an analog peripheral, the analog I/O function will be disabled by
+            clearing the corresponding ANSEL bit.</p>
+        <div class="- topic/note note important note_important" id="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-AA22AE5B-8B59-488B-B8C3-D1034901B1A8" data-ofbid="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82__GUID-AA22AE5B-8B59-488B-B8C3-D1034901B1A8"><span class="note__title">Important:</span> The UxTXIF Transmitter
+            Interrupt flag is set when the TXEN Enable bit is set and the UxTXB register can accept
+            data.</div>
+</div>
+
+</body>
+</html>

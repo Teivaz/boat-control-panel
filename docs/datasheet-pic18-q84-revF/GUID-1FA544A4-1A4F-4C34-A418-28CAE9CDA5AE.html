@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>47.2.5 Special Considerations with Microchip MPLAB® IDE Tools — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1CCF23CB-4FA5-4227-9302-ECA4AA20708C.html"/>
+<link rel="next" href="GUID-731B2320-D4A5-422C-B689-2C4EC7D428E5.html"/>
+<link rel="up" href="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-136E7F45-6464-4E35-80B5-A6E3A67AD53F.html">47 Instruction Set Summary</a></li><li><a href="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9.html">47.2 Extended Instruction Set</a></li><li>47.2.5 Special Considerations with Microchip MPLAB® IDE Tools</li></ol>
+  <div class="sib"><span>← <a href="GUID-1CCF23CB-4FA5-4227-9302-ECA4AA20708C.html" rel="prev">Considerations when Enabling the Extended Instruction Set</a></span><span><a href="GUID-731B2320-D4A5-422C-B689-2C4EC7D428E5.html" rel="next">ICSP™ - In-Circuit Serial Programming™</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__GUID-EF8C6D55-D191-46E9-A229-DED1C4C9B9D8" style="">47.2.5 Special Considerations with Microchip MPLAB<sup class="+ topic/ph hi-d/sup ph sup" id="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F34">®</sup> IDE Tools</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F35" data-ofbid="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F35">The latest versions of Microchip’s software tools have been designed
+         to fully support the extended instruction set on the PIC18 devices. This includes the MPLAB
+         XC8 C compiler, MPASM Assembler and MPLAB X Integrated Development Environment (IDE).</p>
+      <p class="- topic/p p" id="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F3A" data-ofbid="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F3A">When selecting a target device for software development, MPLAB X IDE
+         will automatically set default Configuration bits for that device. The default setting for
+         the XINST Configuration bit is ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’, disabling the extended instruction set
+         and Indexed Literal Offset Addressing mode. For proper execution of applications developed
+         to take advantage of the extended instruction set, XINST must be set during
+         programming.</p>
+      <p class="- topic/p p" id="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F3C" data-ofbid="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F3C">To develop software for the extended instruction set, the user must enable support for the instructions and the Indexed Addressing mode in their language tool(s). Depending on the environment being used, this may be done in several ways:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F3D" data-ofbid="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F3D">A menu option, or dialog box within the environment, that allows the user to configure the language tool and its settings for the project</li>
+         <li class="- topic/li li" id="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F3F" data-ofbid="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F3F">A command-line option</li>
+         <li class="- topic/li li" id="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F41" data-ofbid="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F41">A directive in the source code</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F43" data-ofbid="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE__ID-42120-00003F43">These options vary between different compilers, assemblers and development environments. Users are encouraged to review the documentation accompanying their development systems for the appropriate information.</p>
+   </div>
+
+</body>
+</html>

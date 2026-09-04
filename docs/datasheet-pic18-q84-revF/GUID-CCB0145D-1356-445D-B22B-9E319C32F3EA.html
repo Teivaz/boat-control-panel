@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.3.4.3 Transmit FIFO Configuration — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-AA46B5AB-5BF2-4B3E-B828-3AF0E7852E23.html"/>
+<link rel="next" href="GUID-FDA6F52B-A276-47A5-A4CF-AB0F0938B4B2.html"/>
+<link rel="up" href="GUID-B6BA9D73-3BDC-4B38-9578-8167E784EE90.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html">38.3 Configuration</a></li><li><a href="GUID-B6BA9D73-3BDC-4B38-9578-8167E784EE90.html">38.3.4 Message Memory Configuration</a></li><li>38.3.4.3 Transmit FIFO Configuration</li></ol>
+  <div class="sib"><span>← <a href="GUID-AA46B5AB-5BF2-4B3E-B828-3AF0E7852E23.html" rel="prev">Transmit Queue Configuration</a></span><span><a href="GUID-FDA6F52B-A276-47A5-A4CF-AB0F0938B4B2.html" rel="next">Receive FIFO Configuration</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-CCB0145D-1356-445D-B22B-9E319C32F3EA__GUID-AF22B59D-A2DE-4484-A9D5-2A451EA843AB" style="">38.3.4.3 Transmit FIFO Configuration</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">FIFO 1 through FIFO 3 can be configured as transmit FIFOs by setting TXEN in
+            the CxFIFOCONy register. The number of message objects in each transmit FIFO is
+            configured using the FSIZE[4:0] bits (CxFIFOCONy[27:23]). All objects in one transmit
+            FIFO use the same payload size (number of data bytes), which is determined by the
+            PLSIZE[2:0] bits (CxFIFOCONy[30:28]).</p>
+    </div>
+
+</body>
+</html>

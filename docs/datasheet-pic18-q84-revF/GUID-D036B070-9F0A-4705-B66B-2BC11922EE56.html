@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.4.3 Client Mode Client Select — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1A71E931-A30B-4B94-B35B-9E198DC6F53C.html"/>
+<link rel="next" href="GUID-A7A0ED90-B376-4956-B8A4-377CD97FA726.html"/>
+<link rel="up" href="GUID-312D4604-FDB9-4FC4-9D6A-94EC2AE8B3C5.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-312D4604-FDB9-4FC4-9D6A-94EC2AE8B3C5.html">36.4 Client Mode</a></li><li>36.4.3 Client Mode Client Select</li></ol>
+  <div class="sib"><span>← <a href="GUID-1A71E931-A30B-4B94-B35B-9E198DC6F53C.html" rel="prev">Client Mode Receive Options</a></span><span><a href="GUID-A7A0ED90-B376-4956-B8A4-377CD97FA726.html" rel="next">Client Mode Clock Configuration</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-D036B070-9F0A-4705-B66B-2BC11922EE56__GUID-78A5439E-1224-4679-BF65-E27C0C4BFDDB" style="">36.4.3 Client Mode Client Select</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">In Client mode, an external Client Select signal can be used to synchronize communication
+            with the host device. The Client Select line is held in its Inactive state (high by
+            default) until the host device is ready to communicate. When the Client Select
+            transitions to its Active state, the client knows that a new transmission is
+            starting.</p>
+        <p class="- topic/p p">When the Client Select goes false at the end of the transmission, the receive function of
+            the selected SPI client device returns to the Inactive state. The client is then ready
+            to receive a new transmission when the Client Select goes true again.</p>
+        <p class="- topic/p p">The Client Select signal is received on the SS input pin. This pin is selected with the
+            SPIxSSPPS register (refer to the <strong class="+ topic/ph hi-d/b ph b">“PPS Inputs”</strong> section). When the input on this
+            pin is true, transmission and reception are enabled, and the SDO pin is driven. When the
+            input on this pin is false, the SDO pin is either tri-stated (if the TRIS bit associated
+            with the SDO pin is set) or driven to the value of the LAT bit associated with the SDO
+            pin (if the TRIS bit associated with the SDO pin is cleared). The SCK input is ignored
+            when the SS input is false.</p>
+        <p class="- topic/p p">If the SS input goes false while a data transfer is still in progress, it is considered a
+            Client Select fault. The <a class="- topic/xref xref" href="GUID-D60A9AB9-68EF-4F33-8387-7BA9792E0965.html#BITFIELD_TC3_3JF_RFB" title="SS_in Fault Status"><span><span>SSFLT</span></span></a> bit
+            indicates whether such an event has occurred. The transfer counter value determines the
+            number of bits in a valid data transfer (see the <a class="- topic/xref xref" href="GUID-38725C10-0F95-484B-825E-B276E4433803.html">Transfer Counter</a> section for
+            more details).</p>
+        <p class="- topic/p p">The Client Select polarity is controlled by the <a class="- topic/xref xref" href="GUID-52CDBCA4-7047-4EA0-97A9-D00504F5E217.html#BITFIELD_QJR_NMZ_RFB" title="Client Select Input/Output Polarity Control"><span><span>SSP</span></span></a> bit. When SSP is set (its default state), the Client Select input is active-low, and
+            when it is cleared, the Client Select input is active-high.</p>
+        <p class="- topic/p p">The Client Select for the SPI module is controlled by the <a class="- topic/xref xref" href="GUID-D60A9AB9-68EF-4F33-8387-7BA9792E0965.html#BITFIELD_RKG_H5F_RFB" title="Client Select Enable"><span><span>SSET</span></span></a> bit. When SSET is cleared (its default state), the Client Select will act as
+            described above. When the bit is set, the SPI module will behave as if the SS input is
+            always in its Active state.</p>
+        <div class="- topic/note note important note_important" id="GUID-D036B070-9F0A-4705-B66B-2BC11922EE56__GUID-5FBFE955-F794-4ED7-8E99-F18A82BE338A" data-ofbid="GUID-D036B070-9F0A-4705-B66B-2BC11922EE56__GUID-5FBFE955-F794-4ED7-8E99-F18A82BE338A"><span class="note__title">Important:</span> 
+            <p class="- topic/p p">When SSET is set, the effective SS_in signal is always active. Hence,
+                the SSFLT bit may be disregarded.</p>
+        </div>
+    </div>
+
+</body>
+</html>

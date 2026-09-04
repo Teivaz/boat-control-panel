@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.1.2 General Call Addressing Support — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-49191697-E729-4A87-8EA4-E427FC6D30EA.html"/>
+<link rel="next" href="GUID-4C2D7EB7-BDF0-4928-924F-D7E5B1A24F58.html"/>
+<link rel="up" href="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC.html">37.4.1 I2C Client Mode Operation</a></li><li>37.4.1.2 General Call Addressing Support</li></ol>
+  <div class="sib"><span>← <a href="GUID-49191697-E729-4A87-8EA4-E427FC6D30EA.html" rel="prev">Client Addressing Modes</a></span><span><a href="GUID-4C2D7EB7-BDF0-4928-924F-D7E5B1A24F58.html" rel="next">Client Operation in 7-Bit Addressing Modes</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-5C20C65D-EA1D-44BC-AA74-89E186EBD8D4__GUID-A3DA0FAF-68B6-4BE6-981A-36961205B4D8" style="">37.4.1.2 General Call Addressing Support</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Specification reserves the address <code class="+ topic/ph pr-d/codeph ph codeph">0x00</code> as the
+            General Call address. The General Call address is used to address all client modules
+            connected to the bus at the same time. When a host issues a General Call, all client
+            devices may respond with an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>. The General Call Enable (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_SBH_FJP_LGB" title="General Call Address Enable (used when MODE = 00x or MODE = 11x)">GCEN</a>) bit determines whether client hardware will respond to a General Call
+            address. When GCEN is set (GCEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), client hardware will respond to a
+            General Call with an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>, and when GCEN is clear (GCEN =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the General Call is ignored, and the client responds with a
+            NACK. </div>
+        <div class="- topic/p p">When the module receives a General Call, the <a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_ONC_54V_LGB" title="Address Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1)">ADRIF</a> bit is set and the address is stored in <a class="- topic/xref xref" href="GUID-E7CC5B44-63E1-40F0-8F67-30D643607BC5.html">I2CxADB0</a>. If
+            the <a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_LFC_QSV_LGB" title="Address Interrupt and Hold Enable(1,4)">ADRIE</a> bit is set, the module will generate an interrupt and
+            stretch the clock after the 8th falling edge of SCL. This allows the client to determine
+            the acknowledgement response to return to the host (see <a class="- topic/xref xref" href="#GUID-5C20C65D-EA1D-44BC-AA74-89E186EBD8D4__FIG_RTG_ZLF_KGB"><span>Figure 37-12</span></a>).</div>
+        <div class="- topic/note note important note_important" id="GUID-5C20C65D-EA1D-44BC-AA74-89E186EBD8D4__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-5C20C65D-EA1D-44BC-AA74-89E186EBD8D4__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> When using the General
+            Call addressing feature, loading the I2CxADR0/1/2/3 registers with the
+                <code class="+ topic/ph pr-d/codeph ph codeph">0x00</code> address is not recommended. Additionally, client hardware only
+            supports General Call addressing in 7-bit Addressing modes.</div>
+        <figure class="- topic/fig fig fignone" id="GUID-5C20C65D-EA1D-44BC-AA74-89E186EBD8D4__FIG_RTG_ZLF_KGB" data-ofbid="GUID-5C20C65D-EA1D-44BC-AA74-89E186EBD8D4__FIG_RTG_ZLF_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-12. <span id="GUID-5C20C65D-EA1D-44BC-AA74-89E186EBD8D4__GUID-6509BD52-E75D-4391-B6F3-2241DE3B5636" class="fig--title">General Call Addressing</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-5C20C65D-EA1D-44BC-AA74-89E186EBD8D4__IMAGE_STG_ZLF_KGB" src="GUID-D3288A71-D6F4-4A85-8E69-CC53A35D3F34-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

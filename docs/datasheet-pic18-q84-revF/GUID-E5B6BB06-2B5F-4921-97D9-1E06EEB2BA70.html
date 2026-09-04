@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26.8.10 Level Triggered Hardware Limit One Shot Modes — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A.html"/>
+<link rel="next" href="GUID-91F4F6F3-556F-4CA7-8771-1B12AA9045E9.html"/>
+<link rel="up" href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html">26 TMR2 - Timer2 Module</a></li><li><a href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html">26.8 Operation Examples</a></li><li>26.8.10 Level Triggered Hardware Limit One Shot Modes</li></ol>
+  <div class="sib"><span>← <a href="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A.html" rel="prev">Edge Triggered Monostable Modes</a></span><span><a href="GUID-91F4F6F3-556F-4CA7-8771-1B12AA9045E9.html" rel="next">Timer2 Operation During Sleep</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70__GUID-3C4A4DA2-F136-485A-8BF5-3770DD866DCE" style="">26.8.10 Level Triggered Hardware Limit One Shot
+      Modes</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70__ID-42141-0000143F" data-ofbid="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70__ID-42141-0000143F">The Level Triggered Hardware Limit One Shot modes hold the timer in
+         Reset on an external Reset level and start counting when both the ON bit is set and the
+         external signal is not at the Reset level. If one of either the external signal is not in
+         Reset or the ON bit is set, then the other signal being set/made active will start the
+         timer. Reset levels are selected as follows:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70__ID-42141-00001440" data-ofbid="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70__ID-42141-00001440">Low Reset level (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b10110</code>)</li>
+         <li class="- topic/li li" id="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70__ID-42141-00001443" data-ofbid="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70__ID-42141-00001443">High Reset level (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b10111</code>)</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70__ID-42141-00001446" data-ofbid="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70__ID-42141-00001446">When the timer count matches the TxPR period count, the timer is
+         reset and the ON bit is cleared. When the ON bit is cleared by either a TxPR match or by
+         software control, the timer will stay in Reset until both the ON bit is set and the
+         external signal is not at the Reset level.</p>
+      <p class="- topic/p p" id="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70__ID-42141-00001447" data-ofbid="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70__ID-42141-00001447">When Level Triggered Hardware Limit One Shot modes are used in
+         conjunction with the CCP PWM operation, the PWM drive goes active with either the external
+         signal edge or the setting of the ON bit, whichever of the two starts the timer.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70__ID-42141-00001448" data-ofbid="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70__ID-42141-00001448"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 26-12. <span id="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70__GUID-ED2D5B17-3075-4F85-A18C-C4D5F602178D" class="fig--title">Level Triggered Hardware Limit One
+            Shot Mode Timing Diagram (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b10110</code>)</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-9B462095-A2A7-4130-BB39-DCB0F1175027-high.pdf#toolbar=1" width="615.75" height="330"></iframe></span>
+      </figure>
+   </div>
+
+</body>
+</html>

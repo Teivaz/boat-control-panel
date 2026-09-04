@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.14.2 Condition-Specific Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-89EAFF00-9447-4037-A49A-7E05374041A2.html"/>
+<link rel="next" href="GUID-5A9D0BD2-C6BD-4ACB-98FB-1F6B164C0EA1.html"/>
+<link rel="up" href="GUID-B34AF77F-5737-430A-89C1-C8F50ADCD660.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li><a href="GUID-B34AF77F-5737-430A-89C1-C8F50ADCD660.html">37.3.14 Interrupts</a></li><li>37.3.14.2 Condition-Specific Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-89EAFF00-9447-4037-A49A-7E05374041A2.html" rel="prev">High-Level Interrupts</a></span><span><a href="GUID-5A9D0BD2-C6BD-4ACB-98FB-1F6B164C0EA1.html" rel="next">Operation in Sleep</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-8F8BE73E-7222-46EA-8A8C-6F5C2EF7F49F" style="">37.3.14.2 Condition-Specific Interrupts</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">In addition to the high-level interrupts, module hardware provides several
+            condition-specific interrupts.</p>
+        <p class="- topic/p p">The I2C Peripheral Interrupt (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html" title="I2CxPIR">I2CxPIR</a>) Register contains the following interrupt flag
+            bits:</p>
+        <ul class="- topic/ul ul" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__UL_S5J_SGF_KGB" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__UL_S5J_SGF_KGB">
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-D57E4A0B-DD7D-4366-B13D-F58941FF2074" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-D57E4A0B-DD7D-4366-B13D-F58941FF2074"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#GUID-9822260B-0146-4538-BAAB-AC8C3856312F" title="Byte Count Interrupt Flag(1)">CNTIF</a>: Byte Count Interrupt Flag</li>
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-C1A0467D-B94F-4CD2-A3A6-B238490A38F2" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-C1A0467D-B94F-4CD2-A3A6-B238490A38F2"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_KCQ_HNV_LGB" title="Acknowledge Status Time Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1,2)">ACKTIF</a>: Acknowledge Status Time Interrupt Flag</li>
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-04A13776-EDBA-41D6-865C-A94BA9F602D5" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-04A13776-EDBA-41D6-865C-A94BA9F602D5"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_ALR_G4V_LGB" title="Data Write Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1)">WRIF</a>: Data Write Interrupt Flag</li>
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-CFAFCE95-0ED6-46D9-942A-354C968B9598" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-CFAFCE95-0ED6-46D9-942A-354C968B9598"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_ONC_54V_LGB" title="Address Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1)">ADRIF</a>: Address Interrupt Flag</li>
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-9465EEB0-3368-4823-9F62-9415A76D2EB2" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-9465EEB0-3368-4823-9F62-9415A76D2EB2"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_BLB_LPV_LGB" title="Stop Condition Interrupt Flag(1)">PCIF</a>: Stop Condition Interrupt Flag</li>
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-22FEB2B4-9844-4A2E-B74C-23F1C1CCC220" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-22FEB2B4-9844-4A2E-B74C-23F1C1CCC220"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_P5X_TPV_LGB" title="Restart Condition Interrupt Flag(1)">RSCIF</a>: Restart Condition Interrupt Flag</li>
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-A0249ABE-EC12-4C1E-8066-83C242F938E0" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-A0249ABE-EC12-4C1E-8066-83C242F938E0"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_W3K_BQV_LGB" title="Start Condition Interrupt Flag(1)">SCIF</a>: Start Condition Interrupt Flag</li>
+        </ul>
+        <p class="- topic/p p">When any of the flag bits in <a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html" title="I2CxPIR">I2CxPIR</a> becomes set and the associated interrupt enable bits in
+                <a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html" title="I2CxPIE">I2CxPIE</a>
+            are set, the generic I2CxIF is also set. If the generic I2CxIE bit is set, an interrupt
+            event is generated whenever one of the I2CxPIR flag bits becomes set. If the I2CxIE bit
+            is clear, the I2CxPIR flag bit will still be set by hardware; however, no interrupt
+            event will be triggered.</p>
+        <div class="- topic/p p"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#GUID-9822260B-0146-4538-BAAB-AC8C3856312F" title="Byte Count Interrupt Flag(1)">CNTIF</a> becomes set (CNTIF = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) when the <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>
+            register value reaches zero, indicating that all data bytes in the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C packet
+            have been transmitted or received. CNTIF is set after the 9th falling SCL edge when
+            I2CxCNT reaches zero (I2CxCNT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>).</div>
+        <div class="- topic/p p"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_KCQ_HNV_LGB" title="Acknowledge Status Time Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1,2)">ACKTIF</a> is set (ACKTIF = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) by the 9th falling edge of SCL
+            for any byte when the device is addressed as a client in any Client or Multi-Host mode.
+            If the Acknowledge Interrupt and Hold Enable (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_VMW_1RV_LGB" title="Acknowledge Status Time Interrupt and Hold Enable(1,2)">ACKTIE</a>) bit is set and ACKTIF becomes set:</div>
+        <ul class="- topic/ul ul" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__UL_T5J_SGF_KGB" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__UL_T5J_SGF_KGB">
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-4BD04B8E-C11C-4B92-8861-6D5A18323BEE" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-4BD04B8E-C11C-4B92-8861-6D5A18323BEE">If an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span> is
+                detected, clock stretching is also enabled (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>)</li>
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-E7563CA2-9CA0-4FA4-BB54-5FD6513AC5E1" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-E7563CA2-9CA0-4FA4-BB54-5FD6513AC5E1">If a NACK is detected, no clock
+                stretching occurs (CSTR = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>)</li>
+        </ul>
+        <div class="- topic/p p"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_ALR_G4V_LGB" title="Data Write Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1)">WRIF</a> is set (WRIF = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) after the 8th falling edge of SCL
+            when the module receives a data byte in Client or Multi-Host modes. Once the data byte
+            is received, WRIF is set, as is the Receive Buffer Full Status (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a>) and the I2CxRXIF bits, and if the Data Write Interrupt and Hold Enable
+                (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_SDM_CSV_LGB" title="Data Write Interrupt and Hold Enable(1,3)">WRIE</a>) bit is set, the generic I2CxIF bit is also set. WRIF is a
+            read/write bit and must be cleared in software, while the <a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a>, I2CxRXIF and I2CxIF bits are read-only and are cleared by reading
+                <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a>
+            or by setting the Clear Buffer bit (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_OJT_2VP_LGB" title="Clear Buffer(3)">CLRBF</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>).</div>
+        <div class="- topic/p p"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_ONC_54V_LGB" title="Address Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1)">ADRIF</a> is set on the 8th falling edge of SCL after the module has received a
+            matching 7-bit address, after receiving a matching 10-bit upper address byte, and after
+            receiving a matching 10-bit lower address byte in Client or Multi-Host modes. Upon
+            receiving a matching 7-bit address or 10-bit upper address, the address is copied to
+                <a class="- topic/xref xref" href="GUID-E7CC5B44-63E1-40F0-8F67-30D643607BC5.html">I2CxADB0</a>, the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit setting is copied to the Read
+            Information (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_VMJ_FSP_LGB" title="Read Information(1)">R</a>) bit, the Data (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_MLJ_QSP_LGB" title="Data">D</a>) bit is cleared, and the ADRIF bit is set. If the Address Interrupt and
+            Hold Enable (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_LFC_QSV_LGB" title="Address Interrupt and Hold Enable(1,4)">ADRIE</a>) bit is set, I2CxIF is set, and the clock will be
+            stretched while the module determines whether to <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span> or NACK
+            the transmitter. Upon receiving the matching 10-bit lower address, the address is copied
+            to <a class="- topic/xref xref" href="GUID-51DC1914-5FC6-4DB6-849E-AC7B6E17D460.html" title="I2CxADB1">I2CxADB1</a>,
+            and the ADRIF bit is set. If ADRIE is also set, the clock is stretched while the module
+            determines the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>/NACK response to return to the
+            transmitter.</div>
+        <div class="- topic/p p"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_BLB_LPV_LGB" title="Stop Condition Interrupt Flag(1)">PCIF</a> is set whenever a Stop condition is detected on the bus.</div>
+        <div class="- topic/p p"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_P5X_TPV_LGB" title="Restart Condition Interrupt Flag(1)">RSCIF</a> is set upon the detection of a Restart condition.</div>
+        <div class="- topic/p p"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_W3K_BQV_LGB" title="Start Condition Interrupt Flag(1)">SCIF</a> is set upon the detection of a Start condition.</div>
+        <p class="- topic/p p">In addition to the <a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html" title="I2CxPIR">I2CxPIR</a> register, the I2C Error (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html" title="I2CxERR">I2CxERR</a>) register contains
+            three interrupt flag bits that are used to detect bus errors. These read/write bits are
+            set by module hardware, but must be cleared by user software. The I2CxERR register also
+            includes the interrupt enable bits for these three Error conditions and, when set, will
+            cause an interrupt event whenever the associated interrupt flag bit becomes set.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html" title="I2CxERR">I2CxERR</a>
+            contains the following interrupt flag bits:</p>
+        <ul class="- topic/ul ul" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__UL_U5J_SGF_KGB" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__UL_U5J_SGF_KGB">
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-A57B46A4-5C71-4474-B5FD-5F752411FE3E" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-A57B46A4-5C71-4474-B5FD-5F752411FE3E"><a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4" title="Bus Time-Out Interrupt Flag(1,2)">BTOIF</a>: Bus Time-Out Interrupt Flag</li>
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-56678E7D-9370-48A3-89AD-117BFDFB4385" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-56678E7D-9370-48A3-89AD-117BFDFB4385"><a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_PNL_CHV_LGB" title="Bus Collision Detect Interrupt Flag(1)">BCLIF</a>: Bus Collision Interrupt Flag</li>
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-E23F43F7-1740-4717-916A-77216CF22BF7" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-E23F43F7-1740-4717-916A-77216CF22BF7"><a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_YQQ_P3V_LGB" title="NACK Detect Interrupt Flag(1,3,4)">NACKIF</a>: NACK Detect Interrupt Flag</li>
+        </ul>
+        <div class="- topic/p p"><a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4" title="Bus Time-Out Interrupt Flag(1,2)">BTOIF</a> is set when a bus time-out occurs. The bus time-out
+            period is configured using one of the time-out sources selected by the I2C Bus Time-Out
+            Clock Source Selection (<a class="- topic/xref xref" href="GUID-0148F891-DCB6-4528-85A5-066F0AE5F70D.html" title="I2CxBTOC">I2CxBTOC</a>) register. </div>
+        <div class="- topic/p p">If the module is configured in Client mode with <a class="- topic/xref xref" href="GUID-55DF820D-DB41-4F6B-AD97-4FF7D5D2341F.html#GUID-B1267C3E-BC77-4775-82E1-D4FF2C7B69B8" title="Time-Out Recovery Selection">TOREC</a> set (TOREC = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) and a bus time-out event occurs
+            (regardless of the state of the Client Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_GRY_CQP_LGB" title="Client Mode Active Status">SMA</a>)
+            bit), the module is immediately reset, the SMA and Client Clock Stretching (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a>) bits are cleared, and the BTOIF bit is set. If the Bus Time-Out
+            Interrupt Enable (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_WB5_BKV_LGB" title="Bus Time-Out Interrupt Enable">BTOIE</a>)
+            bit is set, the generic I2C Error Interrupt Flag (I2CxEIF) bit is set.</div>
+        <p class="- topic/p p">If the module is configured in Client mode with <a class="- topic/xref xref" href="GUID-55DF820D-DB41-4F6B-AD97-4FF7D5D2341F.html#GUID-B1267C3E-BC77-4775-82E1-D4FF2C7B69B8" title="Time-Out Recovery Selection">TOREC</a> clear (TOREC = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) and a bus time-out event occurs
+            (regardless of the state of the Client Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_GRY_CQP_LGB" title="Client Mode Active Status">SMA</a>)
+            bit), the BTOIF bit is set, but user software must reset the module. If the Bus Time-Out
+            Interrupt Enable (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_WB5_BKV_LGB" title="Bus Time-Out Interrupt Enable">BTOIE</a>)
+            bit is set, the generic I2C Error Interrupt Flag (I2CxEIF) bit is set.</p>
+        <div class="- topic/p p">If the module is configured in Host mode with <a class="- topic/xref xref" href="GUID-55DF820D-DB41-4F6B-AD97-4FF7D5D2341F.html#GUID-B1267C3E-BC77-4775-82E1-D4FF2C7B69B8" title="Time-Out Recovery Selection">TOREC</a> set (TOREC = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) and the bus time-out event occurs
+            while the Host is active (Host Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a>) =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the Host Data Ready (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a>)
+            bit is cleared, the module will immediately attempt to transmit a Stop condition, and
+            the BTOIF bit is set. Stop condition generation may be delayed if a client device is
+            stretching the clock but will resume once the clock is released or if the client holding
+            the bus also has a time-out event occur. The MMA bit is only cleared after the Stop
+            condition has been generated. If the Bus Time-Out Interrupt Enable (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_WB5_BKV_LGB" title="Bus Time-Out Interrupt Enable">BTOIE</a>)
+            bit is set, the generic I2C Error Interrupt Flag (I2CxEIF) bit is set.</div>
+        <div class="- topic/p p">If the module is configured in Host mode with <a class="- topic/xref xref" href="GUID-55DF820D-DB41-4F6B-AD97-4FF7D5D2341F.html#GUID-B1267C3E-BC77-4775-82E1-D4FF2C7B69B8" title="Time-Out Recovery Selection">TOREC</a> clear (TOREC = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) and the bus time-out event occurs
+            while the Host is active (Host Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a>) =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a> bit
+            is cleared and the BTOIF bit is set, but user software must initiate the Stop condition
+            by setting the <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_GHZ_PXK_43B" title="Host Stop(4)">P</a> bit.
+            If the Bus Time-Out Interrupt Enable (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_WB5_BKV_LGB" title="Bus Time-Out Interrupt Enable">BTOIE</a>)
+            bit is set, the generic I2C Error Interrupt Flag (I2CxEIF) bit is set.</div>
+        <div class="- topic/p p"><a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_PNL_CHV_LGB" title="Bus Collision Detect Interrupt Flag(1)">BCLIF</a> is set upon the detection of a bus collision. A bus collision occurs
+            any time the SDA line is sampled at a logic low while the module expects both SCL and
+            SDA lines to be at a high logic level. When a bus collision occurs, BCLIF is set, and if
+            the Bus Collision Detect Interrupt Enable (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_LSV_KKV_LGB" title="Bus Collision Detect Interrupt Enable">BCLIE</a>) bit is set, I2CxEIF is also set, and the module is reset.</div>
+        <div class="- topic/p p"><a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_YQQ_P3V_LGB" title="NACK Detect Interrupt Flag(1,3,4)">NACKIF</a> is set when either the host or client is active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_GRY_CQP_LGB" title="Client Mode Active Status">SMA</a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code> || <a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) and a NACK response is detected on the bus. A NACK response
+            occurs during the 9th SCL pulse in which the SDA line is released to a logic high. In
+            Host mode, a NACK can be issued when the host has finished receiving data from a client
+            or when the host receives incorrect data. In Client mode, a NACK is issued when the
+            client does not receive a matching address or when it receives incorrect data. A NACK
+            can also be automatically issued when any of the following bits becomes set, which will
+            also set NACKIF and I2CxEIF:</div>
+        <ul class="- topic/ul ul" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__UL_V5J_SGF_KGB" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__UL_V5J_SGF_KGB">
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-7D120449-81E5-4B7C-92CD-8F8F10C64B8A" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-7D120449-81E5-4B7C-92CD-8F8F10C64B8A"><a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#GUID-7A9B3629-D7FD-432A-AE45-E8A97DD638CA" title="Transmit Write Error Status(1)">TXWE</a>: Transmit Write Error Status</li>
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-3CC5990B-5AA5-438D-BD6E-1223AAEE998A" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-3CC5990B-5AA5-438D-BD6E-1223AAEE998A"><a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_BDH_V5P_LGB" title="Receive Read Error Status(1)">RXRE</a>: Receive Read Error Status</li>
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-D12643DA-95F9-4186-8220-31B57E4FD00E" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-D12643DA-95F9-4186-8220-31B57E4FD00E"><a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_ZKN_TFP_LGB" title="Transmit Underflow Status (used only when MODE = 0xx or MODE = 11x)(3)">TXU</a>: Transmit Underflow Status</li>
+            <li class="- topic/li li" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-925F35B4-5612-46E0-866E-6C9B3052CB3C" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-925F35B4-5612-46E0-866E-6C9B3052CB3C"><a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_H5T_P2P_LGB" title="Receive Overflow Status (used only when MODE = 0xx or MODE = 11x)(3)">RXO</a>: Receive Overflow Status</li>
+        </ul>
+        <div class="- topic/note note important note_important" id="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> The I2CxEIF bit is
+            read-only and is only cleared by hardware after all enabled <a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html" title="I2CxERR">I2CxERR</a> error flags have
+            been cleared.</div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10.4 Data Flash Memory (DFM) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2.html"/>
+<link rel="next" href="GUID-EE3A7EC8-ED04-4B62-BBA3-4D936857B80A.html"/>
+<link rel="up" href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html">10 NVM - Nonvolatile Memory Module</a></li><li>10.4 Data Flash Memory (DFM)</li></ol>
+  <div class="sib"><span>← <a href="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2.html" rel="prev">Reading the Program Flash Memory</a></span><span><a href="GUID-EE3A7EC8-ED04-4B62-BBA3-4D936857B80A.html" rel="next">Reading the DFM</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-A8FDF8F5-E9BA-4056-855B-FCA3C7018F18__GUID-C4AC1698-174C-4992-9820-C987FF9BA97C" style="">10.4 Data Flash Memory (DFM)</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-A8FDF8F5-E9BA-4056-855B-FCA3C7018F18__ID-42121-00000389" data-ofbid="GUID-A8FDF8F5-E9BA-4056-855B-FCA3C7018F18__ID-42121-00000389">The Data Flash Memory is a nonvolatile memory array, also referred
+         to as EEPROM. The DFM is mapped above program memory space. The DFM can be accessed using
+         the Table Pointer or NVM Special Function Registers (SFRs). The DFM is readable and
+         writable during normal operation over the entire V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> range.</p>
+      <p class="- topic/p p" id="GUID-A8FDF8F5-E9BA-4056-855B-FCA3C7018F18__ID-42121-000003A4" data-ofbid="GUID-A8FDF8F5-E9BA-4056-855B-FCA3C7018F18__ID-42121-000003A4">The DFM can only be read and written one byte at a time. When
+         interfacing to the data memory block, the NVMDATL register holds the 8-bit data for
+         read/write and the NVMADR register holds the address of the DFM location being
+         accessed.</p>
+      <p class="- topic/p p" id="GUID-A8FDF8F5-E9BA-4056-855B-FCA3C7018F18__ID-42121-000003A5" data-ofbid="GUID-A8FDF8F5-E9BA-4056-855B-FCA3C7018F18__ID-42121-000003A5">The DFM is rated for high erase/write cycle endurance. A byte write
+         automatically erases the location and writes the new data (erase-before-write). The write
+         time is controlled by an internal programming timer; it will vary with voltage and
+         temperature as well as from device-to-device. Refer to the data EEPROM memory parameters in
+         the <strong class="+ topic/ph hi-d/b ph b">“Electrical Specifications”</strong> chapter for the limits.</p>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-EE3A7EC8-ED04-4B62-BBA3-4D936857B80A.html">10.4.1 Reading the DFM</a></li><li><a href="GUID-998C029C-2664-4203-BE19-1769C1A42CD5.html">10.4.2 Writing to DFM</a></li><li><a href="GUID-F0F2E6B1-2F84-4F31-B665-A731E9DB8EE2.html">10.4.3 Erasing the DFM</a></li><li><a href="GUID-37577268-B29A-4184-9D8F-A5DF2A66B6C6.html">10.4.4 DFM Write Verify</a></li><li><a href="GUID-F482E588-93C7-4449-BBED-5E1CF5CF1A17.html">10.4.5 Operation During Code-Protect and Write-Protect</a></li><li><a href="GUID-1D5FB30C-CDA4-4441-A939-C7EB3FFD8E57.html">10.4.6 Protection Against Spurious Writes</a></li></ul>
+</nav>
+</body>
+</html>

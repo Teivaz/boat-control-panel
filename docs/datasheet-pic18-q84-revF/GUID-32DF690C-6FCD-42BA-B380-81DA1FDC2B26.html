@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>19.14.2 LATx — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0.html"/>
+<link rel="next" href="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D.html"/>
+<link rel="up" href="GUID-D3680739-69E1-4BC6-8FED-0F0AE91735AB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html">19 I/O Ports</a></li><li><a href="GUID-D3680739-69E1-4BC6-8FED-0F0AE91735AB.html">19.14 Register Definitions: Port Control</a></li><li>19.14.2 LATx</li></ol>
+  <div class="sib"><span>← <a href="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0.html" rel="prev">PORTx</a></span><span><a href="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D.html" rel="next">TRISx</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26__ID-00000017" style="">19.14.2  LATx</h1><section id="GUID-A639C6A4-B459-4AD2-9E18-8697791C1FCD" class="- topic/section reference/section sidsc-register/registerDescription ">Output Latch Register<div class="- topic/note note important note_important endnote" id="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26__ID-42127-0000071C" data-ofbid="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26__ID-42127-0000071C"><span class="note__title">Important:</span> 
+            <ul class="- topic/ul ul">
+               <li class="- topic/li li" id="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26__GUID-F1700A35-D993-4A80-BAD3-C82A2607B3F4" data-ofbid="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26__GUID-F1700A35-D993-4A80-BAD3-C82A2607B3F4">Writes to LATx are equivalent to
+                  writes to the corresponding PORTx register. Reads from LATx register return
+                  register values, not I/O pin values.</li>
+               <li class="- topic/li li" id="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26__GUID-00C52A21-8F3B-4036-8318-D069277F2DA1" data-ofbid="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26__GUID-00C52A21-8F3B-4036-8318-D069277F2DA1">Refer to the <strong class="+ topic/ph hi-d/b ph b">“Pin Allocation
+                     Table”</strong> for details about pin availability per port</li>
+               <li class="- topic/li li" id="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26__GUID-6A7DC88C-FA37-4254-9CCC-F6EEB1BB189E" data-ofbid="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26__GUID-6A7DC88C-FA37-4254-9CCC-F6EEB1BB189E">Unimplemented bits will read back
+                  as ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’</li>
+            </ul>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>LATx</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26__GUID-80D0B333-DA1C-4C31-A1BB-E0C25027EC0A" data-ofbid="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26__GUID-80D0B333-DA1C-4C31-A1BB-E0C25027EC0A"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">LATx7</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">LATx6</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">LATx5</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">LATx4</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">LATx3</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">LATx2</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">LATx1</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">LATx0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-A639C6A4-B459-4AD2-9E18-8697791C1FCD" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000001B__ID-42127-00001617" id="ID-0000001B">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000001B__ID-42127-00001617" style=""> Bits 0, 1, 2, 3, 4, 5, 6, 7 – LATxn <span>Output Latch Value</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000001B__GUID-A60B0038-C809-4498-88C5-05C6372589F3" data-ofbid="ID-0000001B__GUID-A60B0038-C809-4498-88C5-05C6372589F3"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  xxxxxxxx</td></tr><tr><td>All Other Resets  =  uuuuuuuu</td></tr></tbody></table></td></tr></tbody></table>
+      </div>
+   </article>
+            
+               Writes to LATx are equivalent to
+                  writes to the corresponding PORTx register. Reads from LATx register return
+                  register values, not I/O pin values.
+               Refer to the “Pin Allocation
+                     Table” for details about pin availability per port
+               Unimplemented bits will read back
+                  as ‘0’
+            
+         
+</body>
+</html>

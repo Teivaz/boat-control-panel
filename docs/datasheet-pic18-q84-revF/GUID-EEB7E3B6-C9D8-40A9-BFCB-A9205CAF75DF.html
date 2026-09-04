@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.6 Types of Data Transfers — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7743D52B-CA54-4A59-86F8-9C10A6DA722B.html"/>
+<link rel="next" href="GUID-536ADB7B-6620-40D5-810D-522DB8E6C145.html"/>
+<link rel="up" href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li>16.6 Types of Data Transfers</li></ol>
+  <div class="sib"><span>← <a href="GUID-7743D52B-CA54-4A59-86F8-9C10A6DA722B.html" rel="prev">Level Trigger Requests</a></span><span><a href="GUID-536ADB7B-6620-40D5-810D-522DB8E6C145.html" rel="next">DMA Interrupts</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-EEB7E3B6-C9D8-40A9-BFCB-A9205CAF75DF__GUID-3E4ECBED-37E7-4CC7-B16A-955597730250" style="">16.6 Types of Data Transfers</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">Based on the memory access capabilities of the DMA (see <a class="- topic/xref xref" href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html#GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58__TABLE_X1F_M32_RFB"><span>Table 16-1</span></a>), the following sections discuss the different types of
+            data movement between the source and destination memory regions.</p>
+        <ul class="- topic/ul ul" id="GUID-EEB7E3B6-C9D8-40A9-BFCB-A9205CAF75DF__UL_NN5_5RB_SFB" data-ofbid="GUID-EEB7E3B6-C9D8-40A9-BFCB-A9205CAF75DF__UL_NN5_5RB_SFB">
+            <li class="- topic/li li" id="GUID-EEB7E3B6-C9D8-40A9-BFCB-A9205CAF75DF__GUID-E42FB44C-AF1F-4380-9C6A-CB1CC594F91B" data-ofbid="GUID-EEB7E3B6-C9D8-40A9-BFCB-A9205CAF75DF__GUID-E42FB44C-AF1F-4380-9C6A-CB1CC594F91B">N:1<p class="- topic/p p">This type of
+                    transfer is common when sending predefined data packets (such as strings)
+                    through a single interface point (such as communications modules transmit
+                    registers).</p></li>
+            <li class="- topic/li li" id="GUID-EEB7E3B6-C9D8-40A9-BFCB-A9205CAF75DF__GUID-517C731B-5DCF-4B52-AE98-BC26A897B5F7" data-ofbid="GUID-EEB7E3B6-C9D8-40A9-BFCB-A9205CAF75DF__GUID-517C731B-5DCF-4B52-AE98-BC26A897B5F7">N:N<p class="- topic/p p">This type of
+                    transfer is useful for moving information out of the program Flash or Data
+                    EEPROM to SRAM for manipulation by the CPU or other peripherals.</p></li>
+            <li class="- topic/li li" id="GUID-EEB7E3B6-C9D8-40A9-BFCB-A9205CAF75DF__GUID-3B462320-F0C7-4969-9553-C7415A8B83BF" data-ofbid="GUID-EEB7E3B6-C9D8-40A9-BFCB-A9205CAF75DF__GUID-3B462320-F0C7-4969-9553-C7415A8B83BF">1:1<p class="- topic/p p">This type of
+                    transfer is common when bridging two different modules data streams together
+                    (communications bridge).</p></li>
+            <li class="- topic/li li" id="GUID-EEB7E3B6-C9D8-40A9-BFCB-A9205CAF75DF__GUID-F7DF53EC-A782-4DE2-AE43-9E297753863A" data-ofbid="GUID-EEB7E3B6-C9D8-40A9-BFCB-A9205CAF75DF__GUID-F7DF53EC-A782-4DE2-AE43-9E297753863A">1:N<p class="- topic/p p">This type of
+                    transfer is useful for moving information from a single data source into a
+                    memory buffer (communications receive registers).</p></li>
+        </ul>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>24.1.1 8-Bit Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A64AE238-4933-4C03-8550-A92F9313DFD2.html"/>
+<link rel="next" href="GUID-3A9EE2E1-B99D-4FB9-B94F-2C8BB4636AC9.html"/>
+<link rel="up" href="GUID-A64AE238-4933-4C03-8550-A92F9313DFD2.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-CF65B906-948A-4657-9750-90DB15690B84.html">24 TMR0 - Timer0 Module</a></li><li><a href="GUID-A64AE238-4933-4C03-8550-A92F9313DFD2.html">24.1 Timer0 Operation</a></li><li>24.1.1 8-Bit Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-A64AE238-4933-4C03-8550-A92F9313DFD2.html" rel="prev">Timer0 Operation</a></span><span><a href="GUID-3A9EE2E1-B99D-4FB9-B94F-2C8BB4636AC9.html" rel="next">16-Bit Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-D26FDC45-8E9C-4883-9639-825F66AD7FC4__GUID-CAEC38DC-A30B-4CAB-A652-237255111397" style="">24.1.1 8-Bit Mode</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-D26FDC45-8E9C-4883-9639-825F66AD7FC4__ID-41521-00002918" data-ofbid="GUID-D26FDC45-8E9C-4883-9639-825F66AD7FC4__ID-41521-00002918">In this mode, Timer0 increments on the rising edge of the selected
+            clock source. A prescaler on the clock input gives several prescale options (see the
+            prescaler control bits, <a class="- topic/xref xref" href="GUID-9E53EAD1-67C5-4976-A53D-4F952BAFB65D.html#ID-000000F3" title="Prescaler Rate Select"><span><span>CKPS</span></span></a>). In
+            this mode, as shown in <a class="- topic/xref xref" href="GUID-CF65B906-948A-4657-9750-90DB15690B84.html#GUID-CF65B906-948A-4657-9750-90DB15690B84__FIG_RYS_KTR_TGB"><span>Figure 24-1</span></a>, a buffered version of TMR0H is maintained. </p>
+        <div class="- topic/p p">This is compared with the value of TMR0L on each cycle of the selected clock source. When
+            the two values match, the following events occur:<ul class="- topic/ul ul" id="GUID-D26FDC45-8E9C-4883-9639-825F66AD7FC4__UL_BGF_MVT_RGB" data-ofbid="GUID-D26FDC45-8E9C-4883-9639-825F66AD7FC4__UL_BGF_MVT_RGB">
+                <li class="- topic/li li" id="GUID-D26FDC45-8E9C-4883-9639-825F66AD7FC4__ID-41521-0000291C" data-ofbid="GUID-D26FDC45-8E9C-4883-9639-825F66AD7FC4__ID-41521-0000291C">TMR0L is reset</li>
+                <li class="- topic/li li" id="GUID-D26FDC45-8E9C-4883-9639-825F66AD7FC4__ID-41521-0000291E" data-ofbid="GUID-D26FDC45-8E9C-4883-9639-825F66AD7FC4__ID-41521-0000291E">The contents of TMR0H are copied to the TMR0H buffer for
+                    next comparison</li>
+            </ul></div>
+</div>
+
+</body>
+</html>

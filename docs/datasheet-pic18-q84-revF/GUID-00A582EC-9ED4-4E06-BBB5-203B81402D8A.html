@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.4.2 ACT Out-of-Range Status — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DE7A03D5-ED00-4653-9DF6-42ACCFDD1197.html"/>
+<link rel="next" href="GUID-14D164B1-DB92-424B-9C03-E9C55434C646.html"/>
+<link rel="up" href="GUID-E44C17FF-48E8-49CE-8652-63573CAB03BC.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-E44C17FF-48E8-49CE-8652-63573CAB03BC.html">12.4 Active Clock Tuning (ACT)</a></li><li>12.4.2 ACT Out-of-Range Status</li></ol>
+  <div class="sib"><span>← <a href="GUID-DE7A03D5-ED00-4653-9DF6-42ACCFDD1197.html" rel="prev">ACT Lock Status</a></span><span><a href="GUID-14D164B1-DB92-424B-9C03-E9C55434C646.html" rel="next">ACT Update Disable</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-00A582EC-9ED4-4E06-BBB5-203B81402D8A__GUID-8B5A1E63-75E2-4B1C-9573-596B8A94D2AC" style="">12.4.2 ACT Out-of-Range Status</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">When Active Clock Tuning is enabled, module hardware uses the <a class="- topic/xref xref" href="GUID-E9218AC7-E06A-403D-A3D6-54192CA94BCB.html#GUID-4E3F0A7F-F4D5-40D2-BC32-FE64ECEFC3AA" title="HFINTOSC Frequency Tuning">TUN</a> bits to achieve high accuracy levels. If the
+            module requires a TUN value outside of its range, the ACT Out-of-Range Status (<a class="- topic/xref xref" href="GUID-BB1B1B0D-D1AE-465F-AA78-726C8A0D4DF6.html#BITFIELD_Y4L_TRP_XGB" title="Active Clock Tuning Out-of-Range Status">ACTORS</a>) bit is set by hardware (ACTORS =
+            <code class="+ topic/ph pr-d/codeph ph codeph">1</code>).</p>
+        <div class="- topic/p p">The <a class="- topic/xref xref" href="GUID-BB1B1B0D-D1AE-465F-AA78-726C8A0D4DF6.html#BITFIELD_Y4L_TRP_XGB" title="Active Clock Tuning Out-of-Range Status">ACTORS</a> bit will be set when:<ul class="- topic/ul ul" id="GUID-00A582EC-9ED4-4E06-BBB5-203B81402D8A__UL_RQY_53P_XGB" data-ofbid="GUID-00A582EC-9ED4-4E06-BBB5-203B81402D8A__UL_RQY_53P_XGB">
+                <li class="- topic/li li" id="GUID-00A582EC-9ED4-4E06-BBB5-203B81402D8A__GUID-20852936-4349-4EF1-B4A3-52B6913D8375" data-ofbid="GUID-00A582EC-9ED4-4E06-BBB5-203B81402D8A__GUID-20852936-4349-4EF1-B4A3-52B6913D8375">The HFINTOSC is tuned to its
+                    lowest frequency as determined by the <a class="- topic/xref xref" href="GUID-E9218AC7-E06A-403D-A3D6-54192CA94BCB.html#GUID-4E3F0A7F-F4D5-40D2-BC32-FE64ECEFC3AA" title="HFINTOSC Frequency Tuning">TUN</a> bits and will require a value lower than the TUN bits can
+                    provide to achieve accuracy within ± 1%. </li>
+                <li class="- topic/li li" id="GUID-00A582EC-9ED4-4E06-BBB5-203B81402D8A__GUID-7FBCCC72-3F6B-4939-95C1-3800539CE247" data-ofbid="GUID-00A582EC-9ED4-4E06-BBB5-203B81402D8A__GUID-7FBCCC72-3F6B-4939-95C1-3800539CE247">The HFINTOSC is tuned to its
+                    highest frequency as determined by the TUN bits and will require a value higher
+                    than the TUN bits can provide to achieve accuracy within ± 1%.</li>
+            </ul></div>
+        <p class="- topic/p p">When an ACT out-of-range event occurs, the HFINTOSC will continue to use the
+            last <a class="- topic/xref xref" href="GUID-E9218AC7-E06A-403D-A3D6-54192CA94BCB.html#GUID-4E3F0A7F-F4D5-40D2-BC32-FE64ECEFC3AA" title="HFINTOSC Frequency Tuning">TUN</a> value until the HFINTOSC frequency returns to the tunable
+            range. Once the HFINTOSC returns to the tunable range, module hardware clears the <a class="- topic/xref xref" href="GUID-BB1B1B0D-D1AE-465F-AA78-726C8A0D4DF6.html#BITFIELD_Y4L_TRP_XGB" title="Active Clock Tuning Out-of-Range Status">ACTORS</a> bit.</p>
+        <div class="- topic/note note important note_important" id="GUID-00A582EC-9ED4-4E06-BBB5-203B81402D8A__GUID-2D9013AA-311B-4524-9CF0-CE8B85FC5615" data-ofbid="GUID-00A582EC-9ED4-4E06-BBB5-203B81402D8A__GUID-2D9013AA-311B-4524-9CF0-CE8B85FC5615"><span class="note__title">Important:</span> The <a class="- topic/xref xref" href="GUID-BB1B1B0D-D1AE-465F-AA78-726C8A0D4DF6.html#BITFIELD_Y4L_TRP_XGB" title="Active Clock Tuning Out-of-Range Status">ACTORS</a> bit is read-only. Writes to ACTORS are ignored.</div>
+</div>
+
+</body>
+</html>

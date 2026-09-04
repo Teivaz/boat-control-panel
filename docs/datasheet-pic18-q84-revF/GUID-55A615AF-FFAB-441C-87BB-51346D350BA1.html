@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.11.1 Software-Controlled Restart — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-07C5206E-0EF8-41BB-8E13-E7220C799003.html"/>
+<link rel="next" href="GUID-9A17A85B-2045-43E7-B014-9627421FBA33.html"/>
+<link rel="up" href="GUID-07C5206E-0EF8-41BB-8E13-E7220C799003.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li><a href="GUID-07C5206E-0EF8-41BB-8E13-E7220C799003.html">32.11 Auto-Shutdown Restart</a></li><li>32.11.1 Software-Controlled Restart</li></ol>
+  <div class="sib"><span>← <a href="GUID-07C5206E-0EF8-41BB-8E13-E7220C799003.html" rel="prev">Auto-Shutdown Restart</a></span><span><a href="GUID-9A17A85B-2045-43E7-B014-9627421FBA33.html" rel="next">Auto-Restart</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-55A615AF-FFAB-441C-87BB-51346D350BA1__GUID-89532516-3D85-4162-B1D2-848533DB8C5E" style="">32.11.1 Software-Controlled Restart</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-55A615AF-FFAB-441C-87BB-51346D350BA1__ID-42115-00000275" data-ofbid="GUID-55A615AF-FFAB-441C-87BB-51346D350BA1__ID-42115-00000275">When the <a class="- topic/xref xref" href="GUID-AA068E9E-929B-4A65-997C-47FC96B43629.html#ID-00000097" title="Auto-Restart Enable">REN</a> bit is clear (REN = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-55A615AF-FFAB-441C-87BB-51346D350BA1__ID-42115-00000276">0</code>), the CWG module must be restarted after an auto-shutdown event through
+            software.</p>
+        <p class="- topic/p p" id="GUID-55A615AF-FFAB-441C-87BB-51346D350BA1__ID-42115-00000277" data-ofbid="GUID-55A615AF-FFAB-441C-87BB-51346D350BA1__ID-42115-00000277">Once all auto-shutdown sources are removed, the software must
+            clear the SHUTDOWN bit. Once SHUTDOWN is cleared, the CWG module will resume operation
+            upon the first rising edge of the CWG data input.</p>
+        <div class="- topic/note note important note_important" id="GUID-55A615AF-FFAB-441C-87BB-51346D350BA1__ID-42115-0000027F" data-ofbid="GUID-55A615AF-FFAB-441C-87BB-51346D350BA1__ID-42115-0000027F"><span class="note__title">Important:</span> The SHUTDOWN bit cannot be cleared in software
+            if the Auto-Shutdown condition is still present.</div>
+        <figure class="- topic/fig fig fignone" id="GUID-55A615AF-FFAB-441C-87BB-51346D350BA1__FIG_OHF_ZSJ_11B" data-ofbid="GUID-55A615AF-FFAB-441C-87BB-51346D350BA1__FIG_OHF_ZSJ_11B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 32-15. <span id="GUID-55A615AF-FFAB-441C-87BB-51346D350BA1__GUID-FDA32B32-2544-468F-BC85-F4CF842E75AD" class="fig--title">Shutdown Functionality,
+                Auto-Restart Disabled (REN = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, LSAC = <code class="+ topic/ph pr-d/codeph ph codeph">‘b01</code>, LSBD
+                = <code class="+ topic/ph pr-d/codeph ph codeph">‘b01</code>)</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-55A615AF-FFAB-441C-87BB-51346D350BA1__IMAGE_KMM_JTJ_11B" src="GUID-460FEAA6-C2BD-49DA-BD37-671CC3BD106A-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

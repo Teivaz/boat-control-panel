@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>45.10 Operation in Sleep Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915.html"/>
+<link rel="next" href="GUID-D420F556-1308-4133-8BB9-BE3926194182.html"/>
+<link rel="up" href="GUID-90365EBC-43EB-4517-8E49-99028902B25E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-90365EBC-43EB-4517-8E49-99028902B25E.html">45 CMP - Comparator Module</a></li><li>45.10 Operation in Sleep Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-E760E2CB-6768-4FF7-8B04-4CED99F79915.html" rel="prev">Analog Input Connection Considerations</a></span><span><a href="GUID-D420F556-1308-4133-8BB9-BE3926194182.html" rel="next">ADC Auto-Trigger Source</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-A6B8240F-2993-4A04-B92C-102E48C43DF2__GUID-51B8DF80-95C2-4B36-8466-190B99E2DB61" style="">45.10 Operation in Sleep Mode</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-A6B8240F-2993-4A04-B92C-102E48C43DF2__ID-42111-0000054D" data-ofbid="GUID-A6B8240F-2993-4A04-B92C-102E48C43DF2__ID-42111-0000054D">The comparator module can operate during Sleep. A comparator
+            interrupt will wake the device from Sleep. The CxIE bits of the respective PIE register
+            must be set to enable comparator interrupts.</p>
+        <p class="- topic/p p" id="GUID-A6B8240F-2993-4A04-B92C-102E48C43DF2__ID-42111-00000550" data-ofbid="GUID-A6B8240F-2993-4A04-B92C-102E48C43DF2__ID-42111-00000550"> The comparator clock source is based on the Timer1 clock source.
+            If the Timer1 clock source is either the system clock (F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>) or the
+            instruction clock (F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4), Timer1 will not operate during Sleep, and
+            synchronized comparator outputs will not operate.</p>
+    </div>
+
+</body>
+</html>

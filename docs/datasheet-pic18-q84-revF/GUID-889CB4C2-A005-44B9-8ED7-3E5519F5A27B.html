@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.13 Configuring the CWG — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF.html"/>
+<link rel="next" href="GUID-E594CFDB-0B54-4A0C-A473-ECD012AE3CAC.html"/>
+<link rel="up" href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li>32.13 Configuring the CWG</li></ol>
+  <div class="sib"><span>← <a href="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF.html" rel="prev">Operation During Sleep</a></span><span><a href="GUID-E594CFDB-0B54-4A0C-A473-ECD012AE3CAC.html" rel="next">Register Definitions: CWG Control</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__GUID-84C32760-7788-4BBF-A64A-165D8911C12D" style="">32.13 Configuring the CWG</h1>
+<div class="- topic/body body">
+        <ol class="- topic/ol ol" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__GUID-BB245DFD-D199-430D-AB19-3AA8833E51F6" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__GUID-BB245DFD-D199-430D-AB19-3AA8833E51F6">
+            <li class="- topic/li li" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-0000029C" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-0000029C">Ensure that the TRIS control bits corresponding to CWG
+                outputs are set so that all are configured as inputs, ensuring that the outputs are
+                inactive during setup. External hardware must ensure that pin levels are held to
+                safe levels.</li>
+            <li class="- topic/li li" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-0000029E" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-0000029E">Clear the <a class="- topic/xref xref" href="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B.html#ID-00000005" title="CWG Enable">EN</a> bit, if not already cleared.</li>
+            <li class="- topic/li li" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002A0" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002A0">Configure the <a class="- topic/xref xref" href="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B.html#ID-00000013" title="CWG Mode">MODE</a> bits to set the output operating mode.</li>
+            <li class="- topic/li li" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002A2" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002A2">Configure the <a class="- topic/xref xref" href="GUID-2EA8EF2E-9030-424D-BE37-7E5A7AA6098D.html#ID-00000029" title="CWG Output ‘y’ Polarity"><span><span>POLy</span></span></a> bits to set the output polarities.</li>
+            <li class="- topic/li li" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002A4" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002A4">Configure the <a class="- topic/xref xref" href="GUID-9146CC56-2BA6-49EE-9462-1E35CD412532.html#BITFIELD_PT3_TYV_TZ" title="CWG Data Input Source Select"><span><span>ISM</span></span></a> bits to select the data input source.</li>
+            <li class="- topic/li li" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002A8" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002A8">If a Steering mode is selected, configure the <a class="- topic/xref xref" href="GUID-F964ED4F-48F4-4C57-891C-01456B83F23E.html#ID-0000006B" title="STR'y' Steering Enable(2)">STRy</a> bits to select the desired output on the CWG outputs.</li>
+            <li class="- topic/li li" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002AA" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002AA">Configure the <a class="- topic/xref xref" href="GUID-AA068E9E-929B-4A65-997C-47FC96B43629.html#BITFIELD_PVX_5S2_VZ" title="CWGxB and CWGxD Auto-Shutdown State Control">LSBD</a> and <a class="- topic/xref xref" href="GUID-AA068E9E-929B-4A65-997C-47FC96B43629.html#BITFIELD_FCR_ZS2_VZ" title="CWGxA and CWGxC Auto-Shutdown State Control">LSAC</a> bits to select the Auto-Shutdown Output Override
+                states (this is necessary even if not using auto-shutdown, because start-up will be
+                from a Shutdown state).</li>
+            <li class="- topic/li li" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002AC" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002AC">If auto-restart is desired, set the <a class="- topic/xref xref" href="GUID-AA068E9E-929B-4A65-997C-47FC96B43629.html#ID-00000097" title="Auto-Restart Enable">REN</a> bit.</li>
+            <li class="- topic/li li" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002AE" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002AE">If auto-shutdown is desired, configure the <a class="- topic/xref xref" href="GUID-9DFD4E36-B662-42E5-A4A5-DCB02106F04B.html#ID-0000009E" title="CWG Auto-Shutdown Source Enable(1,2)">ASyE</a> bits to select the shutdown source.</li>
+            <li class="- topic/li li" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002B0" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002B0">Set the desired rising and falling dead-band times with the
+                CWGxDBR and CWGxDBF registers.</li>
+            <li class="- topic/li li" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002B2" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002B2">Select the clock source with the <a class="- topic/xref xref" href="GUID-C1F16A32-028C-49AF-87B0-AD4D27670365.html#BITFIELD_PT3_TYV_TZ" title="CWG Clock Source Selection Select">CS</a> bit.</li>
+            <li class="- topic/li li" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002B4" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002B4">Set the EN bit to enable the module.</li>
+            <li class="- topic/li li" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002B6" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002B6">Clear the TRIS bits that correspond to the CWG outputs to set
+                them as outputs.</li>
+        </ol>
+        <p class="- topic/p p" id="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002B8" data-ofbid="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B__ID-42115-000002B8">If auto-restart is to be used, set the REN bit and the SHUTDOWN
+            bit will be cleared automatically. Otherwise, clear the SHUTDOWN bit in software to
+            start the CWG.</p>
+    </div>
+
+</body>
+</html>

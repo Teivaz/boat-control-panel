@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.3.1 DMX Controller — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E4BC67C8-357E-4AFA-9C34-F15D26034B13.html"/>
+<link rel="next" href="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764.html"/>
+<link rel="up" href="GUID-E4BC67C8-357E-4AFA-9C34-F15D26034B13.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-E4BC67C8-357E-4AFA-9C34-F15D26034B13.html">35.3 DMX Mode (Full-Featured UARTs Only)</a></li><li>35.3.1 DMX Controller</li></ol>
+  <div class="sib"><span>← <a href="GUID-E4BC67C8-357E-4AFA-9C34-F15D26034B13.html" rel="prev">DMX Mode (Full-Featured UARTs Only)</a></span><span><a href="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764.html" rel="next">DMX Receiver</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-B0BC034C-E372-4989-A432-63EC5CB8050B" style="">35.3.1 DMX Controller</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The DMX Controller mode is configured with the following settings:</p>
+        <ul class="- topic/ul ul" id="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__UL_FNV_KRV_CBB" data-ofbid="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__UL_FNV_KRV_CBB">
+            <li class="- topic/li li" id="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-222B256B-D9CC-49BF-88E4-92813ECF9288" data-ofbid="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-222B256B-D9CC-49BF-88E4-92813ECF9288"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_C5C_R5L_BBB" title="UART Mode Select(1)"><span><span>MODE</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1010</span></li>
+            <li class="- topic/li li" id="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-EBB7CEA2-256E-402B-B33B-45AE6FF78A52" data-ofbid="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-EBB7CEA2-256E-402B-B33B-45AE6FF78A52"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_K3M_SSL_BBB" title="Transmit Enable Control(2)"><span><span>TXEN</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+            <li class="- topic/li li" id="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-03CDF924-530C-4234-A45D-9119C18BB8F1" data-ofbid="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-03CDF924-530C-4234-A45D-9119C18BB8F1"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_BYJ_N5L_BBB" title="Receive Enable Control(2)"><span><span>RXEN</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span></li>
+            <li class="- topic/li li" id="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-B9482ECA-64F7-412C-AF1A-9D1E5E472400" data-ofbid="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-B9482ECA-64F7-412C-AF1A-9D1E5E472400"><a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_C5C_R5L_BBB" title="Transmit Control Polarity(1)">TXPOL</a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span></li>
+            <li class="- topic/li li" id="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-9882AC76-8FE0-4253-9D05-0E81234F0C84" data-ofbid="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-9882AC76-8FE0-4253-9D05-0E81234F0C84"><a class="- topic/xref xref" href="GUID-471C59A9-2216-467A-93AD-12A52D1A299F.html#GUID-471C59A9-2216-467A-93AD-12A52D1A299F" title="UxP1">UxP1</a> = one less than the number of bytes to transmit
+                (excluding the Start code)</li>
+            <li class="- topic/li li" id="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-798721F6-DB50-43DD-8141-A16D07079DEE" data-ofbid="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-798721F6-DB50-43DD-8141-A16D07079DEE"><a class="- topic/xref xref" href="GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C.html#GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C" title="UxBRG">UxBRG</a> = value to achieve 250K baud rate</li>
+            <li class="- topic/li li" id="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-841C69F5-E773-400F-875B-08593BE5CEF4" data-ofbid="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-841C69F5-E773-400F-875B-08593BE5CEF4"><a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_K3M_SSL_BBB" title="Stop Bit Mode Control(1)"><span><span>STP</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">10</span> for two Stop
+                bits</li>
+            <li class="- topic/li li" id="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-9356EC02-613A-47D7-AB15-919F901678AD" data-ofbid="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-9356EC02-613A-47D7-AB15-919F901678AD">RxyPPS = TX pin output code</li>
+            <li class="- topic/li li" id="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-4CF8F854-8314-488F-B93C-9BA7D1F5BFC1" data-ofbid="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-4CF8F854-8314-488F-B93C-9BA7D1F5BFC1"><a class="- topic/xref xref" href="GUID-AFEE23AF-E917-46D3-BF17-879043534F4E.html#BITFIELD_MQF_ZNS_YY" title="Serial Port Enable"><span><span>ON</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+        </ul>
+        <p class="- topic/p p">Each DMX transmission begins with a Break followed by a byte called the “Start Code”. The
+            width of the Break is fixed at 25 bit times. The Break is followed by a “Mark After
+            Break” (MAB) Idle period. After this Idle period, the first through the ‘n’th byte is
+            transmitted, where ‘n-1’ is the value in UxP1. See the following figure.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__FIG_QLV_PGW_CBB" data-ofbid="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__FIG_QLV_PGW_CBB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 35-6. <span id="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585__GUID-CF0A22AD-2A65-401C-87D6-6BF368B4E3EA" class="fig--title">DMX Transmit Sequence</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-35DE8F63-15EA-4CDF-AB1B-5F41ABE5AF8A-high.pdf#toolbar=1" width="491.59" height="271.12"></iframe></span>
+        </figure>
+        <p class="- topic/p p">Software sends the Start Code and the ‘n’ data bytes by writing the UxTXB
+            register with each byte to be sent in the desired order. A UxTXIF value of ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span>’ indicates when the UxTXB is ready to accept the next
+            byte.</p>
+        <p class="- topic/p p">The internal byte counter is not accessible to software. Software needs to
+            keep track of the number of bytes written to UxTXB to ensure that no more and no less
+            than ‘n’ bytes are sent because the DMX state machine will automatically insert a Break
+            and reset its internal counter after ‘n’ bytes are written. One way to ensure
+            synchronization between hardware and software is to toggle TXEN after the last byte of
+            the universe is completely free of the transmit shift register, as indicated by the
+            TXMTIF bit.</p>
+    </div>
+
+</body>
+</html>

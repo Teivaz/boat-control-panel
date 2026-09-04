@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.3 DMX Mode (Full-Featured UARTs Only) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-37ECB4FB-7023-4B10-A225-91AFF45CDCE5.html"/>
+<link rel="next" href="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585.html"/>
+<link rel="up" href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li>35.3 DMX Mode (Full-Featured UARTs Only)</li></ol>
+  <div class="sib"><span>← <a href="GUID-37ECB4FB-7023-4B10-A225-91AFF45CDCE5.html" rel="prev">Address Mode Receive</a></span><span><a href="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585.html" rel="next">DMX Controller</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-E4BC67C8-357E-4AFA-9C34-F15D26034B13__GUID-9413A236-1C87-4039-A09A-7E6832749988" style="">35.3 DMX Mode (Full-Featured UARTs Only)</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">DMX is a protocol used in stage and show equipment. This includes lighting, fog machines, motors,
+            etc. The protocol consists of a controller that sends out commands and a receiver, such
+            as theater lights, that receive these commands. The DMX protocol is usually
+            unidirectional but can be a bidirectional protocol in either Half or Full Duplex mode.
+            An example of a Half Duplex mode is the RDM (Remote Device Management) protocol that
+            sits on DMX512A. The controller transmits commands and the receiver receives them. There
+            are no Error conditions or retransmit mechanisms.</p>
+        <p class="- topic/p p">DMX, or DMX512A, consists of a “universe” of 512 channels. This means that one controller
+            can output up to 512 bytes on a single DMX link. Each piece of equipment on the line is
+            programmed to listen to a consecutive sequence of one or more of these bytes.</p>
+        <p class="- topic/p p">For example, a fog machine connected to one of the universes may be programmed to receive
+            one byte, starting at byte number 10, and a lighting unit may be programmed to receive
+            four bytes starting at byte number 22.</p>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-16FF9BCB-620C-4336-9AB1-8FA406106585.html">35.3.1 DMX Controller</a></li><li><a href="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764.html">35.3.2 DMX Receiver</a></li></ul>
+</nav>
+</body>
+</html>

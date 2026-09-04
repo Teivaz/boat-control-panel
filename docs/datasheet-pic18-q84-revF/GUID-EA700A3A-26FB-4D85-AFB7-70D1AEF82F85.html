@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.5.4 Average Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-79E33B2E-D563-4B71-9234-9234F342E734.html"/>
+<link rel="next" href="GUID-3C6662B5-37CE-4D3F-BBDC-290063167876.html"/>
+<link rel="up" href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html">43.5 Computation Operation</a></li><li>43.5.4 Average Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-79E33B2E-D563-4B71-9234-9234F342E734.html" rel="prev">Accumulate Mode</a></span><span><a href="GUID-3C6662B5-37CE-4D3F-BBDC-290063167876.html" rel="next">Burst Average Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-EA700A3A-26FB-4D85-AFB7-70D1AEF82F85__GUID-00BCA777-B592-403A-A053-912B2E907610" style="">43.5.4 Average Mode</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p" id="GUID-EA700A3A-26FB-4D85-AFB7-70D1AEF82F85__ID-42107-00000561" data-ofbid="GUID-EA700A3A-26FB-4D85-AFB7-70D1AEF82F85__ID-42107-00000561">In Average mode (<a class="- topic/xref xref" href="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D.html#ID-00000061" title="ADC Operating Mode Selection(4)"><span><span>MD</span></span></a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-EA700A3A-26FB-4D85-AFB7-70D1AEF82F85__ID-42107-00000562">‘b010</code>), the
+                <a class="- topic/xref xref" href="GUID-30FA2F95-1F03-4839-A4EC-7F5EDB3ADED5.html" title="ADACC">ADACC</a>
+            registers accumulate with each ADC sample, much as in Accumulate mode, and the <a class="- topic/xref xref" href="GUID-C8E93DB7-E488-4F28-82A5-7B2AEBD489A6.html" title="ADCNT">ADCNT</a> register
+            increments with each sample. The <a class="- topic/xref xref" href="GUID-95F0A495-8BB1-4AFF-B146-349799BF1507.html" title="ADFLTR">ADFLTR</a> register is also updated with the right-shifted value of
+            the ADACC register. The value of the <a class="- topic/xref xref" href="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D.html#ID-0000004F" title="ADC Accumulated Calculation Right Shift Select"><span><span>CRS</span></span></a> bits
+            governs the number of right shifts. However, in Average mode, the threshold comparison
+            is performed upon ADCNT being greater than or equal to a user-defined <a class="- topic/xref xref" href="GUID-4EB6CD17-6360-49E7-AB97-1C468A16614B.html#ID-00000136" title="ADC Repeat Threshold">ADRPT</a> value. In this mode, when ADRPT = 2<sup class="+ topic/ph hi-d/sup ph sup">CRS</sup>, the final
+            accumulated value will be divided by the number of samples, allowing for a threshold
+            comparison operation on the average of all gathered samples.</div>
+    </div>
+
+</body>
+</html>

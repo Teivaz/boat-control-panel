@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.2 I2C Terminology — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0.html"/>
+<link rel="next" href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html"/>
+<link rel="up" href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li>37.2 I2C Terminology</li></ol>
+  <div class="sib"><span>← <a href="GUID-C8B0E6CA-3720-45A0-924D-52C7765D39F0.html" rel="prev">I2C Features</a></span><span><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html" rel="next">I2C Module Overview</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-D4EA6193-4947-4F4D-BAB7-7FDFEC870B3B__GUID-5CEA0757-542C-4993-BF16-8295DDDB8405" style="">37.2 I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Terminology</h1><div class="- topic/body body"><p class="- topic/p p">The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C communication protocol terminology used throughout this document have
+            been adapted from the Phillips I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Specification and can be found in the
+            table below.</p><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Bus Terminology and Definitions</strong></p><div class="table-container"><table class="- topic/table table" id="GUID-D4EA6193-4947-4F4D-BAB7-7FDFEC870B3B__TABLE_OWN_VHW_JGB" data-ofbid="GUID-D4EA6193-4947-4F4D-BAB7-7FDFEC870B3B__TABLE_OWN_VHW_JGB" data-cols="2"><caption></caption><colgroup><col/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"><strong class="+ topic/ph hi-d/b ph b">Term</strong></td><td class="- topic/entry entry colsep-0 rowsep-0"><strong class="+ topic/ph hi-d/b ph b">Definition</strong></td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Host</td><td class="- topic/entry entry colsep-0 rowsep-0">The device that initiates a transfer, generates the clock signal and
+                            terminates a transfer</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Client</td><td class="- topic/entry entry colsep-0 rowsep-0">The device addressed by the host</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Multi-Host</td><td class="- topic/entry entry colsep-0 rowsep-0">A bus containing more than one host device that can initiate
+                            communication</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Transmitter</td><td class="- topic/entry entry colsep-0 rowsep-0">The device that shifts data out onto the bus</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Receiver</td><td class="- topic/entry entry colsep-0 rowsep-0">The device that shifts data in from the bus</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Arbitration</td><td class="- topic/entry entry colsep-0 rowsep-0">Procedure that ensures only one host at a time controls the
+                            bus</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Synchronization</td><td class="- topic/entry entry colsep-0 rowsep-0">Procedure that synchronizes the clock signal between two or more
+                            devices on the bus</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Idle</td><td class="- topic/entry entry colsep-0 rowsep-0">The state in which no activity occurs on the bus and both bus lines
+                            are at a high logic level</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Active</td><td class="- topic/entry entry colsep-0 rowsep-0">The state in which one or more devices are communicating on the
+                            bus</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Matching Address</td><td class="- topic/entry entry colsep-0 rowsep-0">The address byte received by a client that matches the value that is
+                            stored in the I2CxADR0/1/2/3 registers</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Addressed Client</td><td class="- topic/entry entry colsep-0 rowsep-0">Client device that has received a matching address and is actively
+                            being clocked by a host device</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Write Request</td><td class="- topic/entry entry colsep-0 rowsep-0">Host transmits an address with the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit
+                            clear indicating that it wishes to transmit data to a client
+                            device</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Read Request</td><td class="- topic/entry entry colsep-0 rowsep-0">Host transmits an address with the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit
+                            set indicating that it wishes to receive data from a client
+                            device</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Clock Stretching</td><td class="- topic/entry entry colsep-0 rowsep-0">The action in which a device holds the SCL line low to stall
+                            communication</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bus Collision</td><td class="- topic/entry entry colsep-0 rowsep-0">Occurs when the module samples the SDA line and returns a low state
+                            while expecting a high state</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bus Time-out</td><td class="- topic/entry entry colsep-0 rowsep-0">Occurs whenever communication stalls for a period longer than
+                            acceptable</td></tr></tbody></table></div></div>
+</body>
+</html>

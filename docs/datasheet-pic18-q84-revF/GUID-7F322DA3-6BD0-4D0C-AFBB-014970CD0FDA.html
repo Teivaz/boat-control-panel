@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>7.1 System Arbitration — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html"/>
+<link rel="next" href="GUID-2DC195B5-C3E0-4027-BF56-050E00C0ECAE.html"/>
+<link rel="up" href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html">7 PIC18 CPU</a></li><li>7.1 System Arbitration</li></ol>
+  <div class="sib"><span>← <a href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html" rel="prev">PIC18 CPU</a></span><span><a href="GUID-2DC195B5-C3E0-4027-BF56-050E00C0ECAE.html" rel="next">Priority Lock</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__GUID-F731362D-7E96-44F4-B485-AEFC861F73FB" style="">7.1 System Arbitration</h1><div class="- topic/body body"><p class="- topic/p p">The system arbiter resolves memory access between the system level selections (i.e., Main,
+Interrupt Service Routine) and peripheral selection (e.g., DMA and Scanner) based on user-assigned
+priorities. A block diagram of the system arbiter can be found below. Each of the system level and
+peripheral selections has its own priority selection registers. Memory access priority is resolved
+using the number written to the corresponding Priority registers, '<code class="+ topic/ph pr-d/codeph ph codeph">0</code>' being the
+highest priority selection and the maximum value being the lowest priority. All system level and
+peripheral level selections default to the lowest priority configuration. If the same value is in
+two or more Priority registers, priority is given to the higher-listed selection according to the
+following table.</p><div class="- topic/p p">
+			<div class="- topic/note note important note_important" id="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__ID-42129-000006E2" data-ofbid="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__ID-42129-000006E2"><span class="note__title">Important:</span> When the PRLOCKED bit is set, the Non Volatile
+Memory (NVM) module has a fixed priority of '<code class="+ topic/ph pr-d/codeph ph codeph">0</code>' that cannot be changed. If an
+interrupt is desired when an NVM read/write operation is in progress, then the ISR priority level
+must be set to '<code class="+ topic/ph pr-d/codeph ph codeph">0</code>'. The NVM module priority is ignored when PRLOCKED bit is
+cleared.</div>
+		</div><div class="- topic/p p">
+			<div class="table-container"><table class="- topic/table table nozebra frame-all" id="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB" data-ofbid="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB" data-cols="3"><caption class="- topic/title title tablecap" data-caption-side="top" data-is-repeated="true"><span class="table--title-label"><span class="table--title-label">Table 7-1. </span></span><span class="table--title" id="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__GUID-B8999D4E-0673-4D25-BF51-C86C47B79CB7">Default Priorities</span></caption><colgroup><col style="width:28.40909090909091%"/><col style="width:28.40909090909091%"/><col style="width:43.18181818181818%"/></colgroup><thead class="- topic/thead thead"><tr class="- topic/row"><th class="- topic/entry entry align-center colsep-1 rowsep-1" id="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__1" colspan="2">Selection</th><th class="- topic/entry entry align-center colsep-0 rowsep-1" id="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__2">Priority Register Reset Value</th></tr></thead><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-1 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__1" rowspan="2">System Level</td><td class="- topic/entry entry align-center colsep-1 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__1">ISR</td><td class="- topic/entry entry align-center colsep-0 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__2">7</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-1 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__1">MAIN</td><td class="- topic/entry entry align-center colsep-0 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__2">7</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-1 rowsep-0" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__1" rowspan="7">Peripheral</td><td class="- topic/entry entry align-center colsep-1 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__1">DMA1</td><td class="- topic/entry entry align-center colsep-0 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__2">7</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-1 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__1">DMA2</td><td class="- topic/entry entry align-center colsep-0 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__2">7</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-1 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__1">DMA3</td><td class="- topic/entry entry align-center colsep-0 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__2">7</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-1 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__1">DMA4</td><td class="- topic/entry entry align-center colsep-0 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__2">7</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-1 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__1">DMA5</td><td class="- topic/entry entry align-center colsep-0 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__2">7</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-1 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__1">DMA6</td><td class="- topic/entry entry align-center colsep-0 rowsep-1" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__2">7</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-1 rowsep-0" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__1">SCANNER</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" headers="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__TABLE_KMC_LPN_5FB__entry__2">7</td></tr></tbody></table></div>
+		</div><div class="- topic/p p">
+			<figure class="- topic/fig fig fignone" id="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__FIG_AYZ_CYM_PGB" data-ofbid="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__FIG_AYZ_CYM_PGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 7-2. <span id="GUID-7F322DA3-6BD0-4D0C-AFBB-014970CD0FDA__GUID-A065A55B-9519-44E7-9407-D1EE5805DB77" class="fig--title">System Arbiter Block Diagram</span></span></figcaption><span class=""><iframe src="GUID-65088F73-8510-41E0-B2EF-55D3D5852A0C-high.pdf#toolbar=1" width="450" height="333.265306122449"></iframe></span></figure>
+		</div></div>
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-2DC195B5-C3E0-4027-BF56-050E00C0ECAE.html">7.1.1 Priority Lock</a></li></ul>
+</nav>
+</body>
+</html>

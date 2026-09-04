@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.2.1 Bus Free Time — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html"/>
+<link rel="next" href="GUID-F9FC65EE-A139-4C91-B508-5B24574998AC.html"/>
+<link rel="up" href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html">37.4.2 I2C Host Mode Operation</a></li><li>37.4.2.1 Bus Free Time</li></ol>
+  <div class="sib"><span>← <a href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html" rel="prev">I2C Host Mode Operation</a></span><span><a href="GUID-F9FC65EE-A139-4C91-B508-5B24574998AC.html" rel="next">Host Clock Timing</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-049CEACE-8FFA-4FC0-AA1D-E869D5037CAB__GUID-93F1E00F-EE75-4F22-9951-1F5EAA79C562" style="">37.4.2.1 Bus Free Time</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The Bus Free Status (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#GUID-967969A7-72DF-42E8-8CE4-4AD59A4CBE74" title="Bus Free Status(2)">BFRE</a>) bit indicates the activity status of the bus. When BFRE
+            is set (BFRE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the bus is in an Idle state (both SDA and SCL are
+            floating high), and any host device residing on the bus can compete for control of the
+            bus. When BFRE is clear (BFRE = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the bus is in an Active state, and
+            any attempts by a host to control the bus will cause a collision.</div>
+        <div class="- topic/p p">The Bus Free Time (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_ACT_ZLP_LGB" title="Bus Free Time Selection">BFRET</a>) bits determine the length of time, in terms of I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C clock
+            pulses, before the bus is considered Idle. Once module hardware detects logic high
+            levels on both SDA and SCL, it monitors the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C clock signal, and when the
+            desired number of pulses have occurred, module hardware sets <a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#GUID-967969A7-72DF-42E8-8CE4-4AD59A4CBE74" title="Bus Free Status(2)">BFRE</a>. The <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_ACT_ZLP_LGB" title="Bus Free Time Selection">BFRET</a> bits are also used to ensure that the module meets the minimum Stop
+            hold time as defined by the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Specification.</div>
+    </div>
+
+</body>
+</html>

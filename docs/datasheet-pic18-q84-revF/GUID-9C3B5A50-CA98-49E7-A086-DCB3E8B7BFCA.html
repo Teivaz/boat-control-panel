@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.1.1.4 4x PLL — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3EE354E0-7D09-461D-BC1C-8958A352AB97.html"/>
+<link rel="next" href="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5.html"/>
+<link rel="up" href="GUID-5DED24A3-7549-4229-9627-680F5E81FE14.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A.html">12.1 Clock Source Types</a></li><li><a href="GUID-5DED24A3-7549-4229-9627-680F5E81FE14.html">12.1.1 External Clock Sources</a></li><li>12.1.1.4 4x PLL</li></ol>
+  <div class="sib"><span>← <a href="GUID-3EE354E0-7D09-461D-BC1C-8958A352AB97.html" rel="prev">Oscillator Start-Up Timer (OST)</a></span><span><a href="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5.html" rel="next">Secondary Oscillator</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-9C3B5A50-CA98-49E7-A086-DCB3E8B7BFCA__GUID-08A68DC7-8874-4B3B-B737-0E29AD94C129" style="">12.1.1.4 4x PLL</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The oscillator module contains a 4x Phase-Locked Loop (PLL) circuit that can be used with
+            the external clock sources to provide a system clock source. The input frequency for the
+            PLL must fall within a specified range. See the <strong class="+ topic/ph hi-d/b ph b">“PLL Specifications”</strong> table found
+            in the <strong class="+ topic/ph hi-d/b ph b">“Electrical Specifications”</strong> chapter for more information.</p>
+        <p class="- topic/p p">The PLL can be enabled for use through one of two methods:</p>
+        <ol class="- topic/ol ol" id="GUID-9C3B5A50-CA98-49E7-A086-DCB3E8B7BFCA__OL_RK5_5K4_SGB" data-ofbid="GUID-9C3B5A50-CA98-49E7-A086-DCB3E8B7BFCA__OL_RK5_5K4_SGB">
+            <li class="- topic/li li" id="GUID-9C3B5A50-CA98-49E7-A086-DCB3E8B7BFCA__GUID-93A1AEB7-C9BA-4D23-806C-6C5BC92A92C4" data-ofbid="GUID-9C3B5A50-CA98-49E7-A086-DCB3E8B7BFCA__GUID-93A1AEB7-C9BA-4D23-806C-6C5BC92A92C4">Program the RSTOSC Configuration bits
+                to select the “EXTOSC with 4x PLL” option.</li>
+            <li class="- topic/li li" id="GUID-9C3B5A50-CA98-49E7-A086-DCB3E8B7BFCA__GUID-CFD05F2F-C1AD-49D9-8339-3AFD5E647525" data-ofbid="GUID-9C3B5A50-CA98-49E7-A086-DCB3E8B7BFCA__GUID-CFD05F2F-C1AD-49D9-8339-3AFD5E647525">Write the <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a> bits to select the ”EXTOSC with 4x PLL” option.</li>
+        </ol>
+    </div>
+
+</body>
+</html>

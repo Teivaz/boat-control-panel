@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.4.5 Daisy-Chain Configuration — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A7A0ED90-B376-4956-B8A4-377CD97FA726.html"/>
+<link rel="next" href="GUID-91B41471-A63D-47AD-82C5-71EE3D07157F.html"/>
+<link rel="up" href="GUID-312D4604-FDB9-4FC4-9D6A-94EC2AE8B3C5.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-312D4604-FDB9-4FC4-9D6A-94EC2AE8B3C5.html">36.4 Client Mode</a></li><li>36.4.5 Daisy-Chain Configuration</li></ol>
+  <div class="sib"><span>← <a href="GUID-A7A0ED90-B376-4956-B8A4-377CD97FA726.html" rel="prev">Client Mode Clock Configuration</a></span><span><a href="GUID-91B41471-A63D-47AD-82C5-71EE3D07157F.html" rel="next">SPI Operation in Sleep Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-A303F2B6-8BBA-4702-B548-AFF957E0B12D__GUID-81B30E3F-FB2B-4F26-A065-EF945CBB8F9C" style="">36.4.5 Daisy-Chain Configuration</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The SPI bus can be connected in a daisy-chain configuration, where the first client
+            output is connected to the second client input, the second client output is connected to
+            the third client input, and so on. The final client output is connected to the host
+            input. Each client sends out, during a second group of clock pulses, an exact copy of
+            what was received during the first group of clock pulses. The whole chain acts as one
+            large communication shift register. The daisy-chain feature only requires a single
+            Client Select line from the host device connected to all client devices (alternately,
+            the client devices can be configured to ignore the Client Select line by setting the
+            SSET bit). </p>
+        <p class="- topic/p p">In a typical daisy-chain configuration, the SCK signal from the host is connected to each
+            of the client device SCK inputs. However, the SCK input and output are separate signals
+            selected by the PPS control. When the PPS selection is made to configure the SCK input
+            and SCK output on separate pins, the SCK output will follow the SCK input, allowing for
+            SCK signals to be daisy-chained like the SDO/SDI signals.</p>
+        <p class="- topic/p p">The following two figures show block diagrams of a typical daisy-chain connection and a
+            daisy-chain connection with daisy-chained SPI clocks, respectively.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-A303F2B6-8BBA-4702-B548-AFF957E0B12D__FIG_OY1_FVW_SFB" data-ofbid="GUID-A303F2B6-8BBA-4702-B548-AFF957E0B12D__FIG_OY1_FVW_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 36-12. <span id="GUID-A303F2B6-8BBA-4702-B548-AFF957E0B12D__GUID-0C2E3433-5798-45EB-B36E-82C4911BB78A" class="fig--title">Traditional SPI Daisy-Chain Connection</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-2471E2D1-E429-446F-805F-297EC8CFA2C6-high.pdf#toolbar=1" width="450" height="377.33187534171674"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-A303F2B6-8BBA-4702-B548-AFF957E0B12D__FIG_EMF_MVW_SFB" data-ofbid="GUID-A303F2B6-8BBA-4702-B548-AFF957E0B12D__FIG_EMF_MVW_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 36-13. <span id="GUID-A303F2B6-8BBA-4702-B548-AFF957E0B12D__GUID-EFB5AA51-2BE1-4FA6-A27F-520CB590317E" class="fig--title">SPI Daisy-Chain Connection with
+                Chained SCK</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-DFD68E84-853A-4AAF-A6CC-47FB261041FE-high.pdf#toolbar=1" width="450" height="424.1607435757244"></iframe></span>
+        </figure>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>23.5.1 CLKRCON — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1F3654F9-2C15-43CF-9D67-B65646DC2355.html"/>
+<link rel="next" href="GUID-0B25AEAA-F5ED-4579-B245-31073F386A8F.html"/>
+<link rel="up" href="GUID-1F3654F9-2C15-43CF-9D67-B65646DC2355.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-547C55F6-AC0C-4F2D-8E34-2C59A4494C4D.html">23 CLKREF - Reference Clock Output Module</a></li><li><a href="GUID-1F3654F9-2C15-43CF-9D67-B65646DC2355.html">23.5 Register Definitions: Reference Clock</a></li><li>23.5.1 CLKRCON</li></ol>
+  <div class="sib"><span>← <a href="GUID-1F3654F9-2C15-43CF-9D67-B65646DC2355.html" rel="prev">Register Definitions: Reference Clock</a></span><span><a href="GUID-0B25AEAA-F5ED-4579-B245-31073F386A8F.html" rel="next">CLKRCLK</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30__ID-00000001" style="">23.5.1  CLKRCON </h1><section id="GUID-843FE64C-5035-4A07-A579-ADCAE4557336" class="- topic/section reference/section sidsc-register/registerDescription ">Reference Clock Control
+            Register<div class="- topic/note note note note_note endnote" id="GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30__ID-42137-00000125" data-ofbid="GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30__ID-42137-00000125"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30__OL_XJV_DNM_WZ" data-ofbid="GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30__OL_XJV_DNM_WZ">
+               <li class="- topic/li li" id="GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30__GUID-22F20538-0C44-4F44-8576-0AC788BF1CB0" data-ofbid="GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30__GUID-22F20538-0C44-4F44-8576-0AC788BF1CB0">Bits are valid for DIV ≥
+                     <code class="+ topic/ph pr-d/codeph ph codeph">001</code>. For DIV = <code class="+ topic/ph pr-d/codeph ph codeph">000</code>, duty cycle is fixed at
+                  50%.</li>
+            </ol>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>CLKRCON</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x039</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30__GUID-634F4A4B-970D-4156-963E-84A706D904A0" data-ofbid="GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30__GUID-634F4A4B-970D-4156-963E-84A706D904A0"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">EN</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="2">DC[1:0]</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="3">DIV[2:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-843FE64C-5035-4A07-A579-ADCAE4557336" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000005__ID-42137-00000273" id="ID-00000005">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000005__ID-42137-00000273" style=""> Bit 7 – EN <span>Reference Clock Module
+         Enable</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000005__GUID-66C62F0A-0F26-452E-AFD1-A476FBA5D8C1" data-ofbid="ID-00000005__GUID-66C62F0A-0F26-452E-AFD1-A476FBA5D8C1"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000005__ID-42137-00000275">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000005__GUID-E9D6E9B5-4106-4658-9EAB-9BF618DE3611">Reference
+                  clock module enabled</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000005__ID-42137-00000278">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000005__GUID-A5CBB254-6DC5-47D4-B8D6-59FA465A18BD">Reference
+                  clock module is disabled</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000000C__ID-42137-0000027D" id="ID-0000000C">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000000C__ID-42137-0000027D" style=""> Bits 4:3 – DC[1:0] <span>
+         Reference Clock Duty Cycle<sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b"><a class="- topic/xref xref" href="#GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30__ID-42137-00000125">(1)</a></strong></sup>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000000C__GUID-285BE701-6A43-4FAA-A473-800C549975DE" data-ofbid="ID-0000000C__GUID-285BE701-6A43-4FAA-A473-800C549975DE"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000000C__ID-42137-0000027F">11</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000000C__GUID-815EFF9A-67FD-48D1-97FF-7DC41889671D">Clock
+                  outputs duty cycle of 75%</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000000C__ID-42137-00000282">10</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000000C__GUID-80BCE751-DF2D-4A41-BF4A-38513C7F8FE8">Clock
+                  outputs duty cycle of 50%</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000000C__ID-42137-00000285">01</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000000C__GUID-4AEE4E70-B120-45E1-8641-99362AFA44EF">Clock
+                  outputs duty cycle of 25%</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000000C__ID-42137-00000288">00</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000000C__GUID-0EC52C8C-75F6-4A62-8519-2C242ECDD8D3">Clock
+                  outputs duty cycle of 0%</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000015__ID-42137-0000028D" id="ID-00000015">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000015__ID-42137-0000028D" style=""> Bits 2:0 – DIV[2:0] <span>Reference Clock
+         Divider</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000015__GUID-026BF582-8133-4D0D-BD3D-FEE722750BD1" data-ofbid="ID-00000015__GUID-026BF582-8133-4D0D-BD3D-FEE722750BD1"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000015__ID-42137-0000028F">111</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000015__GUID-D79F1CC4-5FED-412A-9FEE-46A4893859ED">Base clock
+                  value divided by 128</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000015__ID-42137-00000292">110</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000015__GUID-3644136E-C0A9-4BAC-BB16-62D4398A73D3">Base clock
+                  value divided by 64</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000015__ID-42137-00000295">101</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000015__GUID-87EF7949-5E7A-4C17-9185-FA143BC6F41F">Base clock
+                  value divided by 32</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000015__ID-42137-00000298">100</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000015__GUID-0374A117-909A-4EF2-94D6-9A9132C2CEDF">Base clock
+                  value divided by 16</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000015__ID-42137-0000029B">011</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000015__GUID-A1E37598-96B4-4A6F-94A4-F365A6EDCE71">Base clock
+                  value divided by 8</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000015__ID-42137-0000029E">010</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000015__GUID-99EF43C1-0A0B-4CCE-9DEA-D7E747D4DE32">Base clock
+                  value divided by 4</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000015__ID-42137-000002A1">001</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000015__GUID-FD664C0C-504C-4B24-A15D-B64DCFA558B5">Base clock
+                  value divided by 2</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000015__ID-42137-000002A4">000</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000015__GUID-F1922576-6DE0-4889-AD8F-2FA178ECFD8C">Base clock
+                  value</td>
+            </tr></tbody></table>
+      </div>
+   </article>
+            
+               Bits are valid for DIV ≥
+                     001. For DIV = 000, duty cycle is fixed at
+                  50%.
+            
+         
+</body>
+</html>

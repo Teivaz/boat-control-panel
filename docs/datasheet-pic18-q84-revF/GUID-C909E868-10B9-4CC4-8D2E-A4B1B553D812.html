@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>22 CLC - Configurable Logic Cell — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-96BA295B-DB78-4051-A071-C23A49A46381.html"/>
+<link rel="next" href="GUID-49EE042B-EC05-42F5-9CB0-A92AFD80A996.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>22 CLC - Configurable Logic Cell</li></ol>
+  <div class="sib"><span>← <a href="GUID-96BA295B-DB78-4051-A071-C23A49A46381.html" rel="prev">CANRXPPS</a></span><span><a href="GUID-49EE042B-EC05-42F5-9CB0-A92AFD80A996.html" rel="next">CLC Setup</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-5C308073-BC80-428C-802A-8747A7E93F6B" style="">22 CLC - Configurable
+        Logic Cell</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The Configurable Logic Cell (CLC) module provides
+            programmable logic that operates outside the speed limitations of software execution.
+            The logic cell takes up to 256 input signals and, through the use of configurable gates,
+            reduces those inputs to four logic lines that drive one of eight selectable
+            single-output logic functions.</p>
+        <div class="- topic/p p">Input sources are a combination of the following:<ul class="- topic/ul ul" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__UL_FQK_TFC_F1B" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__UL_FQK_TFC_F1B">
+                <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-3D9287C2-D598-4A66-9158-D62E5C608A46" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-3D9287C2-D598-4A66-9158-D62E5C608A46">I/O pins</li>
+                <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-91520238-D622-4AE5-B257-E91D73E0DCD6" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-91520238-D622-4AE5-B257-E91D73E0DCD6">Internal
+                    clocks</li>
+                <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-6F7F94D1-3C77-45B7-AA0D-7264BD9D2731" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-6F7F94D1-3C77-45B7-AA0D-7264BD9D2731">Peripherals</li>
+                <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-67E451F3-61CD-4B2D-B645-CE524F42828D" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-67E451F3-61CD-4B2D-B645-CE524F42828D">Register
+                    bits</li>
+            </ul>The output can be directed internally to peripherals and to an output pin.</div>
+        <div class="- topic/p p">The following figure is a simplified diagram showing
+            signal flow through the CLC. Possible configurations include:<ul class="- topic/ul ul" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__UL_WG5_QGC_F1B" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__UL_WG5_QGC_F1B">
+                <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-7436060B-2EE9-481F-A910-F52C35A5ED1B" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-7436060B-2EE9-481F-A910-F52C35A5ED1B">Combinatorial
+                        Logic<ul class="- topic/ul ul" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__UL_WMR_TGC_F1B" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__UL_WMR_TGC_F1B">
+                        <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-10338BB8-D38D-4CEC-BF92-BE8A5F0448DD" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-10338BB8-D38D-4CEC-BF92-BE8A5F0448DD">AND</li>
+                        <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-C36B3665-8A29-4A35-A6E7-A92190597A69" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-C36B3665-8A29-4A35-A6E7-A92190597A69">NAND</li>
+                        <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-31823051-FC68-4FBB-9D8F-F55D7E9E62AA" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-31823051-FC68-4FBB-9D8F-F55D7E9E62AA">AND-OR</li>
+                        <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-B8B10F8B-8D34-4A7D-A694-BCEF909DC780" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-B8B10F8B-8D34-4A7D-A694-BCEF909DC780">AND-OR-INVERT</li>
+                        <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-E3B611BC-FBB9-477F-94E0-F89CB005EDEB" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-E3B611BC-FBB9-477F-94E0-F89CB005EDEB">OR-XOR</li>
+                        <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-5D3D165C-668B-4809-BA61-1EC88D2FF6E9" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-5D3D165C-668B-4809-BA61-1EC88D2FF6E9">OR-XNOR</li>
+                    </ul></li>
+                <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-147945BA-939A-4E46-A69F-91A4FA6A19B4" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-147945BA-939A-4E46-A69F-91A4FA6A19B4">Latches<ul class="- topic/ul ul" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__UL_BFV_XGC_F1B" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__UL_BFV_XGC_F1B">
+                        <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-911A90D9-393F-4293-B9E7-4CFAA6C2F58F" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-911A90D9-393F-4293-B9E7-4CFAA6C2F58F">SR</li>
+                        <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-A63A6463-E0BF-4E40-92DB-FFB34AF93402" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-A63A6463-E0BF-4E40-92DB-FFB34AF93402">Clocked D with Set and Reset</li>
+                        <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-5A61991E-61C7-4B21-A692-C9CAE1E8ADBA" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-5A61991E-61C7-4B21-A692-C9CAE1E8ADBA">Transparent D with Set and Reset</li>
+                    </ul></li>
+            </ul></div>
+        <figure class="- topic/fig fig fignone" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__FIG_MZW_WQC_F1B" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__FIG_MZW_WQC_F1B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 22-1. <span id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-D6059E54-B8A9-4994-A14A-6FF69D0D4CC1" class="fig--title">CLC
+                Simplified Block Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-9F30E326-A53A-422F-A2A2-14B99C3E8913-high.pdf#toolbar=1" width="452.38" height="363.62"></iframe></span>
+            <div class="- topic/note note notype note_notype" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-49F4E8CD-954B-42EB-B8AF-400A06F315A9" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-49F4E8CD-954B-42EB-B8AF-400A06F315A9"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__OL_MWK_ZQC_F1B" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__OL_MWK_ZQC_F1B">
+                    <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-1854C9F1-7CA0-45B4-A5CC-B52970A15F9B" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-1854C9F1-7CA0-45B4-A5CC-B52970A15F9B">See <a class="- topic/xref xref" href="GUID-FB7DA898-BA4C-4771-8C73-323D5DCAA144.html#GUID-FB7DA898-BA4C-4771-8C73-323D5DCAA144__FIG_ZWS_XWD_F1B"><span>Figure 22-2</span></a> for input data selection and gating.</li>
+                    <li class="- topic/li li" id="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-AE458DD9-CA3F-4203-BD80-F47CFB501401" data-ofbid="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812__GUID-AE458DD9-CA3F-4203-BD80-F47CFB501401">See <a class="- topic/xref xref" href="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A.html#GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__FIG_VCZ_2WC_F1B"><span>Figure 22-3</span></a> for programmable logic functions.</li>
+                </ol>
+            </div>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-49EE042B-EC05-42F5-9CB0-A92AFD80A996.html">22.1 CLC Setup</a></li><li><a href="GUID-04F60EC9-43BC-4542-B4F9-FE410EEA3E48.html">22.2 CLC Interrupts</a></li><li><a href="GUID-BDB528D3-6BAD-44EE-8E31-3EDB9EF2427B.html">22.3 Effects of a Reset</a></li><li><a href="GUID-4BD3F670-14E5-4D79-A96E-C0A5220E2113.html">22.4 Output Mirror Copies</a></li><li><a href="GUID-E3A0DBD2-78B2-403C-B685-E6ECA35D5DDE.html">22.5 Operation During Sleep</a></li><li><a href="GUID-DB026086-8715-477A-866D-27D205A738B8.html">22.6 CLC Setup Steps</a></li><li><a href="GUID-E29A477D-DC6A-4CF5-BD1F-A1E88C727828.html">22.7 Register Overlay</a></li><li><a href="GUID-4656BF75-B37B-4AF0-A015-BC847533BBBE.html">22.8 Register Definitions: Configurable Logic Cell</a></li><li><a href="GUID-C9E646DD-0C13-4471-9577-874DD16FA763.html">22.9 Register Summary - CLC Control</a></li></ul>
+</nav>
+</body>
+</html>

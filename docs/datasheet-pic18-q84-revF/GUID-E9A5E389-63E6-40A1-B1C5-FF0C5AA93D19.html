@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.6.3.3 Start of Client Select and End of Client Select Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5A8B8E2D-CB38-4F0D-B728-CC470D137110.html"/>
+<link rel="next" href="GUID-BD915424-ADFE-4FA4-AC43-AE06159F88E7.html"/>
+<link rel="up" href="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-3B049106-A068-4D06-BD06-17396A19D766.html">36.6 SPI Interrupts</a></li><li><a href="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6.html">36.6.3 SPI Status Interrupts</a></li><li>36.6.3.3 Start of Client Select and End of Client Select Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-5A8B8E2D-CB38-4F0D-B728-CC470D137110.html" rel="prev">Transfer Counter Is Zero Interrupt</a></span><span><a href="GUID-BD915424-ADFE-4FA4-AC43-AE06159F88E7.html" rel="next">Receiver Overflow and Transmitter Underflow Interrupts</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-E9A5E389-63E6-40A1-B1C5-FF0C5AA93D19__GUID-DE6AA90A-6540-48EF-A7B0-111CB73BCD93" style="">36.6.3.3 Start of Client Select and End of Client
+        Select Interrupts</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The Start of Client Select Interrupt Flag and Start of Client Select Interrupt Enable are
+            the <a class="- topic/xref xref" href="GUID-28CA1CAA-8734-4F85-8A9D-5B7892702B4A.html#BITFIELD_HBR_VJF_RFB" title="Start of Client Select Interrupt Flag"><span><span>SOSIF</span></span></a> and <a class="- topic/xref xref" href="GUID-73DEE9E2-8073-45FE-88D0-F2D6489F1BF5.html#BITFIELD_HBR_VJF_RFB" title="Start of Client Select Interrupt Enable"><span><span>SOSIE</span></span></a> bits, respectively. The End of Client Select Interrupt Flag and End of Client Select
+            Interrupt Enable are the <a class="- topic/xref xref" href="GUID-28CA1CAA-8734-4F85-8A9D-5B7892702B4A.html#BITFIELD_DS5_BKF_RFB" title="End of Client Select Interrupt Flag"><span><span>EOSIF</span></span></a> and <a class="- topic/xref xref" href="GUID-73DEE9E2-8073-45FE-88D0-F2D6489F1BF5.html#BITFIELD_DS5_BKF_RFB" title="End of Client Select Interrupt Enable"><span><span>EOSIE</span></span></a> bits, respectively. These interrupts trigger at the leading and
+            trailing edges of the Client Select input. </p>
+        <p class="- topic/p p">The interrupts are active in both Host and Client mode and will trigger on transitions of
+            the Client Select input, regardless of which mode the SPI is in. In Host mode, the PPS
+            controls will be used to assign the Client Select input to the same pin as the Client
+            Select output, allowing these interrupts to trigger on changes to the Client Select
+            output. </p>
+        <p class="- topic/p p">In Client mode, changing the SSET bit can trigger these interrupts, as it changes the
+            effective input value of Client Select. </p>
+        <p class="- topic/p p">Both SOSIF and EOSIF must be cleared in software.</p>
+</div>
+
+</body>
+</html>

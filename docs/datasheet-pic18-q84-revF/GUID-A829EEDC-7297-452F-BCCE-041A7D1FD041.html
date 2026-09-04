@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>7.3.1 Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4CDA8BD0-8C39-47CE-8297-FB61A0890E23.html"/>
+<link rel="next" href="GUID-AC65D292-1034-4C03-973F-2641C5376474.html"/>
+<link rel="up" href="GUID-4CDA8BD0-8C39-47CE-8297-FB61A0890E23.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html">7 PIC18 CPU</a></li><li><a href="GUID-4CDA8BD0-8C39-47CE-8297-FB61A0890E23.html">7.3 8x8 Hardware Multiplier</a></li><li>7.3.1 Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-4CDA8BD0-8C39-47CE-8297-FB61A0890E23.html" rel="prev">8x8 Hardware Multiplier</a></span><span><a href="GUID-AC65D292-1034-4C03-973F-2641C5376474.html" rel="next">16x16 Unsigned Multiplication Algorithm</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-A829EEDC-7297-452F-BCCE-041A7D1FD041__GUID-B484F6B2-82F1-4AEE-9DA8-2EB7D53F6925" style="">7.3.1 Operation</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-A829EEDC-7297-452F-BCCE-041A7D1FD041__ID-42106-0000000C" data-ofbid="GUID-A829EEDC-7297-452F-BCCE-041A7D1FD041__ID-42106-0000000C">
+         <a class="- topic/xref xref" href="#GUID-A829EEDC-7297-452F-BCCE-041A7D1FD041__GUID-71FDC3F9-AE25-4AB2-9DC1-3CE17DDCA53E"><span>8x8 Unsigned Multiply Routine</span></a> shows the
+         instruction sequence for an 8x8 unsigned multiplication. Only one instruction is required
+         when one of the arguments is already loaded in the WREG register. <a class="- topic/xref xref" href="#GUID-A829EEDC-7297-452F-BCCE-041A7D1FD041__GUID-FB660DFB-3302-4E4E-9832-9717ABCE4BCF"><span>8x8 Signed Multiply Routine</span></a> shows the sequence
+         to do an 8x8 signed multiplication. To account for the sign bits of the arguments, each
+         argument’s Most Significant bit (MSb) is tested and the appropriate subtractions are
+         done.</p>
+      <div class="- topic/example example" id="GUID-A829EEDC-7297-452F-BCCE-041A7D1FD041__GUID-71FDC3F9-AE25-4AB2-9DC1-3CE17DDCA53E" data-ofbid="GUID-A829EEDC-7297-452F-BCCE-041A7D1FD041__GUID-71FDC3F9-AE25-4AB2-9DC1-3CE17DDCA53E"><h2 class="- topic/title title sectiontitle">8x8 Unsigned Multiply Routine</h2>
+         
+         <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c">
+        MOVF    ARG1, W   ;
+&#x2028;        MULWF   ARG2      ; ARG1 * ARG2 -&gt; PRODH:PRODL</pre>
+      </div>
+      <div class="- topic/example example" id="GUID-A829EEDC-7297-452F-BCCE-041A7D1FD041__GUID-FB660DFB-3302-4E4E-9832-9717ABCE4BCF" data-ofbid="GUID-A829EEDC-7297-452F-BCCE-041A7D1FD041__GUID-FB660DFB-3302-4E4E-9832-9717ABCE4BCF"><h2 class="- topic/title title sectiontitle">8x8 Signed Multiply Routine</h2>
+         
+         <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c" id="GUID-A829EEDC-7297-452F-BCCE-041A7D1FD041__ID-42106-00000019" data-ofbid="GUID-A829EEDC-7297-452F-BCCE-041A7D1FD041__ID-42106-00000019">
+        MOVF    ARG1, W
+        MULWF   ARG2       ; ARG1 * ARG2 -&gt; PRODH:PRODL
+        BTFSC   ARG2, SB   ; Test Sign Bit
+        SUBWF   PRODH, F   ; PRODH = PRODH - ARG1
+        MOVF    ARG2, W
+        BTFSC   ARG1, SB   ; Test Sign Bit
+        SUBWF   PRODH, F   ; PRODH = PRODH - ARG2</pre>
+      </div>
+   </div>
+
+</body>
+</html>

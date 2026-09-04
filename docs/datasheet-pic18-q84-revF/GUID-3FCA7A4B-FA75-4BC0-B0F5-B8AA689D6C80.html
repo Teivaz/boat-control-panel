@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>15 WWDT - Windowed Watchdog Timer — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2FD7872E-3B29-4A33-BB35-F1C1A1BBBF1B.html"/>
+<link rel="next" href="GUID-A4A5162D-D0E1-4E64-B62F-4479A5440FB4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>15 WWDT - Windowed Watchdog Timer</li></ol>
+  <div class="sib"><span>← <a href="GUID-2FD7872E-3B29-4A33-BB35-F1C1A1BBBF1B.html" rel="prev">Register Summary - BOR Control and Power Control</a></span><span><a href="GUID-A4A5162D-D0E1-4E64-B62F-4479A5440FB4.html" rel="next">Independent Clock Source</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-D33B1C00-8B09-417A-8C17-ACBEC8F37D8F" style="">15 WWDT - Windowed Watchdog Timer</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">A Watchdog Timer (WDT) is a system timer that generates a Reset if the firmware does not
+            issue a <code class="+ topic/ph pr-d/codeph ph codeph">CLRWDT</code> instruction within the time-out period. A Watchdog Timer
+            is typically used to recover the system from unexpected events. The Windowed Watchdog
+            Timer (WWDT) differs from nonwindowed operation in that <code class="+ topic/ph pr-d/codeph ph codeph">CLRWDT</code>
+            instructions are only accepted when they are performed within a specific window during
+            the time-out period.</p>
+        <div class="- topic/p p">The WWDT has the following features:<ul class="- topic/ul ul" id="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__UL_WF5_YHG_5FB" data-ofbid="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__UL_WF5_YHG_5FB">
+                <li class="- topic/li li" id="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-CDA45E73-C49D-4314-8C7D-8EAC38B700BD" data-ofbid="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-CDA45E73-C49D-4314-8C7D-8EAC38B700BD">Selectable clock source </li>
+                <li class="- topic/li li" id="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-AB9E27C0-185E-40B5-BEFC-B38CC839BD8B" data-ofbid="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-AB9E27C0-185E-40B5-BEFC-B38CC839BD8B">Multiple operating modes<ul class="- topic/ul ul" id="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__UL_RLG_CD5_PGB" data-ofbid="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__UL_RLG_CD5_PGB">
+                        <li class="- topic/li li" id="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-567B6CCF-DD7E-41BE-A0C8-A1E234F0C91F" data-ofbid="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-567B6CCF-DD7E-41BE-A0C8-A1E234F0C91F">WWDT is always on</li>
+                        <li class="- topic/li li" id="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-7BC9BD57-2DCD-439C-8626-9E567B885B0A" data-ofbid="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-7BC9BD57-2DCD-439C-8626-9E567B885B0A">WWDT is off when in Sleep</li>
+                        <li class="- topic/li li" id="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-FFAF8114-46A0-4552-AA03-3A85B8805D56" data-ofbid="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-FFAF8114-46A0-4552-AA03-3A85B8805D56">WWDT is controlled by software</li>
+                        <li class="- topic/li li" id="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-BE4FF57E-72F6-408C-A985-5223971AEBD8" data-ofbid="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-BE4FF57E-72F6-408C-A985-5223971AEBD8">WWDT is always off</li>
+                    </ul></li>
+                <li class="- topic/li li" id="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-7DBC193B-EF3C-4E55-8172-8A1EA6CB090A" data-ofbid="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-7DBC193B-EF3C-4E55-8172-8A1EA6CB090A">Configurable time-out period from
+                    1 ms to 256s (nominal)</li>
+                <li class="- topic/li li" id="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-D2F2D84F-B024-4F2E-A846-FF48772766E2" data-ofbid="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-D2F2D84F-B024-4F2E-A846-FF48772766E2">Configurable window size from 12.5% to 100% of the time-out period</li>
+                <li class="- topic/li li" id="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-69F8D398-8D71-48AD-ACD8-E27BDD40B5E0" data-ofbid="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-69F8D398-8D71-48AD-ACD8-E27BDD40B5E0">Multiple Reset conditions</li>
+            </ul></div>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__FIG_YWR_KV3_SGB" data-ofbid="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__FIG_YWR_KV3_SGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 15-1. <span id="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80__GUID-ECC53756-9A4F-4F31-8941-F3BFEE89F50E" class="fig--title">Windowed Watchdog Timer Block
+                    Diagram</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-C83B994C-D65F-4FF1-A72D-52D797E65C2D-high.pdf#toolbar=1" width="450" height="527.8982442044568"></iframe></span>
+            </figure>
+        </div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-A4A5162D-D0E1-4E64-B62F-4479A5440FB4.html">15.1 Independent Clock Source</a></li><li><a href="GUID-4A35D917-2C86-40F3-B4C5-F860637D828E.html">15.2 WWDT Operating Modes</a></li><li><a href="GUID-9C6DFD20-46AB-43F2-AE51-0B9F26876F46.html">15.3 Time-Out Period</a></li><li><a href="GUID-899D6189-CEDC-457B-AB83-CC3CE3A2E5FC.html">15.4 Watchdog Window</a></li><li><a href="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3.html">15.5 Clearing the Watchdog Timer</a></li><li><a href="GUID-44255F7A-1E27-49A8-A86D-B86C0D221594.html">15.6 Operation During Sleep</a></li><li><a href="GUID-2C838CBB-658F-4D17-A3A0-D5E859B0D48A.html">15.7 Register Definitions: Windowed Watchdog Timer Control</a></li><li><a href="GUID-22095F15-1CF2-472B-9218-C2E70233C9B5.html">15.8 Register Summary - WDT Control</a></li></ul>
+</nav>
+</body>
+</html>

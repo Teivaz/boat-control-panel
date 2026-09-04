@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.4.2 LIN Client Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-18D853E0-78CE-4073-B9D4-43AAB2FD32C8.html"/>
+<link rel="next" href="GUID-4BA83442-B7F9-4363-AFE7-CB39A5B2BCF9.html"/>
+<link rel="up" href="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37.html">35.4 LIN Modes (Full-Featured UARTs Only)</a></li><li>35.4.2 LIN Client Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-18D853E0-78CE-4073-B9D4-43AAB2FD32C8.html" rel="prev">LIN Host/Client Mode</a></span><span><a href="GUID-4BA83442-B7F9-4363-AFE7-CB39A5B2BCF9.html" rel="next">LIN Client Receiver</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-20CCA0BC-FDA1-4BE5-92FC-5F74BC9C5C58" style="">35.4.2 LIN Client Mode</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The LIN Client mode is configured by the following settings:</p>
+        <ul class="- topic/ul ul" id="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__UL_X2F_KLW_CBB" data-ofbid="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__UL_X2F_KLW_CBB">
+            <li class="- topic/li li" id="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-2807B9C3-7CBA-4F9C-8B52-C0B685206DD1" data-ofbid="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-2807B9C3-7CBA-4F9C-8B52-C0B685206DD1"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_C5C_R5L_BBB" title="UART Mode Select(1)"><span><span>MODE</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1011</span></li>
+            <li class="- topic/li li" id="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-0E8F2E82-C684-4E13-B7DD-BE340CE84D97" data-ofbid="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-0E8F2E82-C684-4E13-B7DD-BE340CE84D97"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_K3M_SSL_BBB" title="Transmit Enable Control(2)"><span><span>TXEN</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+            <li class="- topic/li li" id="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-664468B7-D81F-4A8E-A099-B0DCDBA65159" data-ofbid="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-664468B7-D81F-4A8E-A099-B0DCDBA65159"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_BYJ_N5L_BBB" title="Receive Enable Control(2)"><span><span>RXEN</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+            <li class="- topic/li li" id="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-B3949739-63B1-4AF4-B70F-C02C661161DD" data-ofbid="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-B3949739-63B1-4AF4-B70F-C02C661161DD"><a class="- topic/xref xref" href="GUID-DAF4A4A9-A3FB-4388-ADEA-5A0AB193AFBA.html#GUID-DAF4A4A9-A3FB-4388-ADEA-5A0AB193AFBA" title="UxP2">UxP2</a> = number of data bytes to transmit</li>
+            <li class="- topic/li li" id="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-EFA3EBAE-63C4-4E54-A3D4-933D2A4D9F78" data-ofbid="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-EFA3EBAE-63C4-4E54-A3D4-933D2A4D9F78"><a class="- topic/xref xref" href="GUID-464C2505-8799-4461-A95B-5A3F19590F27.html#GUID-464C2505-8799-4461-A95B-5A3F19590F27" title="UxP3">UxP3</a> = number of data bytes to receive</li>
+            <li class="- topic/li li" id="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-C88947CC-552F-424C-981F-A7164396AA8C" data-ofbid="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-C88947CC-552F-424C-981F-A7164396AA8C"><a class="- topic/xref xref" href="GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C.html#GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C" title="UxBRG">UxBRG</a> = value to achieve default baud rate</li>
+            <li class="- topic/li li" id="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-A47593AF-789A-404F-AF38-9DD0223A6346" data-ofbid="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-A47593AF-789A-404F-AF38-9DD0223A6346"><a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_C5C_R5L_BBB" title="Transmit Control Polarity(1)">TXPOL</a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span> (for high Idle
+                state)</li>
+            <li class="- topic/li li" id="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-AB688D50-E7D3-427D-AF18-B6C31D790798" data-ofbid="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-AB688D50-E7D3-427D-AF18-B6C31D790798"><a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_K3M_SSL_BBB" title="Stop Bit Mode Control(1)"><span><span>STP</span></span></a> = desired Stop bits selection</li>
+            <li class="- topic/li li" id="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-5DC5ED20-C624-41C6-8179-CB9053676E7D" data-ofbid="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-5DC5ED20-C624-41C6-8179-CB9053676E7D"><a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_BYJ_N5L_BBB" title="Checksum Mode Select(2)">C0EN</a> = desired Checksum mode</li>
+            <li class="- topic/li li" id="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-827C3A4D-B76B-4241-9B23-DD23E403FCC1" data-ofbid="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-827C3A4D-B76B-4241-9B23-DD23E403FCC1">RxyPPS = TX pin selection code</li>
+            <li class="- topic/li li" id="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-0F372C8C-ACF8-4D48-B6F1-2C636B9A09FE" data-ofbid="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-0F372C8C-ACF8-4D48-B6F1-2C636B9A09FE">TX pin TRIS control =
+                    <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span></li>
+            <li class="- topic/li li" id="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-05ED875F-079F-4B83-AE92-46CFB821DF6B" data-ofbid="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087__GUID-05ED875F-079F-4B83-AE92-46CFB821DF6B"><a class="- topic/xref xref" href="GUID-AFEE23AF-E917-46D3-BF17-879043534F4E.html#BITFIELD_MQF_ZNS_YY" title="Serial Port Enable"><span><span>ON</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+        </ul>
+        <p class="- topic/p p">The Client process starts upon detecting a Break on the RX pin. The Break clears the
+            UxTXCHK, UxRXCHK, UxP2 and UxP3 registers. At the end of the Break, the auto-baud
+            circuity is activated and the baud rate is automatically set using the Sync character
+            following the Break. The character following the Sync character is received as the PID
+            code and is saved in the receive FIFO. The UART computes the two PID parity bits from
+            the six Least Significant bits of the PID. If either parity bit does not match the
+            corresponding bit of the received PID code, the PERIF flag is set and saved at the same
+            FIFO location as the PID code. The UxRXIF bit is set indicating that the PID is
+            available.</p>
+        <p class="- topic/p p">Software retrieves the PID by reading the UxRXB register and determines the Client
+            process to execute from that. The checksum method, number of data bytes, and whether to
+            send or receive data are defined by software according to the PID code.</p>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-4BA83442-B7F9-4363-AFE7-CB39A5B2BCF9.html">35.4.2.1 LIN Client Receiver</a></li><li><a href="GUID-6DD538CA-E858-4710-9854-EF644E1B545B.html">35.4.2.2 LIN Client Transmitter</a></li></ul>
+</nav>
+</body>
+</html>

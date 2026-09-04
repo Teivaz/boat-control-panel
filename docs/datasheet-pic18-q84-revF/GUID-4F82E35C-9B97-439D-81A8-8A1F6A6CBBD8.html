@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.5.9.2 Three Retransmission Attempts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-87521999-9DE0-4148-A7D0-F069EB6EACB2.html"/>
+<link rel="next" href="GUID-EC7A5E7F-854A-4961-84E0-1F03C8350CB0.html"/>
+<link rel="up" href="GUID-769B00F1-7A91-4A09-9AEA-E190BD998E39.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html">38.5 Message Transmission</a></li><li><a href="GUID-769B00F1-7A91-4A09-9AEA-E190BD998E39.html">38.5.9 Retransmission Attempts</a></li><li>38.5.9.2 Three Retransmission Attempts</li></ol>
+  <div class="sib"><span>← <a href="GUID-87521999-9DE0-4148-A7D0-F069EB6EACB2.html" rel="prev">Retransmission Attempts Disabled</a></span><span><a href="GUID-EC7A5E7F-854A-4961-84E0-1F03C8350CB0.html" rel="next">Unlimited Retransmission</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-4F82E35C-9B97-439D-81A8-8A1F6A6CBBD8__GUID-C238936C-3449-40CD-BDF6-7FC897092BA5" style="">38.5.9.2 Three Retransmission Attempts</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">In case an error is detected during transmission, the CAN FD Protocol module
+            will decrement the number of remaining attempts and try to retransmit the message the
+            next time the bus is Idle. In case arbitration is lost, the number of remaining attempts
+            will not change. If all retransmission attempts are exhausted, TXREQ will be cleared and
+            TXATIF in CxFIFOSTAy or CxTXQSTA will be set.</p>
+        <p class="- topic/p p">Before retransmitting the message, the transmit priority will be recalculated. The
+            retransmission attempts will be reinitialized if a different TX FIFO or TXQ is selected
+            for transmission, or if a message is received after the last transmission attempt.</p>
+    </div>
+
+</body>
+</html>

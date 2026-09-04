@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.5.6 C1TXREQ Register — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A4BC4959-9F8B-4287-AF9D-C1B0CB2034BF.html"/>
+<link rel="next" href="GUID-59C585AC-6EE8-4791-8431-1E3299BF3EDA.html"/>
+<link rel="up" href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html">38.5 Message Transmission</a></li><li>38.5.6 C1TXREQ Register</li></ol>
+  <div class="sib"><span>← <a href="GUID-A4BC4959-9F8B-4287-AF9D-C1B0CB2034BF.html" rel="prev">Requesting Transmission of Message in Transmit Queue</a></span><span><a href="GUID-59C585AC-6EE8-4791-8431-1E3299BF3EDA.html" rel="next">Transmit Priority</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-5A5D3C71-6477-4D5C-B1CE-A6BE1B4785CD__GUID-C3B523E4-90BD-4EFC-9E8A-6BD405E668E9" style="">38.5.6 C1TXREQ Register</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p">The CxTXREQ register contains the TXREQ[31:0] bits of the TXQ and of all the
+            TX FIFOs. They have the following purposes:<ul class="- topic/ul ul" id="GUID-5A5D3C71-6477-4D5C-B1CE-A6BE1B4785CD__UL_BNH_YTH_P3B" data-ofbid="GUID-5A5D3C71-6477-4D5C-B1CE-A6BE1B4785CD__UL_BNH_YTH_P3B">
+                <li class="- topic/li li" id="GUID-5A5D3C71-6477-4D5C-B1CE-A6BE1B4785CD__GUID-30EDB7E2-9683-4710-B4AB-9113B39E43E3" data-ofbid="GUID-5A5D3C71-6477-4D5C-B1CE-A6BE1B4785CD__GUID-30EDB7E2-9683-4710-B4AB-9113B39E43E3">The user application can request
+                    transmission of the TXQ and/or one or more TX FIFOs, using only one SPI
+                    instruction, by setting the corresponding bits in the CxTXREQ register. Clearing
+                    a bit does NOT abort any transmissions.</li>
+                <li class="- topic/li li" id="GUID-5A5D3C71-6477-4D5C-B1CE-A6BE1B4785CD__GUID-95382774-1060-4B60-8657-7C5702951E57" data-ofbid="GUID-5A5D3C71-6477-4D5C-B1CE-A6BE1B4785CD__GUID-95382774-1060-4B60-8657-7C5702951E57">Reading the CxTXREQ register
+                    gives information about which transmit FIFOs have transmissions pending.</li>
+            </ul></div>
+        <p class="- topic/p p">CxTXREQ[0] is mapped to the TXQ, CxTXREQ[1] is mapped to TX FIFO 1,
+            CxTXREQ[2] is mapped to TX FIFO 2 and so on.</p>
+    </div>
+
+</body>
+</html>

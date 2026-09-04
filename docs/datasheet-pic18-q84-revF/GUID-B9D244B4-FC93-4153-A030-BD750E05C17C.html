@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.13.37 PIR14 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3815B3A3-33E2-418D-B57A-29B3BDF8ADB7.html"/>
+<link rel="next" href="GUID-B9096AC0-BEEF-4856-8410-9D9BDD7F1D0F.html"/>
+<link rel="up" href="GUID-602D87A7-D67E-4F60-9A0D-E6A6EFDB7CE1.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li><a href="GUID-602D87A7-D67E-4F60-9A0D-E6A6EFDB7CE1.html">11.13 Register Definitions: Interrupt Control</a></li><li>11.13.37 PIR14</li></ol>
+  <div class="sib"><span>← <a href="GUID-3815B3A3-33E2-418D-B57A-29B3BDF8ADB7.html" rel="prev">PIR13</a></span><span><a href="GUID-B9096AC0-BEEF-4856-8410-9D9BDD7F1D0F.html" rel="next">PIR15</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-B9D244B4-FC93-4153-A030-BD750E05C17C__GUID-302CB17E-CBEF-4305-8A94-1BB442100E4C" style="">11.13.37  PIR14</h1><section id="GUID-C0441B6C-ACE5-439B-8969-882E8077CCA2" class="- topic/section reference/section sidsc-register/registerDescription ">Peripheral Interrupt
+            Request Register 14<div class="- topic/note note notype note_notype endnote" id="GUID-B9D244B4-FC93-4153-A030-BD750E05C17C__GUID-29FF9945-C9E8-4BE5-A28C-D47494B3A196" data-ofbid="GUID-B9D244B4-FC93-4153-A030-BD750E05C17C__GUID-29FF9945-C9E8-4BE5-A28C-D47494B3A196"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-B9D244B4-FC93-4153-A030-BD750E05C17C__OL_PKN_YKQ_ZGB" data-ofbid="GUID-B9D244B4-FC93-4153-A030-BD750E05C17C__OL_PKN_YKQ_ZGB">
+                    <li class="- topic/li li" id="GUID-B9D244B4-FC93-4153-A030-BD750E05C17C__GUID-23CEB183-FF0D-4F3E-A3A3-6199CB0E5143" data-ofbid="GUID-B9D244B4-FC93-4153-A030-BD750E05C17C__GUID-23CEB183-FF0D-4F3E-A3A3-6199CB0E5143"> Interrupt flag bits get set
+                        when an interrupt condition occurs, regardless of the state of its
+                        corresponding enable bit or the global enable bit. User software needs to
+                        ensure the appropriate interrupt flag bits are clear prior to enabling an
+                        interrupt.</li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>PIR14</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x4BC</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-B9D244B4-FC93-4153-A030-BD750E05C17C__GUID-52416218-600D-4779-8C69-5C354C0B0EFD" data-ofbid="GUID-B9D244B4-FC93-4153-A030-BD750E05C17C__GUID-52416218-600D-4779-8C69-5C354C0B0EFD"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-B9D244B4-FC93-4153-A030-BD750E05C17C"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">DMA7AIF</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">DMA7ORIF</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">DMA7DCNTIF</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">DMA7SCNTIF</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">NCO3IF</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">CM2IF</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">CLC7IF</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HS</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HS</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HS</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-C0441B6C-ACE5-439B-8969-882E8077CCA2" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-E9BC6A11-DDC3-4DF5-8F78-01AFF6B29B42__GUID-2249A9B9-AE6C-4070-B71C-4B372A1584F2" id="GUID-E9BC6A11-DDC3-4DF5-8F78-01AFF6B29B42">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-E9BC6A11-DDC3-4DF5-8F78-01AFF6B29B42__GUID-2249A9B9-AE6C-4070-B71C-4B372A1584F2" style=""> Bit 7 – DMA7AIF <span>DMA7 Abort
+            Interrupt Flag</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-E9BC6A11-DDC3-4DF5-8F78-01AFF6B29B42__GUID-62E73C02-7655-434C-B6B0-9A5D22EE98CF" data-ofbid="GUID-E9BC6A11-DDC3-4DF5-8F78-01AFF6B29B42__GUID-62E73C02-7655-434C-B6B0-9A5D22EE98CF"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="GUID-E9BC6A11-DDC3-4DF5-8F78-01AFF6B29B42__BITFIELDVALUES_OKR_FD2_V3B" data-ofbid="GUID-E9BC6A11-DDC3-4DF5-8F78-01AFF6B29B42__BITFIELDVALUES_OKR_FD2_V3B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-E9BC6A11-DDC3-4DF5-8F78-01AFF6B29B42__GUID-86FBB9F8-ED7C-45CA-BE88-E6C6C41E777F">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-E9BC6A11-DDC3-4DF5-8F78-01AFF6B29B42__GUID-14DF1815-D5C3-4C63-B7C1-0850CD04506C">Interrupt has occurred (must be cleared by
+                        software)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-E9BC6A11-DDC3-4DF5-8F78-01AFF6B29B42__GUID-8FF19613-5C1B-4076-BCA7-08BC7BEBCB01">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-E9BC6A11-DDC3-4DF5-8F78-01AFF6B29B42__GUID-313F8420-3848-407F-856A-6CE415C55533">Interrupt event has not occurred</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_LSS_KN3_ZGB__GUID-1249359D-BF63-41A6-BCDF-D10D7CA4DF4D" id="BITFIELD_LSS_KN3_ZGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_LSS_KN3_ZGB__GUID-1249359D-BF63-41A6-BCDF-D10D7CA4DF4D" style=""> Bit 6 – DMA7ORIF <span>DMA7 Overrun
+            Interrupt Flag</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_LSS_KN3_ZGB__BITFIELDDESCRIPTION_MSS_KN3_ZGB" data-ofbid="BITFIELD_LSS_KN3_ZGB__BITFIELDDESCRIPTION_MSS_KN3_ZGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_LSS_KN3_ZGB__BITFIELDVALUES_MMN_FD2_V3B" data-ofbid="BITFIELD_LSS_KN3_ZGB__BITFIELDVALUES_MMN_FD2_V3B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LSS_KN3_ZGB__GUID-60545B65-7C31-456E-AE8C-89EF18CC7E05">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LSS_KN3_ZGB__GUID-454B32AD-0623-49AD-B8B5-F207246F8124">Interrupt has occurred (must be cleared by
+                        software)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LSS_KN3_ZGB__GUID-D06670D2-50D5-4315-9CB8-171CB88E8756">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LSS_KN3_ZGB__GUID-C3364BC9-3A56-4E66-A011-57E3D4D80AB7">Interrupt event has not occurred</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_ZSQ_NN3_ZGB__GUID-01A9166F-1D05-46C1-AB04-966236BBC5E1" id="BITFIELD_ZSQ_NN3_ZGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_ZSQ_NN3_ZGB__GUID-01A9166F-1D05-46C1-AB04-966236BBC5E1" style=""> Bit 5 – DMA7DCNTIF <span>DMA7 Destination
+            Count Interrupt Flag</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_ZSQ_NN3_ZGB__BITFIELDDESCRIPTION_ATQ_NN3_ZGB" data-ofbid="BITFIELD_ZSQ_NN3_ZGB__BITFIELDDESCRIPTION_ATQ_NN3_ZGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_ZSQ_NN3_ZGB__BITFIELDVALUES_BCJ_FD2_V3B" data-ofbid="BITFIELD_ZSQ_NN3_ZGB__BITFIELDVALUES_BCJ_FD2_V3B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_ZSQ_NN3_ZGB__GUID-FDE331E2-517D-408D-A0D6-190201D80AA6">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_ZSQ_NN3_ZGB__GUID-A14AEDD2-E03E-4D6B-BA13-2C1670A32CFB">Interrupt has occurred (must be cleared by
+                        software)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_ZSQ_NN3_ZGB__GUID-9FC02F78-A5BC-4850-8D1E-AE673F4C3F76">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_ZSQ_NN3_ZGB__GUID-330C82AD-BD7B-4960-B3FD-32EBF7CDB93D">Interrupt event has not occurred</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_XL3_QN3_ZGB__GUID-12F3ED94-05DD-48C3-B1CC-A0CDFA3CEDEC" id="BITFIELD_XL3_QN3_ZGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_XL3_QN3_ZGB__GUID-12F3ED94-05DD-48C3-B1CC-A0CDFA3CEDEC" style=""> Bit 4 – DMA7SCNTIF <span>DMA7 Source Count
+            Interrupt Flag</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_XL3_QN3_ZGB__BITFIELDDESCRIPTION_YL3_QN3_ZGB" data-ofbid="BITFIELD_XL3_QN3_ZGB__BITFIELDDESCRIPTION_YL3_QN3_ZGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_XL3_QN3_ZGB__BITFIELDVALUES_XBC_FD2_V3B" data-ofbid="BITFIELD_XL3_QN3_ZGB__BITFIELDVALUES_XBC_FD2_V3B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_XL3_QN3_ZGB__GUID-A872C49F-C03D-439B-BA87-B13C6D0D314F">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_XL3_QN3_ZGB__GUID-B38BD273-1328-4BC3-B1C2-87D73FA74829">Interrupt has occurred (must be cleared by
+                        software)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_XL3_QN3_ZGB__GUID-CE8E5C8A-E01B-4024-84DD-E6388A994797">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_XL3_QN3_ZGB__GUID-3EF617F6-66B5-4426-9784-FF459EE23D2B">Interrupt event has not occurred</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="CP1_2D2_V3B__GUID-2249A9B9-AE6C-4070-B71C-4B372A1584F2" id="CP1_2D2_V3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="CP1_2D2_V3B__GUID-2249A9B9-AE6C-4070-B71C-4B372A1584F2" style=""> Bit 3 – NCO3IF <span>NCO3 Interrupt
+            Flag</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="CP1_2D2_V3B__GUID-62E73C02-7655-434C-B6B0-9A5D22EE98CF" data-ofbid="CP1_2D2_V3B__GUID-62E73C02-7655-434C-B6B0-9A5D22EE98CF"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="CP1_2D2_V3B__GUID-F3173075-254F-44BE-A2F9-FF0877CF8C59">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="CP1_2D2_V3B__GUID-7DBB6621-D38D-4F0F-B164-8B36B21FE44B">Interrupt has occurred (must be cleared by
+                        software)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="CP1_2D2_V3B__GUID-6E6D4A76-6D98-4997-9816-47534402C322">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="CP1_2D2_V3B__GUID-35101C4C-F718-45FA-9961-B1246AE9B6F6">Interrupt event has not occurred</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_TXH_KT3_ZGB__GUID-39868EA5-83A3-4E1F-954A-58B845625904" id="BITFIELD_TXH_KT3_ZGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_TXH_KT3_ZGB__GUID-39868EA5-83A3-4E1F-954A-58B845625904" style=""> Bit 2 – CM2IF <span>CMP2 Interrupt
+            Flag</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_TXH_KT3_ZGB__BITFIELDDESCRIPTION_UXH_KT3_ZGB" data-ofbid="BITFIELD_TXH_KT3_ZGB__BITFIELDDESCRIPTION_UXH_KT3_ZGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_TXH_KT3_ZGB__BITFIELDVALUES_KP2_NT3_ZGB" data-ofbid="BITFIELD_TXH_KT3_ZGB__BITFIELDVALUES_KP2_NT3_ZGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_TXH_KT3_ZGB__GUID-1B9EED32-8C05-4B5F-A0B9-35C00AC88799">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_TXH_KT3_ZGB__GUID-228523FE-0021-45A1-9F16-830D5D9BC539">Interrupt has occurred (must be cleared by
+                        software)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_TXH_KT3_ZGB__GUID-71C6D71E-CC72-470B-869D-122A574A5B0A">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_TXH_KT3_ZGB__GUID-F5653E01-A478-4F0B-BF64-5B2D0BF6FC4A">Interrupt event has not occurred</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_QWM_4T3_ZGB__GUID-6043065A-37DB-4E5B-94D8-5A016529B945" id="BITFIELD_QWM_4T3_ZGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_QWM_4T3_ZGB__GUID-6043065A-37DB-4E5B-94D8-5A016529B945" style=""> Bit 1 – CLC7IF <span>CLC7 Interrupt
+            Flag</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_QWM_4T3_ZGB__BITFIELDDESCRIPTION_RWM_4T3_ZGB" data-ofbid="BITFIELD_QWM_4T3_ZGB__BITFIELDDESCRIPTION_RWM_4T3_ZGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_QWM_4T3_ZGB__BITFIELDVALUES_C4K_QT3_ZGB" data-ofbid="BITFIELD_QWM_4T3_ZGB__BITFIELDVALUES_C4K_QT3_ZGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_QWM_4T3_ZGB__GUID-8FFECE3A-8B41-4C5B-B0DC-47D42E438DC6">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_QWM_4T3_ZGB__GUID-5DCF8660-46C3-4115-9BF5-088028D170AA">Interrupt has occurred (must be cleared by
+                        software)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_QWM_4T3_ZGB__GUID-770E4563-1B8A-44DE-A19C-23FC4DA595ED">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_QWM_4T3_ZGB__GUID-6DAAFC2B-3B9C-48E5-BF03-C61252C58883">Interrupt event has not occurred</td>
+                </tr></tbody></table>
+        </div>
+    </article>
+                
+                     Interrupt flag bits get set
+                        when an interrupt condition occurs, regardless of the state of its
+                        corresponding enable bit or the global enable bit. User software needs to
+                        ensure the appropriate interrupt flag bits are clear prior to enabling an
+                        interrupt.
+                
+            
+</body>
+</html>

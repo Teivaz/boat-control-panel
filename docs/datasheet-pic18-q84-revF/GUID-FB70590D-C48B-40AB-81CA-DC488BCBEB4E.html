@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.13 Collision Detection (Full-Featured UARTs Only) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-051AA398-00F4-481C-8760-C91CD51B3D48.html"/>
+<link rel="next" href="GUID-3E039E51-4150-4536-A978-B579498D3C35.html"/>
+<link rel="up" href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li>35.13 Collision Detection (Full-Featured UARTs Only)</li></ol>
+  <div class="sib"><span>← <a href="GUID-051AA398-00F4-481C-8760-C91CD51B3D48.html" rel="prev">Receive Checksum Method</a></span><span><a href="GUID-3E039E51-4150-4536-A978-B579498D3C35.html" rel="next">RX/TX Activity Time-Out</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-FB70590D-C48B-40AB-81CA-DC488BCBEB4E__GUID-467525C9-600A-442C-9193-72B921A928ED" style="">35.13 Collision Detection (Full-Featured UARTs
+        Only)</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">External forces that interfere with the transmit line are detected in all modes of
+            operation with collision detection. Collision detection is always active when <a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_BYJ_N5L_BBB" title="Receive Enable Control(2)"><span><span>RXEN</span></span></a> and <a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_K3M_SSL_BBB" title="Transmit Enable Control(2)"><span><span>TXEN</span></span></a> are both set. When the receive input is connected to the transmit
+            output through either the same I/O pin or external circuitry, a character will be
+            received for every character transmitted. The collision detection circuit provides a
+            warning when the word received does not match the word transmitted.</div>
+        <div class="- topic/p p">The <a class="- topic/xref xref" href="GUID-0335D11B-CDF0-4C1B-B750-F220FDA16575.html#BITFIELD_KPG_CJM_BBB" title="Transmit Collision Interrupt Flag(1)"><span><span>TXCIF</span></span></a> flag is used to signal collisions. This signal is only useful when
+            the TX output is looped back to the RX input and everything that is transmitted is
+            expected to be received. If more than one transmitter is active at the same time, it can
+            be assumed that the TX word will not match the RX word. The TXCIF detects this mismatch
+            and flags an interrupt. The TXCIF bit will also be set in DALI mode transmissions when
+            the received bit is missing the expected mid-bit transition.</div>
+        <div class="- topic/p p">Collision detection is always active, regardless of whether or not the RX input is
+            connected to the TX output. It is up to the user to disable the <a class="- topic/xref xref" href="GUID-BCAA4B97-CF3B-483A-B40D-EFFFD716B63A.html#BITFIELD_KPG_CJM_BBB" title="Transmit Collision Interrupt Enable(1)"><span><span>TXCIE</span></span></a> bit when collision interrupts are not required. The software overhead of unloading
+            the receive buffer of transmitted data are avoided by setting the <a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_MQF_ZNS_YY" title="Run During Overflow Control"><span><span>RUNOVF</span></span></a>
+            bit and ignoring the receive interrupt and letting the receive buffer overflow. When the
+            transmission is complete, prepare for receiving data by flushing the receive buffer (see
+            the <a class="- topic/xref xref" href="GUID-055F1303-369F-45B8-98DC-AC4B619CEA9A.html#GUID-055F1303-369F-45B8-98DC-AC4B619CEA9A">FIFO Reset</a> section) and clearing the <a class="- topic/xref xref" href="GUID-0335D11B-CDF0-4C1B-B750-F220FDA16575.html#BITFIELD_OKF_Y3M_BBB" title="Receive FIFO Overflow Interrupt Flag"><span><span>RXFOIF</span></span></a> overflow flag.</div>
+    </div>
+
+</body>
+</html>

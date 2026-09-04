@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.2.5.1 Listen Only Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4B942552-FED7-4E5B-83F4-F59C1AB2AD2F.html"/>
+<link rel="next" href="GUID-5B5AACEC-C070-4CFF-93C0-D6532B43B96A.html"/>
+<link rel="up" href="GUID-4B942552-FED7-4E5B-83F4-F59C1AB2AD2F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-84A4D028-1C85-48B1-A96D-5816A098641F.html">38.2 Modes of Operation</a></li><li><a href="GUID-4B942552-FED7-4E5B-83F4-F59C1AB2AD2F.html">38.2.5 Debug Modes</a></li><li>38.2.5.1 Listen Only Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-4B942552-FED7-4E5B-83F4-F59C1AB2AD2F.html" rel="prev">Debug Modes</a></span><span><a href="GUID-5B5AACEC-C070-4CFF-93C0-D6532B43B96A.html" rel="next">Restricted Operation Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-86622665-D7A1-46DA-B104-1CDF4212597E__GUID-F5B3ABB0-8BE5-4939-AC55-618E81FBDAEB" style="">38.2.5.1 Listen Only Mode</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">Listen Only mode is a variant of Normal CAN FD Operation mode. If the Listen Only mode is
+            activated, the module on the CAN bus is passive. It will receive messages, but it will
+            not transmit any bits. TXREQx bits will be ignored. No error flags or Acknowledge
+            signals are sent. The error counters are deactivated in this state. The Listen Only mode
+            can be used for detecting the baud rate on the CAN bus. It is necessary that there are
+            at least two further nodes that communicate with each other. The baud rate can be
+            detected empirically by testing different values until a message is received
+            successfully. This mode is also useful for monitoring the CAN bus without influencing
+            it.</p>
+    </div>
+
+</body>
+</html>

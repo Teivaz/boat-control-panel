@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>39.5.1 Related JTAG Files — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4B860315-1651-4C47-B16B-DD6E7DBC35F5.html"/>
+<link rel="next" href="GUID-8564D221-9A24-439C-A703-46E343D01D51.html"/>
+<link rel="up" href="GUID-4B860315-1651-4C47-B16B-DD6E7DBC35F5.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF.html">39 JTAG Boundary Scan</a></li><li><a href="GUID-4B860315-1651-4C47-B16B-DD6E7DBC35F5.html">39.5 Boundary Scan Testing</a></li><li>39.5.1 Related JTAG Files</li></ol>
+  <div class="sib"><span>← <a href="GUID-4B860315-1651-4C47-B16B-DD6E7DBC35F5.html" rel="prev">Boundary Scan Testing</a></span><span><a href="GUID-8564D221-9A24-439C-A703-46E343D01D51.html" rel="next">Effects of Reset</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-C11142D3-F828-4352-B8C9-D42AD885D288" style="">39.5.1 Related JTAG Files</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">To implement BST, all JTAG test tools will require a Boundary Scan Description Language
+            (BSDL) file. BSDL is a subset of VHDL (VHSIC Hardware Description Language) and is
+            described as part of IEEE Std. 1149.1. The device-specific BSDL file describes how the
+            standard is implemented on a particular device and how it operates.</p>
+        <div class="- topic/p p">The BSDL file for a particular device includes the following:<ul class="- topic/ul ul" id="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__UL_D5W_L4X_G3B" data-ofbid="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__UL_D5W_L4X_G3B">
+                <li class="- topic/li li" id="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-7A680A43-F185-4E0D-99B8-3DB9C6277876" data-ofbid="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-7A680A43-F185-4E0D-99B8-3DB9C6277876">The pinout and package
+                    configuration for the particular device</li>
+                <li class="- topic/li li" id="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-257E76C2-8824-45B5-BE6F-94092C5B2264" data-ofbid="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-257E76C2-8824-45B5-BE6F-94092C5B2264">The physical location of the TAP
+                    pins</li>
+                <li class="- topic/li li" id="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-611336D1-1856-4EAB-9E9E-EC5C73BBB130" data-ofbid="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-611336D1-1856-4EAB-9E9E-EC5C73BBB130">The Device ID register and the
+                    device ID</li>
+                <li class="- topic/li li" id="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-6A136A11-A94E-4842-81DF-E8CCE02F19DF" data-ofbid="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-6A136A11-A94E-4842-81DF-E8CCE02F19DF">The length of the Instruction
+                    Register</li>
+                <li class="- topic/li li" id="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-3648DD07-BBFE-4C1A-A940-092003244A63" data-ofbid="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-3648DD07-BBFE-4C1A-A940-092003244A63">The supported BST instructions
+                    and their binary codes</li>
+                <li class="- topic/li li" id="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-170F551D-39F5-4D90-8E69-79EADBDF4A8C" data-ofbid="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-170F551D-39F5-4D90-8E69-79EADBDF4A8C">The length and structure of the
+                    Boundary Scan register</li>
+                <li class="- topic/li li" id="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-21467C89-CD5E-4526-BA18-E0D4E7007B7D" data-ofbid="GUID-1F19ACB0-8D58-4BD7-A730-663A30C10721__GUID-21467C89-CD5E-4526-BA18-E0D4E7007B7D">The boundary scan cell
+                    definition</li>
+            </ul></div>
+        <p class="- topic/p p">Device-specific BSDL files are available at Microchip’s web site, <a class="- topic/xref xref" href="http://www.microchip.com" target="_blank" rel="external noopener">www.microchip.com</a>. The name
+            for each BSDL file is the device name and silicon revision. For example,
+                <code class="+ topic/ph pr-d/codeph ph codeph">PIC18F57Q83_VQFN.BSD</code>, is the BSDL file for the PIC18F57Q83 in the
+            VQFN package.</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.5.3 Preempting Low-Priority Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7ACD4743-2BC8-4228-BFCD-CFE0CB43FEC7.html"/>
+<link rel="next" href="GUID-2C6CA944-184E-4E65-857C-C8E7E0D5DF0C.html"/>
+<link rel="up" href="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li><a href="GUID-CFD9FAFF-3D0E-431A-A1E1-8E4484C2165A.html">11.5 Interrupt Operation</a></li><li>11.5.3 Preempting Low-Priority Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-7ACD4743-2BC8-4228-BFCD-CFE0CB43FEC7.html" rel="prev">Serving a High-Priority Interrupt While a Low-Priority Interrupt Is Pending</a></span><span><a href="GUID-2C6CA944-184E-4E65-857C-C8E7E0D5DF0C.html" rel="next">Simultaneous High- and Low-Priority Interrupts</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-2E6F3716-0151-4F82-8FC7-0117A2821C5D__GUID-3E057D90-2FC8-4395-AEEA-A20841068DE2" style="">11.5.3 Preempting Low-Priority Interrupts</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">Low-priority interrupts can be preempted by high-priority interrupts. While
+            in the low-priority ISR, if a high-priority interrupt arrives, the high-priority
+            interrupt request is generated and the low-priority ISR is suspended, while the
+            high-priority ISR is executed.</p>
+        <p class="- topic/p p">After the high-priority ISR is complete and if any other high-priority
+            interrupt requests are not active, the execution returns to the preempted low-priority
+            ISR.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-2E6F3716-0151-4F82-8FC7-0117A2821C5D__FIG_JBF_M5V_3GB" data-ofbid="GUID-2E6F3716-0151-4F82-8FC7-0117A2821C5D__FIG_JBF_M5V_3GB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 11-4. <span id="GUID-2E6F3716-0151-4F82-8FC7-0117A2821C5D__GUID-606D3702-510C-4111-86A0-493A152C91A7" class="fig--title">Interrupt Execution: High-Priority
+                Interrupt Preempting Low-Priority Interrupts</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-2E6F3716-0151-4F82-8FC7-0117A2821C5D__IMAGE_KBF_M5V_3GB" src="GUID-242410B3-97AF-4D9F-94BD-3061245C93BA-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

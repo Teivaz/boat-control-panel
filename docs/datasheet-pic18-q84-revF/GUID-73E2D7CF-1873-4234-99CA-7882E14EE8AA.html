@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.11.1 Hardware Flow Control — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-05BB831A-75A1-40B1-8559-EA222777E0D2.html"/>
+<link rel="next" href="GUID-198BF5DF-3B2D-4CF1-A328-6D0CC7F9DA3E.html"/>
+<link rel="up" href="GUID-05BB831A-75A1-40B1-8559-EA222777E0D2.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-05BB831A-75A1-40B1-8559-EA222777E0D2.html">35.11 Flow Control</a></li><li>35.11.1 Hardware Flow Control</li></ol>
+  <div class="sib"><span>← <a href="GUID-05BB831A-75A1-40B1-8559-EA222777E0D2.html" rel="prev">Flow Control</a></span><span><a href="GUID-198BF5DF-3B2D-4CF1-A328-6D0CC7F9DA3E.html" rel="next">RS-485 Transceiver Control</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-73E2D7CF-1873-4234-99CA-7882E14EE8AA__GUID-93DD85C0-AFBB-479C-9A22-957597EC945B" style="">35.11.1 Hardware Flow Control</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The hardware flow control is selected by setting the FLO bits to
+                ‘<code class="+ topic/ph pr-d/codeph ph codeph">10</code>’.</p>
+        <p class="- topic/p p">The hardware flow control consists of three lines. The RS-232 signal names for two of
+            these are <span class="+ topic/ph sidscDomain-d/active-low ph active-low">RTS</span> and <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CTS</span>. Both are low
+            true. The third line is called TXDE for transmit drive enable which may be used to
+            control an RS-485 transceiver. This output is high when the TX output is actively
+            sending a character and low at all other times. The UART is configured as DTE (computer)
+            equipment, which means <span class="+ topic/ph sidscDomain-d/active-low ph active-low">RTS</span> is an output and
+                <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CTS</span> is an input.</p>
+        <p class="- topic/p p">The <span class="+ topic/ph sidscDomain-d/active-low ph active-low">RTS</span> and <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CTS</span> signals work as a pair
+            to control the transmission flow. A DTE-to-DTE configuration connects the
+                <span class="+ topic/ph sidscDomain-d/active-low ph active-low">RTS</span> output of the receiving UART to the
+                <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CTS</span> input of the sending UART. Refer to the following
+            figure.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-73E2D7CF-1873-4234-99CA-7882E14EE8AA__FIG_LXT_4JD_DBB" data-ofbid="GUID-73E2D7CF-1873-4234-99CA-7882E14EE8AA__FIG_LXT_4JD_DBB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 35-10. <span id="GUID-73E2D7CF-1873-4234-99CA-7882E14EE8AA__GUID-7ECC3BC8-F688-4D93-9D4E-C047E4F143C8" class="fig--title">Hardware Flow Control Connections</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-52F14B8F-564E-4E50-9FAA-278D9B68A631-high.pdf#toolbar=1" width="450" height="333.5684902359449"></iframe></span>
+        </figure>
+        <p class="- topic/p p">The UART receiving data asserts the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">RTS</span> output low when the
+            input FIFO is empty. When a character is received, the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">RTS</span>
+            output goes high until the UxRXB is read to free up both FIFO locations.</p>
+        <p class="- topic/p p">When the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CTS</span> input goes high after a byte has started to
+            transmit, the transmission will complete normally. The receiver accommodates this by
+            accepting the character in the second FIFO location even when the
+                <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CTS</span> input is high.</p>
+</div>
+
+</body>
+</html>

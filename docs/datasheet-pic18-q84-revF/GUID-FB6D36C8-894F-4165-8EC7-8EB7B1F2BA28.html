@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.3.1 Special Function Registers with DMA Access only — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html"/>
+<link rel="next" href="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF.html"/>
+<link rel="up" href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li><a href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html">16.3 DMA Interface</a></li><li>16.3.1 Special Function Registers with DMA Access only</li></ol>
+  <div class="sib"><span>← <a href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html" rel="prev">DMA Interface</a></span><span><a href="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF.html" rel="next">DMA Addressing</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-FB6D36C8-894F-4165-8EC7-8EB7B1F2BA28__GUID-40B8C9A8-6E83-4696-9D90-F69F36C5E50A" style="">16.3.1 Special Function Registers with DMA Access
+        only</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The DMA can transfer data to any GPR or SFR location. For better user
+            accessibility, some of the more commonly used SFR spaces have their mirror registers
+            placed in a separate data memory location. These mirror registers can be only accessed
+            by the DMA module through the DMA Source and Destination Address registers. The figure
+            below shows the register map for these registers.</p>
+        <p class="- topic/p p">These registers are useful to multiple peripherals together like the Timers,
+            PWMs and also other DMA modules using one of the DMA modules.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-FB6D36C8-894F-4165-8EC7-8EB7B1F2BA28__FIG_RC1_CSK_43B" data-ofbid="GUID-FB6D36C8-894F-4165-8EC7-8EB7B1F2BA28__FIG_RC1_CSK_43B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 16-2. <span id="GUID-FB6D36C8-894F-4165-8EC7-8EB7B1F2BA28__GUID-E21034BB-0C33-467E-B2C2-09D4B474996D" class="fig--title">Special Function Register Map (DMA
+                Access Only)</span></span></figcaption>
+            
+            <p class="- topic/p p"><span class=""><iframe src="GUID-357C6248-22C4-4928-BFD7-ED674465F1DF-high.pdf#toolbar=1" width="669.24" height="329.59"></iframe></span><span class=""><iframe src="GUID-308240FE-7D36-413F-89B4-6BA132B950FF-high.pdf#toolbar=1" width="663.59" height="318.65"></iframe></span></p>
+        </figure>
+    </div>
+
+</body>
+</html>

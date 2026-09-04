@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.12 Data Byte Count — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B50B0395-277E-4FF7-AC78-D1E1903DE349.html"/>
+<link rel="next" href="GUID-B2ABA7F2-C9A8-49B1-9B5E-A54B4454B484.html"/>
+<link rel="up" href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li>37.3.12 Data Byte Count</li></ol>
+  <div class="sib"><span>← <a href="GUID-B50B0395-277E-4FF7-AC78-D1E1903DE349.html" rel="prev">Clock Stretching for Other Client Operations</a></span><span><a href="GUID-B2ABA7F2-C9A8-49B1-9B5E-A54B4454B484.html" rel="next">Auto-Load I2CxCNT</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-E4A12FB1-8569-4368-B42D-F4B7D8A7DBE0__GUID-72E0393F-2F8F-4A46-A83F-499238B203E3" style="">37.3.12 Data Byte Count</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The data byte count refers to the number of data bytes in a complete I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C
+            packet. The data byte count does not include address bytes. The I2C Byte Count (<a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>)
+            register is used to specify the length, in bytes, of the complete transaction. The value
+            loaded into I2CxCNT will be decremented by module hardware each time a data byte is
+            transmitted or received by the module.</p>
+        <div class="- topic/note note important note_important" id="GUID-E4A12FB1-8569-4368-B42D-F4B7D8A7DBE0__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-E4A12FB1-8569-4368-B42D-F4B7D8A7DBE0__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> The <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>
+            register will not decrement past a zero value.</div>
+        <div class="- topic/p p">When a byte transfer causes the <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> register to decrement to ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’, the Byte
+            Count Interrupt Flag (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#GUID-9822260B-0146-4538-BAAB-AC8C3856312F" title="Byte Count Interrupt Flag(1)">CNTIF</a>) bit is set, and if the Byte Count Interrupt Enable
+                (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#GUID-EF2AF3F6-8F65-4C9E-AD90-D05B3A27F0CB" title="Byte Count Interrupt Enable(1)">CNTIE</a>) is set, the general purpose I2C Interrupt Flag (I2CxIF)
+            bit of the Peripheral Interrupt Registers (PIR) is also set. If the I2C Interrupt Enable
+            (I2CxIE) bit of the Peripheral Interrupt Enable (PIE) registers is set, module hardware
+            will generate an interrupt event.</div>
+        <div class="- topic/note note important note_important" id="GUID-E4A12FB1-8569-4368-B42D-F4B7D8A7DBE0__GUID-36749117-2DCA-496F-8CA1-A2DFB3B1D2FB" data-ofbid="GUID-E4A12FB1-8569-4368-B42D-F4B7D8A7DBE0__GUID-36749117-2DCA-496F-8CA1-A2DFB3B1D2FB"><span class="note__title">Important:</span> The I2CxIF bit is
+            read-only and can only be cleared by clearing all the interrupt flag bits of the <a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html" title="I2CxPIR">I2CxPIR</a>
+            register.</div>
+        <p class="- topic/p p">The <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>
+            register can be read at any time, but it is recommended that a double read is performed
+            to ensure a valid count value.</p>
+        <div class="- topic/p p">The <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>
+            register can be written to; however, care is required to prevent register corruption. If
+            the I2CxCNT register is written to during the 8th falling SCL edge of a reception or
+            during the 9th falling SCL edge of a transmission, the register value may be corrupted.
+            In Client mode, I2CxCNT can be safely written to any time the clock is not being
+            stretched (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) or after a Stop condition has been received (Stop Condition
+            Interrupt Flag (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_BLB_LPV_LGB" title="Stop Condition Interrupt Flag(1)">PCIF</a>) =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). In Host mode, I2CxCNT can be safely written to any time the
+            Host Data Ready (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a>) or
+            Bus Free (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#GUID-967969A7-72DF-42E8-8CE4-4AD59A4CBE74" title="Bus Free Status(2)">BFRE</a>) bits are set. If the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C packet is longer than 65,536
+            bytes, the I2CxCNT register can be updated mid-message to prevent the count from
+            reaching zero; however, the preventative measures listed above must be followed.</div>
+        <div class="- topic/p p">When in either Client Read or Host Write mode and the <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> value
+            is nonzero (I2CxCNT != <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the value of the <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_TCX_VCP_LGB" title="Acknowledge Data(1,2)">ACKDT</a> bit is used as the acknowledgement response. When I2CxCNT reaches zero
+            (I2CxCNT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the value of the Acknowledge End of Count (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#GUID-F2D33B25-A469-4E33-B952-D4813928CD27" title="Acknowledge End of Count(2)">ACKCNT</a>) bit is used for the acknowledgement response. </div>
+        <div class="- topic/p p">In Host read or write operations, when the <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>
+            register is clear (I2CxCNT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) and the Restart Enable (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_U3D_1YT_KGB" title="Restart Enable (used only when MODE = 1xx)">RSEN</a>) bit is clear, host hardware automatically generates a Stop condition
+            upon the 9th falling edge of SCL. When I2CxCNT is clear (I2CxCNT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>)
+            and RSEN is set (RSEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), host hardware will stretch the clock while
+            it waits for the Start (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_YPG_M34_LGB" title="Host Start (used only when MODE = 1xx)">S</a>) bit to be set (S = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). When the Start bit has been set,
+            module hardware transmits a Restart condition followed by the address of the client it
+            wishes to communicate with.</div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-B2ABA7F2-C9A8-49B1-9B5E-A54B4454B484.html">37.3.12.1 Auto-Load I2CxCNT</a></li></ul>
+</nav>
+</body>
+</html>

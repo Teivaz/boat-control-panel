@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.2.4.2 Asynchronous Steering Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505.html"/>
+<link rel="next" href="GUID-5F422254-9601-4C4A-87A2-B6B46D498EB9.html"/>
+<link rel="up" href="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li><a href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html">32.2 Operating Modes</a></li><li><a href="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289.html">32.2.4 Steering Modes</a></li><li>32.2.4.2 Asynchronous Steering Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505.html" rel="prev">Synchronous Steering Mode</a></span><span><a href="GUID-5F422254-9601-4C4A-87A2-B6B46D498EB9.html" rel="next">Start-Up Considerations</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-FDBA532E-EAFD-487C-B077-BEB6B5150E91__GUID-4DB3DC45-CADB-4538-9CC9-1B8A9E175BE2" style="">32.2.4.2 Asynchronous Steering Mode</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-FDBA532E-EAFD-487C-B077-BEB6B5150E91__ID-42115-00000105" data-ofbid="GUID-FDBA532E-EAFD-487C-B077-BEB6B5150E91__ID-42115-00000105">In Asynchronous mode (<a class="- topic/xref xref" href="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B.html#ID-00000013" title="CWG Mode"><span><span>MODE</span></span></a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-FDBA532E-EAFD-487C-B077-BEB6B5150E91__ID-42115-00000106">‘b000</code>), steering takes effect at the end of
+            the instruction cycle that writes to STRx. In Asynchronous Steering mode, the output
+            signal may be an incomplete waveform (see the figure below). This operation may be
+            useful when the user firmware needs to immediately remove a signal from the output
+            pin.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-FDBA532E-EAFD-487C-B077-BEB6B5150E91__ID-42115-0000010E" data-ofbid="GUID-FDBA532E-EAFD-487C-B077-BEB6B5150E91__ID-42115-0000010E"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 32-11. <span id="GUID-FDBA532E-EAFD-487C-B077-BEB6B5150E91__GUID-B666F08B-9395-42CE-9A4E-29AAD5140E64" class="fig--title">Example of Asynchronous Steering
+                (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b000</code>)</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-FDBA532E-EAFD-487C-B077-BEB6B5150E91__IMAGE_A3H_YWV_TZ" src="GUID-E59EC3B7-63FC-4256-B1AB-43DF88898792-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

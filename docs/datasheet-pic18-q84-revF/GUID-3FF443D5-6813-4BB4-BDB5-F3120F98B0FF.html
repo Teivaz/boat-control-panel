@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10.3.10.5 Table Pointer Boundaries — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7EE745D1-6925-4561-98DA-4A3649C2A566.html"/>
+<link rel="next" href="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2.html"/>
+<link rel="up" href="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html">10 NVM - Nonvolatile Memory Module</a></li><li><a href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html">10.3 Program Flash Memory (PFM)</a></li><li><a href="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4.html">10.3.10 Table Pointer Operations</a></li><li>10.3.10.5 Table Pointer Boundaries</li></ol>
+  <div class="sib"><span>← <a href="GUID-7EE745D1-6925-4561-98DA-4A3649C2A566.html" rel="prev">Table Write Operations</a></span><span><a href="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2.html" rel="next">Reading the Program Flash Memory</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__GUID-07B355F6-0791-444B-B2FD-4F4EA6D2E426" style="">10.3.10.5 Table Pointer Boundaries</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001B5" data-ofbid="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001B5">The <a class="- topic/xref xref" href="GUID-23BF27B8-E95B-449C-B987-532E5840650F.html" title="TBLPTR">TBLPTR</a> register is used in reads of the Program Flash Memory.
+         Writes using the TBLPTR register go into a buffer RAM from which the data can eventually be
+         transferred to Program Flash Memory using the NVMADR register and NVM commands.</p>
+      <p class="- topic/p p" id="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001B6" data-ofbid="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001B6">When a <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001B7">TBLRD</code> instruction is
+         executed, all 22 bits of the TBLPTR determine which byte is read from program memory
+         directly into the <a class="- topic/xref xref" href="GUID-9613776E-377B-4ED6-BEAE-52E21851DA3D.html" title="TABLAT">TABLAT</a> register.</p>
+      <p class="- topic/p p" id="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001B8" data-ofbid="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001B8">When a <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001B9">TBLWT</code> instruction is
+         executed, the byte in the TABLAT register is written not to Flash memory but to a buffer
+         register in preparation for a program memory write. All the buffer registers form a write
+         block of size 128 words/256 bytes. The LSbs of the TBLPTR register determine to which
+         specific address within the buffer register block the write affects. The size of the write
+         block determines the number of LSbs that are affected. The MSbs of the TBLPTR register have
+         no effect during <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001BB">TBLWT</code> operations.</p>
+      <p class="- topic/p p" id="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001BC" data-ofbid="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001BC">When a program memory page write is executed, the entire buffer
+         register block is written to the Flash memory at the address determined by the MSbs of the
+         NVMADR register. The LSbs are ignored during Flash memory writes.</p>
+      <p class="- topic/p p" id="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001BE" data-ofbid="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001BE">The following figure illustrates the relevant boundaries of the
+         TBLPTR register based on NVM operations.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001E8" data-ofbid="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__ID-42121-000001E8"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 10-5. <span id="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__GUID-9D46F6E0-1E40-4606-ACF0-85A133012F78" class="fig--title">Table Pointer Boundaries Based on
+            Operation</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-9FEFCA6A-5C36-4EE3-B16C-C1C2E7015735-high.pdf#toolbar=1" width="457.12" height="224.53"></iframe></span>
+      </figure>
+      <div class="- topic/note note notype note_notype" id="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__GUID-09613850-7067-4DFF-B804-7E622CB8C973" data-ofbid="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__GUID-09613850-7067-4DFF-B804-7E622CB8C973"><span class="note__title">Note:</span> 
+         <ol class="- topic/ol ol" id="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__OL_VQ5_YWT_3Z" data-ofbid="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__OL_VQ5_YWT_3Z">
+            <li class="- topic/li li" id="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__GUID-8F2209AE-147C-426B-8BBE-EB9220907D1D" data-ofbid="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF__GUID-8F2209AE-147C-426B-8BBE-EB9220907D1D">Refer to the <strong class="+ topic/ph hi-d/b ph b">“Memory
+                  Organization”</strong> chapter for more details about the size of the buffer registers
+               block.</li>
+         </ol>
+      </div>
+   </div>
+
+</body>
+</html>

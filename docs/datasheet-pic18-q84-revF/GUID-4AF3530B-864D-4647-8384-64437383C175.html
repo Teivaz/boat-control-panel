@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>31.5 Buffered Period and Parameter Registers — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C7CBCFD0-0DE3-445F-AA00-1568A64A6B3F.html"/>
+<link rel="next" href="GUID-2BDB3225-ECF1-43D8-8064-204C9B36235D.html"/>
+<link rel="up" href="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE.html">31 PWM - Pulse-Width Modulator with Compare</a></li><li>31.5 Buffered Period and Parameter Registers</li></ol>
+  <div class="sib"><span>← <a href="GUID-C7CBCFD0-0DE3-445F-AA00-1568A64A6B3F.html" rel="prev">External Period Resets</a></span><span><a href="GUID-2BDB3225-ECF1-43D8-8064-204C9B36235D.html" rel="next">Synchronizing Multiple PWMs</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-4AF3530B-864D-4647-8384-64437383C175__GUID-908AB8A7-A055-47E0-96AA-F8306237A241" style="">31.5 Buffered Period and Parameter
+        Registers</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The PWMxPR, PWMxSaP1 and PWMxSaP2 registers are double-buffered. The PWM module operates on the
+            buffered copies. The values in all these registers are copied to the buffer registers
+            when the PWM module is enabled.</p>
+        <p class="- topic/p p">Changes to the PWMxPR, PWMxSaP1 and PWMxSaP2 registers do not affect the buffer registers
+            while the PWM is operating until either software sets the <a class="- topic/xref xref" href="GUID-0D5C847B-F70B-49A7-ADF9-3CCCF3193A17.html#ID-0000000C" title="Reload Registers"><span><span>LD</span></span></a> bit or
+            an external load event occurs. For all operating modes except Center-Aligned, the values
+            are copied to the buffer registers when the PWM timer is reloaded at the end of the
+            period in which the load request occurred. In the Center-Aligned mode, the buffer update
+            occurs on every other period Reset event because one full center-aligned period uses two
+            period cycles. Load requests occurring three or less clocks before the end of the period
+            may not be serviced until the following period.</p>
+        <p class="- topic/p p">A list of external load trigger sources is shown in the <a class="- topic/xref xref" href="GUID-5EE09AC8-810D-4523-A54B-4921E924DDE3.html" title="PWMxLDS">PWMxLDS</a> register. Software can set the LD bits of multiple PWM instances
+            simultaneously with the <a class="- topic/xref xref" href="GUID-AB900B60-1782-43C1-AA3A-B869205C84D4.html" title="PWMLOAD">PWMLOAD</a> register.</p>
+        <div class="- topic/note note important note_important" id="GUID-4AF3530B-864D-4647-8384-64437383C175__GUID-8F72FEEA-06BC-4600-9E19-6430B39217DB" data-ofbid="GUID-4AF3530B-864D-4647-8384-64437383C175__GUID-8F72FEEA-06BC-4600-9E19-6430B39217DB"><span class="note__title">Important:</span>  No changes are allowed after the LD bit is set until after the LD bit
+            is cleared by hardware. Unexpected behavior may result if the LD bit is cleared by
+            software.</div>
+</div>
+
+</body>
+</html>

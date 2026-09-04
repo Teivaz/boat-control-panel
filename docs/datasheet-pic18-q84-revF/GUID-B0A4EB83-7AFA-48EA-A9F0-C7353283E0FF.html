@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43 ADC - Analog-to-Digital Converter with Computation and Context Module — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A6ED8ACA-B2B9-46F9-88A1-407F67B18728.html"/>
+<link rel="next" href="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>43 ADC - Analog-to-Digital Converter with Computation and Context Module</li></ol>
+  <div class="sib"><span>← <a href="GUID-A6ED8ACA-B2B9-46F9-88A1-407F67B18728.html" rel="prev">Register Summary - Temperature Indicator</a></span><span><a href="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52.html" rel="next">ADC Configuration</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__GUID-9EFBC38F-017B-4F96-B739-F7706B5E3471" style="">43 ADC - Analog-to-Digital Converter with
+        Computation and Context Module</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000005" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000005">The Analog-to-Digital Converter with
+            Computation and Context module allows conversion of an analog input signal to a <span class="- topic/ph ph">12-bit</span> binary representation of that
+            signal. This device uses analog inputs that are multiplexed into a single
+            Sample-and-Hold circuit. The output of the Sample-and-Hold (S/H) is connected to the
+            input of the converter. The converter generates a <span class="- topic/ph ph">12-bit</span> binary result via successive
+            approximation and stores the conversion result into the ADC Result registers.</p>
+        <p class="- topic/p p" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000007" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000007">Additionally, the following features are
+            provided within the ADC module:</p>
+        <ul class="- topic/ul ul" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__UL_RR3_QGS_VGB" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__UL_RR3_QGS_VGB">
+            <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000008" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000008">Acquisition timer</li>
+            <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-0000000A" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-0000000A">Hardware Capacitive Voltage Divider (CVD)
+                    support:<ul class="- topic/ul ul" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__UL_SR3_QGS_VGB" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__UL_SR3_QGS_VGB">
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-0000000C" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-0000000C">Precharge timer</li>
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-0000000E" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-0000000E">Adjustable Sample-and-Hold
+                        capacitor array</li>
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000010" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000010">Guard ring digital output
+                        drive</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000012" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000012">Automatic repeat and sequencing:<ul class="- topic/ul ul" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__UL_TR3_QGS_VGB" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__UL_TR3_QGS_VGB">
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000014" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000014">Automated double sample
+                        conversion for CVD</li>
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000016" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000016">Two sets of Result registers
+                        (Current Result and Previous Result)</li>
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000018" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000018">Auto-conversion trigger</li>
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-0000001A" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-0000001A">Internal re-trigger</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-0000001C" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-0000001C">Computation features:<ul class="- topic/ul ul" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__UL_UR3_QGS_VGB" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__UL_UR3_QGS_VGB">
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-0000001E" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-0000001E">Averaging and low-pass filter
+                        functions</li>
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000020" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000020">Reference comparison</li>
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000022" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000022">2-level threshold comparison</li>
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000024" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000024">Selectable interrupts</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__GUID-AA220B19-E893-4675-A84E-7D3984ABCCC0" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__GUID-AA220B19-E893-4675-A84E-7D3984ABCCC0">Automated channel scanning and
+                context switching<ul class="- topic/ul ul" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__UL_K5F_2FP_L3B" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__UL_K5F_2FP_L3B">
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__GUID-3791B519-E8E4-4DB7-9ABA-171540207EAF" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__GUID-3791B519-E8E4-4DB7-9ABA-171540207EAF">Supports up to four unique
+                        configurations</li>
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__GUID-1D9E32F9-9E84-4C2D-916A-6F8DFC9490E8" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__GUID-1D9E32F9-9E84-4C2D-916A-6F8DFC9490E8">Each configuration is saved
+                        as a context</li>
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__GUID-C462BAF8-7FF0-4C46-B070-523B21E82A96" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__GUID-C462BAF8-7FF0-4C46-B070-523B21E82A96">Stop on threshold interrupt
+                        during a scan</li>
+                    <li class="- topic/li li" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__GUID-FFE55476-B0FE-4655-93A9-81AED5785CCB" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__GUID-FFE55476-B0FE-4655-93A9-81AED5785CCB">Unique threshold interrupt
+                        for each configuration</li>
+                </ul></li>
+        </ul>
+        <p class="- topic/p p" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000028" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000028">The ADC voltage reference is software
+            selectable to be either internally generated or externally supplied.</p>
+        <p class="- topic/p p" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000029" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-00000029">The ADC can generate an interrupt upon
+            completion of a conversion and upon threshold comparison. These interrupts can be used
+            to wake up the device from Sleep.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-0000002A" data-ofbid="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__ID-42107-0000002A"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 43-1. <span id="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF__GUID-76504652-60CE-4507-900E-3F13CF2E070D" class="fig--title">ADC Block
+                Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-109EB6C8-CE4D-4A03-8E38-1132773B5FFE-high.pdf#toolbar=1" width="450" height="497.15642797649866"></iframe></span>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52.html">43.1 ADC Configuration</a></li><li><a href="GUID-88AEA9BE-34C2-44BE-A116-5DAB431A258C.html">43.2 ADC Operation</a></li><li><a href="GUID-27235A57-0619-428A-86DB-257BEE32FC2F.html">43.3 ADC Acquisition Requirements</a></li><li><a href="GUID-9895C085-9A4F-4B3E-8AB9-CCFC96B8CA87.html">43.4 ADC Charge Pump</a></li><li><a href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html">43.5 Computation Operation</a></li><li><a href="GUID-FFD3990B-49D0-45A3-848F-CA83EFB5B536.html">43.6 Channel Sequencer and Context</a></li><li><a href="GUID-8FD3470F-42C5-4581-A564-B1DDFA17FB4B.html">43.7 Register Definitions: ADC Control</a></li><li><a href="GUID-9B094B1A-4596-4E85-BAE8-18AACDF1CE71.html">43.8 Register Summary - ADC</a></li></ul>
+</nav>
+</body>
+</html>

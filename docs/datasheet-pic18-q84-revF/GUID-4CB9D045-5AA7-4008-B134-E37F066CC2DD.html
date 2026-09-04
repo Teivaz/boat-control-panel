@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>17.1 Doze Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html"/>
+<link rel="next" href="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350.html"/>
+<link rel="up" href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html">17 Power-Saving Modes</a></li><li>17.1 Doze Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html" rel="prev">Power-Saving Modes</a></span><span><a href="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350.html" rel="next">Doze Operation</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-4CB9D045-5AA7-4008-B134-E37F066CC2DD__GUID-E534BFA7-2855-4115-87ED-23B173C8B06E" style="">17.1 Doze Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-4CB9D045-5AA7-4008-B134-E37F066CC2DD__ID-42139-0000000D" data-ofbid="GUID-4CB9D045-5AA7-4008-B134-E37F066CC2DD__ID-42139-0000000D">Doze mode allows for power saving by reducing CPU operation and
+         Program Flash Memory (PFM) access, without affecting peripheral operation. Doze mode
+         differs from Sleep mode because the band gap and system oscillators continue to operate,
+         while only the CPU and PFM are affected. The reduced execution saves power by eliminating
+         unnecessary operations within the CPU and memory.</p>
+      <div class="- topic/p p" id="GUID-4CB9D045-5AA7-4008-B134-E37F066CC2DD__ID-42139-0000000E" data-ofbid="GUID-4CB9D045-5AA7-4008-B134-E37F066CC2DD__ID-42139-0000000E">When the Doze Enable bit is set (<a class="- topic/xref xref" href="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354.html#ID-0000001E" title="Doze Enable(1)">DOZEN</a>
+         = <code class="+ topic/ph pr-d/codeph ph codeph">‘b1</code>) the CPU executes only one instruction cycle out of every N cycles
+         as defined by the <a class="- topic/xref xref" href="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354.html#ID-00000033" title="Ratio of CPU Instruction Cycles to Peripheral Instruction Cycles">DOZE</a> bits. For example, if DOZE = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-4CB9D045-5AA7-4008-B134-E37F066CC2DD__ID-42139-00000010">001</code>, the instruction cycle ratio is 1:4. The CPU and memory execute for one
+         instruction cycle and then lay Idle for three instruction cycles. During the unused cycles,
+         the peripherals continue to operate at the system clock speed.</div>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350.html">17.1.1 Doze Operation</a></li><li><a href="GUID-BD5588AB-E8D5-43E6-BA71-463862EA4BF2.html">17.1.2 Interrupts During Doze</a></li></ul>
+</nav>
+</body>
+</html>

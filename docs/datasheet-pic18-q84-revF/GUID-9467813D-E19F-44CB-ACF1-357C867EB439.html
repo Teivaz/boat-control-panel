@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.5.17 I2CxADR1 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B58F548D-6BF9-4193-BD8A-56D39F47B0F2.html"/>
+<link rel="next" href="GUID-9ECB3772-CBC7-4B06-BB3D-E72E9E5BF6A8.html"/>
+<link rel="up" href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html">37.5 Register Definitions: I2C Control</a></li><li>37.5.17 I2CxADR1</li></ol>
+  <div class="sib"><span>← <a href="GUID-B58F548D-6BF9-4193-BD8A-56D39F47B0F2.html" rel="prev">I2CxADR0</a></span><span><a href="GUID-9ECB3772-CBC7-4B06-BB3D-E72E9E5BF6A8.html" rel="next">I2CxADR2</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-9467813D-E19F-44CB-ACF1-357C867EB439__GUID-CF3CD83E-89E4-4E38-9621-7B0A13DDBB16" style="">37.5.17  I2CxADR1</h1><section id="GUID-F40BB703-DD9C-4D7B-A72B-DCF5D74433D0" class="- topic/section reference/section sidsc-register/registerDescription ">I2C Address 1
+                Register<div class="- topic/note note notype note_notype endnote" id="GUID-9467813D-E19F-44CB-ACF1-357C867EB439__GUID-612504D4-5C77-471A-A424-F893933D114B" data-ofbid="GUID-9467813D-E19F-44CB-ACF1-357C867EB439__GUID-612504D4-5C77-471A-A424-F893933D114B"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-9467813D-E19F-44CB-ACF1-357C867EB439__OL_XHK_RNW_LGB" data-ofbid="GUID-9467813D-E19F-44CB-ACF1-357C867EB439__OL_XHK_RNW_LGB">
+                    <li class="- topic/li li" id="GUID-9467813D-E19F-44CB-ACF1-357C867EB439__GUID-6CFA8169-6CF8-4C77-94F8-EF15ED39B5D6" data-ofbid="GUID-9467813D-E19F-44CB-ACF1-357C867EB439__GUID-6CFA8169-6CF8-4C77-94F8-EF15ED39B5D6">The ‘<code class="+ topic/ph pr-d/codeph ph codeph">11110</code>’
+                        bit pattern used in the 10-bit address high byte is defined by the
+                            I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Specification. It is up to the user to define these bits.
+                        These bit values are compared to the received address by hardware to
+                        determine a match. The bit pattern transmitted by the host must be the same
+                        as the client address’s bit pattern used for comparison or a match will not
+                        occur.</li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>I2CxADR1</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x0291</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-9467813D-E19F-44CB-ACF1-357C867EB439__GUID-B231054F-E513-424A-96AB-4283E03CB4C0" data-ofbid="GUID-9467813D-E19F-44CB-ACF1-357C867EB439__GUID-B231054F-E513-424A-96AB-4283E03CB4C0"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-9467813D-E19F-44CB-ACF1-357C867EB439"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="7">ADR[6:0]</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-F40BB703-DD9C-4D7B-A72B-DCF5D74433D0" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-414F9866-F34A-4BDB-BDF2-0F145DA3FF39__GUID-C9E83AD8-797D-4195-ACC4-29941E6D898A" id="GUID-414F9866-F34A-4BDB-BDF2-0F145DA3FF39">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-414F9866-F34A-4BDB-BDF2-0F145DA3FF39__GUID-C9E83AD8-797D-4195-ACC4-29941E6D898A" style=""> Bits 7:1 – ADR[6:0] <span>
+            I2C Client Address 1
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-414F9866-F34A-4BDB-BDF2-0F145DA3FF39__GUID-EDEFA7B3-6564-490B-AFDA-9073986DE174" data-ofbid="GUID-414F9866-F34A-4BDB-BDF2-0F145DA3FF39__GUID-EDEFA7B3-6564-490B-AFDA-9073986DE174"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">7-bit Client/Multi-Host modes<em class="+ topic/ph hi-d/i ph i"> (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_MST_254_LGB" title="I2C Mode Select">MODE</a> = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">000</code></span> or
+                                        <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">110</code></span>)</em>:</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-414F9866-F34A-4BDB-BDF2-0F145DA3FF39__GUID-DE240F19-DEDE-43C1-96A4-8A561CC0D922">7-bit
+                        client address 1</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">7-bit Client/Multi-Host modes with Masking<em class="+ topic/ph hi-d/i ph i"> (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_MST_254_LGB" title="I2C Mode Select">MODE</a> = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">011</code></span> or
+                                        <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">111</code></span>)</em>:</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-414F9866-F34A-4BDB-BDF2-0F145DA3FF39__GUID-33C8CEC7-0C7D-453E-AC54-3194E3D3224C">7-bit
+                        client address mask for I2CxADR0</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">10-bit Client mode <em class="+ topic/ph hi-d/i ph i">(<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_MST_254_LGB" title="I2C Mode Select">MODE</a> =
+                            <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">010</code></span>)</em>:</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-414F9866-F34A-4BDB-BDF2-0F145DA3FF39__GUID-6D83B096-CEAE-4CE8-90F1-AAF3A11C8F7C"><strong class="+ topic/ph hi-d/b ph b">ADR[7:3]:</strong> Bit pattern (<code class="+ topic/ph pr-d/codeph ph codeph">11110</code>) as defined by the
+                            I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Specification<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">ADR[2:1]:</strong> Two
+                            Most Significant bits of first 10-bit
+                        address</p></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName"><span class="- topic/ph ph">10-bit Client mode with Masking <em class="+ topic/ph hi-d/i ph i">(<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_MST_254_LGB" title="I2C Mode Select">MODE</a> =
+                            <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">011</code></span>)</em>:</span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-414F9866-F34A-4BDB-BDF2-0F145DA3FF39__GUID-AF0106D4-47F9-46DF-B489-D1D9409ECD73"><strong class="+ topic/ph hi-d/b ph b">ADR[7:3]:</strong> Bit pattern (<code class="+ topic/ph pr-d/codeph ph codeph">11110</code>) as defined by the
+                            I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Specification<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">ADR[2:1]:</strong> Two
+                            Most Significant bits of 10-bit address</p></td>
+                </tr></tbody></table>
+        </div>
+    </article>
+                
+                    The ‘11110’
+                        bit pattern used in the 10-bit address high byte is defined by the
+                            I2C Specification. It is up to the user to define these bits.
+                        These bit values are compared to the received address by hardware to
+                        determine a match. The bit pattern transmitted by the host must be the same
+                        as the client address’s bit pattern used for comparison or a match will not
+                        occur.
+                
+            
+</body>
+</html>

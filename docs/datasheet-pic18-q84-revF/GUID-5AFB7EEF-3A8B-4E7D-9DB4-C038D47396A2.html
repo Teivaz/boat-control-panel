@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.4.8 Run Status Flag — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-658EC3E2-3D89-43D1-97A0-6D9373CD6594.html"/>
+<link rel="next" href="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10.html"/>
+<link rel="up" href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html">28.4 UTMR Operation</a></li><li>28.4.8 Run Status Flag</li></ol>
+  <div class="sib"><span>← <a href="GUID-658EC3E2-3D89-43D1-97A0-6D9373CD6594.html" rel="prev">One Shot Mode</a></span><span><a href="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10.html" rel="next">UTMR Output Modes</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2__GUID-A9EDB5D3-3173-4C2D-A779-F6FFD27B12B2" style="">28.4.8 Run Status Flag</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">In all modes of operation, the <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#ID-00000005" title="Timer Run/Stop Status (Read-Only)(1,2)">RUN</a> status bit in the TUxyCON1 register is set whenever the counter/timer is
+            Active (after a Start event, but before a Stop condition). The RUN bit will remain set
+            through a Reset condition<a class="- topic/xref xref" href="#GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2__GUID-27D8A2F5-8D7E-498D-A54D-09FB8C374FF0"><sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b">(1)</strong></sup></a>. Note that the RUN status bit is
+            synchronous to the counter/timer clock and updates may be delayed. Refer to the <a class="- topic/xref xref" href="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB.html">Synchronous vs.
+                Asynchronous Operation</a> section for details about clock synchronization.<div class="- topic/note note important note_important" id="GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2__GUID-5C8A99EB-BBD9-4095-B363-F4AC638ED55C" data-ofbid="GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2__GUID-5C8A99EB-BBD9-4095-B363-F4AC638ED55C"><span class="note__title">Important:</span> 
+                <ol class="- topic/ol ol" id="GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2__OL_EP1_ZWV_3LB" data-ofbid="GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2__OL_EP1_ZWV_3LB">
+                    <li class="- topic/li li" id="GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2__GUID-27D8A2F5-8D7E-498D-A54D-09FB8C374FF0" data-ofbid="GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2__GUID-27D8A2F5-8D7E-498D-A54D-09FB8C374FF0">The RUN bit is held at zero
+                        if a Start has occurred (the counter is “running”), but ERS is holding the
+                        counter at the value zero when RESET = <code class="+ topic/ph pr-d/codeph ph codeph">‘b01</code>
+                        (level-triggered).</li>
+                    <li class="- topic/li li" id="GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2__GUID-D0E511FD-F441-4707-96AD-99DE64E88FCB" data-ofbid="GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2__GUID-D0E511FD-F441-4707-96AD-99DE64E88FCB">The RUN status bit lags the
+                        internal Run/Stop state by two to three instruction cycles. If Start and
+                        Stop occur rapidly in succession, the RUN bit may not be set at all.</li>
+                </ol>
+            </div></div>
+    </div>
+
+</body>
+</html>

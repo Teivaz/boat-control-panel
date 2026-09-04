@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.4 Active Clock Tuning (ACT) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-372FD3A6-E691-4804-B2AB-753505CFE9F2.html"/>
+<link rel="next" href="GUID-DE7A03D5-ED00-4653-9DF6-42ACCFDD1197.html"/>
+<link rel="up" href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li>12.4 Active Clock Tuning (ACT)</li></ol>
+  <div class="sib"><span>← <a href="GUID-372FD3A6-E691-4804-B2AB-753505CFE9F2.html" rel="prev">Reset or Wake-Up from Sleep</a></span><span><a href="GUID-DE7A03D5-ED00-4653-9DF6-42ACCFDD1197.html" rel="next">ACT Lock Status</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-E44C17FF-48E8-49CE-8652-63573CAB03BC__GUID-1D039C90-3557-48BD-9415-E8D3E57BC60C" style="">12.4 Active Clock Tuning (ACT)</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">Many applications, such as those using UART communication, require an oscillator
+            with an accuracy of ± 1% over the full temperature and voltage range. To meet this level
+            of accuracy, the Active Clock Tuning (ACT) feature utilizes the SOSC frequency of 32.768
+            kHz to adjust the frequency of the HFINTOSC over voltage and temperature.</p>
+        <div class="- topic/note note important note_important" id="GUID-E44C17FF-48E8-49CE-8652-63573CAB03BC__GUID-E1BD4B36-8A38-438B-8121-182C18E9A46D" data-ofbid="GUID-E44C17FF-48E8-49CE-8652-63573CAB03BC__GUID-E1BD4B36-8A38-438B-8121-182C18E9A46D"><span class="note__title">Important:</span> Active Clock Tuning requires the use of a 32.768 kHz external
+            oscillator connected to the SOSCI/SOSCO pins.</div>
+        <p class="- topic/p p">Active Clock Tuning is enabled via the Active Clock Tuning Enable (<a class="- topic/xref xref" href="GUID-BB1B1B0D-D1AE-465F-AA78-726C8A0D4DF6.html#GUID-2E45501E-BA06-47BC-B5A1-1294C564470B" title="Active Clock Tuning Enable">ACTEN</a>) bit. When ACTEN is set (ACTEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the ACT module
+            uses the SOSC time base to measure the HFINTOSC frequency and uses the HFINTOSC
+            Frequency Tuning (<a class="- topic/xref xref" href="GUID-E9218AC7-E06A-403D-A3D6-54192CA94BCB.html#GUID-4E3F0A7F-F4D5-40D2-BC32-FE64ECEFC3AA" title="HFINTOSC Frequency Tuning">TUN</a>) bits to adjust the HFINTOSC frequency. When ACTEN is clear (ACTEN =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the ACT feature is disabled, and user software can utilize the
+            TUN bits to adjust the HFINTOSC frequency.</p>
+        <div class="- topic/note note important note_important" id="GUID-E44C17FF-48E8-49CE-8652-63573CAB03BC__GUID-03EDF111-DF26-4ED1-9AEF-F7DA134DCCE5" data-ofbid="GUID-E44C17FF-48E8-49CE-8652-63573CAB03BC__GUID-03EDF111-DF26-4ED1-9AEF-F7DA134DCCE5"><span class="note__title">Important:</span> When the ACT feature
+            is enabled, the <a class="- topic/xref xref" href="GUID-E9218AC7-E06A-403D-A3D6-54192CA94BCB.html#GUID-4E3F0A7F-F4D5-40D2-BC32-FE64ECEFC3AA" title="HFINTOSC Frequency Tuning">TUN</a> bits are controlled directly through module
+            hardware and become read-only bits to user software. Writes to the TUN bits when the ACT
+            feature is enabled are ignored.</div>
+        <p class="- topic/p p">The figure below shows the Active Clock Tuning block diagram.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-E44C17FF-48E8-49CE-8652-63573CAB03BC__FIG_FRM_YGJ_XGB" data-ofbid="GUID-E44C17FF-48E8-49CE-8652-63573CAB03BC__FIG_FRM_YGJ_XGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 12-11. <span id="GUID-E44C17FF-48E8-49CE-8652-63573CAB03BC__GUID-DE82F017-31F0-4AA3-940E-01A059CCC636" class="fig--title">Active Clock Tuning (ACT) Block Diagram</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-E44C17FF-48E8-49CE-8652-63573CAB03BC__IMAGE_GRM_YGJ_XGB" src="GUID-3214526C-3DDB-4884-9A4E-0ED0C6926B03-high.svg"/></span>
+        </figure>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-DE7A03D5-ED00-4653-9DF6-42ACCFDD1197.html">12.4.1 ACT Lock Status</a></li><li><a href="GUID-00A582EC-9ED4-4E06-BBB5-203B81402D8A.html">12.4.2 ACT Out-of-Range Status</a></li><li><a href="GUID-14D164B1-DB92-424B-9C03-E9C55434C646.html">12.4.3 ACT Update Disable</a></li><li><a href="GUID-BE0D23BC-1615-4D4D-B9DE-EB05419172B4.html">12.4.4 ACT Interrupts</a></li></ul>
+</nav>
+</body>
+</html>

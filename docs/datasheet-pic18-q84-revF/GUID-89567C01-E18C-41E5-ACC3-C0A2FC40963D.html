@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>27.1.3 Time Base — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-6BCD340F-1ED0-48AD-A1D9-6EC3A979BCCC.html"/>
+<link rel="next" href="GUID-10C0029B-94E6-429D-9849-18F1D80B4E42.html"/>
+<link rel="up" href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3.html">27 SMT - Signal Measurement Timer</a></li><li><a href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html">27.1 SMT Operation</a></li><li>27.1.3 Time Base</li></ol>
+  <div class="sib"><span>← <a href="GUID-6BCD340F-1ED0-48AD-A1D9-6EC3A979BCCC.html" rel="prev">Signal and Window Source Selection</a></span><span><a href="GUID-10C0029B-94E6-429D-9849-18F1D80B4E42.html" rel="next">Pulse-Width and Period Captures</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-89567C01-E18C-41E5-ACC3-C0A2FC40963D__GUID-182B9120-751A-473C-B09C-896D891D52F4" style="">27.1.3 Time Base</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The SMTxTMR register is the 24-bit counter/timer used for measurement in each of the
+            modes of the SMT. Setting the <a class="- topic/xref xref" href="GUID-9C2CCB2B-DBC4-4A58-8D3A-82550FFB543F.html#BITFIELD_XLF_CZV_F1B" title="SMT Manual Timer Reset">RST</a> bit clears the SMTxTMR register to 0x000000. It can be written to and
+            read by software. It is not guarded for atomic access, therefore reads and writes to the
+            SMTxTMR register must be made only when <a class="- topic/xref xref" href="GUID-79D79EE8-D02B-4A33-82F5-F82AD44CC1A2.html#ID-00000090" title="SMT GO Data Acquisition">GO
+            </a>= <code class="+ topic/ph pr-d/codeph ph codeph">0</code>.</p>
+        <p class="- topic/p p">The counter can be prevented from resetting at the end of the timer period
+            by using the <a class="- topic/xref xref" href="GUID-40E488AA-76D2-42E2-BEC3-6E67920BC239.html#ID-00000097" title="SMT Counter Halt Enable">STP</a> bit. When STP = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the
+            SMTxTMR will stop and remain equal to the SMTxPR register. When STP =
+            <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, the SMTxTMR register resets to 0x000000 at the end of the
+            period.</p>
+    </div>
+
+</body>
+</html>

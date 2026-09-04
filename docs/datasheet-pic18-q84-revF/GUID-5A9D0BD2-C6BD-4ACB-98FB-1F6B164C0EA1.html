@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.15 Operation in Sleep — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D.html"/>
+<link rel="next" href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html"/>
+<link rel="up" href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li>37.3.15 Operation in Sleep</li></ol>
+  <div class="sib"><span>← <a href="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D.html" rel="prev">Condition-Specific Interrupts</a></span><span><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html" rel="next">I2C Operation</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-5A9D0BD2-C6BD-4ACB-98FB-1F6B164C0EA1__GUID-CCF264EE-9727-46E5-9566-A2C3AE3D8428" style="">37.3.15 Operation in Sleep</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C module can operate while in Sleep mode.</p>
+        <p class="- topic/p p">In Client mode, the module can transmit and receive data as long as the system clock
+            source operates in Sleep. If the generic I2C Interrupt Enable (I2CxIE) bit is set and
+            the client receives or transmits a complete byte, I2CxIF is set and the device wakes up
+            from Sleep.</p>
+        <p class="- topic/p p">In Host mode, both the system clock and the selected <a class="- topic/xref xref" href="GUID-1104B90B-16AC-4A43-BC76-816D7C449473.html" title="I2CxCLK">I2CxCLK</a> source
+            must be able to operate in Sleep. If the I2CxIE bit is set and the I2CxIF bit becomes
+            set, the device wakes from Sleep.</p>
+    </div>
+
+</body>
+</html>

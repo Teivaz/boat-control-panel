@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1B1DC689-BFDB-4E27-861D-B729859282F1.html"/>
+<link rel="next" href="GUID-916D8EB0-94EA-4316-A3CA-29CB139B3416.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</li></ol>
+  <div class="sib"><span>← <a href="GUID-1B1DC689-BFDB-4E27-861D-B729859282F1.html" rel="prev">Register Summary - DSM</a></span><span><a href="GUID-916D8EB0-94EA-4316-A3CA-29CB139B3416.html" rel="next">UART I/O Pin Configuration</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-4C8445F6-1AD9-4AC7-AAFF-ABFE755CC54F" style="">35 UART - Universal Asynchronous Receiver
+        Transmitter with Protocol Support</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The Universal Asynchronous Receiver Transmitter (UART) module is a serial I/O
+            communications peripheral. It contains all the clock generators, shift registers and
+            data buffers necessary to perform an input or output serial data transfer, independent
+            of device program execution. The UART, also known as a Serial Communications Interface
+            (SCI), can be configured as a full-duplex asynchronous system or one of several
+            automated protocols. The Full Duplex mode is useful for communications with peripheral
+            systems, such as wireless modems and USB to serial interface modules.</p>
+        <p class="- topic/p p">Supported protocols include:</p>
+        <ul class="- topic/ul ul" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__UL_WYH_R5S_BBB" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__UL_WYH_R5S_BBB">
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-13FEFA32-009A-40B9-8CC7-58C2E45009F5" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-13FEFA32-009A-40B9-8CC7-58C2E45009F5">LIN Host and Client</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-3030CE70-2A4F-41D3-8788-365C745C95FF" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-3030CE70-2A4F-41D3-8788-365C745C95FF">DMX Controller and Receiver</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-409C2200-B46A-4D69-9E22-35FB16771E8E" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-409C2200-B46A-4D69-9E22-35FB16771E8E">DALI Control Gear and Control
+                Device</li>
+        </ul>
+        <p class="- topic/p p">The UART module includes the following capabilities:</p>
+        <ul class="- topic/ul ul" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__UL_THS_Y5S_BBB" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__UL_THS_Y5S_BBB">
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-495AE83B-6A6D-4B24-B836-F5F03715423B" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-495AE83B-6A6D-4B24-B836-F5F03715423B">Half and full-duplex asynchronous
+                transmit and receive</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-AE5093F8-8C72-422F-81CC-D2BCDFCC2575" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-AE5093F8-8C72-422F-81CC-D2BCDFCC2575">Two-byte input buffer</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-E5B1BC10-F2F7-4CB6-A860-343918A016DC" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-E5B1BC10-F2F7-4CB6-A860-343918A016DC">One-byte output buffer</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-B0992885-BD47-41A1-8BE7-0B23DF401AA5" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-B0992885-BD47-41A1-8BE7-0B23DF401AA5">Programmable 7-bit or 8-bit byte
+                width</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-52BD1496-EF37-41A2-B0E3-4CF470A8D18A" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-52BD1496-EF37-41A2-B0E3-4CF470A8D18A">9th bit address detection</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-EFA2E7A2-C03A-4FE7-9483-70B0BE14CFAF" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-EFA2E7A2-C03A-4FE7-9483-70B0BE14CFAF">9th bit even or odd parity</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-87B33599-5AC9-42E7-A30A-2B0441328261" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-87B33599-5AC9-42E7-A30A-2B0441328261">Input buffer overrun error detection</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-AAC3E530-FB21-49E6-AE10-414240F0DA32" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-AAC3E530-FB21-49E6-AE10-414240F0DA32">Receive framing error detection</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-99E5FAEC-DC32-4001-83FE-82636E89B12A" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-99E5FAEC-DC32-4001-83FE-82636E89B12A">Hardware and software flow control</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-B86046EC-F941-4B5B-84D3-466CCE0D8CA0" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-B86046EC-F941-4B5B-84D3-466CCE0D8CA0">Automatic checksum calculation and
+                verification</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-16540431-32F3-4999-8FC8-2693DDB85D77" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-16540431-32F3-4999-8FC8-2693DDB85D77">Programmable 1, 1.5, and 2 Stop bits</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-D5A662AB-A3EC-4EF5-8DB7-0F66A51D63D9" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-D5A662AB-A3EC-4EF5-8DB7-0F66A51D63D9">Programmable data polarity</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-47BF3D77-11FA-4AA4-BE83-32278DAF224E" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-47BF3D77-11FA-4AA4-BE83-32278DAF224E">Manchester encoder/decoder</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-B35EEBE2-753E-46CD-A6BC-C1B8C50F1197" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-B35EEBE2-753E-46CD-A6BC-C1B8C50F1197">Operation in Sleep</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-7A96F5D8-6219-4D00-BAB4-AFE9869D0DD9" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-7A96F5D8-6219-4D00-BAB4-AFE9869D0DD9">Automatic detection and calibration of the baud rate</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-93DD46A1-F522-4F24-B6D1-1A1CD14AA397" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-93DD46A1-F522-4F24-B6D1-1A1CD14AA397">Wake-up on Break reception</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-621B9AEF-1330-4BB2-97B2-58335CFDB356" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-621B9AEF-1330-4BB2-97B2-58335CFDB356">Automatic and user timed Break period generation</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-D660F3BA-B978-4C3A-B483-59666E78A619" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-D660F3BA-B978-4C3A-B483-59666E78A619">RX and TX inactivity time-outs (with
+                Timer2)</li>
+        </ul>
+        <p class="- topic/p p">The operation of the UART module is controlled through 19 8-bit registers:</p>
+        <ul class="- topic/ul ul" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__UL_C5Q_P5T_BBB" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__UL_C5Q_P5T_BBB">
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-82F45AD3-5436-4900-99B2-2729DE27B888" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-82F45AD3-5436-4900-99B2-2729DE27B888">Three control registers (UxCON0-UxCON2)</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-7E51512F-3883-4732-994C-A4C8169E5B6F" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-7E51512F-3883-4732-994C-A4C8169E5B6F">Error enable and status (UxERRIE, UxERRIR, UxUIR)</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-43FF0623-9629-462C-9D23-17A8FD86F0F2" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-43FF0623-9629-462C-9D23-17A8FD86F0F2">UART buffer status and control (UxFIFO)</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-40CFBFB9-D46E-4377-A701-E16B6683DD20" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-40CFBFB9-D46E-4377-A701-E16B6683DD20">Three 9-bit protocol parameters (UxP1-UxP3)</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-B0401E8F-C70C-4CCF-A87B-31E4BC15277D" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-B0401E8F-C70C-4CCF-A87B-31E4BC15277D">16-bit Baud Rate Generator
+                (UxBRG)</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-7B0E72C3-4A69-4DD1-A4A0-0D21842C18CC" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-7B0E72C3-4A69-4DD1-A4A0-0D21842C18CC">Transmit buffer write (UxTXB)</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-9CDAB000-7BFC-4B9B-AE74-E5B36F5275B6" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-9CDAB000-7BFC-4B9B-AE74-E5B36F5275B6">Receive buffer read (UxRXB)</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-56B7D7E9-7039-4FB6-9EC7-2FC44E1FA613" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-56B7D7E9-7039-4FB6-9EC7-2FC44E1FA613">Receive checksum (UxRXCHK)</li>
+            <li class="- topic/li li" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-FD2A94C1-DE2D-4094-B98C-2A57984AC30B" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-FD2A94C1-DE2D-4094-B98C-2A57984AC30B">Transmit checksum (UxTXCHK)</li>
+        </ul>
+        <p class="- topic/p p">The UART transmit output (TX_out) is available to the TX pin and internally to various
+            peripherals.</p>
+        <p class="- topic/p p">Block diagrams of the UART transmitter and receiver are shown in the
+            following figures.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__FIG_QSC_BMT_BBB" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__FIG_QSC_BMT_BBB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 35-1. <span id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-16B9BC82-FED8-4510-B104-9E0A10C4908F" class="fig--title">UART Transmitter Block Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-89499475-6F6A-452C-9AC6-03A2412C7054-high.pdf#toolbar=1" width="450" height="262.17450118363206"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__FIG_TL2_DMT_BBB" data-ofbid="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__FIG_TL2_DMT_BBB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 35-2. <span id="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__GUID-EC482684-AAC5-498C-B457-37D93B868C18" class="fig--title">UART Receiver Block Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-21426674-4F25-453A-AE59-890AD3427B0A-high.pdf#toolbar=1" width="450" height="297.5009152815406"></iframe></span>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-916D8EB0-94EA-4316-A3CA-29CB139B3416.html">35.1 UART I/O Pin Configuration</a></li><li><a href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html">35.2 UART Asynchronous Modes</a></li><li><a href="GUID-E4BC67C8-357E-4AFA-9C34-F15D26034B13.html">35.3 DMX Mode (Full-Featured UARTs Only)</a></li><li><a href="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37.html">35.4 LIN Modes (Full-Featured UARTs Only)</a></li><li><a href="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB.html">35.5 DALI Mode (Full-Featured UARTs Only)</a></li><li><a href="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4.html">35.6 General Purpose Manchester (Full-Featured UARTs Only)</a></li><li><a href="GUID-6E1C38C7-7953-4B48-AFAA-F5082796C5D7.html">35.7 Polarity</a></li><li><a href="GUID-931A27F4-D58D-440C-A6D6-E30F9681BB4F.html">35.8 Stop Bits</a></li><li><a href="GUID-F19C980D-B2C3-4290-AEB3-DE26CFEB34FC.html">35.9 Operation After FIFO Overflow</a></li><li><a href="GUID-C75CCD6E-F156-44D3-B559-BDCBD6B2914E.html">35.10 Receive and Transmit Buffers</a></li><li><a href="GUID-05BB831A-75A1-40B1-8559-EA222777E0D2.html">35.11 Flow Control</a></li><li><a href="GUID-CF86A33F-3619-4700-9C22-AB4609BA462F.html">35.12 Checksum (Full-Featured UARTs Only)</a></li><li><a href="GUID-FB70590D-C48B-40AB-81CA-DC488BCBEB4E.html">35.13 Collision Detection (Full-Featured UARTs Only)</a></li><li><a href="GUID-3E039E51-4150-4536-A978-B579498D3C35.html">35.14 RX/TX Activity Time-Out</a></li><li><a href="GUID-5826C264-AE14-4D81-AFD3-5BB426EF3A71.html">35.15 Clock Accuracy with Asynchronous Operation</a></li><li><a href="GUID-5D554793-676E-4F0B-8022-67C65136118D.html">35.16 UART Baud Rate Generator</a></li><li><a href="GUID-170B7BEC-5D31-4D5B-B3B7-8B4F40A32614.html">35.17 Transmitting a Break</a></li><li><a href="GUID-B1FEB099-3B32-462D-AA49-3FA800650662.html">35.18 Receiving a Break</a></li><li><a href="GUID-5564A67A-D2D9-4F71-9D93-90FFC832D26F.html">35.19 UART Operation During Sleep</a></li><li><a href="GUID-4A4C44F6-79C3-42AB-98BB-07B6B7B46F08.html">35.20 Register Definitions: UART</a></li><li><a href="GUID-17A8252D-C4BA-49AE-B89E-60E5F3586957.html">35.21 Register Summary - UART</a></li></ul>
+</nav>
+</body>
+</html>

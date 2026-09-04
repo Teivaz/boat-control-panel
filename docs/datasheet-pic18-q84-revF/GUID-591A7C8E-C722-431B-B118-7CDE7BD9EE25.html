@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>17.2.3.1 Sleep Current vs. Wake-Up Time — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DBACCDFF-E710-403E-9D4E-23395C209DFB.html"/>
+<link rel="next" href="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8.html"/>
+<link rel="up" href="GUID-DBACCDFF-E710-403E-9D4E-23395C209DFB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html">17 Power-Saving Modes</a></li><li><a href="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC.html">17.2 Sleep Mode</a></li><li><a href="GUID-DBACCDFF-E710-403E-9D4E-23395C209DFB.html">17.2.3 Low-Power Sleep Mode</a></li><li>17.2.3.1 Sleep Current vs. Wake-Up Time</li></ol>
+  <div class="sib"><span>← <a href="GUID-DBACCDFF-E710-403E-9D4E-23395C209DFB.html" rel="prev">Low-Power Sleep Mode</a></span><span><a href="GUID-B4315DA0-2110-4C9F-8BFE-38932C5E59E8.html" rel="next">Peripheral Usage in Sleep</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-591A7C8E-C722-431B-B118-7CDE7BD9EE25__GUID-6F1FC5D9-88BF-48A5-A1B2-382953EC91D3" style="">17.2.3.1 Sleep Current vs. Wake-Up Time</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <div class="- topic/p p">The Low-Power Sleep mode can be selected by setting the <a class="- topic/xref xref" href="GUID-C466114D-3092-4435-B901-4A88EC6A3B74.html#ID-00000005" title="Voltage Regulator Power Mode Selection">VREGPM</a> bits as following:<ul class="- topic/ul ul" id="GUID-591A7C8E-C722-431B-B118-7CDE7BD9EE25__UL_HZ1_V2N_PHB" data-ofbid="GUID-591A7C8E-C722-431B-B118-7CDE7BD9EE25__UL_HZ1_V2N_PHB">
+            <li class="- topic/li li" id="GUID-591A7C8E-C722-431B-B118-7CDE7BD9EE25__GUID-4C53708F-E60C-4F19-A861-660084CB01F9" data-ofbid="GUID-591A7C8E-C722-431B-B118-7CDE7BD9EE25__GUID-4C53708F-E60C-4F19-A861-660084CB01F9">VREGPM = <code class="+ topic/ph pr-d/codeph ph codeph">‘b00</code>; the
+               voltage regulator is in High-Power mode. In this mode, the voltage regulator and
+               reference circuitry remain in the normal configuration while in Sleep. Hence, there
+               is no delay needed for these circuits to stabilize after wake-up (fastest wake-up
+               from Sleep).</li>
+            <li class="- topic/li li" id="GUID-591A7C8E-C722-431B-B118-7CDE7BD9EE25__GUID-76C8F605-4DA2-42C6-8C62-BF09D62F0DC8" data-ofbid="GUID-591A7C8E-C722-431B-B118-7CDE7BD9EE25__GUID-76C8F605-4DA2-42C6-8C62-BF09D62F0DC8">VREGPM = <code class="+ topic/ph pr-d/codeph ph codeph">‘b01</code>; the
+               voltage regulator is in Low-Power mode. In this mode, when waking up from Sleep, an
+               extra delay time is required for the voltage regulator and reference circuitry to
+               return to the normal configuration and stabilize (faster wake-up from Sleep).</li>
+            <li class="- topic/li li" id="GUID-591A7C8E-C722-431B-B118-7CDE7BD9EE25__GUID-7BDF8B52-8586-415E-88FF-D93DD8DAE114" data-ofbid="GUID-591A7C8E-C722-431B-B118-7CDE7BD9EE25__GUID-7BDF8B52-8586-415E-88FF-D93DD8DAE114">VREGPM = <code class="+ topic/ph pr-d/codeph ph codeph">‘b10</code>; the
+               voltage regulator is in Ultra Low-Power mode. In this mode, the voltage regulator and
+               reference circuitry are in the lowest current consumption mode and all the auxiliary
+               circuits remain shut down. Wake-up from Sleep in this mode needs the longest delay
+               time for the voltage regulator and reference circuitry to stabilize (lowest current
+               consumption).</li>
+            <li class="- topic/li li" id="GUID-591A7C8E-C722-431B-B118-7CDE7BD9EE25__GUID-0584ABB2-677C-4424-9F5D-182C2E69D69A" data-ofbid="GUID-591A7C8E-C722-431B-B118-7CDE7BD9EE25__GUID-0584ABB2-677C-4424-9F5D-182C2E69D69A">VREGPM = <code class="+ topic/ph pr-d/codeph ph codeph">‘b11</code>; this
+               mode is similar to the Ultra Low-Power mode (VREGPM = <code class="+ topic/ph pr-d/codeph ph codeph">‘b10</code>) and is
+               recommended <u class="+ topic/ph hi-d/u ph u">ONLY</u> for extended temperature ranges at or above 70℃.</li>
+         </ul></div>
+   </div>
+
+</body>
+</html>

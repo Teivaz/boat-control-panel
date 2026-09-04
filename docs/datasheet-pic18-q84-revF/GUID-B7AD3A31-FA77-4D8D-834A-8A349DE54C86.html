@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.3.5 Fail-Safe Condition Clearing — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-EDE5C4A5-DD96-4259-8819-49751F924D69.html"/>
+<link rel="next" href="GUID-372FD3A6-E691-4804-B2AB-753505CFE9F2.html"/>
+<link rel="up" href="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB.html">12.3 Fail-Safe Clock Monitor (FSCM)</a></li><li>12.3.5 Fail-Safe Condition Clearing</li></ol>
+  <div class="sib"><span>← <a href="GUID-EDE5C4A5-DD96-4259-8819-49751F924D69.html" rel="prev">Fail-Safe Clock Monitor Fault Injection</a></span><span><a href="GUID-372FD3A6-E691-4804-B2AB-753505CFE9F2.html" rel="next">Reset or Wake-Up from Sleep</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-B7AD3A31-FA77-4D8D-834A-8A349DE54C86__GUID-63AD9EF1-0640-4765-84AC-1AEFD9703EE7" style="">12.3.5 Fail-Safe Condition Clearing</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p">For the FOSC FSCM, the Fail-Safe condition is cleared after either a device
+            Reset, execution of a <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction, or a change to the <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a>/<a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GHR_WSL_YGB" title="New Divider Selection Request">NDIV</a> bits. When switching to the external oscillator or PLL, the
+            Oscillator Start-up Timer (OST) is restarted. While the OST is running, the device
+            continues to operate from HFINTOSC. When the OST expires, the Fail-Safe condition is
+            cleared after successfully switching to the external clock source.</div>
+        <div class="- topic/note note important note_important" id="GUID-B7AD3A31-FA77-4D8D-834A-8A349DE54C86__GUID-59D95003-718E-43A9-BA24-8D9BAC3A34B7" data-ofbid="GUID-B7AD3A31-FA77-4D8D-834A-8A349DE54C86__GUID-59D95003-718E-43A9-BA24-8D9BAC3A34B7"><span class="note__title">Important:</span> Software must clear
+            the OSFIF bit before switching to the external oscillator. If the Fail-Safe condition
+            still exists, the OSFIF bit will be set again by module hardware.</div>
+</div>
+
+</body>
+</html>

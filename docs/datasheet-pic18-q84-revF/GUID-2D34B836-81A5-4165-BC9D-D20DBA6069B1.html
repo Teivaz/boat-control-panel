@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>19.5 ANSELx - Analog Control — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BD780E05-26D9-44C5-8B00-3C7CA261320C.html"/>
+<link rel="next" href="GUID-97E43E99-A95C-402D-81F8-EB129BDE0E6F.html"/>
+<link rel="up" href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html">19 I/O Ports</a></li><li>19.5 ANSELx - Analog Control</li></ol>
+  <div class="sib"><span>← <a href="GUID-BD780E05-26D9-44C5-8B00-3C7CA261320C.html" rel="prev">TRISx - Direction Control</a></span><span><a href="GUID-97E43E99-A95C-402D-81F8-EB129BDE0E6F.html" rel="next">WPUx - Weak Pull-Up Control</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-2D34B836-81A5-4165-BC9D-D20DBA6069B1__GUID-02F655B1-FB53-440C-8BF6-4192EDF5B5B7" style="">19.5 ANSELx - Analog Control</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-2D34B836-81A5-4165-BC9D-D20DBA6069B1__ID-42127-000000DF" data-ofbid="GUID-2D34B836-81A5-4165-BC9D-D20DBA6069B1__ID-42127-000000DF">Ports that support analog inputs have an associated <a class="- topic/xref xref" href="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6.html" title="ANSELx">ANSELx</a>
+            register. The ANSELx register is used to configure the Input mode of an I/O pin to
+            analog. Setting an ANSELx bit high will disable the digital input buffer associated with
+            that bit and cause the corresponding input value to always read ‘<code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-2D34B836-81A5-4165-BC9D-D20DBA6069B1__ID-42127-000000E1">0</code>’, whether the value is read in PORTx register or
+            selected by PPS as a peripheral input.</p>
+        <p class="- topic/p p" id="GUID-2D34B836-81A5-4165-BC9D-D20DBA6069B1__ID-42127-00000099" data-ofbid="GUID-2D34B836-81A5-4165-BC9D-D20DBA6069B1__ID-42127-00000099">Disabling the input buffer prevents analog signal levels on the
+            pin between a logic high and low from causing excessive current in the logic input
+            circuitry.</p>
+        <p class="- topic/p p" id="GUID-2D34B836-81A5-4165-BC9D-D20DBA6069B1__ID-42127-000000E2" data-ofbid="GUID-2D34B836-81A5-4165-BC9D-D20DBA6069B1__ID-42127-000000E2">The state of the ANSELx bits has no effect on digital or analog
+            output functions. A pin with TRIS clear and ANSEL set will still operate as a digital
+            output, but the Input mode will be analog. This can cause unexpected behavior when
+            executing Read-Modify-Write instructions on the PORTx register.</p>
+        <div class="- topic/note note important note_important" id="GUID-2D34B836-81A5-4165-BC9D-D20DBA6069B1__ID-42127-000000E9" data-ofbid="GUID-2D34B836-81A5-4165-BC9D-D20DBA6069B1__ID-42127-000000E9"><span class="note__title">Important:</span> The ANSELx bits default to the Analog mode
+            after Reset. To use any pins as digital general purpose or peripheral inputs, the
+            corresponding ANSEL bits must be changed to ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’ by the user.</div>
+    </div>
+
+</body>
+</html>

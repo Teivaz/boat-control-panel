@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.13 DMA Integration — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B2ABA7F2-C9A8-49B1-9B5E-A54B4454B484.html"/>
+<link rel="next" href="GUID-A0AAD4E6-C8B3-4A58-A705-384F9DF2E32F.html"/>
+<link rel="up" href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li>37.3.13 DMA Integration</li></ol>
+  <div class="sib"><span>← <a href="GUID-B2ABA7F2-C9A8-49B1-9B5E-A54B4454B484.html" rel="prev">Auto-Load I2CxCNT</a></span><span><a href="GUID-A0AAD4E6-C8B3-4A58-A705-384F9DF2E32F.html" rel="next">7-Bit Host Transmission</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9__GUID-770788AE-B5EE-4EDC-9EFF-BB4FBE92C5B1" style="">37.3.13 DMA Integration</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C module can be used with the DMA for data transfers. The DMA can be
+            triggered through software via the DMA Transaction (DGO) bit or through the use of the
+            following hardware triggers:</p>
+        <ul class="- topic/ul ul" id="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9__UL_FWF_QN2_RHB" data-ofbid="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9__UL_FWF_QN2_RHB">
+            <li class="- topic/li li" id="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9__GUID-85AFA820-525B-4D1C-9F61-4CFBD475BA25" data-ofbid="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9__GUID-85AFA820-525B-4D1C-9F61-4CFBD475BA25">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Transmit Interrupt
+                Flag (I2CxTXIF)</li>
+            <li class="- topic/li li" id="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9__GUID-9B7DF5A2-B70F-499B-8650-E0AA71F4BF53" data-ofbid="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9__GUID-9B7DF5A2-B70F-499B-8650-E0AA71F4BF53">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Receive Interrupt Flag
+                (I2CxRXIF)</li>
+            <li class="- topic/li li" id="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9__GUID-1FD95683-E231-4DEC-A7F6-775F27EB83B2" data-ofbid="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9__GUID-1FD95683-E231-4DEC-A7F6-775F27EB83B2">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Interrupt Flag
+                (I2CxIF)</li>
+            <li class="- topic/li li" id="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9__GUID-C1C7E704-220A-4E40-A81F-CE78594A0BE5" data-ofbid="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9__GUID-C1C7E704-220A-4E40-A81F-CE78594A0BE5">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Error Interrupt Flag
+                (I2CxEIF)</li>
+        </ul>
+        <p class="- topic/p p">For I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C communication, the I2CxTXIF is commonly used as the hardware trigger
+            source for host or client transmission, and I2CxRXIF is commonly used as the hardware
+            trigger source for host or client reception.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-A0AAD4E6-C8B3-4A58-A705-384F9DF2E32F.html">37.3.13.1 7-Bit Host Transmission</a></li><li><a href="GUID-9E38DEA9-0B12-4ED1-957D-B8E0F61C71E1.html">37.3.13.2 10-Bit Host Transmission</a></li><li><a href="GUID-4DB59592-1307-4589-9A22-7B96C0AD9D2D.html">37.3.13.3 7/10-Bit Host Reception</a></li><li><a href="GUID-90C0EC15-958C-406C-8BED-C83ED99B8DB4.html">37.3.13.4 7-Bit Client Transmission</a></li><li><a href="GUID-6664201D-5C25-44C8-B811-CA06B16AF8B5.html">37.3.13.5 10-Bit Client Transmission</a></li><li><a href="GUID-86EEF140-AF84-477C-8638-83EDC3F68627.html">37.3.13.6 7/10-Bit Client Reception</a></li></ul>
+</nav>
+</body>
+</html>

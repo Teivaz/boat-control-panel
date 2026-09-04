@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>29.3 Compare Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7B628A8B-F890-4A20-A46F-73466460E057.html"/>
+<link rel="next" href="GUID-4A3ABF7E-DCD9-4904-8155-B3748CC526D7.html"/>
+<link rel="up" href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html">29 CCP - Capture/Compare/PWM Module</a></li><li>29.3 Compare Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-7B628A8B-F890-4A20-A46F-73466460E057.html" rel="prev">Capture During Sleep</a></span><span><a href="GUID-4A3ABF7E-DCD9-4904-8155-B3748CC526D7.html" rel="next">CCPx Pin Configuration</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__GUID-8D116D8D-DD8F-4A8D-AFDA-A4E2204BBF64" style="">29.3 Compare Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000646" data-ofbid="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000646">The Compare mode function described in this section is available and
+         identical for all CCP modules.</p>
+      <p class="- topic/p p" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000647" data-ofbid="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000647">Compare mode makes use of the 16-bit odd numbered Timer resources
+         (Timer1, Timer3, etc.). The 16-bit value of the <a class="- topic/xref xref" href="GUID-CA43AA05-853A-4508-81FC-75F888985FE7.html" title="CCPRx">CCPRx</a>
+         register is constantly compared against the 16-bit value of the TMRx register. When a match
+         occurs, one of the following events can occur:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000648" data-ofbid="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000648">Toggle the CCPx output and clear TMRx</li>
+         <li class="- topic/li li" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-0000064A" data-ofbid="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-0000064A">Toggle the CCPx output without clearing TMRx</li>
+         <li class="- topic/li li" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-0000064C" data-ofbid="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-0000064C">Set the CCPx output</li>
+         <li class="- topic/li li" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-0000064E" data-ofbid="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-0000064E">Clear the CCPx output</li>
+         <li class="- topic/li li" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000650" data-ofbid="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000650">Generate a Pulse output</li>
+         <li class="- topic/li li" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000652" data-ofbid="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000652">Generate a Pulse output and clear TMRx</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000654" data-ofbid="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000654">The action on the pin is based on the value of the <a class="- topic/xref xref" href="GUID-B5E1B30C-10E2-4929-B5C4-0F271B634DD1.html#ID-0000001D" title="CCP Mode Select">MODE</a> control bits.</p>
+      <p class="- topic/p p" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000655" data-ofbid="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000655">All Compare modes can generate an interrupt. When MODE = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000656">‘b0001</code> or <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000657">‘b1011</code>, the CCP resets the TMRx register.</p>
+      <p class="- topic/p p" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000658" data-ofbid="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-00000658">The following figure shows a simplified diagram of the compare
+         operation.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-0000065A" data-ofbid="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__ID-42109-0000065A"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 29-2. <span id="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944__GUID-7E22B2F3-5EE3-4617-823A-CD569DA0907A" class="fig--title">Compare Mode Operation Block
+            Diagram</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-3A82FA9C-05D8-4294-919E-E4D823796440-high.pdf#toolbar=1" width="450" height="235.9183673469388"></iframe></span>
+      </figure>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-4A3ABF7E-DCD9-4904-8155-B3748CC526D7.html">29.3.1 CCPx Pin Configuration</a></li><li><a href="GUID-AD774D74-D044-4BA0-81A2-491F1CD453FF.html">29.3.2 Timer1 Mode for Compare</a></li><li><a href="GUID-9DB92477-1080-40DF-BA49-D2D696DD20B2.html">29.3.3 Compare During Sleep</a></li></ul>
+</nav>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.5.9.2 Precharge Control — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-26F38CB0-EA06-4A44-BA4B-E25060EDD9AF.html"/>
+<link rel="next" href="GUID-64BA12F2-9F30-4FF0-9A5F-371074EE0217.html"/>
+<link rel="up" href="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html">43.5 Computation Operation</a></li><li><a href="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4.html">43.5.9 Capacitive Voltage Divider (CVD) Features</a></li><li>43.5.9.2 Precharge Control</li></ol>
+  <div class="sib"><span>← <a href="GUID-26F38CB0-EA06-4A44-BA4B-E25060EDD9AF.html" rel="prev">CVD Operation</a></span><span><a href="GUID-64BA12F2-9F30-4FF0-9A5F-371074EE0217.html" rel="next">Acquisition Control for CVD (ADPRE &gt; 0)</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-26402BB5-21F5-4E3F-92CE-C0B83FD6FD5A__GUID-FD90CA93-85A6-40D9-94EC-FDA9780FE0DA" style="">43.5.9.2 Precharge Control</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p" id="GUID-26402BB5-21F5-4E3F-92CE-C0B83FD6FD5A__ID-42107-000003DD" data-ofbid="GUID-26402BB5-21F5-4E3F-92CE-C0B83FD6FD5A__ID-42107-000003DD">The precharge stage is the period of time that
+            brings the external channel and internal Sample-and-Hold capacitor to known voltage
+            levels. Precharge is enabled by writing a nonzero value to the <a class="- topic/xref xref" href="GUID-DB7AC91C-B964-41FD-9F32-82FE0962180A.html" title="ADPRE">ADPRE</a>
+            register. This stage is initiated when an ADC conversion begins, either from setting the
+                <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000021" title="ADC Conversion Status(1,2)">GO</a> bit, a Special Event Trigger, or a conversion restart from the
+            computation functionality. If the ADPRE register is cleared when an ADC conversion
+            begins, this stage is skipped.</div>
+        <p class="- topic/p p" id="GUID-26402BB5-21F5-4E3F-92CE-C0B83FD6FD5A__ID-42107-000003DE" data-ofbid="GUID-26402BB5-21F5-4E3F-92CE-C0B83FD6FD5A__ID-42107-000003DE">During the precharge time, C<sub class="+ topic/ph hi-d/sub ph sub">HOLD</sub> is disconnected from the outer portion of
+            the sample path that leads to the external capacitive sensor and is connected to either
+                V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> or V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub>, depending on the value of the <a class="- topic/xref xref" href="GUID-91A099AA-6FF5-4C34-ABF1-6C3EFCAF1E11.html#BITFIELD_GRT_BFH_KZ" title="Precharge Polarity"><span><span>PPOL</span></span></a> bit. At the
+            same time, the port pin logic of the selected analog channel is overridden to drive a
+            digital high or low out to precharge the outer portion of the ADC’s sample path, which
+            includes the external sensor. The output polarity of this override is determined by the
+            PPOL bit such that the external sensor cap is charged opposite that of the internal
+                C<sub class="+ topic/ph hi-d/sub ph sub">HOLD</sub> cap. The amount of time for precharge
+            is controlled by the <a class="- topic/xref xref" href="GUID-DB7AC91C-B964-41FD-9F32-82FE0962180A.html" title="ADPRE">ADPRE</a> register.</p>
+        <div class="- topic/note note important note_important" id="GUID-26402BB5-21F5-4E3F-92CE-C0B83FD6FD5A__ID-42107-000003E9" data-ofbid="GUID-26402BB5-21F5-4E3F-92CE-C0B83FD6FD5A__ID-42107-000003E9"><span class="note__title">Important:</span> The external charging
+            overrides the TRIS/LAT/Guard outputs setting of the respective I/O pin. If there is a
+            device attached to this pin, precharge must not be used.</div>
+    </div>
+
+</body>
+</html>

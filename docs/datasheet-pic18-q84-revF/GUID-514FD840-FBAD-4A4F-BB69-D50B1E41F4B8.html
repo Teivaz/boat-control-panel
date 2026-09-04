@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.2.2 UART Asynchronous Receiver — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4.html"/>
+<link rel="next" href="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5.html"/>
+<link rel="up" href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html">35.2 UART Asynchronous Modes</a></li><li>35.2.2 UART Asynchronous Receiver</li></ol>
+  <div class="sib"><span>← <a href="GUID-EA04F089-A025-4318-B9D1-946F5C477CA4.html" rel="prev">Asynchronous Transmission Setup</a></span><span><a href="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5.html" rel="next">Enabling the Receiver</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8__GUID-86BA4691-A83C-4250-9E79-DE5A1BFE235C" style="">35.2.2 UART Asynchronous Receiver</h1><div class="- topic/body body"><p class="- topic/p p">The Asynchronous mode is typically used in RS-232 systems. The receiver block diagram is shown in
+        <a class="- topic/xref xref" href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html#GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B__FIG_TL2_DMT_BBB"><span>Figure 35-2</span></a>. The data are received on
+      the RX pin and drive the data recovery block. The data recovery block is actually a high-speed
+      shifter operating at 4 or 16 times the baud rate, whereas the serial Receive Shift Register
+      (RSR) operates at the bit rate. When all bits of the character have been shifted in, they are
+      immediately transferred to a two-character First-In First-Out (FIFO) memory. The FIFO
+      buffering allows reception of two complete characters and the start of a third character
+      before software must begin servicing the UART receiver. The FIFO registers and RSR are not
+      directly accessible by software. Access to the received data is made via the UxRXB
+      register.</p></div>
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5.html">35.2.2.1 Enabling the Receiver</a></li><li><a href="GUID-2966F8A6-816E-45CF-87A6-FB4C876E377D.html">35.2.2.2 Receiving Data</a></li><li><a href="GUID-5E356814-0336-401E-9354-1F579534A656.html">35.2.2.3 Receive Data Polarity</a></li><li><a href="GUID-05AC903C-8E83-4090-AFA2-0E9D2821C64C.html">35.2.2.4 Receive Interrupts</a></li><li><a href="GUID-54CB9908-D26F-43DA-BBFF-E3F03CDCBF6C.html">35.2.2.5 Receive Framing Error</a></li><li><a href="GUID-89720302-21EA-4810-AC8E-A9C8EDD3DE40.html">35.2.2.6 Receiver Parity Modes</a></li><li><a href="GUID-4A8B083E-6442-4C63-8E3C-BCEF2B42B817.html">35.2.2.7 Receive FIFO Overflow</a></li><li><a href="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0.html">35.2.2.8 Asynchronous Reception Setup</a></li></ul>
+</nav>
+</body>
+</html>

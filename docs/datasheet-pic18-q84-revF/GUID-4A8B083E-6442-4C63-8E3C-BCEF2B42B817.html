@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.2.2.7 Receive FIFO Overflow — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-89720302-21EA-4810-AC8E-A9C8EDD3DE40.html"/>
+<link rel="next" href="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0.html"/>
+<link rel="up" href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html">35.2 UART Asynchronous Modes</a></li><li><a href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html">35.2.2 UART Asynchronous Receiver</a></li><li>35.2.2.7 Receive FIFO Overflow</li></ol>
+  <div class="sib"><span>← <a href="GUID-89720302-21EA-4810-AC8E-A9C8EDD3DE40.html" rel="prev">Receiver Parity Modes</a></span><span><a href="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0.html" rel="next">Asynchronous Reception Setup</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-4A8B083E-6442-4C63-8E3C-BCEF2B42B817__GUID-EED07097-65E4-4AF6-A4D1-09CBCFFC75CC" style="">35.2.2.7 Receive FIFO Overflow</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">When more characters are received than the receive FIFO can hold, the <a class="- topic/xref xref" href="GUID-0335D11B-CDF0-4C1B-B750-F220FDA16575.html#BITFIELD_OKF_Y3M_BBB" title="Receive FIFO Overflow Interrupt Flag"><span><span>RXFOIF</span></span></a> bit is set. The character causing the Overflow condition is
+            discarded. The <a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_MQF_ZNS_YY" title="Run During Overflow Control"><span><span>RUNOVF</span></span></a> bit determines how the receive circuit responds to characters while
+            the Overflow condition persists. When RUNOVF is set, the receive shifter stays
+            synchronized to the incoming data stream by responding to Start, data, and Stop bits.
+            However, all received bytes not already in the FIFO are discarded. When RUNOVF is
+            cleared, the receive shifter ceases operation and Start, data, and Stop bits are
+            ignored. The Receive Overflow condition is cleared by reading the UxRXB register and
+            clearing the RXFOIF bit. If the UxRXB register is not read, thereby opening a space in
+            the FIFO, the next character received will be discarded and cause another Overflow
+            condition.</p>
+        <p class="- topic/p p">A receive overflow error will generate a summary UxEIF interrupt when the <a class="- topic/xref xref" href="GUID-BCAA4B97-CF3B-483A-B40D-EFFFD716B63A.html#BITFIELD_OKF_Y3M_BBB" title="Receive FIFO Overflow Interrupt Enable"><span><span>RXFOIE</span></span></a> bit is set.</p>
+</div>
+
+</body>
+</html>

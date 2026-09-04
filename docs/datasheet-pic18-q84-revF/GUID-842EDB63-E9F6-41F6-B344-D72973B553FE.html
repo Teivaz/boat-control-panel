@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>31 PWM - Pulse-Width Modulator with Compare — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-96F9BA7C-98E0-43F4-A26D-49C24164436E.html"/>
+<link rel="next" href="GUID-EDAB9182-6E78-4A05-8B19-C26925E4D20D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>31 PWM - Pulse-Width Modulator with Compare</li></ol>
+  <div class="sib"><span>← <a href="GUID-96F9BA7C-98E0-43F4-A26D-49C24164436E.html" rel="prev">Register Summary - Capture, Compare, and PWM Timers Selection</a></span><span><a href="GUID-EDAB9182-6E78-4A05-8B19-C26925E4D20D.html" rel="next">Output Slices</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-C10FF250-5D73-4AEA-A6F1-08A522B467F4" style="">31 PWM - Pulse-Width Modulator with
+        Compare</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">This module is a 16-bit Pulse-Width Modulator (PWM) with a compare feature
+            and multiple outputs. The outputs are grouped in slices where each slice has two
+            outputs. There can be up to four slices in each PWM module. The <a class="- topic/xref xref" href="GUID-0D5C847B-F70B-49A7-ADF9-3CCCF3193A17.html#ID-00000005" title="PWM Module Enable"><span><span>EN</span></span></a> bit enables the PWM operation for all slices simultaneously. The
+            prescale counter, postscale counter, and all internal logic is held in Reset while the
+            EN bit is low.</p>
+        <div class="- topic/p p"> Features of this module include the following:<ul class="- topic/ul ul" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__UL_BRH_F3J_VGB" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__UL_BRH_F3J_VGB">
+                <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-6E78820D-92AD-4697-8EDF-937F98443941" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-6E78820D-92AD-4697-8EDF-937F98443941">Five main operating modes:<ul class="- topic/ul ul" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__UL_BVP_4JJ_VGB" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__UL_BVP_4JJ_VGB">
+                        <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-F34F0713-64E2-45E5-AD83-A41A21F14D36" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-F34F0713-64E2-45E5-AD83-A41A21F14D36">Left Aligned</li>
+                        <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-66BF41A8-252B-4107-8201-7CE95C9C7DAB" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-66BF41A8-252B-4107-8201-7CE95C9C7DAB">Right Aligned</li>
+                        <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-26D5E79F-B04E-4996-802B-B2413E6BBAF9" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-26D5E79F-B04E-4996-802B-B2413E6BBAF9">Center-Aligned</li>
+                        <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-135688C2-85BF-41C1-8183-47694A878E2B" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-135688C2-85BF-41C1-8183-47694A878E2B">Variable Aligned</li>
+                        <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-B2A07951-2652-423C-95F0-D5CD678B822F" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-B2A07951-2652-423C-95F0-D5CD678B822F">Compare<ul class="- topic/ul ul" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__UL_WNM_RJJ_VGB" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__UL_WNM_RJJ_VGB">
+                                <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-4BDA8E12-2DB3-4BA3-838A-6703B2313074" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-4BDA8E12-2DB3-4BA3-838A-6703B2313074">Pulsed</li>
+                                <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-BC5821A6-AECA-4B8A-B19C-EF6B8DCE1F70" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-BC5821A6-AECA-4B8A-B19C-EF6B8DCE1F70">Toggled</li>
+                            </ul></li>
+                    </ul></li>
+                <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-7C979CD3-3875-4D5C-A1CE-E4A5349E40CB" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-7C979CD3-3875-4D5C-A1CE-E4A5349E40CB">Push-pull operation (available in
+                    Left and Right Aligned modes only)</li>
+                <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-5613051F-38F2-46B8-B0C2-68982CFD99FC" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-5613051F-38F2-46B8-B0C2-68982CFD99FC">Independent 16-bit period
+                    timer</li>
+                <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-1DF517A6-004C-4C00-A07B-45EB1CCCA500" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-1DF517A6-004C-4C00-A07B-45EB1CCCA500">Programmable clock sources</li>
+                <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-6699967A-EF63-40E6-86D3-F225B3A1D35D" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-6699967A-EF63-40E6-86D3-F225B3A1D35D">Programmable trigger sources for
+                    synchronous duty cycle and period changes</li>
+                <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-383F3458-2839-4677-997C-816EF759A5AC" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-383F3458-2839-4677-997C-816EF759A5AC">Programmable
+                    synchronous/asynchronous Reset sources</li>
+                <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-8284D47F-248A-41CA-A917-84648CAE5602" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-8284D47F-248A-41CA-A917-84648CAE5602">Programmable Reset source
+                    polarity control</li>
+                <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-20984DE8-57E3-48A0-85EA-319B10603335" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-20984DE8-57E3-48A0-85EA-319B10603335">Programmable PWM output polarity
+                    control</li>
+                <li class="- topic/li li" id="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-9ECD8A7F-D44C-4F2D-9B03-F2B24621588A" data-ofbid="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE__GUID-9ECD8A7F-D44C-4F2D-9B03-F2B24621588A">Up to four two-output slices per
+                    module</li>
+            </ul> Block diagrams of each PWM mode are shown in their respective sections.</div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-EDAB9182-6E78-4A05-8B19-C26925E4D20D.html">31.1 Output Slices</a></li><li><a href="GUID-185D8F95-F4F8-47B8-BD5D-3E89287A2E99.html">31.2 Period Timer</a></li><li><a href="GUID-EBE71BD9-6F4A-46C8-B43F-1D6A5142632A.html">31.3 Clock Sources</a></li><li><a href="GUID-C7CBCFD0-0DE3-445F-AA00-1568A64A6B3F.html">31.4 External Period Resets</a></li><li><a href="GUID-4AF3530B-864D-4647-8384-64437383C175.html">31.5 Buffered Period and Parameter Registers</a></li><li><a href="GUID-2BDB3225-ECF1-43D8-8064-204C9B36235D.html">31.6 Synchronizing Multiple PWMs</a></li><li><a href="GUID-23C3750C-DF66-47DA-9966-AF83570509D4.html">31.7 Interrupts</a></li><li><a href="GUID-52772E7E-8E4C-4BBB-B9A2-DDBD2A3C48BD.html">31.8 Operation During Sleep</a></li><li><a href="GUID-1D695B33-5814-450E-901B-DF01E6352A29.html">31.9 Register Definitions: PWM Control</a></li><li><a href="GUID-57229884-88A4-4629-88CD-23A9B2F60358.html">31.10 Register Summary - PWM</a></li></ul>
+</nav>
+</body>
+</html>

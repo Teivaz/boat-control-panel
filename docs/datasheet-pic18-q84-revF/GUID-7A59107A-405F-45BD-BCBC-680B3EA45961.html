@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.2.2 Configuration Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F4B5E92A-8014-4F2E-8363-62819F9B7434.html"/>
+<link rel="next" href="GUID-C3CA0F66-2DB3-422A-8A2A-AFDDBFEF8D96.html"/>
+<link rel="up" href="GUID-84A4D028-1C85-48B1-A96D-5816A098641F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-84A4D028-1C85-48B1-A96D-5816A098641F.html">38.2 Modes of Operation</a></li><li>38.2.2 Configuration Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-F4B5E92A-8014-4F2E-8363-62819F9B7434.html" rel="prev">Bus Integrating Mode</a></span><span><a href="GUID-C3CA0F66-2DB3-422A-8A2A-AFDDBFEF8D96.html" rel="next">Normal Modes</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-EDBBC6B2-8AEC-466C-8B4A-D9A3BFF0204D" style="">38.2.2 Configuration Mode</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">After Reset, the CAN FD Protocol Module is in Configuration mode. The error counters are
+            cleared and all registers contain the Reset values.</p>
+        <p class="- topic/p p">The CAN FD Protocol Module must be initialized before activation. This is
+            only possible when the module is in Configuration mode, OPMOD[2:0] =
+                <code class="+ topic/ph pr-d/codeph ph codeph">100</code>. The Configuration mode is requested by setting REQOP[2:0] =
+                <code class="+ topic/ph pr-d/codeph ph codeph">100</code>. </p>
+        <p class="- topic/p p">The CAN FD Protocol module will protect the user from accidentally violating
+            the CAN protocol through programming errors. The following registers and bit fields can
+            only be programmed during Configuration mode:</p>
+        <ul class="- topic/ul ul" id="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__UL_ACB_FFL_43B" data-ofbid="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__UL_ACB_FFL_43B">
+            <li class="- topic/li li" id="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-D3D8E5B4-09A4-4641-8B04-26C06EE12321" data-ofbid="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-D3D8E5B4-09A4-4641-8B04-26C06EE12321">CxCON: WAKFIL, CLKSEL, PXEDIS, ISOCRECEN, TXQEN, STEF, SERRLOM, ESIGM, RTXAT</li>
+            <li class="- topic/li li" id="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-BC6C59EB-2A47-4E76-8551-FE57F76874B5" data-ofbid="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-BC6C59EB-2A47-4E76-8551-FE57F76874B5">CxNBTCFG, C1DBTCFG and C1TDC</li>
+            <li class="- topic/li li" id="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-DC267C78-B4BF-436A-8083-856BC69394EC" data-ofbid="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-DC267C78-B4BF-436A-8083-856BC69394EC">CxTXQCON: PLSIZE[2:0], FSIZE[4:0]</li>
+            <li class="- topic/li li" id="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-8F9A348B-6873-47AC-A629-FE96CB344E35" data-ofbid="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-8F9A348B-6873-47AC-A629-FE96CB344E35">CxFIFOCON: TXEN, RXTSEN, PLSIZE[2:0], FSIZE[4:0]</li>
+            <li class="- topic/li li" id="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-8E299A29-6E2A-4C21-8FC8-87DD555F6F4E" data-ofbid="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-8E299A29-6E2A-4C21-8FC8-87DD555F6F4E">CxTEFCON: TEFTSEN, FSIZE[4:0]</li>
+            <li class="- topic/li li" id="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-96E2F9B6-E54A-4FB3-B090-1783F505F696" data-ofbid="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-96E2F9B6-E54A-4FB3-B090-1783F505F696">CxFIFOBA</li>
+        </ul>
+        <p class="- topic/p p">The CAN FD Protocol module is not allowed to enter Configuration mode during
+            transmission or reception to prevent the module from causing errors on the CAN bus. The
+            following registers are Reset when exiting Configuration mode:</p>
+        <ul class="- topic/ul ul" id="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__UL_BCB_FFL_43B" data-ofbid="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__UL_BCB_FFL_43B">
+            <li class="- topic/li li" id="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-B82880C3-FCB3-4371-8B01-69E7666A8587" data-ofbid="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-B82880C3-FCB3-4371-8B01-69E7666A8587">CxTREC</li>
+            <li class="- topic/li li" id="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-FBA74619-8BF4-455E-8493-F494A0335B08" data-ofbid="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-FBA74619-8BF4-455E-8493-F494A0335B08">CxBDIAG0</li>
+            <li class="- topic/li li" id="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-2D6E34BC-726D-4009-8625-2C554F9669CA" data-ofbid="GUID-7A59107A-405F-45BD-BCBC-680B3EA45961__GUID-2D6E34BC-726D-4009-8625-2C554F9669CA">CxBDIAG1</li>
+        </ul>
+        <p class="- topic/p p"> In Configuration mode, FRESET is set in the CxFIFOCON, CxTXQCON, and
+            CxTEFCON registers, and all FIFOs and the TXQ are Reset.</p>
+    </div>
+
+</body>
+</html>

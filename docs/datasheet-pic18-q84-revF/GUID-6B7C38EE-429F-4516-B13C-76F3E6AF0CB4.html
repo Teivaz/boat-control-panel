@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.6 General Purpose Manchester (Full-Featured UARTs Only) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2C36C7AE-8077-4C2B-B8AB-BE74F439A0B3.html"/>
+<link rel="next" href="GUID-6E1C38C7-7953-4B48-AFAA-F5082796C5D7.html"/>
+<link rel="up" href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li>35.6 General Purpose Manchester (Full-Featured UARTs Only)</li></ol>
+  <div class="sib"><span>← <a href="GUID-2C36C7AE-8077-4C2B-B8AB-BE74F439A0B3.html" rel="prev">Control Gear</a></span><span><a href="GUID-6E1C38C7-7953-4B48-AFAA-F5082796C5D7.html" rel="next">Polarity</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-566B62D8-F255-474E-BD51-A7C42AC296CC" style="">35.6 General Purpose Manchester (Full-Featured
+        UARTs Only)</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">General purpose Manchester is a subset of the DALI mode. When the UxP1L register is cleared,
+            there is no minimum wait time between frames. This allows full- and half-duplex
+            operation because writes to the UxTXB register are not held waiting for a receive
+            operation to complete.</p>
+        <p class="- topic/p p">General purpose Manchester operation maintains all other aspects of DALI mode
+            as shown in <a class="- topic/xref xref" href="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB.html#GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB__FIG_PN1_CHY_CBB"><span>Figure 35-9</span></a> such as:</p>
+        <ul class="- topic/ul ul" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__UL_EM4_2DD_DBB" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__UL_EM4_2DD_DBB">
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-FC19CF32-C251-47FB-8C1C-9E23FFEB2E9E" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-FC19CF32-C251-47FB-8C1C-9E23FFEB2E9E">Single-pulse Start bit</li>
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-70542611-EF03-4F3E-AC8C-8C303BFEDA3E" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-70542611-EF03-4F3E-AC8C-8C303BFEDA3E">Most Significant bit first</li>
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-5463DB05-9FBC-4C0D-ADC9-2C9CC0B7F8DB" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-5463DB05-9FBC-4C0D-ADC9-2C9CC0B7F8DB">No stop periods between back-to-back bytes</li>
+        </ul>
+        <p class="- topic/p p">The general purpose Manchester mode is configured with the following
+            settings:</p>
+        <ul class="- topic/ul ul" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__UL_ACX_2DD_DBB" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__UL_ACX_2DD_DBB">
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-5517DCF0-436C-4FC3-939A-4546618305C8" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-5517DCF0-436C-4FC3-939A-4546618305C8"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_C5C_R5L_BBB" title="UART Mode Select(1)"><span><span>MODE</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">‘b1000</span></li>
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-F2AFD4E1-8512-4859-B7DB-DD0C2124A504" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-F2AFD4E1-8512-4859-B7DB-DD0C2124A504"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_K3M_SSL_BBB" title="Transmit Enable Control(2)"><span><span>TXEN</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-945DD150-9C86-41E4-9C80-C30BCA2F1EA7" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-945DD150-9C86-41E4-9C80-C30BCA2F1EA7"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_BYJ_N5L_BBB" title="Receive Enable Control(2)"><span><span>RXEN</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-8EC07227-F55B-4D36-8F7C-D09D0D337416" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-8EC07227-F55B-4D36-8F7C-D09D0D337416"><a class="- topic/xref xref" href="GUID-471C59A9-2216-467A-93AD-12A52D1A299F.html#GUID-471C59A9-2216-467A-93AD-12A52D1A299F" title="UxP1">UxP1</a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0h</span></li>
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-2859A066-DB6E-4E00-B30F-0C9259954ECA" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-2859A066-DB6E-4E00-B30F-0C9259954ECA"><a class="- topic/xref xref" href="GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C.html#GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C" title="UxBRG">UxBRG</a> = desired baud rate</li>
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-6C8901D6-76A9-48BE-9AAF-0092063B0AB5" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-6C8901D6-76A9-48BE-9AAF-0092063B0AB5"><a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_C5C_R5L_BBB" title="Transmit Control Polarity(1)">TXPOL</a> and <a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_XWQ_NRL_BBB" title="Receive Polarity Control">RXPOL</a> = desired Idle state</li>
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-20FB7802-41CB-47E0-9D1A-57F79B6F2BA7" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-20FB7802-41CB-47E0-9D1A-57F79B6F2BA7"><a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_K3M_SSL_BBB" title="Stop Bit Mode Control(1)"><span><span>STP</span></span></a> = desired number of stop periods</li>
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-D564F83D-E802-46BD-8D8E-3FACF4D92085" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-D564F83D-E802-46BD-8D8E-3FACF4D92085">RxyPPS = TX pin selection code</li>
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-3FD843AF-340A-4449-A301-8398CDB7936E" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-3FD843AF-340A-4449-A301-8398CDB7936E">TX pin TRIS control = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span></li>
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-CD818B66-7689-4379-99D0-CA58B82C717F" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-CD818B66-7689-4379-99D0-CA58B82C717F">RXPPS = RX pin selection code</li>
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-91AB9786-6FE7-485E-8146-B76FA44D1723" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-91AB9786-6FE7-485E-8146-B76FA44D1723">RX pin TRIS control = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-6F9EDAC7-55D9-4B79-B1B8-B54C04DB7892" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-6F9EDAC7-55D9-4B79-B1B8-B54C04DB7892">Input pin ANSEL bit = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span></li>
+            <li class="- topic/li li" id="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-B3F58BBE-6FD5-4F3A-8039-91933BB8BAE8" data-ofbid="GUID-6B7C38EE-429F-4516-B13C-76F3E6AF0CB4__GUID-B3F58BBE-6FD5-4F3A-8039-91933BB8BAE8"><a class="- topic/xref xref" href="GUID-AFEE23AF-E917-46D3-BF17-879043534F4E.html#BITFIELD_MQF_ZNS_YY" title="Serial Port Enable"><span><span>ON</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+        </ul>
+        <p class="- topic/p p">The Manchester bit stream timing is shown in <a class="- topic/xref xref" href="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB.html#GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB__FIG_PN1_CHY_CBB"><span>Figure 35-9</span></a>.</p>
+</div>
+
+</body>
+</html>

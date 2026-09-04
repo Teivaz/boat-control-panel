@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.1.1.5 Secondary Oscillator — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-9C3B5A50-CA98-49E7-A086-DCB3E8B7BFCA.html"/>
+<link rel="next" href="GUID-25362F2C-8A61-49C5-A6FA-33620F8FFD5B.html"/>
+<link rel="up" href="GUID-5DED24A3-7549-4229-9627-680F5E81FE14.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A.html">12.1 Clock Source Types</a></li><li><a href="GUID-5DED24A3-7549-4229-9627-680F5E81FE14.html">12.1.1 External Clock Sources</a></li><li>12.1.1.5 Secondary Oscillator</li></ol>
+  <div class="sib"><span>← <a href="GUID-9C3B5A50-CA98-49E7-A086-DCB3E8B7BFCA.html" rel="prev">4x PLL</a></span><span><a href="GUID-25362F2C-8A61-49C5-A6FA-33620F8FFD5B.html" rel="next">SOSC Start-Up Timing</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__GUID-52F588ED-8F29-4F62-94B1-6A8DB0289A16" style="">12.1.1.5 Secondary Oscillator</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The Secondary Oscillator (SOSC) is a separate external oscillator block that can be used as an
+            alternate system clock source or as a Timer clock source. The SOSC is optimized for
+            32.768 kHz and can be used with either an external quartz crystal connected to the SOSCI
+            and SOSCO pins or with an external clock source connected to the SOSCI pin, as shown in
+            the figures below.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__FIG_YCV_MZ4_SGB" data-ofbid="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__FIG_YCV_MZ4_SGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 12-5. <span id="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__GUID-2533BE4E-14E3-42B1-A791-F4134C4CF1B7" class="fig--title">SOSC 32.768 kHz Quartz Crystal Oscillator Operation</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__IMAGE_ADV_MZ4_SGB" src="GUID-268417DB-1E85-4EB0-BF0D-CBA23F1194C0-high.svg"/></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__FIG_FHK_41P_SGB" data-ofbid="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__FIG_FHK_41P_SGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 12-6. <span id="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__GUID-C6CC93DF-43C0-401A-B3CC-6FAA306427E2" class="fig--title">SOSC 32.768 kHz External Clock Operation</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__IMAGE_GHK_41P_SGB" src="GUID-D72B0DAE-F6CF-4ED9-AB41-685C2450FA22-high.svg"/></span>
+        </figure>
+        <p class="- topic/p p">The SOSC can be enabled through one of two methods:</p>
+        <ul class="- topic/ul ul" id="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__UL_DBG_MS4_SGB" data-ofbid="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__UL_DBG_MS4_SGB">
+            <li class="- topic/li li" id="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__GUID-B49A2D49-564C-459D-9F8B-A40B009FC437" data-ofbid="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__GUID-B49A2D49-564C-459D-9F8B-A40B009FC437">Programming the RSTOSC Configuration
+                bits to select the SOSC as the system clock.</li>
+            <li class="- topic/li li" id="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__GUID-1CBB9C6C-2AB3-4E73-9B24-6F79639875A2" data-ofbid="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__GUID-1CBB9C6C-2AB3-4E73-9B24-6F79639875A2">Programming the <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a> bits to select the SOSC during run time.</li>
+        </ul>
+        <p class="- topic/p p">Two Power modes are available for the secondary oscillator and are selected using the
+            Secondary Oscillator Power Mode Select (<a class="- topic/xref xref" href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html#BITFIELD_DBH_3YH_ZGB" title="Secondary Oscillator Power Mode Select">SOSCPWR</a>) bit. When SOSCPWR is clear (SOSCPWR = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the
+            oscillator operates in Low-Power mode, which is ideal for crystal oscillators with low
+            drive strength. When SOSCPWR is set (SOSCPWR = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the oscillator
+            operates in High-Power mode, which is ideal for crystal oscillators with high drive
+            strength or high Equivalent Series Resistance (ESR).</p>
+        <div class="- topic/note note important note_important" id="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__GUID-63D2151F-4A4E-4A6B-B5D7-1D8A5BE89740" data-ofbid="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5__GUID-63D2151F-4A4E-4A6B-B5D7-1D8A5BE89740"><span class="note__title">Important:</span> The SOSC module must
+            be disabled before changing Power modes. Changes to the Power mode during operation may
+            result in undefined oscillator behavior.</div>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-25362F2C-8A61-49C5-A6FA-33620F8FFD5B.html">12.1.1.5.1 SOSC Start-Up Timing</a></li></ul>
+</nav>
+</body>
+</html>

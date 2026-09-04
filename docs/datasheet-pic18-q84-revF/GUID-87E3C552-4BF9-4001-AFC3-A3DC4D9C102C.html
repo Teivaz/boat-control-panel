@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.7.1 Filter Configuration — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2FBE3C3E-EDE4-4ABD-A9FA-D9AC9D794D77.html"/>
+<link rel="next" href="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735.html"/>
+<link rel="up" href="GUID-2FBE3C3E-EDE4-4ABD-A9FA-D9AC9D794D77.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-2FBE3C3E-EDE4-4ABD-A9FA-D9AC9D794D77.html">38.7 Message Filtering</a></li><li>38.7.1 Filter Configuration</li></ol>
+  <div class="sib"><span>← <a href="GUID-2FBE3C3E-EDE4-4ABD-A9FA-D9AC9D794D77.html" rel="prev">Message Filtering</a></span><span><a href="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735.html" rel="next">Filtering a Received Message</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-87E3C552-4BF9-4001-AFC3-A3DC4D9C102C__GUID-416CF87D-6575-4B2C-8944-AED5F724A870" style="">38.7.1 Filter Configuration</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The filters are controlled by the CxFLTCONy registers. The filters must be
+            disabled by clearing the FLTEN bit before changing the filter or mask object; the module
+            need not be in Configuration mode. After the filter object is updated, the Buffer
+            Pointer, FnBP, has to be initialized and the filter can be enabled by setting the FLTEN
+            bit. The FnBP points to the FIFO where the matching receive message needs to be
+            stored.</p>
+    </div>
+
+</body>
+</html>

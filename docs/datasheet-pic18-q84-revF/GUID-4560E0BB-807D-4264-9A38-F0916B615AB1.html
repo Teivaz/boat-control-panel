@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.5.13 Transmit State Diagram — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7151D7CF-7A18-40CD-99E2-7257D1C523A2.html"/>
+<link rel="next" href="GUID-3DF418F4-0BC0-46BE-8B8F-EFB30F2F9C29.html"/>
+<link rel="up" href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html">38.5 Message Transmission</a></li><li>38.5.13 Transmit State Diagram</li></ol>
+  <div class="sib"><span>← <a href="GUID-7151D7CF-7A18-40CD-99E2-7257D1C523A2.html" rel="prev">Mismatch of DLC and Payload Size During Transmission</a></span><span><a href="GUID-3DF418F4-0BC0-46BE-8B8F-EFB30F2F9C29.html" rel="next">Resetting Transmit FIFO</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-17F90942-F23C-4952-AE3F-5813DCD518D8" style="">38.5.13 Transmit State Diagram</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p"><a class="- topic/xref xref" href="#GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__FIG_I3G_HWH_P3B"><span>Figure 38-13</span></a> describes how messages are queued for transmission. It illustrates
+            how the most important transmit flags are set and cleared:<ol class="- topic/ol ol" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__OL_CCJ_QVH_P3B" data-ofbid="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__OL_CCJ_QVH_P3B">
+                <li class="- topic/li li" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-0818D05B-D5B4-4F96-8083-DCD06B55ABDA" data-ofbid="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-0818D05B-D5B4-4F96-8083-DCD06B55ABDA">Messages are queued for transmission by setting the TXREQ flag.</li>
+                <li class="- topic/li li" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-16A956C5-9F1F-4B22-BFF3-45844F47DC02" data-ofbid="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-16A956C5-9F1F-4B22-BFF3-45844F47DC02">The transmit priority will be determined. The FIFO or TXQ with the highest
+                    priority TXPRIx flag will be selected. The index of the TX message in the FIFO
+                    or TXQ will be calculated.</li>
+                <li class="- topic/li li" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-20D3753D-0EF7-4E29-9B2F-703CF0914651" data-ofbid="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-20D3753D-0EF7-4E29-9B2F-703CF0914651">The TX message is pending for transmission.</li>
+                <li class="- topic/li li" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-44C032F8-B116-495A-AB30-DFE08AACCE69" data-ofbid="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-44C032F8-B116-495A-AB30-DFE08AACCE69">Transmission can only start when the bus is Idle.</li>
+                <li class="- topic/li li" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-16330F5D-45BC-42ED-97EF-2E0B5E8B6ADB" data-ofbid="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-16330F5D-45BC-42ED-97EF-2E0B5E8B6ADB">A pending transmission can only be aborted before SOF is transmitted.</li>
+                <li class="- topic/li li" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-02458FD1-2EA1-4AA9-9394-0616FE581A6A" data-ofbid="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-02458FD1-2EA1-4AA9-9394-0616FE581A6A">During the transmission of a
+                    message, the CAN FD Protocol module checks for the following:<ol class="- topic/ol ol" type="a" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__OL_BDV_TVH_P3B" data-ofbid="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__OL_BDV_TVH_P3B">
+                        <li class="- topic/li li" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-AE876444-0691-41DE-B234-FBACF10CEA1B" data-ofbid="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-AE876444-0691-41DE-B234-FBACF10CEA1B">Loss of arbitration
+                            during the arbitration field.</li>
+                        <li class="- topic/li li" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-F80BA44F-80B5-4852-82EA-C048611923C1" data-ofbid="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-F80BA44F-80B5-4852-82EA-C048611923C1">Transmit errors.</li>
+                    </ol></li>
+                <li class="- topic/li li" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-9251FDB0-EE25-4312-AD74-4B6DF2F053C8" data-ofbid="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-9251FDB0-EE25-4312-AD74-4B6DF2F053C8">In case a message of a TX FIFO or the TXQ is transmitted successfully, the TXREQ
+                    will only be cleared after all messages of the FIFO are transmitted. After the
+                    transmission of any message, the status flags of the FIFO or TXQ are updated. In
+                    case STEF (CxCON[19]) is set, the message will be stored into the TEF and a
+                    timestamp will be attached if enabled.</li>
+                <li class="- topic/li li" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-7396B54E-D40F-44B6-95C5-7F7437955EF6" data-ofbid="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-7396B54E-D40F-44B6-95C5-7F7437955EF6">In case arbitration is lost, TXLARB of the TX FIFO or TXQ will be set and the
+                    device will switch over to receiving the message (see <a class="- topic/xref xref" href="GUID-ABE11A28-ACFC-4D60-BEDB-BA3A1CF953C4.html"><span><span>Message Reception</span></span></a>).</li>
+                <li class="- topic/li li" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-E842A9CB-F82C-406A-B558-07E45FCF66D7" data-ofbid="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-E842A9CB-F82C-406A-B558-07E45FCF66D7">In case an error is detected during the transmission of a message, an error
+                    frame will be transmitted and the appropriate error flags will be set. Messages
+                    will be retransmitted according to <a class="- topic/xref xref" href="GUID-769B00F1-7A91-4A09-9AEA-E190BD998E39.html"><span><span>Retransmission Attempts</span></span></a>.</li>
+            </ol></div>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__FIG_I3G_HWH_P3B" data-ofbid="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__FIG_I3G_HWH_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-13. <span id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__GUID-BEE13EEC-9A9D-4D04-B3ED-469AEA54C174" class="fig--title">Transmit State Diagram</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-4560E0BB-807D-4264-9A38-F0916B615AB1__IMAGE_J3G_HWH_P3B" src="GUID-81533499-BF76-41EA-B9A5-D7C0B8BA8C35-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

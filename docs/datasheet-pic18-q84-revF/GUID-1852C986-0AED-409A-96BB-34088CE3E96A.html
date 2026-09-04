@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.6.1.1 Channel Context Configuration — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-FD49D85E-5F1E-48E5-ABF6-710A3814DE7F.html"/>
+<link rel="next" href="GUID-BC25B262-5F01-471E-ABAF-E5C5E129FA4E.html"/>
+<link rel="up" href="GUID-FD49D85E-5F1E-48E5-ABF6-710A3814DE7F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-FFD3990B-49D0-45A3-848F-CA83EFB5B536.html">43.6 Channel Sequencer and Context</a></li><li><a href="GUID-FD49D85E-5F1E-48E5-ABF6-710A3814DE7F.html">43.6.1 Channel Context</a></li><li>43.6.1.1 Channel Context Configuration</li></ol>
+  <div class="sib"><span>← <a href="GUID-FD49D85E-5F1E-48E5-ABF6-710A3814DE7F.html" rel="prev">Channel Context</a></span><span><a href="GUID-BC25B262-5F01-471E-ABAF-E5C5E129FA4E.html" rel="next">Channel Context Configuration Example</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-1852C986-0AED-409A-96BB-34088CE3E96A__GUID-F8D51BDF-1F93-4944-A236-724A96DB25BB" style="">43.6.1.1 Channel Context Configuration</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The following steps are used to configure channel context via the <a class="- topic/xref xref" href="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030.html" title="ADCTX">ADCTX</a>
+            register:</p>
+        <ol class="- topic/ol ol" id="GUID-1852C986-0AED-409A-96BB-34088CE3E96A__OL_N5W_LZ3_L3B" data-ofbid="GUID-1852C986-0AED-409A-96BB-34088CE3E96A__OL_N5W_LZ3_L3B">
+            <li class="- topic/li li" id="GUID-1852C986-0AED-409A-96BB-34088CE3E96A__GUID-BEE4F56E-30EB-4AF3-832F-BD49C58EB67F" data-ofbid="GUID-1852C986-0AED-409A-96BB-34088CE3E96A__GUID-BEE4F56E-30EB-4AF3-832F-BD49C58EB67F">Write the desired context number into
+                the <a class="- topic/xref xref" href="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030.html#XQC_SKM_M3B" title="Channel Context Selection">CTX</a> bits; hardware automatically clears <a class="- topic/xref xref" href="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030.html#GUID-4795EFC3-BE90-4235-BC07-60CAD3739B79" title="Context Display Select">CTXSW</a>.</li>
+            <li class="- topic/li li" id="GUID-1852C986-0AED-409A-96BB-34088CE3E96A__GUID-7F07100A-C98C-48DF-B83C-356672485DCD" data-ofbid="GUID-1852C986-0AED-409A-96BB-34088CE3E96A__GUID-7F07100A-C98C-48DF-B83C-356672485DCD">Configure all desired ADC registers
+                (e.g., <a class="- topic/xref xref" href="GUID-91A099AA-6FF5-4C34-ABF1-6C3EFCAF1E11.html" title="ADCON1">ADCON1</a>, <a class="- topic/xref xref" href="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D.html" title="ADCON2">ADCON2</a>, etc.).</li>
+            <li class="- topic/li li" id="GUID-1852C986-0AED-409A-96BB-34088CE3E96A__GUID-D738FFCC-8578-485C-AC3E-D698679974D8" data-ofbid="GUID-1852C986-0AED-409A-96BB-34088CE3E96A__GUID-D738FFCC-8578-485C-AC3E-D698679974D8">Repeat steps 1 and 2 until all
+                channel contexts have been configured.</li>
+        </ol>
+        <div class="- topic/note note remember note_remember" id="GUID-1852C986-0AED-409A-96BB-34088CE3E96A__GUID-6837A75D-6B95-4675-A884-1681165200C8" data-ofbid="GUID-1852C986-0AED-409A-96BB-34088CE3E96A__GUID-6837A75D-6B95-4675-A884-1681165200C8"><span class="note__title">Remember:</span> The context number is
+            always one number greater than the value written into the <a class="- topic/xref xref" href="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030.html#XQC_SKM_M3B" title="Channel Context Selection">CTX</a> bits. For example, when the CTX bits are written with zero
+            (CTX = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), Context 1 is in view.</div>
+        <p class="- topic/p p">Once the context number has been written into the <a class="- topic/xref xref" href="GUID-9D68B137-D68A-40FE-B43C-B23B3981D030.html#XQC_SKM_M3B" title="Channel Context Selection">CTX</a> bits, the selected channel context is available for software access.
+            After each ADC register is configured, the register value is copied into the associated
+            context register.</p>
+        <p class="- topic/p p">Data can also be read from the ADC’s data registers (<a class="- topic/xref xref" href="GUID-95F0A495-8BB1-4AFF-B146-349799BF1507.html" title="ADFLTR">ADFLTR</a>, <a class="- topic/xref xref" href="GUID-03130209-3BF5-4D2A-B9B0-19A9E1A58C89.html" title="ADRES">ADRES</a>, etc.) using the same steps above. Rather than configuring
+            the desired ADC registers in step 2, user software can instead read data from the
+            desired data registers.</p>
+        <div class="- topic/note note warning note_warning" id="GUID-1852C986-0AED-409A-96BB-34088CE3E96A__GUID-D7A52FBA-0159-4ED5-8348-76C280666662" data-ofbid="GUID-1852C986-0AED-409A-96BB-34088CE3E96A__GUID-D7A52FBA-0159-4ED5-8348-76C280666662"><span class="note__title">Warning:</span> It is highly recommended
+            to verify that the <a class="- topic/xref xref" href="GUID-D37FA911-31F8-4990-9287-79830C2DF08F.html#ID-000000A5" title="ADC Module Cycle Multi-Stage Status">STAT</a> bits of the <a class="- topic/xref xref" href="GUID-D37FA911-31F8-4990-9287-79830C2DF08F.html" title="ADSTAT">ADSTAT</a> register are clear (STAT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) before changing any
+            context registers. Modifying context registers during an active conversion may lead to
+            data corruption.</div>
+</div>
+
+</body>
+</html>

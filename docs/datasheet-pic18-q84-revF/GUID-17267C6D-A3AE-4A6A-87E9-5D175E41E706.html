@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.12.3 Memory Selection — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DCAEBAF1-75B2-4843-AB0D-8ED6FDBB227B.html"/>
+<link rel="next" href="GUID-B1C6E55B-82A3-4756-BC46-26EEC54FD7B8.html"/>
+<link rel="up" href="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li><a href="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA.html">13.12 CRC-on-Boot Module Overview</a></li><li>13.12.3 Memory Selection</li></ol>
+  <div class="sib"><span>← <a href="GUID-DCAEBAF1-75B2-4843-AB0D-8ED6FDBB227B.html" rel="prev">Polynomial, Seed, and Expected Values</a></span><span><a href="GUID-B1C6E55B-82A3-4756-BC46-26EEC54FD7B8.html" rel="next">Output Pin Setup</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706__GUID-9FBB022B-1FFF-42DB-BCF4-79CA80B41232" style="">13.12.3 Memory Selection</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The CRC-on-boot module can be configured to scan and perform a CRC on five
+            NVM regions: The boot, application, SAF segments of program memory, data EEPROM memory
+            and Configuration Words. Each is enabled individually by clearing Configuration bits
+            CFGSCEN, DATSCEN, SAFSCEN, APPSCEN and BOOTSCEN for the configuration memory, EEPROM,
+            SAF section, application section and boot section, respectively. Each memory segment is
+            treated slightly differently and can vary based on other configuration settings:</p>
+        <ul class="- topic/ul ul" id="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706__UL_JQV_LNS_HKB" data-ofbid="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706__UL_JQV_LNS_HKB">
+            <li class="- topic/li li" id="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706__GUID-6C71CA43-F935-44A8-AC6B-F90236C052A7" data-ofbid="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706__GUID-6C71CA43-F935-44A8-AC6B-F90236C052A7">The data EEPROM segment scans the
+                entire data EEPROM memory of the device</li>
+            <li class="- topic/li li" id="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706__GUID-B6661475-A214-429E-8CD3-6C6165A9BC0C" data-ofbid="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706__GUID-B6661475-A214-429E-8CD3-6C6165A9BC0C">The configuration memory scans all
+                configuration memory, except the four bytes for the non-boot CRC expected value (as
+                this would be self-referencing and cause issues in CRC calculation)</li>
+            <li class="- topic/li li" id="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706__GUID-A4A4127C-BE67-4E6D-9C90-BA7305A63700" data-ofbid="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706__GUID-A4A4127C-BE67-4E6D-9C90-BA7305A63700"> The SAF area scans the Storage Area
+                Flash region (the last 128 words of program memory) if the SAFEN Configuration bit
+                is cleared (Storage Area Flash enabled). If the Storage Area Flash is disabled,
+                attempting to scan this region will result in the CRC-on-boot indicating a
+                mismatch.</li>
+            <li class="- topic/li li" id="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706__GUID-D75C9631-15FA-4B80-BBA8-1392BDBC85E2" data-ofbid="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706__GUID-D75C9631-15FA-4B80-BBA8-1392BDBC85E2">The boot area scans the region of
+                program memory defined by the BBEN and BBSIZE Configuration bits. If the BBEN bit is
+                set (disabling boot area), attempting to scan this region will result in the
+                CRC-on-boot indicating a mismatch.</li>
+            <li class="- topic/li li" id="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706__GUID-C29F298B-04BC-49DA-82BC-E3B1ED04F27E" data-ofbid="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706__GUID-C29F298B-04BC-49DA-82BC-E3B1ED04F27E">The application area scans the
+                remainder of program memory not specifically designated for the Boot Block or the
+                SAF</li>
+        </ul>
+</div>
+
+</body>
+</html>

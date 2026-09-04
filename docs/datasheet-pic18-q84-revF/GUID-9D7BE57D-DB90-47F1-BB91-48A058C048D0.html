@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.9 Transmit Buffer — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-72E0AB3E-D1ED-4E72-BBBC-59AB77DBD2E1.html"/>
+<link rel="next" href="GUID-261B9C6D-A800-4785-8551-91DD255D3C56.html"/>
+<link rel="up" href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li>37.3.9 Transmit Buffer</li></ol>
+  <div class="sib"><span>← <a href="GUID-72E0AB3E-D1ED-4E72-BBBC-59AB77DBD2E1.html" rel="prev">Address Buffers</a></span><span><a href="GUID-261B9C6D-A800-4785-8551-91DD255D3C56.html" rel="next">Receive Buffer</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-9D7BE57D-DB90-47F1-BB91-48A058C048D0__GUID-5C692A65-82BE-4F4C-BEC1-1E02EF4D237E" style="">37.3.9 Transmit Buffer</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C module has a dedicated transmit buffer, <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a>, which
+            is independent from the receive buffer.</p>
+        <div class="- topic/p p">The transmit buffer is loaded with an address byte (when <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), or a data byte, that is copied into the transmit shift register
+            and transmitted onto the bus. When the <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> register does not
+            contain any transmit data, the Transmit Buffer Empty Status (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_KS4_K5P_LGB" title="Transmit Buffer Empty Status(2)">TXBE</a>)
+            bit is set (TXBE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), allowing user software or the DMA to load a new
+            byte into the buffer. When the TXBE bit is set and the <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> register is nonzero
+            (I2CxCNT != <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Transmit Interrupt Flag (I2CxTXIF)
+            bit of the PIR registers is set and can be used as a DMA trigger. A write to I2CxTXB
+            will clear both the TXBE and I2CxTXIF bits. Setting the Clear Buffer (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_OJT_2VP_LGB" title="Clear Buffer(3)">CLRBF</a>) bit clears I2CxTXIF, the I2Cx Receive Buffer (<a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a>) and I2CxTXB.</div>
+        <div class="- topic/p p">If user software attempts to load <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> while it is full, the Transmit Write Error Status
+                (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#GUID-7A9B3629-D7FD-432A-AE45-E8A97DD638CA" title="Transmit Write Error Status(1)">TXWE</a>) bit is set, a NACK is generated, and the new data are
+            ignored. If TXWE is set, user software must clear the bit before attempting to load the
+            buffer again.</div>
+        <div class="- topic/p p">When module hardware attempts to transfer the contents of <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> to the transmit shift register while I2CxTXB is empty (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_KS4_K5P_LGB" title="Transmit Buffer Empty Status(2)">TXBE</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the Transmit Underflow Status (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_ZKN_TFP_LGB" title="Transmit Underflow Status (used only when MODE = 0xx or MODE = 11x)(3)">TXU</a>) bit is set, I2CxTXB is loaded with <code class="+ topic/ph pr-d/codeph ph codeph">0xFF</code>,
+            and a NACK is generated.</div>
+        <div class="- topic/note note important note_important" id="GUID-9D7BE57D-DB90-47F1-BB91-48A058C048D0__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-9D7BE57D-DB90-47F1-BB91-48A058C048D0__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> A transmit underflow
+            can only occur when clock stretching is disabled (Clock Stretching Disable (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_KNG_JGP_LGB" title="Clock Stretching Disable (used only when MODE = 0xx or MODE = 11x)">CSD</a>) bit = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). Clock stretching prevents transmit
+            underflows because the clock is stretched after the 8th falling SCL edge and is only
+            released upon the write of new data into <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a>.</div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>44.1 Output Voltage Selection — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F3B3EF42-4565-4F90-A427-1C6FA13B8CFF.html"/>
+<link rel="next" href="GUID-F85196F5-0BFE-4F52-9100-E06BECB24C01.html"/>
+<link rel="up" href="GUID-F3B3EF42-4565-4F90-A427-1C6FA13B8CFF.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-F3B3EF42-4565-4F90-A427-1C6FA13B8CFF.html">44 DAC - Digital-to-Analog Converter Module - 8-Bit</a></li><li>44.1 Output Voltage Selection</li></ol>
+  <div class="sib"><span>← <a href="GUID-F3B3EF42-4565-4F90-A427-1C6FA13B8CFF.html" rel="prev">DAC - Digital-to-Analog Converter Module - 8-Bit</a></span><span><a href="GUID-F85196F5-0BFE-4F52-9100-E06BECB24C01.html" rel="next">Ratiometric Output Level</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-EA17F3F6-5791-46CA-8DA4-B135B24A03BE__GUID-759F1E76-476A-4FDC-ACD2-D78B7F3AB5D2" style="">44.1 Output Voltage Selection</h1>
+<div class="- topic/body body">
+                        <p class="- topic/p p">The DAC has 2<sup class="+ topic/ph hi-d/sup ph sup">n</sup> voltage level ranges, where n is
+      the number of bits in DACR. Each level is determined by the <a class="- topic/xref xref" href="GUID-CB414706-2254-4FFD-9F72-225CBD430B93.html#GUID-B61706AD-B33A-4A06-A4A1-8C0823AD52E1" title="Data Input Bits for DAC Value"><span><span>DACxR</span></span></a> bits. The DAC output voltage can be determined by using <a class="- topic/xref xref" href="#GUID-EA17F3F6-5791-46CA-8DA4-B135B24A03BE__EQUATION-FIGURE_CGX_QQZ_2LB"><span>Equation 44-1</span></a>.</p>
+    <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-EA17F3F6-5791-46CA-8DA4-B135B24A03BE__EQUATION-FIGURE_CGX_QQZ_2LB" data-ofbid="GUID-EA17F3F6-5791-46CA-8DA4-B135B24A03BE__EQUATION-FIGURE_CGX_QQZ_2LB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 44-1. <span id="GUID-EA17F3F6-5791-46CA-8DA4-B135B24A03BE__GUID-B06B4035-3129-4EA8-999F-A594FAFF74B2" class="fig--title">DAC Output Equation</span></span></figcaption>
+      
+      <div class="+ topic/div equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+            <mrow>
+              <mi>D</mi>
+              <mi>A</mi>
+              <mi>C</mi>
+              <mi>x</mi>
+              <mi>_</mi>
+              <mi>o</mi>
+              <mi>u</mi>
+              <mi>t</mi>
+              <mi>p</mi>
+              <mi>u</mi>
+              <mi>t</mi>
+              <mo>⁢</mo>
+              <mo>=</mo>
+              <mtext> </mtext>
+              <mrow>
+                <mo>(</mo>
+                <mrow>
+                  <mrow>
+                    <mo>(</mo>
+                    <msub>
+                      <mrow>
+                        <mi>V</mi>
+                      </mrow>
+                      <mrow>
+                        <mi>R</mi>
+                        <mi>E</mi>
+                        <mi>F</mi>
+                        <mo>+</mo>
+                      </mrow>
+                    </msub>
+                    <mo>−</mo>
+                    <msub>
+                      <mrow>
+                        <mi>V</mi>
+                      </mrow>
+                      <mrow>
+                        <mi>R</mi>
+                        <mi>E</mi>
+                        <mi>F</mi>
+                        <mo>−</mo>
+                      </mrow>
+                    </msub>
+                    <mo>)</mo>
+                  </mrow>
+                  <mo>×</mo>
+                  <mfrac>
+                    <mrow>
+                      <mi>D</mi>
+                      <mi>A</mi>
+                      <mi>C</mi>
+                      <mi>R</mi>
+                    </mrow>
+                    <mrow>
+                      <msup>
+                        <mrow>
+                          <mn>2</mn>
+                        </mrow>
+                        <mrow>
+                          <mi>n</mi>
+                        </mrow>
+                      </msup>
+                    </mrow>
+                  </mfrac>
+                </mrow>
+                <mo>)</mo>
+              </mrow>
+              <mo>+</mo>
+              <msub>
+                <mrow>
+                  <mi>V</mi>
+                </mrow>
+                <mrow>
+                  <mi>R</mi>
+                  <mi>E</mi>
+                  <mi>F</mi>
+                  <mo>−</mo>
+                </mrow>
+              </msub>
+            </mrow>
+          </math></div>
+    </figure>
+            </div>
+
+</body>
+</html>

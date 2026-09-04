@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.5 Restart Condition — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-46250360-F0F0-471E-B85A-D0DED7203711.html"/>
+<link rel="next" href="GUID-38CB246B-2620-4978-B122-E5E13D40DC20.html"/>
+<link rel="up" href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li>37.3.5 Restart Condition</li></ol>
+  <div class="sib"><span>← <a href="GUID-46250360-F0F0-471E-B85A-D0DED7203711.html" rel="prev">Acknowledge Sequence</a></span><span><a href="GUID-38CB246B-2620-4978-B122-E5E13D40DC20.html" rel="next">Stop Condition</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-EBD0C643-A58E-4542-9737-700164CBD0CA__GUID-7D736C2C-CFFA-494C-8CB9-9FFF84ECF534" style="">37.3.5 Restart Condition</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">A Restart condition is essentially the same as a Start condition – the SDA line
+            transitions from an idle level to an active level while the SCL line is Idle – but may
+            be used in place of a Stop condition whenever the host device has completed its current
+            transfer but wishes to keep control of the bus. A Restart condition has the same effect
+            as a Start condition, resetting all client logic and preparing it to receive an address. </p>
+        <p class="- topic/p p">A Restart condition is also used when the host wishes to use a combined data transfer
+            format. A combined data transfer format is used when a host wishes to communicate with a
+            specific register address or memory location. In a combined format, the host issues a
+            Start condition, followed by the client’s address, followed by a data byte which
+            represents the desired client register or memory address. Once the client address and
+            data byte have been acknowledged by the client, the host issues a Restart condition,
+            followed by the client address. If the host wishes to write data to the client, the LSb
+            of the client address, the Read/not Write (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span>) bit, will be
+            clear. If the host wishes to read data from the client, the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span>
+            bit will be set. Once the client has acknowledged the second address byte, the host
+            issues a Restart condition, followed by the upper byte of the client address with the
+                R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit set. Client logic will then acknowledge the upper
+            byte and begin to transmit data to the host.</p>
+        <div class="- topic/note note important note_important" id="GUID-EBD0C643-A58E-4542-9737-700164CBD0CA__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-EBD0C643-A58E-4542-9737-700164CBD0CA__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> In 10-bit Client mode,
+            a Restart is required for the host to read data out of the client, regardless of which
+            data transfer format is used – host read-only or combined. For example, if the host
+            wishes to perform a bulk read, it will transmit the client’s 10-bit address with the
+                R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit clear.</div>
+        <p class="- topic/p p">The figure below shows a Restart condition.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-EBD0C643-A58E-4542-9737-700164CBD0CA__FIG_B24_R52_KGB" data-ofbid="GUID-EBD0C643-A58E-4542-9737-700164CBD0CA__FIG_B24_R52_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-6. <span id="GUID-EBD0C643-A58E-4542-9737-700164CBD0CA__GUID-7F59006B-D2CA-44E0-B21F-0B44AEF3BFFA" class="fig--title">Restart Condition</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-EBD0C643-A58E-4542-9737-700164CBD0CA__IMAGE_C24_R52_KGB" src="GUID-5B6E46D7-B571-48BD-816B-AB2E0D5620C1-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

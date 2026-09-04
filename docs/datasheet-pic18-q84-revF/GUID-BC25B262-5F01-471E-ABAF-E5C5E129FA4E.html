@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.6.1.2 Channel Context Configuration Example — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1852C986-0AED-409A-96BB-34088CE3E96A.html"/>
+<link rel="next" href="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1.html"/>
+<link rel="up" href="GUID-FD49D85E-5F1E-48E5-ABF6-710A3814DE7F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-FFD3990B-49D0-45A3-848F-CA83EFB5B536.html">43.6 Channel Sequencer and Context</a></li><li><a href="GUID-FD49D85E-5F1E-48E5-ABF6-710A3814DE7F.html">43.6.1 Channel Context</a></li><li>43.6.1.2 Channel Context Configuration Example</li></ol>
+  <div class="sib"><span>← <a href="GUID-1852C986-0AED-409A-96BB-34088CE3E96A.html" rel="prev">Channel Context Configuration</a></span><span><a href="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1.html" rel="next">Channel Sequencer</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-BC25B262-5F01-471E-ABAF-E5C5E129FA4E__GUID-AE7AFACE-0192-4171-B1D3-FA1F95432FD7" style="">43.6.1.2 Channel Context Configuration Example</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The code example below illustrates the configuration of four channel contexts.</p>
+        <div class="- topic/example example" id="GUID-BC25B262-5F01-471E-ABAF-E5C5E129FA4E__GUID-652278EE-75AD-4F41-9F4B-648F58048E49" data-ofbid="GUID-BC25B262-5F01-471E-ABAF-E5C5E129FA4E__GUID-652278EE-75AD-4F41-9F4B-648F58048E49"><h2 class="- topic/title title sectiontitle">Configuring Channel Context</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><strong class="hl-keyword">void</strong> <span class="hl-functions">configADCContext</span>(<strong class="hl-keyword">void</strong>)
+{ 
+    ADCTX = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;                          <em class="hl-comment">// Select Context 1</em>
+    <em class="hl-comment">// Configure ADC registers for Context 1        </em>
+    ADLTHL = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x10</span></code>;                         <em class="hl-comment">// Lower threshold = 1000</em>
+    ADLTHH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x27</span></code>; 
+    ADUTHL = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0xE8</span></code>;                         <em class="hl-comment">// Upper threshold = 10,000</em>
+    ADUTHH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x03</span></code>;
+    ADSTPTL = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;                        <em class="hl-comment">// Setpoint = 0</em>
+    ADSTPTH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;
+    ADACCU = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;
+    ADRPT = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x10</span></code>;                          <em class="hl-comment">// Accumulate 16 samples     </em>
+    ADPCH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;                          <em class="hl-comment">// PCH ANA0; </em>
+    ADCON1 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;     
+    ADCON2 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x01</span></code>;                         <em class="hl-comment">// Accumulate_mode</em>
+    ADCON3 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x04</span></code>;
+    ADSTAT = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;    
+    ADREF = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;                          <em class="hl-comment">// ADNREF VSS; ADPREF VDD;</em>
+    ADCON0 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x04</span></code>;                         <em class="hl-comment">// CONT = 0</em>
+    
+    ADCTX = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x01</span></code>;                          <em class="hl-comment">// Select Context 2</em>
+    <em class="hl-comment">// Configure ADC registers for Context 2</em>
+    ADLTHL = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0xF4</span></code>;                         <em class="hl-comment">// Lower threshold = 500</em>
+    ADLTHH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x01</span></code>; 
+    ADUTHL = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x88</span></code>;                         <em class="hl-comment">// Upper threshold = 5000</em>
+    ADUTHH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x13</span></code>;
+    ADSTPTL = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;                        <em class="hl-comment">// Setpoint = 0</em>
+    ADSTPTH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;
+    ADACCU = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;
+    ADRPT = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x20</span></code>;                          <em class="hl-comment">// Accumulate 32 samples     </em>
+    ADPCH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x01</span></code>;                          <em class="hl-comment">// PCH ANA1; </em>
+    ADCON1 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;     
+    ADCON2 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x52</span></code>;                         <em class="hl-comment">// Average_mode; CRS = /32</em>
+    ADCON3 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x04</span></code>;
+    ADSTAT = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;    
+    ADREF = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;                          <em class="hl-comment">// ADNREF VSS; ADPREF VDD;</em>
+    ADCON0 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x04</span></code>;                         <em class="hl-comment">// CONT = 0</em>
+    
+    ADCTX = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x02</span></code>;                          <em class="hl-comment">// Select Context 3</em>
+    <em class="hl-comment">// Configure ADC registers for Context 3</em>
+    ADLTHL = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0xF4</span></code>;                         <em class="hl-comment">// Lower threshold = 500</em>
+    ADLTHH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x01</span></code>; 
+    ADUTHL = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x88</span></code>;                         <em class="hl-comment">// Upper threshold = 5000</em>
+    ADUTHH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x13</span></code>;
+    ADSTPTL = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;                        <em class="hl-comment">// Setpoint = 0</em>
+    ADSTPTH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;
+    ADACCU = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;
+    ADRPT = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x20</span></code>;                          <em class="hl-comment">// Accumulate 32 samples     </em>
+    ADPCH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x02</span></code>;                          <em class="hl-comment">// PCH ANA2; </em>
+    ADCON1 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;     
+    ADCON2 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x53</span></code>;                         <em class="hl-comment">// Burst_Average mode; CRS = /32</em>
+    ADCON3 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x04</span></code>;
+    ADSTAT = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;    
+    ADREF = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;                          <em class="hl-comment">// ADNREF VSS; ADPREF VDD;</em>
+    ADCON0 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x04</span></code>;                         <em class="hl-comment">// CONT = 0</em>
+    
+    ADCTX = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x03</span></code>;                          <em class="hl-comment">// Select Context 4</em>
+    <em class="hl-comment">// Configure ADC registers for Context 4</em>
+    ADLTHL = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;              
+    ADLTHH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>; 
+    ADUTHL = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;              
+    ADUTHH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;
+    ADSTPTL = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;             
+    ADSTPTH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;
+    ADACCU = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;
+    ADRPT = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x04</span></code>;                   
+    ADPCH = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x03</span></code>;                         <em class="hl-comment">// PCH ANA3; </em>
+    ADCON1 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;     
+    ADCON2 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x24</span></code>;                        <em class="hl-comment">// LPF mode; CRS = 2</em>
+    ADCON3 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x57</span></code>;                        <em class="hl-comment">// Context 4 interrupt always</em>
+    ADSTAT = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;    
+    ADREF = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;                         <em class="hl-comment">// ADNREF VSS; ADPREF VDD;</em>
+    ADCON0 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x04</span></code>;                        <em class="hl-comment">// CONT = 0</em>
+    
+    <em class="hl-comment">// Apply to all context</em>
+    ADACT = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;                         <em class="hl-comment">// No ACT</em>
+    ADCLK = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x00</span></code>;                         <em class="hl-comment">// ADCS FOSC/2;</em>
+    ADCON0 = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0x84</span></code>;                        <em class="hl-comment">// Enable ADC</em>
+    PIR2bits.ADCH1IF = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0</span></code>;                 <em class="hl-comment">// Clear interrupt flags</em>
+    PIR2bits.ADCH2IF = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0</span></code>;       
+    PIR2bits.ADCH3IF = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0</span></code>;       
+    PIR2bits.ADCH4IF = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">0</span></code>;       
+    PIE2bits.ADCH1IE = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">1</span></code>;                <em class="hl-comment">// Enable Threshold interrupts</em>
+    PIE2bits.ADCH2IE = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">1</span></code>;
+    PIE2bits.ADCH3IE = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">1</span></code>;
+    PIE2bits.ADCH4IE = <code class="+ topic/ph pr-d/codeph ph codeph"><span class="hl-number">1</span></code>;
+}</pre>
+        </div>
+</div>
+
+</body>
+</html>

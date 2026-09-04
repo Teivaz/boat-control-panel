@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>31.7.2 Parameter Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-FB7DA367-3C10-4D3C-AA34-2F6238CE58C0.html"/>
+<link rel="next" href="GUID-52772E7E-8E4C-4BBB-B9A2-DDBD2A3C48BD.html"/>
+<link rel="up" href="GUID-23C3750C-DF66-47DA-9966-AF83570509D4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE.html">31 PWM - Pulse-Width Modulator with Compare</a></li><li><a href="GUID-23C3750C-DF66-47DA-9966-AF83570509D4.html">31.7 Interrupts</a></li><li>31.7.2 Parameter Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-FB7DA367-3C10-4D3C-AA34-2F6238CE58C0.html" rel="prev">Period Interrupt Postscaler</a></span><span><a href="GUID-52772E7E-8E4C-4BBB-B9A2-DDBD2A3C48BD.html" rel="next">Operation During Sleep</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-0354F40E-9306-4D77-9C3E-1CFFB655C108__GUID-CA2540EB-016D-41BC-963F-85B2AEB005F8" style="">31.7.2 Parameter Interrupts</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The P1 and P2 parameters in each slice have interrupts that occur depending
+            on the selected mode. The individual parameter interrupts are indicated in the <a class="- topic/xref xref" href="GUID-55C943B5-1251-439E-93DD-8580AFF68CF8.html" title="PWMxGIR">PWMxGIR</a> register and enabled by the corresponding bits in the <a class="- topic/xref xref" href="GUID-EDC223A5-5F26-4D3D-948F-26DE0213D523.html" title="PWMxGIE">PWMxGIE</a> register. </p>
+        <p class="- topic/p p">A timing example is shown in <a class="- topic/xref xref" href="GUID-2E08BAA2-1143-46E4-94FC-DBA58E4A2CC3.html#GUID-2E08BAA2-1143-46E4-94FC-DBA58E4A2CC3__FIG_LW4_PWQ_VGB"><span>Figure 31-2</span></a>. Refer to the timing diagrams of each of the other modes for more
+            details.</p>
+        <p class="- topic/p p">All the enabled PWMxGIR interrupts of one PMW instance are OR’d together
+            into the PWMxIF bit in one of the PIR registers. The PWMxIF bit is read-only. When any
+            of the PWMxGIR bits are set then the PWMxIF bit is true. All PWMxGIF flags must be reset
+            to clear the PWMxIF bit. The PWMxIF interrupt is enabled with the PWMxIE bit in the
+            corresponding PIE register.</p>
+    </div>
+
+</body>
+</html>

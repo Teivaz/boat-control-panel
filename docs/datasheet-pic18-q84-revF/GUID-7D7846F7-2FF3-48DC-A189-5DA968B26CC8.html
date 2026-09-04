@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.2.1 Enabling and Disabling the SPI Module — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html"/>
+<link rel="next" href="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009.html"/>
+<link rel="up" href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html">36.2 SPI Operation</a></li><li>36.2.1 Enabling and Disabling the SPI Module</li></ol>
+  <div class="sib"><span>← <a href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html" rel="prev">SPI Operation</a></span><span><a href="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009.html" rel="next">BUSY Bit</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-7D7846F7-2FF3-48DC-A189-5DA968B26CC8__GUID-DC311C3C-4FAF-4A94-931F-9215BC25C8AF" style="">36.2.1 Enabling and Disabling the SPI
+        Module</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">Setting the <a class="- topic/xref xref" href="GUID-CD70C100-5F91-4E6F-86D4-583C754F39BE.html#GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B" title="SPI Enable"><span><span>EN</span></span></a> bit enables the SPI peripheral. However, to reset or reconfigure the
+            SPI mode, the EN bit must be cleared. </p>
+        <p class="- topic/p p">Setting the EN bit enables the SPI inputs and outputs: SDI, SDO, SCK_out, SCK_in, SS_out
+            and SS_in. The pins for all of these inputs and outputs are selected by the PPS controls
+            and thus must have their functions mapped properly to the device pins to function. Refer
+            to the <strong class="+ topic/ph hi-d/b ph b">“PPS - Peripheral Pin Select Module”</strong> chapter for more details. </p>
+        <p class="- topic/p p">SS_out and SCK_out must have the pins to which they are assigned set as outputs (TRIS
+            bits must be ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’) to properly output. Clearing the TRIS bit of the SDO
+            pin will cause the SPI module to always control that pin, but is not necessary for SDO
+            functionality (see the <a class="- topic/xref xref" href="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59.html">Input and Output Polarity Control</a> section).</p>
+        <div class="- topic/p p">Configurations selected by the following registers will not be changed while the EN bit
+            is set:<ul class="- topic/ul ul" id="GUID-7D7846F7-2FF3-48DC-A189-5DA968B26CC8__UL_ZRL_M5G_SFB" data-ofbid="GUID-7D7846F7-2FF3-48DC-A189-5DA968B26CC8__UL_ZRL_M5G_SFB">
+                <li class="- topic/li li" id="GUID-7D7846F7-2FF3-48DC-A189-5DA968B26CC8__GUID-08650965-DD94-4D13-952D-F403181D7349" data-ofbid="GUID-7D7846F7-2FF3-48DC-A189-5DA968B26CC8__GUID-08650965-DD94-4D13-952D-F403181D7349">SPIxBAUD</li>
+                <li class="- topic/li li" id="GUID-7D7846F7-2FF3-48DC-A189-5DA968B26CC8__GUID-C7800E36-E913-4B21-A035-621713F7BED8" data-ofbid="GUID-7D7846F7-2FF3-48DC-A189-5DA968B26CC8__GUID-C7800E36-E913-4B21-A035-621713F7BED8">SPIxCON1</li>
+                <li class="- topic/li li" id="GUID-7D7846F7-2FF3-48DC-A189-5DA968B26CC8__GUID-511243DF-4885-4A01-A5B2-5E9DE1FCBB49" data-ofbid="GUID-7D7846F7-2FF3-48DC-A189-5DA968B26CC8__GUID-511243DF-4885-4A01-A5B2-5E9DE1FCBB49">SPIxCON0 (with the exception of
+                    clearing the EN bit)</li>
+            </ul></div>
+        <p class="- topic/p p">Clearing the EN bit aborts any transmissions in progress, disables the setting of
+            interrupt flags by hardware, and resets the FIFO occupancy (see the <a class="- topic/xref xref" href="GUID-348F54FD-8138-4C74-AC65-C7C2BE5908E2.html">Transmit and Receive
+                FIFOs</a> section).</p>
+    </div>
+
+</body>
+</html>

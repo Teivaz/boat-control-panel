@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.3 Fail-Safe Clock Monitor (FSCM) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03.html"/>
+<link rel="next" href="GUID-4DE60C98-B4EE-4FC3-A62C-363391FCF437.html"/>
+<link rel="up" href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li>12.3 Fail-Safe Clock Monitor (FSCM)</li></ol>
+  <div class="sib"><span>← <a href="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03.html" rel="prev">Clock Switch and Sleep</a></span><span><a href="GUID-4DE60C98-B4EE-4FC3-A62C-363391FCF437.html" rel="next">Fail-Safe Detection</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB__GUID-AE8DBE6C-98C7-4052-8D3A-2E2E75B9D019" style="">12.3 Fail-Safe Clock Monitor (FSCM)</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The Fail-Safe Clock Monitor (FSCM) allows the device to continue operating
+            in the event of an oscillator failure. The FSCM also provides diagnostic data pertaining
+            to potential primary and secondary oscillator failures. The FSCM serves three separate
+            functions: </p>
+        <ul class="- topic/ul ul" id="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB__UL_WBB_MDQ_BKB" data-ofbid="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB__UL_WBB_MDQ_BKB">
+            <li class="- topic/li li" id="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB__GUID-843256E6-0313-4CAF-B617-2183C3072D5B" data-ofbid="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB__GUID-843256E6-0313-4CAF-B617-2183C3072D5B">Monitoring of F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> using
+                the FSCMFEV bit</li>
+            <li class="- topic/li li" id="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB__GUID-C2110BF6-F0C3-4758-9734-7050AF7CFF6C" data-ofbid="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB__GUID-C2110BF6-F0C3-4758-9734-7050AF7CFF6C">Monitoring of EXTOSC (primary
+                external oscillator) using the FSCMPEV bit</li>
+            <li class="- topic/li li" id="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB__GUID-65531C54-372D-4D29-A40C-2226480B4E18" data-ofbid="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB__GUID-65531C54-372D-4D29-A40C-2226480B4E18">Monitoring of SOSC (secondary
+                external oscillator) using the FSCMSEV bit</li>
+        </ul>
+        <p class="- topic/p p">The primary external oscillator FSCM (FSCMP) is enabled by setting the Fail-Safe Clock
+            Monitor for Primary Crystal Oscillator (FCMENP) Configuration bit. The secondary
+            external oscillator FSCM (FSCMS) is enabled by setting the Fail-Safe Clock Monitor for
+            Secondary Crystal Oscillator (FCMENS) Configuration bit. The F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> FSCM is
+            enabled by setting the Fail-Safe Clock Monitor Enable for FOSC (FCMEN) Configuration
+            bit. The figure below shows the FSCM block diagram.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB__FIG_SX2_Q25_RLB" data-ofbid="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB__FIG_SX2_Q25_RLB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 12-10. <span id="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB__GUID-C603125D-C8B8-4A72-93BC-55D5E84F28D4" class="fig--title">FSCM Block Diagram</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-42EF11B3-5A98-4A6A-B5C1-5DDB9A17F3AE-high.pdf#toolbar=1" width="450" height="286.92307692307696"></iframe></span>
+            </figure>
+        </div>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-4DE60C98-B4EE-4FC3-A62C-363391FCF437.html">12.3.1 Fail-Safe Detection</a></li><li><a href="GUID-FB65206A-8CF9-4DC5-8013-8B2239B5AA06.html">12.3.2 Fail-Safe Operation - FOSC Fail-Safe Clock Monitor</a></li><li><a href="GUID-0E92653A-FADA-469F-A74C-81A1FF8638E5.html">12.3.3 Fail-Safe Operation - Primary and Secondary Fail-Safe Clock Monitors</a></li><li><a href="GUID-EDE5C4A5-DD96-4259-8819-49751F924D69.html">12.3.4 Fail-Safe Clock Monitor Fault Injection</a></li><li><a href="GUID-B7AD3A31-FA77-4D8D-834A-8A349DE54C86.html">12.3.5 Fail-Safe Condition Clearing</a></li><li><a href="GUID-372FD3A6-E691-4804-B2AB-753505CFE9F2.html">12.3.6 Reset or Wake-Up from Sleep</a></li></ul>
+</nav>
+</body>
+</html>

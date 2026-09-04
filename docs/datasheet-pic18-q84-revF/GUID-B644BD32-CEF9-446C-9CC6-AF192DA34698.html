@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>19.11 I2C Pad Control — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-665115EC-91E3-4534-A8A0-A0B6A49A966B.html"/>
+<link rel="next" href="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7.html"/>
+<link rel="up" href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html">19 I/O Ports</a></li><li>19.11 I2C Pad Control</li></ol>
+  <div class="sib"><span>← <a href="GUID-665115EC-91E3-4534-A8A0-A0B6A49A966B.html" rel="prev">Edge Selectable Interrupt-on-Change</a></span><span><a href="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7.html" rel="next">I/O Priorities</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-B644BD32-CEF9-446C-9CC6-AF192DA34698__GUID-FD548FFB-5DBD-48E4-A63D-C8427CD85B79" style="">19.11 I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Pad Control</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">For this family of devices, the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C specific pads are available on
+                <span class="- topic/ph ph">RB1, RB2, RC3 and RC4</span> pins. The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C
+            characteristics of each of these pins is controlled by the <a class="- topic/xref xref" href="GUID-29BB68C1-284F-40A6-8700-AB65ADA2B0AC.html" title="RxyI2C">RxyI2C</a> registers. These characteristics include enabling I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C
+            specific slew rate (over standard GPIO slew rate), selecting internal pull-ups for
+                I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C pins, and selecting appropriate input threshold as per SMBus
+            specifications.</p>
+        <div class="- topic/note note important note_important" id="GUID-B644BD32-CEF9-446C-9CC6-AF192DA34698__GUID-E3D6EAB4-9864-4FDF-8DE5-3F61AA9C3AB3" data-ofbid="GUID-B644BD32-CEF9-446C-9CC6-AF192DA34698__GUID-E3D6EAB4-9864-4FDF-8DE5-3F61AA9C3AB3"><span class="note__title">Important:</span> Any peripheral using
+            the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C pins reads the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C input levels when enabled via
+            RxyI2C.</div>
+    </div>
+
+</body>
+</html>

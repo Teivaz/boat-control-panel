@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26.8.9 Edge Triggered Monostable Modes — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4F7E4ED0-2008-429C-972A-E171F29D79A1.html"/>
+<link rel="next" href="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70.html"/>
+<link rel="up" href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html">26 TMR2 - Timer2 Module</a></li><li><a href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html">26.8 Operation Examples</a></li><li>26.8.9 Edge Triggered Monostable Modes</li></ol>
+  <div class="sib"><span>← <a href="GUID-4F7E4ED0-2008-429C-972A-E171F29D79A1.html" rel="prev">Level Reset, Edge Triggered Hardware Limit One Shot Modes</a></span><span><a href="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70.html" rel="next">Level Triggered Hardware Limit One Shot Modes</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A__GUID-EF6551C8-C933-424D-9094-44A73A2A2AC1" style="">26.8.9 Edge Triggered Monostable Modes</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A__ID-42141-0000142B" data-ofbid="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A__ID-42141-0000142B">The Edge Triggered Monostable modes start the timer on an edge from
+         the external Reset signal input after the ON bit is set and stop incrementing the timer
+         when the timer matches the TxPR period value. The following edges will start the timer:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A__ID-42141-0000142C" data-ofbid="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A__ID-42141-0000142C">Rising edge (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b10001</code>)</li>
+         <li class="- topic/li li" id="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A__ID-42141-0000142F" data-ofbid="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A__ID-42141-0000142F">Falling edge (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b10010</code>)</li>
+         <li class="- topic/li li" id="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A__ID-42141-00001432" data-ofbid="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A__ID-42141-00001432">Rising or Falling edge (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b10011</code>)</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A__ID-42141-00001435" data-ofbid="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A__ID-42141-00001435">When an Edge Triggered Monostable mode is used in conjunction with
+         the CCP PWM operation, the PWM drive goes active with the external Reset signal edge that
+         starts the timer, but will not go active when the timer matches the TxPR value. While the
+         timer is incrementing, additional edges on the external Reset signal will not affect the
+         CCP PWM.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A__ID-42141-00001438" data-ofbid="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A__ID-42141-00001438"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 26-11. <span id="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A__GUID-14C9A0EA-BAC9-4AAD-AF0D-06E9478076A7" class="fig--title">Rising Edge Triggered Monostable Mode
+            Timing Diagram (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b10001</code>)</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-8193211B-2CE3-44E6-8333-AC4C8505DA6F-high.pdf#toolbar=1" width="450" height="1036.3887861528221"></iframe></span>
+      </figure>
+   </div>
+
+</body>
+</html>

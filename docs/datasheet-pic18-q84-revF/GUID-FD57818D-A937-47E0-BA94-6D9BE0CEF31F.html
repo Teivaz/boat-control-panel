@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10.3.9 User ID, Device ID, Configuration Settings Access, DIA and DCI — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B0C08B66-D57B-41E2-B128-7BB39DC54279.html"/>
+<link rel="next" href="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4.html"/>
+<link rel="up" href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html">10 NVM - Nonvolatile Memory Module</a></li><li><a href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html">10.3 Program Flash Memory (PFM)</a></li><li>10.3.9 User ID, Device ID, Configuration Settings Access, DIA and DCI</li></ol>
+  <div class="sib"><span>← <a href="GUID-B0C08B66-D57B-41E2-B128-7BB39DC54279.html" rel="prev">Unexpected Termination of Write Operation</a></span><span><a href="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4.html" rel="next">Table Pointer Operations</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F__GUID-628935A6-1A47-4434-8D07-5D09F7120205" style="">10.3.9 User ID, Device ID, Configuration Settings
+      Access, DIA and DCI</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F__ID-42121-00000336" data-ofbid="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F__ID-42121-00000336">The NVMADR value determines which NVM address space is accessed. The
+         User IDs and Configuration areas allow read and write access, whereas Device and Revision
+         IDs are limited to read-only.</p>
+      <p class="- topic/p p">Reading and writing User ID space is identical to reading and writing PFM space as
+         described in the preceding paragraphs. </p>
+      
+      <div class="- topic/p p">Writing to the Configuration bits is performed in the same
+         manner as writing to the Data Flash Memory (DFM). Configuration settings are modified one
+         byte at a time with the NVM Read and Write operations. When a Write operation is performed
+         on a Configuration byte, an erase byte is performed automatically before the new byte is
+         written. Any code protection settings that are not enabled will remain not enabled after
+         the Write operation, unless the new values enable them. However, any code protection
+         settings that are enabled cannot be disabled by a self-write of the configuration space.
+         The user can modify the configuration space by following these steps:<ol class="- topic/ol ol" id="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F__OL_JCK_GXS_RGB" data-ofbid="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F__OL_JCK_GXS_RGB">
+            <li class="- topic/li li" id="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F__GUID-EDA8DD87-A045-4EC6-8B1F-8A418C3BA828" data-ofbid="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F__GUID-EDA8DD87-A045-4EC6-8B1F-8A418C3BA828">Read the target Configuration byte by
+               setting the NVMADR with the target address.</li>
+            <li class="- topic/li li" id="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F__GUID-A82D52B1-7523-43EE-9240-868D54631FD6" data-ofbid="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F__GUID-A82D52B1-7523-43EE-9240-868D54631FD6">Retrieve the Configuration byte with
+               the Read operation (NVMCMD = <code class="+ topic/ph pr-d/codeph ph codeph">‘b000</code>).</li>
+            <li class="- topic/li li" id="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F__GUID-F0C0B37C-07F8-4E0B-A71B-E3890B6F5DB4" data-ofbid="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F__GUID-F0C0B37C-07F8-4E0B-A71B-E3890B6F5DB4">Modify the Configuration byte in
+               NVMDAT register.</li>
+            <li class="- topic/li li" id="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F__GUID-77B7B44E-5F13-44FD-86A7-9817F85D98A3" data-ofbid="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F__GUID-77B7B44E-5F13-44FD-86A7-9817F85D98A3">Write the NVMDAT register to the
+               Configuration byte using the Write operation (NVMCMD = <code class="+ topic/ph pr-d/codeph ph codeph">‘b011</code>) and
+               unlock sequence.</li>
+         </ol></div>
+   </div>
+
+</body>
+</html>

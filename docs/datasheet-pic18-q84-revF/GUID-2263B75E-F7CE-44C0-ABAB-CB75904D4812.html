@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.1 DMA Registers — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html"/>
+<link rel="next" href="GUID-1050B102-E6EA-4402-9BBA-A02B371CE765.html"/>
+<link rel="up" href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li>16.1 DMA Registers</li></ol>
+  <div class="sib"><span>← <a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html" rel="prev">DMA - Direct Memory Access</a></span><span><a href="GUID-1050B102-E6EA-4402-9BBA-A02B371CE765.html" rel="next">DMA Organization</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-E7CD6AC8-F4DD-4482-8CBA-2249AED1EEF6" style="">16.1 DMA Registers</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The operation of the DMA module is controlled by the following
+            registers:</p>
+        <ul class="- topic/ul ul" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__UL_SGN_4XY_QFB" data-ofbid="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__UL_SGN_4XY_QFB">
+            <li class="- topic/li li" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-70A6A387-102A-40C4-88E5-E926C9C9E78E" data-ofbid="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-70A6A387-102A-40C4-88E5-E926C9C9E78E">DMA Instance Selection (DMASELECT)
+                register</li>
+            <li class="- topic/li li" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-B91E26E6-9989-42EB-972A-ECE94836FD42" data-ofbid="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-B91E26E6-9989-42EB-972A-ECE94836FD42">Control (DMAnCON0, DMAnCON1)
+                registers</li>
+            <li class="- topic/li li" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-018FDEB6-3E04-47E5-AB1B-A5DD60B95620" data-ofbid="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-018FDEB6-3E04-47E5-AB1B-A5DD60B95620">Data Buffer (DMAnBUF) register</li>
+            <li class="- topic/li li" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-ED3998A6-0C94-40B9-97E1-19424BD4B441" data-ofbid="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-ED3998A6-0C94-40B9-97E1-19424BD4B441">Source Start Address (DMAnSSA)
+                register</li>
+            <li class="- topic/li li" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-D18BF31F-A0BB-4AED-B296-DBC0B6C84E7B" data-ofbid="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-D18BF31F-A0BB-4AED-B296-DBC0B6C84E7B">Source Pointer (DMAnSPTR)
+                register</li>
+            <li class="- topic/li li" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-06C24ACF-39FC-42C3-B694-3820300EB2AE" data-ofbid="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-06C24ACF-39FC-42C3-B694-3820300EB2AE">Source Message Size (DMAnSSZ)
+                register</li>
+            <li class="- topic/li li" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-BCC91A82-9A44-43D6-915E-B5F641FE9C9B" data-ofbid="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-BCC91A82-9A44-43D6-915E-B5F641FE9C9B">Source Count (DMAnSCNT) register</li>
+            <li class="- topic/li li" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-996B1F00-5926-4B0C-8884-D2F97BFFCB94" data-ofbid="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-996B1F00-5926-4B0C-8884-D2F97BFFCB94">Destination Start Address (DMAnDSA)
+                register</li>
+            <li class="- topic/li li" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-26E6180F-290E-4E6F-8565-9CE0EF7D6B61" data-ofbid="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-26E6180F-290E-4E6F-8565-9CE0EF7D6B61">Destination Pointer (DMAnDPTR)
+                register</li>
+            <li class="- topic/li li" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-3237B741-A1B6-4690-9D64-6233E39209E6" data-ofbid="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-3237B741-A1B6-4690-9D64-6233E39209E6">Destination Message Size (DMAnDSZ)
+                register</li>
+            <li class="- topic/li li" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-FD6F1132-E367-4348-B385-97EB70CA4BF9" data-ofbid="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-FD6F1132-E367-4348-B385-97EB70CA4BF9">Destination Count (DMAnDCNT)
+                register</li>
+            <li class="- topic/li li" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-F2F2E486-1F33-429F-9542-4FE055B44681" data-ofbid="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-F2F2E486-1F33-429F-9542-4FE055B44681">Start Interrupt Request Source
+                (DMAnSIRQ) register</li>
+            <li class="- topic/li li" id="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-3B2A6227-EF35-4487-B0FA-43DDB57DC9E7" data-ofbid="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812__GUID-3B2A6227-EF35-4487-B0FA-43DDB57DC9E7">Abort Interrupt Request Source
+                (DMAnAIRQ) register</li>
+        </ul>
+        <p class="- topic/p p">The registers are detailed in <a class="- topic/xref xref" href="GUID-23F905A7-5019-4E0F-9454-D45A360073DB.html#GUID-23F905A7-5019-4E0F-9454-D45A360073DB__GUID-BE965075-A422-44C3-9F53-D063651DE040">Register Definitions: DMA</a>.</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.2.1.2 Transmitting Data — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82.html"/>
+<link rel="next" href="GUID-D01C8272-ABE3-46A6-A3E2-B07684BF0B1F.html"/>
+<link rel="up" href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html">35.2 UART Asynchronous Modes</a></li><li><a href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html">35.2.1 UART Asynchronous Transmitter</a></li><li>35.2.1.2 Transmitting Data</li></ol>
+  <div class="sib"><span>← <a href="GUID-5E79EF3E-31E2-498D-BE28-76183C886D82.html" rel="prev">Enabling the Transmitter</a></span><span><a href="GUID-D01C8272-ABE3-46A6-A3E2-B07684BF0B1F.html" rel="next">Transmit Data Polarity</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-EB6D11AD-9E35-45D3-BEB3-E8E3DAC2D623__GUID-A921B60F-751D-4C55-8823-960D2D741D68" style="">35.2.1.2 Transmitting Data</h1><div class="- topic/body body"><p class="- topic/p p">A transmission is initiated by writing a character to the <a class="- topic/xref xref" href="GUID-CA81CB84-6F0C-42F3-8536-A8752F75D43B.html#GUID-CA81CB84-6F0C-42F3-8536-A8752F75D43B" title="UxTXB">UxTXB</a> register. If this is the first character, or the previous character has been completely transmitted from the TSR, the data in the UxTXB is immediately transferred to the TSR register. If the TSR still contains all or part of a previous character, the new character data are held in the UxTXB until the previous character transmission is complete. The pending character in the UxTXB is then transferred to the TSR at the beginning of the previous character Stop bit transmission. The transmission of the Start bit, data bits and Stop bit sequence commences immediately following the completion of all of the previous character’s Stop bits.</p></div>
+</body>
+</html>

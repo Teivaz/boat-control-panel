@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.3.4 Fail-Safe Clock Monitor Fault Injection — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0E92653A-FADA-469F-A74C-81A1FF8638E5.html"/>
+<link rel="next" href="GUID-B7AD3A31-FA77-4D8D-834A-8A349DE54C86.html"/>
+<link rel="up" href="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB.html">12.3 Fail-Safe Clock Monitor (FSCM)</a></li><li>12.3.4 Fail-Safe Clock Monitor Fault Injection</li></ol>
+  <div class="sib"><span>← <a href="GUID-0E92653A-FADA-469F-A74C-81A1FF8638E5.html" rel="prev">Fail-Safe Operation - Primary and Secondary Fail-Safe Clock Monitors</a></span><span><a href="GUID-B7AD3A31-FA77-4D8D-834A-8A349DE54C86.html" rel="next">Fail-Safe Condition Clearing</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-EDE5C4A5-DD96-4259-8819-49751F924D69__GUID-1A5A9C93-B3A1-4210-8875-00AB79A63CB4" style="">12.3.4 Fail-Safe Clock Monitor Fault Injection</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p">Each of the Fail-Safe Clock monitors on this device has its own respective Fault
+      Injection bit. The Fault Injection bit is used to verify in the software that the FSCM
+      functions work properly and that they will detect a clock failure during normal operation. If
+      the FSCM Fault Injection bit is set, the FSCM sample clock input will be blocked, forcing a
+      clock failure. Writing to the FOSC FSCM Fault Injection (<a class="- topic/xref xref" href="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC.html#BITFIELD_TTW_CDQ_BKB" title="FOSC Fail-Safe Clock Monitor Fault Injection(1)"><span><span>FSCMFFI</span></span></a>) bit will result in
+      the system clock switching to HFINTOSC and the <a class="- topic/xref xref" href="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC.html#BITFIELD_XTW_CDQ_BKB" title="FOSC Fail-Safe Clock Monitor Status(2)"><span><span>FSCMFEV</span></span></a> bit as well as the
+      Oscillator Fail Interrupt Flag (OSFIF) of the PIR registers being set. Writing to the primary
+      and secondary external FSCM Fault Injection (<a class="- topic/xref xref" href="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC.html#BITFIELD_FXT_VCQ_BKB" title="Primary Oscillator Fail-Safe Clock Monitor Fault Injection(1)"><span><span>FSCMPFI</span></span></a> and <a class="- topic/xref xref" href="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC.html#GUID-4EDD23AC-DFCB-404C-B688-CA4F651DAC64" title="SOSC Fail-Safe Clock Monitor Fault Injection(1)"><span><span>FSCMSFI</span></span></a>) bits will result in the respective FSCM Fault Status (<a class="- topic/xref xref" href="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC.html#BITFIELD_ZX3_YCQ_BKB" title="Primary Oscillator Fail-Safe Clock Monitor Status(2)"><span><span>FSCMPEV</span></span></a> and <a class="- topic/xref xref" href="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC.html#DBC_JBQ_BKB" title="SOSC Fail-Safe Clock Monitor Status(2)"><span><span>FSCMSEV</span></span></a>) bits being set
+      but the system clock will not switch. Additionally, the Oscillator Fail Interrupt Flag (OSFIF)
+      of the PIR registers will also be set.</div>
+    </div>
+
+</body>
+</html>

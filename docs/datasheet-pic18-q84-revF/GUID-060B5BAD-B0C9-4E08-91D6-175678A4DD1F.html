@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26.6 CSYNC Bit — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BC2C7138-F41A-4342-B87F-DA43BBDEFA6A.html"/>
+<link rel="next" href="GUID-B74F7E86-4EB4-45C9-91B7-597023F74CDC.html"/>
+<link rel="up" href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html">26 TMR2 - Timer2 Module</a></li><li>26.6 CSYNC Bit</li></ol>
+  <div class="sib"><span>← <a href="GUID-BC2C7138-F41A-4342-B87F-DA43BBDEFA6A.html" rel="prev">PSYNC Bit</a></span><span><a href="GUID-B74F7E86-4EB4-45C9-91B7-597023F74CDC.html" rel="next">Operating Modes</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-060B5BAD-B0C9-4E08-91D6-175678A4DD1F__GUID-DF329A60-6761-437C-9878-985B13AA022E" style="">26.6 CSYNC Bit</h1>
+<div class="- topic/body concept/conbody body conbody">
+<p class="- topic/p p">All bits in the Timer2 SFRs are synchronized to F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4 by default, not the
+                                    Timer2 input clock. As such, if the Timer2 input clock is not
+                                    synchronized to F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4, it is possible for the Timer2
+                                    input clock to transition at the same time as the ON bit is set
+                                    in software, which may cause undesirable behavior and glitches
+                                    in the counter. Setting the CSYNC bit remedies this problem by
+                                    synchronizing the ON bit to the Timer2 input clock instead of
+                                                F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4. However, as this synchronization
+                                    uses an edge of the TMR2 input clock, up to one input clock
+                                    cycle will be consumed and not counted by the Timer2 when CSYNC
+                                    is set. Conversely, clearing the CSYNC bit synchronizes the ON
+                                    bit to F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4, which does not consume any clock
+                                    edges, but has the previously stated risk of glitches.</p>
+</div>
+
+</body>
+</html>

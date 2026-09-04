@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10 NVM - Nonvolatile Memory Module — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-122F4F22-0CD5-4A26-BA36-2A48C1370AEC.html"/>
+<link rel="next" href="GUID-4A0E75C0-5F8B-483C-9C0C-19EA428F2364.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>10 NVM - Nonvolatile Memory Module</li></ol>
+  <div class="sib"><span>← <a href="GUID-122F4F22-0CD5-4A26-BA36-2A48C1370AEC.html" rel="prev">Register Summary - Memory Organization</a></span><span><a href="GUID-4A0E75C0-5F8B-483C-9C0C-19EA428F2364.html" rel="next">Operations</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-5C66A4D8-0D76-464B-9C68-82213EED60A2" style="">10 NVM - Nonvolatile Memory Module</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The Nonvolatile Memory (NVM) module provides run-time read and write access to the
+            Program Flash Memory (PFM), Data Flash Memory (DFM) and Configuration bits. PFM includes
+            the program memory and user ID space. DFM is also referred to as EEPROM which is
+            accessed one byte at a time and the erase before write is automatic. </p>
+        <p class="- topic/p p">The Table Pointer provides read-only access to the PFM, DFM and Configuration bits. The
+            NVM controls provide both read and write access to PFM, DFM and Configuration bits. </p>
+        <p class="- topic/p p">Reads and writes to and from the DFM are limited to single byte operations, whereas those
+            for PFM are 16-bit word or 128-word page operations. The page buffer memory occupies one
+            full bank of RAM space located in the RAM bank following the last occupied GPR bank.
+            Refer to the <strong class="+ topic/ph hi-d/b ph b">“Memory Organization”</strong> chapter for more details about the buffer
+            RAM.</p>
+        <div class="- topic/p p">The registers used for control, address and data are as follows:<ul class="- topic/ul ul" id="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__UL_JRH_5HL_KGB" data-ofbid="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__UL_JRH_5HL_KGB">
+                <li class="- topic/li li" id="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-DE912CBF-A1F9-40E5-9A5F-70266B8C941C" data-ofbid="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-DE912CBF-A1F9-40E5-9A5F-70266B8C941C"><a class="- topic/xref xref" href="GUID-E05C5D94-F489-42E8-8DC8-B64719A787B5.html" title="NVMCON0">NVMCON0</a> - Operation start and active status</li>
+                <li class="- topic/li li" id="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-5C7477C1-5399-43E7-845E-831553C2D00D" data-ofbid="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-5C7477C1-5399-43E7-845E-831553C2D00D"><a class="- topic/xref xref" href="GUID-0EEEF66D-6FAA-4BC6-B759-A3A7E60F6A6C.html" title="NVMCON1">NVMCON1</a> - Operation type and error status</li>
+                <li class="- topic/li li" id="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-B3A39FCD-EDB7-4C95-B27A-C21A1AF4953C" data-ofbid="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-B3A39FCD-EDB7-4C95-B27A-C21A1AF4953C"><a class="- topic/xref xref" href="GUID-3B9154EA-42F0-45B3-99D5-30A6DB75A028.html" title="NVMLOCK">NVMLOCK</a> - Write-only register to guard against accidental
+                    writes</li>
+                <li class="- topic/li li" id="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-B8FDA1D0-C2AA-44C9-9DAB-37B8BEC00754" data-ofbid="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-B8FDA1D0-C2AA-44C9-9DAB-37B8BEC00754"><a class="- topic/xref xref" href="GUID-C527108F-A4F1-421C-8804-FCDE70E8924B.html" title="NVMADR">NVMADR</a>
+                    - Read/write target address (multibyte register)</li>
+                <li class="- topic/li li" id="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-FC0D878A-A1DF-40EF-AE19-AF4CD04BD67E" data-ofbid="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-FC0D878A-A1DF-40EF-AE19-AF4CD04BD67E"><a class="- topic/xref xref" href="GUID-C07AE142-AB00-4870-AD7E-A78E1E2DEAC1.html" title="NVMDAT">NVMDAT</a>
+                    - Read/write target data (multibyte register)</li>
+                <li class="- topic/li li" id="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-77058506-BAB3-4AD5-B9AD-220390038C19" data-ofbid="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-77058506-BAB3-4AD5-B9AD-220390038C19"><a class="- topic/xref xref" href="GUID-23BF27B8-E95B-449C-B987-532E5840650F.html" title="TBLPTR">TBLPTR</a>
+                    - Table Pointer PFM target address for reads and buffer RAM address for writes
+                    (multibyte register)</li>
+                <li class="- topic/li li" id="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-0B2675DF-8B39-4356-9BF7-50E409EC8101" data-ofbid="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104__GUID-0B2675DF-8B39-4356-9BF7-50E409EC8101"><a class="- topic/xref xref" href="GUID-9613776E-377B-4ED6-BEAE-52E21851DA3D.html" title="TABLAT">TABLAT</a>
+                    - Table Pointer read/write target data (single byte register)</li>
+            </ul></div>
+        <p class="- topic/p p">The write and erase times are controlled by an on-chip timer. The write and
+            erase voltages are generated by an on-chip charge pump rated to function over the
+            operating voltage range of the device.</p>
+        <p class="- topic/p p">PFM and DFM can be protected in two ways: code protection and write protection. Code
+            protection (Configuration bit <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CP</span>) disables read and write
+            access through an external device programmer. Write protection prevents user software
+            writes to NVM areas tagged for protection by the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">WRTn</span>
+            Configuration bits. Code protection does not affect the self-write and erase
+            functionality, whereas write protection does. Attempts to write a protected location
+            will set the <a class="- topic/xref xref" href="GUID-0EEEF66D-6FAA-4BC6-B759-A3A7E60F6A6C.html#GUID-E2F70FF0-FA6F-4B04-A534-AEE5AD5CE465" title="NVM Write Error"><span><span>WRERR</span></span></a> bit. Code protection and write protection can only be reset on a
+            Bulk Erase performed by an external programmer.</p>
+        <p class="- topic/p p">The Bulk Erase command is used to completely erase different memory regions.
+            The area to be erased is selected using a bit field combination. The Bulk Erase command
+            can only be issued through an external programmer. There is no run time access for this
+            command. </p>
+        <p class="- topic/p p">If the device is code-protected and a Bulk Erase command for the configuration memory is
+            issued, all other memory regions are also erased. Refer to the appropriate Family
+            Programming Specification for more details.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-4A0E75C0-5F8B-483C-9C0C-19EA428F2364.html">10.1 Operations</a></li><li><a href="GUID-5B2102CA-3255-43DC-B4BA-610CE1880E7D.html">10.2 Unlock Sequence</a></li><li><a href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html">10.3 Program Flash Memory (PFM)</a></li><li><a href="GUID-A8FDF8F5-E9BA-4056-855B-FCA3C7018F18.html">10.4 Data Flash Memory (DFM)</a></li><li><a href="GUID-D8A68072-5F59-409E-B918-D9C40FE63DFF.html">10.5 Register Definitions: NVM</a></li><li><a href="GUID-2F498B47-F465-47E4-A5A4-B02A6EC0C00E.html">10.6 Register Summary - NVM</a></li></ul>
+</nav>
+</body>
+</html>

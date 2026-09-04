@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.11.3.3 CAN Bus Error Interrupt (CERRIF) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-539CCC91-553B-482C-BE93-F88B6B22F46F.html"/>
+<link rel="next" href="GUID-1A8297DC-820C-4FC6-A1ED-A0A6FA7F4F36.html"/>
+<link rel="up" href="GUID-CDDCE0D8-24C2-4963-ACC8-BDDCE011AF44.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197.html">38.11 Interrupts</a></li><li><a href="GUID-CDDCE0D8-24C2-4963-ACC8-BDDCE011AF44.html">38.11.3 Main Interrupts</a></li><li>38.11.3.3 CAN Bus Error Interrupt (CERRIF)</li></ol>
+  <div class="sib"><span>← <a href="GUID-539CCC91-553B-482C-BE93-F88B6B22F46F.html" rel="prev">Wake-Up Interrupt (WAKIF)</a></span><span><a href="GUID-1A8297DC-820C-4FC6-A1ED-A0A6FA7F4F36.html" rel="next">CAN Mode Change Interrupt (MODIF)</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-742F8D44-8645-48F3-B861-8C49E3549F94__GUID-9784ED3F-58CB-449A-98DF-1BC4C53DFBC9" style="">38.11.3.3 CAN Bus Error Interrupt (CERRIF)</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The CxTREC register will count the errors during transmit and receive
+            according to the ISO11898-1:2015. The CERRIF flag will be set based on the error counter
+            values. The flag must be cleared by the application.</p>
+        <div class="- topic/p p">CERRIF will be set each time a threshold in the TEC/REC counter is crossed
+            by the following conditions:<ul class="- topic/ul ul" id="GUID-742F8D44-8645-48F3-B861-8C49E3549F94__UL_S5R_LFJ_Q3B" data-ofbid="GUID-742F8D44-8645-48F3-B861-8C49E3549F94__UL_S5R_LFJ_Q3B">
+                <li class="- topic/li li" id="GUID-742F8D44-8645-48F3-B861-8C49E3549F94__GUID-44F1DD58-5AF0-4B82-925F-239E46FF9AB6" data-ofbid="GUID-742F8D44-8645-48F3-B861-8C49E3549F94__GUID-44F1DD58-5AF0-4B82-925F-239E46FF9AB6">TEC or REC exceeds the Error
+                    Warning state threshold.</li>
+                <li class="- topic/li li" id="GUID-742F8D44-8645-48F3-B861-8C49E3549F94__GUID-CB033EC8-3752-4D87-937E-F516C42B9C61" data-ofbid="GUID-742F8D44-8645-48F3-B861-8C49E3549F94__GUID-CB033EC8-3752-4D87-937E-F516C42B9C61">The transmitter or receiver
+                    transitions to the Error Passive state.</li>
+                <li class="- topic/li li" id="GUID-742F8D44-8645-48F3-B861-8C49E3549F94__GUID-DF2D17C9-3195-4ED7-AD72-2A47FD8DACC9" data-ofbid="GUID-742F8D44-8645-48F3-B861-8C49E3549F94__GUID-DF2D17C9-3195-4ED7-AD72-2A47FD8DACC9">The transmitter transitions to
+                    the Bus Off state.</li>
+                <li class="- topic/li li" id="GUID-742F8D44-8645-48F3-B861-8C49E3549F94__GUID-4220F290-3B86-4A27-AF0B-CF9BA9855EEF" data-ofbid="GUID-742F8D44-8645-48F3-B861-8C49E3549F94__GUID-4220F290-3B86-4A27-AF0B-CF9BA9855EEF">The transmitter or receiver
+                    transitions from the Error Passive to Error Active state.</li>
+                <li class="- topic/li li" id="GUID-742F8D44-8645-48F3-B861-8C49E3549F94__GUID-063ADE24-A6D2-4694-ACC8-A583347DD2A3" data-ofbid="GUID-742F8D44-8645-48F3-B861-8C49E3549F94__GUID-063ADE24-A6D2-4694-ACC8-A583347DD2A3">The module transitions from the
+                    Bus Off to Error Active state after the bus off recovery sequence.</li>
+            </ul></div>
+        <p class="- topic/p p">When the user clears CERRIF, it will remain clear until a new counter crossing
+            occurs.</p>
+    </div>
+
+</body>
+</html>

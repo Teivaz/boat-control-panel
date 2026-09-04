@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26 TMR2 - Timer2 Module — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2478120B-F53E-48F6-AB40-270DA91F29F6.html"/>
+<link rel="next" href="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>26 TMR2 - Timer2 Module</li></ol>
+  <div class="sib"><span>← <a href="GUID-2478120B-F53E-48F6-AB40-270DA91F29F6.html" rel="prev">Register Summary - Timer1</a></span><span><a href="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F.html" rel="next">Timer2 Operation</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-0939F183-DC78-493F-8860-B5BB62524176" style="">26 TMR2 - Timer2 Module</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-00001174" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-00001174">The Timer2 module is an 8-bit timer that incorporates the following
+         features:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-00001176" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-00001176">8-bit timer and period registers</li>
+         <li class="- topic/li li" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-0000117A" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-0000117A">Readable and writable</li>
+         <li class="- topic/li li" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-0000117C" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-0000117C">Software programmable prescaler (1:1 to 1:128)</li>
+         <li class="- topic/li li" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-0000117E" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-0000117E">Software programmable postscaler (1:1 to 1:16)</li>
+         <li class="- topic/li li" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-EC0429C6-F6BC-403E-992B-90B750869C6E" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-EC0429C6-F6BC-403E-992B-90B750869C6E">Interrupt on T2TMR match with T2PR</li>
+         <li class="- topic/li li" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-F4D456EF-A6C7-4A97-9668-A04EDA3E9294" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-F4D456EF-A6C7-4A97-9668-A04EDA3E9294">One-shot operation</li>
+         <li class="- topic/li li" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-F09EB64D-D179-4568-902C-AB88C69FDE13" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-F09EB64D-D179-4568-902C-AB88C69FDE13">Full asynchronous operation</li>
+         <li class="- topic/li li" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-AF9B3EC8-29C0-4840-93CA-57FB3C89F670" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-AF9B3EC8-29C0-4840-93CA-57FB3C89F670">Includes Hardware Limit Timer (HLT)</li>
+         <li class="- topic/li li" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-2880BDDA-BA17-4BA4-9589-69EA42661AF3" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-2880BDDA-BA17-4BA4-9589-69EA42661AF3">Alternate clock sources</li>
+         <li class="- topic/li li" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-01660196-2E72-4E7B-A04E-CB406018D774" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-01660196-2E72-4E7B-A04E-CB406018D774">External timer Reset signal sources</li>
+         <li class="- topic/li li" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-C5E0BBCB-4C5D-44F4-BDB4-61587BD5198D" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-C5E0BBCB-4C5D-44F4-BDB4-61587BD5198D">Configurable timer Reset operation</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-0000118E" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-0000118E">See the figure below for a block diagram of Timer2. </p>
+      <div class="- topic/note note important note_important" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-00001197" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-00001197"><span class="note__title">Important:</span> References to module Timer2 apply to all the
+         even numbered timers on this device (Timer2, Timer4, etc.).</div>
+      <figure class="- topic/fig fig fignone" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-000011AC" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-42141-000011AC"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 26-1. <span id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-D60372BF-17AF-4E06-875B-82E288940B07" class="fig--title">Timer2 with Hardware Limit Timer (HLT) Block Diagram</span></span></figcaption>
+         
+      </figure>
+      <figure class="- topic/fig fig fignone" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-FIG-0000000A" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__ID-FIG-0000000A">
+         <span class=""><iframe src="GUID-5DFCA54D-C40D-4966-8204-E5095BECF7B4-high.pdf#toolbar=1" width="547.95" height="406.35"></iframe></span>
+         <div class="- topic/note note notype note_notype" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-B2AB378F-C3C4-480F-8C5A-8B01C311B20D" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-B2AB378F-C3C4-480F-8C5A-8B01C311B20D"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__OL_CFS_XRW_PZ" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__OL_CFS_XRW_PZ">
+               <li class="- topic/li li" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-BD76A456-74C9-4B10-B41B-383B6AFF64FD" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-BD76A456-74C9-4B10-B41B-383B6AFF64FD">Signal to the CCP peripheral for
+                  PWM pulse trigger in PWM mode.</li>
+               <li class="- topic/li li" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-1A3B16C1-0751-46A2-AE2B-5AA9906B32D6" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-1A3B16C1-0751-46A2-AE2B-5AA9906B32D6">See <a class="- topic/xref xref" href="GUID-D890434E-D754-479A-9174-71B88F44F065.html#ID-000000CC" title="External Reset Source Selection"><span><span>RSEL</span></span></a> for external Reset sources.</li>
+               <li class="- topic/li li" id="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-C490D61C-6551-43E2-8199-0DD869339F5D" data-ofbid="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9__GUID-C490D61C-6551-43E2-8199-0DD869339F5D">See <a class="- topic/xref xref" href="GUID-5D74F7CB-5C5D-4BBF-A222-6BCF80A21BD2.html#ID-000000CC" title="Timer Clock Source Selection"><span><span>CS</span></span></a> for clock source selections.</li>
+            </ol>
+         </div>
+      </figure>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F.html">26.1 Timer2 Operation</a></li><li><a href="GUID-765FFC3C-945B-48E3-883F-9FE1A676F494.html">26.2 Timer2 Output</a></li><li><a href="GUID-58A80DC9-1DD4-4044-AF13-1D07A0B84159.html">26.3 External Reset Sources</a></li><li><a href="GUID-F8A4CE68-D3EC-4992-8F71-071E66A22E88.html">26.4 Timer2 Interrupt</a></li><li><a href="GUID-BC2C7138-F41A-4342-B87F-DA43BBDEFA6A.html">26.5 PSYNC Bit</a></li><li><a href="GUID-060B5BAD-B0C9-4E08-91D6-175678A4DD1F.html">26.6 CSYNC Bit</a></li><li><a href="GUID-B74F7E86-4EB4-45C9-91B7-597023F74CDC.html">26.7 Operating Modes</a></li><li><a href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html">26.8 Operation Examples</a></li><li><a href="GUID-91F4F6F3-556F-4CA7-8771-1B12AA9045E9.html">26.9 Timer2 Operation During Sleep</a></li><li><a href="GUID-F940AF35-787B-4855-87AD-86EAD3ED9BD0.html">26.10 Register Definitions: Timer2 Control</a></li><li><a href="GUID-5DE47E10-D6F7-42A1-8CDC-56496CABFDBF.html">26.11 Register Summary - Timer2</a></li></ul>
+</nav>
+</body>
+</html>

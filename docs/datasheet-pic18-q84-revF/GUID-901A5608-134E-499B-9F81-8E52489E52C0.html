@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.3.2 Multi-Host Mode Bus Arbitration — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-228E8DFD-F414-47E2-820C-3D3FD2EB86F1.html"/>
+<link rel="next" href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html"/>
+<link rel="up" href="GUID-023C912B-1251-4318-9328-9FA6A0765D88.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-023C912B-1251-4318-9328-9FA6A0765D88.html">37.4.3 I2C Multi-Host Mode Operation</a></li><li>37.4.3.2 Multi-Host Mode Bus Arbitration</li></ol>
+  <div class="sib"><span>← <a href="GUID-228E8DFD-F414-47E2-820C-3D3FD2EB86F1.html" rel="prev">Multi-Host Mode Clock Synchronization</a></span><span><a href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html" rel="next">Register Definitions: I2C Control</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-EDBC2C1E-81B2-4975-9748-6EB08966DF32" style="">37.4.3.2 Multi-Host Mode Bus Arbitration</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">When the bus is Idle, any host device may attempt to take control of the bus. Two or more
+            host devices may issue a Start condition within the minimum hold time
+                (T<sub class="+ topic/ph hi-d/sub ph sub">HD:STA</sub>), which triggers a valid Start on the bus. The host devices must
+            then compete using bus arbitration to determine who takes control of the bus and
+            completes their transaction. </p>
+        <p class="- topic/p p">Bus arbitration takes place bit by bit, and it may be possible for two hosts who have
+            identical messages to complete the entire transaction without either device losing
+            arbitration. </p>
+        <div class="- topic/p p">During every bit period, while SCL is high each host device compares the actual signal
+            level of SDA to the signal level the host actually transmitted. SDA sampling is
+            performed during the SCL high period because the SDA data must be stable during this
+            period; therefore, the first host to detect a low signal level on SDA while it expects a
+            high signal level loses arbitration. In this case, the ‘losing’ host device detects a
+            bus collision and sets the Bus Collision Detect Interrupt Flag (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_PNL_CHV_LGB" title="Bus Collision Detect Interrupt Flag(1)">BCLIF</a>), and if the Bus Collision Detect Interrupt Enable (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_LSV_KKV_LGB" title="Bus Collision Detect Interrupt Enable">BCLIE</a>) bit is set, the generic I2CxEIF is also set.</div>
+        <p class="- topic/p p">Arbitration can be lost in any of the following states:</p>
+        <ul class="- topic/ul ul" id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__UL_QKY_B5T_KGB" data-ofbid="GUID-901A5608-134E-499B-9F81-8E52489E52C0__UL_QKY_B5T_KGB">
+            <li class="- topic/li li" id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-EB51C54F-163F-4551-AE76-E107EB8FCE95" data-ofbid="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-EB51C54F-163F-4551-AE76-E107EB8FCE95">Address transfer</li>
+            <li class="- topic/li li" id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-6015CA5E-6983-4912-A0FA-15FFCF92CA15" data-ofbid="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-6015CA5E-6983-4912-A0FA-15FFCF92CA15">Data transfer</li>
+            <li class="- topic/li li" id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-F5D144D5-EB5B-49F4-A36B-86DCF2C3E786" data-ofbid="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-F5D144D5-EB5B-49F4-A36B-86DCF2C3E786">Start condition</li>
+            <li class="- topic/li li" id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-3F3145CC-135D-4342-8240-CAAF14F96FD3" data-ofbid="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-3F3145CC-135D-4342-8240-CAAF14F96FD3">Restart condition</li>
+            <li class="- topic/li li" id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-6A7CEFDB-A491-481C-8655-9D8B3F3C7559" data-ofbid="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-6A7CEFDB-A491-481C-8655-9D8B3F3C7559">Acknowledge sequence</li>
+            <li class="- topic/li li" id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-B8545BFA-A964-4A11-B5C8-2C7A3D80324F" data-ofbid="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-B8545BFA-A964-4A11-B5C8-2C7A3D80324F">Stop condition</li>
+        </ul>
+        <p class="- topic/p p">If a collision occurs during the data transfer phase, the transmission is halted and both
+            SCL and SDA are released by hardware. If a collision occurs during a Start, Restart,
+            Acknowledge, or Stop, the operation is aborted and hardware releases SCL and SDA. If a
+            collision occurs during the addressing phase, the host that ‘wins’ arbitration may be
+            attempting to address the ‘losing’ host as a client. In this case, the host that lost
+            arbitration must switch to its Client mode and check to see if an address matches.</p>
+        <div class="- topic/note note important note_important" id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C
+            Specification states that a bus collision cannot occur during a Start condition. If a
+            collision occurs during a Start, <a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_PNL_CHV_LGB" title="Bus Collision Detect Interrupt Flag(1)">BCLIF</a> will be set during the addressing phase.</div>
+        <div class="- topic/p p">User software must clear <a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_PNL_CHV_LGB" title="Bus Collision Detect Interrupt Flag(1)">BCLIF</a> to resume operation.</div>
+        <figure class="- topic/fig fig fignone" id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__FIG_GVX_N5T_KGB" data-ofbid="GUID-901A5608-134E-499B-9F81-8E52489E52C0__FIG_GVX_N5T_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-42. <span id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-6D41D36C-C69A-4D8C-BCC4-4E9E67F3C6E2" class="fig--title">Bus Collision</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__IMAGE_HVX_N5T_KGB" src="GUID-6CA8A9A1-408D-45BA-83AF-BBB14936B599-high.svg"/></span>
+        </figure>
+        <figure class="- topic/fig fig fignone rotatepage" id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__FIG_H22_V5T_KGB" data-ofbid="GUID-901A5608-134E-499B-9F81-8E52489E52C0__FIG_H22_V5T_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-43. <span id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__GUID-69F311C3-79F2-4A1C-B821-C863454228E9" class="fig--title">Multi-Host Mode
+                Transmission</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-901A5608-134E-499B-9F81-8E52489E52C0__IMAGE_I22_V5T_KGB" src="GUID-6548512C-3074-4871-B3B9-65558F5F74A3-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

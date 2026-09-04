@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.11.4.1 Interrupt Look-up Table — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A460E863-341B-4200-9562-7B823C9BDF21.html"/>
+<link rel="next" href="GUID-A8CAA0FD-C48E-413C-BB51-CDCF1F9BDAA9.html"/>
+<link rel="up" href="GUID-A460E863-341B-4200-9562-7B823C9BDF21.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197.html">38.11 Interrupts</a></li><li><a href="GUID-A460E863-341B-4200-9562-7B823C9BDF21.html">38.11.4 Interrupt Handling</a></li><li>38.11.4.1 Interrupt Look-up Table</li></ol>
+  <div class="sib"><span>← <a href="GUID-A460E863-341B-4200-9562-7B823C9BDF21.html" rel="prev">Interrupt Handling</a></span><span><a href="GUID-A8CAA0FD-C48E-413C-BB51-CDCF1F9BDAA9.html" rel="next">Interrupt Status Register</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-39F86344-F459-411A-A7B1-C684F7CFFFCD__GUID-357B0406-F7D9-4AEB-9165-5EF7120327B7" style="">38.11.4.1 Interrupt Look-up Table</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The ICODEx and FILHITx bits in the CxVEC register enable the application to
+            use a Look-up Table to implement the Interrupt Service Routine (ISR).</p>
+        <div class="- topic/p p">The following bit fields allow the application to make full use of the three
+            interrupt pins:<ul class="- topic/ul ul" id="GUID-39F86344-F459-411A-A7B1-C684F7CFFFCD__UL_QPP_DGJ_Q3B" data-ofbid="GUID-39F86344-F459-411A-A7B1-C684F7CFFFCD__UL_QPP_DGJ_Q3B">
+                <li class="- topic/li li" id="GUID-39F86344-F459-411A-A7B1-C684F7CFFFCD__GUID-24FE9102-3518-4632-AD80-1FB5B60C7CBD" data-ofbid="GUID-39F86344-F459-411A-A7B1-C684F7CFFFCD__GUID-24FE9102-3518-4632-AD80-1FB5B60C7CBD">TXCODE[6:0] bits: Reflect which object has a transmit interrupt pending</li>
+                <li class="- topic/li li" id="GUID-39F86344-F459-411A-A7B1-C684F7CFFFCD__GUID-63094D16-96C2-415E-8C12-890693F39586" data-ofbid="GUID-39F86344-F459-411A-A7B1-C684F7CFFFCD__GUID-63094D16-96C2-415E-8C12-890693F39586">RXCODE[6:0] bits: Reflect which object has a receive interrupt pending</li>
+            </ul></div>
+        <p class="- topic/p p">A separate Look-up Table can be implemented for transmit and receive
+            interrupts. If more than one object has a pending interrupt, the interrupt or FIFO with
+            the highest number will show up in RXCODEx, TXCODEx and ICODEx. Once the interrupt with
+            the highest priority is cleared, the next highest priority interrupt will show up in
+            C1VECH/L. RXCODEx, TXCODEx and ICODEx are implemented with combinatorial logic using the
+            interrupt flags as inputs.</p>
+    </div>
+
+</body>
+</html>

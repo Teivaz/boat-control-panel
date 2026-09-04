@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.8.1 Receive Message Object — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-ABE11A28-ACFC-4D60-BEDB-BA3A1CF953C4.html"/>
+<link rel="next" href="GUID-823B78B9-0AED-429A-9BB3-BB082792C8E8.html"/>
+<link rel="up" href="GUID-ABE11A28-ACFC-4D60-BEDB-BA3A1CF953C4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-ABE11A28-ACFC-4D60-BEDB-BA3A1CF953C4.html">38.8 Message Reception</a></li><li>38.8.1 Receive Message Object</li></ol>
+  <div class="sib"><span>← <a href="GUID-ABE11A28-ACFC-4D60-BEDB-BA3A1CF953C4.html" rel="prev">Message Reception</a></span><span><a href="GUID-823B78B9-0AED-429A-9BB3-BB082792C8E8.html" rel="next">Reading a Receive Message Object</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-23CBB1BF-B72C-425B-B0F5-913668196D68" style="">38.8.1 Receive Message Object</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p"><a class="- topic/xref xref" href="GUID-823B78B9-0AED-429A-9BB3-BB082792C8E8.html#GUID-823B78B9-0AED-429A-9BB3-BB082792C8E8__TABLE_TML_NJN_P3B"><span>Table 38-10</span></a> specifies the receive message object used by the RX FIFOs. The
+            receive objects contain the message ID, control bits, payload and timestamp.<ul class="- topic/ul ul" id="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__UL_ZYB_RVM_P3B" data-ofbid="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__UL_ZYB_RVM_P3B">
+                <li class="- topic/li li" id="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-5799513B-E75C-4411-9271-3A2DE03F12C2" data-ofbid="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-5799513B-E75C-4411-9271-3A2DE03F12C2">SID: Standard Identifier (ID) or Base ID.</li>
+                <li class="- topic/li li" id="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-4FC4E6EA-43CA-4162-A76C-AE75FEF1F6EA" data-ofbid="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-4FC4E6EA-43CA-4162-A76C-AE75FEF1F6EA">EID: Extended Identifier.</li>
+                <li class="- topic/li li" id="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-6F70EB79-E55F-486F-9CEB-3EA2D8D12CFA" data-ofbid="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-6F70EB79-E55F-486F-9CEB-3EA2D8D12CFA">DLC: Data Length Code; specifies the number of data bytes in the frame (see
+                        <a class="- topic/xref xref" href="GUID-E3A641D3-CD93-4D89-B4FE-7D723EF2523B.html"><span><span>DLC Encoding</span></span></a>).</li>
+                <li class="- topic/li li" id="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-C601FB6B-F2A2-4F34-BD94-846D7FA10469" data-ofbid="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-C601FB6B-F2A2-4F34-BD94-846D7FA10469">IDE: Identifier Extension; IDE =
+                        <code class="+ topic/ph pr-d/codeph ph codeph">0</code> means a Base Identifier frame is received. IDE =
+                        <code class="+ topic/ph pr-d/codeph ph codeph">1</code> means an Extended Identifier frame is received.</li>
+                <li class="- topic/li li" id="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-D9CC639C-D974-4288-A57C-8D007E2C8690" data-ofbid="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-D9CC639C-D974-4288-A57C-8D007E2C8690">RTR: Remote Transmit Request; this bit is only specified in CAN 2.0 frames. If
+                    this bit is set, the module is requested to respond with a frame
+                    transmission.</li>
+                <li class="- topic/li li" id="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-F0768BB1-52F6-41B4-A4FC-1BDB4DC9F3FE" data-ofbid="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-F0768BB1-52F6-41B4-A4FC-1BDB4DC9F3FE"> FDF: FD Frame; if this bit is set, a CAN FD frame is received; otherwise, a CAN
+                    2.0 frame is received.</li>
+                <li class="- topic/li li" id="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-8C705E8F-91BB-46CA-BFF3-EE76923C9470" data-ofbid="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-8C705E8F-91BB-46CA-BFF3-EE76923C9470">BRS: Bit Rate Switch; the data phase of a CAN FD frame is received using DBR if
+                    this bit is set. If the bit is clear, the whole frame is received using
+                    NBR.</li>
+                <li class="- topic/li li" id="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-FC99BE99-D43A-49AD-84E7-DCFCA9C823C0" data-ofbid="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-FC99BE99-D43A-49AD-84E7-DCFCA9C823C0">ESI: Error Status Indicator; the ESI bit reflects the error status of the
+                    transmitting node. A recessive ESI bit in a CAN FD frame indicates that the
+                    transmitting node is error passive; a dominant bit shows that the transmitting
+                    node is error active.</li>
+                <li class="- topic/li li" id="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-53B8CFBC-A6F0-4F40-80A8-9AC0F225E90E" data-ofbid="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-53B8CFBC-A6F0-4F40-80A8-9AC0F225E90E">FILHIT: Indicates the number of the filter that matched the received
+                    message.</li>
+                <li class="- topic/li li" id="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-15537D8F-CC5D-449F-AE94-6F4300F76A90" data-ofbid="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-15537D8F-CC5D-449F-AE94-6F4300F76A90">RXMSGTS: Timestamp of the
+                    received message; timestamping can be enabled for each RX FIFO individually
+                    using RXTSEN (C1FIFOCONxL[5]). The receive message object will not contain
+                    RXMSGTS if timestamping is disabled.</li>
+                <li class="- topic/li li" id="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-6148B90E-A4DC-414D-A1D7-919113B0A6F7" data-ofbid="GUID-5609EB88-2CA0-46A2-A10A-1835E515E4A6__GUID-6148B90E-A4DC-414D-A1D7-919113B0A6F7">Receive Buffer Data: Contains the payload of the message. The maximum payload is
+                    configured by the PLSIZEx bits (CxFIFOCON[31:29]).</li>
+            </ul></div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-823B78B9-0AED-429A-9BB3-BB082792C8E8.html">38.8.1.1 Reading a Receive Message Object</a></li></ul>
+</nav>
+</body>
+</html>

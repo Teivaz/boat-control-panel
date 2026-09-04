@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>20.4 Interrupt Flags — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A694C3AA-CA9A-4485-AB77-CC0BAC00F21C.html"/>
+<link rel="next" href="GUID-CBD6D115-7264-4A01-9957-55D149675D4F.html"/>
+<link rel="up" href="GUID-D705A6DD-EDA1-467E-8D60-DF90A2DBDA13.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D705A6DD-EDA1-467E-8D60-DF90A2DBDA13.html">20 IOC - Interrupt-on-Change</a></li><li>20.4 Interrupt Flags</li></ol>
+  <div class="sib"><span>← <a href="GUID-A694C3AA-CA9A-4485-AB77-CC0BAC00F21C.html" rel="prev">Individual Pin Configuration</a></span><span><a href="GUID-CBD6D115-7264-4A01-9957-55D149675D4F.html" rel="next">Clearing Interrupt Flags</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-EF4EC0CF-2FD7-474A-BA1D-55ED5C000505__GUID-C939D8EF-4045-4B62-A3B2-DF3273ADC9C4" style="">20.4 Interrupt Flags</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-EF4EC0CF-2FD7-474A-BA1D-55ED5C000505__ID-42128-0000001E" data-ofbid="GUID-EF4EC0CF-2FD7-474A-BA1D-55ED5C000505__ID-42128-0000001E">The bits located in the IOCxF registers are status flags that
+         correspond to the interrupt-on-change pins of each port. If an expected edge is detected on
+         an appropriately enabled pin, then the status flag for that pin will be set, and an
+         interrupt will be generated if the IOCIE bit is set. The IOCIF bit located in the
+         corresponding Peripheral Interrupt Request (PIRx) register, is all the IOCxF bits ORd
+         together. The IOCIF bit is read-only. All of the IOCxF Status bits must be cleared to clear
+         the IOCIF bit.</p>
+   </div>
+
+</body>
+</html>

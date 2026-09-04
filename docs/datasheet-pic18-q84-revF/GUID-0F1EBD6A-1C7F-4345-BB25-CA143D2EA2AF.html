@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.4.5 Start, Stop and Reset Events — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2.html"/>
+<link rel="next" href="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D.html"/>
+<link rel="up" href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html">28.4 UTMR Operation</a></li><li>28.4.5 Start, Stop and Reset Events</li></ol>
+  <div class="sib"><span>← <a href="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2.html" rel="prev">External Reset Source (ERS)</a></span><span><a href="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D.html" rel="next">Start Event</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-E8206C74-C366-4B17-A4BC-AF4946492F11" style="">28.4.5 Start, Stop and Reset Events</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">To enable the counter/timer, the <a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#ID-00000005" title="Timer Enable(1,2)">ON</a> bit of the TUxyCON0 register must be set. When ON =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, the module is disabled, and the module output is cleared. </div>
+        <div class="- topic/p p">When the module is disabled, the following things apply:<ol class="- topic/ol ol" id="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__OL_TQ2_TX5_HLB" data-ofbid="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__OL_TQ2_TX5_HLB">
+                <li class="- topic/li li" id="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-4797C1F5-5D82-4A65-AD95-B9D0CD6B6225" data-ofbid="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-4797C1F5-5D82-4A65-AD95-B9D0CD6B6225">RUN SFR bit is cleared.</li>
+                <li class="- topic/li li" id="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-7B8CFBE7-B637-4C89-BCA5-BCDD59ED05E6" data-ofbid="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-7B8CFBE7-B637-4C89-BCA5-BCDD59ED05E6"><a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#ID-0000001A" title="Timer Output Polarity Select(5)">OPOL</a> bit in the TUxyCON0 register will continue to
+                    control the output polarity.</li>
+                <li class="- topic/li li" id="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-A38B8CCF-1FDB-42EB-BF76-F54C7EA4C969" data-ofbid="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-A38B8CCF-1FDB-42EB-BF76-F54C7EA4C969">ERS input logic is reset and disabled.</li>
+                <li class="- topic/li li" id="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-1688EF94-4FCC-4E2D-9B4D-CEE766BEDB1C" data-ofbid="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-1688EF94-4FCC-4E2D-9B4D-CEE766BEDB1C">Interrupts will not trigger.</li>
+                <li class="- topic/li li" id="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-13474598-7748-449A-A08B-7C287975855A" data-ofbid="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-13474598-7748-449A-A08B-7C287975855A">Clock requests are not asserted.</li>
+                <li class="- topic/li li" id="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-B30CA255-CC13-4FBE-BDC2-29487915682A" data-ofbid="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-B30CA255-CC13-4FBE-BDC2-29487915682A">All SFRs can be written.</li>
+            </ol></div>
+        <div class="- topic/p p">
+            <div class="- topic/note note important note_important" id="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-8DD7AAF5-54C5-4CDA-9CE1-E7AC066459F9" data-ofbid="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-8DD7AAF5-54C5-4CDA-9CE1-E7AC066459F9"><span class="note__title">Important:</span> 
+                <ol class="- topic/ol ol" id="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__OL_I35_ZX5_HLB" data-ofbid="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__OL_I35_ZX5_HLB">
+                    <li class="- topic/li li" id="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-E2C724E5-A867-4F59-80F3-0386140281A6" data-ofbid="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-E2C724E5-A867-4F59-80F3-0386140281A6">The value of the TUxyTMR counter and TUxyCR capture registers are not
+                        affected when the ON bit is clear, unless they are changed explicitly by the
+                        user.</li>
+                    <li class="- topic/li li" id="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-83B26C9D-89B4-4CE9-A8CD-8FF3B92D6BB5" data-ofbid="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-83B26C9D-89B4-4CE9-A8CD-8FF3B92D6BB5">Clock synchronization may apply, in which case, actions performed may or may
+                        not have immediate effect.</li>
+                    <li class="- topic/li li" id="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-F35F2EA5-50E2-4A40-A652-896900A1587D" data-ofbid="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF__GUID-F35F2EA5-50E2-4A40-A652-896900A1587D">The ON bit, like many other
+                        bits in the module, remains unchanged after a non-POR/BOR system Reset. It
+                        is recommended to clear the ON bit at the start of program execution to
+                        avoid starting the system with a running timer.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D.html">28.4.5.1 Start Event</a></li><li><a href="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907.html">28.4.5.2 Reset Event</a></li><li><a href="GUID-A0D57AB5-909A-46BF-9972-621A49224C58.html">28.4.5.3 Stop Event</a></li></ul>
+</nav>
+</body>
+</html>

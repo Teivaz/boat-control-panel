@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10.3.10.6 Reading the Program Flash Memory — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF.html"/>
+<link rel="next" href="GUID-A8FDF8F5-E9BA-4056-855B-FCA3C7018F18.html"/>
+<link rel="up" href="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html">10 NVM - Nonvolatile Memory Module</a></li><li><a href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html">10.3 Program Flash Memory (PFM)</a></li><li><a href="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4.html">10.3.10 Table Pointer Operations</a></li><li>10.3.10.6 Reading the Program Flash Memory</li></ol>
+  <div class="sib"><span>← <a href="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF.html" rel="prev">Table Pointer Boundaries</a></span><span><a href="GUID-A8FDF8F5-E9BA-4056-855B-FCA3C7018F18.html" rel="next">Data Flash Memory (DFM)</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__GUID-06A6D3E9-9844-4E70-8730-D543924C3F6B" style="">10.3.10.6 Reading the Program Flash Memory</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__ID-42121-000001EE" data-ofbid="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__ID-42121-000001EE">The <code class="+ topic/ph pr-d/codeph ph codeph">TBLRD</code> instruction retrieves data from program
+         memory at the location to which the <a class="- topic/xref xref" href="GUID-23BF27B8-E95B-449C-B987-532E5840650F.html" title="TBLPTR">TBLPTR</a> register points and places it into the <a class="- topic/xref xref" href="GUID-9613776E-377B-4ED6-BEAE-52E21851DA3D.html" title="TABLAT">TABLAT</a> SFR register. Table reads from program memory are performed one byte at a
+         time. The instruction set includes incrementing the TBLPTR register automatically for the
+         next table read operation.</p>
+      <p class="- topic/p p" id="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__ID-42121-000001F2" data-ofbid="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__ID-42121-000001F2">The CPU operation is suspended during the read and resumes operation
+         immediately after. From the user point of view, the value in the TABLAT register is valid
+         in the next instruction cycle.</p>
+      <p class="- topic/p p" id="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__ID-42121-000001F3" data-ofbid="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__ID-42121-000001F3">The internal program memory is typically organized by words. The
+         Least Significant bit of the address selects between the high and low bytes of the word.
+         The following figure illustrates the interface between the internal program memory and the
+         TABLAT register.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__ID-42121-000001F6" data-ofbid="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__ID-42121-000001F6"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 10-6. <span id="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__GUID-73DFD0F3-D500-467B-8967-BA5BFD44C276" class="fig--title">Reads from Program Flash
+            Memory</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-1D341530-3C0A-4D73-8CD0-ECF278B29A6B-high.pdf#toolbar=1" width="536.45" height="268.65"></iframe></span>
+      </figure>
+      <figure class="- topic/fig fig fignone" id="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__ID-42121-00000209" data-ofbid="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__ID-42121-00000209"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 10-7. <span id="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__GUID-F11299DB-6B32-4E48-BBD9-36D68B7E3515" class="fig--title">Program Flash Memory Read
+            Flowchart</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-AAB99E64-C45C-419B-B972-0C0C4E314E4F-high.pdf#toolbar=1" width="450" height="887.6663146779302"></iframe></span>
+      </figure>
+      <div class="- topic/example example" id="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__GUID-0EFBC82D-CFF2-4563-8B9E-DE7376C39414" data-ofbid="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2__GUID-0EFBC82D-CFF2-4563-8B9E-DE7376C39414"><h2 class="- topic/title title sectiontitle">Reading a Program Flash Memory Word</h2>
+         
+         <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c">   MOVLW   CODE_ADDR_UPPER    ; Load TBLPTR with the base   
+   MOVWF   TBLPTRU            ; address of the word
+   MOVLW   CODE_ADDR_HIGH
+   MOVWF   TBLPTRH
+   MOVLW   CODE_ADDR_LOW
+   MOVWF   TBLPTRL
+READ_WORD:
+   TBLRD*+                    ; read into TABLAT and increment
+   MOVF    TABLAT, W          ; get data
+   MOVWF   WORD_EVEN
+   TBLRD*+                    ; read into TABLAT and increment
+   MOVFW   TABLAT, W          ; get data
+   MOVF    WORD_ODD</pre>
+      </div>
+   </div>
+
+</body>
+</html>

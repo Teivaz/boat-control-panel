@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.8.7 Abort Trigger, Message in Progress — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6.html"/>
+<link rel="next" href="GUID-FC895CE6-CE5A-4B6F-A1AA-3B1509C2CEE8.html"/>
+<link rel="up" href="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li><a href="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA.html">16.8 DMA Setup and Operation</a></li><li>16.8.7 Abort Trigger, Message in Progress</li></ol>
+  <div class="sib"><span>← <a href="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6.html" rel="prev">Abort Trigger, Message Complete</a></span><span><a href="GUID-FC895CE6-CE5A-4B6F-A1AA-3B1509C2CEE8.html" rel="next">Reset</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E__GUID-3C39785A-D906-4BA8-8E09-88764454EBF6" style="">16.8.7 Abort Trigger, Message in Progress</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">When an abort interrupt request is received in a DMA transaction, the DMA
+            will perform a soft-stop by clearing the DGO bit (i.e., if the DMA was reading the
+            source register, it will complete the read operation and then clear the DGO bit).</p>
+        <p class="- topic/p p">The <a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#BITFIELD_QJJ_143_F1B" title="Start of Transfer Interrupt Request Enable"><span><span>SIRQEN</span></span></a> bit is cleared to prevent any overrun and the <a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#UV1_PQ4_3GB" title="Abort of Transfer Interrupt Request Enable"><span><span>AIRQEN</span></span></a> bit is cleared to prevent any false aborts. When the DGO bit is set
+            again, the DMA will resume operation from where it left off after the soft-stop.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E__FIG_KTV_VHD_TFB" data-ofbid="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E__FIG_KTV_VHD_TFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 16-12. <span id="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E__GUID-64B07737-0923-43E8-BE0B-31587FB6AC82" class="fig--title">Abort During Message
+                Transfer</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-00E92EFF-299B-4E69-B94F-D5DC03A109D9-high.pdf#toolbar=1" width="554.94" height="469.58"></iframe></span>
+        </figure>
+        <div class="- topic/note note notype note_notype" id="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E__GUID-37100B82-00DD-4E1E-BC49-509D63946F49" data-ofbid="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E__GUID-37100B82-00DD-4E1E-BC49-509D63946F49"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E__OL_YPV_ZFX_SFB" data-ofbid="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E__OL_YPV_ZFX_SFB">
+                <li class="- topic/li li" id="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E__GUID-F7253568-F7A7-4E98-AAF2-B38E221D7FDA" data-ofbid="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E__GUID-F7253568-F7A7-4E98-AAF2-B38E221D7FDA">SR - Source Read</li>
+                <li class="- topic/li li" id="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E__GUID-FC9EF6A6-97A5-4394-977C-B2395E1F7193" data-ofbid="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E__GUID-FC9EF6A6-97A5-4394-977C-B2395E1F7193">DW - Destination Write</li>
+            </ol>
+        </div>
+        
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>27.1.6.3 Period and Duty Cycle Measurement Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C3300C35-E5CA-4A0E-9161-EA705B4B9742.html"/>
+<link rel="next" href="GUID-AB5B1B36-86AD-49F2-99CF-4E6B1FA9DA8F.html"/>
+<link rel="up" href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3.html">27 SMT - Signal Measurement Timer</a></li><li><a href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html">27.1 SMT Operation</a></li><li><a href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html">27.1.6 Modes of Operation</a></li><li>27.1.6.3 Period and Duty Cycle Measurement Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-C3300C35-E5CA-4A0E-9161-EA705B4B9742.html" rel="prev">Gated Timer Mode</a></span><span><a href="GUID-AB5B1B36-86AD-49F2-99CF-4E6B1FA9DA8F.html" rel="next">High and Low Measurement Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-DC9F6824-4CD1-4A0A-8DCB-DBF8EE5E3347__GUID-585E7AAD-E3A4-4526-959D-B93F3D0A8886" style="">27.1.6.3 Period and Duty Cycle Measurement
+        Mode</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">In this mode, either the duty cycle or period of the input signal can be
+            acquired relative to the SMT clock. The SMTxCPW register is updated on a falling edge of
+            the signal, and the SMTxCPR register is updated on a rising edge of the signal. The
+            rising edge also resets the SMTxTMR register to 0x000001. The GO bit is reset on a
+            rising edge when the SMT is in Single Acquisition mode. Refer to the figures below.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-DC9F6824-4CD1-4A0A-8DCB-DBF8EE5E3347__FIG_FRN_RZY_1BB" data-ofbid="GUID-DC9F6824-4CD1-4A0A-8DCB-DBF8EE5E3347__FIG_FRN_RZY_1BB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 27-6. <span id="GUID-DC9F6824-4CD1-4A0A-8DCB-DBF8EE5E3347__GUID-8F5F8C7B-0758-4B90-BC80-2E1D3E7F0063" class="fig--title">Period and Duty Cycle, Repeat
+                Acquisition Mode Timing Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-E80F1CD3-3FCC-4A5B-8DDB-2DED0D1D29E8-high.pdf#toolbar=1" width="450" height="1079.7982195845698"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-DC9F6824-4CD1-4A0A-8DCB-DBF8EE5E3347__FIG_HY4_RZY_1BB" data-ofbid="GUID-DC9F6824-4CD1-4A0A-8DCB-DBF8EE5E3347__FIG_HY4_RZY_1BB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 27-7. <span id="GUID-DC9F6824-4CD1-4A0A-8DCB-DBF8EE5E3347__GUID-01AD5B9D-EB22-4D72-8B96-126A5AFFE968" class="fig--title">Period and Duty Cycle, Single
+                Acquisition Mode Timing Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-95DE6DA5-2A91-4442-BCF4-6F6E0E9FD0C4-high.pdf#toolbar=1" width="450" height="1077.8753709198813"></iframe></span>
+        </figure>
+        
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.2.4 PLL Input Switch — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-62590B6D-4A64-4135-B351-CBBCFF83B793.html"/>
+<link rel="next" href="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03.html"/>
+<link rel="up" href="GUID-26C95464-A09C-4F40-954D-AACD69628A0E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-26C95464-A09C-4F40-954D-AACD69628A0E.html">12.2 Clock Switching</a></li><li>12.2.4 PLL Input Switch</li></ol>
+  <div class="sib"><span>← <a href="GUID-62590B6D-4A64-4135-B351-CBBCFF83B793.html" rel="prev">CSWHOLD</a></span><span><a href="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03.html" rel="next">Clock Switch and Sleep</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-303128D4-96DB-4AB4-9068-7CD2A08AE796__GUID-F892B253-F0A7-4980-B42C-996CA75C0D86" style="">12.2.4 PLL Input Switch</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">Switching between the PLL and any non-PLL source is handled in the same manner as
+            any other clock source change. </p>
+        <div class="- topic/p p">When the <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a> selects a source with a PLL, the system
+            continues to operate using the current oscillator until the new oscillator is ready.
+            When the new source is ready, the associated Status bit in the Oscillator Status (<a class="- topic/xref xref" href="GUID-56425695-1C07-4B9A-A4DC-F86CD572BBCC.html" title="OSCSTAT">OSCSTAT</a>) register is set, and once the PLL is locked and ready for use, the
+            PLL is Ready (<a class="- topic/xref xref" href="GUID-56425695-1C07-4B9A-A4DC-F86CD572BBCC.html#BITFIELD_AGS_SC3_ZGB" title="PLL is Ready">PLLR</a>) bit is set. Once both the source and PLL are ready, the
+            switch will complete.</div>
+</div>
+
+</body>
+</html>

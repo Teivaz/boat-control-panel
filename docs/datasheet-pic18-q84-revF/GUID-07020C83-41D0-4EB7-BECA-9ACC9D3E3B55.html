@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.2.6.1 Sleep Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F59E6799-E0FC-4E23-8D95-8C4E523375A6.html"/>
+<link rel="next" href="GUID-97D5D04E-FFC6-44FA-A086-EF7BCC4CF4AC.html"/>
+<link rel="up" href="GUID-F59E6799-E0FC-4E23-8D95-8C4E523375A6.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-84A4D028-1C85-48B1-A96D-5816A098641F.html">38.2 Modes of Operation</a></li><li><a href="GUID-F59E6799-E0FC-4E23-8D95-8C4E523375A6.html">38.2.6 Low-Power Modes</a></li><li>38.2.6.1 Sleep Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-F59E6799-E0FC-4E23-8D95-8C4E523375A6.html" rel="prev">Low-Power Modes</a></span><span><a href="GUID-97D5D04E-FFC6-44FA-A086-EF7BCC4CF4AC.html" rel="next">Idle Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-07020C83-41D0-4EB7-BECA-9ACC9D3E3B55__GUID-59D3BF08-9FFC-4B39-8F04-62150421DE4A" style="">38.2.6.1 Sleep Mode</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">In the CAN module, special conditions need to be met for Sleep mode. The module must
+            first be switched to Disable mode by setting REQOPx = <code class="+ topic/ph pr-d/codeph ph codeph">001</code>. When OPMODx
+            = <code class="+ topic/ph pr-d/codeph ph codeph">001</code>, indicating Disable mode has been achieved, the CAN FD Protocol
+            Module enters Sleep mode after a Sleep mode request.</p>
+        <p class="- topic/p p">In Sleep mode, the register content does not change, so the OPMODx bits do not change. At
+            the end of Sleep, the module will continue in the mode specified by the OPMODx bits
+            previous to Sleep mode (which needs to be Disable mode, OPMODx = <code class="+ topic/ph pr-d/codeph ph codeph">001</code>).
+            If the user executes a <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction without switching to Disable
+            mode, the module assumes a clock is available to read/write from RAM. Since the system
+            clock input is not available in Sleep mode, the CAN module cannot run as it requires a
+            system clock to transmit or receive. Also, the FIFO is in system RAM, which has no clock
+            in Sleep mode.</p>
+        <p class="- topic/p p">Recommended steps:</p>
+        <p class="- topic/p p">1. Write the REQOP[2:0] bits to ‘<code class="+ topic/ph pr-d/codeph ph codeph">001</code>’; the module will enter Disable
+            mode.</p>
+        <p class="- topic/p p">2. Poll the OPMOD[2:0] bits to verify whether they are ‘<code class="+ topic/ph pr-d/codeph ph codeph">001</code>’, which
+            indicates that the module has successfully entered Disable mode.</p>
+        <p class="- topic/p p">3. Execute the <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction.</p>
+    </div>
+
+</body>
+</html>

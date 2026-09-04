@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>40 HLVD - High/Low-Voltage Detect — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-8564D221-9A24-439C-A703-46E343D01D51.html"/>
+<link rel="next" href="GUID-584471F8-D262-4AED-83B3-1C5A01BFE8B6.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>40 HLVD - High/Low-Voltage Detect</li></ol>
+  <div class="sib"><span>← <a href="GUID-8564D221-9A24-439C-A703-46E343D01D51.html" rel="prev">Effects of Reset</a></span><span><a href="GUID-584471F8-D262-4AED-83B3-1C5A01BFE8B6.html" rel="next">Operation</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95__GUID-8567BD92-CC05-40F4-9312-E9BE19C46273" style="">40 HLVD - High/Low-Voltage Detect</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95__ID-42124-00000004" data-ofbid="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95__ID-42124-00000004">The HLVD module can be configured to monitor the device voltage.
+         This is useful in battery monitoring applications. Complete control of the HLVD module is
+         provided through the <a class="- topic/xref xref" href="GUID-0B1DF746-9022-49B5-A088-565014A88929.html#GUID-0B1DF746-9022-49B5-A088-565014A88929__ID-00000015">HLVDCON0</a> and <a class="- topic/xref xref" href="GUID-A1EAA8BD-E4DA-4400-8695-2AB3D6E5FB53.html#GUID-A1EAA8BD-E4DA-4400-8695-2AB3D6E5FB53__ID-00000001">HLVDCON1</a> registers.</p>
+      <p class="- topic/p p" id="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95__ID-42124-0000000A" data-ofbid="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95__ID-42124-0000000A">Refer to the figure below for a simplified block diagram of the HLVD
+         module.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95__GUID-4BDD4944-566A-4DEB-B396-0464C4F98BB4" data-ofbid="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95__GUID-4BDD4944-566A-4DEB-B396-0464C4F98BB4"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 40-1. <span id="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95__GUID-D476AFF1-3E36-46E5-8F1F-F2AD74077885" class="fig--title">HLVD Module Block Diagram</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-5D6CFCF0-211E-445E-AC75-4F9EADA29CDE-high.pdf#toolbar=1" width="450" height="719.7179543459174"></iframe></span>
+      </figure>
+      <p class="- topic/p p" id="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95__ID-42124-0000000C" data-ofbid="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95__ID-42124-0000000C">Since the HLVD can be software enabled through the <a class="- topic/xref xref" href="GUID-0B1DF746-9022-49B5-A088-565014A88929.html#ID-00000019" title="High/Low-Voltage Detect Power Enable">EN</a>
+         bit, setting and clearing the enable bit does not produce a false HLVD event glitch. Each
+         time the HLVD module is enabled, the <a class="- topic/xref xref" href="GUID-0B1DF746-9022-49B5-A088-565014A88929.html#ID-00000027" title="Band Gap Reference Voltages Stable Status Flag">RDY</a>
+         bit can be used to detect when the module is stable and ready to use.</p>
+      <p class="- topic/p p" id="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95__ID-42124-0000000E" data-ofbid="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95__ID-42124-0000000E">The <a class="- topic/xref xref" href="GUID-0B1DF746-9022-49B5-A088-565014A88929.html#ID-0000002E" title="HLVD Positive going (High-Voltage) Interrupt Enable">INTH</a>
+         and <a class="- topic/xref xref" href="GUID-0B1DF746-9022-49B5-A088-565014A88929.html#ID-00000035" title="HLVD Negative going (Low-Voltage) Interrupt Enable">INTL</a> bits determine the overall operation of the module. When INTH is set, the
+         module monitors for rises in V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> above the trip point set by the bits. When INTL
+         is set, the module monitors for drops in V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> below the trip point set by the
+            <a class="- topic/xref xref" href="GUID-A1EAA8BD-E4DA-4400-8695-2AB3D6E5FB53.html#ID-00000005" title="High/Low-Voltage Detection Limit Selection">SEL</a> bits. When both the INTH and INTL bits are set, any changes above or below
+         the trip point set by the SEL bits can be monitored.</p>
+      <p class="- topic/p p" id="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95__ID-42124-00000011" data-ofbid="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95__ID-42124-00000011">The <a class="- topic/xref xref" href="GUID-0B1DF746-9022-49B5-A088-565014A88929.html#ID-00000020" title="HLVD Comparator Output">OUT</a>
+         bit can be read to determine if the voltage is greater than or less than the selected trip
+         point.</p>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-584471F8-D262-4AED-83B3-1C5A01BFE8B6.html">40.1 Operation</a></li><li><a href="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9.html">40.2 Setup</a></li><li><a href="GUID-81DEED0A-B370-4496-A73F-8DEAD194C51E.html">40.3 Current Consumption</a></li><li><a href="GUID-BAC8EAC7-146D-4EB0-8B1C-7E36EE25E3E0.html">40.4 HLVD Start-Up Time</a></li><li><a href="GUID-287A2ED2-284C-4D57-84C1-4E6452D6CE5F.html">40.5 Applications</a></li><li><a href="GUID-8A8BEE0D-A866-4FAE-A768-6FA81969AABE.html">40.6 Operation During Sleep</a></li><li><a href="GUID-E9CED777-A9EF-42B8-B3E5-17FE666A318F.html">40.7 Operation During Idle and Doze Modes</a></li><li><a href="GUID-0B11288B-14A2-42DF-8C12-4D3D6B3526FB.html">40.8 Effects of a Reset</a></li><li><a href="GUID-D2530185-CB0F-4E4A-8BB8-5F8384A99CDB.html">40.9 Register Definitions: HLVD Control</a></li><li><a href="GUID-1DC1DE41-2CEF-4940-B09D-735438E2F285.html">40.10 Register Summary - HLVD</a></li></ul>
+</nav>
+</body>
+</html>

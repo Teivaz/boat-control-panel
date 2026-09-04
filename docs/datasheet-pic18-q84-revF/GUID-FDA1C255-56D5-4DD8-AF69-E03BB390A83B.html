@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>14.2 Brown-out Reset (BOR) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E4C37F33-791C-4096-89F9-F67020E8C314.html"/>
+<link rel="next" href="GUID-16DE7E45-4A0C-449E-B276-FDE72374172B.html"/>
+<link rel="up" href="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F.html">14 Resets</a></li><li>14.2 Brown-out Reset (BOR)</li></ol>
+  <div class="sib"><span>← <a href="GUID-E4C37F33-791C-4096-89F9-F67020E8C314.html" rel="prev">Power-on Reset (POR)</a></span><span><a href="GUID-16DE7E45-4A0C-449E-B276-FDE72374172B.html" rel="next">BOR Is Always On</a> →</span></div>
+</nav>
+
+	<h1 class="- topic/title title topictitle1" id="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__GUID-35152DB8-1310-4CB8-AAC1-42AD9D0F0FF1" style="">14.2 Brown-out Reset (BOR)</h1>
+	<div class="- topic/body body">
+		<p class="- topic/p p" id="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__ID-42138-000001BF" data-ofbid="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__ID-42138-000001BF">The BOR circuit holds the device in Reset when V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> reaches a
+			selectable minimum level. Between the POR and BOR, complete voltage range coverage for
+			execution protection can be implemented. The <a class="- topic/xref xref" href="GUID-96AC33D5-0A2F-4CEF-BD33-7B4D9ED59493.html#ID-0000004B" title="Brown-out Reset Status"><span class="+ topic/ph sidscDomain-d/active-low ph active-low">BOR</span></a> bit will be set to ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’ if
+			a BOR has occurred.</p>
+		<p class="- topic/p p" id="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__ID-42138-000001C1" data-ofbid="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__ID-42138-000001C1">The BOR module has four operating modes controlled by the BOREN
+			Configuration bits. The four operating modes are:</p>
+		<ul class="- topic/ul ul" id="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__UL_VV3_BSJ_VGB" data-ofbid="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__UL_VV3_BSJ_VGB">
+			<li class="- topic/li li" id="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__ID-42138-000001C2" data-ofbid="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__ID-42138-000001C2">BOR is always on</li>
+			<li class="- topic/li li" id="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__ID-42138-000001C4" data-ofbid="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__ID-42138-000001C4">BOR is off when in Sleep</li>
+			<li class="- topic/li li" id="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__ID-42138-000001C6" data-ofbid="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__ID-42138-000001C6">BOR is controlled by software</li>
+			<li class="- topic/li li" id="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__ID-42138-000001C8" data-ofbid="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__ID-42138-000001C8">BOR is always off</li>
+		</ul>
+		<p class="- topic/p p">Refer to the BOR Operating Modes table for more information.</p>
+		<p class="- topic/p p" id="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__ID-42138-000001CD" data-ofbid="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B__ID-42138-000001CD">A V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> noise rejection filter prevents the BOR from triggering
+			on small events. If V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> falls below V<sub class="+ topic/ph hi-d/sub ph sub">BOR</sub> for a duration greater than
+			parameter T<sub class="+ topic/ph hi-d/sub ph sub">BORDC</sub>, the device will reset. Refer to the <strong class="+ topic/ph hi-d/b ph b">“Electrical
+				Specifications”</strong> chapter for more details.</p>
+	</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-16DE7E45-4A0C-449E-B276-FDE72374172B.html">14.2.1 BOR Is Always On</a></li><li><a href="GUID-0F7555B6-4A6E-4415-A70A-B1D0D4C47893.html">14.2.2 BOR Is Off in Sleep</a></li><li><a href="GUID-3610216A-E5B3-4AE3-AB84-F30DA513AE9C.html">14.2.3 BOR Controlled by Software</a></li><li><a href="GUID-62CD76E0-CE2A-42E4-ABCE-D2C32CE46D95.html">14.2.4 BOR Is Always Off</a></li><li><a href="GUID-7C2E68AF-57D7-464E-A104-91E9B6A9D3E1.html">14.2.5 BOR and Bulk Erase</a></li></ul>
+</nav>
+</body>
+</html>

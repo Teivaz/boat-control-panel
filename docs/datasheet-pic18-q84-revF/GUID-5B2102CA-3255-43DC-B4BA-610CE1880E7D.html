@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10.2 Unlock Sequence — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4A0E75C0-5F8B-483C-9C0C-19EA428F2364.html"/>
+<link rel="next" href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html"/>
+<link rel="up" href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html">10 NVM - Nonvolatile Memory Module</a></li><li>10.2 Unlock Sequence</li></ol>
+  <div class="sib"><span>← <a href="GUID-4A0E75C0-5F8B-483C-9C0C-19EA428F2364.html" rel="prev">Operations</a></span><span><a href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html" rel="next">Program Flash Memory (PFM)</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-5B2102CA-3255-43DC-B4BA-610CE1880E7D__GUID-A62DF308-1B84-4452-81F3-9319450E6B68" style="">10.2 Unlock Sequence</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">As an additional layer of protection against memory corruption, a specific code execution
+            unlock sequence is required to initiate a write or erase operation. All interrupts need
+            to be disabled before starting the unlock sequence to ensure proper execution.</p>
+        <div class="- topic/example example" id="GUID-5B2102CA-3255-43DC-B4BA-610CE1880E7D__GUID-14F35D48-5E49-41EB-B86B-B45C1465425C" data-ofbid="GUID-5B2102CA-3255-43DC-B4BA-610CE1880E7D__GUID-14F35D48-5E49-41EB-B86B-B45C1465425C"><h2 class="- topic/title title sectiontitle">Unlock Sequence in C</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c">NVMLOCK = <span class="hl-number">0x55</span>;
+NVMLOCK = <span class="hl-number">0xAA</span>;
+NVMCON0bits.GO = <span class="hl-number">1</span>;</pre>
+        </div>
+    </div>
+
+</body>
+</html>

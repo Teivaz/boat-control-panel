@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.3.3 Fail-Safe Operation - Primary and Secondary Fail-Safe Clock Monitors — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-FB65206A-8CF9-4DC5-8013-8B2239B5AA06.html"/>
+<link rel="next" href="GUID-EDE5C4A5-DD96-4259-8819-49751F924D69.html"/>
+<link rel="up" href="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB.html">12.3 Fail-Safe Clock Monitor (FSCM)</a></li><li>12.3.3 Fail-Safe Operation - Primary and Secondary Fail-Safe Clock Monitors</li></ol>
+  <div class="sib"><span>← <a href="GUID-FB65206A-8CF9-4DC5-8013-8B2239B5AA06.html" rel="prev">Fail-Safe Operation - FOSC Fail-Safe Clock Monitor</a></span><span><a href="GUID-EDE5C4A5-DD96-4259-8819-49751F924D69.html" rel="next">Fail-Safe Clock Monitor Fault Injection</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-0E92653A-FADA-469F-A74C-81A1FF8638E5__GUID-C10F0103-B129-45A5-826F-CAA1339A6F6C" style="">12.3.3 Fail-Safe Operation - Primary and Secondary
+        Fail-Safe Clock Monitors</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p">When the primary external clock (EXTOSC) or the secondary external clock (SOSC) fail, the
+                        Oscillator Fail Interrupt Flag (OSFIF) bit of the PIR registers will be set.
+                        Additionally, the corresponding FSCM failure status bit (<a class="- topic/xref xref" href="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC.html#BITFIELD_ZX3_YCQ_BKB" title="Primary Oscillator Fail-Safe Clock Monitor Status(2)">FSCMPEV</a> or <a class="- topic/xref xref" href="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC.html#DBC_JBQ_BKB" title="SOSC Fail-Safe Clock Monitor Status(2)">FSCMSEV</a>, respectively) will be set. If the Oscillator Fail
+                        Interrupt Enable (OSFIE) bit has been set, an interrupt will be generated
+                        when OSFIF is high. It is important to note that neither the primary or
+                        secondary Fail-Safe Clock Monitors will cause a clock switch to occur in the
+                        event of a failure, and it is up to the user to address the clock fail
+                        event.</div>
+</div>
+
+</body>
+</html>

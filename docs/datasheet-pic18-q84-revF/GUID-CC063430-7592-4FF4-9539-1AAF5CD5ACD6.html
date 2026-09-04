@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>8.2 Code Protection — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-6E6BCFB2-A18A-453C-A6DC-57BCBDE063F1.html"/>
+<link rel="next" href="GUID-9DED854E-3928-4DB4-8A7F-6A826BD42D82.html"/>
+<link rel="up" href="GUID-9C35573A-184E-4015-8E03-D617F440E66E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9C35573A-184E-4015-8E03-D617F440E66E.html">8 Device Configuration</a></li><li>8.2 Code Protection</li></ol>
+  <div class="sib"><span>← <a href="GUID-6E6BCFB2-A18A-453C-A6DC-57BCBDE063F1.html" rel="prev">Configuration Settings</a></span><span><a href="GUID-9DED854E-3928-4DB4-8A7F-6A826BD42D82.html" rel="next">User ID</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-CC063430-7592-4FF4-9539-1AAF5CD5ACD6__GUID-213AD83B-BE0E-4B54-A4A4-D03DECD689F1" style="">8.2 Code Protection</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-CC063430-7592-4FF4-9539-1AAF5CD5ACD6__ID-42112-00000A9C" data-ofbid="GUID-CC063430-7592-4FF4-9539-1AAF5CD5ACD6__ID-42112-00000A9C">Code protection allows the device to be protected from unauthorized
+         access. Internal access to the program memory is unaffected by any code protection setting.
+         A single code-protect bit controls the access for both program memory and data EEPROM
+         memory.</p>
+      <p class="- topic/p p" id="GUID-CC063430-7592-4FF4-9539-1AAF5CD5ACD6__ID-42112-00000A9F" data-ofbid="GUID-CC063430-7592-4FF4-9539-1AAF5CD5ACD6__ID-42112-00000A9F">The entire program memory and Data EEPROM space is protected from
+         external reads and writes by the <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-CC063430-7592-4FF4-9539-1AAF5CD5ACD6__ID-42112-00000AA0">CP</span> bit.
+         When <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-CC063430-7592-4FF4-9539-1AAF5CD5ACD6__ID-42112-00000AA1">CP</span> = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-CC063430-7592-4FF4-9539-1AAF5CD5ACD6__ID-42112-00000AA2">0</code>, external reads and writes are inhibited and a read will return all ‘<code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-CC063430-7592-4FF4-9539-1AAF5CD5ACD6__ID-42112-00000AA3">0</code>’s. The CPU can continue to read the memory, regardless
+         of the protection bit settings. Self-writing the program memory is dependent upon the write
+         protection setting.</p>
+   </div>
+
+</body>
+</html>

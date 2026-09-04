@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.7.2.2 Mask Bits — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7D887803-AFCC-4FA1-B45A-2CB438AED875.html"/>
+<link rel="next" href="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE.html"/>
+<link rel="up" href="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-2FBE3C3E-EDE4-4ABD-A9FA-D9AC9D794D77.html">38.7 Message Filtering</a></li><li><a href="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735.html">38.7.2 Filtering a Received Message</a></li><li>38.7.2.2 Mask Bits</li></ol>
+  <div class="sib"><span>← <a href="GUID-7D887803-AFCC-4FA1-B45A-2CB438AED875.html" rel="prev">Filtering Standard or Extended Frames</a></span><span><a href="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE.html" rel="next">Filtering on Data Bytes</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-BA224378-C9C7-490B-9B1E-2DF80A58F302__GUID-2D698345-6981-4030-97CB-6A52D89F4DE9" style="">38.7.2.2 Mask Bits</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The mask object is used to ignore selected bits of the received identifier.
+            The masked bits (mask bits with a value of ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’) of the RXMAB will not
+            be compared with the bits in the filter object. For example, to receive all messages
+            with Identifiers 0, 1, 2 and 3, it is required to mask the lower two bits of the
+            identifier by clearing the corresponding bits of the mask object.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-BA224378-C9C7-490B-9B1E-2DF80A58F302__FIG_KR2_PPM_P3B" data-ofbid="GUID-BA224378-C9C7-490B-9B1E-2DF80A58F302__FIG_KR2_PPM_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-15. <span id="GUID-BA224378-C9C7-490B-9B1E-2DF80A58F302__GUID-14E627AE-44BD-451A-A2BA-0FFDE9D35F2E" class="fig--title">Filter Match</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-BA224378-C9C7-490B-9B1E-2DF80A58F302__IMAGE_LR2_PPM_P3B" src="GUID-02128027-9004-41DA-A2E8-EA540D6B8F97-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

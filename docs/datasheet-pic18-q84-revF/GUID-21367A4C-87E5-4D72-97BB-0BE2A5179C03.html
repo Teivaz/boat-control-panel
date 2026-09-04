@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>29.4.4 PWM Period — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-51BE6410-F96B-4539-9DAF-342E747FBF2A.html"/>
+<link rel="next" href="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C.html"/>
+<link rel="up" href="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html">29 CCP - Capture/Compare/PWM Module</a></li><li><a href="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE.html">29.4 PWM Overview</a></li><li>29.4.4 PWM Period</li></ol>
+  <div class="sib"><span>← <a href="GUID-51BE6410-F96B-4539-9DAF-342E747FBF2A.html" rel="prev">Timer2 Timer Resource</a></span><span><a href="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C.html" rel="next">PWM Duty Cycle</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__GUID-FA3AC2E7-4C07-4FC3-863D-26C9DA79E66A" style="">29.4.4 PWM Period</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__ID-42109-000006E0" data-ofbid="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__ID-42109-000006E0">The PWM period is specified by the T2PR register of Timer2. The PWM
+         period can be calculated using the formula in the equation below.</p>
+      <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__EQUATION-DISPLAY_PHW_524_N1B" data-ofbid="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__EQUATION-DISPLAY_PHW_524_N1B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 29-1. <span id="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__GUID-80B50C04-8581-4276-86B7-256DCAC8C1D0" class="fig--title">PWM Period</span></span></figcaption>
+         
+         <div class="+ topic/div equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                  <mrow>
+                     <mi>P</mi>
+                     <mi>W</mi>
+                     <mi>M</mi>
+                     <mtext> </mtext>
+                     <mi>P</mi>
+                     <mi>e</mi>
+                     <mi>r</mi>
+                     <mi>i</mi>
+                     <mi>o</mi>
+                     <mi>d</mi>
+                     <mo>=</mo>
+                     <mrow>
+                        <mo>[</mo>
+                        <mrow>
+                           <mo>(</mo>
+                           <mi>T</mi>
+                           <mn>2</mn>
+                           <mi>P</mi>
+                           <mi>R</mi>
+                           <mo>+</mo>
+                           <mn>1</mn>
+                           <mo>)</mo>
+                        </mrow>
+                        <mo>]</mo>
+                     </mrow>
+                     <mo>•</mo>
+                     <mn>4</mn>
+                     <mo>•</mo>
+                     <msub>
+                        <mrow>
+                           <mi>T</mi>
+                        </mrow>
+                        <mrow>
+                           <mi>O</mi>
+                           <mi>S</mi>
+                           <mi>C</mi>
+                        </mrow>
+                     </msub>
+                     <mo>•</mo>
+                     <mrow>
+                        <mo>(</mo>
+                        <mi>T</mi>
+                        <mi>M</mi>
+                        <mi>R</mi>
+                        <mn>2</mn>
+                        <mtext> </mtext>
+                        <mi>Pr</mi>
+                        <mi>e</mi>
+                        <mi>s</mi>
+                        <mi>c</mi>
+                        <mi>a</mi>
+                        <mi>l</mi>
+                        <mi>e</mi>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>V</mi>
+                        <mi>a</mi>
+                        <mi>l</mi>
+                        <mi>u</mi>
+                        <mi>e</mi>
+                        <mo>)</mo>
+                        <mo>⁢</mo>
+                     </mrow>
+                  </mrow>
+               </math></div>
+      </figure>
+      <p class="- topic/p p">where T<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> = 1/F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub></p>
+      <p class="- topic/p p" id="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__ID-42109-000006E6" data-ofbid="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__ID-42109-000006E6">When T2TMR is equal to T2PR, the following three events occur on the
+         next increment event:</p>
+      <ul class="- topic/ul ul" id="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__UL_LS4_HQS_CZ" data-ofbid="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__UL_LS4_HQS_CZ">
+         <li class="- topic/li li" id="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__ID-42109-000006E7" data-ofbid="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__ID-42109-000006E7">T2TMR is cleared</li>
+         <li class="- topic/li li" id="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__ID-42109-000006E9" data-ofbid="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__ID-42109-000006E9">The CCPx pin is set (Exception: If the PWM duty cycle = 0%, the
+            pin will not be set)</li>
+         <li class="- topic/li li" id="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__ID-42109-000006EC" data-ofbid="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__ID-42109-000006EC">The PWM duty cycle is transferred from the CCPRx register into a
+            10-bit buffer</li>
+      </ul>
+      <div class="- topic/note note important note_important" id="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__ID-42109-000006F5" data-ofbid="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03__ID-42109-000006F5"><span class="note__title">Important:</span> The Timer postscaler (see the “<strong class="+ topic/ph hi-d/b ph b">Timer2
+            Interrupt</strong>” section in the <strong class="+ topic/ph hi-d/b ph b">“TMR2 - Timer2 Module”</strong> chapter) is not used in the
+         determination of the PWM frequency.</div>
+   </div>
+
+</body>
+</html>

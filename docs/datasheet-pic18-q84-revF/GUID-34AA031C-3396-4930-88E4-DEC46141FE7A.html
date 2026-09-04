@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.2.2 Push-Pull Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF.html"/>
+<link rel="next" href="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44.html"/>
+<link rel="up" href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li><a href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html">32.2 Operating Modes</a></li><li>32.2.2 Push-Pull Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF.html" rel="prev">Half Bridge Mode</a></span><span><a href="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44.html" rel="next">Full Bridge Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__GUID-2028DE01-9D5A-4E0C-ADF0-812B5C91B036" style="">32.2.2 Push-Pull Mode</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__ID-42115-0000006F" data-ofbid="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__ID-42115-0000006F">In Push-Pull mode, two output signals are generated, alternating
+            copies of the input as illustrated in <a class="- topic/xref xref" href="#GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__ID-42115-00000088"><span>Figure 32-3</span></a>. This alternation creates the Push-Pull effect required
+            for driving some transformer-based power supply designs. Steering modes are not used in
+            Push-Pull mode. A basic block diagram for the Push-Pull mode is shown in <a class="- topic/xref xref" href="#GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__FIG_WQT_GRV_TZ"><span>Figure 32-4</span></a>.</p>
+        <p class="- topic/p p" id="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__ID-42115-00000072" data-ofbid="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__ID-42115-00000072">The Push-Pull sequencer is reset whenever <a class="- topic/xref xref" href="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B.html#ID-00000005" title="CWG Enable">EN</a> = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__ID-42115-00000073">0</code> or if an
+            auto-shutdown event occurs. The sequencer is clocked by the first input pulse, and the
+            first output appears on CWGxA.</p>
+        <p class="- topic/p p" id="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__ID-42115-00000074" data-ofbid="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__ID-42115-00000074">The unused outputs CWGxC and CWGxD drive copies of CWGxA and
+            CWGxB, respectively, but with polarity controlled by the <a class="- topic/xref xref" href="GUID-2EA8EF2E-9030-424D-BE37-7E5A7AA6098D.html#ID-00000029" title="CWG Output ‘y’ Polarity">POLC</a> and <a class="- topic/xref xref" href="GUID-2EA8EF2E-9030-424D-BE37-7E5A7AA6098D.html#ID-00000029" title="CWG Output ‘y’ Polarity">POLD</a> bits, respectively.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__ID-42115-00000088" data-ofbid="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__ID-42115-00000088"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 32-3. <span id="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__GUID-32870359-EF0C-4BEC-AE56-F21338D81D0B" class="fig--title">CWG Push-Pull Mode
+                Operation</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__IMAGE_UJH_YR4_TZ" src="GUID-1A812DD5-B667-4AEA-A2A1-4ECF4BF494FB-high.svg"/></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__FIG_WQT_GRV_TZ" data-ofbid="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__FIG_WQT_GRV_TZ"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 32-4. <span id="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A__GUID-4DBB815B-6A90-4ABD-8C04-7FF137A2385E" class="fig--title">Simplified CWG Block Diagram
+                (Push-Pull Mode, MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b101</code>)</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-6C5BAE86-8153-4AB7-BD39-91DB5EEF3732-high.pdf#toolbar=1" width="450" height="634.418525027961"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.5.11 Remote Transmit Request (RTR) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2901637A-8342-4C73-85DB-476C8B6D6FC9.html"/>
+<link rel="next" href="GUID-7151D7CF-7A18-40CD-99E2-7257D1C523A2.html"/>
+<link rel="up" href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html">38.5 Message Transmission</a></li><li>38.5.11 Remote Transmit Request (RTR)</li></ol>
+  <div class="sib"><span>← <a href="GUID-2901637A-8342-4C73-85DB-476C8B6D6FC9.html" rel="prev">Aborting Transmission</a></span><span><a href="GUID-7151D7CF-7A18-40CD-99E2-7257D1C523A2.html" rel="next">Mismatch of DLC and Payload Size During Transmission</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A__GUID-2859BCB5-95AB-4F07-88BA-A48C6993707B" style="">38.5.11 Remote Transmit Request (RTR)</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The CAN bus system has a method for allowing a host node to request data from another
+            node. The host sends a message with the RTR bit set. The message contains no data, only
+            an address to trigger a filter match.</p>
+        <p class="- topic/p p">Remote frames are only specified for CAN 2.0 frames; they are not supported in CAN FD
+            frames.</p>
+        <p class="- topic/p p">The filter that is configured to respond to a Remote Transmit Request will point to a
+            FIFO that is configured for transmission and RTREN has to be set.</p>
+        <p class="- topic/p p">Automatic remote data requests can be handled without MCU intervention. If a FIFO is
+            properly configured, when a filter matches and points to the FIFO, the FIFO will be
+            queued for transmission.</p>
+        <div class="- topic/p p">The FIFO must be configured as follows:<ul class="- topic/ul ul" id="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A__UL_DTJ_JVH_P3B" data-ofbid="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A__UL_DTJ_JVH_P3B">
+                <li class="- topic/li li" id="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A__GUID-16830814-F123-4F54-8AE6-F14D93CED45D" data-ofbid="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A__GUID-16830814-F123-4F54-8AE6-F14D93CED45D">Set TXEN to
+                    ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’.</li>
+                <li class="- topic/li li" id="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A__GUID-885B09F9-103A-494E-A49F-6DC206E8008D" data-ofbid="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A__GUID-885B09F9-103A-494E-A49F-6DC206E8008D">A filter must be enabled and
+                    loaded with a matching message identifier.</li>
+                <li class="- topic/li li" id="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A__GUID-78895AD3-5A1E-4843-AFCF-7F2F10A6ECDC" data-ofbid="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A__GUID-78895AD3-5A1E-4843-AFCF-7F2F10A6ECDC">The Buffer Pointer for that
+                    filter must point to the TX FIFO (normally, a filter points to an RX FIFO).</li>
+                <li class="- topic/li li" id="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A__GUID-C11B8EBD-B17D-443F-95DD-193B8C4AAC4F" data-ofbid="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A__GUID-C11B8EBD-B17D-443F-95DD-193B8C4AAC4F">RTREN bit must be set to
+                        ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’ to enable RTR.</li>
+                <li class="- topic/li li" id="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A__GUID-F6A26B38-A38F-452E-8D74-75757C5A7BF2" data-ofbid="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A__GUID-F6A26B38-A38F-452E-8D74-75757C5A7BF2">The FIFO must be preloaded with
+                    at least one message to be sent.</li>
+            </ul></div>
+        <p class="- topic/p p">When an RTR message is received and it matches a filter pointing to a properly configured
+            transmit FIFO, the TXREQ bit is set, queuing the object for transmission according to
+            priorities.</p>
+        <p class="- topic/p p">A FIFO will only be transmitted if TXEN and RTREN are set, and if it is NOT empty. When a
+            request for a remote transmission occurs while the FIFO is empty, the event will be
+            treated as an overflow and the RXOVIF bit will be set.</p>
+    </div>
+
+</body>
+</html>

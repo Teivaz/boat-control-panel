@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.8.2 Destination Stop — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4.html"/>
+<link rel="next" href="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510.html"/>
+<link rel="up" href="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li><a href="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA.html">16.8 DMA Setup and Operation</a></li><li>16.8.2 Destination Stop</li></ol>
+  <div class="sib"><span>← <a href="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4.html" rel="prev">Source Stop</a></span><span><a href="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510.html" rel="next">Continuous Transfer</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49__GUID-C145B582-3267-4153-8BF4-0ED417B52D24" style="">16.8.2 Destination Stop</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">When the Destination Stop bit is set (DSTP = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) and the DMAxDCNT
+            register reloads, the DMA clears the SIRQEN bit to stop receiving new start interrupt
+            request signals and sets the DMAnDCNTIF flag.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49__FIG_PQS_5GX_SFB" data-ofbid="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49__FIG_PQS_5GX_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 16-7. <span id="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49__GUID-D6F971E7-AD8C-4F1D-BA43-5BA70B2478A3" class="fig--title">GPR-GPR Transactions with Hardware
+                Triggers, DSTP = <code class="+ topic/ph pr-d/codeph ph codeph"><strong class="+ topic/ph hi-d/b ph b">1</strong></code></span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-AC46A115-132E-469D-8AFB-9666AB3DC023-high.pdf#toolbar=1" width="630.34" height="434.94"></iframe></span>
+        </figure>
+        <div class="- topic/note note notype note_notype" id="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49__GUID-5F0F4B4D-3D05-442C-BC48-42C810C09EA3" data-ofbid="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49__GUID-5F0F4B4D-3D05-442C-BC48-42C810C09EA3"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49__OL_YPV_ZFX_SFB" data-ofbid="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49__OL_YPV_ZFX_SFB">
+                <li class="- topic/li li" id="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49__GUID-29B10672-35E6-4123-9E0B-9332283EE2DE" data-ofbid="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49__GUID-29B10672-35E6-4123-9E0B-9332283EE2DE">SR - Source Read</li>
+                <li class="- topic/li li" id="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49__GUID-C4D0A53B-435F-48DE-8B68-A25630BAE36D" data-ofbid="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49__GUID-C4D0A53B-435F-48DE-8B68-A25630BAE36D">DW - Destination Write</li>
+            </ol>
+        </div>
+    </div>
+
+</body>
+</html>

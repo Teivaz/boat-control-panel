@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.2.2.4 Receive Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5E356814-0336-401E-9354-1F579534A656.html"/>
+<link rel="next" href="GUID-54CB9908-D26F-43DA-BBFF-E3F03CDCBF6C.html"/>
+<link rel="up" href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html">35.2 UART Asynchronous Modes</a></li><li><a href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html">35.2.2 UART Asynchronous Receiver</a></li><li>35.2.2.4 Receive Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-5E356814-0336-401E-9354-1F579534A656.html" rel="prev">Receive Data Polarity</a></span><span><a href="GUID-54CB9908-D26F-43DA-BBFF-E3F03CDCBF6C.html" rel="next">Receive Framing Error</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-05AC903C-8E83-4090-AFA2-0E9D2821C64C__GUID-C9DB2C48-9D94-4744-A5ED-36BACBBCD8FF" style="">35.2.2.4 Receive Interrupts</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">Immediately after all data bits and the Stop bit have been received, the character
+            in the RSR is transferred to the UART receive FIFO. The UxRXIF Interrupt flag in the
+            respective PIR register is set at this time, provided it is not being suppressed.</p>
+        <p class="- topic/p p">The UxRXIF is suppressed by any of the following:</p>
+        <ul class="- topic/ul ul" id="GUID-05AC903C-8E83-4090-AFA2-0E9D2821C64C__UL_U2C_BJ5_BBB" data-ofbid="GUID-05AC903C-8E83-4090-AFA2-0E9D2821C64C__UL_U2C_BJ5_BBB">
+            <li class="- topic/li li" id="GUID-05AC903C-8E83-4090-AFA2-0E9D2821C64C__GUID-A0FDC4EB-B51F-499A-BFA3-83ECC749E9B7" data-ofbid="GUID-05AC903C-8E83-4090-AFA2-0E9D2821C64C__GUID-A0FDC4EB-B51F-499A-BFA3-83ECC749E9B7">FERIF when FERIE is set</li>
+            <li class="- topic/li li" id="GUID-05AC903C-8E83-4090-AFA2-0E9D2821C64C__GUID-E982EB9C-A273-4C22-92D0-96FBF319BAEF" data-ofbid="GUID-05AC903C-8E83-4090-AFA2-0E9D2821C64C__GUID-E982EB9C-A273-4C22-92D0-96FBF319BAEF">PERIF when PERIE is set</li>
+        </ul>
+        <p class="- topic/p p">When the UART uses DMA for reception, suppressing the UxRXIF suspends the DMA
+            transfer of data until software processes the error and reads UxRXB to advance the FIFO
+            beyond the error.</p>
+        <p class="- topic/p p">The UxRXIF interrupts are enabled by setting all of the following bits:</p>
+        <ul class="- topic/ul ul" id="GUID-05AC903C-8E83-4090-AFA2-0E9D2821C64C__UL_NQT_PJ5_BBB" data-ofbid="GUID-05AC903C-8E83-4090-AFA2-0E9D2821C64C__UL_NQT_PJ5_BBB">
+            <li class="- topic/li li" id="GUID-05AC903C-8E83-4090-AFA2-0E9D2821C64C__GUID-F3A225C2-E5EA-4C75-95C4-BF9D3EE4DB9E" data-ofbid="GUID-05AC903C-8E83-4090-AFA2-0E9D2821C64C__GUID-F3A225C2-E5EA-4C75-95C4-BF9D3EE4DB9E">UxRXIE, Interrupt Enable bit in the
+                PIE register</li>
+            <li class="- topic/li li" id="GUID-05AC903C-8E83-4090-AFA2-0E9D2821C64C__GUID-FAC8DC72-66B2-4404-89DE-76D22A3207AB" data-ofbid="GUID-05AC903C-8E83-4090-AFA2-0E9D2821C64C__GUID-FAC8DC72-66B2-4404-89DE-76D22A3207AB">Global Interrupt Enable bits</li>
+        </ul>
+        <p class="- topic/p p">The UxRXIF Interrupt Flag bit will be set when it is not suppressed and there
+            is an unread character in the FIFO, regardless of the state of interrupt enable bits.
+            Reading the UxRXB register will transfer the top character out of the FIFO and reduce
+            the FIFO contents by one. The UxRXIF Interrupt Flag bit is read-only and therefore
+            cannot be set or cleared by software.</p>
+</div>
+
+</body>
+</html>

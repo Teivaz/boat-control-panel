@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.4.1 Synchronous vs. Asynchronous Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html"/>
+<link rel="next" href="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0.html"/>
+<link rel="up" href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html">28.4 UTMR Operation</a></li><li>28.4.1 Synchronous vs. Asynchronous Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html" rel="prev">UTMR Operation</a></span><span><a href="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0.html" rel="next">Timer Counter and Capture Registers</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__GUID-3C72EBA1-1D9B-4C07-A130-D7AE50268AB7" style="">28.4.1 Synchronous vs. Asynchronous
+        Operation</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">A new feature of the UTMR module is the isolation of the counter/timer and its control
+            logic to a separate timer clock domain. This can simplify and accelerate the operation
+            of the timer when running on an external clock source. Unfortunately, it also makes the
+            control bits in the Timer Control registers asynchronous to the timer clock domain. It
+            is, therefore, necessary to synchronize the Timer Control Register bits to the timer
+            clock domain by setting the <a class="- topic/xref xref" href="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A.html#ID-0000000C" title="ERS Clock Synchronization Select(1,2)">CSYNC</a> bit in the TUxyHLT register. This will cause the synchronization of
+            both the ERS inputs and Control Register bits to the selected counter/timer clock and
+            allow the module to operate completely asynchronous from the system clock. </div>
+        <p class="- topic/p p">The synchronization logic produces a delay between the assertion of a signal and its
+            effect in operation. Any signal that goes from the processor domain to the timer domain
+            (like assertion/de-assertion of ON or ERS controls) requires three counter/timer clocks
+            to synchronize. Any signal that goes from the timer domain to the processor domain (like
+            assertion/de-assertion of ON bit, RUN bit, ERS controls, output and interrupt signals)
+            requires three system clocks to synchronize. This delay is acceptable in synchronous
+            applications because the start, reset, and stop events are delayed equally, and there is
+            no net change to the counter sequence.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__FIG_IKP_3S2_H3B"><span>Figure 28-2</span></a> shows clock synchronization with the ON
+            bit (Start) and ERS Reset (Stop), whereas <a class="- topic/xref xref" href="#GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__FIG_UFW_HVY_Q3B"><span>Figure 28-3</span></a> shows clock synchronization with setting/clearing of the ON bit (Start/Stop). If an
+            external clock source is selected, then the UTMR will also continue to run during Sleep
+            and can generate interrupts on Start, Stop or Reset, which will wake up the
+            processor.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__FIG_IKP_3S2_H3B" data-ofbid="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__FIG_IKP_3S2_H3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 28-2. <span id="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__GUID-14812B27-A8AA-47D9-827A-D169026F5BE2" class="fig--title">Clock
+                    Synchronization with ON Bit and Stop Condition</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-19B04FA2-09FE-45A9-BBDE-D05352B9FB7E-high.pdf#toolbar=1" width="450" height="303.8645980253879"></iframe></span>
+            </figure>
+            <figure class="- topic/fig fig fignone" id="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__FIG_UFW_HVY_Q3B" data-ofbid="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__FIG_UFW_HVY_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 28-3. <span id="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__GUID-2095D1B7-3CD6-473D-AC62-F1A42470A18E" class="fig--title">Clock
+                    Synchronization with ON Bit and Off Condition</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-812A3497-A488-476F-BB11-2DB1A4B36ECF-high.pdf#toolbar=1" width="450" height="303.8645980253879"></iframe></span>
+            </figure>
+        </div>
+        <div class="- topic/p p">Clearing the CSYNC bit will disable the synchronization logic. When CSYNC =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, ERS asynchronously gates the clock and/or resets the timer,
+            according to Start, Reset and Stop options. It is possible that the timer clock may
+            transition at the same time that the ON bit is set by the user or an ERS event occurs or
+            a CLR or CAPT command is passed (a clock collision), which may cause unpredictable
+            results to the counter value. Setting CSYNC = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> removes this
+                uncertainty.<div class="- topic/note note important note_important" id="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__GUID-93751414-D9EE-4723-AEA0-2F41623D81F4" data-ofbid="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__GUID-93751414-D9EE-4723-AEA0-2F41623D81F4"><span class="note__title">Important:</span> Using an external clock synchronizer, like the CLC or the comparator sync logic,
+                can allow synchronous applications with CSYNC = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, but clock rate
+                limitations may apply at the device level.</div></div>
+        <p class="- topic/p p">The ON bit must be set for all counting operations. With START = <code class="+ topic/ph pr-d/codeph ph codeph">‘b00</code>
+            (no ERS Start), setting ON will start the timer as though a Start condition occurred.
+            With START &gt; <code class="+ topic/ph pr-d/codeph ph codeph">‘b00</code> (ERS edge/level-triggers Start), setting ON
+            prepares the timer for an ERS Start condition and enables the ERS detection logic.</p>
+        <p class="- topic/p p">ON will return to ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’ when a hardware Stop condition occurs or when
+            written by software, except as noted in the <a class="- topic/xref xref" href="GUID-658EC3E2-3D89-43D1-97A0-6D9373CD6594.html">One Shot Mode</a>
+            section. <a class="- topic/xref xref" href="#GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__FIG_C5J_2TP_WLB"><span>Figure 28-4</span></a> and <a class="- topic/xref xref" href="#GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__GUID-E3341B35-113B-4987-8234-18594B978BAA"><span>Figure 28-5</span></a> below show
+            timing examples for One Shot mode with CSYNC = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and CSYNC =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, respectively.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__FIG_C5J_2TP_WLB" data-ofbid="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__FIG_C5J_2TP_WLB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 28-4. <span id="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__GUID-11990E99-23C8-4706-A570-5AAB751DA3D1" class="fig--title">Synchronization and Prescaler
+                Timing (CSYNC = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>)</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-388A5812-AA77-493A-AD85-6378DD8BAA0C-high.pdf#toolbar=1" width="497.52" height="612.65"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__GUID-E3341B35-113B-4987-8234-18594B978BAA" data-ofbid="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__GUID-E3341B35-113B-4987-8234-18594B978BAA"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 28-5. <span id="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__GUID-8A80833D-0DEB-49BE-BB63-CC6173CE254F" class="fig--title">Synchronization and Prescaler
+                Timing (CSYNC = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>)</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-6878D8AA-45E6-4564-9B6C-4EA20D7634D0-high.pdf#toolbar=1" width="496.38" height="613.06"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

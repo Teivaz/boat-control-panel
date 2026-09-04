@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>25 TMR1 - Timer1 Module with Gate Control — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-CD8D467B-B24B-483B-87D6-F8D923B49800.html"/>
+<link rel="next" href="GUID-3DD39D0F-F7EB-4B98-9871-4EAC39D96913.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>25 TMR1 - Timer1 Module with Gate Control</li></ol>
+  <div class="sib"><span>← <a href="GUID-CD8D467B-B24B-483B-87D6-F8D923B49800.html" rel="prev">Register Summary - Timer0</a></span><span><a href="GUID-3DD39D0F-F7EB-4B98-9871-4EAC39D96913.html" rel="next">Timer1 Operation</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-CECAD742-593D-4C5C-90C4-DBB3BD76B001" style="">25 TMR1 - Timer1 Module with Gate Control</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-000003F8" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-000003F8">The Timer1 module is a 16-bit timer/counter with the following
+            features:</p>
+        <ul class="- topic/ul ul" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__UL_M4J_P1T_TGB" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__UL_M4J_P1T_TGB">
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-000003FA" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-000003FA">16-bit timer/counter register pair (TMRxH:TMRxL)</li>
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-000003FC" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-000003FC">Programmable internal or external clock source</li>
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-000003FE" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-000003FE">2-bit prescaler</li>
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000402" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000402">Clock source for optional comparator synchronization</li>
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000404" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000404">Multiple Timer1 gate (count enable) sources</li>
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000407" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000407">Interrupt-on-overflow</li>
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000409" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000409">Wake-up on overflow (external clock, Asynchronous mode
+                only)</li>
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-0000040B" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-0000040B">16-bit read/write operation</li>
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-0000040D" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-0000040D">Time base for the capture/compare function with the CCP
+                modules</li>
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-0000040F" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-0000040F">Special event trigger (with CCP)</li>
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000411" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000411">Selectable gate source polarity</li>
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000413" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000413">Gate Toggle mode</li>
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000415" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000415">Gate Single Pulse mode</li>
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000417" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000417">Gate value status</li>
+            <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000419" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00000419">Gate event interrupt</li>
+        </ul>
+        <div class="- topic/note note important note_important" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00001197" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__ID-42141-00001197"><span class="note__title">Important:</span> References to the module Timer1 apply to all
+            the odd numbered timers on this device.</div>
+        <figure class="- topic/fig fig fignone" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__FIG_IW3_JWN_WGB" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__FIG_IW3_JWN_WGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 25-1. <span id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-8A766113-46B1-400A-8883-569C9ECBD285" class="fig--title">Timer1 Block Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-4C72DC61-EB41-49BF-8E69-9A92A4727A53-high.pdf#toolbar=1" width="484.98" height="479.09"></iframe></span>
+        </figure>
+        <div class="- topic/note note notype note_notype" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-DE7634A4-4B3B-4B76-B409-58F22BF426C6" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-DE7634A4-4B3B-4B76-B409-58F22BF426C6"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__OL_ESQ_44C_11B" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__OL_ESQ_44C_11B">
+                <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-0318570D-A931-4DB1-9DA2-CF2B6FDC34C4" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-0318570D-A931-4DB1-9DA2-CF2B6FDC34C4">This signal comes from the pin
+                    selected by Timer1 PPS register.</li>
+                <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-04457F9C-C447-4CEC-8AEB-A23BC7915A87" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-04457F9C-C447-4CEC-8AEB-A23BC7915A87"><a class="- topic/xref xref" href="GUID-DA7CA9B2-C0D3-44BE-8A93-3861BF3EE7DF.html#GUID-DA7CA9B2-C0D3-44BE-8A93-3861BF3EE7DF" title="TMRx">TMRx</a> register increments on rising edge.</li>
+                <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-2BE978AB-0C18-4C89-AC7F-1C7408DD0C4E" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-2BE978AB-0C18-4C89-AC7F-1C7408DD0C4E">Synchronize does not operate
+                    while in Sleep.</li>
+                <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-0E038F81-EC41-4BA2-9B57-E4558C991AD7" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-0E038F81-EC41-4BA2-9B57-E4558C991AD7">See <a class="- topic/xref xref" href="GUID-94AF80CD-C533-40D3-ADAA-2B580D697C0E.html#GUID-94AF80CD-C533-40D3-ADAA-2B580D697C0E" title="TxCLK">TxCLK</a> for clock source selections.</li>
+                <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-E49FD6E3-EF3D-4518-83FB-C6FAFD9E5825" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-E49FD6E3-EF3D-4518-83FB-C6FAFD9E5825">See <a class="- topic/xref xref" href="GUID-DEAF7FA3-EA8D-49D5-9C99-A081511D08AD.html#GUID-DEAF7FA3-EA8D-49D5-9C99-A081511D08AD" title="TxGATE">TxGATE</a> for gate source selections.</li>
+                <li class="- topic/li li" id="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-26D6D916-8D7C-4234-AE03-7C939B843939" data-ofbid="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4__GUID-26D6D916-8D7C-4234-AE03-7C939B843939">Synchronized comparator output
+                    must not be used in conjunction with synchronized input clock.</li>
+            </ol>
+        </div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-3DD39D0F-F7EB-4B98-9871-4EAC39D96913.html">25.1 Timer1 Operation</a></li><li><a href="GUID-1112BF5B-AFCF-4767-8F54-B15A47EB6DDE.html">25.2 Clock Source Selection</a></li><li><a href="GUID-5A5BC88E-97E0-4BE5-8590-31610BFD43F5.html">25.3 Timer1 Prescaler</a></li><li><a href="GUID-ACDC4323-C442-405C-AEA7-FE1BAD702A90.html">25.4 Secondary Oscillator</a></li><li><a href="GUID-E4547B4A-7C30-4F81-9225-C27E393F85D0.html">25.5 Timer1 Operation in Asynchronous Counter Mode</a></li><li><a href="GUID-7C1EE732-0070-410F-8E22-750A992E9F38.html">25.6 Timer1 16-Bit Read/Write Mode</a></li><li><a href="GUID-BA690294-A6ED-4AE0-86FE-CD2BF16037F8.html">25.7 Timer1 Gate</a></li><li><a href="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9.html">25.8 Timer1 Interrupt</a></li><li><a href="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B.html">25.9 Timer1 Operation During Sleep</a></li><li><a href="GUID-980282E6-00F2-4822-8F7A-4380A8CD3403.html">25.10 CCP Capture/Compare Time Base</a></li><li><a href="GUID-07D6C471-A95A-45CE-8201-5615A72A65A0.html">25.11 CCP Special Event Trigger</a></li><li><a href="GUID-61DB4F63-C12B-4C60-8346-F80F8E08F869.html">25.12 Peripheral Module Disable</a></li><li><a href="GUID-D244A40B-8BC2-4F98-AFC6-E508E2834BED.html">25.13 Register Definitions: Timer1 Control</a></li><li><a href="GUID-2478120B-F53E-48F6-AB40-270DA91F29F6.html">25.14 Register Summary - Timer1</a></li></ul>
+</nav>
+</body>
+</html>

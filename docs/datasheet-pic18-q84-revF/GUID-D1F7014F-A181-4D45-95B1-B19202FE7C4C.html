@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.4.6 Hardware Limit Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A0D57AB5-909A-46BF-9972-621A49224C58.html"/>
+<link rel="next" href="GUID-658EC3E2-3D89-43D1-97A0-6D9373CD6594.html"/>
+<link rel="up" href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html">28.4 UTMR Operation</a></li><li>28.4.6 Hardware Limit Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-A0D57AB5-909A-46BF-9972-621A49224C58.html" rel="prev">Stop Event</a></span><span><a href="GUID-658EC3E2-3D89-43D1-97A0-6D9373CD6594.html" rel="next">One Shot Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-D1F7014F-A181-4D45-95B1-B19202FE7C4C__GUID-554452D8-ECBD-4FF6-BC4E-B4C958B3C83B" style="">28.4.6 Hardware Limit Mode</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The Limit mode of operation is controlled by the <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#ID-0000001A" title="Limit Mode Enable(4)">LIMIT</a> bit in the TUxyCON1 register. Setting the LIMIT bit will cause the
+            counter/timer value to not advance when the TUxyTMR counter register value equals the
+            value in the TUxyPR period register (even though the timer is still “running”). If the
+            LIMIT bit is cleared, the counter/timer will continue to count through the PR match and
+            roll over at the maximum value of the TUxyTMR counter register. The LIMIT bit is not
+            synchronized to the counter/timer clock and does not need to be changed when the ON bit
+            is set. </div>
+        <div class="- topic/p p">
+            <div class="- topic/note note important note_important" id="GUID-D1F7014F-A181-4D45-95B1-B19202FE7C4C__GUID-5D9DCB4B-79F1-49E5-ACBE-4C4F1F6A1DED" data-ofbid="GUID-D1F7014F-A181-4D45-95B1-B19202FE7C4C__GUID-5D9DCB4B-79F1-49E5-ACBE-4C4F1F6A1DED"><span class="note__title">Important:</span> 
+                <ol class="- topic/ol ol" id="GUID-D1F7014F-A181-4D45-95B1-B19202FE7C4C__OL_HNM_FWV_3LB" data-ofbid="GUID-D1F7014F-A181-4D45-95B1-B19202FE7C4C__OL_HNM_FWV_3LB">
+                    <li class="- topic/li li" id="GUID-D1F7014F-A181-4D45-95B1-B19202FE7C4C__GUID-C68B068E-9BEC-4576-8B42-06A7401286E6" data-ofbid="GUID-D1F7014F-A181-4D45-95B1-B19202FE7C4C__GUID-C68B068E-9BEC-4576-8B42-06A7401286E6">This bit is relevant when
+                        RESET = <code class="+ topic/ph pr-d/codeph ph codeph">‘b00</code> (No hardware Reset) and counter equals
+                        PR.</li>
+                    <li class="- topic/li li" id="GUID-D1F7014F-A181-4D45-95B1-B19202FE7C4C__GUID-27A1A6AD-B76B-44A1-A8AB-2638BA04551C" data-ofbid="GUID-D1F7014F-A181-4D45-95B1-B19202FE7C4C__GUID-27A1A6AD-B76B-44A1-A8AB-2638BA04551C"> The effect of Limit mode is
+                        to prevent the counter from exceeding PR value. Reset and CLR events are not
+                        prevented from clearing the counter.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

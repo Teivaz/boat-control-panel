@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.2.3 ADC Operation During Sleep — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B.html"/>
+<link rel="next" href="GUID-D68E09A4-9A79-4D1D-89B9-6CFFDFF25FCB.html"/>
+<link rel="up" href="GUID-88AEA9BE-34C2-44BE-A116-5DAB431A258C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-88AEA9BE-34C2-44BE-A116-5DAB431A258C.html">43.2 ADC Operation</a></li><li>43.2.3 ADC Operation During Sleep</li></ol>
+  <div class="sib"><span>← <a href="GUID-F8F18403-2C52-4A5E-A2AA-5515A4C3336B.html" rel="prev">Completion of a Conversion</a></span><span><a href="GUID-D68E09A4-9A79-4D1D-89B9-6CFFDFF25FCB.html" rel="next">External Trigger During Sleep</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-7839BA35-BB26-42C4-84B1-2ADDF21FB0ED__GUID-A2792C75-0AF5-4ED5-9476-573FC3AD64C1" style="">43.2.3 ADC Operation During Sleep</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-7839BA35-BB26-42C4-84B1-2ADDF21FB0ED__ID-42107-00000293" data-ofbid="GUID-7839BA35-BB26-42C4-84B1-2ADDF21FB0ED__ID-42107-00000293">The ADC module can operate during Sleep. This
+            requires the ADC clock source to be set to the ADCRC option. When the ADCRC oscillator
+            source is selected, the ADC waits one additional instruction before starting the
+            conversion. This allows the <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-7839BA35-BB26-42C4-84B1-2ADDF21FB0ED__ID-42107-00000294">SLEEP</code> instruction to be executed, which can
+            reduce system noise during the conversion. If the ADC interrupt is enabled, the device
+            will wake up from Sleep when the conversion completes. If the ADC interrupt is disabled,
+            the device remains in Sleep and the ADC module is turned off after the conversion
+            completes, although the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000005" title="ADC Enable">ON</a>
+            bit remains set.</p>
+    </div>
+
+</body>
+</html>

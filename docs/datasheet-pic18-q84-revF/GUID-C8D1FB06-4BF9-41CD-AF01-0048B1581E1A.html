@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.9.3 TUxyHLT — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-02A10DCE-624F-4AD9-BAE6-C06889E6BDA1.html"/>
+<link rel="next" href="GUID-5D5620C9-DBC6-4EFF-9604-176775F7504E.html"/>
+<link rel="up" href="GUID-7463E9BA-CF26-4B25-8FCB-C8F606187580.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-7463E9BA-CF26-4B25-8FCB-C8F606187580.html">28.9 Register Definitions: Universal Timer</a></li><li>28.9.3 TUxyHLT</li></ol>
+  <div class="sib"><span>← <a href="GUID-02A10DCE-624F-4AD9-BAE6-C06889E6BDA1.html" rel="prev">TU32yCON1</a></span><span><a href="GUID-5D5620C9-DBC6-4EFF-9604-176775F7504E.html" rel="next">TU8yHLT</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__ID-00000001" style="">28.9.3  TUxyHLT</h1><section class="- topic/section reference/section sidsc-register/registerDescription " id="GUID-246A8F98-EC97-46D2-B6ED-486FD0F7EA03">Hardware Limit Timer Control Register<div class="- topic/note note note note_note endnote" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__ID-42107-000009C8" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__ID-42107-000009C8"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__OL_XH5_1X4_33B" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__OL_XH5_1X4_33B">
+               <li class="- topic/li li" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-6430A59C-E025-4A57-B4B4-468DB47B5262" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-6430A59C-E025-4A57-B4B4-468DB47B5262">This bit is Reset to
+                     ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’.</li>
+               <li class="- topic/li li" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-42A5152F-7374-447A-93E5-7860E45D9F1C" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-42A5152F-7374-447A-93E5-7860E45D9F1C">If CSYNC = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, the
+                  ERS and ON edges must occur sufficiently further away from the clock edge to be
+                  registered into the timer domain. If the ERS and/or ON edges occur too close to
+                  the clock edge, it may result in a Race condition and the ERS/ON edges may be
+                  missed.</li>
+               <li class="- topic/li li" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-4A2153D1-44E3-4EC4-AC7D-9A0B86BDBD75" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-4A2153D1-44E3-4EC4-AC7D-9A0B86BDBD75">The TUxyCLK clock source is
+                  enabled when ON = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> regardless of the Start event.</li>
+               <li class="- topic/li li" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-67B18F81-7729-4D7C-B549-A8C9EBF67512" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-67B18F81-7729-4D7C-B549-A8C9EBF67512">If EPOL = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, then
+                  timer Start/Reset/Stop conditions happen at the alternate level/edge,
+                  respectively.</li>
+               <li class="- topic/li li" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-CC44ADB6-ED02-4B3C-9A4E-9D73CDACCCE9" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-CC44ADB6-ED02-4B3C-9A4E-9D73CDACCCE9">When the timer is running, any
+                  subsequent Start condition is ignored. If RESET = <code class="+ topic/ph pr-d/codeph ph codeph">‘b10</code> (Reset at
+                  first clock after starting), the timer resets at every Start condition, even when
+                  the actual start event is being ignored.</li>
+               <li class="- topic/li li" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-9E6F2ADA-B3B5-44DB-8BD4-A95B5E61966F" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-9E6F2ADA-B3B5-44DB-8BD4-A95B5E61966F">If START = <code class="+ topic/ph pr-d/codeph ph codeph">‘b11</code>
+                  (level triggered at ERS = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), RESET = <code class="+ topic/ph pr-d/codeph ph codeph">‘b10</code>
+                  (Reset at first clock after starting) applies only at the Off-On transition of the
+                  timer’s Run state.</li>
+               <li class="- topic/li li" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-E0B16093-DE02-4A01-A796-85FDEA42FD40" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-E0B16093-DE02-4A01-A796-85FDEA42FD40">If RESET = <code class="+ topic/ph pr-d/codeph ph codeph">‘b10</code>
+                  (level-triggered), the RUN bit is held at ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’.</li>
+               <li class="- topic/li li" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-7B862BB8-73E1-45CE-BC2A-CFF4C1582EEB" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-7B862BB8-73E1-45CE-BC2A-CFF4C1582EEB">A Reset or Stop event reloads the
+                  PR register as described in <a class="- topic/xref xref" href="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD.html">Timer Period
+                  Register</a>.</li>
+               <li class="- topic/li li" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-6DBD256A-A9D9-4FA8-887E-40CC2D833856" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-6DBD256A-A9D9-4FA8-887E-40CC2D833856">Actions involving ERS require ON =
+                     <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and a running clock.</li>
+               <li class="- topic/li li" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-1DD94969-2312-4A4D-9783-70746EE4CAFF" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-1DD94969-2312-4A4D-9783-70746EE4CAFF">Software can always set ON =
+                     <code class="+ topic/ph pr-d/codeph ph codeph">0</code> to stop the counter.</li>
+               <li class="- topic/li li" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-5583A8F1-8A33-4E81-ACA7-EC82AE803376" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-5583A8F1-8A33-4E81-ACA7-EC82AE803376">If OSEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, a
+                  Stop event will clear ON.</li>
+               <li class="- topic/li li" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-11B8B19E-E4A3-41CF-B390-AFCA21BA5D14" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-11B8B19E-E4A3-41CF-B390-AFCA21BA5D14">This register is not clock
+                  synchronized and needs to only be written when ON = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>.</li>
+               <li class="- topic/li li" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-3BEDCE9E-B993-4143-AE4C-DBED5E8CF0DF" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-3BEDCE9E-B993-4143-AE4C-DBED5E8CF0DF">This register is not available
+                  when the module is chained and operated as a Secondary module.</li>
+            </ol>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>TUxyHLT</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-A4005BD7-DB23-447F-8ADC-19517A5C7D03" data-ofbid="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-A4005BD7-DB23-447F-8ADC-19517A5C7D03"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">EPOL</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">CSYNC</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="2">START[1:0]</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="2">RESET[1:0]</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="2">STOP[1:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section class="- topic/section reference/section sidsc-register/registerDescription " id="GUID-246A8F98-EC97-46D2-B6ED-486FD0F7EA03"></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000005__ID-42107-00001A6A" id="ID-00000005">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000005__ID-42107-00001A6A" style=""> Bit 7 – EPOL <span>ERS Polarity Selection</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000005__GUID-862AF8FF-E61D-4207-8DE7-5B54D961EDF4" data-ofbid="ID-00000005__GUID-862AF8FF-E61D-4207-8DE7-5B54D961EDF4"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  0</td></tr><tr><td>All Other Resets  =  u</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000005__ID-42107-00001A6C">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000005__GUID-97046364-A871-4981-9369-3F856B24BE85">The edges and levels for Start,
+                  Reset and Stop are inverted</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000005__ID-42107-00001A6F">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000005__GUID-4CE4B224-2EA5-4812-94BC-A514EF43E24F">The edges and levels for Start,
+                  Reset and Stop are the true input levels</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000000C__ID-42107-00001A73" id="ID-0000000C">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000000C__ID-42107-00001A73" style=""> Bit 6 – CSYNC <span>
+         ERS Clock Synchronization Select<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-6430A59C-E025-4A57-B4B4-468DB47B5262"><span>1</span></a>,<a class="- topic/xref xref" href="#GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-42A5152F-7374-447A-93E5-7860E45D9F1C"><span>2</span></a>)</sup></strong>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000000C__GUID-F11B2041-AC1E-41F5-BBFF-BC04A3020A47" data-ofbid="ID-0000000C__GUID-F11B2041-AC1E-41F5-BBFF-BC04A3020A47"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  1</td></tr><tr><td>All Other Resets  =  u</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000000C__ID-42107-00001A75">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000000C__GUID-B17BDE4F-8F95-45B1-AD7A-8EDCA1B07B23">ERS and ON are synchronized with
+                  TUxyCLK</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000000C__ID-42107-00001A78">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000000C__GUID-5662123A-E93B-4BF3-A3C6-F6E162FBDA47">The counter starts, stops and
+                  resets asynchronously</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000013__ID-42107-00001A7C" id="ID-00000013">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000013__ID-42107-00001A7C" style=""> Bits 5:4 – START[1:0] <span>
+         Counter Start Condition Select<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-4A2153D1-44E3-4EC4-AC7D-9A0B86BDBD75">3</a>,<a class="- topic/xref xref" href="#GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-67B18F81-7729-4D7C-B549-A8C9EBF67512">4</a>)</sup></strong>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000013__GUID-CE308B04-E613-4CF7-B9CC-59CA4EB68C3A" data-ofbid="ID-00000013__GUID-CE308B04-E613-4CF7-B9CC-59CA4EB68C3A"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  00</td></tr><tr><td>All Other Resets  =  uu</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000013__ID-42107-00001A7E">11</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000013__GUID-3244FD32-55C4-4374-A70E-6F1369C8B85B">Timer counter starts when ERS =
+                     <code class="+ topic/ph pr-d/codeph ph codeph">1</code></td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000013__ID-42107-00001A81">10</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000013__GUID-53B9352B-4F4C-4233-9D5F-1EFB90C07332">Timer counter starts at rising edge
+                  of ERS</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000013__GUID-1F5FF08A-95CA-4B32-B25E-023DEB8F9ECD">01</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000013__GUID-5FEE68C5-ED5F-488A-9B77-FA4F4B245D17">Timer counter starts at either edge
+                  of ERS</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000013__GUID-C1698D8A-E70F-4D13-9C7E-27AC6F5ED020">00</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000013__GUID-00AA3334-25A0-4BED-91CF-C3FEA4F246DC">No start due to ERS, timer runs
+                  when ON = <code class="+ topic/ph pr-d/codeph ph codeph">1</code></td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000001A__ID-42107-00001A85" id="ID-0000001A">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000001A__ID-42107-00001A85" style=""> Bits 3:2 – RESET[1:0] <span>
+         Counter Reset Condition Select<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-67B18F81-7729-4D7C-B549-A8C9EBF67512">4</a>,<a class="- topic/xref xref" href="#GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-CC44ADB6-ED02-4B3C-9A4E-9D73CDACCCE9">5</a>,<a class="- topic/xref xref" href="#GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-9E6F2ADA-B3B5-44DB-8BD4-A95B5E61966F">6</a>,<a class="- topic/xref xref" href="#GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-E0B16093-DE02-4A01-A796-85FDEA42FD40">7</a>,<a class="- topic/xref xref" href="#GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-7B862BB8-73E1-45CE-BC2A-CFF4C1582EEB">8</a>)</sup></strong>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000001A__GUID-774F3AA8-AC0D-4A2A-9A27-9360093F9285" data-ofbid="ID-0000001A__GUID-774F3AA8-AC0D-4A2A-9A27-9360093F9285"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  00</td></tr><tr><td>All Other Resets  =  uu</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000001A__ID-42107-00001A87">11</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000001A__GUID-1ECC5D9D-0743-4934-A911-71C45946C4CD">Timer counter resets at PR match
+                  i.e., when counter equals PR; Next clock brings counter to
+                  zero</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000001A__ID-42107-00001A8A">10</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000001A__GUID-B9E874D9-BB94-45BA-ADCC-CD422CF85C2F">Timer counter resets at the first
+                  clock when starting and/or also at PR match</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000001A__GUID-EB103C2D-2E6A-4BD8-A815-25ABAB8A7B32">01</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000001A__GUID-D54AEE40-3EBF-4FB9-9557-A8193BAAA717">Timer counter resets when ERS =
+                     <code class="+ topic/ph pr-d/codeph ph codeph">0</code> and/or also at PR match</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000001A__GUID-3719AD9F-88BA-41D1-8CD1-A33FE043C622">00</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000001A__GUID-0261B77B-2BE2-4A02-AA5A-D4A1CE96EBBC">No hardware
+                  Reset</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000021__ID-42107-00001A8E" id="ID-00000021">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000021__ID-42107-00001A8E" style=""> Bits 1:0 – STOP[1:0] <span>
+         Counter Stop Condition Select<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-67B18F81-7729-4D7C-B549-A8C9EBF67512">4</a>,<a class="- topic/xref xref" href="#GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-7B862BB8-73E1-45CE-BC2A-CFF4C1582EEB">8</a>,<a class="- topic/xref xref" href="#GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-6DBD256A-A9D9-4FA8-887E-40CC2D833856">9</a>,<a class="- topic/xref xref" href="#GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-1DD94969-2312-4A4D-9783-70746EE4CAFF">10</a>,<a class="- topic/xref xref" href="#GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A__GUID-5583A8F1-8A33-4E81-ACA7-EC82AE803376">11</a>)</sup></strong>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000021__GUID-4F816013-668A-4E8E-A08D-1B8CDEC98739" data-ofbid="ID-00000021__GUID-4F816013-668A-4E8E-A08D-1B8CDEC98739">The Stop feature has effect only when the
+            counter is actively running. Once stopped, additional Stop events will not invoke
+            capture or interrupt.</section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  00</td></tr><tr><td>All Other Resets  =  uu</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000021__ID-42107-00001A90">11</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000021__GUID-09E7B109-B7DF-4BB1-8E3D-7BE1E8550A99">Timer stops counting at PR match
+                  i.e., when counter equals PR; current counter value is captured in
+                  TUxyCR</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000021__ID-42107-00001A93">10</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000021__GUID-F9818205-9176-4A86-9D59-C9E37FD5279D">Timer stops counting at rising edge
+                  of ERS; current counter value is captured in TUxyCR</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000021__GUID-73934EEF-C75D-48AB-AFC3-E10AE875569E">01</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000021__GUID-F231EA32-BEBF-48F3-A488-2763AFDC8659">Timer stops counting at either edge
+                  of ERS; current counter value is captured in TUxyCR</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000021__GUID-BAAF2F71-32F9-4B9C-A51C-032CF63EA6FA">00</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000021__GUID-DA31BF28-F880-472C-9DE5-712C55BCB9EC">ERS or PR match do not stop the
+                  timer; software must clear ON to stop the timer; current counter value is captured
+                  in TUxyCR at every rising edge of ERS</td>
+            </tr></tbody></table>
+      </div>
+   </article>
+            
+               This bit is Reset to
+                     ‘1’.
+               If CSYNC = 0, the
+                  ERS and ON edges must occur sufficiently further away from the clock edge to be
+                  registered into the timer domain. If the ERS and/or ON edges occur too close to
+                  the clock edge, it may result in a Race condition and the ERS/ON edges may be
+                  missed.
+               The TUxyCLK clock source is
+                  enabled when ON = 1 regardless of the Start event.
+               If EPOL = 1, then
+                  timer Start/Reset/Stop conditions happen at the alternate level/edge,
+                  respectively.
+               When the timer is running, any
+                  subsequent Start condition is ignored. If RESET = ‘b10 (Reset at
+                  first clock after starting), the timer resets at every Start condition, even when
+                  the actual start event is being ignored.
+               If START = ‘b11
+                  (level triggered at ERS = 1), RESET = ‘b10
+                  (Reset at first clock after starting) applies only at the Off-On transition of the
+                  timer’s Run state.
+               If RESET = ‘b10
+                  (level-triggered), the RUN bit is held at ‘0’.
+               A Reset or Stop event reloads the
+                  PR register as described in Timer Period
+                  Register.
+               Actions involving ERS require ON =
+                     1 and a running clock.
+               Software can always set ON =
+                     0 to stop the counter.
+               If OSEN = 1, a
+                  Stop event will clear ON.
+               This register is not clock
+                  synchronized and needs to only be written when ON = 0.
+               This register is not available
+                  when the module is chained and operated as a Secondary module.
+            
+         
+</body>
+</html>

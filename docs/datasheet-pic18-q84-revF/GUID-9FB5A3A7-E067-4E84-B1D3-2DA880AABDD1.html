@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.3.1 Clock Configuration — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html"/>
+<link rel="next" href="GUID-B5ABE4B5-585B-496B-B369-938C5BEFD314.html"/>
+<link rel="up" href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html">38.3 Configuration</a></li><li>38.3.1 Clock Configuration</li></ol>
+  <div class="sib"><span>← <a href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html" rel="prev">Configuration</a></span><span><a href="GUID-B5ABE4B5-585B-496B-B369-938C5BEFD314.html" rel="next">CAN Configuration</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-9FB5A3A7-E067-4E84-B1D3-2DA880AABDD1__GUID-1EBD9908-B67D-4FF5-8112-7152059543A2" style="">38.3.1 Clock Configuration</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The sample point of all nodes in a CAN FD network needs to be at the same position.
+            Hence, it is recommended to use the same clock frequency and bit time settings for all
+            nodes. Therefore, a CAN Clock of 40 MHz or 20 MHz is recommended.</p>
+        <p class="- topic/p p">The CLKSEL bit allows the selection of the clock source to the CAN FD module.</p>
+        <p class="- topic/p p">• If CLKSEL = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, then the external clock (EXTCLK) will be selected.</p>
+        <p class="- topic/p p"> • If CLKSEL = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, then the system clock (F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>) will be
+            selected.</p>
+    </div>
+
+</body>
+</html>

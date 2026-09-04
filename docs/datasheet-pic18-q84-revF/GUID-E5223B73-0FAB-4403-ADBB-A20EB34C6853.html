@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>25.7.3 Timer1 Gate Toggle Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-CE8035F0-315B-4E1D-AE66-1B5D274F278B.html"/>
+<link rel="next" href="GUID-90AE71CD-975D-4949-9DCE-140BA1EB5B23.html"/>
+<link rel="up" href="GUID-BA690294-A6ED-4AE0-86FE-CD2BF16037F8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html">25 TMR1 - Timer1 Module with Gate Control</a></li><li><a href="GUID-BA690294-A6ED-4AE0-86FE-CD2BF16037F8.html">25.7 Timer1 Gate</a></li><li>25.7.3 Timer1 Gate Toggle Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-CE8035F0-315B-4E1D-AE66-1B5D274F278B.html" rel="prev">Timer1 Gate Source Selection</a></span><span><a href="GUID-90AE71CD-975D-4949-9DCE-140BA1EB5B23.html" rel="next">Timer1 Gate Single Pulse Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-E5223B73-0FAB-4403-ADBB-A20EB34C6853__GUID-77322A08-8494-417B-A9B7-8439E220E997" style="">25.7.3 Timer1 Gate Toggle Mode</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">When Timer1 Gate Toggle mode is enabled, it is possible to measure the full-cycle length
+            of a Timer1 Gate signal, as opposed to the duration of a single-level pulse. The Timer1
+            gate source is routed through a flip-flop that changes state on every incrementing edge
+            of the signal. See the figure below for timing details.</p>
+        <p class="- topic/p p">Timer1 Gate Toggle mode is enabled by setting the GTM bit. When the GTM bit is cleared,
+            the flip-flop is cleared and held clear. This is necessary to control which edge is
+            measured.</p>
+        <div class="- topic/note note important note_important" id="GUID-E5223B73-0FAB-4403-ADBB-A20EB34C6853__GUID-44A097A2-8A85-4E90-95CF-9E71E67D8E48" data-ofbid="GUID-E5223B73-0FAB-4403-ADBB-A20EB34C6853__GUID-44A097A2-8A85-4E90-95CF-9E71E67D8E48"><span class="note__title">Important:</span> Enabling Toggle mode
+            at the same time as changing the gate polarity may result in indeterminate
+            operation.</div>
+        <figure class="- topic/fig fig fignone" id="GUID-E5223B73-0FAB-4403-ADBB-A20EB34C6853__FIG_MFW_SWN_WGB" data-ofbid="GUID-E5223B73-0FAB-4403-ADBB-A20EB34C6853__FIG_MFW_SWN_WGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 25-5. <span id="GUID-E5223B73-0FAB-4403-ADBB-A20EB34C6853__GUID-C319594D-7047-4938-B555-5F300F397ABC" class="fig--title">Timer1 Gate Toggle Mode</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-FC82B572-05A8-440F-B90A-5EEA25CE1386-high.pdf#toolbar=1" width="456.75" height="258.75"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

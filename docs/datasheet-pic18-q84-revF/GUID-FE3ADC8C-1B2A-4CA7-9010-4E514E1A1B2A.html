@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>27.1.5 Status Information — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-10C0029B-94E6-429D-9849-18F1D80B4E42.html"/>
+<link rel="next" href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html"/>
+<link rel="up" href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3.html">27 SMT - Signal Measurement Timer</a></li><li><a href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html">27.1 SMT Operation</a></li><li>27.1.5 Status Information</li></ol>
+  <div class="sib"><span>← <a href="GUID-10C0029B-94E6-429D-9849-18F1D80B4E42.html" rel="prev">Pulse-Width and Period Captures</a></span><span><a href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html" rel="next">Modes of Operation</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-FE3ADC8C-1B2A-4CA7-9010-4E514E1A1B2A__GUID-AA88B92E-DFCF-4FC4-AD6B-D47EAF63B8EB" style="">27.1.5 Status Information</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The SMT provides input status information for the user without requiring the
+            need to monitor the raw incoming signals.</p>
+        <p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Go Status:</strong> Timer run status is indicated by the <a class="- topic/xref xref" href="GUID-9C2CCB2B-DBC4-4A58-8D3A-82550FFB543F.html#BITFIELD_MGX_HZV_F1B" title="SMT GO Value Status">TS</a> bit. The TS bit is delayed in time by synchronizer delays in
+            non-counter modes.</p>
+        <p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Signal Status:</strong> Signal status is indicated by the <a class="- topic/xref xref" href="GUID-9C2CCB2B-DBC4-4A58-8D3A-82550FFB543F.html#BITFIELD_BDF_SFW_F1B" title="SMT Signal Value Status">AS</a> bit. This bit is used in all modes, except Window Measure,
+            Time-of-Flight, and Capture modes, and is only valid when <a class="- topic/xref xref" href="GUID-9C2CCB2B-DBC4-4A58-8D3A-82550FFB543F.html#BITFIELD_MGX_HZV_F1B" title="SMT GO Value Status">TS</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>. The signal status is delayed in time by
+            synchronizer delays in non-counter modes.</p>
+        <p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Window Status:</strong> Window status is indicated by the <a class="- topic/xref xref" href="GUID-9C2CCB2B-DBC4-4A58-8D3A-82550FFB543F.html#BITFIELD_RM5_4ZV_F1B" title="SMT Window Status">WS</a> bit. This bit is only used in Windowed Measure, Gated
+            Counter, and Gated Window Measure modes, and is only valid when <a class="- topic/xref xref" href="GUID-9C2CCB2B-DBC4-4A58-8D3A-82550FFB543F.html#BITFIELD_MGX_HZV_F1B" title="SMT GO Value Status">TS</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>. Window status is delayed in time by
+            synchronizer delays in non-counter modes.</p>
+    </div>
+
+</body>
+</html>

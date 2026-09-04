@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.6.1 Reading a TEF Object — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5538E23F-5F84-4814-9FB6-39172949A455.html"/>
+<link rel="next" href="GUID-70D40675-3B21-4E8C-8934-FEA80F0A1FE8.html"/>
+<link rel="up" href="GUID-5538E23F-5F84-4814-9FB6-39172949A455.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-5538E23F-5F84-4814-9FB6-39172949A455.html">38.6 Transmit Event FIFO (TEF)</a></li><li>38.6.1 Reading a TEF Object</li></ol>
+  <div class="sib"><span>← <a href="GUID-5538E23F-5F84-4814-9FB6-39172949A455.html" rel="prev">Transmit Event FIFO (TEF)</a></span><span><a href="GUID-70D40675-3B21-4E8C-8934-FEA80F0A1FE8.html" rel="next">Resetting the TEF</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-AE1D2BFE-614E-473A-B7E1-55FFA1126E87__GUID-42DEF606-CD07-4995-B93A-C94900805C3B" style="">38.6.1 Reading a TEF Object</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">Before reading a TEF object, the application must check that the TEF is not
+            empty by reading the CxTEFSTA register. The TEF is not empty if TEFNEIF is set.</p>
+        <p class="- topic/p p">The TEF user address points to the address in RAM of the next TEF object to read. The
+            actual address in RAM is calculated using <a class="- topic/xref xref" href="#GUID-AE1D2BFE-614E-473A-B7E1-55FFA1126E87__EQUATION-FIGURE_I1D_GXH_P3B"><span>Equation 38-21</span></a>. TE0 of the TEF object is read first, followed by TE1 and TE2.</p>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-AE1D2BFE-614E-473A-B7E1-55FFA1126E87__EQUATION-FIGURE_I1D_GXH_P3B" data-ofbid="GUID-AE1D2BFE-614E-473A-B7E1-55FFA1126E87__EQUATION-FIGURE_I1D_GXH_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-21. <span id="GUID-AE1D2BFE-614E-473A-B7E1-55FFA1126E87__GUID-001B75D5-1C97-4E3B-96AE-CA2F1A7B55A0" class="fig--title">Start Address of the TEF Object</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <mi>A</mi>
+                            <mo>=</mo>
+                            <mi>B</mi>
+                            <mi>a</mi>
+                            <mi>s</mi>
+                            <mi>e</mi>
+                            <mi>A</mi>
+                            <mi>d</mi>
+                            <mi>d</mi>
+                            <mi>r</mi>
+                            <mi>e</mi>
+                            <mi>s</mi>
+                            <mi>s</mi>
+                            <mo>=</mo>
+                            <mi>C</mi>
+                            <mi>x</mi>
+                            <mi>F</mi>
+                            <mi>I</mi>
+                            <mi>F</mi>
+                            <mi>O</mi>
+                            <mi>B</mi>
+                            <mi>A</mi>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+        <div class="- topic/note note notype note_notype" id="GUID-AE1D2BFE-614E-473A-B7E1-55FFA1126E87__GUID-2AC19494-8475-4F73-87DE-D9F01F5A5FB0" data-ofbid="GUID-AE1D2BFE-614E-473A-B7E1-55FFA1126E87__GUID-2AC19494-8475-4F73-87DE-D9F01F5A5FB0"><span class="note__title">Note:</span> CxFIFOBAH/L needs to be set to a value
+            between <span class="- topic/ph ph">0x3800</span> and the end of RAM, leaving enough room to
+            allow the TEF and Transmit Queue (if enabled) as well as the FIFOs.</div>
+        <p class="- topic/p p">After the TEF object is read from RAM, the TEF needs to be incremented by
+            setting UINC (CxTEFCON[8]). This will cause the CAN FD Protocol module to increment the
+            tail pointer and update CxTEFUA.</p>
+        <p class="- topic/p p">Now the next message can be read from the TEF.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-70D40675-3B21-4E8C-8934-FEA80F0A1FE8.html">38.6.1.1 Resetting the TEF</a></li></ul>
+</nav>
+</body>
+</html>

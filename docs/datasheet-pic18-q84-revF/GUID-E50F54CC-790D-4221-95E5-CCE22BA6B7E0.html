@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>18.2 Disabling a Module — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A7283D5E-77C7-4AE7-BD76-C2740E76DE15.html"/>
+<link rel="next" href="GUID-FCD72609-5101-4533-9889-C06955D7A65B.html"/>
+<link rel="up" href="GUID-81E09780-BB75-46CA-BA38-1BA2102FED0F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-81E09780-BB75-46CA-BA38-1BA2102FED0F.html">18 PMD - Peripheral Module Disable</a></li><li>18.2 Disabling a Module</li></ol>
+  <div class="sib"><span>← <a href="GUID-A7283D5E-77C7-4AE7-BD76-C2740E76DE15.html" rel="prev">Overview</a></span><span><a href="GUID-FCD72609-5101-4533-9889-C06955D7A65B.html" rel="next">Enabling a Module</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-E50F54CC-790D-4221-95E5-CCE22BA6B7E0__GUID-8404DFA7-8F5E-43A3-A17B-3E5B0DE5026E" style="">18.2 Disabling a Module</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-E50F54CC-790D-4221-95E5-CCE22BA6B7E0__ID-42134-0000000E" data-ofbid="GUID-E50F54CC-790D-4221-95E5-CCE22BA6B7E0__ID-42134-0000000E">A peripheral can be disabled by setting the corresponding peripheral
+         disable bit in the PMDx register. Disabling a module has the following effects:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-E50F54CC-790D-4221-95E5-CCE22BA6B7E0__ID-42134-00000011" data-ofbid="GUID-E50F54CC-790D-4221-95E5-CCE22BA6B7E0__ID-42134-00000011">The module is held in Reset and does not function</li>
+         <li class="- topic/li li" id="GUID-E50F54CC-790D-4221-95E5-CCE22BA6B7E0__ID-42134-00000013" data-ofbid="GUID-E50F54CC-790D-4221-95E5-CCE22BA6B7E0__ID-42134-00000013">All the SFRs pertaining to that peripheral become
+               “unimplemented”<ul class="- topic/ul ul">
+               <li class="- topic/li li" id="GUID-E50F54CC-790D-4221-95E5-CCE22BA6B7E0__ID-42134-00000015" data-ofbid="GUID-E50F54CC-790D-4221-95E5-CCE22BA6B7E0__ID-42134-00000015">Writing is disabled</li>
+               <li class="- topic/li li" id="GUID-E50F54CC-790D-4221-95E5-CCE22BA6B7E0__ID-42134-00000017" data-ofbid="GUID-E50F54CC-790D-4221-95E5-CCE22BA6B7E0__ID-42134-00000017">Reading returns <code class="+ topic/ph pr-d/codeph ph codeph">0x00</code></li>
+            </ul></li>
+         <li class="- topic/li li" id="GUID-E50F54CC-790D-4221-95E5-CCE22BA6B7E0__ID-42134-00000019" data-ofbid="GUID-E50F54CC-790D-4221-95E5-CCE22BA6B7E0__ID-42134-00000019">Module outputs are disabled</li>
+      </ul>
+   </div>
+
+</body>
+</html>

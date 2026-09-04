@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.13.3 7/10-Bit Host Reception — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-9E38DEA9-0B12-4ED1-957D-B8E0F61C71E1.html"/>
+<link rel="next" href="GUID-90C0EC15-958C-406C-8BED-C83ED99B8DB4.html"/>
+<link rel="up" href="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li><a href="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9.html">37.3.13 DMA Integration</a></li><li>37.3.13.3 7/10-Bit Host Reception</li></ol>
+  <div class="sib"><span>← <a href="GUID-9E38DEA9-0B12-4ED1-957D-B8E0F61C71E1.html" rel="prev">10-Bit Host Transmission</a></span><span><a href="GUID-90C0EC15-958C-406C-8BED-C83ED99B8DB4.html" rel="next">7-Bit Client Transmission</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-4DB59592-1307-4589-9A22-7B96C0AD9D2D__GUID-4267D359-5AD7-4FDE-BCBF-9C0617C6C507" style="">37.3.13.3 7/10-Bit Host Reception</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">In both 7-bit and 10-bit Host Receive modes, the state of the <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> bit is ignored. Once the complete 7-bit or 10-bit address has been
+            received by the client, the client will transmit a data byte. Once the byte has been
+            received by the host, hardware sets the I2CxRXIF bit, which triggers the DMA to read
+                <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a>.
+            Once the DMA has read I2CxRXB, I2CxRXIF is cleared by hardware and the DMA waits for the
+            next occurrence of I2CxRXIF being set.</p>
+    </div>
+
+</body>
+</html>

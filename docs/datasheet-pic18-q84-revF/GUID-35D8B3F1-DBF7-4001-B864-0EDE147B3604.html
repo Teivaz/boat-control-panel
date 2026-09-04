@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.3.3.6 Oscillator Tolerance — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F9987E20-4B38-4273-AD25-284CF0520896.html"/>
+<link rel="next" href="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251.html"/>
+<link rel="up" href="GUID-1D45D3A2-247B-4C23-ACD6-4131BDF1900C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html">38.3 Configuration</a></li><li><a href="GUID-1D45D3A2-247B-4C23-ACD6-4131BDF1900C.html">38.3.3 CAN FD Bit Time Configuration</a></li><li>38.3.3.6 Oscillator Tolerance</li></ol>
+  <div class="sib"><span>← <a href="GUID-F9987E20-4B38-4273-AD25-284CF0520896.html" rel="prev">Synchronization Jump Width</a></span><span><a href="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251.html" rel="next">Recommendations for Bit Time Configuration</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__GUID-BCD74008-52F7-4C18-BE23-48A31AB9F534" style="">38.3.3.6 Oscillator Tolerance</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The oscillator tolerance, <em class="+ topic/ph hi-d/i ph i">df</em>, around the nominal frequency of the
+            oscillator, <em class="+ topic/ph hi-d/i ph i">fnom</em>, is defined in <a class="- topic/xref xref" href="#GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_V5M_XJ1_P3B"><span>Equation 38-11</span></a>.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_JJX_XJ1_P3B"><span>Equation 38-12</span></a> through <a class="- topic/xref xref" href="#GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_KHQ_CK1_P3B"><span>Equation 38-16</span></a> describe the conditions for the maximum tolerance of the
+            oscillator.</p>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_V5M_XJ1_P3B" data-ofbid="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_V5M_XJ1_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-11. <span id="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__GUID-0277D5B1-03FD-41A2-AE32-6D07E95B05DE" class="fig--title">Oscillator Tolerance</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <mrow>
+                                <mo>(</mo>
+                                <mn>1</mn>
+                                <mo>−</mo>
+                                <mi>d</mi>
+                                <mi>f</mi>
+                                <mo>)</mo>
+                            </mrow>
+                            <mo>×</mo>
+                            <mi>f</mi>
+                            <mi>n</mi>
+                            <mi>o</mi>
+                            <mi>m</mi>
+                            <mo>≤</mo>
+                            <msub>
+                                <mrow>
+                                    <mi>F</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>S</mi>
+                                    <mi>Y</mi>
+                                    <mi>S</mi>
+                                    <mi>C</mi>
+                                    <mi>L</mi>
+                                    <mi>K</mi>
+                                </mrow>
+                            </msub>
+                            <mo>≤</mo>
+                            <mrow>
+                                <mo>(</mo>
+                                <mn>1</mn>
+                                <mo>+</mo>
+                                <mi>d</mi>
+                                <mi>f</mi>
+                                <mo>)</mo>
+                            </mrow>
+                            <mo>×</mo>
+                            <mi>f</mi>
+                            <mi>n</mi>
+                            <mi>o</mi>
+                            <mi>m</mi>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_JJX_XJ1_P3B" data-ofbid="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_JJX_XJ1_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-12. <span id="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__GUID-011B1B53-AC3D-4170-9CDA-0EFA8EB04D6D" class="fig--title">Condition 1</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <mi>d</mi>
+                            <mi>f</mi>
+                            <mo>≤</mo>
+                            <mfrac>
+                                <mrow>
+                                    <mi>N</mi>
+                                    <mi>S</mi>
+                                    <mi>J</mi>
+                                    <mi>W</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>2</mn>
+                                    <mo>×</mo>
+                                    <mn>10</mn>
+                                    <mo>×</mo>
+                                    <mfrac>
+                                        <mrow>
+                                            <mi>N</mi>
+                                            <mi>B</mi>
+                                            <mi>T</mi>
+                                        </mrow>
+                                        <mrow>
+                                            <mi>N</mi>
+                                            <mi>T</mi>
+                                            <mi>Q</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </mfrac>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_Q5C_YJ1_P3B" data-ofbid="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_Q5C_YJ1_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-13. <span id="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__GUID-9DEFCB61-89E0-42C1-BF9C-52C84A40C6C0" class="fig--title">Condition 2</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <mi>d</mi>
+                            <mi>f</mi>
+                            <mo>≤</mo>
+                            <mfrac>
+                                <mrow>
+                                    <mi>min</mi>
+                                    <mo>⁡</mo>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mi>N</mi>
+                                        <mi>P</mi>
+                                        <mi>H</mi>
+                                        <mi>S</mi>
+                                        <mi>E</mi>
+                                        <mi>G</mi>
+                                        <mn>1</mn>
+                                        <mo>,</mo>
+                                        <mi>N</mi>
+                                        <mi>P</mi>
+                                        <mi>H</mi>
+                                        <mi>S</mi>
+                                        <mi>E</mi>
+                                        <mi>G</mi>
+                                        <mn>2</mn>
+                                        <mo>)</mo>
+                                    </mrow>
+                                </mrow>
+                                <mrow>
+                                    <mn>2</mn>
+                                    <mo>×</mo>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mn>13</mn>
+                                        <mo>×</mo>
+                                        <mfrac>
+                                            <mrow>
+                                                <mi>N</mi>
+                                                <mi>B</mi>
+                                                <mi>T</mi>
+                                            </mrow>
+                                            <mrow>
+                                                <mi>N</mi>
+                                                <mi>T</mi>
+                                                <mi>Q</mi>
+                                            </mrow>
+                                        </mfrac>
+                                        <mo>−</mo>
+                                        <mi>N</mi>
+                                        <mi>P</mi>
+                                        <mi>H</mi>
+                                        <mi>S</mi>
+                                        <mi>E</mi>
+                                        <mi>G</mi>
+                                        <mn>2</mn>
+                                        <mo>)</mo>
+                                    </mrow>
+                                </mrow>
+                            </mfrac>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_H13_BK1_P3B" data-ofbid="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_H13_BK1_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-14. <span id="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__GUID-C2DB69F7-E7AD-473E-8683-CC00FF7EA9D3" class="fig--title">Condition 3</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <mi>d</mi>
+                            <mi>f</mi>
+                            <mo>≤</mo>
+                            <mfrac>
+                                <mrow>
+                                    <mi>D</mi>
+                                    <mi>S</mi>
+                                    <mi>J</mi>
+                                    <mi>W</mi>
+                                </mrow>
+                                <mrow>
+                                    <mn>2</mn>
+                                    <mo>×</mo>
+                                    <mn>10</mn>
+                                    <mo>×</mo>
+                                    <mfrac>
+                                        <mrow>
+                                            <mi>D</mi>
+                                            <mi>B</mi>
+                                            <mi>T</mi>
+                                        </mrow>
+                                        <mrow>
+                                            <mi>D</mi>
+                                            <mi>T</mi>
+                                            <mi>Q</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </mfrac>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_L2F_CK1_P3B" data-ofbid="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_L2F_CK1_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-15. <span id="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__GUID-A7809EBB-C379-4F61-8715-5ED161D78E98" class="fig--title">Condition 4</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <mi>d</mi>
+                            <mi>f</mi>
+                            <mo>≤</mo>
+                            <mfrac>
+                                <mrow>
+                                    <mi>min</mi>
+                                    <mo>⁡</mo>
+                                    <mo>(</mo>
+                                    <mi>N</mi>
+                                    <mi>P</mi>
+                                    <mi>H</mi>
+                                    <mi>S</mi>
+                                    <mi>E</mi>
+                                    <mi>G</mi>
+                                    <mn>1</mn>
+                                    <mo>,</mo>
+                                    <mtext> </mtext>
+                                    <mi>N</mi>
+                                    <mi>P</mi>
+                                    <mi>H</mi>
+                                    <mi>S</mi>
+                                    <mi>E</mi>
+                                    <mi>G</mi>
+                                    <mn>2</mn>
+                                    <mo>)</mo>
+                                </mrow>
+                                <mrow>
+                                    <mn>2</mn>
+                                    <mo>×</mo>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mrow>
+                                            <mo>(</mo>
+                                            <mn>6</mn>
+                                            <mo>×</mo>
+                                            <mfrac>
+                                                <mrow>
+                                                  <mi>D</mi>
+                                                  <mi>B</mi>
+                                                  <mi>T</mi>
+                                                </mrow>
+                                                <mrow>
+                                                  <mi>D</mi>
+                                                  <mi>T</mi>
+                                                  <mi>Q</mi>
+                                                </mrow>
+                                            </mfrac>
+                                            <mo>−</mo>
+                                            <mi>D</mi>
+                                            <mi>P</mi>
+                                            <mi>H</mi>
+                                            <mi>S</mi>
+                                            <mi>E</mi>
+                                            <mi>G</mi>
+                                            <mn>2</mn>
+                                            <mo>)</mo>
+                                            <mo>×</mo>
+                                            <mfrac>
+                                                <mrow>
+                                                  <mi>D</mi>
+                                                  <mi>B</mi>
+                                                  <mi>R</mi>
+                                                  <mi>P</mi>
+                                                </mrow>
+                                                <mrow>
+                                                  <mi>N</mi>
+                                                  <mi>B</mi>
+                                                  <mi>R</mi>
+                                                  <mi>P</mi>
+                                                </mrow>
+                                            </mfrac>
+                                            <mo>+</mo>
+                                            <mn>7</mn>
+                                            <mo>×</mo>
+                                            <mfrac>
+                                                <mrow>
+                                                  <mi>N</mi>
+                                                  <mi>B</mi>
+                                                  <mi>T</mi>
+                                                </mrow>
+                                                <mrow>
+                                                  <mi>N</mi>
+                                                  <mi>T</mi>
+                                                  <mi>Q</mi>
+                                                </mrow>
+                                            </mfrac>
+                                        </mrow>
+                                        <mo>)</mo>
+                                    </mrow>
+                                </mrow>
+                            </mfrac>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_KHQ_CK1_P3B" data-ofbid="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__EQUATION-FIGURE_KHQ_CK1_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-16. <span id="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604__GUID-42B0DDEF-17FC-481A-9A3A-A6991E91DEAC" class="fig--title">Condition 5</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <mi>d</mi>
+                            <mi>f</mi>
+                            <mo>≤</mo>
+                            <mfrac>
+                                <mrow>
+                                    <mi>D</mi>
+                                    <mi>S</mi>
+                                    <mi>J</mi>
+                                    <mi>W</mi>
+                                    <mo>−</mo>
+                                    <mi>max</mi>
+                                    <mo>⁡</mo>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mn>0</mn>
+                                        <mo>,</mo>
+                                        <mrow>
+                                            <mo>(</mo>
+                                            <mfrac>
+                                                <mrow>
+                                                  <mi>N</mi>
+                                                  <mi>B</mi>
+                                                  <mi>R</mi>
+                                                  <mi>P</mi>
+                                                </mrow>
+                                                <mrow>
+                                                  <mi>D</mi>
+                                                  <mi>B</mi>
+                                                  <mi>R</mi>
+                                                  <mi>P</mi>
+                                                </mrow>
+                                            </mfrac>
+                                            <mo>−</mo>
+                                            <mn>1</mn>
+                                            <mo>)</mo>
+                                        </mrow>
+                                        <mo>)</mo>
+                                    </mrow>
+                                </mrow>
+                                <mrow>
+                                    <mn>2</mn>
+                                    <mo>×</mo>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mrow>
+                                            <mo>(</mo>
+                                            <mn>2</mn>
+                                            <mo>×</mo>
+                                            <mfrac>
+                                                <mrow>
+                                                  <mi>N</mi>
+                                                  <mi>B</mi>
+                                                  <mi>T</mi>
+                                                </mrow>
+                                                <mrow>
+                                                  <mi>N</mi>
+                                                  <mi>T</mi>
+                                                  <mi>Q</mi>
+                                                </mrow>
+                                            </mfrac>
+                                            <mo>×</mo>
+                                            <mi>H</mi>
+                                            <mi>N</mi>
+                                            <mi>S</mi>
+                                            <mi>E</mi>
+                                            <mi>G</mi>
+                                            <mi>P</mi>
+                                            <mn>2</mn>
+                                            <mo>)</mo>
+                                            <mo>×</mo>
+                                            <mfrac>
+                                                <mrow>
+                                                  <mi>N</mi>
+                                                  <mi>B</mi>
+                                                  <mi>R</mi>
+                                                  <mi>P</mi>
+                                                </mrow>
+                                                <mrow>
+                                                  <mi>D</mi>
+                                                  <mi>B</mi>
+                                                  <mi>R</mi>
+                                                  <mi>P</mi>
+                                                </mrow>
+                                            </mfrac>
+                                            <mo>+</mo>
+                                            <mi>D</mi>
+                                            <mi>P</mi>
+                                            <mi>H</mi>
+                                            <mi>S</mi>
+                                            <mi>E</mi>
+                                            <mi>G</mi>
+                                            <mn>2</mn>
+                                            <mo>+</mo>
+                                            <mn>4</mn>
+                                            <mo>×</mo>
+                                            <mfrac>
+                                                <mrow>
+                                                  <mi>D</mi>
+                                                  <mi>B</mi>
+                                                  <mi>T</mi>
+                                                </mrow>
+                                                <mrow>
+                                                  <mi>D</mi>
+                                                  <mi>T</mi>
+                                                  <mi>Q</mi>
+                                                </mrow>
+                                            </mfrac>
+                                        </mrow>
+                                        <mo>)</mo>
+                                    </mrow>
+                                </mrow>
+                            </mfrac>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

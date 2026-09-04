@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.4.2 Timer Counter and Capture Registers — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB.html"/>
+<link rel="next" href="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD.html"/>
+<link rel="up" href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html">28.4 UTMR Operation</a></li><li>28.4.2 Timer Counter and Capture Registers</li></ol>
+  <div class="sib"><span>← <a href="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB.html" rel="prev">Synchronous vs. Asynchronous Operation</a></span><span><a href="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD.html" rel="next">Timer Period Register</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-39F8E8B5-697B-4207-8852-FFB6F87FB28F" style="">28.4.2 Timer Counter and Capture
+        Registers</h1><div class="- topic/body body"><div class="- topic/p p">The UTMR module has two registers to access the timer/counter value – TUxyTMR counter
+            register and TUxyCR capture register. The size of these registers is the same as the
+            size of the timer. Both registers share the same memory location and are addressed based
+            on the<a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#ID-00000021" title="Timer Readout Mode Select(6,7,8)">
+                RDSEL</a> bit in the TUxyCON0 register. Setting the RDSEL bit addresses the
+            TUxyTMR counter register, whereas clearing the RDSEL bit addresses the TUxyCR capture
+            register.</div><p class="- topic/p p">To read the raw counter value using the TUxyTMR counter register, the RDSEL bit must be
+            set. When the timer is running in either Synchronous or Asynchronous mode, directly
+            reading the TUxyTMR counter register can produce erroneous values. This can occur when
+            the counter/timer is operating from an asynchronous clock source or when the read
+            happens coincidentally with the rollover of the bottom 8 bits of the TUxyTMR counter
+            register.</p><p class="- topic/p p">Clearing the RDSEL bit directs all counter/timer reads through the TUxyCR capture
+            register. The TUxyCR capture register is functionally a read-only register and is loaded
+            directly from the counter/timer in response to either of the following three
+            conditions:</p><ol class="- topic/ol ol" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__OL_L44_W4G_R3B" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__OL_L44_W4G_R3B"><li class="- topic/li li" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-65C569B3-F022-42FB-AEB5-0AFADF057EA9" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-65C569B3-F022-42FB-AEB5-0AFADF057EA9">Setting the <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#ID-00000021" title="Timer “Capture” Command(5,6,7,8,9)">CAPT</a> command bit.</li><li class="- topic/li li" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-7F6DEEA8-AFCF-482E-9A49-35DA904D1D47" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-7F6DEEA8-AFCF-482E-9A49-35DA904D1D47">When a stop event is generated.</li><li class="- topic/li li" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-B2CB22D5-BF6D-4593-9F95-3B1EE1EB4DBE" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-B2CB22D5-BF6D-4593-9F95-3B1EE1EB4DBE">In the event of an ERS rising edge
+                (or falling edge based on <a class="- topic/xref xref" href="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A.html#ID-00000005" title="ERS Polarity Selection">EPOL</a> bit selection) if the Stop condition is set to none. See <a class="- topic/xref xref" href="GUID-A0D57AB5-909A-46BF-9972-621A49224C58.html">Stop Event</a>
+                for more details on Stop condition.</li></ol><div class="- topic/p p">It is recommended that any read of the timer, when it is running, utilizes the CAPT
+            command bit with the RDSEL bit clear. Asserting the CAPT bit will cause synchronous
+            transfer of the timer value to the TUxyCR capture register. The CAPT bit remains set
+            until the capture is complete. The TUxyCR capture register can then be read by the
+            processor without any data corruption. See <a class="- topic/xref xref" href="#GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__FIG_KTF_B14_R3B"><span>Figure 28-6</span></a> for an example of the CAPT bit operation.<figure class="- topic/fig fig fignone" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__FIG_KTF_B14_R3B" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__FIG_KTF_B14_R3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 28-6. <span id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-0FBEB174-470C-46AC-A165-9D7D3754C83A" class="fig--title">CAPT
+                    Bit Operation </span></span></figcaption><span class=""><iframe src="GUID-2C221C01-2633-4D78-A053-D12F12AC12E3-high.pdf#toolbar=1" width="494.1" height="451.42"></iframe></span></figure></div><p class="- topic/p p">In the event of an ERS rising capture, the TUxyCR capture register must be read before
+            the event of a second ERS rising or the data captured will be overwritten by the second
+            rising event.</p><div class="- topic/p p">The TUxyTMR counter register can be written when the <a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#ID-00000021" title="Timer Readout Mode Select(6,7,8)">
+                RDSEL</a> bit is set, provided that the <a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#ID-00000005" title="Timer Enable(1,2)">ON</a>
+            bit is clear. Attempting to write to the TUxyTMR counter register with the ON bit set
+            can result in corrupted data. If the intention is to clear the counter, the CLR command
+            bit needs to be used instead of writing zeros. Asserting the <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#ID-00000013" title="Timer Counter “Clear” Command(5,6)">CLR</a> bit clears the TUxyTMR counter register, even if the ON bit is set. The
+            CLR bit remains set until the counter is reset.</div><div class="- topic/p p">The CAPT and CLR command bits are subject to synchronization delays which is dependent on
+            the settings of CSYNC and ON bits, as shown in <a class="- topic/xref xref" href="#GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB"><span>Table 28-2</span></a>.<div class="table-container"><table class="- topic/table table frame-all" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB" data-cols="3"><caption class="- topic/title title tablecap" data-caption-side="top" data-is-repeated="true"><span class="table--title-label"><span class="table--title-label">Table 28-2. </span></span><span class="table--title" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-10879CBA-83D8-4576-BA13-E81BE409FC37">Behavior of CAPT and CLR
+                    Commands with Respect to ON and CSYNC Bits</span></caption><colgroup><col style="width:20.580474934036943%"/><col style="width:13.192612137203167%"/><col style="width:66.22691292875989%"/></colgroup><thead class="- topic/thead thead"><tr class="- topic/row"><th class="- topic/entry entry align-left colsep-1 rowsep-1" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__1">ON Bit</th><th class="- topic/entry entry align-left colsep-1 rowsep-1" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__2">CSYNC Bit</th><th class="- topic/entry entry align-left colsep-0 rowsep-1" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__3">Behavior of CAPT and CLR Commands</th></tr></thead><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry align-left colsep-1 rowsep-1" headers="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__1"><code class="+ topic/ph pr-d/codeph ph codeph">1</code> (Timer Running)</td><td class="- topic/entry entry align-left colsep-1 rowsep-1" headers="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__2"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></td><td class="- topic/entry entry align-left colsep-0 rowsep-1" headers="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__3">Synchronization delay of three timer clock cycles applies before
+                                the desired action is performed</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-left colsep-1 rowsep-1" headers="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__1"><code class="+ topic/ph pr-d/codeph ph codeph">1</code> (Timer Running)</td><td class="- topic/entry entry align-left colsep-1 rowsep-1" headers="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__2"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></td><td class="- topic/entry entry align-left colsep-0 rowsep-1" headers="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__3">No synchronization delay applies. Desired action is performed
+                                immediately.</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-left colsep-1 rowsep-1" headers="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__1"><code class="+ topic/ph pr-d/codeph ph codeph">0</code> (Timer Stopped)</td><td class="- topic/entry entry align-left colsep-1 rowsep-1" headers="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__2"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></td><td class="- topic/entry entry align-left colsep-0 rowsep-1" headers="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__3">Synchronization delay of three timer clock cycles applies. The
+                                desired action is delayed until timer clock resumes.</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-left colsep-1 rowsep-0" headers="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__1"><code class="+ topic/ph pr-d/codeph ph codeph">0</code> (Timer Stopped)</td><td class="- topic/entry entry align-left colsep-1 rowsep-0" headers="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__2"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></td><td class="- topic/entry entry align-left colsep-0 rowsep-0" headers="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__TABLE_UN4_NT5_HLB__entry__3">No synchronization delay applies. Desired action is performed
+                                immediately.</td></tr></tbody></table></div></div><div class="- topic/p p">
+            <div class="- topic/note note important note_important" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-A800C80D-53DB-4A81-926B-DE5F5CE3E996" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-A800C80D-53DB-4A81-926B-DE5F5CE3E996"><span class="note__title">Important:</span> 
+                <ol class="- topic/ol ol" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__OL_M5F_G55_HLB" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__OL_M5F_G55_HLB"><li class="- topic/li li" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-D2E0802A-41B6-4326-B249-E0AD3D338560" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-D2E0802A-41B6-4326-B249-E0AD3D338560">Reading and writing the
+                        TUxyTMR counter register when the timer is running (ON = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>)
+                        is not recommended. The TUxyTMR counter register needs to be read or written
+                        to only when the timer is stopped (ON = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) to prevent data
+                        corruption.</li><li class="- topic/li li" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-C39B8F94-2663-431A-8AC9-3EDAED2D47F8" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-C39B8F94-2663-431A-8AC9-3EDAED2D47F8">The TUxyTMR register, like
+                        many othe registers in the module, remains unchanged after a non-POR/BOR
+                        system Reset. It is recommended to always clear this register at the start
+                        of program execution to avoid counting from an unknown value.</li><li class="- topic/li li" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-D88700DB-B897-4368-B379-72A12247B30D" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-D88700DB-B897-4368-B379-72A12247B30D">Setting the CLR bit does not
+                        reset the TUxyCR capture register.</li><li class="- topic/li li" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-FDBF1D25-B8D0-4680-B7B4-96B64611E3CB" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-FDBF1D25-B8D0-4680-B7B4-96B64611E3CB">The TUxyTMR register needs to
+                        not be written as a means to change the effective period. If the intention
+                        is to change the timer period, the TUxyPR period register needs to be
+                        changed instead. See <a class="- topic/xref xref" href="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD.html">Timer Period Register</a> for more details on how to
+                        change the timer period while the timer is running.</li><li class="- topic/li li" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-D777849F-4EE5-41C1-A9F8-2CEBD4E2B77C" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-D777849F-4EE5-41C1-A9F8-2CEBD4E2B77C">When software sets a CLR or
+                        CAPT command bit, the bit value of ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’ is indicated in the
+                        SFR immediately, to indicate that the over-and-back clock synchronization is
+                        not complete. However, a sufficiently high timer clock frequency might
+                        complete the cross-domain synchronization within one instruction cycle and
+                        the bit value would always appear to be ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’.</li><li class="- topic/li li" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-764784B8-1146-4BA3-9C38-8F6D057415B5" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-764784B8-1146-4BA3-9C38-8F6D057415B5">Setting CLR or CAPT command
+                        bits to ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’ has no effect.</li><li class="- topic/li li" id="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-5771CAE7-AA49-497C-B048-94539D2EDF8A" data-ofbid="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0__GUID-5771CAE7-AA49-497C-B048-94539D2EDF8A">The timer starts counting by
+                        incrementing the TUxyTMR value to the next valid counter value. For
+                        instance, if the counter is in Reset state (TUxyTMR = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>),
+                        then the timer starts counting from 1. If the TUxyTMR = PR and RESET = at PR
+                        Match, then the timer will start counting by resetting the counter to zero
+                        first.</li></ol>
+            </div>
+        </div></div>
+</body>
+</html>

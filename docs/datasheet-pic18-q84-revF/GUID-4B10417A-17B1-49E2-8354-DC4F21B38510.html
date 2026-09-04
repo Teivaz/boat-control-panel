@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.8.3 Continuous Transfer — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49.html"/>
+<link rel="next" href="GUID-B831B66E-9FD4-45EB-A552-402CE09BB66D.html"/>
+<link rel="up" href="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li><a href="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA.html">16.8 DMA Setup and Operation</a></li><li>16.8.3 Continuous Transfer</li></ol>
+  <div class="sib"><span>← <a href="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49.html" rel="prev">Destination Stop</a></span><span><a href="GUID-B831B66E-9FD4-45EB-A552-402CE09BB66D.html" rel="next">Transfer from SFR to GPR</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510__GUID-953FF752-37A9-4F68-96ED-B05252BBBF86" style="">16.8.3 Continuous Transfer</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">When the Source or the Destination Stop bit is cleared (<a class="- topic/xref xref" href="GUID-2A5BB90C-F4F7-4EDC-8B9F-71709DC67C52.html#BITFIELD_ZKF_5S4_3GB" title="Source Counter Reload Stop"><span><span>SSTP</span></span></a>, <a class="- topic/xref xref" href="GUID-2A5BB90C-F4F7-4EDC-8B9F-71709DC67C52.html#BITFIELD_QJJ_143_F1B" title="Destination Counter Reload Stop"><span><span>DSTP</span></span></a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the transactions continue unless stopped by
+            the user. The DMAxSCNTIF and DMAxDCNTIF flags are set whenever the respective counter
+            registers are reloaded.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510__FIG_PC2_VHX_SFB" data-ofbid="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510__FIG_PC2_VHX_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 16-8. <span id="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510__GUID-28E0B6D9-F7F4-439D-936E-221E0CEFEB39" class="fig--title">GPR-GPR Transactions with Hardware
+                Triggers, SSTP, DSTP = <code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-F65F6AAC-A21F-430C-91D3-15882C3CB1FE-high.pdf#toolbar=1" width="605.21" height="428.15"></iframe></span>
+        </figure>
+        <div class="- topic/note note notype note_notype" id="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510__GUID-9C5F4850-66F6-4FA2-95D1-559F5A422A26" data-ofbid="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510__GUID-9C5F4850-66F6-4FA2-95D1-559F5A422A26"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510__OL_YPV_ZFX_SFB" data-ofbid="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510__OL_YPV_ZFX_SFB">
+                <li class="- topic/li li" id="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510__GUID-1D565092-88E0-4E1B-A11A-F9EE9A3F369B" data-ofbid="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510__GUID-1D565092-88E0-4E1B-A11A-F9EE9A3F369B">SR - Source Read</li>
+                <li class="- topic/li li" id="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510__GUID-D4B1FC45-ACF5-4FB6-8292-E71BB15A833B" data-ofbid="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510__GUID-D4B1FC45-ACF5-4FB6-8292-E71BB15A833B">DW - Destination Write</li>
+            </ol>
+        </div>
+        
+    </div>
+
+</body>
+</html>

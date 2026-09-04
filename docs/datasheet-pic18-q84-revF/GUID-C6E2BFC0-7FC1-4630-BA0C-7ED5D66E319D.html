@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.1.2.4 ADCRC — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4.html"/>
+<link rel="next" href="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC.html"/>
+<link rel="up" href="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A.html">12.1 Clock Source Types</a></li><li><a href="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7.html">12.1.2 Internal Clock Sources</a></li><li>12.1.2.4 ADCRC</li></ol>
+  <div class="sib"><span>← <a href="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4.html" rel="prev">LFINTOSC</a></span><span><a href="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC.html" rel="next">Oscillator Status and Manual Enable</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-C6E2BFC0-7FC1-4630-BA0C-7ED5D66E319D__GUID-4A8C472F-D339-4154-A566-8838160AF192" style="">12.1.2.4 ADCRC</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The Analog-to-Digital RC (ADCRC) oscillator is dedicated to the ADC module. ADCRC operates at a
+      fixed frequency of approximately 600 kHz and is used as a conversion clock source. The ADCRC
+      allows the ADC module to operate in Sleep mode, which can reduce system noise during the ADC
+      conversion. The ADCRC is automatically enabled when it is selected as the clock source for the
+      ADC module or when selected as the clock source of any peripheral that may use it. The ADCRC
+      may also be manually enabled via the ADC Oscillator Enable (<a class="- topic/xref xref" href="GUID-49394B12-4B55-44B1-85A7-19080285149B.html#BITFIELD_IPR_TH3_ZGB" title="ADCRC Oscillator Enable">ADOEN</a>) bit,
+      thereby avoiding start-up delays when this source is used intermittently.</p>
+</div>
+
+</body>
+</html>

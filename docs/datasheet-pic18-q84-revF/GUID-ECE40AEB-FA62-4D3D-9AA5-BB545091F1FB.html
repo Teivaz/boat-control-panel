@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>9.5.3.1 FSR Registers and the INDF Operand — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-24755C96-A501-40D0-B59F-23E781F10FCB.html"/>
+<link rel="next" href="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596.html"/>
+<link rel="up" href="GUID-24755C96-A501-40D0-B59F-23E781F10FCB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2BAB2696-5102-45C6-8EF2-0812A58B9EC7.html">9 Memory Organization</a></li><li><a href="GUID-D6ED03D2-3DA7-4418-9192-E7A83494ECF4.html">9.5 Data Addressing Modes</a></li><li><a href="GUID-24755C96-A501-40D0-B59F-23E781F10FCB.html">9.5.3 Indirect Addressing</a></li><li>9.5.3.1 FSR Registers and the INDF Operand</li></ol>
+  <div class="sib"><span>← <a href="GUID-24755C96-A501-40D0-B59F-23E781F10FCB.html" rel="prev">Indirect Addressing</a></span><span><a href="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596.html" rel="next">FSR Registers and POSTINC, POSTDEC, PREINC and PLUSW</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-ECE40AEB-FA62-4D3D-9AA5-BB545091F1FB__GUID-632CB063-8A28-4A29-ABE4-D57AF567F84C" style="">9.5.3.1 FSR Registers and the INDF Operand</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-ECE40AEB-FA62-4D3D-9AA5-BB545091F1FB__ID-42129-000065ED" data-ofbid="GUID-ECE40AEB-FA62-4D3D-9AA5-BB545091F1FB__ID-42129-000065ED">At the core of Indirect Addressing are three sets of registers:
+         FSR0, FSR1 and FSR2. Each represent a pair of 8-bit registers, FSRnH and FSRnL. Each FSR
+         pair holds the full address of the RAM location. The FSR value can address the entire range
+         of the data memory in a linear fashion. The FSR register pairs, then, serve as pointers to
+         data memory locations.</p>
+      <p class="- topic/p p" id="GUID-ECE40AEB-FA62-4D3D-9AA5-BB545091F1FB__ID-42129-000065EE" data-ofbid="GUID-ECE40AEB-FA62-4D3D-9AA5-BB545091F1FB__ID-42129-000065EE">Indirect Addressing is accomplished with a set of Indirect File
+         Operands, INDF0 through INDF2. These can be thought of as “virtual” registers; they are
+         mapped in the SFR space but are not physically implemented. Reading or writing to a
+         particular INDF register actually accesses its corresponding FSR register pair. A read from
+         INDF1, for example, reads the data at the address indicated by FSR1H:FSR1L. Instructions
+         that use the INDF registers as operands actually use the contents of their corresponding
+         FSR as a pointer to the instruction’s target. The INDF operand is just a convenient way of
+         using the pointer.</p>
+      <p class="- topic/p p" id="GUID-ECE40AEB-FA62-4D3D-9AA5-BB545091F1FB__ID-42129-000065EF" data-ofbid="GUID-ECE40AEB-FA62-4D3D-9AA5-BB545091F1FB__ID-42129-000065EF">Because Indirect Addressing uses a full address, the FSR value can
+         target any location in any bank regardless of the BSR value. However, the Access RAM bit
+         must be cleared to zero to ensure that the INDF register in Access space is the object of
+         the operation instead of a register in one of the other banks. The assembler default value
+         for the Access RAM bit is zero when targeting any of the indirect operands.</p>
+   </div>
+
+</body>
+</html>

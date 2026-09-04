@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.3.4.1.2 Hardware Trigger, SIRQ — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-AFB4E769-FF45-4675-8A66-9DADF73AE291.html"/>
+<link rel="next" href="GUID-EBD671AC-0CCE-4BF8-9852-B901310EC575.html"/>
+<link rel="up" href="GUID-88A29055-5CF0-40B8-AB5D-B46F7711554D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li><a href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html">16.3 DMA Interface</a></li><li><a href="GUID-129A63BF-383B-4E30-91DE-858C4D6CC236.html">16.3.4 DMA Message Transfers</a></li><li><a href="GUID-88A29055-5CF0-40B8-AB5D-B46F7711554D.html">16.3.4.1 Starting DMA Message Transfers</a></li><li>16.3.4.1.2 Hardware Trigger, SIRQ</li></ol>
+  <div class="sib"><span>← <a href="GUID-AFB4E769-FF45-4675-8A66-9DADF73AE291.html" rel="prev">User Software Control</a></span><span><a href="GUID-EBD671AC-0CCE-4BF8-9852-B901310EC575.html" rel="next">Stopping DMA Message Transfers</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-B49C0021-360B-40CE-895E-20BD181DDEA8__GUID-48720F72-C681-4461-90C5-DE6CDCABAD83" style="">16.3.4.1.2 Hardware Trigger, SIRQ</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">A hardware trigger is an interrupt request from another module sent to the
+            DMA with the purpose of starting a DMA message. The DMA start trigger source is
+            user-selectable using the DMAnSIRQ register.</p>
+        <p class="- topic/p p">The <a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#BITFIELD_QJJ_143_F1B" title="Start of Transfer Interrupt Request Enable"><span><span>SIRQEN</span></span></a> bit is used to enable sampling of external interrupt triggers by which
+            a DMA transfer can be started. When set, the DMA will sample the selected interrupt
+            source and when cleared, the DMA will ignore the interrupt source. Clearing the SIRQEN
+            bit does not stop a DMA transaction currently in progress, it only stops more hardware
+            request signals from being received.</p>
+    </div>
+
+</body>
+</html>

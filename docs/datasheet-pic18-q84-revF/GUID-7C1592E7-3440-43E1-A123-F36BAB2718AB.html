@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.5 DALI Mode (Full-Featured UARTs Only) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-6DD538CA-E858-4710-9854-EF644E1B545B.html"/>
+<link rel="next" href="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B.html"/>
+<link rel="up" href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li>35.5 DALI Mode (Full-Featured UARTs Only)</li></ol>
+  <div class="sib"><span>← <a href="GUID-6DD538CA-E858-4710-9854-EF644E1B545B.html" rel="prev">LIN Client Transmitter</a></span><span><a href="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B.html" rel="next">Control Device</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB__GUID-0B4D4F9B-A659-416F-BA9F-AA9FBC4BD81E" style="">35.5 DALI Mode (Full-Featured UARTs Only)</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">DALI is a protocol used for intelligent lighting control for building
+            automation. The protocol consists of Control Devices and Control Gear. A Control Device
+            is an application controller that sends out commands to the light fixtures. The light
+            fixture itself is termed as a Control Gear. The communication is done using Manchester
+            encoding, which is performed by the UART hardware.</p>
+        <p class="- topic/p p">Manchester encoding consists of the clock and data in a single bit stream (refer to <a class="- topic/xref xref" href="#GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB__FIG_PN1_CHY_CBB"><span>Figure 35-9</span></a>). A high-to-low or a low-to-high
+            transition always occurs in the middle of the bit period and may or may not occur at the
+            bit period boundaries. When the consecutive bits in the bit stream are of the same value
+            (i.e., consecutive ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span>’s or consecutive ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span>’s), a
+            transition occurs at the bit boundary. However, when the bit value changes, there is no
+            transition at the bit boundary. According to the standard, a half-bit time is typically
+            416.7 μs long. A double half-bit time or a single bit is typically 833.3 μs.</p>
+        <p class="- topic/p p">The protocol is inherently half-duplex. Communication over the bus occurs in
+            the form of forward and backward frames. Wait times between the frames are defined in
+            the standard to prevent collision between the frames.</p>
+        <p class="- topic/p p">A Control Device transmission is termed as the forward frame. In the DALI 2.0 standard, a
+            forward frame can be two or three bytes in length. The two-byte forward frame is used
+            for communication between Control Device and Control Gear whereas the three-byte forward
+            frame is used for communication between Control Devices on the bus. The first byte in
+            the forward frame is the control byte and is followed by either one or two data bytes.
+            The transaction begins when the Control Device starts a transmission. Unlike other
+            protocols, each byte in the frame is transmitted MSb first. Typical frame timing is
+            shown below.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB__FIG_VDR_ZGY_CBB" data-ofbid="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB__FIG_VDR_ZGY_CBB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 35-7. <span id="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB__GUID-FC1BC1CD-2B9A-492B-911F-C20146460E61" class="fig--title">DALI Frame Timing</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-AE2744B3-C46D-4EB0-97F9-4F55FA76B717-high.pdf#toolbar=1" width="491.59" height="219.39"></iframe></span>
+        </figure>
+        <p class="- topic/p p">During the communication between two Control Devices, three bytes are
+            required to be transmitted. In this case, the software must write the third byte to
+            UxTXB as soon as UxTXIF goes true and before the output shifter becomes empty. This
+            ensures that the three bytes of the forward frame are transmitted back-to-back without
+            any interruption.</p>
+        <p class="- topic/p p">All Control Gear on the bus receive the forward frame. If the forward frame
+            requires a reply to be sent, one of the Control Gear may respond with a single byte,
+            called the backward frame. The 2.0 standard requires the Control Gear to begin
+            transmission of the backward frame between 5.5 ms to 10.5 ms (~14 to 22 half-bit times)
+            after reception of the forward frame. Once the backward frame is received by the Control
+            Device, it is required to wait a minimum of 2.4 ms (~6 half-bit times). After this wait
+            time, the Control Device is free to transmit another forward frame. Refer to the figure
+            below.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB__FIG_BHB_BHY_CBB" data-ofbid="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB__FIG_BHB_BHY_CBB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 35-8. <span id="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB__GUID-867CCC19-0E7F-49D6-9121-57E2502760A9" class="fig--title">DALI Forward/Backward Frame Timing</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-6EA28FD3-1EA4-46B7-8BB9-A5AEEA817558-high.pdf#toolbar=1" width="491.15" height="189.36"></iframe></span>
+        </figure>
+        <div class="- topic/p p">A Start bit is used to indicate the start of the forward and backward
+            frames. When <a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_XWQ_NRL_BBB" title="Auto-Baud Detect Enable(3)">ABDEN</a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span>, the
+            receiver bit rate is determined by the BRG register. When ABDEN = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span>, the first bit synchronizes the receiver with the transmitter and sets
+            the receiver bit rate. The low period of the Start bit is measured and is used as the
+            timing reference for all data bits in the forward and backward frames. The <a class="- topic/xref xref" href="GUID-0335D11B-CDF0-4C1B-B750-F220FDA16575.html#BITFIELD_K3M_SSL_BBB" title="Auto-baud Detect Overflow Interrupt Flag">ABDOVF</a> bit is set if the Start bit low period causes the
+            measurement counter to overflow. All the bits following the Start bit are data bits. The
+            bit stream terminates when no transition is detected in the middle of a bit period.
+            Refer to the figure below.</div>
+        <figure class="- topic/fig fig fignone" id="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB__FIG_PN1_CHY_CBB" data-ofbid="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB__FIG_PN1_CHY_CBB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 35-9. <span id="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB__GUID-28AF3182-11EF-4BE0-92A6-CBB5C1A00354" class="fig--title">Manchester Timing</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-FB2FC56D-318C-4400-917E-5D793D3040E1-high.pdf#toolbar=1" width="491.69" height="219.39"></iframe></span>
+        </figure>
+        <p class="- topic/p p">The forward and backward frames are terminated by two Idle bit periods or
+            Stop bits. Normally, these start in the first bit period of a byte. If both Stop bits
+            are valid, the byte reception is terminated.</p>
+        <p class="- topic/p p">If either of the Stop bits is invalid, the frame is tagged as invalid by saving it as a
+            null byte and setting the framing error in the receive FIFO.</p>
+        <p class="- topic/p p">A framing error also occurs when no transition is detected on the bus in the middle of a
+            bit period when the byte reception is not complete. In such a scenario, the byte will be
+            saved with the <a class="- topic/xref xref" href="GUID-0335D11B-CDF0-4C1B-B750-F220FDA16575.html#BITFIELD_C5C_R5L_BBB" title="Framing Error Interrupt Flag">FERIF</a> bit set.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B.html">35.5.1 Control Device</a></li><li><a href="GUID-2C36C7AE-8077-4C2B-B8AB-BE74F439A0B3.html">35.5.2 Control Gear</a></li></ul>
+</nav>
+</body>
+</html>

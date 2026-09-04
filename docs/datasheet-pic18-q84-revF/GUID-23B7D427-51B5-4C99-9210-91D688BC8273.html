@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26.8.3 Edge Triggered Hardware Limit Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD.html"/>
+<link rel="next" href="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A.html"/>
+<link rel="up" href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html">26 TMR2 - Timer2 Module</a></li><li><a href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html">26.8 Operation Examples</a></li><li>26.8.3 Edge Triggered Hardware Limit Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD.html" rel="prev">Hardware Gate Mode</a></span><span><a href="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A.html" rel="next">Level Triggered Hardware Limit Mode</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-23B7D427-51B5-4C99-9210-91D688BC8273__GUID-8C87751F-900E-4FB6-B600-988579F1B7DB" style="">26.8.3 Edge Triggered Hardware Limit Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-23B7D427-51B5-4C99-9210-91D688BC8273__ID-42141-000013C5" data-ofbid="GUID-23B7D427-51B5-4C99-9210-91D688BC8273__ID-42141-000013C5">In Hardware Limit mode, the timer can be reset by the TMRx_ers
+         external signal before the timer reaches the period count. Three types of Resets are
+         possible:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-23B7D427-51B5-4C99-9210-91D688BC8273__ID-42141-000013C6" data-ofbid="GUID-23B7D427-51B5-4C99-9210-91D688BC8273__ID-42141-000013C6">Reset on rising or falling edge (MODE =
+            <code class="+ topic/ph pr-d/codeph ph codeph">‘b00011</code>)</li>
+         <li class="- topic/li li" id="GUID-23B7D427-51B5-4C99-9210-91D688BC8273__ID-42141-000013C9" data-ofbid="GUID-23B7D427-51B5-4C99-9210-91D688BC8273__ID-42141-000013C9">Reset on rising edge (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b00100</code>)</li>
+         <li class="- topic/li li" id="GUID-23B7D427-51B5-4C99-9210-91D688BC8273__ID-42141-000013CC" data-ofbid="GUID-23B7D427-51B5-4C99-9210-91D688BC8273__ID-42141-000013CC">Reset on falling edge (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b00101</code>)</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-23B7D427-51B5-4C99-9210-91D688BC8273__ID-42141-000013CF" data-ofbid="GUID-23B7D427-51B5-4C99-9210-91D688BC8273__ID-42141-000013CF">When the timer is used in conjunction with the CCP in PWM mode then
+         an early Reset shortens the period and restarts the PWM pulse after a two clock delay.
+         Refer to <a class="- topic/xref xref" href="#GUID-23B7D427-51B5-4C99-9210-91D688BC8273__ID-42141-000013D5"><span>Figure 26-5</span></a>.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-23B7D427-51B5-4C99-9210-91D688BC8273__ID-42141-000013D5" data-ofbid="GUID-23B7D427-51B5-4C99-9210-91D688BC8273__ID-42141-000013D5"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 26-5. <span id="GUID-23B7D427-51B5-4C99-9210-91D688BC8273__GUID-083AEB65-3D2B-45F7-A619-9F58F6E789EF" class="fig--title">Edge Triggered Hardware Limit Mode
+            Timing Diagram (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b00100</code>)</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-B6EF473A-0B41-454E-93EE-62ADB5FA6F3E-high.pdf#toolbar=1" width="450" height="341.1655471120679"></iframe></span>
+      </figure>
+      
+   </div>
+
+</body>
+</html>

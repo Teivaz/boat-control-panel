@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.4.4 External Reset Source (ERS) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD.html"/>
+<link rel="next" href="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF.html"/>
+<link rel="up" href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html">28.4 UTMR Operation</a></li><li>28.4.4 External Reset Source (ERS)</li></ol>
+  <div class="sib"><span>← <a href="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD.html" rel="prev">Timer Period Register</a></span><span><a href="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF.html" rel="next">Start, Stop and Reset Events</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2__GUID-E198730E-0466-49EA-9C80-8D4D4FBC4839" style="">28.4.4 External Reset Source (ERS)</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">An External Reset Source (ERS) is an external input to the timer module that can be used
+            to trigger Start, Reset and Stop conditions for the timer. It can be selected by
+            configuring the <a class="- topic/xref xref" href="GUID-D61E82F2-29C8-4B25-901B-C4E187158945.html" title="TUxyERS">TUxyERS</a> selection register and goes through edge/level detection and
+            synchronization as shown in <a class="- topic/xref xref" href="#GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2__FIG_IKP_3S2_H3B"><span>Figure 28-7</span></a>. The
+            polarity of the ERS signal is selected using the <a class="- topic/xref xref" href="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A.html#ID-00000005" title="ERS Polarity Selection">EPOL</a> bit in the TUxyHLT register. Setting the EPOL bit will invert the state
+            of the selected ERS source. Also included is a Continuous mode selection for Start/Stop
+            conditions to provide an ERS-independent software controlled start/stop option. See the
+                <a class="- topic/xref xref" href="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF.html">Start, Stop and
+                Reset Events</a> section for start, stop and Reset events.</p>
+        <div class="- topic/p p">
+            <div class="- topic/note note important note_important" id="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2__GUID-2B8C490E-F70A-458B-BB92-F2A81F1C84FC" data-ofbid="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2__GUID-2B8C490E-F70A-458B-BB92-F2A81F1C84FC"><span class="note__title">Important:</span> 
+                <ol class="- topic/ol ol" id="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2__OL_DQY_1X5_HLB" data-ofbid="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2__OL_DQY_1X5_HLB">
+                    <li class="- topic/li li" id="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2__GUID-C87DC5C4-7234-4167-A640-0DA320053039" data-ofbid="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2__GUID-C87DC5C4-7234-4167-A640-0DA320053039">Actions involving ERS require
+                        the <a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#ID-00000005" title="Timer Enable(1,2)">ON</a> bit to be set and a running clock.</li>
+                    <li class="- topic/li li" id="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2__GUID-3B1F929E-8894-47B8-978A-EE6C0DC335D7" data-ofbid="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2__GUID-3B1F929E-8894-47B8-978A-EE6C0DC335D7">The EPOL bit must not be
+                        changed when ON = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>. Changing EPOL will spontaneously cause
+                        an edge event and can cause timer output to flip.</li>
+                </ol>
+            </div>
+        </div>
+        <figure class="- topic/fig fig fignone" id="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2__FIG_IKP_3S2_H3B" data-ofbid="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2__FIG_IKP_3S2_H3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 28-7. <span id="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2__GUID-14812B27-A8AA-47D9-827A-D169026F5BE2" class="fig--title">ERS
+                Edge/Level Detection, Synchronization and Polarity Control </span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-A0DC1A60-061B-491A-AB3E-30DC997CE901-high.pdf#toolbar=1" width="460.8" height="362.4"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

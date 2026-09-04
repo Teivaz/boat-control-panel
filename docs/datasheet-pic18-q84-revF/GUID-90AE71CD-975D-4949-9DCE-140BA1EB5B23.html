@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>25.7.4 Timer1 Gate Single Pulse Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E5223B73-0FAB-4403-ADBB-A20EB34C6853.html"/>
+<link rel="next" href="GUID-B761FC16-B172-4692-84F1-CBAAC6DEFA2E.html"/>
+<link rel="up" href="GUID-BA690294-A6ED-4AE0-86FE-CD2BF16037F8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html">25 TMR1 - Timer1 Module with Gate Control</a></li><li><a href="GUID-BA690294-A6ED-4AE0-86FE-CD2BF16037F8.html">25.7 Timer1 Gate</a></li><li>25.7.4 Timer1 Gate Single Pulse Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-E5223B73-0FAB-4403-ADBB-A20EB34C6853.html" rel="prev">Timer1 Gate Toggle Mode</a></span><span><a href="GUID-B761FC16-B172-4692-84F1-CBAAC6DEFA2E.html" rel="next">Timer1 Gate Value Status</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-90AE71CD-975D-4949-9DCE-140BA1EB5B23__GUID-AB301917-2D27-4831-AAD8-63A11E703A6F" style="">25.7.4 Timer1 Gate Single Pulse Mode</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">When Timer1 Gate Single Pulse mode is enabled, it is possible to capture a
+            single pulse gate event. Timer1 Gate Single Pulse mode is first enabled by setting the
+                <a class="- topic/xref xref" href="GUID-38D487CB-8529-4509-B251-073A23673818.html#ID-000000B2" title="Timer Gate Single Pulse Mode">GSPM</a> bit. Next, the <a class="- topic/xref xref" href="GUID-38D487CB-8529-4509-B251-073A23673818.html#ID-000000B9" title="Timer Gate Single Pulse Acquisition Status">GGO/DONE</a> must be set. The Timer1 will be fully enabled on the next
+            incrementing edge. On the next trailing edge of the pulse, the
+                GGO/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">DONE</span> bit will automatically be cleared. No other gate
+            events will be allowed to increment Timer1 until the GGO/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">DONE</span>
+            bit is once again set in software.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-90AE71CD-975D-4949-9DCE-140BA1EB5B23__FIG_EMN_5WN_WGB" data-ofbid="GUID-90AE71CD-975D-4949-9DCE-140BA1EB5B23__FIG_EMN_5WN_WGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 25-6. <span id="GUID-90AE71CD-975D-4949-9DCE-140BA1EB5B23__GUID-6F617DA3-ADE4-4EF1-B3E9-3B9A89ADEEDB" class="fig--title">Timer1 Gate Single Pulse Mode</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-C99172D7-5E7E-4C9A-92E6-ADC8DDED1995-high.pdf#toolbar=1" width="471.75" height="372.75"></iframe></span>
+        </figure>
+        <p class="- topic/p p">Clearing the GSPM bit will also clear the GGO/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">DONE</span> bit. See the
+            figure below for timing details. Enabling the Toggle mode and the Single Pulse mode
+            simultaneously will permit both sections to work together. This allows the cycle times
+            on the Timer1 gate source to be measured. See the figure below for timing details.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-90AE71CD-975D-4949-9DCE-140BA1EB5B23__FIG_BRK_VWN_WGB" data-ofbid="GUID-90AE71CD-975D-4949-9DCE-140BA1EB5B23__FIG_BRK_VWN_WGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 25-7. <span id="GUID-90AE71CD-975D-4949-9DCE-140BA1EB5B23__GUID-957BB463-25D3-4623-B523-944F799C574D" class="fig--title">Timer1 Gate Single Pulse and Toggle Combined Mode</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-3C71817C-B51A-4439-9261-2DF8A1400EC8-high.pdf#toolbar=1" width="478.5" height="384"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

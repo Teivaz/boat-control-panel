@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.13.16 CxBDIAG1 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-CD7B3E1F-3AAA-4E0F-B5BF-12F228BDBA07.html"/>
+<link rel="next" href="GUID-60A11D4D-6C00-4B3C-A462-B36104C29423.html"/>
+<link rel="up" href="GUID-241B161B-B09D-4E83-B372-38ACC8C472CD.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-241B161B-B09D-4E83-B372-38ACC8C472CD.html">38.13 Register Definitions: CAN FD Control</a></li><li>38.13.16 CxBDIAG1</li></ol>
+  <div class="sib"><span>← <a href="GUID-CD7B3E1F-3AAA-4E0F-B5BF-12F228BDBA07.html" rel="prev">CxBDIAG0</a></span><span><a href="GUID-60A11D4D-6C00-4B3C-A462-B36104C29423.html" rel="next">CxTEFCON</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-27DF11A5-F8B2-4583-A246-C558C6F7105F" style="">38.13.16  CxBDIAG1</h1><section id="GUID-94AD8632-8B0F-4D77-A8B0-53F3323C6944" class="- topic/section reference/section sidsc-register/registerDescription ">CAN Bus Diagnostics
+            Register 1<div class="- topic/note note notype note_notype endnote" id="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-BC77BA22-44B9-4E09-8B1C-A82FBA07C47B" data-ofbid="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-BC77BA22-44B9-4E09-8B1C-A82FBA07C47B"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__OL_L4C_MRM_K3B" data-ofbid="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__OL_L4C_MRM_K3B">
+                    <li class="- topic/li li" id="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-4643F261-E1F4-4006-8700-DDB3310F9AF5" data-ofbid="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-4643F261-E1F4-4006-8700-DDB3310F9AF5">The individual bytes in this
+                        multibyte register can be accessed with the following register names:<ul class="- topic/ul ul" id="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__UL_CBZ_1GR_J3B" data-ofbid="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__UL_CBZ_1GR_J3B">
+                            <li class="- topic/li li" id="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-BB632D95-F0AF-4934-8E3E-ECA80B78AD80" data-ofbid="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-BB632D95-F0AF-4934-8E3E-ECA80B78AD80">CxBDIAG1T: Accesses
+                                the top byte BDIAG1[31:24]</li>
+                            <li class="- topic/li li" id="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-3A83301D-F6F9-4588-BAA5-B8AE7E4DD30B" data-ofbid="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-3A83301D-F6F9-4588-BAA5-B8AE7E4DD30B">CxBDIAG1U: Accesses
+                                the upper byte BDIAG1[23:16]</li>
+                            <li class="- topic/li li" id="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-7019AD89-914E-4B6A-9EA2-F7458167D9E5" data-ofbid="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-7019AD89-914E-4B6A-9EA2-F7458167D9E5">CxBDIAG1H: Accesses
+                                the high byte BDIAG1[15:8]</li>
+                            <li class="- topic/li li" id="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-30919A5B-4C6C-4464-AD94-400141784875" data-ofbid="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-30919A5B-4C6C-4464-AD94-400141784875">CxBDIAG1L: Accesses
+                                the low byte BDIAG1[7:0]</li>
+                        </ul></li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>CxBDIAG1</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x013C</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-3483B3CA-C341-407C-A75F-F496757DF746" data-ofbid="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08__GUID-3483B3CA-C341-407C-A75F-F496757DF746"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-A5AC5B5C-F30E-45CD-B55F-20BC02B89A08"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">31</td><td class="- topic/entry entry colsep-0 rowsep-0">30</td><td class="- topic/entry entry colsep-0 rowsep-0">29</td><td class="- topic/entry entry colsep-0 rowsep-0">28</td><td class="- topic/entry entry colsep-0 rowsep-0">27</td><td class="- topic/entry entry colsep-0 rowsep-0">26</td><td class="- topic/entry entry colsep-0 rowsep-0">25</td><td class="- topic/entry entry colsep-0 rowsep-0">24</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">DLCMM</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ESI</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">DCRCERR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">DSTUFERR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">DFORMERR</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">DBIT1ERR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">DBIT0ERR</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">23</td><td class="- topic/entry entry colsep-0 rowsep-0">22</td><td class="- topic/entry entry colsep-0 rowsep-0">21</td><td class="- topic/entry entry colsep-0 rowsep-0">20</td><td class="- topic/entry entry colsep-0 rowsep-0">19</td><td class="- topic/entry entry colsep-0 rowsep-0">18</td><td class="- topic/entry entry colsep-0 rowsep-0">17</td><td class="- topic/entry entry colsep-0 rowsep-0">16</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TXBOERR</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">NCRCERR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">NSTUFERR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">NFORMERR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">NACKERR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">NBIT1ERR</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">NBIT0ERR</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">15</td><td class="- topic/entry entry colsep-0 rowsep-0">14</td><td class="- topic/entry entry colsep-0 rowsep-0">13</td><td class="- topic/entry entry colsep-0 rowsep-0">12</td><td class="- topic/entry entry colsep-0 rowsep-0">11</td><td class="- topic/entry entry colsep-0 rowsep-0">10</td><td class="- topic/entry entry colsep-0 rowsep-0">9</td><td class="- topic/entry entry colsep-0 rowsep-0">8</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="8">EFMSGCNT[15:8]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="8">EFMSGCNT[7:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-94AD8632-8B0F-4D77-A8B0-53F3323C6944" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-626D1892-C470-451E-B8F4-266808169156__GUID-701396B3-334D-4195-90D4-E87ED65479EC" id="GUID-626D1892-C470-451E-B8F4-266808169156">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-626D1892-C470-451E-B8F4-266808169156__GUID-701396B3-334D-4195-90D4-E87ED65479EC" style=""> Bit 31 – DLCMM <span>DLC
+            Mismatch</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-626D1892-C470-451E-B8F4-266808169156__GUID-AAA690B5-7CA2-49E5-BC2B-DA8BF76B4949" data-ofbid="GUID-626D1892-C470-451E-B8F4-266808169156__GUID-AAA690B5-7CA2-49E5-BC2B-DA8BF76B4949">During a
+                transmission or reception, the specified DLC is larger than the PLSIZEx of the FIFO
+                element.</section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_MTK_CZJ_L3B__GUID-1A535508-3CBE-4679-B417-E5D646DFEFF7" id="BITFIELD_MTK_CZJ_L3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_MTK_CZJ_L3B__GUID-1A535508-3CBE-4679-B417-E5D646DFEFF7" style=""> Bit 30 – ESI <span>ESI Flag of Received CAN FD Message Set</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_MTK_CZJ_L3B__BITFIELDDESCRIPTION_NTK_CZJ_L3B" data-ofbid="BITFIELD_MTK_CZJ_L3B__BITFIELDDESCRIPTION_NTK_CZJ_L3B"></section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_ECJ_JZJ_L3B__GUID-42C9DE96-F4E2-4E27-935A-2FFA0A0C08B9" id="BITFIELD_ECJ_JZJ_L3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_ECJ_JZJ_L3B__GUID-42C9DE96-F4E2-4E27-935A-2FFA0A0C08B9" style=""> Bit 29 – DCRCERR <span>Received Message with CRC Incorrect Checksum in the Data
+            Segment</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_ECJ_JZJ_L3B__BITFIELDDESCRIPTION_FCJ_JZJ_L3B" data-ofbid="BITFIELD_ECJ_JZJ_L3B__BITFIELDDESCRIPTION_FCJ_JZJ_L3B">The CRC Checksum of a received
+                message is considered incorrect if the CRC of the incoming message does not match
+                with the CRC calculated from the received data.</section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_NVD_QZJ_L3B__GUID-94C79047-D184-4D41-9EDC-A685DC6F1529" id="BITFIELD_NVD_QZJ_L3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_NVD_QZJ_L3B__GUID-94C79047-D184-4D41-9EDC-A685DC6F1529" style=""> Bit 28 – DSTUFERR <span>Received Message with Illegal Sequence in the Data
+            Segment</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_NVD_QZJ_L3B__BITFIELDDESCRIPTION_OVD_QZJ_L3B" data-ofbid="BITFIELD_NVD_QZJ_L3B__BITFIELDDESCRIPTION_OVD_QZJ_L3B">An Illegal Sequence occurs
+                when more than five equal bits in sequence in a part of the received message where
+                this is not allowed.</section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_B44_B1K_L3B__GUID-CADDE91C-991D-48A6-A8C5-F30ADF427F62" id="BITFIELD_B44_B1K_L3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_B44_B1K_L3B__GUID-CADDE91C-991D-48A6-A8C5-F30ADF427F62" style=""> Bit 27 – DFORMERR <span>Received Frame with a Fixed Format Error in Data
+            Segment</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_B44_B1K_L3B__BITFIELDDESCRIPTION_C44_B1K_L3B" data-ofbid="BITFIELD_B44_B1K_L3B__BITFIELDDESCRIPTION_C44_B1K_L3B">A fixed format error occurs
+                when a part of the incoming frame with a fixed format has the wrong
+                format.</section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_MVS_G1K_L3B__GUID-5D011C5C-89CD-4892-86EF-BB0E0039319F" id="BITFIELD_MVS_G1K_L3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_MVS_G1K_L3B__GUID-5D011C5C-89CD-4892-86EF-BB0E0039319F" style=""> Bit 25 – DBIT1ERR <span>Transmitted Message Recessive Level in Data
+            Segment</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_MVS_G1K_L3B__BITFIELDDESCRIPTION_NVS_G1K_L3B" data-ofbid="BITFIELD_MVS_G1K_L3B__BITFIELDDESCRIPTION_NVS_G1K_L3B">During the data segment of a
+                message transmission, the device wanted to send a recessive level (bit of logical
+                value ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’), but the monitored bus value was
+                dominant.</section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_XY5_N1K_L3B__GUID-7F400EF3-3F0B-4E2C-B266-1F334086AD48" id="BITFIELD_XY5_N1K_L3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_XY5_N1K_L3B__GUID-7F400EF3-3F0B-4E2C-B266-1F334086AD48" style=""> Bit 24 – DBIT0ERR <span>Transmitted Message Dominant Level in Data
+            Segment</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_XY5_N1K_L3B__BITFIELDDESCRIPTION_YY5_N1K_L3B" data-ofbid="BITFIELD_XY5_N1K_L3B__BITFIELDDESCRIPTION_YY5_N1K_L3B">During the transmission of a
+                message, the device wanted to send a dominant level (logical value
+                    ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’), but the monitored bus value was
+                recessive.</section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_L2C_1BK_L3B__GUID-4F87892C-48B2-40F2-A00C-A5F402905BD9" id="BITFIELD_L2C_1BK_L3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_L2C_1BK_L3B__GUID-4F87892C-48B2-40F2-A00C-A5F402905BD9" style=""> Bit 23 – TXBOERR <span>Device Went to Bus Off</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_L2C_1BK_L3B__BITFIELDDESCRIPTION_M2C_1BK_L3B" data-ofbid="BITFIELD_L2C_1BK_L3B__BITFIELDDESCRIPTION_M2C_1BK_L3B"></section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_QH2_DBK_L3B__GUID-7914707B-973A-4164-9FCD-EA48CDCBB580" id="BITFIELD_QH2_DBK_L3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_QH2_DBK_L3B__GUID-7914707B-973A-4164-9FCD-EA48CDCBB580" style=""> Bit 21 – NCRCERR <span>Received Message with CRC Incorrect Checksum in Non-Data
+            Segment</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_QH2_DBK_L3B__BITFIELDDESCRIPTION_RH2_DBK_L3B" data-ofbid="BITFIELD_QH2_DBK_L3B__BITFIELDDESCRIPTION_RH2_DBK_L3B">The CRC Checksum of a received
+                message is considered incorrect if the CRC of the incoming message does not match
+                with the CRC calculated from the received data.</section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_Y52_NBK_L3B__GUID-0B659BDA-9235-4920-901B-B0CB4CA0879E" id="BITFIELD_Y52_NBK_L3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_Y52_NBK_L3B__GUID-0B659BDA-9235-4920-901B-B0CB4CA0879E" style=""> Bit 20 – NSTUFERR <span>Received Message with Illegal Sequence in Non-Data
+            Segment</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_Y52_NBK_L3B__BITFIELDDESCRIPTION_Z52_NBK_L3B" data-ofbid="BITFIELD_Y52_NBK_L3B__BITFIELDDESCRIPTION_Z52_NBK_L3B">An Illegal Sequence occurs
+                when more than five equal bits in sequence in a part of the received message where
+                this is not allowed</section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_KX5_PBK_L3B__GUID-F37A75FE-CA24-4DB6-AAB4-949F1A8F7819" id="BITFIELD_KX5_PBK_L3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_KX5_PBK_L3B__GUID-F37A75FE-CA24-4DB6-AAB4-949F1A8F7819" style=""> Bit 19 – NFORMERR <span>Received Frame with a Fixed Format Error in Non-Data
+            Segment</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_KX5_PBK_L3B__BITFIELDDESCRIPTION_LX5_PBK_L3B" data-ofbid="BITFIELD_KX5_PBK_L3B__BITFIELDDESCRIPTION_LX5_PBK_L3B">A fixed format error occurs
+                when a part of the incoming frame with a fixed format has the wrong
+                format</section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_OFF_VBK_L3B__GUID-64B2EBD1-0C07-43E6-9E91-D051C7415722" id="BITFIELD_OFF_VBK_L3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_OFF_VBK_L3B__GUID-64B2EBD1-0C07-43E6-9E91-D051C7415722" style=""> Bit 18 – NACKERR <span>Transmitted Message Not Acknowledged</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_OFF_VBK_L3B__BITFIELDDESCRIPTION_PFF_VBK_L3B" data-ofbid="BITFIELD_OFF_VBK_L3B__BITFIELDDESCRIPTION_PFF_VBK_L3B">Transmitted message was not
+                Acknowledged</section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_D2L_XBK_L3B__GUID-7BBC03A5-84C1-43C1-971C-88F68FA25EDB" id="BITFIELD_D2L_XBK_L3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_D2L_XBK_L3B__GUID-7BBC03A5-84C1-43C1-971C-88F68FA25EDB" style=""> Bit 17 – NBIT1ERR <span>Transmitted Message Dominant Level in Non-Data
+            Segment</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_D2L_XBK_L3B__BITFIELDDESCRIPTION_E2L_XBK_L3B" data-ofbid="BITFIELD_D2L_XBK_L3B__BITFIELDDESCRIPTION_E2L_XBK_L3B">During the non-data segment of
+                a message transmission, the device wanted to send a recessive level (bit of logical
+                value ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’), but the monitored bus value was
+                dominant</section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_K5L_BCK_L3B__GUID-A93930F9-8E37-483D-B606-A2130EF7D166" id="BITFIELD_K5L_BCK_L3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_K5L_BCK_L3B__GUID-A93930F9-8E37-483D-B606-A2130EF7D166" style=""> Bit 16 – NBIT0ERR <span>Transmitted Message Dominant Level in Non-Data
+            Segment</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_K5L_BCK_L3B__BITFIELDDESCRIPTION_L5L_BCK_L3B" data-ofbid="BITFIELD_K5L_BCK_L3B__BITFIELDDESCRIPTION_L5L_BCK_L3B">During the transmission of a
+                message(or Acknowledge bit, or active error flag or overload flag), the device
+                wanted to send a dominant level (logical value ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’), but the
+                monitored bus value was recessive. During bus off recovery, this status is set each
+                time a sequence of 11 recessive bits have been monitored. This enables the CPU to
+                monitor the proceeding of the bus off recovery sequence (indicating the bus is not
+                stuck at dominant or continuously disturbed).</section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_QCK_KCK_L3B__GUID-F6D6C9AA-809E-4CFC-A52A-1BABCE9AA4B1" id="BITFIELD_QCK_KCK_L3B">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_QCK_KCK_L3B__GUID-F6D6C9AA-809E-4CFC-A52A-1BABCE9AA4B1" style=""> Bits 15:0 – EFMSGCNT[15:0] <span>Error-Free Message Counter</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_QCK_KCK_L3B__BITFIELDDESCRIPTION_RCK_KCK_L3B" data-ofbid="BITFIELD_QCK_KCK_L3B__BITFIELDDESCRIPTION_RCK_KCK_L3B"></section>
+            
+        </div>
+    </article>
+                
+                    The individual bytes in this
+                        multibyte register can be accessed with the following register names:
+                            CxBDIAG1T: Accesses
+                                the top byte BDIAG1[31:24]
+                            CxBDIAG1U: Accesses
+                                the upper byte BDIAG1[23:16]
+                            CxBDIAG1H: Accesses
+                                the high byte BDIAG1[15:8]
+                            CxBDIAG1L: Accesses
+                                the low byte BDIAG1[7:0]
+                        
+                
+            
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>24.3.3 Timer0 Example — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-AED959A9-3400-4852-B708-F371082B142D.html"/>
+<link rel="next" href="GUID-2A8EB672-301B-4CF4-9C6C-05B00F8D3DE1.html"/>
+<link rel="up" href="GUID-B0391B0D-349F-44DD-A022-879DF3127CA3.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-CF65B906-948A-4657-9750-90DB15690B84.html">24 TMR0 - Timer0 Module</a></li><li><a href="GUID-B0391B0D-349F-44DD-A022-879DF3127CA3.html">24.3 Timer0 Output and Interrupt</a></li><li>24.3.3 Timer0 Example</li></ol>
+  <div class="sib"><span>← <a href="GUID-AED959A9-3400-4852-B708-F371082B142D.html" rel="prev">Timer0 Interrupt</a></span><span><a href="GUID-2A8EB672-301B-4CF4-9C6C-05B00F8D3DE1.html" rel="next">Operation During Sleep</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__GUID-E29A7A81-8623-472D-8297-B4F1767F3B03" style="">24.3.3 Timer0 Example</h1>
+<div class="- topic/body body">
+        <div class="- topic/example example" id="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__GUID-C7A72E84-9B7C-4BC7-8B47-2E011C220DE6" data-ofbid="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__GUID-C7A72E84-9B7C-4BC7-8B47-2E011C220DE6">Timer0 Configuration:<ul class="- topic/ul ul" id="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__UL_FX5_DJG_2Z" data-ofbid="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__UL_FX5_DJG_2Z">
+                <li class="- topic/li li" id="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__GUID-474CF52D-C23D-4806-A945-E840BAB4D3AE" data-ofbid="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__GUID-474CF52D-C23D-4806-A945-E840BAB4D3AE">Timer0 mode = 16-bit</li>
+                <li class="- topic/li li" id="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__GUID-EC48CCE2-533B-42CD-A5CC-D3FA80D9C157" data-ofbid="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__GUID-EC48CCE2-533B-42CD-A5CC-D3FA80D9C157">Clock Source = F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4
+                    (250 kHz)</li>
+                <li class="- topic/li li" id="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__GUID-B3413762-7014-4B9A-B6F0-E2DFAF271599" data-ofbid="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__GUID-B3413762-7014-4B9A-B6F0-E2DFAF271599">Synchronous operation</li>
+                <li class="- topic/li li" id="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__GUID-BC35888A-C688-4384-B29A-5AF9151EA895" data-ofbid="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__GUID-BC35888A-C688-4384-B29A-5AF9151EA895">Prescaler = 1:1</li>
+                <li class="- topic/li li" id="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__GUID-F70805A7-8C51-4D8F-B40A-DED4B86EBC1F" data-ofbid="GUID-17945377-CEF5-48C6-AACF-CF3208CFB2B8__GUID-F70805A7-8C51-4D8F-B40A-DED4B86EBC1F">Postscaler = 1:2 (T0OUTPS =
+                        <code class="+ topic/ph pr-d/codeph ph codeph">1</code>)</li>
+            </ul>In this case, the TMR0_out toggles every two rollovers of TMR0H:TMR0L. <p class="- topic/p p">i.e.,
+                (0xFFFF)*2*(1/250 kHz) = 524.28 ms</p></div>
+    </div>
+
+</body>
+</html>

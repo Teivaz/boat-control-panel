@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.2.6 ADC Conversion Procedure (Basic Mode) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E0282AF5-D358-46DE-B745-36BF56CA6C75.html"/>
+<link rel="next" href="GUID-27235A57-0619-428A-86DB-257BEE32FC2F.html"/>
+<link rel="up" href="GUID-88AEA9BE-34C2-44BE-A116-5DAB431A258C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-88AEA9BE-34C2-44BE-A116-5DAB431A258C.html">43.2 ADC Operation</a></li><li>43.2.6 ADC Conversion Procedure (Basic Mode)</li></ol>
+  <div class="sib"><span>← <a href="GUID-E0282AF5-D358-46DE-B745-36BF56CA6C75.html" rel="prev">Auto-Conversion Trigger</a></span><span><a href="GUID-27235A57-0619-428A-86DB-257BEE32FC2F.html" rel="next">ADC Acquisition Requirements</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-B93B7A79-3F29-4FD1-B292-6A01F591113B" style="">43.2.6 ADC Conversion Procedure (Basic Mode)</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-0000030F" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-0000030F">This is an example procedure for using the ADC
+            to perform an Analog-to-Digital Conversion:</p>
+        <ol class="- topic/ol ol" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-B873A9FF-E20A-4422-B023-09CD25DA61AF" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-B873A9FF-E20A-4422-B023-09CD25DA61AF">
+            <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000310" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000310">Configure Port:<ol class="- topic/ol ol" type="a" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__OL_J1T_XQ2_B1B" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__OL_J1T_XQ2_B1B">
+                    <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-A1957513-B7BC-49FD-99E4-1DE070315E59" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-A1957513-B7BC-49FD-99E4-1DE070315E59">Disable
+                        pin output driver (Refer to the TRISx register)</li>
+                    <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-860DFD75-F842-458A-8604-50C0F2ADC805" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-860DFD75-F842-458A-8604-50C0F2ADC805">Configure
+                        pin as analog (Refer to the ANSELx register)</li>
+                </ol></li>
+            <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000316" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000316">Configure the ADC module:<ol class="- topic/ol ol" type="a" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__OL_THR_ZQ2_B1B" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__OL_THR_ZQ2_B1B">
+                    <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-21C2D5FA-D8E6-4A40-B064-1F0AA4A42D57" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-21C2D5FA-D8E6-4A40-B064-1F0AA4A42D57">Select
+                        ADC conversion clock</li>
+                    <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-6A2DC5D8-C7D0-401B-8C26-824CA876EA7B" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-6A2DC5D8-C7D0-401B-8C26-824CA876EA7B">Configure
+                        voltage reference</li>
+                    <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-1626A3C0-FFEF-4BAE-AF6C-EEE7D5ED28EA" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-1626A3C0-FFEF-4BAE-AF6C-EEE7D5ED28EA">Select
+                        ADC input channel</li>
+                    <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-33A084DD-6D6D-409D-B34A-2A325850B0FA" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-33A084DD-6D6D-409D-B34A-2A325850B0FA">Configure precharge (<a class="- topic/xref xref" href="GUID-DB7AC91C-B964-41FD-9F32-82FE0962180A.html" title="ADPRE">ADPRE</a>) and acquisition (<a class="- topic/xref xref" href="GUID-9019A40D-315C-4781-9A92-C91B17B335B1.html" title="ADACQ">ADACQ</a>) time period</li>
+                    <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-2454FAB9-BC4D-4021-A801-24A7E42F2D54" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-2454FAB9-BC4D-4021-A801-24A7E42F2D54">Turn on
+                        ADC module</li>
+                </ol></li>
+            <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000320" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000320">Configure ADC interrupt (optional):<ol class="- topic/ol ol" type="a" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__OL_JZH_CR2_B1B" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__OL_JZH_CR2_B1B">
+                    <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-310491BE-485B-4982-969F-106D24A5003C" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-310491BE-485B-4982-969F-106D24A5003C">Clear the
+                        ADC interrupt flag</li>
+                    <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-1C41CD7F-7079-4E3C-A319-B39E22331976" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-1C41CD7F-7079-4E3C-A319-B39E22331976">Enable
+                        the ADC interrupt</li>
+                    <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-140399B5-C523-46A5-85B4-FDAC6A2C3959" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-140399B5-C523-46A5-85B4-FDAC6A2C3959">Enable
+                        global interrupt (GIE bit)<a class="- topic/xref xref" href="#GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-F98E7549-9779-41E7-9082-6B3407F7777A"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-0000032A">(1)</sup></strong></a></li>
+                </ol></li>
+            <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-0000032B" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-0000032B">If <a class="- topic/xref xref" href="GUID-9019A40D-315C-4781-9A92-C91B17B335B1.html#ID-00000113" title="Acquisition (charge share time) Select">ADACQ</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>,
+                software must wait the required acquisition time<a class="- topic/xref xref" href="#GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-F98E7549-9779-41E7-9082-6B3407F7777A"><sup class="+ topic/ph hi-d/sup ph sup">(2)</sup></a>.</li>
+            <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000330" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000330">Start conversion by setting the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000021" title="ADC Conversion Status(1,2)"><span><span>GO</span></span></a>
+                bit.</li>
+            <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000332" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000332">Wait for ADC conversion to complete by
+                one of the following:<ul class="- topic/ul ul" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__UL_JVH_5BN_YGB" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__UL_JVH_5BN_YGB">
+                    <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-C770619D-9FD2-4D70-92BA-8E7FCF22C6C1" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-C770619D-9FD2-4D70-92BA-8E7FCF22C6C1">Polling
+                        the GO bit</li>
+                    <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-C67CDA37-192E-4ECE-8E63-200CB9208A19" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-C67CDA37-192E-4ECE-8E63-200CB9208A19">Waiting
+                        for the ADC interrupt (if interrupt is enabled)</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000338" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000338">Read ADC Result.</li>
+            <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-0000033A" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-0000033A">Clear the ADC interrupt flag (if
+                interrupt is enabled).</li>
+        </ol>
+        <div class="- topic/note note note note_note" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-F98E7549-9779-41E7-9082-6B3407F7777A" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-F98E7549-9779-41E7-9082-6B3407F7777A"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-51CCE3DA-5A49-4322-AFF0-B2EBD015713D" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-51CCE3DA-5A49-4322-AFF0-B2EBD015713D">
+                <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000343" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000343">With global interrupts disabled (GIE
+                    = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the device will wake from Sleep, but will not enter an
+                    Interrupt Service Routine.</li>
+                <li class="- topic/li li" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000345" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__ID-42107-00000345">Refer to the <a class="- topic/xref xref" href="GUID-27235A57-0619-428A-86DB-257BEE32FC2F.html">ADC Acquisition Requirements</a> section for more details.</li>
+            </ol>
+        </div>
+        <div class="- topic/example example" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-884DB395-0BAE-4DF6-BF00-8440662FEACC" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-884DB395-0BAE-4DF6-BF00-8440662FEACC"><h2 class="- topic/title title sectiontitle">ADC
+                Conversion (assembly)</h2>
+            
+            <div class="- topic/p p">
+                        <pre class="+ topic/pre pr-d/codeblock pre codeblock asm"><code>; This code block configures the ADC for polling, Vdd and Vss references,
+; ADCRC oscillator, and AN0 input.
+; Conversion start &amp; polling for completion are included.
+
+    BANKSEL ADCON1      ;
+    clrf    ADCON1      ;
+    clrf    ADCON2      ; Legacy mode, no filtering, ADRES-&gt;ADPREV
+    clrf    ADCON3      ; no math functions
+    clrf    ADREF       ; Vref = Vdd &amp; Vss
+    clrf    ADPCH       ; select RA0/AN0
+    clrf    ADACQ       ; software controlled acquisition time
+    clrf    ADCAP       ; default S&amp;H capacitance
+    clrf    ADRPT       ; no repeat measurements
+    clrf    ADACT       ; auto-conversion disabled
+    movlw   B'10010100' ; ADC On, right-justified, ADCRC clock
+    movwf   ADCON0
+    BANKSEL TRISA       ;
+    bsf     TRISA,0     ; Set RA0 to input
+    BANKSEL ANSEL       ;
+    bsf     ANSEL,0     ; Set RA0 to analog
+    call    SampleTime  ; Acquisiton delay
+    BANKSEL ADCON0 
+    bsf     ADCON0,GO   ; Start conversion
+    btfsc   ADCON0,GO   ; Is conversion done?
+    goto    $-2         ; No, test again
+    BANKSEL ADRESH      ;
+    movf    ADRESH,W    ; Read upper byte
+    movwf   RESULTHI    ; store in GPR space
+    movf    ADRESL,W    ; Read lower byte
+    movwf   RESULTLO    ; Store in GPR space</code></pre>
+                </div>
+        </div>
+        <div class="- topic/example example" id="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-667D0182-3C17-484B-98C6-1ADECD472DF0" data-ofbid="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5__GUID-667D0182-3C17-484B-98C6-1ADECD472DF0"><h2 class="- topic/title title sectiontitle">ADC
+                Conversion (C)</h2>
+            
+            <div class="- topic/p p">
+                        <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><em class="hl-comment">/*This code block configures the ADC
+for polling, VDD and VSS references,
+ADCRC oscillator and AN0 input.
+Conversion start &amp; polling for completion
+are included.
+  */</em>
+    <strong class="hl-keyword">void</strong> <span class="hl-functions">main</span>() {
+        <em class="hl-comment">//System Initialize</em>
+        initializeSystem();
+
+        <em class="hl-comment">//Setup ADC</em>
+        ADCON0bits.FM = <span class="hl-number">1</span>;      <em class="hl-comment">//right justify</em>
+        ADCON0bits.CS = <span class="hl-number">1</span>;      <em class="hl-comment">//ADCRC Clock</em>
+        ADPCH = <span class="hl-number">0x00</span>;           <em class="hl-comment">//RA0 is Analog channel</em>
+        TRISAbits.TRISA0 = <span class="hl-number">1</span>;   <em class="hl-comment">//Set RA0 to input</em>
+        ANSELAbits.ANSELA0 = <span class="hl-number">1</span>; <em class="hl-comment">//Set RA0 to analog</em>
+        ADCON0bits.ON = <span class="hl-number">1</span>;      <em class="hl-comment">//Turn ADC On</em>
+
+    <strong class="hl-keyword">while</strong> (<span class="hl-number">1</span>) {
+        ADCON0bits.GO = <span class="hl-number">1</span>;     <em class="hl-comment">//Start conversion</em>
+        <strong class="hl-keyword">while</strong> (ADCON0bits.GO); <em class="hl-comment">//Wait for conversion done</em>
+        resultHigh = ADRESH;   <em class="hl-comment">//Read result</em>
+        resultLow = ADRESL;    <em class="hl-comment">//Read result</em>
+    }
+ }</pre>
+                </div>
+        </div>
+    </div>
+
+</body>
+</html>

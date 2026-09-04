@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.4 UTMR Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-42001B0C-D3B0-4A07-809C-BD73A2E59F1C.html"/>
+<link rel="next" href="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB.html"/>
+<link rel="up" href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li>28.4 UTMR Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-42001B0C-D3B0-4A07-809C-BD73A2E59F1C.html" rel="prev">UTMR Prescaler</a></span><span><a href="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB.html" rel="next">Synchronous vs. Asynchronous Operation</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-C814C2EC-BFF3-48B5-B0D1-A141926BDE2C" style="">28.4 UTMR Operation</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The basic UTMR module has a counter/timer, a double-buffered period register, and a
+            hardwired compare function. Together with an External Reset Selector (ERS), Clock
+            Selection MUX, and programmable Start/Stop/Reset logic, the module can be configured for
+            a variety of hardware limit and signal measurement functions. See <a class="- topic/xref xref" href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html#GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__FIG_VCY_XNL_M3B"><span>Figure 28-1</span></a> for the UTMR module block diagram.</p>
+        <div class="- topic/p p">Available options include:<ol class="- topic/ol ol" id="GUID-43EDC99C-2C52-448D-825C-F980F714814D__OL_YSL_QGK_Q3B" data-ofbid="GUID-43EDC99C-2C52-448D-825C-F980F714814D__OL_YSL_QGK_Q3B">
+                <li class="- topic/li li" id="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-E24870E1-572F-493B-A067-C09EEC40310C" data-ofbid="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-E24870E1-572F-493B-A067-C09EEC40310C">Synchronous or asynchronous
+                    operation.</li>
+                <li class="- topic/li li" id="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-D1CCCFBC-C4D6-4B10-ABDA-9068E18B7F5C" data-ofbid="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-D1CCCFBC-C4D6-4B10-ABDA-9068E18B7F5C">Software control via the <a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#ID-00000005" title="Timer Enable(1,2)">ON</a> bit.</li>
+                <li class="- topic/li li" id="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-0C372BBB-5A01-4529-B26E-065BF6405753" data-ofbid="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-0C372BBB-5A01-4529-B26E-065BF6405753">Asynchronous read and Reset of
+                    the counter/timer using the <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#ID-00000021" title="Timer “Capture” Command(5,6,7,8,9)">CAPT</a> and <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#ID-00000013" title="Timer Counter “Clear” Command(5,6)">CLR</a> bits.</li>
+                <li class="- topic/li li" id="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-E6752D5A-C6B2-4944-80BB-307B184C109A" data-ofbid="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-E6752D5A-C6B2-4944-80BB-307B184C109A">Selection of a variety of
+                    hardware ERS inputs.</li>
+                <li class="- topic/li li" id="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-C890103D-5510-4199-8AA0-A9D42C0C55C8" data-ofbid="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-C890103D-5510-4199-8AA0-A9D42C0C55C8">A variety of both software and
+                    hardware triggers for start, stop and Reset events.</li>
+                <li class="- topic/li li" id="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-ABBCB39F-434C-4A24-BE4F-23B1FF620E72" data-ofbid="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-ABBCB39F-434C-4A24-BE4F-23B1FF620E72">A Limit mode that stops the
+                    counter/timer on a period register match.</li>
+                <li class="- topic/li li" id="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-3F88B044-E3BF-461B-8457-F93109540A64" data-ofbid="GUID-43EDC99C-2C52-448D-825C-F980F714814D__GUID-3F88B044-E3BF-461B-8457-F93109540A64">A One Shot/Monostable mode
+                    option.</li>
+            </ol></div>
+        <p class="- topic/p p">Together, the various combination of options implements all the functions for
+            both a signal measurement and hardware limit timer.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB.html">28.4.1 Synchronous vs. Asynchronous Operation</a></li><li><a href="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0.html">28.4.2 Timer Counter and Capture Registers</a></li><li><a href="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD.html">28.4.3 Timer Period Register</a></li><li><a href="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2.html">28.4.4 External Reset Source (ERS)</a></li><li><a href="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF.html">28.4.5 Start, Stop and Reset Events</a></li><li><a href="GUID-D1F7014F-A181-4D45-95B1-B19202FE7C4C.html">28.4.6 Hardware Limit Mode</a></li><li><a href="GUID-658EC3E2-3D89-43D1-97A0-6D9373CD6594.html">28.4.7 One Shot Mode</a></li><li><a href="GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2.html">28.4.8 Run Status Flag</a></li></ul>
+</nav>
+</body>
+</html>

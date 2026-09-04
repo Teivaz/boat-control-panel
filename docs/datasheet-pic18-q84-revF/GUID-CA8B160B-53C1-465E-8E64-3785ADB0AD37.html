@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.4 LIN Modes (Full-Featured UARTs Only) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764.html"/>
+<link rel="next" href="GUID-18D853E0-78CE-4073-B9D4-43AAB2FD32C8.html"/>
+<link rel="up" href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li>35.4 LIN Modes (Full-Featured UARTs Only)</li></ol>
+  <div class="sib"><span>← <a href="GUID-A273A85E-2F72-42A0-8E2D-9E4B9E95C764.html" rel="prev">DMX Receiver</a></span><span><a href="GUID-18D853E0-78CE-4073-B9D4-43AAB2FD32C8.html" rel="next">LIN Host/Client Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37__GUID-1671260D-0967-4260-8338-1B22CF59BC0B" style="">35.4 LIN Modes (Full-Featured UARTs Only)</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">LIN is a protocol used primarily in automotive applications. The LIN network consists of two
+            kinds of software processes: a Host process and a Client process. Each network has only
+            one Host process and one or more Client processes.</p>
+        <p class="- topic/p p">From a physical layer point of view, the UART on one processor may be driven by both a
+            Host and a Client process, as long as only one Host process exists on the network.</p>
+        <p class="- topic/p p">A LIN transaction consists of a Host process followed by a Client process. The Client
+            process may involve more than one client where one is transmitting and the other(s)
+            receiving. The transaction begins by the following Host process transmission
+            sequence:</p>
+        <ol class="- topic/ol ol" id="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37__OL_GLN_W3W_CBB" data-ofbid="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37__OL_GLN_W3W_CBB">
+            <li class="- topic/li li" id="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37__GUID-29B94421-8E61-4350-BD07-740BCC7F2ED4" data-ofbid="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37__GUID-29B94421-8E61-4350-BD07-740BCC7F2ED4">Break.</li>
+            <li class="- topic/li li" id="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37__GUID-0156A4BD-831B-4384-8321-56709C509E7C" data-ofbid="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37__GUID-0156A4BD-831B-4384-8321-56709C509E7C">Delimiter bit.</li>
+            <li class="- topic/li li" id="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37__GUID-3997CA35-D904-4F06-93CB-C17FB8CF6FD6" data-ofbid="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37__GUID-3997CA35-D904-4F06-93CB-C17FB8CF6FD6">Sync Field.</li>
+            <li class="- topic/li li" id="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37__GUID-0CD7F453-EA9F-4EE0-898C-AB4E5499CD9B" data-ofbid="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37__GUID-0CD7F453-EA9F-4EE0-898C-AB4E5499CD9B">PID byte.</li>
+        </ol>
+        <p class="- topic/p p">The PID determines which Client processes are expected to respond to the host. When the
+            PID byte is complete, the TX output remains in the Idle state. One or more of the Client
+            processes may respond to the Host process. If no one responds within the inter-byte
+            period, the host is free to start another transmission. The inter-byte period is timed
+            by software using a means other than the UART.</p>
+        <p class="- topic/p p">The Client process follows the Host process. When the client software recognizes the PID,
+            that Client process responds by either transmitting the required response or by
+            receiving the transmitted data. Only Client processes send data. Therefore, Client
+            processes receiving data are receiving that of another Client process.</p>
+        <p class="- topic/p p">When a client sends data, the client UART automatically calculates the checksum for the
+            transmitted bytes as they are sent and appends the inverted checksum byte to the client
+            response.</p>
+        <p class="- topic/p p">When a client receives data, the checksum is accumulated on each byte as it is received
+            using the same algorithm as the sending process. The last byte, which is the inverted
+            checksum value calculated by the sending process, is added to the locally calculated
+            checksum by the UART. The check passes when the result is all ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span>’s,
+            otherwise the check fails and the CERIF bit is set.</p>
+        <div class="- topic/p p">Two methods for computing the checksum are available: legacy and enhanced.
+            The legacy checksum includes only the data bytes. The enhanced checksum includes the PID
+            and the data. The <a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_BYJ_N5L_BBB" title="Checksum Mode Select(2)"><span><span>C0EN</span></span></a> control bit determines the checksum method. Setting C0EN to ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span>’ selects the enhanced method. Software must select the
+            appropriate method before the Start bit of the checksum byte is received.</div>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-18D853E0-78CE-4073-B9D4-43AAB2FD32C8.html">35.4.1 LIN Host/Client Mode</a></li><li><a href="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087.html">35.4.2 LIN Client Mode</a></li></ul>
+</nav>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.3.4.2.1 User Software Control — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-EBD671AC-0CCE-4BF8-9852-B901310EC575.html"/>
+<link rel="next" href="GUID-C97B62FE-17AD-4072-99BD-7CA749CFB8B0.html"/>
+<link rel="up" href="GUID-EBD671AC-0CCE-4BF8-9852-B901310EC575.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li><a href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html">16.3 DMA Interface</a></li><li><a href="GUID-129A63BF-383B-4E30-91DE-858C4D6CC236.html">16.3.4 DMA Message Transfers</a></li><li><a href="GUID-EBD671AC-0CCE-4BF8-9852-B901310EC575.html">16.3.4.2 Stopping DMA Message Transfers</a></li><li>16.3.4.2.1 User Software Control</li></ol>
+  <div class="sib"><span>← <a href="GUID-EBD671AC-0CCE-4BF8-9852-B901310EC575.html" rel="prev">Stopping DMA Message Transfers</a></span><span><a href="GUID-C97B62FE-17AD-4072-99BD-7CA749CFB8B0.html" rel="next">Hardware Trigger, AIRQ</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-F372DA90-43D6-446D-B023-BE2E548B186C__GUID-CB47FFD7-43F4-4275-8F05-055B52D1E095" style="">16.3.4.2.1 User Software Control</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">If the user clears the DGO bit, the message will be stopped and the DMA will
+            remain in the current configuration.</p>
+        <p class="- topic/p p">For example, if the user clears the DGO bit after source data has been read,
+            but before it is written to the destination, then the data in the DMAnBUF register will
+            not reach its destination.</p>
+        <p class="- topic/p p">This is also referred to as a soft-stop as the operation can resume, if
+            desired, by setting the DGO bit again.</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10.3.10 Table Pointer Operations — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F.html"/>
+<link rel="next" href="GUID-D1A9B600-9EF4-4B28-80CC-8114E2B5C04F.html"/>
+<link rel="up" href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html">10 NVM - Nonvolatile Memory Module</a></li><li><a href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html">10.3 Program Flash Memory (PFM)</a></li><li>10.3.10 Table Pointer Operations</li></ol>
+  <div class="sib"><span>← <a href="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F.html" rel="prev">User ID, Device ID, Configuration Settings Access, DIA and DCI</a></span><span><a href="GUID-D1A9B600-9EF4-4B28-80CC-8114E2B5C04F.html" rel="next">Table Pointer Register</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__GUID-145CF310-BFC8-4A00-A436-C2108632A02B" style="">10.3.10 Table Pointer Operations</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p" id="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__ID-42121-00000175" data-ofbid="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__ID-42121-00000175">To read and write program memory, there are two operations that
+            allow the processor to move bytes between the program memory space and the data RAM:</p>
+        <ul class="- topic/ul ul" id="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__UL_PPG_KNZ_RZ" data-ofbid="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__UL_PPG_KNZ_RZ">
+            <li class="- topic/li li" id="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__ID-42121-00000176" data-ofbid="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__ID-42121-00000176">Table Read (<code class="+ topic/ph pr-d/codeph ph codeph">TBLRD*</code>)</li>
+            <li class="- topic/li li" id="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__ID-42121-00000179" data-ofbid="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__ID-42121-00000179">Table Write (<code class="+ topic/ph pr-d/codeph ph codeph">TBLWT*</code>)</li>
+        </ul>
+        <div class="- topic/p p">The SFR registers associated with these operations include: <ul class="- topic/ul ul" id="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__UL_XJC_NLZ_RZ" data-ofbid="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__UL_XJC_NLZ_RZ">
+                <li class="- topic/li li" id="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__GUID-5C15D67F-E6DD-4CE8-964A-F503E3AD0E3B" data-ofbid="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__GUID-5C15D67F-E6DD-4CE8-964A-F503E3AD0E3B"><a class="- topic/xref xref" href="GUID-9613776E-377B-4ED6-BEAE-52E21851DA3D.html" title="TABLAT">TABLAT</a>
+                    register</li>
+                <li class="- topic/li li" id="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__GUID-5CBFF4AA-FDBC-465B-AE2E-34E7589C73E0" data-ofbid="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__GUID-5CBFF4AA-FDBC-465B-AE2E-34E7589C73E0"><a class="- topic/xref xref" href="GUID-23BF27B8-E95B-449C-B987-532E5840650F.html" title="TBLPTR">TBLPTR</a>
+                    registers</li>
+            </ul></div>
+        <p class="- topic/p p" id="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__ID-42121-0000017C" data-ofbid="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4__ID-42121-0000017C">The program memory space is 16 bits wide, while the data RAM space
+            is eight bits wide. The TBLPTR registers determine the address of one byte of the NVM
+            memory. Table reads move one byte of data from NVM space to the TABLAT register, and
+            table writes move the TABLAT data to the buffer RAM ready for a subsequent write to NVM
+            space with the NVM controls.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-D1A9B600-9EF4-4B28-80CC-8114E2B5C04F.html">10.3.10.1 Table Pointer Register</a></li><li><a href="GUID-8757CFCA-3AA4-47D5-8F28-08585B19439F.html">10.3.10.2 Table Latch Register</a></li><li><a href="GUID-19412C65-E482-42D0-A3BD-D46C9616EBC4.html">10.3.10.3 Table Read Operations</a></li><li><a href="GUID-7EE745D1-6925-4561-98DA-4A3649C2A566.html">10.3.10.4 Table Write Operations</a></li><li><a href="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF.html">10.3.10.5 Table Pointer Boundaries</a></li><li><a href="GUID-3E89B792-0FF8-4EA9-9D9D-7F9640322AD2.html">10.3.10.6 Reading the Program Flash Memory</a></li></ul>
+</nav>
+</body>
+</html>

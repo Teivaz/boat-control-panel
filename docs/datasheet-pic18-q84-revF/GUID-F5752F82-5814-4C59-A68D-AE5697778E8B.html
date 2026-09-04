@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>19.3 LATx - Output Latch — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-576EF2BE-BA6C-479C-8B9A-8448DF05FD11.html"/>
+<link rel="next" href="GUID-BD780E05-26D9-44C5-8B00-3C7CA261320C.html"/>
+<link rel="up" href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html">19 I/O Ports</a></li><li>19.3 LATx - Output Latch</li></ol>
+  <div class="sib"><span>← <a href="GUID-576EF2BE-BA6C-479C-8B9A-8448DF05FD11.html" rel="prev">PORTx - Data Register</a></span><span><a href="GUID-BD780E05-26D9-44C5-8B00-3C7CA261320C.html" rel="next">TRISx - Direction Control</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-F5752F82-5814-4C59-A68D-AE5697778E8B__GUID-42BB2A08-1858-48FA-8368-ADCEE63C3A95" style="">19.3 LATx - Output Latch</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-F5752F82-5814-4C59-A68D-AE5697778E8B__ID-42127-00000096" data-ofbid="GUID-F5752F82-5814-4C59-A68D-AE5697778E8B__ID-42127-00000096">The Data Latch (<a class="- topic/xref xref" href="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26.html" title="LATx">LATx</a>
+            registers) is useful for Read-Modify-Write operations on the value that the I/O pins are
+            driving.</p>
+        <p class="- topic/p p" id="GUID-F5752F82-5814-4C59-A68D-AE5697778E8B__ID-42127-00000097" data-ofbid="GUID-F5752F82-5814-4C59-A68D-AE5697778E8B__ID-42127-00000097">A write operation to the LATx register has the same effect as a
+            write to the corresponding PORTx register. A read of the LATx register reads the values
+            held in the I/O PORT latches, while a read of the PORTx register reads the actual I/O
+            pin value.</p>
+        <div class="- topic/note note important note_important" id="GUID-F5752F82-5814-4C59-A68D-AE5697778E8B__GUID-BD3C3742-D6B8-45B4-B691-ECD8BA50AB9C" data-ofbid="GUID-F5752F82-5814-4C59-A68D-AE5697778E8B__GUID-BD3C3742-D6B8-45B4-B691-ECD8BA50AB9C"><span class="note__title">Important:</span> As a general rule,
+            output operations to a port must use the LAT register to avoid Read-Modify-Write issues.
+            For example, a bit set or clear operation reads the port, modifies the bit, and writes
+            the result back to the port. When two bit operations are executed in succession, output
+            loading on the changed bit may delay the change at the output in which case the bit will
+            be misread in the second bit operation and written to an unexpected level. The LAT
+            registers are isolated from the port loading and therefore changes are not
+            delayed.</div>
+    </div>
+
+</body>
+</html>

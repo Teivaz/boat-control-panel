@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.4.1.2 SDO Output Data — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DC99C364-D291-4287-BE51-2060105CEE54.html"/>
+<link rel="next" href="GUID-1A71E931-A30B-4B94-B35B-9E198DC6F53C.html"/>
+<link rel="up" href="GUID-EDC18EB4-671C-4922-9DC8-FEA7439E6C65.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-312D4604-FDB9-4FC4-9D6A-94EC2AE8B3C5.html">36.4 Client Mode</a></li><li><a href="GUID-EDC18EB4-671C-4922-9DC8-FEA7439E6C65.html">36.4.1 Client Mode Transmit Options</a></li><li>36.4.1.2 SDO Output Data</li></ol>
+  <div class="sib"><span>← <a href="GUID-DC99C364-D291-4287-BE51-2060105CEE54.html" rel="prev">SDO Drive/Tri-State</a></span><span><a href="GUID-1A71E931-A30B-4B94-B35B-9E198DC6F53C.html" rel="next">Client Mode Receive Options</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-F98C1956-1B7E-4428-B972-A1E5F3E9494A__GUID-C4B5A6C5-477B-4735-98A4-F6FB7AFA590A" style="">36.4.1.2 SDO Output Data</h1><div class="- topic/body body"><p class="- topic/p p">The TXR bit controls the nature of the data that is transmitted in Client mode. When TXR is set, transmitted data are taken from the transmit FIFO. If the FIFO is empty, the most recently received data will be transmitted and the TXUIF flag will be set to indicate that a transmit FIFO underflow has occurred.</p><p class="- topic/p p">When TXR is cleared, the data will be taken from the transmit FIFO, and the FIFO occupancy will not decrease. If the transmit FIFO is empty, the most recently received data will be transmitted, and the TXUIF bit will not be set. However, if the TRIS bit associated with the SDO pin is set, clearing the TXR bit will cause the SPI module to not output any data to the SDO pin.</p></div>
+</body>
+</html>

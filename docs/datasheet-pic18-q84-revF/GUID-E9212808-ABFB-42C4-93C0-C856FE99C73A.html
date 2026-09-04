@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.1 Clock Source Types — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html"/>
+<link rel="next" href="GUID-5DED24A3-7549-4229-9627-680F5E81FE14.html"/>
+<link rel="up" href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li>12.1 Clock Source Types</li></ol>
+  <div class="sib"><span>← <a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html" rel="prev">OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></span><span><a href="GUID-5DED24A3-7549-4229-9627-680F5E81FE14.html" rel="next">External Clock Sources</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A__GUID-CD032D57-F0EA-459E-9267-1801859D0A27" style="">12.1 Clock Source Types</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">Clock sources can be classified as external or internal.</p>
+        <div class="- topic/p p">External clock sources rely on external circuitry for the clock source to function.
+            Examples of external clock sources include:<ul class="- topic/ul ul" id="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A__UL_TNW_TGZ_VGB" data-ofbid="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A__UL_TNW_TGZ_VGB">
+                <li class="- topic/li li" id="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A__GUID-504358A1-DA91-4954-B341-A3DB97E8F618" data-ofbid="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A__GUID-504358A1-DA91-4954-B341-A3DB97E8F618">Digital oscillator modules</li>
+                <li class="- topic/li li" id="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A__GUID-B32188E0-AB96-4A55-97DA-2BB28333CE5B" data-ofbid="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A__GUID-B32188E0-AB96-4A55-97DA-2BB28333CE5B">Quartz crystal resonators</li>
+                <li class="- topic/li li" id="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A__GUID-56E19BA7-5829-4E7B-BF76-D6E2047FF4A8" data-ofbid="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A__GUID-56E19BA7-5829-4E7B-BF76-D6E2047FF4A8">Ceramic resonators</li>
+            </ul></div>
+        <p class="- topic/p p">A 4x PLL is provided for use with external clock sources.</p>
+        <p class="- topic/p p">Internal clock sources are contained within the oscillator module. The
+            internal oscillator block features two internal oscillators that are used to generate
+            internal system clock sources. The High-Frequency Internal Oscillator (HFINTOSC) can
+            produce a wide range of frequencies which are determined via the HFINTOSC Frequency
+            Selection (<a class="- topic/xref xref" href="GUID-1EEB4FE6-E7C6-4660-A0D1-7B2F5A722DB3.html" title="OSCFRQ">OSCFRQ</a>) register. The Low-Frequency Internal Oscillator
+            (LFINTOSC) generates a fixed nominal 31 kHz clock signal. The internal oscillator block
+            also features an RC oscillator which is dedicated to the Analog-to-Digital Converter
+            (ADC).</p>
+        <div class="- topic/p p">The oscillator module allows the system clock source or system clock
+            frequency to be changed through clock switching. Clock source selections are made via
+            the New Oscillator Source Request (<a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a>) bits. Once the clock source has been selected, the clock
+            source base frequency can be divided (post-scaled) via the New Divider Selection Request
+                (<a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GHR_WSL_YGB" title="New Divider Selection Request">NDIV</a>) bits.</div>
+        <p class="- topic/p p">The instruction clock (F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4) can be routed to the OSC2/CLKOUT
+            pin when the pin is not in use. The Clock Out Enable (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">CLKOUTEN</span>)
+            Configuration bit controls the functionality of the CLKOUT signal. When
+                <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CLKOUTEN</span> is clear (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">CLKOUTEN</span> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the CLKOUT signal is routed to the OSC2/CLKOUT pin. When
+                <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CLKOUTEN</span> is set (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">CLKOUTEN</span> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the OSC2/CLKOUT pin functions as an I/O pin. </p>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-5DED24A3-7549-4229-9627-680F5E81FE14.html">12.1.1 External Clock Sources</a></li><li><a href="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7.html">12.1.2 Internal Clock Sources</a></li><li><a href="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC.html">12.1.3 Oscillator Status and Manual Enable</a></li></ul>
+</nav>
+</body>
+</html>

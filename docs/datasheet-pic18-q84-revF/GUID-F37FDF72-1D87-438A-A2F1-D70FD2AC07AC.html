@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.2 UART Asynchronous Modes — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-916D8EB0-94EA-4316-A3CA-29CB139B3416.html"/>
+<link rel="next" href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html"/>
+<link rel="up" href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li>35.2 UART Asynchronous Modes</li></ol>
+  <div class="sib"><span>← <a href="GUID-916D8EB0-94EA-4316-A3CA-29CB139B3416.html" rel="prev">UART I/O Pin Configuration</a></span><span><a href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html" rel="next">UART Asynchronous Transmitter</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC__GUID-75990ED7-2120-41A7-98A8-39FDBD5687CE" style="">35.2 UART Asynchronous Modes</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The UART has five Asynchronous modes:</p>
+        <ul class="- topic/ul ul" id="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC__UL_PBD_3VT_BBB" data-ofbid="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC__UL_PBD_3VT_BBB">
+            <li class="- topic/li li" id="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC__GUID-616DE649-2644-430D-8FEA-698F16FB7B32" data-ofbid="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC__GUID-616DE649-2644-430D-8FEA-698F16FB7B32">7-bit</li>
+            <li class="- topic/li li" id="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC__GUID-B739CB3C-C684-48FE-9C2C-D233D7760E5A" data-ofbid="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC__GUID-B739CB3C-C684-48FE-9C2C-D233D7760E5A">8-bit</li>
+            <li class="- topic/li li" id="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC__GUID-21553BE6-F45B-4E47-89E6-90DE0ABC1827" data-ofbid="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC__GUID-21553BE6-F45B-4E47-89E6-90DE0ABC1827">8-bit with even parity in the 9th
+                bit</li>
+            <li class="- topic/li li" id="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC__GUID-4D1DD5B8-7143-4E17-BC22-84D446AE3642" data-ofbid="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC__GUID-4D1DD5B8-7143-4E17-BC22-84D446AE3642">8-bit with odd parity in the 9th
+                bit</li>
+            <li class="- topic/li li" id="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC__GUID-80749CC8-D245-4ACB-8022-1226B226D2AE" data-ofbid="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC__GUID-80749CC8-D245-4ACB-8022-1226B226D2AE">8-bit with address indicator in the
+                9th bit</li>
+        </ul>
+        <p class="- topic/p p">The UART transmits and receives data using the standard Non-Return-to-Zero (NRZ) format.
+            NRZ is implemented with two levels: A VOH Mark state, which represents a
+                ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’ data bit, and a VOL Space state, which represents a
+                ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’ data bit. NRZ implies that consecutively transmitted data bits
+            of the same value stay at the output level of that bit without returning to a neutral
+            level between each bit transmission. An NRZ transmission port idles in the Mark state.
+            Each character transmission consists of one Start bit followed by seven or eight data
+            bits, one optional parity or address bit, and is always terminated by one or more Stop
+            bits. The Start bit is always a space and the Stop bits are always marks. The most
+            common data format is eight bits with no parity. Each transmitted bit persists for a
+            period of 1/ (Baud Rate). An on-chip dedicated 16-bit Baud Rate Generator is used to
+            derive standard baud rate frequencies from the system oscillator. See the <a class="- topic/xref xref" href="GUID-5D554793-676E-4F0B-8022-67C65136118D.html#GUID-5D554793-676E-4F0B-8022-67C65136118D">UART Baud Rate Generator</a> section for more information.</p>
+        <p class="- topic/p p">In all Asynchronous modes, the UART transmits and receives the LSb first. The UART’s
+            transmitter and receiver are functionally independent but share the same data format and
+            baud rate. Parity is supported by the hardware with even and odd parity modes.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-A1DDB9EC-4871-432F-96C0-219CCA1ECE0C.html">35.2.1 UART Asynchronous Transmitter</a></li><li><a href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html">35.2.2 UART Asynchronous Receiver</a></li><li><a href="GUID-4109B660-A595-4B90-A307-4B6B8579F69D.html">35.2.3 Asynchronous Address Mode</a></li></ul>
+</nav>
+</body>
+</html>

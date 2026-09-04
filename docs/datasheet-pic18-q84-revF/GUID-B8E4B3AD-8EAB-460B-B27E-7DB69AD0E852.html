@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.7 Returning from Interrupt Service Routine (ISR) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B9EC70D9-D35A-4189-A53F-31A19B16011C.html"/>
+<link rel="next" href="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046.html"/>
+<link rel="up" href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li>11.7 Returning from Interrupt Service Routine (ISR)</li></ol>
+  <div class="sib"><span>← <a href="GUID-B9EC70D9-D35A-4189-A53F-31A19B16011C.html" rel="prev">Accessing Shadow Registers</a></span><span><a href="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046.html" rel="next">Interrupt Latency</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-B8E4B3AD-8EAB-460B-B27E-7DB69AD0E852__GUID-6B09F6C0-6B4E-4F81-9D96-5E715B15E477" style="">11.7 Returning from Interrupt Service Routine
+        (ISR)</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The Return from Interrupt (<code class="+ topic/ph pr-d/codeph ph codeph">RETFIE</code>) instruction is used to mark the end
+            of an ISR. </p>
+        <p class="- topic/p p">When the <code class="+ topic/ph pr-d/codeph ph codeph">RETFIE 1</code> instruction is executed, the PC is loaded
+            with the saved PC value from the top of the PC stack. Saved context is also restored
+            with the execution of this instruction. Thus, execution returns to the state of
+            operation that existed before the interrupt occurred. </p>
+        <p class="- topic/p p">When the <code class="+ topic/ph pr-d/codeph ph codeph">RETFIE 0</code> instruction is executed, the saved
+            context is not restored back to the registers.</p>
+    </div>
+
+</body>
+</html>

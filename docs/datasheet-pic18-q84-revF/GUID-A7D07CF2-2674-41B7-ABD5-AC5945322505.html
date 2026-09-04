@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.2.4.1 Synchronous Steering Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289.html"/>
+<link rel="next" href="GUID-FDBA532E-EAFD-487C-B077-BEB6B5150E91.html"/>
+<link rel="up" href="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li><a href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html">32.2 Operating Modes</a></li><li><a href="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289.html">32.2.4 Steering Modes</a></li><li>32.2.4.1 Synchronous Steering Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289.html" rel="prev">Steering Modes</a></span><span><a href="GUID-FDBA532E-EAFD-487C-B077-BEB6B5150E91.html" rel="next">Asynchronous Steering Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505__GUID-3520182F-B82C-463A-BF72-7CB9E7A9378F" style="">32.2.4.1 Synchronous Steering Mode</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505__ID-42115-000000FA" data-ofbid="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505__ID-42115-000000FA">In Synchronous Steering mode (<a class="- topic/xref xref" href="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B.html#ID-00000013" title="CWG Mode"><span><span>MODE</span></span></a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505__ID-42115-000000FB">‘b001</code>), the changes to steering selection
+            registers take effect on the next rising edge of CWG Data (see the figure below). In
+            Synchronous Steering mode, the output will always produce a complete waveform.</p>
+        <div class="- topic/note note important note_important" id="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505__ID-42115-000000F3" data-ofbid="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505__ID-42115-000000F3"><span class="note__title">Important:</span> Only the STRx bits are synchronized; the OVRx
+            bits are not synchronized.</div>
+        <figure class="- topic/fig fig fignone" id="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505__ID-42115-000000FE" data-ofbid="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505__ID-42115-000000FE"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 32-10. <span id="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505__GUID-EFD7D318-8D31-4D6D-8DC5-C5D3B23449AA" class="fig--title">Example of Synchronous Steering
+                (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b001</code>)</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505__IMAGE_B2S_SWV_TZ" src="GUID-E4309D66-1F46-47F4-9A70-0278627A5160-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.6.3.1 Shift Register Empty Interrupt — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6.html"/>
+<link rel="next" href="GUID-5A8B8E2D-CB38-4F0D-B728-CC470D137110.html"/>
+<link rel="up" href="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-3B049106-A068-4D06-BD06-17396A19D766.html">36.6 SPI Interrupts</a></li><li><a href="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6.html">36.6.3 SPI Status Interrupts</a></li><li>36.6.3.1 Shift Register Empty Interrupt</li></ol>
+  <div class="sib"><span>← <a href="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6.html" rel="prev">SPI Status Interrupts</a></span><span><a href="GUID-5A8B8E2D-CB38-4F0D-B728-CC470D137110.html" rel="next">Transfer Counter Is Zero Interrupt</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-A5FF50FE-F787-44DC-961B-8F38ACD5A388__GUID-5400D2BA-D3F6-4290-8C8B-CDAE192E6D1B" style="">36.6.3.1 Shift Register Empty Interrupt</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The Shift Register Empty Interrupt Flag and Shift Register Empty Interrupt Enable are the
+                <a class="- topic/xref xref" href="GUID-28CA1CAA-8734-4F85-8A9D-5B7892702B4A.html#GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B" title="Shift Register Empty Interrupt Flag"><span><span>SRMTIF</span></span></a> and <a class="- topic/xref xref" href="GUID-73DEE9E2-8073-45FE-88D0-F2D6489F1BF5.html#GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B" title="Shift Register Empty Interrupt Enable"><span><span>SRMTIE</span></span></a> bits, respectively. This interrupt is only available in Host mode
+            and triggers when a data transfer completes and conditions are not present to start a
+            new transfer, as dictated by the TXR and RXR bits (see <a class="- topic/xref xref" href="GUID-58292C67-26C3-49E8-9D78-1E217D2E4B0C.html#GUID-58292C67-26C3-49E8-9D78-1E217D2E4B0C__TABLE_D5L_43H_SFB"><span>Table 36-1</span></a> for conditions for starting a new Host mode data transfer with
+            different TXR/ RXR settings). This interrupt will be triggered at the end of the last
+            full bit period after SCK has been low for one ½-baud period. See the figure below for
+            more details of the timing of this interrupt as well as other interrupts. This bit will
+            not clear itself when the conditions for starting a new transfer occur and must be
+            cleared in software.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-A5FF50FE-F787-44DC-961B-8F38ACD5A388__FIG_ZBL_FCX_SFB" data-ofbid="GUID-A5FF50FE-F787-44DC-961B-8F38ACD5A388__FIG_ZBL_FCX_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 36-14. <span id="GUID-A5FF50FE-F787-44DC-961B-8F38ACD5A388__GUID-3644515B-4CB0-4DFF-B52E-DFA4B7FB3ACC" class="fig--title">Transfer And Client Select
+                Interrupt Timing</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-7E394890-D0B7-4648-9E52-8EE7A4EB83BA-high.pdf#toolbar=1" width="450" height="851.6288124594419"></iframe></span>
+        </figure>
+</div>
+
+</body>
+</html>

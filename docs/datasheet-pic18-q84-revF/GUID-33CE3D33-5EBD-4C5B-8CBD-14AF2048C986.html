@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.9.1 TUxyCON0 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7463E9BA-CF26-4B25-8FCB-C8F606187580.html"/>
+<link rel="next" href="GUID-247DCE79-C828-4FA7-A95B-CB84E3118715.html"/>
+<link rel="up" href="GUID-7463E9BA-CF26-4B25-8FCB-C8F606187580.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-7463E9BA-CF26-4B25-8FCB-C8F606187580.html">28.9 Register Definitions: Universal Timer</a></li><li>28.9.1 TUxyCON0</li></ol>
+  <div class="sib"><span>← <a href="GUID-7463E9BA-CF26-4B25-8FCB-C8F606187580.html" rel="prev">Register Definitions: Universal Timer</a></span><span><a href="GUID-247DCE79-C828-4FA7-A95B-CB84E3118715.html" rel="next">TU8yCON0</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__ID-00000001" style="">28.9.1  TUxyCON0</h1><section class="- topic/section reference/section sidsc-register/registerDescription " id="GUID-246A8F98-EC97-46D2-B6ED-486FD0F7EA03">Timer Control Register 0<div class="- topic/note note note note_note endnote" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__ID-42107-000009C8" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__ID-42107-000009C8"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__OL_YYB_CV3_KZ" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__OL_YYB_CV3_KZ">
+               <li class="- topic/li li" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-41344584-4508-411C-A0E6-4AEEFB733D3D" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-41344584-4508-411C-A0E6-4AEEFB733D3D">The selected clock will be enabled
+                  when this bit is set and a Start condition has occurred.</li>
+               <li class="- topic/li li" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-23CC371F-B126-41C3-AA18-A7CC56AF4E38" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-23CC371F-B126-41C3-AA18-A7CC56AF4E38">When this bit is set and CSYNC =
+                     <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, it takes three timer clocks to synchronize. When this bit
+                  is cleared and CSYNC = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the selected clock source (especially
+                  external clock sources) must supply at least three additional clocks to resolve
+                  internal states. During this time, if the timer is already running, any stop/Reset
+                  related ERS events that get processed will continue to affect the Run state of the
+                  timer. If CSYNC = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, the ON bit clears immediately and the timer
+                  stops immediately.</li>
+               <li class="- topic/li li" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-A7E4C950-6057-4D72-8EC2-7411A9DBCF9C" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-A7E4C950-6057-4D72-8EC2-7411A9DBCF9C">This bit is not clock synchronized
+                  and only needs to be changed while ON = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>.</li>
+               <li class="- topic/li li" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-A8C2D290-63AF-42E7-85F8-F92C407969A2" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-A8C2D290-63AF-42E7-85F8-F92C407969A2">The purpose of this control is to
+                  select the active edge when using externally-clocked Counter mode.</li>
+               <li class="- topic/li li" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-473A7FDF-D6BE-4088-BB3D-9B7AB6695879" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-473A7FDF-D6BE-4088-BB3D-9B7AB6695879">This bit controls the output even
+                  when ON = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>.</li>
+               <li class="- topic/li li" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-7C20B43D-34CF-4DC6-B4C4-3D07A7E9B97A" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-7C20B43D-34CF-4DC6-B4C4-3D07A7E9B97A">This bit is shadowed when the
+                  module is frozen during debugging and restored when the module resumes
+                  operation.</li>
+               <li class="- topic/li li" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-04C2E716-96B0-434D-8CF6-47207FB57821" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-04C2E716-96B0-434D-8CF6-47207FB57821">Capture or stop events load the
+                  TUxyCR capture register, regardless of this bit’s setting.</li>
+               <li class="- topic/li li" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-2953E043-1F6D-45C8-9A09-7BC49DBBDAFC" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-2953E043-1F6D-45C8-9A09-7BC49DBBDAFC">The effect of writing to TUxyCR
+                  with RDSEL = <code class="+ topic/ph pr-d/codeph ph codeph">0</code> is not defined.</li>
+               <li class="- topic/li li" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-A3837093-4C8C-4423-BFD1-3BA828A72078" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-A3837093-4C8C-4423-BFD1-3BA828A72078">The interrupt flags will be set
+                  even if the corresponding interrupt is disabled.</li>
+               <li class="- topic/li li" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-43B700DB-AE7A-4FCB-AFAF-AC82964B18BF" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-43B700DB-AE7A-4FCB-AFAF-AC82964B18BF">The PRIF interrupt will not occur
+                  if the user writes the PR value to the TUxyTMR counter register directly.</li>
+               <li class="- topic/li li" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-BA216E7B-1A45-445C-ABC7-516745DDF268" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-BA216E7B-1A45-445C-ABC7-516745DDF268">The CIF interrupt trigger requires
+                  a running timer.</li>
+               <li class="- topic/li li" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-9B7C1D9F-DE03-436E-A728-A249079F9D3D" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-9B7C1D9F-DE03-436E-A728-A249079F9D3D">This register is not available
+                  when the module is chained and operated as a Secondary module.</li>
+            </ol>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>TUxyCON0</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-A4005BD7-DB23-447F-8ADC-19517A5C7D03" data-ofbid="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-A4005BD7-DB23-447F-8ADC-19517A5C7D03"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ON</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">CPOL</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">OM</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">OPOL</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">RDSEL</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">PRIE</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ZIE</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">CIE</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HC</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section class="- topic/section reference/section sidsc-register/registerDescription " id="GUID-246A8F98-EC97-46D2-B6ED-486FD0F7EA03"></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000005__ID-42107-00001A6A" id="ID-00000005">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000005__ID-42107-00001A6A" style=""> Bit 7 – ON <span>
+         Timer Enable<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-41344584-4508-411C-A0E6-4AEEFB733D3D">1</a>,<a class="- topic/xref xref" href="#GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-23CC371F-B126-41C3-AA18-A7CC56AF4E38">2</a>)</sup></strong>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000005__GUID-862AF8FF-E61D-4207-8DE7-5B54D961EDF4" data-ofbid="ID-00000005__GUID-862AF8FF-E61D-4207-8DE7-5B54D961EDF4"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  0</td></tr><tr><td>All Other Resets  =  u</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000005__ID-42107-00001A6C">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000005__GUID-97046364-A871-4981-9369-3F856B24BE85">The module is
+                  enabled</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000005__ID-42107-00001A6F">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000005__GUID-4CE4B224-2EA5-4812-94BC-A514EF43E24F">The module is disabled and in the
+                  lowest power mode</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000000C__ID-42107-00001A73" id="ID-0000000C">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000000C__ID-42107-00001A73" style=""> Bit 6 – CPOL <span>
+         Timer Clock Polarity Select<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-A7E4C950-6057-4D72-8EC2-7411A9DBCF9C">3</a>,<a class="- topic/xref xref" href="#GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-A8C2D290-63AF-42E7-85F8-F92C407969A2">4</a>)</sup></strong>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000000C__GUID-F11B2041-AC1E-41F5-BBFF-BC04A3020A47" data-ofbid="ID-0000000C__GUID-F11B2041-AC1E-41F5-BBFF-BC04A3020A47"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  0</td></tr><tr><td>All Other Resets  =  u</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000000C__ID-42107-00001A75">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000000C__GUID-B17BDE4F-8F95-45B1-AD7A-8EDCA1B07B23">The counter advances with the clock
+                  rising edge</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000000C__ID-42107-00001A78">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000000C__GUID-5662123A-E93B-4BF3-A3C6-F6E162FBDA47">The counter advances with the clock
+                  falling edge</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000013__ID-42107-00001A7C" id="ID-00000013">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000013__ID-42107-00001A7C" style=""> Bit 5 – OM <span>Timer Output Mode Select</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000013__GUID-CE308B04-E613-4CF7-B9CC-59CA4EB68C3A" data-ofbid="ID-00000013__GUID-CE308B04-E613-4CF7-B9CC-59CA4EB68C3A"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  0</td></tr><tr><td>All Other Resets  =  u</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000013__ID-42107-00001A7E">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000013__GUID-3244FD32-55C4-4374-A70E-6F1369C8B85B">Output is in Level
+                  mode</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000013__ID-42107-00001A81">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000013__GUID-53B9352B-4F4C-4233-9D5F-1EFB90C07332">Output is in Pulse
+                  mode</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000001A__ID-42107-00001A85" id="ID-0000001A">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000001A__ID-42107-00001A85" style=""> Bit 4 – OPOL <span>
+         Timer Output Polarity Select<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-473A7FDF-D6BE-4088-BB3D-9B7AB6695879">5</a>)</sup></strong>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000001A__GUID-774F3AA8-AC0D-4A2A-9A27-9360093F9285" data-ofbid="ID-0000001A__GUID-774F3AA8-AC0D-4A2A-9A27-9360093F9285"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  0</td></tr><tr><td>All Other Resets  =  u</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000001A__ID-42107-00001A87">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000001A__GUID-1ECC5D9D-0743-4934-A911-71C45946C4CD">Output is high when the timer is
+                  Idle</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000001A__ID-42107-00001A8A">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000001A__GUID-B9E874D9-BB94-45BA-ADCC-CD422CF85C2F">Output is low when the timer is
+                  Idle</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000021__ID-42107-00001A8E" id="ID-00000021">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000021__ID-42107-00001A8E" style=""> Bit 3 – RDSEL <span>
+         Timer Readout Mode Select<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-7C20B43D-34CF-4DC6-B4C4-3D07A7E9B97A">6</a>,<a class="- topic/xref xref" href="#GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-04C2E716-96B0-434D-8CF6-47207FB57821">7</a>,<a class="- topic/xref xref" href="#GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-2953E043-1F6D-45C8-9A09-7BC49DBBDAFC"><span>8</span></a>)</sup></strong>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000021__GUID-CE308B04-E613-4CF7-B9CC-59CA4EB68C3A" data-ofbid="ID-00000021__GUID-CE308B04-E613-4CF7-B9CC-59CA4EB68C3A">The RDSEL bit selects the addressing of
+            TUxyTMR and TUxyCR registers. See <a class="- topic/xref xref" href="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0.html">Timer Counter and Capture Registers</a> for
+            details.</section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  0</td></tr><tr><td>All Other Resets  =  u</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000021__ID-42107-00001A90">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000021__GUID-09E7B109-B7DF-4BB1-8E3D-7BE1E8550A99">TUxyTMR reads/write the value of
+                  the raw counter</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000021__ID-42107-00001A93">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000021__GUID-F9818205-9176-4A86-9D59-C9E37FD5279D">TUxyCR reads the value of the
+                  capture register</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_OY3_RV4_33B__GUID-3B470651-53B8-40F6-970C-4BBD092C5072" id="BITFIELD_OY3_RV4_33B">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_OY3_RV4_33B__GUID-3B470651-53B8-40F6-970C-4BBD092C5072" style=""> Bit 2 – PRIE <span>
+         Period Match Interrupt Enable<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-A3837093-4C8C-4423-BFD1-3BA828A72078">9</a>,<a class="- topic/xref xref" href="#GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-43B700DB-AE7A-4FCB-AFAF-AC82964B18BF">10</a>)</sup></strong>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_OY3_RV4_33B__BITFIELDDESCRIPTION_PY3_RV4_33B" data-ofbid="BITFIELD_OY3_RV4_33B__BITFIELDDESCRIPTION_PY3_RV4_33B"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  0</td></tr><tr><td>All Other Resets  =  u</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_OY3_RV4_33B__BITFIELDVALUES_RY3_RV4_33B" data-ofbid="BITFIELD_OY3_RV4_33B__BITFIELDVALUES_RY3_RV4_33B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_OY3_RV4_33B__GUID-925CAB73-E6C7-4937-B275-A923CD6DF453">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_OY3_RV4_33B__GUID-95726C56-E6DE-4B73-A65F-60913F1BA4E8">PRIF interrupt will occur when the
+                  counter increments from PR-1 to PR</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_OY3_RV4_33B__GUID-B4BA9537-FC50-4DD5-A460-5008137C7A86">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_OY3_RV4_33B__GUID-6BB8EBFF-E1F2-4795-A437-8C7D2877CF99">PRIF interrupt is
+                  disabled</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_MYN_VV4_33B__GUID-DFF237D3-593D-43A0-96F6-9C05E248C13F" id="BITFIELD_MYN_VV4_33B">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_MYN_VV4_33B__GUID-DFF237D3-593D-43A0-96F6-9C05E248C13F" style=""> Bit 1 – ZIE <span>
+         Zero Interrupt Enable<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-A3837093-4C8C-4423-BFD1-3BA828A72078">9</a>)</sup></strong>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_MYN_VV4_33B__BITFIELDDESCRIPTION_NYN_VV4_33B" data-ofbid="BITFIELD_MYN_VV4_33B__BITFIELDDESCRIPTION_NYN_VV4_33B"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  0</td></tr><tr><td>All Other Resets  =  u</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_MYN_VV4_33B__BITFIELDVALUES_PYN_VV4_33B" data-ofbid="BITFIELD_MYN_VV4_33B__BITFIELDVALUES_PYN_VV4_33B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_MYN_VV4_33B__GUID-67D38CF2-A0A0-4648-BBE2-0FAE85D18143">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_MYN_VV4_33B__GUID-92D6E444-2A29-4B0D-90D4-D3C3FA823C11">ZIF interrupt will occur when the
+                  counter becomes zero from a nonzero value</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_MYN_VV4_33B__GUID-1E46B2B7-2B4A-4D05-8016-2A57A738C4E5">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_MYN_VV4_33B__GUID-EA9481B7-36C1-4D74-A1A9-235F91EED7AE">ZIF interrupt is
+                  disabled</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_YLR_VV4_33B__GUID-B15C31B3-2A8D-4E09-8F19-7A659591D0DD" id="BITFIELD_YLR_VV4_33B">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_YLR_VV4_33B__GUID-B15C31B3-2A8D-4E09-8F19-7A659591D0DD" style=""> Bit 0 – CIE <span>
+         Capture Interrupt Enable<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-A3837093-4C8C-4423-BFD1-3BA828A72078">9</a>,<a class="- topic/xref xref" href="#GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986__GUID-BA216E7B-1A45-445C-ABC7-516745DDF268">11</a>)</sup></strong>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_YLR_VV4_33B__BITFIELDDESCRIPTION_ZLR_VV4_33B" data-ofbid="BITFIELD_YLR_VV4_33B__BITFIELDDESCRIPTION_ZLR_VV4_33B"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  0</td></tr><tr><td>All Other Resets  =  u</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_YLR_VV4_33B__BITFIELDVALUES_BMR_VV4_33B" data-ofbid="BITFIELD_YLR_VV4_33B__BITFIELDVALUES_BMR_VV4_33B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_YLR_VV4_33B__GUID-223A5150-7C60-49E1-A139-0FBF40544F35">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_YLR_VV4_33B__GUID-2CC4D0DA-28FA-481F-AB46-3506C913535B">CIF interrupt will occur when a
+                  capture event occurs</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_YLR_VV4_33B__GUID-19644ED0-D5F2-4261-A9A2-4FF436F37763">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_YLR_VV4_33B__GUID-8335A859-1C62-4AAB-A37B-C7E81D0140EE">CIF interrupt is
+                  disabled</td>
+            </tr></tbody></table>
+      </div>
+   </article>
+            
+               The selected clock will be enabled
+                  when this bit is set and a Start condition has occurred.
+               When this bit is set and CSYNC =
+                     1, it takes three timer clocks to synchronize. When this bit
+                  is cleared and CSYNC = 1, the selected clock source (especially
+                  external clock sources) must supply at least three additional clocks to resolve
+                  internal states. During this time, if the timer is already running, any stop/Reset
+                  related ERS events that get processed will continue to affect the Run state of the
+                  timer. If CSYNC = 0, the ON bit clears immediately and the timer
+                  stops immediately.
+               This bit is not clock synchronized
+                  and only needs to be changed while ON = 0.
+               The purpose of this control is to
+                  select the active edge when using externally-clocked Counter mode.
+               This bit controls the output even
+                  when ON = 0.
+               This bit is shadowed when the
+                  module is frozen during debugging and restored when the module resumes
+                  operation.
+               Capture or stop events load the
+                  TUxyCR capture register, regardless of this bit’s setting.
+               The effect of writing to TUxyCR
+                  with RDSEL = 0 is not defined.
+               The interrupt flags will be set
+                  even if the corresponding interrupt is disabled.
+               The PRIF interrupt will not occur
+                  if the user writes the PR value to the TUxyTMR counter register directly.
+               The CIF interrupt trigger requires
+                  a running timer.
+               This register is not available
+                  when the module is chained and operated as a Secondary module.
+            
+         
+</body>
+</html>

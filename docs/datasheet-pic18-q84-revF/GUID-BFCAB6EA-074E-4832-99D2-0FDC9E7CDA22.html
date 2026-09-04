@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.9 Interrupt Setup Procedure — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3707A074-AF85-44E8-B73B-4C7A5CAEB6A9.html"/>
+<link rel="next" href="GUID-E98B1C2D-60D5-468A-9746-B11F5A70B05D.html"/>
+<link rel="up" href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li>11.9 Interrupt Setup Procedure</li></ol>
+  <div class="sib"><span>← <a href="GUID-3707A074-AF85-44E8-B73B-4C7A5CAEB6A9.html" rel="prev">Aborting Interrupts</a></span><span><a href="GUID-E98B1C2D-60D5-468A-9746-B11F5A70B05D.html" rel="next">External Interrupt Pins</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-39D245AD-88D1-428B-913B-A5589D1C703F" style="">11.9 Interrupt Setup Procedure</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">
+            <ol class="- topic/ol ol" id="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__OL_IZM_1GN_YFB" data-ofbid="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__OL_IZM_1GN_YFB">
+                <li class="- topic/li li" id="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-47382DD4-76B8-48ED-BF9D-A96D91B3B4B6" data-ofbid="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-47382DD4-76B8-48ED-BF9D-A96D91B3B4B6">When using interrupt priority
+                    levels, set IPEN and then select the user-assigned priority level for the
+                    interrupt source by writing the control bits in the appropriate IPRx control
+                        register.<div class="- topic/note note important note_important" id="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-53C5DD4D-5303-4067-9CD4-9FA360D2C4AB" data-ofbid="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-53C5DD4D-5303-4067-9CD4-9FA360D2C4AB"><span class="note__title">Important:</span> At a device Reset, the IPRx registers are initialized such
+                        that all user interrupt sources are assigned to high priority.</div></li>
+                <li class="- topic/li li" id="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-56751E9C-937A-400B-B04D-DFF2765D97CF" data-ofbid="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-56751E9C-937A-400B-B04D-DFF2765D97CF">Clear the Interrupt Flag Status
+                    bit associated with the peripheral in the associated PIRx STATUS register.</li>
+                <li class="- topic/li li" id="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-4879B29E-6512-454A-A7F9-92B5E12AC500" data-ofbid="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-4879B29E-6512-454A-A7F9-92B5E12AC500">Enable the interrupt source by
+                    setting the interrupt enable control bit associated with the source in the
+                    appropriate PIEx register.</li>
+                <li class="- topic/li li" id="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-6F78EB93-D7A8-4465-BBE4-8680C6B30E49" data-ofbid="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-6F78EB93-D7A8-4465-BBE4-8680C6B30E49">If the vector table is used
+                    (MVECEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), then set up the start address for the Interrupt
+                    Vector Table using <a class="- topic/xref xref" href="GUID-E940C060-117B-4C3F-926C-C057E18D7103.html">IVTBASE</a>. See the <a class="- topic/xref xref" href="GUID-01EA66D8-D50D-49C1-92DA-0D4E8C13824A.html">Interrupt
+                        Vector Table Contents</a> section for more details.</li>
+                <li class="- topic/li li" id="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-7FBEC8F0-1E0C-4C80-88F3-047C26DE41BA" data-ofbid="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-7FBEC8F0-1E0C-4C80-88F3-047C26DE41BA">Once IVTBASE is written to, set
+                    the interrupt enable bits in INTCON0. </li>
+                <li class="- topic/li li" id="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-FC5BB3D9-3A71-4055-970C-9894C511B981" data-ofbid="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-FC5BB3D9-3A71-4055-970C-9894C511B981">An example of setting up
+                    interrupts and ISRs can be found below.</li>
+            </ol>
+            
+        </div>
+        <div class="- topic/example example" id="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-F2F13C06-42BB-4EB5-BAFD-8696130E47F8" data-ofbid="GUID-BFCAB6EA-074E-4832-99D2-0FDC9E7CDA22__GUID-F2F13C06-42BB-4EB5-BAFD-8696130E47F8"><h2 class="- topic/title title sectiontitle">Setting Up Vectored Interrupts
+                Using XC8</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><em class="hl-comment">// NOTE 1: If IVTBASE is changed from its default value of 0x000008, then the</em>
+<em class="hl-comment">// "base(...)" argument must be provided in the ISR. Otherwise the vector</em>
+<em class="hl-comment">// table will be placed at 0x0008 by default regardless of the IVTBASE value.</em>
+
+<em class="hl-comment">// NOTE 2: When MVECEN=0 and IPEN=1, a separate argument as "high_priority"</em>
+<em class="hl-comment">// or "low_priority" can be used to distinguish between the two ISRs.</em>
+<em class="hl-comment">// If the argument is not provided, the ISR is considered high priority</em>
+<em class="hl-comment">// by default.</em>
+
+<em class="hl-comment">// NOTE 3: Multiple interrupts can be handled by the same ISR if they are</em>
+<em class="hl-comment">// specified in the "irq(...)" argument. Ex: irq(IRQ_SW, IRQ_HLVD)</em>
+
+<strong class="hl-keyword">void</strong> <span class="hl-functions">__interrupt</span>(irq(IRQ_SW), base(<span class="hl-number">0x3008</span>)) SW_ISR(<strong class="hl-keyword">void</strong>)
+{
+    PIR0bits.SWIF = <span class="hl-number">0</span>;    <em class="hl-comment">// Clear the interrupt flag</em>
+    LATCbits.LATC0 ^= <span class="hl-number">1</span>;    <em class="hl-comment">// ISR code goes here</em>
+}
+<strong class="hl-keyword">void</strong> <span class="hl-functions">__interrupt</span>(irq(<strong class="hl-keyword">default</strong>), base(<span class="hl-number">0x3008</span>)) DEFAULT_ISR(<strong class="hl-keyword">void</strong>)
+{
+    <em class="hl-comment">// Unhandled interrupts go here</em>
+}
+<strong class="hl-keyword">void</strong> INTERRUPT_Initialize (<strong class="hl-keyword">void</strong>)
+{
+    INTCON0bits.GIEH = <span class="hl-number">1</span>;    <em class="hl-comment">// Enable high priority interrupts</em>
+    INTCON0bits.GIEL = <span class="hl-number">1</span>;    <em class="hl-comment">// Enable low priority interrupts    </em>
+    INTCON0bits.IPEN = <span class="hl-number">1</span>;    <em class="hl-comment">// Enable interrupt priority</em>
+    PIE0bits.SWIE = <span class="hl-number">1</span>;     <em class="hl-comment">// Enable SW interrupt</em>
+    PIE0bits.HLVDIE = <span class="hl-number">1</span>;     <em class="hl-comment">// Enable HLVD interrupt</em>
+    IPR0bits.SWIP = <span class="hl-number">0</span>;     <em class="hl-comment">// Make SW interrupt low priority</em>
+
+    <em class="hl-comment">// Change IVTBASE if required</em>
+    IVTBASEU = <span class="hl-number">0x00</span>;          <em class="hl-comment">// Optional</em>
+    IVTBASEH = <span class="hl-number">0x30</span>;          <em class="hl-comment">// Default is 0x000008</em>
+    IVTBASEL = <span class="hl-number">0x08</span>;
+}</pre>
+        </div>
+    </div>
+
+</body>
+</html>

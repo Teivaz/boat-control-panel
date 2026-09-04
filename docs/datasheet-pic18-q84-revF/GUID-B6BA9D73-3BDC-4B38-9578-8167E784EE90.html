@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.3.4 Message Memory Configuration — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-742F7670-08C3-499C-950E-FBD8B7E97B88.html"/>
+<link rel="next" href="GUID-FC42289D-0F0B-4874-8B32-66AF38226186.html"/>
+<link rel="up" href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html">38.3 Configuration</a></li><li>38.3.4 Message Memory Configuration</li></ol>
+  <div class="sib"><span>← <a href="GUID-742F7670-08C3-499C-950E-FBD8B7E97B88.html" rel="prev">Bit Time Configuration Example</a></span><span><a href="GUID-FC42289D-0F0B-4874-8B32-66AF38226186.html" rel="next">Transmit Event FIFO Configuration</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-B6BA9D73-3BDC-4B38-9578-8167E784EE90__GUID-F1AE3B63-D2FA-4D34-98F1-C331E38D9A84" style="">38.3.4 Message Memory Configuration</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The message objects of the TEF, TXQ and transmit/receive FIFOs are located in RAM (see
+                <a class="- topic/xref xref" href="#GUID-B6BA9D73-3BDC-4B38-9578-8167E784EE90__FIG_QSV_RVF_P3B"><span>Figure 38-6</span></a>). The application must configure the
+            number of message objects in a FIFO between Message Object 0 and Message Object 31.
+            Additionally, the application must configure the payload size of the message objects in
+            each FIFO. This configuration determines where message objects are located in RAM. The
+            RAM allocation can only be configured in Configuration mode.</p>
+        <p class="- topic/p p">To optimize RAM usage, the application needs to start configuring the RAM with the TEF,
+            followed by the TXQ, and continue with FIFO 1, FIFO 2 and FIFO 3.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-B6BA9D73-3BDC-4B38-9578-8167E784EE90__FIG_QSV_RVF_P3B" data-ofbid="GUID-B6BA9D73-3BDC-4B38-9578-8167E784EE90__FIG_QSV_RVF_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-6. <span id="GUID-B6BA9D73-3BDC-4B38-9578-8167E784EE90__GUID-B6CC4CE5-FEF4-4520-9B30-1FD8277255F7" class="fig--title">Message Memory
+                    Organization</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-B6BA9D73-3BDC-4B38-9578-8167E784EE90__IMAGE_RSV_RVF_P3B" src="GUID-E016A3F9-BDCB-41E3-B383-9AF754564DBB-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-FC42289D-0F0B-4874-8B32-66AF38226186.html">38.3.4.1 Transmit Event FIFO Configuration</a></li><li><a href="GUID-AA46B5AB-5BF2-4B3E-B828-3AF0E7852E23.html">38.3.4.2 Transmit Queue Configuration</a></li><li><a href="GUID-CCB0145D-1356-445D-B22B-9E319C32F3EA.html">38.3.4.3 Transmit FIFO Configuration</a></li><li><a href="GUID-FDA6F52B-A276-47A5-A4CF-AB0F0938B4B2.html">38.3.4.4 Receive FIFO Configuration</a></li><li><a href="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A.html">38.3.4.5 Calculation of Required Message Memory</a></li></ul>
+</nav>
+</body>
+</html>

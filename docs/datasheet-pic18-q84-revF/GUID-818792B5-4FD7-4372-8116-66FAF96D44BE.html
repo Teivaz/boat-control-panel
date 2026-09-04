@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.10 Scanner Interrupt — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE.html"/>
+<link rel="next" href="GUID-1EF9B9DB-7161-43E0-A021-09F756202BA7.html"/>
+<link rel="up" href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li>13.10 Scanner Interrupt</li></ol>
+  <div class="sib"><span>← <a href="GUID-8A355B7D-6900-4EBB-B78D-F5EAE21709CE.html" rel="prev">Configuring the Scanner</a></span><span><a href="GUID-1EF9B9DB-7161-43E0-A021-09F756202BA7.html" rel="next">Peripheral Module Disable</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-818792B5-4FD7-4372-8116-66FAF96D44BE__GUID-F0047643-EDB1-46C4-9994-A1E634511A71" style="">13.10 Scanner Interrupt</h1><div class="- topic/body body"><div class="- topic/p p">The scanner will trigger an interrupt when the <a class="- topic/xref xref" href="GUID-954A61C6-F5B6-4625-8868-91C5E0693D11.html#ID-0000009F" title="Scanner GO(3,4)"><span><span>SGO</span></span></a> bit transitions from ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’ to ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’. The SCANIF interrupt flag of one of the PIR registers is set when the last memory location is reached and the data are entered into the <a class="- topic/xref xref" href="GUID-F3874916-83FF-4A49-99B7-71ADB25F92C9.html" title="CRCDATA">CRCDATA</a> registers. The SCANIF bit must be cleared by software. The SCAN interrupt enable is the SCANIE bit of the corresponding PIE register.</div></div>
+</body>
+</html>

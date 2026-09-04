@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>7.4.2 Instructions in Program Memory — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1484957A-097D-40E7-93BC-4ABB03BE6346.html"/>
+<link rel="next" href="GUID-73955031-F3F4-4CB0-AE41-0E9BAF402DAC.html"/>
+<link rel="up" href="GUID-14DFAAAF-B702-4D1F-8136-9925B6B4DA46.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html">7 PIC18 CPU</a></li><li><a href="GUID-14DFAAAF-B702-4D1F-8136-9925B6B4DA46.html">7.4 PIC18 Instruction Cycle</a></li><li>7.4.2 Instructions in Program Memory</li></ol>
+  <div class="sib"><span>← <a href="GUID-1484957A-097D-40E7-93BC-4ABB03BE6346.html" rel="prev">Instruction Flow/Pipelining</a></span><span><a href="GUID-73955031-F3F4-4CB0-AE41-0E9BAF402DAC.html" rel="next">Multi-Word Instructions</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-E49D160C-D43F-4754-AFBE-2A057A93B1C2__GUID-EBC7B754-D5DD-4534-A162-78FF11CC01D4" style="">7.4.2 Instructions in Program Memory</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-E49D160C-D43F-4754-AFBE-2A057A93B1C2__ID-42129-000006C3" data-ofbid="GUID-E49D160C-D43F-4754-AFBE-2A057A93B1C2__ID-42129-000006C3">The program memory is addressed in bytes. Instructions are stored as
+         either two bytes, four bytes, or six bytes in program memory. The Least Significant Byte of
+         an instruction word is always stored in a program memory location with an even address (LSb
+         = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>). To maintain alignment with instruction boundaries, the PC increments
+         in steps of two and the LSb will always read ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’. See the <strong class="+ topic/ph hi-d/b ph b">“Program
+            Counter”</strong> section in the <strong class="+ topic/ph hi-d/b ph b">“Memory Organization”</strong> chapter for more details. The
+         instructions in the Program Memory figure below shows how instruction words are stored in
+         the program memory.</p>
+      <p class="- topic/p p" id="GUID-E49D160C-D43F-4754-AFBE-2A057A93B1C2__ID-42129-000006C9" data-ofbid="GUID-E49D160C-D43F-4754-AFBE-2A057A93B1C2__ID-42129-000006C9">The <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-E49D160C-D43F-4754-AFBE-2A057A93B1C2__ID-42129-000006CA">CALL</code> and <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-E49D160C-D43F-4754-AFBE-2A057A93B1C2__ID-42129-000006CB">GOTO</code> instructions have the absolute program memory
+         address embedded into the instruction. Since instructions are always stored on word
+         boundaries, the data contained in the instruction is a word address. The word address is
+         written to the corresponding bits of the Program Counter register, which accesses the
+         desired byte address in program memory. Instruction #2 in the example shows how the
+         instruction <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-E49D160C-D43F-4754-AFBE-2A057A93B1C2__ID-42129-000006CD">GOTO 0006h</code> is encoded in the program
+         memory. Program branch instructions, which encode a relative address offset, operate in the
+         same manner. The offset value stored in a branch instruction represents the number of
+         single-word instructions by which the PC will be offset.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-E49D160C-D43F-4754-AFBE-2A057A93B1C2__FIG_PGF_VDR_XHB" data-ofbid="GUID-E49D160C-D43F-4754-AFBE-2A057A93B1C2__FIG_PGF_VDR_XHB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 7-4. <span id="GUID-E49D160C-D43F-4754-AFBE-2A057A93B1C2__GUID-0D3A993C-E2FA-49B8-A79B-81670BDB6DAF" class="fig--title">Instructions in Program
+            Memory</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-47D731E2-9DA5-4C4A-AA0E-785BC312D84C-high.pdf#toolbar=1" width="450" height="240.49198080074922"></iframe></span>
+      </figure>
+   </div>
+
+</body>
+</html>

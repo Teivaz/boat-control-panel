@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.2.6 Transfer Counter — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59.html"/>
+<link rel="next" href="GUID-EC23C857-1C50-459E-9D83-9BA96A6DB06E.html"/>
+<link rel="up" href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html">36.2 SPI Operation</a></li><li>36.2.6 Transfer Counter</li></ol>
+  <div class="sib"><span>← <a href="GUID-740E7C30-C9AA-41ED-8898-57599A1E7B59.html" rel="prev">Input and Output Polarity Control</a></span><span><a href="GUID-EC23C857-1C50-459E-9D83-9BA96A6DB06E.html" rel="next">Total Bit Count Mode (BMODE = 0)</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-38725C10-0F95-484B-825E-B276E4433803__GUID-A0800505-E358-41AE-A48E-DD6713C2C305" style="">36.2.6 Transfer Counter</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">In all Host modes, the transfer counter can be used to determine how many data transfers
+            the SPI will send/receive. The transfer counter is comprised of the SPIxTCNT registers
+            and is also partially controlled by the SPIxTWIDTH register.</p>
+        <div class="- topic/p p">The transfer counter has two primary modes, determined by the <a class="- topic/xref xref" href="GUID-CD70C100-5F91-4E6F-86D4-583C754F39BE.html#BITFIELD_DQY_N5F_RFB" title="Bit-Length Mode Select(1)"><span><span>BMODE</span></span></a> bit. Each mode uses the SPIxTCNT and SPIxTWIDTH registers to determine
+            the number and size of the transfers. In both modes, when the transfer counter reaches
+            zero, the TCZIF interrupt flag is set.</div>
+        <div class="- topic/note note important note_important" id="GUID-38725C10-0F95-484B-825E-B276E4433803__GUID-368E4821-40D5-4684-88F3-9421734C1A6D" data-ofbid="GUID-38725C10-0F95-484B-825E-B276E4433803__GUID-368E4821-40D5-4684-88F3-9421734C1A6D"><span class="note__title">Important:</span> 
+            <p class="- topic/p p">In all Client modes and when BMODE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> in Host modes, the transfer
+                counter will still decrement as transfers occur and can be used to count the number
+                of messages sent/received, control SS_out, and trigger TCZIF. Also, when BMODE =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the SPIxTWIDTH register can be used in Host and Client modes
+                to determine the size of messages sent and received by the SPI, even if the transfer
+                counter is not being actively used to control the number of messages being
+                sent/received by the SPI module.</p>
+        </div>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-EC23C857-1C50-459E-9D83-9BA96A6DB06E.html">36.2.6.1 Total Bit Count Mode (BMODE = 0)</a></li><li><a href="GUID-3F03B3CC-533E-4185-8B1B-11516F2B93C0.html">36.2.6.2 Variable Transfer Size Mode (BMODE = 1)</a></li><li><a href="GUID-5A577801-04BA-4C3C-B620-B1721A3265E1.html">36.2.6.3 Transfer Counter in Client Mode</a></li></ul>
+</nav>
+</body>
+</html>

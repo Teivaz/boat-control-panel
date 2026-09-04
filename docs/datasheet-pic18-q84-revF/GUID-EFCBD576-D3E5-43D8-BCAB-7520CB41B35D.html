@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.12.1 Bus Diagnostic Registers — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DAEF6086-6F8E-4CF1-9E54-A43F6F740060.html"/>
+<link rel="next" href="GUID-C3FCE377-6576-4F9A-9D6B-9D98C83D3773.html"/>
+<link rel="up" href="GUID-DAEF6086-6F8E-4CF1-9E54-A43F6F740060.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-DAEF6086-6F8E-4CF1-9E54-A43F6F740060.html">38.12 Error Handling</a></li><li>38.12.1 Bus Diagnostic Registers</li></ol>
+  <div class="sib"><span>← <a href="GUID-DAEF6086-6F8E-4CF1-9E54-A43F6F740060.html" rel="prev">Error Handling</a></span><span><a href="GUID-C3FCE377-6576-4F9A-9D6B-9D98C83D3773.html" rel="next">Recovery from Bus Off State</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-EFCBD576-D3E5-43D8-BCAB-7520CB41B35D__GUID-B9A23798-772F-4941-BF05-931D0704E4F7" style="">38.12.1 Bus Diagnostic Registers</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The Bus Diagnostic registers provide additional information about the health
+            of the CAN bus:</p>
+        <div class="- topic/p p">
+            <ul class="- topic/ul ul" id="GUID-EFCBD576-D3E5-43D8-BCAB-7520CB41B35D__UL_D2L_R3X_SJB" data-ofbid="GUID-EFCBD576-D3E5-43D8-BCAB-7520CB41B35D__UL_D2L_R3X_SJB">
+                <li class="- topic/li li" id="GUID-EFCBD576-D3E5-43D8-BCAB-7520CB41B35D__GUID-169ED642-659C-46B4-AD01-AB11E5132416" data-ofbid="GUID-EFCBD576-D3E5-43D8-BCAB-7520CB41B35D__GUID-169ED642-659C-46B4-AD01-AB11E5132416">CxBDIAG0 contains separate error counters for receive/transmit and for
+                    nominal/data bit rates. The counters work differently than the counters in the
+                    CxTREC registers. They are simply incremented by one on every error. They are
+                    never decremented, but can be cleared by writing ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’ to the
+                    register.</li>
+                <li class="- topic/li li" id="GUID-EFCBD576-D3E5-43D8-BCAB-7520CB41B35D__GUID-922BBB4C-0D31-4084-8E4C-7DE71573B45A" data-ofbid="GUID-EFCBD576-D3E5-43D8-BCAB-7520CB41B35D__GUID-922BBB4C-0D31-4084-8E4C-7DE71573B45A">CxBDIAG1 keeps track of the kind of error that occurred since the last clearing
+                    of the register. The CxBDIAG1 register also contains the error-free message
+                    counter. The flags and the counter are cleared by writing ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’
+                    to the register.</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

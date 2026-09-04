@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10.4.3 Erasing the DFM — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-998C029C-2664-4203-BE19-1769C1A42CD5.html"/>
+<link rel="next" href="GUID-37577268-B29A-4184-9D8F-A5DF2A66B6C6.html"/>
+<link rel="up" href="GUID-A8FDF8F5-E9BA-4056-855B-FCA3C7018F18.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html">10 NVM - Nonvolatile Memory Module</a></li><li><a href="GUID-A8FDF8F5-E9BA-4056-855B-FCA3C7018F18.html">10.4 Data Flash Memory (DFM)</a></li><li>10.4.3 Erasing the DFM</li></ol>
+  <div class="sib"><span>← <a href="GUID-998C029C-2664-4203-BE19-1769C1A42CD5.html" rel="prev">Writing to DFM</a></span><span><a href="GUID-37577268-B29A-4184-9D8F-A5DF2A66B6C6.html" rel="next">DFM Write Verify</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-F0F2E6B1-2F84-4F31-B665-A731E9DB8EE2__GUID-F2075055-6496-4B7D-83BE-C14C7767D5CA" style="">10.4.3 Erasing the DFM</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <section class="- topic/section section" id="GUID-F0F2E6B1-2F84-4F31-B665-A731E9DB8EE2__GUID-5676409A-DABA-4D4C-ADCF-5CA0D911A00B" data-ofbid="GUID-F0F2E6B1-2F84-4F31-B665-A731E9DB8EE2__GUID-5676409A-DABA-4D4C-ADCF-5CA0D911A00B">
+         <p class="- topic/p p" id="GUID-F0F2E6B1-2F84-4F31-B665-A731E9DB8EE2__ID-42121-0000040E" data-ofbid="GUID-F0F2E6B1-2F84-4F31-B665-A731E9DB8EE2__ID-42121-0000040E">The DFM does not support the Page Erase operation. However, the
+            DFM can be erased by writing 0xFF to all locations in the memory that need to be erased.
+            The simple code example bellow shows how to erase ‘n’ number of bytes in DFM. Refer to
+            the <strong class="+ topic/ph hi-d/b ph b">“Memory Organization”</strong> chapter for more details about the DFM size and valid
+            address locations.</p>
+      </section>
+      <div class="- topic/example example" id="GUID-F0F2E6B1-2F84-4F31-B665-A731E9DB8EE2__GUID-7ECD8321-5CEB-49E8-A993-1EDA2F6A363D" data-ofbid="GUID-F0F2E6B1-2F84-4F31-B665-A731E9DB8EE2__GUID-7ECD8321-5CEB-49E8-A993-1EDA2F6A363D"><h2 class="- topic/title title sectiontitle">Erasing n Bytes of Data Flash Memory
+            in C</h2>
+         
+         <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><em class="hl-comment">// Code sequence to erase n bytes of DFM</em>
+<em class="hl-comment">// DFM target start address is specified by PAGE_ADDR</em>
+<em class="hl-comment">// Number of bytes to be eares is specified by n</em>
+
+<em class="hl-comment">// Save interrupt enable bit value</em>
+uint8_t GIEBitValue = INTCON0bits.GIE;
+
+<em class="hl-comment">// Load NVMADR with the target address of the byte</em>
+NVMADR = DFM_ADDR;              
+NVMDATL = <span class="hl-number">0xFF</span>;                    <em class="hl-comment">// Load NVMDATL with 0xFF</em>
+NVMCON1bits.CMD = <span class="hl-number">0x04</span>;            <em class="hl-comment">// Set the write and post increment command</em>
+INTCON0bits.GIE = <span class="hl-number">0</span>;               <em class="hl-comment">// Disable interrupts</em>
+
+<strong class="hl-keyword">for</strong> (uint8_t i = <span class="hl-number">0</span>; i &lt; n; i++}(
+        NVMLOCK = <span class="hl-number">0x55</span>;
+        NVMLOCK = <span class="hl-number">0xAA</span>;
+        NVMCON0bits.GO = <span class="hl-number">1</span>;
+}
+
+<em class="hl-comment">// Verify byte erase operation success and call the recovery function if needed</em>
+<strong class="hl-keyword">if</strong> (NVMCON1bits.WRERR){            
+   ERASE_FAULT_RECOVERY();
+}
+
+INTCON0bits.GIE = GIEBitValue;     <em class="hl-comment">// Restore interrupt enable bit value</em>
+NVMCON1bits.CMD = <span class="hl-number">0</span>;               <em class="hl-comment">// Disable writes to memory</em></pre>
+      </div>
+   </div>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.12.1 Transmit Checksum Method — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-CF86A33F-3619-4700-9C22-AB4609BA462F.html"/>
+<link rel="next" href="GUID-051AA398-00F4-481C-8760-C91CD51B3D48.html"/>
+<link rel="up" href="GUID-CF86A33F-3619-4700-9C22-AB4609BA462F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-CF86A33F-3619-4700-9C22-AB4609BA462F.html">35.12 Checksum (Full-Featured UARTs Only)</a></li><li>35.12.1 Transmit Checksum Method</li></ol>
+  <div class="sib"><span>← <a href="GUID-CF86A33F-3619-4700-9C22-AB4609BA462F.html" rel="prev">Checksum (Full-Featured UARTs Only)</a></span><span><a href="GUID-051AA398-00F4-481C-8760-C91CD51B3D48.html" rel="next">Receive Checksum Method</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-84EB6CB2-BA93-4247-A626-3136023AEF0F__GUID-6A1A8DE8-9B9F-47B0-AEF1-D21E773722F3" style="">35.12.1 Transmit Checksum Method</h1>
+<div class="- topic/body body">
+        <ol class="- topic/ol ol" id="GUID-84EB6CB2-BA93-4247-A626-3136023AEF0F__OL_TPK_CF2_DBB" data-ofbid="GUID-84EB6CB2-BA93-4247-A626-3136023AEF0F__OL_TPK_CF2_DBB">
+            <li class="- topic/li li" id="GUID-84EB6CB2-BA93-4247-A626-3136023AEF0F__GUID-CADCCF82-7F6E-474B-B933-023292DBFADA" data-ofbid="GUID-84EB6CB2-BA93-4247-A626-3136023AEF0F__GUID-CADCCF82-7F6E-474B-B933-023292DBFADA">Clear the UxTXCHK register.</li>
+            <li class="- topic/li li" id="GUID-84EB6CB2-BA93-4247-A626-3136023AEF0F__GUID-D0DB7622-0350-4826-BC1D-00193399C5DB" data-ofbid="GUID-84EB6CB2-BA93-4247-A626-3136023AEF0F__GUID-D0DB7622-0350-4826-BC1D-00193399C5DB">Set the C0EN bit.</li>
+            <li class="- topic/li li" id="GUID-84EB6CB2-BA93-4247-A626-3136023AEF0F__GUID-322831F2-0865-4199-9B1B-0168CB7AAF03" data-ofbid="GUID-84EB6CB2-BA93-4247-A626-3136023AEF0F__GUID-322831F2-0865-4199-9B1B-0168CB7AAF03">Send all bytes of the transaction output.</li>
+            <li class="- topic/li li" id="GUID-84EB6CB2-BA93-4247-A626-3136023AEF0F__GUID-AADDD1D5-F828-4D10-9BBA-FB3532968B14" data-ofbid="GUID-84EB6CB2-BA93-4247-A626-3136023AEF0F__GUID-AADDD1D5-F828-4D10-9BBA-FB3532968B14">Invert UxTXCHK and send the result as the last byte of the transaction.</li>
+        </ol>
+    </div>
+
+</body>
+</html>

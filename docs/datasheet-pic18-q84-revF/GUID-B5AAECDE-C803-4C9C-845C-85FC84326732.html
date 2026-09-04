@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>33.7 Operation in Sleep — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C0CDFEB7-4CB7-4608-B97F-86D14CC8A067.html"/>
+<link rel="next" href="GUID-44C01B04-D920-4206-8B99-6DB86D9177A7.html"/>
+<link rel="up" href="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574.html">33 NCO - Numerically Controlled Oscillator Module</a></li><li>33.7 Operation in Sleep</li></ol>
+  <div class="sib"><span>← <a href="GUID-C0CDFEB7-4CB7-4608-B97F-86D14CC8A067.html" rel="prev">Effects of a Reset</a></span><span><a href="GUID-44C01B04-D920-4206-8B99-6DB86D9177A7.html" rel="next">Register Definitions: NCO</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-B5AAECDE-C803-4C9C-845C-85FC84326732__GUID-0FDF7198-1424-4597-8C5F-A365FC9D168C" style="">33.7 Operation in Sleep</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The NCO module operates independently from the system clock and will continue
+            to run during Sleep, provided that the clock source selected remains active. </p>
+        <p class="- topic/p p">The HFINTOSC remains active during Sleep when the NCO module is enabled and
+            the HFINTOSC is selected as the clock source, regardless of the system clock source
+            selected. </p>
+        <p class="- topic/p p">In other words, if the HFINTOSC is simultaneously selected as the system
+            clock and the NCO clock source, when the NCO is enabled, the CPU will go Idle during
+            Sleep, but the NCO will continue to operate and the HFINTOSC will remain active. </p>
+        <p class="- topic/p p">With a clock running, it will have a direct effect on the Sleep mode
+            current.</p>
+    </div>
+
+</body>
+</html>

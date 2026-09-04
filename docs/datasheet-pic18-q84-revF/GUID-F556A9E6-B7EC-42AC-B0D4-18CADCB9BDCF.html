@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.3.2 DMA Addressing — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-FB6D36C8-894F-4165-8EC7-8EB7B1F2BA28.html"/>
+<link rel="next" href="GUID-64273735-637D-4DBB-BABD-CAFB33BA2BC3.html"/>
+<link rel="up" href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li><a href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html">16.3 DMA Interface</a></li><li>16.3.2 DMA Addressing</li></ol>
+  <div class="sib"><span>← <a href="GUID-FB6D36C8-894F-4165-8EC7-8EB7B1F2BA28.html" rel="prev">Special Function Registers with DMA Access only</a></span><span><a href="GUID-64273735-637D-4DBB-BABD-CAFB33BA2BC3.html" rel="next">DMA Message Size/Counters</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__GUID-FD1F279E-DCD6-48BD-84C1-29ACEC367AF9" style="">16.3.2 DMA Addressing</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The start addresses for the source read and destination write operations are
+            set using the DMAnSSA and DMAnDSA registers, respectively.</p>
+        <p class="- topic/p p">When the DMA message transfers are in progress, the DMAnSPTR and DMAnDPTR
+            registers contain the current Address Pointers for each source read and destination
+            write operation. These registers are modified after each transaction based on the
+            Address mode selection bits.</p>
+        <p class="- topic/p p">The <a class="- topic/xref xref" href="GUID-2A5BB90C-F4F7-4EDC-8B9F-71709DC67C52.html#BITFIELD_RCN_QS4_3GB" title="Source Address Mode Selection">SMODE</a> and <a class="- topic/xref xref" href="GUID-2A5BB90C-F4F7-4EDC-8B9F-71709DC67C52.html#GUID-1C79FAB1-2A96-4E11-9081-8E6B0B1B3A4E" title="Destination Address Mode Selection"><span><span>DMODE</span></span></a> bits determine the Address modes of operation by controlling how the
+            DMAnSPTR and DMAnDPTR registers are updated after every DMA data transaction (<a class="- topic/xref xref" href="#GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__FIG_G45_XSZ_RFB"><span>Figure 16-3</span></a>).</p>
+        <div class="- topic/p p">Each address can be separately configured to: <ul class="- topic/ul ul" id="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__UL_PVK_NRZ_RFB" data-ofbid="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__UL_PVK_NRZ_RFB">
+                <li class="- topic/li li" id="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__GUID-A68706FC-FF1C-4823-B447-6C926C2F9770" data-ofbid="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__GUID-A68706FC-FF1C-4823-B447-6C926C2F9770">Remain unchanged</li>
+                <li class="- topic/li li" id="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__GUID-A9C661B7-5089-424A-997C-4CE85D237C3E" data-ofbid="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__GUID-A9C661B7-5089-424A-997C-4CE85D237C3E">Increment by 1</li>
+                <li class="- topic/li li" id="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__GUID-0DC54E0C-1508-4C47-AFEF-E100D9D4DE83" data-ofbid="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__GUID-0DC54E0C-1508-4C47-AFEF-E100D9D4DE83">Decrement by 1</li>
+            </ul></div>
+        <figure class="- topic/fig fig fignone" id="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__FIG_G45_XSZ_RFB" data-ofbid="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__FIG_G45_XSZ_RFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 16-3. <span id="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__GUID-B5191CFA-A440-40A0-B2AC-8CE288237437" class="fig--title">DMA Pointers Block Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-E132A09A-5DA6-4EC9-B5AA-A6D349866830-high.pdf#toolbar=1" width="450" height="300.6783970707893"></iframe></span>
+        </figure>
+        <p class="- topic/p p">The DMA can initiate data transfers from the PFM, Data EEPROM or SFR/GPR
+            space. The <a class="- topic/xref xref" href="GUID-2A5BB90C-F4F7-4EDC-8B9F-71709DC67C52.html#GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C" title="Source Memory Region Selection"><span><span>SMR</span></span></a> bits are used to select the type of memory being
+            pointed to by the Source Address Pointer. The SMR bits are required because the PFM and
+            SFR/GPR spaces have overlapping addresses that do not allow the specified address to
+            uniquely define the memory location to be accessed.</p>
+        <div class="- topic/note note important note_important" id="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__GUID-C3EF66D3-FE5A-4717-871F-9455269A9F13" data-ofbid="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__GUID-C3EF66D3-FE5A-4717-871F-9455269A9F13"><span class="note__title">Important:</span> 
+            <ol class="- topic/ol ol" id="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__OL_Y2K_TLM_MGB" data-ofbid="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__OL_Y2K_TLM_MGB">
+                <li class="- topic/li li" id="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__GUID-330F8999-E97F-4A01-A77B-7B397A31E95A" data-ofbid="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__GUID-330F8999-E97F-4A01-A77B-7B397A31E95A">For proper memory read access to
+                    occur, the combination of address and space selection must be valid.</li>
+                <li class="- topic/li li" id="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__GUID-D3580430-A09C-420E-81B4-F0C266C789EE" data-ofbid="GUID-F556A9E6-B7EC-42AC-B0D4-18CADCB9BDCF__GUID-D3580430-A09C-420E-81B4-F0C266C789EE">The destination does not have
+                    space selection bits because it can only write to the SFR/GPR space.</li>
+            </ol>
+        </div>
+    </div>
+
+</body>
+</html>

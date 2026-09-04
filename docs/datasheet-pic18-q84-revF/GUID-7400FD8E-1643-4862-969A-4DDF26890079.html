@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.9.1.4 TEF Status Flags — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-35D426DF-66F6-4A60-A48C-23610F3D9F4D.html"/>
+<link rel="next" href="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE.html"/>
+<link rel="up" href="GUID-87C4DC21-0F0D-4EE4-9DF9-B98DA69BB81C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-18BE65DA-2E61-49D8-AAE7-AC56D4A9B739.html">38.9 FIFO Behavior</a></li><li><a href="GUID-87C4DC21-0F0D-4EE4-9DF9-B98DA69BB81C.html">38.9.1 FIFO Status Flags</a></li><li>38.9.1.4 TEF Status Flags</li></ol>
+  <div class="sib"><span>← <a href="GUID-35D426DF-66F6-4A60-A48C-23610F3D9F4D.html" rel="prev">TXQ Status Flags</a></span><span><a href="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE.html" rel="next">Transmit FIFO Behavior</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-7400FD8E-1643-4862-969A-4DDF26890079__GUID-3E1ABBEF-5767-4CD2-9C98-7F88753003BD" style="">38.9.1.4 TEF Status Flags</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p">There are four TEF status flags:<ul class="- topic/ul ul" id="GUID-7400FD8E-1643-4862-969A-4DDF26890079__UL_EG4_ZK4_P3B" data-ofbid="GUID-7400FD8E-1643-4862-969A-4DDF26890079__UL_EG4_ZK4_P3B">
+                <li class="- topic/li li" id="GUID-7400FD8E-1643-4862-969A-4DDF26890079__GUID-ECA65153-7D42-4771-99D2-20878C630A42" data-ofbid="GUID-7400FD8E-1643-4862-969A-4DDF26890079__GUID-ECA65153-7D42-4771-99D2-20878C630A42">TEFFIF: TEF Full Interrupt Flag; set when the TEF is full.</li>
+                <li class="- topic/li li" id="GUID-7400FD8E-1643-4862-969A-4DDF26890079__GUID-EA257DD2-E844-4839-9AFB-BD54D2A91382" data-ofbid="GUID-7400FD8E-1643-4862-969A-4DDF26890079__GUID-EA257DD2-E844-4839-9AFB-BD54D2A91382">TEFHIF: TEF Half Full Interrupt Flag; set when the TEF is at least half
+                    full.</li>
+                <li class="- topic/li li" id="GUID-7400FD8E-1643-4862-969A-4DDF26890079__GUID-92265325-5172-4D5B-BAF5-FD0ABC335613" data-ofbid="GUID-7400FD8E-1643-4862-969A-4DDF26890079__GUID-92265325-5172-4D5B-BAF5-FD0ABC335613">TEFNEIF: TEF Not Empty Interrupt Flag; set when there is at least one message in
+                    the TEF.</li>
+                <li class="- topic/li li" id="GUID-7400FD8E-1643-4862-969A-4DDF26890079__GUID-1BF7F316-4E69-4CB5-B58B-A78F6DEF2A91" data-ofbid="GUID-7400FD8E-1643-4862-969A-4DDF26890079__GUID-1BF7F316-4E69-4CB5-B58B-A78F6DEF2A91">TEFOVIF: TEF Overrun Interrupt Flag; set when an overflow has occurred.</li>
+            </ul></div>
+        <p class="- topic/p p">The status flags of the TEF are set when there are transmitted messages in the FIFO.
+            Before the first message is stored (after the TEF is reset), all status flags are
+            cleared. When the TEF is full, all flags are set.</p>
+    </div>
+
+</body>
+</html>

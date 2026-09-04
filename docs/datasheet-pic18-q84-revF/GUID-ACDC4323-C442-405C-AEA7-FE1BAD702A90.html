@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>25.4 Secondary Oscillator — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5A5BC88E-97E0-4BE5-8590-31610BFD43F5.html"/>
+<link rel="next" href="GUID-E4547B4A-7C30-4F81-9225-C27E393F85D0.html"/>
+<link rel="up" href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html">25 TMR1 - Timer1 Module with Gate Control</a></li><li>25.4 Secondary Oscillator</li></ol>
+  <div class="sib"><span>← <a href="GUID-5A5BC88E-97E0-4BE5-8590-31610BFD43F5.html" rel="prev">Timer1 Prescaler</a></span><span><a href="GUID-E4547B4A-7C30-4F81-9225-C27E393F85D0.html" rel="next">Timer1 Operation in Asynchronous Counter Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-ACDC4323-C442-405C-AEA7-FE1BAD702A90__GUID-1E970209-1339-409B-A8D7-917979FE158C" style="">25.4 Secondary Oscillator</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-ACDC4323-C442-405C-AEA7-FE1BAD702A90__ID-42141-00000C8B" data-ofbid="GUID-ACDC4323-C442-405C-AEA7-FE1BAD702A90__ID-42141-00000C8B">A secondary low-power 32.768 kHz oscillator circuit is built-in
+            between pins SOSCI (input) and SOSCO (amplifier output). This internal circuit is to be
+            used in conjunction with an external 32.768 kHz crystal. The secondary oscillator is not
+            only dedicated to Timer1; it can also be used by other modules.</p>
+        <p class="- topic/p p" id="GUID-ACDC4323-C442-405C-AEA7-FE1BAD702A90__ID-42141-00000C8D" data-ofbid="GUID-ACDC4323-C442-405C-AEA7-FE1BAD702A90__ID-42141-00000C8D">The oscillator circuit is enabled by setting the SOSCEN bit of the
+            OSCEN register. This can be used as one of the Timer1 clock sources selected with the
+                <a class="- topic/xref xref" href="GUID-94AF80CD-C533-40D3-ADAA-2B580D697C0E.html#ID-000000CC" title="Timer Clock Source Selection">CS</a> bits. The oscillator will continue to run during Sleep.</p>
+        <div class="- topic/note note important note_important" id="GUID-ACDC4323-C442-405C-AEA7-FE1BAD702A90__ID-42141-00000C95" data-ofbid="GUID-ACDC4323-C442-405C-AEA7-FE1BAD702A90__ID-42141-00000C95"><span class="note__title">Important:</span> The oscillator requires a start-up and
+            stabilization time before use. Thus, the SOSCEN bit of the OSCEN register must be set
+            and a suitable delay observed prior to enabling Timer1. A software check can be
+            performed to confirm if the secondary oscillator is enabled and ready to use. This is
+            done by polling the secondary oscillator ready Status bit. Refer to the <strong class="+ topic/ph hi-d/b ph b">“OSC -
+                Oscillator Module (With Fail-Safe Clock Monitor)”</strong> chapter for more
+            details.</div>
+    </div>
+
+</body>
+</html>

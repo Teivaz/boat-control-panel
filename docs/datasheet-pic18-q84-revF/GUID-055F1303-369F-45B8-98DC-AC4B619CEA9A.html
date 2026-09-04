@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.10.2 FIFO Reset — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-8CEFB3A3-546A-4ACB-81CE-EF38CC0E4C45.html"/>
+<link rel="next" href="GUID-05BB831A-75A1-40B1-8559-EA222777E0D2.html"/>
+<link rel="up" href="GUID-C75CCD6E-F156-44D3-B559-BDCBD6B2914E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-C75CCD6E-F156-44D3-B559-BDCBD6B2914E.html">35.10 Receive and Transmit Buffers</a></li><li>35.10.2 FIFO Reset</li></ol>
+  <div class="sib"><span>← <a href="GUID-8CEFB3A3-546A-4ACB-81CE-EF38CC0E4C45.html" rel="prev">FIFO Status</a></span><span><a href="GUID-05BB831A-75A1-40B1-8559-EA222777E0D2.html" rel="next">Flow Control</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-055F1303-369F-45B8-98DC-AC4B619CEA9A__GUID-BB051CF1-FF70-42BE-8A72-8AEA558704BC" style="">35.10.2 FIFO Reset</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">All modes support resetting the receive and transmit buffers.</p>
+        <p class="- topic/p p">The receive buffer is flushed and all unread data discarded when the <a class="- topic/xref xref" href="GUID-2A8CC206-1569-40FD-9221-4BB29D97CE3C.html#BITFIELD_OKF_Y3M_BBB" title="Receive Buffer Empty Status">RXBE</a> bit is written to ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span>’. Instead of using a
+                <code class="+ topic/ph pr-d/codeph ph codeph">BSF</code> instruction to set RXBE, the <code class="+ topic/ph pr-d/codeph ph codeph">MOVWF</code> instruction
+            with the <a class="- topic/xref xref" href="GUID-2A8CC206-1569-40FD-9221-4BB29D97CE3C.html#BITFIELD_K3M_SSL_BBB" title="Transmit Buffer Empty Status">TXBE</a> bit cleared will be used to avoid inadvertently clearing a
+            byte pending in the TSR when UxTXB is empty.</p>
+        <div class="- topic/p p">Data written to UxTXB when <a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_K3M_SSL_BBB" title="Transmit Enable Control(2)">TXEN</a> is low will be held in the Transmit Shift Register (TSR), then sent
+            when TXEN is set. The transmit buffer and inactive TSR are flushed by setting the TXBE
+            bit. Setting TXBE while a character is actively transmitting from the TSR will complete
+            the transmission without being flushed.</div>
+        <p class="- topic/p p">Clearing the <a class="- topic/xref xref" href="GUID-AFEE23AF-E917-46D3-BF17-879043534F4E.html#BITFIELD_MQF_ZNS_YY" title="Serial Port Enable"><span><span>ON</span></span></a> bit will discard all received data and transmit data pending in the
+            TSR and UxTXB.</p>
+    </div>
+
+</body>
+</html>

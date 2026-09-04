@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>40.2 Setup — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-584471F8-D262-4AED-83B3-1C5A01BFE8B6.html"/>
+<link rel="next" href="GUID-81DEED0A-B370-4496-A73F-8DEAD194C51E.html"/>
+<link rel="up" href="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-FFF8936E-7BCC-4210-9FDF-362C4FFB8A95.html">40 HLVD - High/Low-Voltage Detect</a></li><li>40.2 Setup</li></ol>
+  <div class="sib"><span>← <a href="GUID-584471F8-D262-4AED-83B3-1C5A01BFE8B6.html" rel="prev">Operation</a></span><span><a href="GUID-81DEED0A-B370-4496-A73F-8DEAD194C51E.html" rel="next">Current Consumption</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__GUID-6195E207-671D-466E-A0AE-63248D4CCFF8" style="">40.2 Setup</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-00000020" data-ofbid="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-00000020">To set up the HLVD module:</p>
+      <ol class="- topic/ol ol" id="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__GUID-3DD11C92-EAEA-4289-8716-5A9A79C36DA5" data-ofbid="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__GUID-3DD11C92-EAEA-4289-8716-5A9A79C36DA5">
+         <li class="- topic/li li" id="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-00000021" data-ofbid="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-00000021">Select the desired HLVD trip point by writing the value to the
+               <a class="- topic/xref xref" href="GUID-A1EAA8BD-E4DA-4400-8695-2AB3D6E5FB53.html#ID-00000005" title="High/Low-Voltage Detection Limit Selection"><span><span>SEL</span></span></a> bits.</li>
+         <li class="- topic/li li" id="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-00000023" data-ofbid="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-00000023">Depending on the application to detect high-voltage peaks or
+            low-voltage drops or both, set the <a class="- topic/xref xref" href="GUID-0B1DF746-9022-49B5-A088-565014A88929.html#ID-0000002E" title="HLVD Positive going (High-Voltage) Interrupt Enable"><span><span>INTH</span></span></a> or <a class="- topic/xref xref" href="GUID-0B1DF746-9022-49B5-A088-565014A88929.html#ID-00000035" title="HLVD Negative going (Low-Voltage) Interrupt Enable"><span><span>INTL</span></span></a> bit appropriately.</li>
+         <li class="- topic/li li" id="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-00000025" data-ofbid="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-00000025">Enable the HLVD module by setting the <a class="- topic/xref xref" href="GUID-0B1DF746-9022-49B5-A088-565014A88929.html#ID-00000019" title="High/Low-Voltage Detect Power Enable"><span><span>EN</span></span></a>
+            bit.</li>
+         <li class="- topic/li li" id="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-00000027" data-ofbid="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-00000027">Clear the HLVD Interrupt Flag (HLVDIF), which may have been set
+            from a previous interrupt.</li>
+         <li class="- topic/li li" id="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-00000029" data-ofbid="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-00000029">If interrupts are desired, enable the HLVD interrupt by setting
+            the HLVDIE and GIE bits.<p class="- topic/p p" id="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-0000002B" data-ofbid="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-0000002B">An interrupt will not be generated
+               until the <a class="- topic/xref xref" href="GUID-0B1DF746-9022-49B5-A088-565014A88929.html#ID-00000027" title="Band Gap Reference Voltages Stable Status Flag"><span><span>RDY</span></span></a> bit is set.</p><div class="- topic/note note important note_important" id="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-00000032" data-ofbid="GUID-6793E0A0-A11C-4DAD-A189-C56C70FA9DE9__ID-42124-00000032"><span class="note__title">Important:</span> Before changing any module settings (interrupts and tripping point), first disable
+               the module (<a class="- topic/xref xref" href="GUID-0B1DF746-9022-49B5-A088-565014A88929.html#ID-00000019" title="High/Low-Voltage Detect Power Enable"><span><span>EN</span></span></a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), make the changes and re-enable
+               the module. This prevents the generation of false HLVD events.</div></li>
+      </ol>
+   </div>
+
+</body>
+</html>

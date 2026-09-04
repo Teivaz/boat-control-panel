@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.5.8.1 Continuous Sampling Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B68D364C-3063-48D9-A9B1-6585E91E01B3.html"/>
+<link rel="next" href="GUID-D9791A02-9160-4988-B2CD-76CF73B2F3B0.html"/>
+<link rel="up" href="GUID-B68D364C-3063-48D9-A9B1-6585E91E01B3.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html">43.5 Computation Operation</a></li><li><a href="GUID-B68D364C-3063-48D9-A9B1-6585E91E01B3.html">43.5.8 Repetition and Sampling Options</a></li><li>43.5.8.1 Continuous Sampling Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-B68D364C-3063-48D9-A9B1-6585E91E01B3.html" rel="prev">Repetition and Sampling Options</a></span><span><a href="GUID-D9791A02-9160-4988-B2CD-76CF73B2F3B0.html" rel="next">Double Sample Conversion</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-1E28C159-7362-470B-81E7-355F2B01C339__GUID-5D5FF60B-BE68-43DE-BF25-800B60FE40D3" style="">43.5.8.1 Continuous Sampling Mode</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p" id="GUID-1E28C159-7362-470B-81E7-355F2B01C339__ID-42107-000005A3" data-ofbid="GUID-1E28C159-7362-470B-81E7-355F2B01C339__ID-42107-000005A3">Setting the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-0000000C" title="ADC Continuous Operation Enable"><span><span>CONT</span></span></a> bit automatically retriggers a new conversion cycle after updating the
+                <a class="- topic/xref xref" href="GUID-30FA2F95-1F03-4839-A4EC-7F5EDB3ADED5.html" title="ADACC">ADACC</a> register. That means the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000021" title="ADC Conversion Status(1,2)"><span><span>GO</span></span></a> bit remains set to generate automatic retriggering. If <a class="- topic/xref xref" href="GUID-C3D871FC-51E7-44E4-A754-55BAA4D71143.html#ID-00000070" title="ADC Stop-on-Interrupt"><span><span>SOI</span></span></a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, a threshold interrupt condition will clear the
+            GO bit and the conversion will stop.</div>
+    </div>
+
+</body>
+</html>

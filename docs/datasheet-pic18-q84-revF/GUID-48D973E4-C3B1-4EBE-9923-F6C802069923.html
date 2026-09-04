@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.2 Interrupt Control and Status Registers — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E.html"/>
+<link rel="next" href="GUID-62FC3E7B-300F-4961-9F3E-68300C0CBDBF.html"/>
+<link rel="up" href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li>11.2 Interrupt Control and Status Registers</li></ol>
+  <div class="sib"><span>← <a href="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E.html" rel="prev">Overview</a></span><span><a href="GUID-62FC3E7B-300F-4961-9F3E-68300C0CBDBF.html" rel="next">Interrupt Vector Table</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__GUID-62C71042-2B28-4750-B1BB-DA3795E17577" style="">11.2 Interrupt Control and Status
+        Registers</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The devices in this family implement the following registers for the
+            interrupt controller:</p>
+        <ul class="- topic/ul ul" id="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__UL_WGS_KC3_5FB" data-ofbid="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__UL_WGS_KC3_5FB">
+            <li class="- topic/li li" id="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__GUID-8E3ACEF7-47D6-4988-BE06-16652B56E4E5" data-ofbid="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__GUID-8E3ACEF7-47D6-4988-BE06-16652B56E4E5"><a class="- topic/xref xref" href="GUID-41BD135E-759C-4716-87B4-2E7DAA2590B1.html" title="INTCON0">INTCON0</a>, <a class="- topic/xref xref" href="GUID-687D1650-C0EA-4AEC-A2D1-BFE3163D4B1B.html" title="INTCON1">INTCON1</a> Control Registers</li>
+            <li class="- topic/li li" id="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__GUID-4557147A-9A66-4F55-B4BE-E24668B1CE57" data-ofbid="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__GUID-4557147A-9A66-4F55-B4BE-E24668B1CE57">PIRx - Peripheral Interrupt Status
+                Registers</li>
+            <li class="- topic/li li" id="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__GUID-5099AFDA-C006-4DA4-9163-747A8A858BA3" data-ofbid="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__GUID-5099AFDA-C006-4DA4-9163-747A8A858BA3">PIEx - Peripheral Interrupt Enable
+                Registers</li>
+            <li class="- topic/li li" id="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__GUID-00F41D8E-748A-444D-9E88-086F9D98F467" data-ofbid="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__GUID-00F41D8E-748A-444D-9E88-086F9D98F467">IPRx - Peripheral Interrupt Priority
+                Registers</li>
+            <li class="- topic/li li" id="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__GUID-6F5BFC11-206F-4A34-884B-B2D3A869AD5A" data-ofbid="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__GUID-6F5BFC11-206F-4A34-884B-B2D3A869AD5A"><a class="- topic/xref xref" href="GUID-68C0FDF3-7A26-4084-B1D8-A08C90901A11.html" title="IVTBASE">IVTBASE</a> Address Registers</li>
+            <li class="- topic/li li" id="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__GUID-665F2791-55B4-4959-AEA2-0324B682B888" data-ofbid="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923__GUID-665F2791-55B4-4959-AEA2-0324B682B888"><a class="- topic/xref xref" href="GUID-D0472972-D758-4150-A286-EC2482EF2FAB.html" title="IVTLOCK">IVTLOCK</a> Register</li>
+        </ul>
+        <p class="- topic/p p">Global interrupt control functions and external interrupts are controlled
+            from the INTCON0 register. The INTCON1 register contains the status flags for the
+            interrupt controller.</p>
+        <p class="- topic/p p">The PIRx registers contain all of the interrupt request flags. Each source
+            of interrupt has a Status bit, which is set by the respective peripherals or an external
+            signal, and is either cleared via software or automatically cleared by hardware upon
+            clearing of the interrupt condition, depending on the peripheral and bit.</p>
+        <p class="- topic/p p">The PIEx registers contain all of the interrupt enable bits. These control
+            bits are used to individually enable interrupts from the peripherals or external
+            signals.</p>
+        <p class="- topic/p p">The IPRx registers are used to set the interrupt priority level for each
+            source of interrupt. Each user interrupt source can be assigned to either a high or low
+            priority.</p>
+        <p class="- topic/p p">The IVTBASE register is user-programmable and is used to determine the start address of
+            the IVT and the IVTLOCK register is used to prevent any unintended writes to the IVTBASE
+            register.</p>
+        <p class="- topic/p p">There are two other Configuration bits that control the way the interrupt controller can
+            be configured: The MVECEN and the IVT1WAY bits.</p>
+        <p class="- topic/p p">The MVECEN bit determines whether the IVT is used to determine the interrupt priorities.
+            The IVT1WAY bit determines the number of times the IVTLOCKED bit can be cleared and set
+            after a device Reset. See the <a class="- topic/xref xref" href="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162.html">Interrupt Vector Table Address Calculation</a> section for
+            details.</p>
+    </div>
+
+</body>
+</html>

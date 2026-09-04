@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.11.1.1 Transmit Queue Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E84F6F7C-8A43-425D-BD4C-3BF6D52B7772.html"/>
+<link rel="next" href="GUID-3DF3B9E9-B11F-4509-BB4A-35A8872F26AB.html"/>
+<link rel="up" href="GUID-E84F6F7C-8A43-425D-BD4C-3BF6D52B7772.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197.html">38.11 Interrupts</a></li><li><a href="GUID-E84F6F7C-8A43-425D-BD4C-3BF6D52B7772.html">38.11.1 FIFO Individual Interrupts</a></li><li>38.11.1.1 Transmit Queue Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-E84F6F7C-8A43-425D-BD4C-3BF6D52B7772.html" rel="prev">FIFO Individual Interrupts</a></span><span><a href="GUID-3DF3B9E9-B11F-4509-BB4A-35A8872F26AB.html" rel="next">Receive FIFO Interrupts (RFIF)</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-30293095-7217-4D96-8878-291A36031E0B__GUID-2A3D8AB2-F24B-439F-9B73-F70E0C9F12A4" style="">38.11.1.1 Transmit Queue Interrupts</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">CxTXQCON contains the interrupt enable flags and CxTXQSTA contains the
+            interrupt flags for the TXQ.</p>
+        <div class="- topic/p p">The TXQ interrupt occurs when there is a change in the status of the TXQ.
+            There are two interrupt sources:<ul class="- topic/ul ul" id="GUID-30293095-7217-4D96-8878-291A36031E0B__UL_MK5_F2J_Q3B" data-ofbid="GUID-30293095-7217-4D96-8878-291A36031E0B__UL_MK5_F2J_Q3B">
+                <li class="- topic/li li" id="GUID-30293095-7217-4D96-8878-291A36031E0B__GUID-040D774F-E7BD-4F1B-BC80-1F282E728452" data-ofbid="GUID-30293095-7217-4D96-8878-291A36031E0B__GUID-040D774F-E7BD-4F1B-BC80-1F282E728452">TXQ Not Full Interrupt Flag (TXQNIF)</li>
+                <li class="- topic/li li" id="GUID-30293095-7217-4D96-8878-291A36031E0B__GUID-868FA8A5-C95C-4809-A44C-BE60697435EC" data-ofbid="GUID-30293095-7217-4D96-8878-291A36031E0B__GUID-868FA8A5-C95C-4809-A44C-BE60697435EC"> TXQ Empty Interrupt Flag (TXQEIF)</li>
+            </ul></div>
+        <p class="- topic/p p">Both interrupts can be enabled individually. The interrupts cannot be cleared by the
+            application; they will be cleared when the condition of the FIFO terminates.</p>
+        <p class="- topic/p p">Both interrupt sources are OR’d together and reflected in the TFIF0 flag
+            (CxTXIF[0]).</p>
+    </div>
+
+</body>
+</html>

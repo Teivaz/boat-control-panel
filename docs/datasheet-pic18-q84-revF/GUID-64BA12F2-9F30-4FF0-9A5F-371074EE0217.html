@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.5.9.3 Acquisition Control for CVD (ADPRE &gt; 0) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-26402BB5-21F5-4E3F-92CE-C0B83FD6FD5A.html"/>
+<link rel="next" href="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496.html"/>
+<link rel="up" href="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html">43.5 Computation Operation</a></li><li><a href="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4.html">43.5.9 Capacitive Voltage Divider (CVD) Features</a></li><li>43.5.9.3 Acquisition Control for CVD (ADPRE &gt; 0)</li></ol>
+  <div class="sib"><span>← <a href="GUID-26402BB5-21F5-4E3F-92CE-C0B83FD6FD5A.html" rel="prev">Precharge Control</a></span><span><a href="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496.html" rel="next">Guard Ring Outputs</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-64BA12F2-9F30-4FF0-9A5F-371074EE0217__GUID-B9BF9A4E-971E-45CF-A0EC-E46F25643604" style="">43.5.9.3 Acquisition Control for CVD (ADPRE &gt;
+            <code class="+ topic/ph pr-d/codeph ph codeph">0</code>)</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-64BA12F2-9F30-4FF0-9A5F-371074EE0217__ID-42107-000003ED" data-ofbid="GUID-64BA12F2-9F30-4FF0-9A5F-371074EE0217__ID-42107-000003ED">The acquisition stage allows time for the
+            voltage on the internal Sample-and-Hold capacitor to charge or discharge from the
+            selected analog channel. This acquisition time is controlled by the <a class="- topic/xref xref" href="GUID-9019A40D-315C-4781-9A92-C91B17B335B1.html" title="ADACQ">ADACQ</a> register. The acquisition stage begins when precharge stage ends.</p>
+        <p class="- topic/p p" id="GUID-64BA12F2-9F30-4FF0-9A5F-371074EE0217__ID-42107-000003F0" data-ofbid="GUID-64BA12F2-9F30-4FF0-9A5F-371074EE0217__ID-42107-000003F0">At the start of the acquisition stage, the port
+            pin logic of the selected analog channel is overridden to turn off the digital high/low
+            output drivers so they do not affect the final result of the charge averaging. Also, the
+            selected ADC channel is connected to C<sub class="+ topic/ph hi-d/sub ph sub">HOLD</sub>. This
+            allows charge averaging to proceed between the precharged channel and the C<sub class="+ topic/ph hi-d/sub ph sub">HOLD</sub> capacitor.</p>
+        <div class="- topic/note note important note_important" id="GUID-64BA12F2-9F30-4FF0-9A5F-371074EE0217__ID-42107-000003FA" data-ofbid="GUID-64BA12F2-9F30-4FF0-9A5F-371074EE0217__ID-42107-000003FA"><span class="note__title">Important:</span> When <a class="- topic/xref xref" href="GUID-DB7AC91C-B964-41FD-9F32-82FE0962180A.html" title="ADPRE">ADPRE</a> &gt; <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, setting <a class="- topic/xref xref" href="GUID-9019A40D-315C-4781-9A92-C91B17B335B1.html" title="ADACQ">ADACQ</a> to ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’ will set a
+            maximum acquisition time. When precharge is disabled, setting ADACQ to ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’ will disable hardware acquisition time
+            control.</div>
+    </div>
+
+</body>
+</html>

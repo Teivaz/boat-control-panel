@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.2.3 CSWHOLD — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BB1A8A69-FF43-4A25-9131-F1DA42CAAB18.html"/>
+<link rel="next" href="GUID-303128D4-96DB-4AB4-9068-7CD2A08AE796.html"/>
+<link rel="up" href="GUID-26C95464-A09C-4F40-954D-AACD69628A0E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-26C95464-A09C-4F40-954D-AACD69628A0E.html">12.2 Clock Switching</a></li><li>12.2.3 CSWHOLD</li></ol>
+  <div class="sib"><span>← <a href="GUID-BB1A8A69-FF43-4A25-9131-F1DA42CAAB18.html" rel="prev">COSC and CDIV Bits</a></span><span><a href="GUID-303128D4-96DB-4AB4-9068-7CD2A08AE796.html" rel="next">PLL Input Switch</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-62590B6D-4A64-4135-B351-CBBCFF83B793__GUID-48D10F28-46D7-46D0-96E4-C0132F2BB624" style="">12.2.3 CSWHOLD</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">When the system oscillator changes frequencies, peripherals using the system clock may be
+            affected. For example, if the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C module is actively using the system clock
+            as its Serial Clock (SCL) time base, changing the system clock frequency will change the
+            SCL frequency. The Clock Switch Hold (<a class="- topic/xref xref" href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html#GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE" title="Clock Switch Hold Control">CSWHOLD</a>) bit can be used to suspend a requested clock switch. In this
+            example, software can request a new clock source, use the CSWHOLD bit to suspend the
+            switch, wait for the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C bus to become Idle, then reconfigure the SCL
+            frequency based on the new clock source. Once the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C has been reconfigured,
+            software can use CSWHOLD to complete the clock switch without causing any issues with
+            the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C bus.</p>
+        <div class="- topic/p p">When <a class="- topic/xref xref" href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html#GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE" title="Clock Switch Hold Control">CSWHOLD</a> is set (CSWHOLD = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), a write to <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a> and/or <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GHR_WSL_YGB" title="New Divider Selection Request">NDIV</a> is accepted, but the clock switch is suspended and does not
+            automatically complete. While the switch is suspended, code execution continues using
+            the old (current) clock source. Module hardware will still enable the new oscillator
+            selection and set the <a class="- topic/xref xref" href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html#BITFIELD_QYH_QZH_ZGB" title="New Oscillator is Ready (read-only)(1)">NOSCR</a>
+            bit. Once the NOSCR bit is set, software will either:<ul class="- topic/ul ul" id="GUID-62590B6D-4A64-4135-B351-CBBCFF83B793__UL_O2P_NL2_YGB" data-ofbid="GUID-62590B6D-4A64-4135-B351-CBBCFF83B793__UL_O2P_NL2_YGB">
+                <li class="- topic/li li" id="GUID-62590B6D-4A64-4135-B351-CBBCFF83B793__GUID-DA04D2C0-D390-477A-9780-97DBFE99ADB8" data-ofbid="GUID-62590B6D-4A64-4135-B351-CBBCFF83B793__GUID-DA04D2C0-D390-477A-9780-97DBFE99ADB8">clear CSWHOLD so that the clock
+                    switch can complete, or</li>
+                <li class="- topic/li li" id="GUID-62590B6D-4A64-4135-B351-CBBCFF83B793__GUID-847B94BE-6AC6-4FD3-ABD8-F02BE01BA80B" data-ofbid="GUID-62590B6D-4A64-4135-B351-CBBCFF83B793__GUID-847B94BE-6AC6-4FD3-ABD8-F02BE01BA80B">copy the Current Oscillator
+                    Source Select (<a class="- topic/xref xref" href="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7.html#GUID-97A74ABE-A6FE-4387-88C8-D2D02745E246" title="Current Oscillator Source Select (read-only)(1)">COSC</a>) value into NOSC to abandon the clock switch.</li>
+            </ul></div>
+        <div class="- topic/p p">When <a class="- topic/xref xref" href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html#GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE" title="Clock Switch Hold Control">CSWHOLD</a> is clear (CSWHOLD = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the clock switch will occur
+            when the <a class="- topic/xref xref" href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html#BITFIELD_QYH_QZH_ZGB" title="New Oscillator is Ready (read-only)(1)">NOSCR</a>
+            bit is set. When NOSCR is set, the CSWIF is also set, and if CSWIE is set, the generated
+            interrupt will be serviced using the new oscillator.</div>
+    </div>
+
+</body>
+</html>

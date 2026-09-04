@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>25.11 CCP Special Event Trigger — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-980282E6-00F2-4822-8F7A-4380A8CD3403.html"/>
+<link rel="next" href="GUID-61DB4F63-C12B-4C60-8346-F80F8E08F869.html"/>
+<link rel="up" href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html">25 TMR1 - Timer1 Module with Gate Control</a></li><li>25.11 CCP Special Event Trigger</li></ol>
+  <div class="sib"><span>← <a href="GUID-980282E6-00F2-4822-8F7A-4380A8CD3403.html" rel="prev">CCP Capture/Compare Time Base</a></span><span><a href="GUID-61DB4F63-C12B-4C60-8346-F80F8E08F869.html" rel="next">Peripheral Module Disable</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-07D6C471-A95A-45CE-8201-5615A72A65A0__GUID-D5A58E4B-A15A-47C5-AE37-10839A92F97F" style="">25.11 CCP Special Event Trigger</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">When any of the CCPs are configured to trigger a special event, the trigger will clear
+            the TMRx register. This special event does not cause a Timer1 interrupt. The CCP module
+            may still be configured to generate a CCP interrupt. In this mode of operation, the
+            CCPRx register becomes the period register for Timer1. Timer1 must be synchronized and
+                F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4 must be selected as the clock source to utilize the Special Event
+            Trigger. Asynchronous operation of Timer1 can cause a Special Event Trigger to be
+            missed. In the event that a write to TMRxH or TMRxL coincides with a Special Event
+            Trigger from the CCP, the write will take precedence.</p>
+    </div>
+
+</body>
+</html>

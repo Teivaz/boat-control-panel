@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>14.12 Power Control (PCON0/PCON1) Registers — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7F8ECE9D-42A1-486A-BD12-AC9DB1FABF1F.html"/>
+<link rel="next" href="GUID-55C39281-E961-474D-B83E-86BB37D1FB65.html"/>
+<link rel="up" href="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F.html">14 Resets</a></li><li>14.12 Power Control (PCON0/PCON1) Registers</li></ol>
+  <div class="sib"><span>← <a href="GUID-7F8ECE9D-42A1-486A-BD12-AC9DB1FABF1F.html" rel="prev">Determining the Cause of a Reset</a></span><span><a href="GUID-55C39281-E961-474D-B83E-86BB37D1FB65.html" rel="next">Register Definitions: Power Control</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__GUID-937E4EF4-6FC2-437C-8390-CB6967730600" style="">14.12 Power Control (PCON0/PCON1)
+        Registers</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-0000039E" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-0000039E">The Power Control (<a class="- topic/xref xref" href="GUID-96AC33D5-0A2F-4CEF-BD33-7B4D9ED59493.html" title="PCON0">PCON0</a>/<a class="- topic/xref xref" href="GUID-CF2E33A7-A0A9-4E7D-A0DD-459DD614A9A4.html" title="PCON1">PCON1</a>) registers contain
+            flag bits to differentiate between the following Reset events:</p>
+        <ul class="- topic/ul ul" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__UL_BHT_NWJ_VGB" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__UL_BHT_NWJ_VGB">
+            <li class="- topic/li li" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-0000039F" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-0000039F">Brown-out Reset (<a class="- topic/xref xref" href="GUID-96AC33D5-0A2F-4CEF-BD33-7B4D9ED59493.html#ID-0000004B" title="Brown-out Reset Status"><span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003A1">BOR</span></a>)</li>
+            <li class="- topic/li li" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003A2" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003A2">Power-on Reset (<a class="- topic/xref xref" href="GUID-96AC33D5-0A2F-4CEF-BD33-7B4D9ED59493.html#ID-00000044" title="Power-on Reset Status"><span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003A4">POR</span></a>)</li>
+            <li class="- topic/li li" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003A5" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003A5">Reset Instruction Reset (<a class="- topic/xref xref" href="GUID-96AC33D5-0A2F-4CEF-BD33-7B4D9ED59493.html#ID-0000003D" title="RESET Instruction Flag"><span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003A7">RI</span></a>)</li>
+            <li class="- topic/li li" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003A8" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003A8"><span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003AA">MCLR</span> Reset
+                    (<a class="- topic/xref xref" href="GUID-96AC33D5-0A2F-4CEF-BD33-7B4D9ED59493.html#ID-00000036" title="MCLR Reset Flag"><span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003AB">RMCLR</span></a>)</li>
+            <li class="- topic/li li" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003AC" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003AC">Watchdog Timer Reset (<a class="- topic/xref xref" href="GUID-96AC33D5-0A2F-4CEF-BD33-7B4D9ED59493.html#ID-0000002F" title="WDT Reset Flag"><span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003AE">RWDT</span></a>)</li>
+            <li class="- topic/li li" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003AF" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003AF">Watchdog Window Violation (<a class="- topic/xref xref" href="GUID-96AC33D5-0A2F-4CEF-BD33-7B4D9ED59493.html#ID-00000028" title="Watchdog Window Violation Flag"><span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003B1">WDTWV</span></a>)</li>
+            <li class="- topic/li li" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003B2" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003B2">Stack Underflow Reset (<a class="- topic/xref xref" href="GUID-96AC33D5-0A2F-4CEF-BD33-7B4D9ED59493.html#ID-00000021" title="Stack Underflow Flag">STKUNF</a>)</li>
+            <li class="- topic/li li" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003B4" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003B4">Stack Overflow Reset (<a class="- topic/xref xref" href="GUID-96AC33D5-0A2F-4CEF-BD33-7B4D9ED59493.html#ID-0000001A" title="Stack Overflow Flag">STKOVF</a>)</li>
+            <li class="- topic/li li" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__GUID-ACEC744E-1482-42E4-9413-6EF880BBB319" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__GUID-ACEC744E-1482-42E4-9413-6EF880BBB319">Configuration Memory Reset (<a class="- topic/xref xref" href="GUID-CF2E33A7-A0A9-4E7D-A0DD-459DD614A9A4.html#BITFIELD_XGC_PHR_VGB" title="Configuration Memory Reset Flag"><span class="+ topic/ph sidscDomain-d/active-low ph active-low">RCM</span></a>)</li>
+            <li class="- topic/li li" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__GUID-DA658B00-D25F-465F-989B-5FB9F7AE0FC7" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__GUID-DA658B00-D25F-465F-989B-5FB9F7AE0FC7">Memory Violation Reset (<a class="- topic/xref xref" href="GUID-CF2E33A7-A0A9-4E7D-A0DD-459DD614A9A4.html#BITFIELD_UK3_PHR_VGB" title="Memory Violation Reset Flag"><span class="+ topic/ph sidscDomain-d/active-low ph active-low">MEMV</span></a>)</li>
+            <li class="- topic/li li" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__GUID-0359F7CB-B203-4997-84E6-6298F277B8F8" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__GUID-0359F7CB-B203-4997-84E6-6298F277B8F8">Main LDO Voltage Regulator Reset
+                    (<a class="- topic/xref xref" href="GUID-CF2E33A7-A0A9-4E7D-A0DD-459DD614A9A4.html#BITFIELD_VJ3_NGS_DBB" title="Main LDO Voltage Regulator Reset Flag"><span class="+ topic/ph sidscDomain-d/active-low ph active-low">RVREG</span></a>)</li>
+        </ul>
+        <p class="- topic/p p" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003B8" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003B8">Hardware will change the corresponding register bit or bits as a
+            result of the Reset event. Bits for other Reset events remain unchanged. See <a class="- topic/xref xref" href="GUID-7F8ECE9D-42A1-486A-BD12-AC9DB1FABF1F.html">Determining the Cause of a Reset</a> for more
+            details.</p>
+        <p class="- topic/p p" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003BA" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003BA">Software will reset the bit to the Inactive state after restart
+            (hardware will not reset the bit).</p>
+        <p class="- topic/p p" id="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003BB" data-ofbid="GUID-737412A1-7981-4422-8F60-FFD76D411440__ID-42138-000003BB">Software may also set any PCON0 bit to the Active state, so that
+            user code may be tested, but no Reset action will be generated.</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.5 SPI Operation in Sleep Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A303F2B6-8BBA-4702-B548-AFF957E0B12D.html"/>
+<link rel="next" href="GUID-3B049106-A068-4D06-BD06-17396A19D766.html"/>
+<link rel="up" href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li>36.5 SPI Operation in Sleep Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-A303F2B6-8BBA-4702-B548-AFF957E0B12D.html" rel="prev">Daisy-Chain Configuration</a></span><span><a href="GUID-3B049106-A068-4D06-BD06-17396A19D766.html" rel="next">SPI Interrupts</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-91B41471-A63D-47AD-82C5-71EE3D07157F__GUID-02721FA2-56AD-4E31-A006-F07F678D2A18" style="">36.5 SPI Operation in Sleep Mode</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The SPI Host mode will operate in Sleep, provided that the clock source selected by
+            SPIxCLK is active in Sleep mode. FIFOs will operate as they do when the part is awake.
+            When TXR = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the transmit FIFO will need to contain data for transfers
+            to take place in Sleep. All interrupts will still set the interrupt flags in Sleep, but
+            only enabled interrupts will wake the device from Sleep.</p>
+        <p class="- topic/p p">The SPI Client mode will operate in Sleep because the clock is provided by an external
+            host device. FIFOs will still operate,  interrupts will set interrupt flags, and enabled
+            interrupts will wake the device from Sleep.</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.1.2.3 LFINTOSC — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E5B524DC-26B1-4792-9E74-4B7C02CA5846.html"/>
+<link rel="next" href="GUID-C6E2BFC0-7FC1-4630-BA0C-7ED5D66E319D.html"/>
+<link rel="up" href="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A.html">12.1 Clock Source Types</a></li><li><a href="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7.html">12.1.2 Internal Clock Sources</a></li><li>12.1.2.3 LFINTOSC</li></ol>
+  <div class="sib"><span>← <a href="GUID-E5B524DC-26B1-4792-9E74-4B7C02CA5846.html" rel="prev">MFINTOSC</a></span><span><a href="GUID-C6E2BFC0-7FC1-4630-BA0C-7ED5D66E319D.html" rel="next">ADCRC</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__GUID-809AABC6-3A78-4596-B621-91327A5742B5" style="">12.1.2.3 LFINTOSC</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The Low-Frequency Internal Oscillator (LFINTOSC) is a factory-calibrated 31 kHz
+            internal clock source. </p>
+        <p class="- topic/p p">The LFINTOSC can be used as a system clock source and may be used by certain peripheral
+            modules as a clock source. Additionally, the LFINTOSC provides a time base for the
+            following:</p>
+        <ul class="- topic/ul ul" id="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__UL_Z2Y_ZWX_XGB" data-ofbid="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__UL_Z2Y_ZWX_XGB">
+            <li class="- topic/li li" id="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__GUID-3906B3B1-D65C-4488-8B0F-42498376175A" data-ofbid="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__GUID-3906B3B1-D65C-4488-8B0F-42498376175A">Power-up Timer (PWRT) </li>
+            <li class="- topic/li li" id="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__GUID-89BAB855-F5A8-471D-AC0C-AACF3A900F02" data-ofbid="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__GUID-89BAB855-F5A8-471D-AC0C-AACF3A900F02">Watchdog Timer (WDT)/Windowed Watchdog Timer (WWDT)</li>
+            <li class="- topic/li li" id="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__GUID-7C5EAE4C-7B26-4540-A610-D0ADFC7719A0" data-ofbid="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__GUID-7C5EAE4C-7B26-4540-A610-D0ADFC7719A0">Fail-Safe Clock Monitor (FSCM)</li>
+        </ul>
+        <div class="- topic/p p">The LFINTOSC is enabled through one of the following methods:<ul class="- topic/ul ul" id="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__UL_XLC_JYX_XGB" data-ofbid="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__UL_XLC_JYX_XGB">
+                <li class="- topic/li li" id="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__GUID-04584CFD-C3F0-4107-BD9F-15BA9530F8C4" data-ofbid="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__GUID-04584CFD-C3F0-4107-BD9F-15BA9530F8C4">Program the RSTOSC Configuration
+                    bits to select LFINTOSC</li>
+                <li class="- topic/li li" id="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__GUID-89207A11-96C0-47B9-92A2-222B533538FD" data-ofbid="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4__GUID-89207A11-96C0-47B9-92A2-222B533538FD">Write the <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a> bits to select LFINTOSC during run time</li>
+            </ul></div>
+</div>
+
+</body>
+</html>

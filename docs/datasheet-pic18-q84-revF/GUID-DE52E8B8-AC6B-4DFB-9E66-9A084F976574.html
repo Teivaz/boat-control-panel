@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>33 NCO - Numerically Controlled Oscillator Module — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B3637608-7E2A-4555-9968-54F3EDD4BF33.html"/>
+<link rel="next" href="GUID-BF999A68-24B9-4C97-B8FD-EDB8B60EB037.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>33 NCO - Numerically Controlled Oscillator Module</li></ol>
+  <div class="sib"><span>← <a href="GUID-B3637608-7E2A-4555-9968-54F3EDD4BF33.html" rel="prev">Register Summary - CWG</a></span><span><a href="GUID-BF999A68-24B9-4C97-B8FD-EDB8B60EB037.html" rel="next">NCO Operation</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-0233C58E-D25A-44EE-992D-97C0D1A267A5" style="">33 NCO - Numerically Controlled Oscillator
+        Module</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The Numerically Controlled Oscillator (NCO) module is a timer that uses
+            overflow from the addition of an increment value to divide the input frequency. The
+            advantage of the addition method over a simple counter driven timer is that the output
+            frequency resolution does not vary with the divider value. The NCO is most useful for
+            applications that require frequency accuracy and fine resolution at a fixed duty
+            cycle.</p>
+        <div class="- topic/p p">Features of the NCO include:<ul class="- topic/ul ul" id="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__UL_CBF_GFP_T1B" data-ofbid="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__UL_CBF_GFP_T1B">
+                <li class="- topic/li li" id="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-39BB382C-1EDD-427A-B38A-E3A3F5DC9792" data-ofbid="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-39BB382C-1EDD-427A-B38A-E3A3F5DC9792">20-Bit Increment Function</li>
+                <li class="- topic/li li" id="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-D582FA1E-68C0-4534-B118-5BAC7B0F110C" data-ofbid="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-D582FA1E-68C0-4534-B118-5BAC7B0F110C">Fixed Duty Cycle (FDC) mode</li>
+                <li class="- topic/li li" id="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-DFA255CE-6AF9-4950-87FB-FBF0D2335A51" data-ofbid="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-DFA255CE-6AF9-4950-87FB-FBF0D2335A51">Pulse Frequency (PF) mode</li>
+                <li class="- topic/li li" id="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-7D1ADF4D-51C1-45D7-9F55-ACFD3AA665ED" data-ofbid="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-7D1ADF4D-51C1-45D7-9F55-ACFD3AA665ED">Output Pulse-Width Control</li>
+                <li class="- topic/li li" id="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-C3A8C434-0C9E-4851-8A36-9E89BDD5AC89" data-ofbid="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-C3A8C434-0C9E-4851-8A36-9E89BDD5AC89">Multiple Clock Input Sources</li>
+                <li class="- topic/li li" id="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-5E113554-111E-4F4D-B74F-4D75C39F8D3C" data-ofbid="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-5E113554-111E-4F4D-B74F-4D75C39F8D3C">Output Polarity Control</li>
+                <li class="- topic/li li" id="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-4B954E6E-EA03-49E5-AAB8-552B64FB132D" data-ofbid="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-4B954E6E-EA03-49E5-AAB8-552B64FB132D">Interrupt Capability</li>
+            </ul></div>
+        <p class="- topic/p p">The following figure is a simplified block diagram of the NCO module.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__FIG_X1B_RFP_T1B" data-ofbid="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__FIG_X1B_RFP_T1B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 33-1. <span id="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574__GUID-D4564544-303A-43AA-B216-58C29143E4AE" class="fig--title">Numerically Controlled Oscillator
+                Module Simplified Block Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-45C7C066-55AE-459C-A067-95C93D8A58B2-high.pdf#toolbar=1" width="539.32" height="498.79"></iframe></span>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-BF999A68-24B9-4C97-B8FD-EDB8B60EB037.html">33.1 NCO Operation</a></li><li><a href="GUID-7AA8B1F3-F0B1-469F-941B-32ABE2B69C0F.html">33.2 Fixed Duty Cycle Mode</a></li><li><a href="GUID-71BADBA6-CB57-4288-8BE9-759D1D600927.html">33.3 Pulse Frequency Mode</a></li><li><a href="GUID-9CE9BCBC-0918-47BB-B3BF-0113FD19CFF8.html">33.4 Output Polarity Control</a></li><li><a href="GUID-9F7C6A35-1578-40CB-A524-B80D0D5D2C41.html">33.5 Interrupts</a></li><li><a href="GUID-C0CDFEB7-4CB7-4608-B97F-86D14CC8A067.html">33.6 Effects of a Reset</a></li><li><a href="GUID-B5AAECDE-C803-4C9C-845C-85FC84326732.html">33.7 Operation in Sleep</a></li><li><a href="GUID-44C01B04-D920-4206-8B99-6DB86D9177A7.html">33.8 Register Definitions: NCO</a></li><li><a href="GUID-2075A662-3FA1-4FD2-856E-27AA7E0359CE.html">33.9 Register Summary - NCO</a></li></ul>
+</nav>
+</body>
+</html>

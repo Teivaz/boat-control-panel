@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.1.4.2 Client Reception (10-Bit Addressing Mode) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-616050A8-1C5F-40B5-B95F-9D4F3F9EA326.html"/>
+<link rel="next" href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html"/>
+<link rel="up" href="GUID-0BB503DB-DB52-4D18-8BDA-4D4A04EBDE87.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC.html">37.4.1 I2C Client Mode Operation</a></li><li><a href="GUID-0BB503DB-DB52-4D18-8BDA-4D4A04EBDE87.html">37.4.1.4 Client Operation in 10-Bit Addressing Modes</a></li><li>37.4.1.4.2 Client Reception (10-Bit Addressing Mode)</li></ol>
+  <div class="sib"><span>← <a href="GUID-616050A8-1C5F-40B5-B95F-9D4F3F9EA326.html" rel="prev">Client Transmission (10-Bit Addressing Mode)</a></span><span><a href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html" rel="next">I2C Host Mode Operation</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-BF077791-DEAB-4095-947D-01EEE4814FE9" style="">37.4.1.4.2 Client Reception (10-Bit Addressing
+        Mode)</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The following section describes the sequence of events that occur when the module is
+            receiving data in 7-bit Addressing mode:</p>
+        <ol class="- topic/ol ol" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__OL_AFB_RFL_KGB" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__OL_AFB_RFL_KGB">
+            <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-43BCA373-F9DD-424E-9406-6C93D27AA15B" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-43BCA373-F9DD-424E-9406-6C93D27AA15B">The host issues a Start condition.
+                Once the Start is detected, client hardware sets the Start Condition Interrupt Flag
+                    (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_W3K_BQV_LGB" title="Start Condition Interrupt Flag(1)">SCIF</a>) bit. If the Start Condition Interrupt Enable (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_CFJ_MWV_LGB" title="Stop Condition Interrupt Enable(1)">SCIE</a>) bit is also set, the generic I2CxIF bit is also
+                set.</li>
+            <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-C98AE32E-304A-4038-AAE2-006604355BE3" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-C98AE32E-304A-4038-AAE2-006604355BE3">Host hardware transmits the address
+                high byte with the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit clear
+                    (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>).</li>
+            <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-427B86D2-E7F3-4370-A78A-59363BC9E217" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-427B86D2-E7F3-4370-A78A-59363BC9E217">The received high address byte is
+                compared to the values in the I2CxADR registers. If the client is configured in
+                10-bit Addressing mode (no masking), the received high address byte is compared to
+                the values in the <a class="- topic/xref xref" href="GUID-9467813D-E19F-44CB-ACF1-357C867EB439.html" title="I2CxADR1">I2CxADR1</a> and <a class="- topic/xref xref" href="GUID-5FB3E556-DEB9-4761-9345-4EC5A7B9E170.html" title="I2CxADR3">I2CxADR3</a>
+                registers. If the client is configured in 10-bit Addressing with Masking mode, the
+                received high address byte is compared to the masked value in the I2CxADR1
+                    register.<p class="- topic/p p">If a high address match occurs:</p><ul class="- topic/ul ul" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__UL_J5H_XFL_KGB" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__UL_J5H_XFL_KGB">
+                    <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-29CC7D04-6035-4C09-BE0D-6A9D731D794F" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-29CC7D04-6035-4C09-BE0D-6A9D731D794F">The
+                            R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit value is copied to the Read Information
+                            (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_VMJ_FSP_LGB" title="Read Information(1)">R</a>) bit by module hardware.</li>
+                    <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-9FCCC9AB-21FE-4069-B21D-B226634E34AB" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-9FCCC9AB-21FE-4069-B21D-B226634E34AB">The Data (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_MLJ_QSP_LGB" title="Data">D</a>) bit is cleared (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_MLJ_QSP_LGB" title="Data">D</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) by hardware, indicating the
+                        last received byte was an address.</li>
+                    <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-E0D1E547-5442-4CCE-8883-C671055E79B5" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-E0D1E547-5442-4CCE-8883-C671055E79B5">The Address Interrupt Flag
+                            (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_ONC_54V_LGB" title="Address Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1)">ADRIF</a>) bit is set (ADRIF = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). It
+                        is important to note that regardless of whether the Address Interrupt and
+                        Hold Enable (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_LFC_QSV_LGB" title="Address Interrupt and Hold Enable(1,4)">ADRIE</a>) bit is set, clock stretching does not occur
+                        when the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit is clear in 10-bit Addressing
+                        modes.</li>
+                    <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-6E5D5A6E-AF5B-4F20-ACE0-24755C55870C" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-6E5D5A6E-AF5B-4F20-ACE0-24755C55870C">The matching address is
+                        loaded into either the <a class="- topic/xref xref" href="GUID-51DC1914-5FC6-4DB6-849E-AC7B6E17D460.html" title="I2CxADB1">I2CxADB1</a> register or into the <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> register as determined by the Address Buffer Disable
+                            (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a>) bit. When ABD is clear (ABD =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the matching address is copied to I2CxADB1. When
+                        ABD is set (ABD = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the matching address is copied to
+                        I2CxRXB, which also sets the Receive Buffer Full Status (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a>) bit and the I2C Receive Interrupt Flag
+                        (I2CxRXIF) bit.</li>
+                </ul><p class="- topic/p p">If no address match occurs, the module remains Idle.</p></li>
+            <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-979256CD-DA64-43B2-843D-0781A35FE9EA" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-979256CD-DA64-43B2-843D-0781A35FE9EA">The host device transmits the 9th
+                clock pulse, and client hardware transfers the value of the <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_TCX_VCP_LGB" title="Acknowledge Data(1,2)">ACKDT</a> bit onto the SDA line. If there are pending errors,
+                such as a receive buffer overflow (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_H5T_P2P_LGB" title="Receive Overflow Status (used only when MODE = 0xx or MODE = 11x)(3)">RXO</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), client hardware generates a NACK
+                and the module goes Idle.</li>
+            <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-059C1B16-A382-462E-ADB9-E9973C1209FC" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-059C1B16-A382-462E-ADB9-E9973C1209FC">The host device transmits the low
+                address byte. If the client is configured in 10-bit Addressing mode (no masking),
+                the received low address byte is compared to the values in <a class="- topic/xref xref" href="GUID-B58F548D-6BF9-4193-BD8A-56D39F47B0F2.html" title="I2CxADR0">I2CxADR0</a>
+                and <a class="- topic/xref xref" href="GUID-9ECB3772-CBC7-4B06-BB3D-E72E9E5BF6A8.html" title="I2CxADR2">I2CxADR2</a>. In 10-bit Addressing with Masking mode, the received low
+                address byte is compared to the masked value of I2CxADR0.<p class="- topic/p p">If a match
+                    occurs:</p><ul class="- topic/ul ul" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__UL_IJ5_3GL_KGB" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__UL_IJ5_3GL_KGB">
+                    <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-FB394DE7-1340-4510-BC23-C6A1F518A4F9" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-FB394DE7-1340-4510-BC23-C6A1F518A4F9">The Client Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_GRY_CQP_LGB" title="Client Mode Active Status">SMA</a>) bit is set by module hardware.</li>
+                    <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-54BA5CB0-6A08-416F-8593-6BDE4FE2A712" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-54BA5CB0-6A08-416F-8593-6BDE4FE2A712"><a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_ONC_54V_LGB" title="Address Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1)">ADRIF</a> is set. If <a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_LFC_QSV_LGB" title="Address Interrupt and Hold Enable(1,4)">ADRIE</a> is set and the Clock Stretching Disable (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_KNG_JGP_LGB" title="Clock Stretching Disable (used only when MODE = 0xx or MODE = 11x)">CSD</a>) bit is clear, hardware sets the Client Clock Stretching
+                            (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a>) bit and the generic I2CxIF bit. This allows time for the
+                        client to read either <a class="- topic/xref xref" href="GUID-E7CC5B44-63E1-40F0-8F67-30D643607BC5.html">I2CxADB0</a> or
+                            <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> and selectively <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>/NACK based
+                        on the received address. When the client has finished processing the
+                        address, software must clear CSTR to resume operation.</li>
+                    <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-A0034E8D-E1FB-4AA6-A822-52A336472E57" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-A0034E8D-E1FB-4AA6-A822-52A336472E57">The matching received address
+                        is loaded into either the <a class="- topic/xref xref" href="GUID-E7CC5B44-63E1-40F0-8F67-30D643607BC5.html">I2CxADB0</a>
+                        register or into the <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> register
+                        as determined by the <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> bit. When ABD is clear (ABD = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the
+                        matching address is copied to I2CxADB0. When ABD is set (ABD =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the matching address is copied to I2CxRXB, which
+                        also sets the <a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a> and the I2CxRXIF bits. I2CxRXIF is a read-only bit and must
+                        be cleared by either reading I2CxRXB or by setting the Clear Buffer (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_OJT_2VP_LGB" title="Clear Buffer(3)">CLRBF</a>) bit (CLRBF = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>).</li>
+                </ul><p class="- topic/p p">If no match occurs, the module goes Idle.</p></li>
+            <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-0D1EAE0F-3FBF-43A2-BFE8-D1B49106EE5F" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-0D1EAE0F-3FBF-43A2-BFE8-D1B49106EE5F">The host device transmits the 9th
+                clock pulse, and client hardware transfers the value of the <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_TCX_VCP_LGB" title="Acknowledge Data(1,2)">ACKDT</a> bit onto the SDA line. If there are pending errors,
+                such as a receive buffer overflow (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_H5T_P2P_LGB" title="Receive Overflow Status (used only when MODE = 0xx or MODE = 11x)(3)">RXO</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), client hardware generates a NACK
+                and the module goes Idle.</li>
+            <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-0224D655-190D-4441-B377-FC2036B865DE" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-0224D655-190D-4441-B377-FC2036B865DE">After the 9th falling edge of SCL,
+                the Acknowledge Status Time Interrupt Flag (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_KCQ_HNV_LGB" title="Acknowledge Status Time Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1,2)">ACKTIF</a>) bit is set. If the Acknowledge Time Interrupt and
+                Hold Enable (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_VMW_1RV_LGB" title="Acknowledge Status Time Interrupt and Hold Enable(1,2)">ACKTIE</a>) bit is also set, the generic I2CxIF is set, and if
+                client hardware generated an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>, the <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a> bit is also set and the clock is stretched (when <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_KNG_JGP_LGB" title="Clock Stretching Disable (used only when MODE = 0xx or MODE = 11x)">CSD</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>). If a NACK was generated, the
+                    <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a> bit remains unchanged. Once completed, software must
+                clear CSTR and ACKTIF to release the clock and resume operation.</li>
+            <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-5A3A1711-D597-43C5-9149-4818E8D7E823" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-5A3A1711-D597-43C5-9149-4818E8D7E823">If client hardware generated a NACK,
+                host hardware generates a Stop condition, the Stop Condition Interrupt Flag (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_BLB_LPV_LGB" title="Stop Condition Interrupt Flag(1)">PCIF</a>) is set when client hardware detects the Stop
+                condition, and the client goes Idle. If an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span> was
+                generated, host hardware transmits the first seven bits of the 8-bit data byte.</li>
+            <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-B4CE9DE8-26C5-4E20-A889-957CFB53504A" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-B4CE9DE8-26C5-4E20-A889-957CFB53504A">If data remains in <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a>
+                    (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and I2CxRXIF =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) when the first seven bits of the new byte are received by the
+                shift register, <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a> is set, and if <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_KNG_JGP_LGB" title="Clock Stretching Disable (used only when MODE = 0xx or MODE = 11x)">CSD</a> is clear, the clock is stretched after the 7th falling
+                edge of SCL. This allows time for the client to read I2CxRXB, which clears <a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a> and I2CxRXIF, and prevents a receive buffer overflow.
+                Once I2CxRXB has been read, RXBF and I2CxRXIF are cleared, and hardware releases
+                SCL.</li>
+            <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-38FA7FB3-D5DD-4628-A293-9E6F8A9606BA" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-38FA7FB3-D5DD-4628-A293-9E6F8A9606BA">Host hardware transmits the 8th bit
+                of the current data byte into the client receive shift register. Client hardware
+                then transfers the complete byte into <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> on the 8th
+                falling edge of SCL and sets the following bits:<ul class="- topic/ul ul" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__UL_YPG_WGL_KGB" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__UL_YPG_WGL_KGB">
+                    <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-DA19A731-B508-4BB0-8EA4-F15D1B37245C" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-DA19A731-B508-4BB0-8EA4-F15D1B37245C">I2CxRXIF</li>
+                    <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-EE5F28B2-8442-4811-B92B-93D9B6E665E1" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-EE5F28B2-8442-4811-B92B-93D9B6E665E1">I2CxIF</li>
+                    <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-ED2F9A88-0C1A-4409-B41C-4DA33683E298" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-ED2F9A88-0C1A-4409-B41C-4DA33683E298">Data Write Interrupt Flag
+                            (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_ALR_G4V_LGB" title="Data Write Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1)">WRIF</a>) </li>
+                    <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-85F38FFA-51A2-4B1B-8A19-EE6BAE10FADC" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-85F38FFA-51A2-4B1B-8A19-EE6BAE10FADC">Data (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_MLJ_QSP_LGB" title="Data">D</a>)</li>
+                    <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-8779BA19-82AE-49B8-8083-2AD03F39C708" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-8779BA19-82AE-49B8-8083-2AD03F39C708"><a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a></li>
+                </ul><div class="- topic/p p"><a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> is decremented by one. If the Data Write Interrupt and Hold
+                    Enable (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_SDM_CSV_LGB" title="Data Write Interrupt and Hold Enable(1,3)">WRIE</a>) bit is set (WRIE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), hardware sets <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a> (when <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_KNG_JGP_LGB" title="Clock Stretching Disable (used only when MODE = 0xx or MODE = 11x)">CSD</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) and stretches the clock, allowing time for
+                    client software to read <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> and
+                    determine the state of the <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_TCX_VCP_LGB" title="Acknowledge Data(1,2)">ACKDT</a> bit that is transmitted back to the host. Once the client
+                    determines the Acknowledgement response, software clears CSTR to allow further
+                    communication.</div></li>
+            <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-EF1844D5-9371-4FEC-8886-16DEBBB7504E" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-EF1844D5-9371-4FEC-8886-16DEBBB7504E">Upon the 9th falling edge of SCL, the
+                    <a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_KCQ_HNV_LGB" title="Acknowledge Status Time Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1,2)">ACKTIF</a> bit is set. If <a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_VMW_1RV_LGB" title="Acknowledge Status Time Interrupt and Hold Enable(1,2)">ACKTIE</a> is also set, the generic I2CxIF is set, and if <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_KNG_JGP_LGB" title="Clock Stretching Disable (used only when MODE = 0xx or MODE = 11x)">CSD</a> is clear, client hardware sets <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a> and stretches the clock. This allows time for software
+                to read <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a>. Once complete, software must clear both CSTR and ACKTIF to
+                release the clock and continue communication.</li>
+            <li class="- topic/li li" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-CB77CDD0-4894-4ABF-93B9-212C3CF30834" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-CB77CDD0-4894-4ABF-93B9-212C3CF30834">Repeat Steps 8 – 11 until the host
+                has transmitted all the data (<a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) or until the host issues a Stop or Restart condition.</li>
+        </ol>
+        <figure class="- topic/fig fig fignone rotatepage" id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__FIG_MZN_W1M_KGB" data-ofbid="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__FIG_MZN_W1M_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-22. <span id="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF__GUID-7B484CF2-8A6C-43DF-B96E-9DEAA48A8AAB" class="fig--title">10-Bit Client Mode
+                Reception</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-BF926EEA-E9B1-40B4-B6D5-B9B5F8E0E334-high.pdf#toolbar=1" width="612" height="852"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

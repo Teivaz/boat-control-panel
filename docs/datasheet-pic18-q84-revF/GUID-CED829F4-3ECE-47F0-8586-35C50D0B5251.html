@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.3.3.7 Recommendations for Bit Time Configuration — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604.html"/>
+<link rel="next" href="GUID-742F7670-08C3-499C-950E-FBD8B7E97B88.html"/>
+<link rel="up" href="GUID-1D45D3A2-247B-4C23-ACD6-4131BDF1900C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html">38.3 Configuration</a></li><li><a href="GUID-1D45D3A2-247B-4C23-ACD6-4131BDF1900C.html">38.3.3 CAN FD Bit Time Configuration</a></li><li>38.3.3.7 Recommendations for Bit Time Configuration</li></ol>
+  <div class="sib"><span>← <a href="GUID-35D8B3F1-DBF7-4001-B864-0EDE147B3604.html" rel="prev">Oscillator Tolerance</a></span><span><a href="GUID-742F7670-08C3-499C-950E-FBD8B7E97B88.html" rel="next">Bit Time Configuration Example</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-4AEF169A-0E75-4DD3-9FB1-98609966D457" style="">38.3.3.7 Recommendations for Bit Time
+        Configuration</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The following recommendations need to be considered when configuring the bit time:</p>
+        <div class="- topic/p p">
+            <ul class="- topic/ul ul" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__UL_H4B_LLL_43B" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__UL_H4B_LLL_43B">
+                <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-FD5014CE-4635-41F1-9867-22F0A4933999" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-FD5014CE-4635-41F1-9867-22F0A4933999">Select the highest available CAN
+                    clock frequency:<ul class="- topic/ul ul" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__UL_YB2_MLL_43B" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__UL_YB2_MLL_43B">
+                        <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-946B19F3-7105-4451-8F02-B79DEC4C375E" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-946B19F3-7105-4451-8F02-B79DEC4C375E">Short TQ leads to high
+                            resolution to select the sample point.</li>
+                        <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-D1E3E006-1664-4309-AFD8-2CF989C6634E" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-D1E3E006-1664-4309-AFD8-2CF989C6634E">Use 20 MHz or 40 MHz for
+                            SYSCLK.</li>
+                    </ul></li>
+                <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-C8606BA4-2416-49B8-914B-2D88733745C6" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-C8606BA4-2416-49B8-914B-2D88733745C6">Select the lowest NBRP and
+                        DBRP:<ul class="- topic/ul ul" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__UL_J4G_PLL_43B" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__UL_J4G_PLL_43B">
+                        <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-423D7A5D-7319-4B78-9DBA-7F9E63104AE2" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-423D7A5D-7319-4B78-9DBA-7F9E63104AE2">Low BRP leads to short
+                            TQ.</li>
+                        <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-E404FACF-E1E5-4218-A070-16A148D4EC3C" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-E404FACF-E1E5-4218-A070-16A148D4EC3C">NSYNC and DSYNC will be
+                            short and reduce the quantization error.</li>
+                        <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-EB6A25DE-2212-46DA-91E2-7C24501E7E7C" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-EB6A25DE-2212-46DA-91E2-7C24501E7E7C">The receiving node can
+                            synchronize more accurately to the transmitting node.</li>
+                    </ul></li>
+                <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-F7B63698-802D-4C84-95A3-745256769124" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-F7B63698-802D-4C84-95A3-745256769124">Set NBRP equal to DBRP:<ul class="- topic/ul ul" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__UL_JRF_RLL_43B" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__UL_JRF_RLL_43B">
+                        <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-56FBFDBF-D370-47F3-A789-5DC0E8FF163B" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-56FBFDBF-D370-47F3-A789-5DC0E8FF163B">Identical TQ in both
+                            phases prevents quantization errors during Bit Rate Switching.</li>
+                    </ul></li>
+                <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-4788946A-559D-424D-BFCE-5A48003DC560" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-4788946A-559D-424D-BFCE-5A48003DC560">Use the same Nominal Sample Point
+                    (NSP) and Data Sample Point (DSP) in all nodes on the CAN FD network:<ul class="- topic/ul ul" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__UL_NNM_TLL_43B" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__UL_NNM_TLL_43B">
+                        <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-C03D6A2A-D93C-4867-9063-EDBC23531886" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-C03D6A2A-D93C-4867-9063-EDBC23531886">Different sample points
+                            in the different nodes lead to different lengths of the BRS and CRC
+                            delimiter bits and introduce phase errors when switching the bit
+                            rate.</li>
+                        <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-7B30B635-5C0B-49C5-87B8-60528820D2BE" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-7B30B635-5C0B-49C5-87B8-60528820D2BE">NSP need not be equal to
+                            the DSP.</li>
+                        <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-CFDACFDC-D4B3-48FF-95F2-759F499666EA" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-CFDACFDC-D4B3-48FF-95F2-759F499666EA">The SSP can be different
+                            in differing CAN FD nodes.</li>
+                    </ul></li>
+                <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-ADD56220-9DEE-445C-A650-F1BD25572FB2" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-ADD56220-9DEE-445C-A650-F1BD25572FB2">Select the largest possible NSJW
+                    and DSJW:<ul class="- topic/ul ul" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__UL_DVM_WLL_43B" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__UL_DVM_WLL_43B">
+                        <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-CE2BED07-F4C7-4993-93D1-F0E1107A003C" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-CE2BED07-F4C7-4993-93D1-F0E1107A003C">Maximizes the oscillator
+                            tolerance.</li>
+                        <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-DA87CFFA-DD7F-48EE-A1FD-B1EF28E628E3" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-DA87CFFA-DD7F-48EE-A1FD-B1EF28E628E3">Allows the receiving
+                            nodes to quickly resynchronize to the transmitting nodes.</li>
+                    </ul></li>
+                <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-030B81C0-6446-438C-93F3-9069667F1EFE" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-030B81C0-6446-438C-93F3-9069667F1EFE">Enable automatic TDC for DBR of 1
+                    Mbps and higher:<ul class="- topic/ul ul" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__UL_B1J_YLL_43B" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__UL_B1J_YLL_43B">
+                        <li class="- topic/li li" id="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-6D12ED7C-B855-4E34-99F7-14C780D1D8F5" data-ofbid="GUID-CED829F4-3ECE-47F0-8586-35C50D0B5251__GUID-6D12ED7C-B855-4E34-99F7-14C780D1D8F5">Automatic TDC measurement
+                            compensates for transmitter delay variations.</li>
+                    </ul></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

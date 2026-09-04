@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>33.2 Fixed Duty Cycle Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-8BA1A58B-BA4E-4991-BCB5-B9F3A8324306.html"/>
+<link rel="next" href="GUID-71BADBA6-CB57-4288-8BE9-759D1D600927.html"/>
+<link rel="up" href="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574.html">33 NCO - Numerically Controlled Oscillator Module</a></li><li>33.2 Fixed Duty Cycle Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-8BA1A58B-BA4E-4991-BCB5-B9F3A8324306.html" rel="prev">Increment Registers</a></span><span><a href="GUID-71BADBA6-CB57-4288-8BE9-759D1D600927.html" rel="next">Pulse Frequency Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-7AA8B1F3-F0B1-469F-941B-32ABE2B69C0F__GUID-3678342F-C67A-4C3E-8ED0-EB0ACE19B83A" style="">33.2 Fixed Duty Cycle Mode</h1>
+<div class="- topic/body concept/conbody body conbody">
+<p class="- topic/p p">In Fixed Duty Cycle (FDC) mode, every time the accumulator overflows, the output is
+            toggled. This provides a 50% duty cycle at half the F<sub class="+ topic/ph hi-d/sub ph sub">OVERFLOW</sub> frequency,
+            provided that the increment value remains constant. For more information, see the figure
+            below.</p>
+    <p class="- topic/p p">The FDC mode is selected by clearing the <a class="- topic/xref xref" href="GUID-D920EAEF-31A2-486C-8B11-A344DD40CD24.html#BITFIELD_F5X_HZD_G1B" title="NCO Pulse Frequency Mode">PFM</a> bit.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-7AA8B1F3-F0B1-469F-941B-32ABE2B69C0F__FIG_KHP_BY5_T1B" data-ofbid="GUID-7AA8B1F3-F0B1-469F-941B-32ABE2B69C0F__FIG_KHP_BY5_T1B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 33-2. <span id="GUID-7AA8B1F3-F0B1-469F-941B-32ABE2B69C0F__GUID-667CB1A0-719C-4CA5-8BA1-400B3D2D7B97" class="fig--title">FDC Output Mode Timing
+                    Diagram</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-750BCD42-2EB3-4217-82CD-35CE4D079FA7-high.pdf#toolbar=1" width="472.35" height="708.75"></iframe></span>
+            </figure>
+        </div>
+</div>
+
+</body>
+</html>

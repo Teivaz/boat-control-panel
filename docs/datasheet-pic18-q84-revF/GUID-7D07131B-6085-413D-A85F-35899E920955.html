@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.3.3.3 Transmitter Delay Compensation (TDC) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-07A72FEC-A3BF-4E8F-9780-FBEE206FCAFB.html"/>
+<link rel="next" href="GUID-B75BC11B-2AB7-4607-AFBE-8C848765ABD4.html"/>
+<link rel="up" href="GUID-1D45D3A2-247B-4C23-ACD6-4131BDF1900C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html">38.3 Configuration</a></li><li><a href="GUID-1D45D3A2-247B-4C23-ACD6-4131BDF1900C.html">38.3.3 CAN FD Bit Time Configuration</a></li><li>38.3.3.3 Transmitter Delay Compensation (TDC)</li></ol>
+  <div class="sib"><span>← <a href="GUID-07A72FEC-A3BF-4E8F-9780-FBEE206FCAFB.html" rel="prev">Propagation Delay</a></span><span><a href="GUID-B75BC11B-2AB7-4607-AFBE-8C848765ABD4.html" rel="next">Synchronization</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-7D07131B-6085-413D-A85F-35899E920955__GUID-86C2DCBF-552F-49F4-8F86-A786D3111B78" style="">38.3.3.3 Transmitter Delay Compensation (TDC)</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">During the data phase of a CAN FD transmission, only one node is transmitting; the others
+            are receiving. Therefore, the propagation delay does not limit the maximum data rate.
+            When transmitting via pin CxTX, the CAN FD Protocol Module receives the transmitted data
+            from its local CAN transceiver via pin CxRX. The received data are delayed by the CAN
+            transceiver’s loop delay. In case this delay is greater than 1 + DTSEG1, a bit error
+            will be detected.</p>
+        <p class="- topic/p p">To enable a data phase bit time that is shorter than the transceiver loop delay, the
+            Transmitter Delay Compensation (TDC) is implemented. Instead of sampling after DTSEG1, a
+            Secondary Sample Point (SSP) is calculated and used for sampling during the data phase
+            of a CAN FD message.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-7D07131B-6085-413D-A85F-35899E920955__FIG_DSY_FH1_P3B"><span>Figure 38-5</span></a> illustrates how the transceiver loop delay is measured
+            and <a class="- topic/xref xref" href="#GUID-7D07131B-6085-413D-A85F-35899E920955__EQUATION-FIGURE_NTC_RG1_P3B">Equation 1-10</a> shows how the SSP is calculated.</p>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-7D07131B-6085-413D-A85F-35899E920955__EQUATION-FIGURE_NTC_RG1_P3B" data-ofbid="GUID-7D07131B-6085-413D-A85F-35899E920955__EQUATION-FIGURE_NTC_RG1_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-10. <span id="GUID-7D07131B-6085-413D-A85F-35899E920955__GUID-C475A98C-88C2-446E-A219-99A2E82898C4" class="fig--title">Secondary Sample Point</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <mi mathvariant="italic">S</mi>
+                            <mi mathvariant="italic">S</mi>
+                            <mi mathvariant="italic">P</mi>
+                            <mo mathvariant="italic">=</mo>
+                            <mi mathvariant="italic">T</mi>
+                            <mi mathvariant="italic">D</mi>
+                            <mi mathvariant="italic">C</mi>
+                            <mi mathvariant="italic">V</mi>
+                            <mrow>
+                                <mo mathvariant="italic">[</mo>
+                                <mn mathvariant="italic">5</mn>
+                                <mo mathvariant="italic">:</mo>
+                                <mn mathvariant="italic">0</mn>
+                                <mo mathvariant="italic">]</mo>
+                                <mo mathvariant="italic">+</mo>
+                                <mi mathvariant="italic">T</mi>
+                                <mi mathvariant="italic">D</mi>
+                                <mi mathvariant="italic">C</mi>
+                                <mi mathvariant="italic">O</mi>
+                                <mrow>
+                                    <mo mathvariant="italic">[</mo>
+                                    <mn mathvariant="italic">6</mn>
+                                    <mo mathvariant="italic">:</mo>
+                                    <mn mathvariant="italic">0</mn>
+                                    <mo mathvariant="italic">]</mo>
+                                </mrow>
+                            </mrow>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-7D07131B-6085-413D-A85F-35899E920955__FIG_DSY_FH1_P3B" data-ofbid="GUID-7D07131B-6085-413D-A85F-35899E920955__FIG_DSY_FH1_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-5. <span id="GUID-7D07131B-6085-413D-A85F-35899E920955__GUID-6AC7AA6F-B349-4BDB-AFE5-95C8F0B92019" class="fig--title">Measurement of Transceiver Delay (TDCV)</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-7D07131B-6085-413D-A85F-35899E920955__IMAGE_ESY_FH1_P3B" src="GUID-68798383-C403-4165-8FF2-53F31143A32B-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

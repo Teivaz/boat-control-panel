@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.15 Clock Accuracy with Asynchronous Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3E039E51-4150-4536-A978-B579498D3C35.html"/>
+<link rel="next" href="GUID-5D554793-676E-4F0B-8022-67C65136118D.html"/>
+<link rel="up" href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li>35.15 Clock Accuracy with Asynchronous Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-3E039E51-4150-4536-A978-B579498D3C35.html" rel="prev">RX/TX Activity Time-Out</a></span><span><a href="GUID-5D554793-676E-4F0B-8022-67C65136118D.html" rel="next">UART Baud Rate Generator</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-5826C264-AE14-4D81-AFD3-5BB426EF3A71__GUID-92F113B3-F001-40EE-9872-BBA981999B50" style="">35.15 Clock Accuracy with Asynchronous
+        Operation</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The factory calibrates the internal oscillator block output (INTOSC). However, the INTOSC
+            frequency may drift as V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> or temperature changes, which directly affects the
+            asynchronous baud rate. Two methods may be used to adjust the baud rate clock, but both
+            require a reference clock source of some kind.</p>
+        <p class="- topic/p p">The first (preferred) method uses the OSCTUNE register to adjust the INTOSC output.
+            Adjusting the value of the OSCTUNE register allows for fine resolution changes to the
+            system clock source. See the <strong class="+ topic/ph hi-d/b ph b">“HFINTOSC Frequency Tuning”</strong> section for more
+            information.</p>
+        <p class="- topic/p p">The other method adjusts the value of the Baud Rate Generator. This can be done
+            automatically with the Auto-Baud Detect feature (see the <a class="- topic/xref xref" href="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B.html#GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B">Auto-Baud Detect</a> section). There may not be fine enough
+            resolution when adjusting the Baud Rate Generator to compensate for a gradual change of
+            the peripheral clock frequency.</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.16.2 Auto-Baud Overflow — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B.html"/>
+<link rel="next" href="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907.html"/>
+<link rel="up" href="GUID-5D554793-676E-4F0B-8022-67C65136118D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-5D554793-676E-4F0B-8022-67C65136118D.html">35.16 UART Baud Rate Generator</a></li><li>35.16.2 Auto-Baud Overflow</li></ol>
+  <div class="sib"><span>← <a href="GUID-A87FEB88-A5FB-4801-8589-4B6A2D176B7B.html" rel="prev">Auto-Baud Detect</a></span><span><a href="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907.html" rel="next">Auto Wake-on-Break</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-9CEC6C92-D5A5-4F5F-9852-B7DC8DA60801__GUID-1967671D-88CD-48C5-B9B0-F8CC563725F2" style="">35.16.2 Auto-Baud Overflow</h1>
+<div class="- topic/body body">
+<div class="- topic/p p">During the course of automatic baud detection, the <a class="- topic/xref xref" href="GUID-0335D11B-CDF0-4C1B-B750-F220FDA16575.html#BITFIELD_K3M_SSL_BBB" title="Auto-baud Detect Overflow Interrupt Flag"><span><span>ABDOVF</span></span></a> bit will be set if the baud rate counter overflows before the fifth falling edge is
+            detected on the RX pin. The ABDOVF bit indicates that the counter has exceeded the
+            maximum count that can fit in the 16 bits of the UxBRG register pair. After the ABDOVF
+            bit has been set, the state machine continues to search until the fifth falling edge is
+            detected on the RX pin. Upon detecting the fifth falling RX edge, the hardware will set
+            the ABDIF Interrupt flag and clear the ABDEN bit. The UxBRG register values retain their
+            previous value. The <a class="- topic/xref xref" href="GUID-6FE1EBC7-3CDD-4B04-B97B-84C683051951.html#BITFIELD_XWQ_NRL_BBB" title="Auto-Baud Detect Interrupt"><span><span>ABDIF</span></span></a> flag and ABDOVF flag can be cleared by software directly. To generate an interrupt on
+            an Auto-Baud Overflow condition, all the following bits must be set:<ul class="- topic/ul ul" id="GUID-9CEC6C92-D5A5-4F5F-9852-B7DC8DA60801__UL_RKX_5DF_DBB" data-ofbid="GUID-9CEC6C92-D5A5-4F5F-9852-B7DC8DA60801__UL_RKX_5DF_DBB">
+                <li class="- topic/li li" id="GUID-9CEC6C92-D5A5-4F5F-9852-B7DC8DA60801__GUID-E5718AC9-D9DE-4F30-BECF-9CF31BAEBE0D" data-ofbid="GUID-9CEC6C92-D5A5-4F5F-9852-B7DC8DA60801__GUID-E5718AC9-D9DE-4F30-BECF-9CF31BAEBE0D"><a class="- topic/xref xref" href="GUID-BCAA4B97-CF3B-483A-B40D-EFFFD716B63A.html#BITFIELD_K3M_SSL_BBB" title="Auto-baud Detect Overflow Interrupt Enable"><span><span>ABDOVE</span></span></a> bit</li>
+                <li class="- topic/li li" id="GUID-9CEC6C92-D5A5-4F5F-9852-B7DC8DA60801__GUID-659C05A5-BAB8-4855-BA73-9EB283B77FCA" data-ofbid="GUID-9CEC6C92-D5A5-4F5F-9852-B7DC8DA60801__GUID-659C05A5-BAB8-4855-BA73-9EB283B77FCA">UxEIE bit in the PIEx
+                    register</li>
+                <li class="- topic/li li" id="GUID-9CEC6C92-D5A5-4F5F-9852-B7DC8DA60801__GUID-51F73B65-F4BF-47F2-B1D0-AF419AAD462B" data-ofbid="GUID-9CEC6C92-D5A5-4F5F-9852-B7DC8DA60801__GUID-51F73B65-F4BF-47F2-B1D0-AF419AAD462B">Global Interrupt Enable bits</li>
+            </ul></div>
+        <p class="- topic/p p">To terminate the auto-baud process before the ABDIF flag is set, clear the ABDEN bit,
+            then clear the ABDOVF bit.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.2.3 Asynchronous Address Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0.html"/>
+<link rel="next" href="GUID-DFA00415-00A4-46EA-B539-792FAE30BAA6.html"/>
+<link rel="up" href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html">35.2 UART Asynchronous Modes</a></li><li>35.2.3 Asynchronous Address Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0.html" rel="prev">Asynchronous Reception Setup</a></span><span><a href="GUID-DFA00415-00A4-46EA-B539-792FAE30BAA6.html" rel="next">Address Mode Transmit</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-4109B660-A595-4B90-A307-4B6B8579F69D__GUID-46221AE9-BF70-411D-A070-D040C27F4ABD" style="">35.2.3 Asynchronous Address Mode</h1><div class="- topic/body body"><p class="- topic/p p">A special Address Detection mode is available for use when multiple receivers share the same transmission line, as seen in RS-485 systems.</p><p class="- topic/p p">When Asynchronous Address mode is enabled, all data are transmitted and received as 9-bit characters. The 9th bit determines whether the character is address or data. When the 9th bit is set, the eight Least Significant bits are the address. When the 9th bit is clear, the Least Significant bits are data. In either case, the 9th bit is stored in PERIF when the byte is written to the receive FIFO. When PERIE is also set, the RXIF will be suppressed, thereby suspending DMA transfers allowing software to process the received address.</p><p class="- topic/p p">An address character will enable all receivers that match the address and disable all other receivers. Once a receiver is enabled, all non-address characters will be received until an address character that does not match is received.</p></div>
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-DFA00415-00A4-46EA-B539-792FAE30BAA6.html">35.2.3.1 Address Mode Transmit</a></li><li><a href="GUID-37ECB4FB-7023-4B10-A225-91AFF45CDCE5.html">35.2.3.2 Address Mode Receive</a></li></ul>
+</nav>
+</body>
+</html>

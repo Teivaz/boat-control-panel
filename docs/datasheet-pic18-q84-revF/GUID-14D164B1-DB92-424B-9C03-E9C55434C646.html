@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.4.3 ACT Update Disable — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-00A582EC-9ED4-4E06-BBB5-203B81402D8A.html"/>
+<link rel="next" href="GUID-BE0D23BC-1615-4D4D-B9DE-EB05419172B4.html"/>
+<link rel="up" href="GUID-E44C17FF-48E8-49CE-8652-63573CAB03BC.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-E44C17FF-48E8-49CE-8652-63573CAB03BC.html">12.4 Active Clock Tuning (ACT)</a></li><li>12.4.3 ACT Update Disable</li></ol>
+  <div class="sib"><span>← <a href="GUID-00A582EC-9ED4-4E06-BBB5-203B81402D8A.html" rel="prev">ACT Out-of-Range Status</a></span><span><a href="GUID-BE0D23BC-1615-4D4D-B9DE-EB05419172B4.html" rel="next">ACT Interrupts</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-14D164B1-DB92-424B-9C03-E9C55434C646__GUID-2A4E37CC-8623-42C7-8F54-FAF65D3C6036" style="">12.4.3 ACT Update Disable</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">When Active Clock Tuning is enabled, the <a class="- topic/xref xref" href="GUID-E9218AC7-E06A-403D-A3D6-54192CA94BCB.html" title="OSCTUNE">OSCTUNE</a> register is continuously updated every ACT clock cycle. The ACT
+            Update Disable (<a class="- topic/xref xref" href="GUID-BB1B1B0D-D1AE-465F-AA78-726C8A0D4DF6.html#BITFIELD_U4M_TPP_XGB" title="Active Clock Tuning Update Disable">ACTUD</a>) bit can be used to suspend updates to the OSCTUNE
+            register. When ACTUD is set (ACTUD = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), updates to OSCTUNE are
+            suspended, although the module continues to operate. The last value written to OSCTUNE
+            is used for tuning, and the <a class="- topic/xref xref" href="GUID-BB1B1B0D-D1AE-465F-AA78-726C8A0D4DF6.html#BITFIELD_GKL_3RP_XGB" title="Active Clock Tuning Lock Status">ACTLOCK</a> bit is continually updated for each ACT cycle. When
+            ACTUD is clear (ACTUD = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the module updates OSCTUNE register every
+            ACT cycle.</p>
+</div>
+
+</body>
+</html>

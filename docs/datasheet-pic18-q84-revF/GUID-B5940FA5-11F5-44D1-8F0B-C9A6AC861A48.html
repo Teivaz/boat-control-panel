@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>39.1.1 TAP — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E2B0B0B9-FED8-49DC-89BC-920E93849E12.html"/>
+<link rel="next" href="GUID-FD99C48F-12CF-48E7-81E9-3B876EECBB98.html"/>
+<link rel="up" href="GUID-E2B0B0B9-FED8-49DC-89BC-920E93849E12.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF.html">39 JTAG Boundary Scan</a></li><li><a href="GUID-E2B0B0B9-FED8-49DC-89BC-920E93849E12.html">39.1 Test Access Port (TAP) and TAP Controller</a></li><li>39.1.1 TAP</li></ol>
+  <div class="sib"><span>← <a href="GUID-E2B0B0B9-FED8-49DC-89BC-920E93849E12.html" rel="prev">Test Access Port (TAP) and TAP Controller</a></span><span><a href="GUID-FD99C48F-12CF-48E7-81E9-3B876EECBB98.html" rel="next">TAP Controller</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-B5940FA5-11F5-44D1-8F0B-C9A6AC861A48__GUID-39D07628-58EE-4403-B882-121B0E2BC094" style="">39.1.1 TAP</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The Test Access Port (TAP) on the <span class="- topic/ph ph">PIC18-Q84</span> is a
+            general-purpose port that provides test access to many built-in support functions and
+            test logic defined in IEEE Standard 1149.1. The TAP is disabled by programming the
+            JTAGEN bit in <span class="- topic/ph ph">CONFIG2 </span> (the TAP, by default, is enabled in the
+            bit’s unprogrammed state). While enabled, the designated I/O pins become dedicated TAP
+            pins. The PIC implements a 4-pin JTAG interface with these pins:<ul class="- topic/ul ul" id="GUID-B5940FA5-11F5-44D1-8F0B-C9A6AC861A48__UL_WKQ_VPQ_G3B" data-ofbid="GUID-B5940FA5-11F5-44D1-8F0B-C9A6AC861A48__UL_WKQ_VPQ_G3B">
+                <li class="- topic/li li" id="GUID-B5940FA5-11F5-44D1-8F0B-C9A6AC861A48__GUID-821FAEF0-6A86-4958-878E-5F985A864A2B" data-ofbid="GUID-B5940FA5-11F5-44D1-8F0B-C9A6AC861A48__GUID-821FAEF0-6A86-4958-878E-5F985A864A2B">TCK (Test Clock): Provides the
+                    clock for test logic.</li>
+                <li class="- topic/li li" id="GUID-B5940FA5-11F5-44D1-8F0B-C9A6AC861A48__GUID-7724D969-1229-4F62-8F0A-5A5AF77601F5" data-ofbid="GUID-B5940FA5-11F5-44D1-8F0B-C9A6AC861A48__GUID-7724D969-1229-4F62-8F0A-5A5AF77601F5">TMS (Test Mode Select): Input
+                    used by the TAP to control test operations.</li>
+                <li class="- topic/li li" id="GUID-B5940FA5-11F5-44D1-8F0B-C9A6AC861A48__GUID-766524ED-A4AC-4D1D-9623-354193C0A508" data-ofbid="GUID-B5940FA5-11F5-44D1-8F0B-C9A6AC861A48__GUID-766524ED-A4AC-4D1D-9623-354193C0A508">TDI (Test Data Input): Serial
+                    input for test instructions and data.</li>
+                <li class="- topic/li li" id="GUID-B5940FA5-11F5-44D1-8F0B-C9A6AC861A48__GUID-A6CE10AD-DE9B-4BA7-8E8E-3882CFA02B53" data-ofbid="GUID-B5940FA5-11F5-44D1-8F0B-C9A6AC861A48__GUID-A6CE10AD-DE9B-4BA7-8E8E-3882CFA02B53">TDO (Test Data Output): Serial
+                    output for test instructions and data.</li>
+            </ul></div>
+        <p class="- topic/p p">To minimize I/O loss due to JTAG, the optional TAP Reset (TRST) input pin, specified in
+            the standard, is not implemented on <span class="- topic/ph ph">PIC18-Q84</span>
+            devices. For convenience, a “soft” TAP Reset has been included in the TAP controller,
+            using the TMS and TCK pins. To force a port Reset, apply a logic high to the TMS pin for
+            at least five rising edges of TCK. Note that device Resets (including POR) do not
+            automatically result in a TAP Reset; this must be done by the external JTAG controller
+            using the soft TAP Reset.</p>
+    </div>
+
+</body>
+</html>

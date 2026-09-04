@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>41.1 Independent Gain Amplifiers — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0FC4DD39-E0A0-4361-ABD2-0634A67E719C.html"/>
+<link rel="next" href="GUID-EBC5BD4E-ED82-4ACA-92A8-9BE8CF6EBD42.html"/>
+<link rel="up" href="GUID-0FC4DD39-E0A0-4361-ABD2-0634A67E719C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-0FC4DD39-E0A0-4361-ABD2-0634A67E719C.html">41 FVR - Fixed Voltage Reference</a></li><li>41.1 Independent Gain Amplifiers</li></ol>
+  <div class="sib"><span>← <a href="GUID-0FC4DD39-E0A0-4361-ABD2-0634A67E719C.html" rel="prev">FVR - Fixed Voltage Reference</a></span><span><a href="GUID-EBC5BD4E-ED82-4ACA-92A8-9BE8CF6EBD42.html" rel="next">FVR Stabilization Period</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-81FF46FD-1518-4081-86EB-71096C58E4FB__GUID-F5C2A5C8-83AF-44EA-80FC-9AA679EF4D73" style="">41.1 Independent Gain Amplifiers</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-81FF46FD-1518-4081-86EB-71096C58E4FB__ID-42122-0000001A" data-ofbid="GUID-81FF46FD-1518-4081-86EB-71096C58E4FB__ID-42122-0000001A">The output of the FVR is routed through two independent programmable
+         gain amplifiers. Each amplifier can be programmed for a gain of 1x, 2x or 4x, to produce
+         the three possible voltage levels.</p>
+      <div class="- topic/p p" id="GUID-81FF46FD-1518-4081-86EB-71096C58E4FB__ID-42122-0000001B" data-ofbid="GUID-81FF46FD-1518-4081-86EB-71096C58E4FB__ID-42122-0000001B">The <a class="- topic/xref xref" href="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89.html#BITFIELD_IXW_DF4_KGB" title="FVR Buffer 1 Gain Selection(2)">ADFVR</a> bits
+         are used to enable and configure the gain amplifier settings for the reference supplied to
+         the ADC module. Refer to the <strong class="+ topic/ph hi-d/b ph b">“ADC - Analog-to-Digital Converter with Computation
+            Module”</strong> chapter for additional information.</div>
+      <div class="- topic/p p" id="GUID-81FF46FD-1518-4081-86EB-71096C58E4FB__ID-42122-0000001D" data-ofbid="GUID-81FF46FD-1518-4081-86EB-71096C58E4FB__ID-42122-0000001D">The <a class="- topic/xref xref" href="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89.html#JNV_RQ4_3GB" title="FVR Buffer 2 Gain Selection(1)">CDAFVR</a>
+         bits are used to enable and configure the gain amplifier settings for the reference
+         supplied to the DAC and comparator modules. Refer to the <strong class="+ topic/ph hi-d/b ph b">“DAC - Digital-to-Analog
+            Converter Module”</strong> and <strong class="+ topic/ph hi-d/b ph b">“CMP - Comparator Module”</strong> chapters for additional
+         information.</div>
+      <p class="- topic/p p">Refer to the figure below for the block diagram of the FVR module.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-81FF46FD-1518-4081-86EB-71096C58E4FB__FIG_O42_TXN_KGB" data-ofbid="GUID-81FF46FD-1518-4081-86EB-71096C58E4FB__FIG_O42_TXN_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 41-1. <span id="GUID-81FF46FD-1518-4081-86EB-71096C58E4FB__GUID-BAE6BE21-19C9-445B-9DFC-B5067A6E1EE0" class="fig--title">Fixed Voltage Reference Block
+            Diagram</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-9434CB11-79D9-42B3-9502-C513581D480D-high.pdf#toolbar=1" width="450" height="274.60455803545136"></iframe></span>
+      </figure>
+   </div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>5.2.3 Bit Fields — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-485FF055-4C40-49EF-9C61-5A52DF3337F5.html"/>
+<link rel="next" href="GUID-24D8AB76-6D0C-4D90-8886-8A9A7E0F8AC3.html"/>
+<link rel="up" href="GUID-87BF53B6-3719-402C-A05E-D49AFD5D2CE5.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-ADAB72FF-09FA-4F32-AAA9-DEB6E81A5531.html">5 Register and Bit Naming Conventions</a></li><li><a href="GUID-87BF53B6-3719-402C-A05E-D49AFD5D2CE5.html">5.2 Bit Names</a></li><li>5.2.3 Bit Fields</li></ol>
+  <div class="sib"><span>← <a href="GUID-485FF055-4C40-49EF-9C61-5A52DF3337F5.html" rel="prev">Long Bit Names</a></span><span><a href="GUID-24D8AB76-6D0C-4D90-8886-8A9A7E0F8AC3.html" rel="next">Register and Bit Naming Exceptions</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B__GUID-9A2F4111-0E1E-4C7A-AB3F-6349C04ACF14" style="">5.2.3 Bit Fields</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B__ID-42132-000003A3" data-ofbid="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B__ID-42132-000003A3">Bit fields are two or more adjacent bits in the same register. Bit
+         fields adhere only to the short bit naming convention. For example, the three Least
+         Significant bits of the ADCON2 register contain the ADC Operating Mode Selection bit. The
+         short name for this field is MD and the long name is ADMD. Bit field access is only
+         possible in C programs. The following example demonstrates a C program instruction for
+         setting the ADC to operate in Accumulate mode: </p>
+      <p class="- topic/p p"><code class="+ topic/ph pr-d/codeph ph codeph">ADCON2bits.MD = 0b001;</code></p>
+      <p class="- topic/p p" id="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B__ID-42132-000003A5" data-ofbid="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B__ID-42132-000003A5">Individual bits in a bit field can also be accessed with long and
+         short bit names. Each bit is the field name appended with the number of the bit position
+         within the field. For example, the Most Significant MODE bit has the short bit name MD2 and
+         the long bit name is ADMD2. The following two examples demonstrate assembly program
+         sequences for setting the ADC to operate in Accumulate mode:</p>
+      <div class="- topic/example example" id="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B__GUID-DEB190BB-CD1B-45C1-8AE9-B20D7D097FA1" data-ofbid="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B__GUID-DEB190BB-CD1B-45C1-8AE9-B20D7D097FA1">
+         <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c" id="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B__ID-42132-000003A7" data-ofbid="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B__ID-42132-000003A7">MOVLW  ~(<span class="hl-number">1</span>&lt;&lt;MD2 | <span class="hl-number">1</span>&lt;&lt;MD1)
+ANDWF  ADCON2,F
+MOVLW  <span class="hl-number">1</span>&lt;&lt;MD0
+IORWF  ADCON2,F</pre>
+      </div>
+      <div class="- topic/example example" id="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B__GUID-5A6F635D-D34B-4321-A52F-428F620B26A5" data-ofbid="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B__GUID-5A6F635D-D34B-4321-A52F-428F620B26A5">
+         <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c" id="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B__ID-42132-000003AC" data-ofbid="GUID-117B8A30-12D3-4F9A-8066-33D6D62F0E5B__ID-42132-000003AC">BCF    ADCON2,ADMD2
+BCF    ADCON2,ADMD1
+BSF    ADCON2,ADMD0</pre>
+      </div>
+   </div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.2.6.2 Idle Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-07020C83-41D0-4EB7-BECA-9ACC9D3E3B55.html"/>
+<link rel="next" href="GUID-1BC3F993-60B2-41BE-AE8A-766C770A1439.html"/>
+<link rel="up" href="GUID-F59E6799-E0FC-4E23-8D95-8C4E523375A6.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-84A4D028-1C85-48B1-A96D-5816A098641F.html">38.2 Modes of Operation</a></li><li><a href="GUID-F59E6799-E0FC-4E23-8D95-8C4E523375A6.html">38.2.6 Low-Power Modes</a></li><li>38.2.6.2 Idle Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-07020C83-41D0-4EB7-BECA-9ACC9D3E3B55.html" rel="prev">Sleep Mode</a></span><span><a href="GUID-1BC3F993-60B2-41BE-AE8A-766C770A1439.html" rel="next">Wake-Up From Sleep</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-97D5D04E-FFC6-44FA-A086-EF7BCC4CF4AC__GUID-11882E5B-A4CA-45D6-80D5-1EC7BA2C743D" style="">38.2.6.2 Idle Mode</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The system can be set to run in a Low-Power mode, called Idle mode. When the device is in
+            Idle mode, the CPU is disabled and only select peripherals are active. Based on the
+            configuration of the CAN SIDL bit, the module can either be in or out of Idle mode:</p>
+        <p class="- topic/p p">• If SIDL = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, the module continues operation in Idle mode. If the
+            module generates an interrupt while in Idle mode, the interrupt may generate a wake-up
+            event.</p>
+        <p class="- topic/p p">• If SIDL = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the module stops when the device is in Idle mode. The
+            module performs the same procedures when stopped in Idle mode as it does in Disable mode
+            and the same requirements apply.</p>
+        <p class="- topic/p p">The user needs to ensure that the module is not active when the CPU transitions to Idle
+            mode with SIDL = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>. To protect the CAN bus system from fatal
+            consequences due to violation of this rule, the module will drive the TX pin into the
+            Recessive state while stopped in Idle mode. If the CAN SIDL bit is set, the recommended
+            procedure is to bring the module into Disable mode before the device is placed in Idle
+            mode.</p>
+    </div>
+
+</body>
+</html>

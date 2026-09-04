@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.2.4 Steering Modes — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-769A811B-D65D-4581-BCCD-A79247CD3795.html"/>
+<link rel="next" href="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505.html"/>
+<link rel="up" href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li><a href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html">32.2 Operating Modes</a></li><li>32.2.4 Steering Modes</li></ol>
+  <div class="sib"><span>← <a href="GUID-769A811B-D65D-4581-BCCD-A79247CD3795.html" rel="prev">Dead-Band Delay in Full Bridge Mode</a></span><span><a href="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505.html" rel="next">Synchronous Steering Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289__GUID-03C75331-E85E-4143-BB24-FDC72ED97CEC" style="">32.2.4 Steering Modes</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289__ID-42115-000000E1" data-ofbid="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289__ID-42115-000000E1">In both Synchronous and Asynchronous Steering modes, the CWG Data
+            can be steered to any combination of four CWG outputs. A fixed value will be presented
+            on all the outputs not used for the PWM output. Each output has independent polarity,
+            steering, and shutdown options. Dead-band control is not used in either Steering
+            mode.</p>
+        <div class="- topic/p p" id="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289__ID-42115-000000E2" data-ofbid="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289__ID-42115-000000E2">For example, when <a class="- topic/xref xref" href="GUID-F964ED4F-48F4-4C57-891C-01456B83F23E.html#ID-0000006B" title="STR'y' Steering Enable(2)">STRA</a> = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289__ID-42115-000000E3">0</code>, the corresponding pin is
+            held at the level defined by <a class="- topic/xref xref" href="GUID-F964ED4F-48F4-4C57-891C-01456B83F23E.html#ID-00000057" title="Steering Data OVR'y'">OVRA</a>. When <a class="- topic/xref xref" href="GUID-F964ED4F-48F4-4C57-891C-01456B83F23E.html#ID-0000006B" title="STR'y' Steering Enable(2)">STRA</a> = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289__ID-42115-000000E6">1</code>, the pin is driven by the
+            CWG Data signal. The <a class="- topic/xref xref" href="GUID-2EA8EF2E-9030-424D-BE37-7E5A7AA6098D.html#ID-00000029" title="CWG Output ‘y’ Polarity">POLy</a> bits control the signal polarity only when STRy = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289__ID-42115-000000E9">1</code>.</div>
+        <p class="- topic/p p" id="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289__ID-42115-000000F5" data-ofbid="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289__ID-42115-000000F5">The CWG auto-shutdown operation also applies in Steering modes as
+            described in the <a class="- topic/xref xref" href="GUID-6197F686-AADF-4660-B041-D3FEDC67F6B4.html">Auto-Shutdown</a> section. An auto-shutdown event will only affect pins that
+            have STRy = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289__ID-42115-000000F7">1</code>.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289__ID-42115-0000011A" data-ofbid="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289__ID-42115-0000011A"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 32-9. <span id="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289__GUID-0753BE93-CA00-4077-AB81-76A1A1A0AA1D" class="fig--title">Simplified CWG Block Diagram
+                (Output Steering Modes)</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-C2A19286-DC49-4FEE-A7CE-90E74156E245-high.pdf#toolbar=1" width="450" height="623.5094738261671"></iframe></span>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-A7D07CF2-2674-41B7-ABD5-AC5945322505.html">32.2.4.1 Synchronous Steering Mode</a></li><li><a href="GUID-FDBA532E-EAFD-487C-B077-BEB6B5150E91.html">32.2.4.2 Asynchronous Steering Mode</a></li><li><a href="GUID-5F422254-9601-4C4A-87A2-B6B46D498EB9.html">32.2.4.3 Start-Up Considerations</a></li></ul>
+</nav>
+</body>
+</html>

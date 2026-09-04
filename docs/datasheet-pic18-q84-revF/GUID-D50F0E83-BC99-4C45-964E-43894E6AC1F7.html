@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.1.2 Internal Clock Sources — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-25362F2C-8A61-49C5-A6FA-33620F8FFD5B.html"/>
+<link rel="next" href="GUID-F9786274-3838-4FC7-9C13-EEBA65D5712B.html"/>
+<link rel="up" href="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A.html">12.1 Clock Source Types</a></li><li>12.1.2 Internal Clock Sources</li></ol>
+  <div class="sib"><span>← <a href="GUID-25362F2C-8A61-49C5-A6FA-33620F8FFD5B.html" rel="prev">SOSC Start-Up Timing</a></span><span><a href="GUID-F9786274-3838-4FC7-9C13-EEBA65D5712B.html" rel="next">HFINTOSC</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7__GUID-C5E08C51-EBAC-47A3-9570-40E9EF2AF61C" style="">12.1.2 Internal Clock Sources</h1>
+<div class="- topic/body body">
+<div class="- topic/p p">The internal oscillator block contains two independent oscillators that can produce
+            two internal system clock sources:<ul class="- topic/ul ul" id="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7__UL_CF5_GZP_XGB" data-ofbid="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7__UL_CF5_GZP_XGB">
+                <li class="- topic/li li" id="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7__GUID-8B21AD47-4892-4CB0-BE26-DBE73C2EE722" data-ofbid="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7__GUID-8B21AD47-4892-4CB0-BE26-DBE73C2EE722">High-Frequency Internal Oscillator (HFINTOSC)</li>
+                <li class="- topic/li li" id="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7__GUID-2AB49BF1-D075-4967-AD99-238A478A8356" data-ofbid="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7__GUID-2AB49BF1-D075-4967-AD99-238A478A8356">Low-Frequency Internal Oscillator (LFINTOSC)</li>
+            </ul></div>
+        <div class="- topic/p p">Internal oscillator selection is performed one of two ways:<ol class="- topic/ol ol" id="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7__OL_CKH_JCQ_XGB" data-ofbid="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7__OL_CKH_JCQ_XGB">
+                <li class="- topic/li li" id="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7__GUID-830FFCDF-2D6D-4E08-A81B-044614F5BE48" data-ofbid="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7__GUID-830FFCDF-2D6D-4E08-A81B-044614F5BE48">Program the RSTOSC Configuration
+                    bits to select one of the INTOSC sources which will be used upon a device
+                    Reset.</li>
+                <li class="- topic/li li" id="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7__GUID-0E50881A-4482-418F-87D4-55415F02FB92" data-ofbid="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7__GUID-0E50881A-4482-418F-87D4-55415F02FB92">Write the New Oscillator Source
+                    Request (<a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a>) bits to select an internal oscillator during run
+                    time.</li>
+            </ol></div>
+        <p class="- topic/p p">In INTOSC mode, the OSC1/CLKIN and OSC2/CLKOUT pins are available for use as
+            a general purpose I/Os, provided that no external oscillator is connected. The function
+            of the OSC2/CLKOUT pin is determined by the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CLKOUTEN</span>
+            Configuration bit. When <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CLKOUTEN</span> is set
+                (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">CLKOUTEN</span> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the pin functions as a
+            general-purpose I/O. When <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CLKOUTEN</span> is clear
+                (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">CLKOUTEN</span> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the system instruction
+            clock (F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4) is available as an output signal on the pin.</p>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-F9786274-3838-4FC7-9C13-EEBA65D5712B.html">12.1.2.1 HFINTOSC</a></li><li><a href="GUID-E5B524DC-26B1-4792-9E74-4B7C02CA5846.html">12.1.2.2 MFINTOSC</a></li><li><a href="GUID-E955444A-D882-4C7D-B08C-3EA872DA0AD4.html">12.1.2.3 LFINTOSC</a></li><li><a href="GUID-C6E2BFC0-7FC1-4630-BA0C-7ED5D66E319D.html">12.1.2.4 ADCRC</a></li></ul>
+</nav>
+</body>
+</html>

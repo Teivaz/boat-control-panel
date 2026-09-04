@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>19.13 MCLR/VPP/RE3 Pin — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7.html"/>
+<link rel="next" href="GUID-D3680739-69E1-4BC6-8FED-0F0AE91735AB.html"/>
+<link rel="up" href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html">19 I/O Ports</a></li><li>19.13 MCLR/VPP/RE3 Pin</li></ol>
+  <div class="sib"><span>← <a href="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7.html" rel="prev">I/O Priorities</a></span><span><a href="GUID-D3680739-69E1-4BC6-8FED-0F0AE91735AB.html" rel="next">Register Definitions: Port Control</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__GUID-CB0F2357-0D4F-459C-BE0D-A47ACF60FC7E" style="">19.13 <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span>/V<sub class="+ topic/ph hi-d/sub ph sub">PP</sub><span class="- topic/ph ph">/RE3</span>
+        Pin</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__ID-42127-0000012C" data-ofbid="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__ID-42127-0000012C">The <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__ID-42127-0000012D">MCLR</span>/V<sub class="+ topic/ph hi-d/sub ph sub">PP</sub> pin is an input-only pin. Its operation is
+            controlled by the MCLRE Configuration bit. When selected as a PORT pin (MCLRE =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), it functions as a digital input-only pin; as such, it does not
+            have TRISx and LATx bits associated with its operation. Otherwise, it functions as the
+            device’s Master Clear input. In either configuration, the
+                <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span>/V<sub class="+ topic/ph hi-d/sub ph sub">PP</sub> pin also functions as the programming
+            voltage input pin during high-voltage programming.</p>
+        <p class="- topic/p p" id="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__ID-42127-00000130" data-ofbid="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__ID-42127-00000130">The <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span>/V<sub class="+ topic/ph hi-d/sub ph sub">PP</sub> pin is a
+            read-only bit and will read ‘<code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__ID-42127-00000131">1</code>’ when MCLRE =
+                <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__ID-42127-00000132">1</code> (i.e., Master Clear enabled).</p>
+        <div class="- topic/note note important note_important" id="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__GUID-C669F603-F489-4EEE-BDB6-C956E6E90DB8" data-ofbid="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__GUID-C669F603-F489-4EEE-BDB6-C956E6E90DB8"><span class="note__title">Important:</span> On a Power-on Reset
+            (POR), the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span>/V<sub class="+ topic/ph hi-d/sub ph sub">PP</sub> pin is enabled as a digital
+            input-only if Master Clear functionality is disabled.</div>
+        <p class="- topic/p p" id="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__ID-42127-0000015D" data-ofbid="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__ID-42127-0000015D">The <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span>/V<sub class="+ topic/ph hi-d/sub ph sub">PP</sub> pin has an
+            individually controlled internal weak pull-up. When set, the corresponding WPU bit
+            enables the pull-up. When the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span>/V<sub class="+ topic/ph hi-d/sub ph sub">PP</sub> pin is
+            configured as <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__ID-42127-0000015E">MCLR</span> (MCLRE = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__ID-42127-0000015F">1</code> and LVP = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__ID-42127-00000160">0</code>) or configured for Low-Voltage Programming (MCLRE = <code class="+ topic/ph pr-d/codeph ph codeph">x</code>
+            and LVP = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80__ID-42127-00000161">1</code>), the pull-up is always enabled, and
+            the WPU bit has no effect.</p>
+    </div>
+
+</body>
+</html>

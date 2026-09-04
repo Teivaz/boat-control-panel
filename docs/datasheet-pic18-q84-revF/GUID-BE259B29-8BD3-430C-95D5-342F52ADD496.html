@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.5.9.4 Guard Ring Outputs — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-64BA12F2-9F30-4FF0-9A5F-371074EE0217.html"/>
+<link rel="next" href="GUID-A5E34262-6007-477B-99FF-1F47A8A8F059.html"/>
+<link rel="up" href="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html">43.5 Computation Operation</a></li><li><a href="GUID-4C3762A4-53AF-4764-89C9-9C6FDF1CEFB4.html">43.5.9 Capacitive Voltage Divider (CVD) Features</a></li><li>43.5.9.4 Guard Ring Outputs</li></ol>
+  <div class="sib"><span>← <a href="GUID-64BA12F2-9F30-4FF0-9A5F-371074EE0217.html" rel="prev">Acquisition Control for CVD (ADPRE &gt; 0)</a></span><span><a href="GUID-A5E34262-6007-477B-99FF-1F47A8A8F059.html" rel="next">Additional Sample-and-Hold Capacitance</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__GUID-9F24A198-3F3F-4456-B8FB-C66AC0A2B0E7" style="">43.5.9.4 Guard Ring Outputs</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__ID-42107-00000402" data-ofbid="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__ID-42107-00000402"><a class="- topic/xref xref" href="#GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__ID-42107-00000411"><span>Figure 43-9</span></a>
+            shows a typical guard ring circuit. C<sub class="+ topic/ph hi-d/sub ph sub">GUARD</sub>
+            represents the capacitance of the guard ring trace placed on the PCB. The user selects
+            values for R<sub class="+ topic/ph hi-d/sub ph sub">A</sub> and R<sub class="+ topic/ph hi-d/sub ph sub">B</sub> that will create a voltage profile on C<sub class="+ topic/ph hi-d/sub ph sub">GUARD</sub>, which will match the selected acquisition
+            channel.</p>
+        <div class="- topic/p p" id="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__ID-42107-00000408" data-ofbid="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__ID-42107-00000408">The purpose of the guard ring is to generate a
+            signal in phase with the CVD sensing signal to minimize the effects of the parasitic
+            capacitance on sensing electrodes. It also can be used as a mutual drive for mutual
+            capacitive sensing. For more information about active guard and mutual drive, refer to
+            the following Microchip application note, available at the corporate website (<a class="- topic/xref xref" href="http://www.microchip.com" target="_blank" rel="external noopener">www.microchip.com</a>):<ul class="- topic/ul ul" id="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__UL_X4D_JSP_XGB" data-ofbid="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__UL_X4D_JSP_XGB">
+                <li class="- topic/li li" id="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__GUID-1F6F1280-80A1-4A56-B2B9-C17DB9203014" data-ofbid="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__GUID-1F6F1280-80A1-4A56-B2B9-C17DB9203014">AN1478, <em class="+ topic/ph hi-d/i ph i">“mTouch<sup class="+ topic/ph hi-d/sup ph sup">TM</sup> Sensing Solution Acquisition
+                        Methods Capacitive Voltage Divider”</em></li>
+            </ul>
+        </div>
+        <p class="- topic/p p" id="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__ID-42107-0000040C" data-ofbid="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__ID-42107-0000040C">The ADC has two guard ring drive outputs,
+            ADGRDA and ADGRDB. These outputs are routed through PPS controls to I/O pins. Refer to
+            the <strong class="+ topic/ph hi-d/b ph b">“PPS - Peripheral Pin Select Module”</strong> chapter for more details. The polarity
+            of these outputs is controlled by the <a class="- topic/xref xref" href="GUID-91A099AA-6FF5-4C34-ABF1-6C3EFCAF1E11.html#ID-00000036" title="Guard Ring Polarity Selection"><span><span>GPOL</span></span></a> and <a class="- topic/xref xref" href="GUID-91A099AA-6FF5-4C34-ABF1-6C3EFCAF1E11.html#ID-0000002C" title="A/D Inverted Precharge Enable"><span><span>IPEN</span></span></a>
+            bits.</p>
+        <p class="- topic/p p" id="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__ID-42107-0000040E" data-ofbid="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__ID-42107-0000040E">At the start of the first precharge stage, both
+            outputs are set to match the GPOL bit. Once the acquisition stage begins, ADGRDA changes
+            polarity, while ADGRDB remains unchanged. When performing a double sample conversion,
+            setting the IPEN bit causes both guard ring outputs to transition to the opposite
+            polarity of GPOL at the start of the second precharge stage, and ADGRDA toggles again
+            for the second acquisition. For more information on the timing of the guard ring output,
+            refer to <a class="- topic/xref xref" href="#GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__ID-42107-00000415"><span>Figure 43-10</span></a>.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__ID-42107-00000411" data-ofbid="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__ID-42107-00000411"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 43-9. <span id="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__GUID-BBDD41EE-0344-4A9E-8726-C07F5C9E959C" class="fig--title">Guard Ring
+                Circuit</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__IMAGE_ZG3_DVR_D1B" src="GUID-EDB109BC-1086-426F-B87E-21BD418C30E8-high.svg"/></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__ID-42107-00000415" data-ofbid="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__ID-42107-00000415"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 43-10. <span id="GUID-BE259B29-8BD3-430C-95D5-342F52ADD496__GUID-4AD8C84F-E3EF-4CA2-B09C-CFF12E158FFE" class="fig--title">Differential CVD with Guard Ring Output Waveform</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-B9373698-F082-4269-8FF8-A6B0B536CA2C-high.pdf#toolbar=1" width="450" height="466.359525155455"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

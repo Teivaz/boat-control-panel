@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.3.6.3 SCK Start-Up Delay — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C.html"/>
+<link rel="next" href="GUID-312D4604-FDB9-4FC4-9D6A-94EC2AE8B3C5.html"/>
+<link rel="up" href="GUID-FAB3070C-BF7D-4A6F-8883-4BF0A5307358.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-58292C67-26C3-49E8-9D78-1E217D2E4B0C.html">36.3 Host Mode</a></li><li><a href="GUID-FAB3070C-BF7D-4A6F-8883-4BF0A5307358.html">36.3.6 Host Mode SPI Clock Configuration</a></li><li>36.3.6.3 SCK Start-Up Delay</li></ol>
+  <div class="sib"><span>← <a href="GUID-8DFAB700-95AE-4F0D-A992-100CA64FB87C.html" rel="prev">Clock and Data Change Alignment</a></span><span><a href="GUID-312D4604-FDB9-4FC4-9D6A-94EC2AE8B3C5.html" rel="next">Client Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-566437A9-A65C-40D1-A9E2-BDBEB0F20D7C__GUID-B4700AD7-6C76-4526-AC9D-C6F2E8DC9112" style="">36.3.6.3 SCK Start-Up Delay</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">When starting an SPI data exchange, the host device asserts the SS output by either
+            setting the SSET bit or loading the TCNT value, which then triggers the module to send
+            data by writing SPIxTXB. These data triggers are synchronized to the clock selected by
+            the SPIxCLK register before the first SCK pulse appears, usually requiring one or two
+            clock periods of the selected SPI source clock.</p>
+        <p class="- topic/p p">The SPI module includes additional synchronization delays on SCK generation specifically
+            designed to ensure that the Client Select output timing is correct, without requiring
+            precision software timing loops. By default, this synchronization delay is ½ baud
+            period.</p>
+        <p class="- topic/p p">When the value of the SPIxBAUD register is a small number (indicating higher
+            SCK frequencies), the code execution delay between asserting SS and writing SPIxTXB is
+            relatively long compared to the added synchronization delay before the first SCK edge.
+            With larger values of SPIxBAUD (indicating lower SCK frequencies), the code execution
+            delay is much smaller relative to the synchronization delay. Therefore, the first SCK
+            edge after SS is asserted will be closer to the synchronization delay.</p>
+        <p class="- topic/p p"> Setting the <a class="- topic/xref xref" href="GUID-52CDBCA4-7047-4EA0-97A9-D00504F5E217.html#BITFIELD_DQY_N5F_RFB" title="Fast Start Enable"><span><span>FST</span></span></a> bit removes the synchronization delay, allowing systems with low
+            SPIxBAUD values (and thus, long synchronization delays) to forgo this extra delay, in
+            which case the time between the SS assertion and the first SCK edge depends entirely on
+            the code execution delay.</p>
+</div>
+
+</body>
+</html>

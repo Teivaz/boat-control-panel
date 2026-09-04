@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.1 I2C Client Mode Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html"/>
+<link rel="next" href="GUID-49191697-E729-4A87-8EA4-E427FC6D30EA.html"/>
+<link rel="up" href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li>37.4.1 I2C Client Mode Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html" rel="prev">I2C Operation</a></span><span><a href="GUID-49191697-E729-4A87-8EA4-E427FC6D30EA.html" rel="next">Client Addressing Modes</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC__GUID-3240C59D-95E8-4376-BB2F-F3128DE03DF4" style="">37.4.1 I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Client Mode
+        Operation</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C module provides four Client Operation modes as selected by the I2C
+            Mode Select (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_MST_254_LGB" title="I2C Mode Select">MODE</a>) bits:</div>
+        <ul class="- topic/ul ul" id="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC__UL_TC5_CJF_KGB" data-ofbid="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC__UL_TC5_CJF_KGB">
+            <li class="- topic/li li" id="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC__GUID-9FC4E222-1FA3-4161-AAB1-99CE5484CE4F" data-ofbid="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC__GUID-9FC4E222-1FA3-4161-AAB1-99CE5484CE4F">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Client mode with
+                recognition of up to four 7-bit addresses</li>
+            <li class="- topic/li li" id="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC__GUID-05E2AAAD-66E0-4691-8FDB-43A54815A0F4" data-ofbid="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC__GUID-05E2AAAD-66E0-4691-8FDB-43A54815A0F4">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Client mode with
+                recognition of up to two masked 7-bit addresses</li>
+            <li class="- topic/li li" id="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC__GUID-F220460B-777C-489A-801B-815558671331" data-ofbid="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC__GUID-F220460B-777C-489A-801B-815558671331">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Client mode with
+                recognition of up to two 10-bit addresses</li>
+            <li class="- topic/li li" id="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC__GUID-129695A1-5B83-41EC-A982-FA58D0470589" data-ofbid="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC__GUID-129695A1-5B83-41EC-A982-FA58D0470589">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Client mode with
+                recognition of one masked 10-bit address</li>
+        </ul>
+        <p class="- topic/p p">During operation, the client device waits until module hardware detects a Start condition
+            on the bus. Once the Start condition is detected, the client waits for the incoming
+            address information to be received by the receive shift register. The address is then
+            compared to the addresses stored in the I2C Address 0/1/2/3 registers (<a class="- topic/xref xref" href="GUID-B58F548D-6BF9-4193-BD8A-56D39F47B0F2.html" title="I2CxADR0">I2CxADR0</a>,
+                <a class="- topic/xref xref" href="GUID-9467813D-E19F-44CB-ACF1-357C867EB439.html" title="I2CxADR1">I2CxADR1</a>, <a class="- topic/xref xref" href="GUID-9ECB3772-CBC7-4B06-BB3D-E72E9E5BF6A8.html" title="I2CxADR2">I2CxADR2</a>, <a class="- topic/xref xref" href="GUID-5FB3E556-DEB9-4761-9345-4EC5A7B9E170.html" title="I2CxADR3">I2CxADR3</a>), and if an address match is detected, client hardware
+            transfers the matching address into either the <a class="- topic/xref xref" href="GUID-E7CC5B44-63E1-40F0-8F67-30D643607BC5.html">I2CxADB0</a>/<a class="- topic/xref xref" href="GUID-51DC1914-5FC6-4DB6-849E-AC7B6E17D460.html" title="I2CxADB1">I2CxADB1</a>
+            registers or the <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> register, depending on the state of the Address Buffer Disable
+                (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a>) bit. If there are no address matches, there is no response
+            from the client.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-49191697-E729-4A87-8EA4-E427FC6D30EA.html">37.4.1.1 Client Addressing Modes</a></li><li><a href="GUID-5C20C65D-EA1D-44BC-AA74-89E186EBD8D4.html">37.4.1.2 General Call Addressing Support</a></li><li><a href="GUID-4C2D7EB7-BDF0-4928-924F-D7E5B1A24F58.html">37.4.1.3 Client Operation in 7-Bit Addressing Modes</a></li><li><a href="GUID-0BB503DB-DB52-4D18-8BDA-4D4A04EBDE87.html">37.4.1.4 Client Operation in 10-Bit Addressing Modes</a></li></ul>
+</nav>
+</body>
+</html>

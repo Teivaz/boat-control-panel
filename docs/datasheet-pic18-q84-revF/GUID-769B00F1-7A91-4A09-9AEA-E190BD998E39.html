@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.5.9 Retransmission Attempts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-6E0E6B57-69B5-47D4-8E8F-B84413550E09.html"/>
+<link rel="next" href="GUID-87521999-9DE0-4148-A7D0-F069EB6EACB2.html"/>
+<link rel="up" href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html">38.5 Message Transmission</a></li><li>38.5.9 Retransmission Attempts</li></ol>
+  <div class="sib"><span>← <a href="GUID-6E0E6B57-69B5-47D4-8E8F-B84413550E09.html" rel="prev">Transmit Bandwidth Sharing</a></span><span><a href="GUID-87521999-9DE0-4148-A7D0-F069EB6EACB2.html" rel="next">Retransmission Attempts Disabled</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-769B00F1-7A91-4A09-9AEA-E190BD998E39__GUID-7861BEC3-BCDF-45A4-927D-4563B65008E4" style="">38.5.9 Retransmission Attempts</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p">The number of retransmission attempts can be configured as follows:<ul class="- topic/ul ul" id="GUID-769B00F1-7A91-4A09-9AEA-E190BD998E39__UL_VWR_P5H_P3B" data-ofbid="GUID-769B00F1-7A91-4A09-9AEA-E190BD998E39__UL_VWR_P5H_P3B">
+                <li class="- topic/li li" id="GUID-769B00F1-7A91-4A09-9AEA-E190BD998E39__GUID-E1A173F9-28E1-4103-AE35-DD473A65A973" data-ofbid="GUID-769B00F1-7A91-4A09-9AEA-E190BD998E39__GUID-E1A173F9-28E1-4103-AE35-DD473A65A973">Retransmission attempts are disabled</li>
+                <li class="- topic/li li" id="GUID-769B00F1-7A91-4A09-9AEA-E190BD998E39__GUID-33DFF59D-FA9F-4BEF-A936-D76751933394" data-ofbid="GUID-769B00F1-7A91-4A09-9AEA-E190BD998E39__GUID-33DFF59D-FA9F-4BEF-A936-D76751933394">Three retransmission attempts</li>
+                <li class="- topic/li li" id="GUID-769B00F1-7A91-4A09-9AEA-E190BD998E39__GUID-C18EAA8C-151A-44B7-9D75-12DD69C21F66" data-ofbid="GUID-769B00F1-7A91-4A09-9AEA-E190BD998E39__GUID-C18EAA8C-151A-44B7-9D75-12DD69C21F66">Unlimited retransmissions</li>
+            </ul></div>
+        <p class="- topic/p p">The retransmission attempts can be restricted by setting RTXAT (CxCON[16]).
+            The number of retransmission attempts can be configured individually for each transmit
+            FIFO and the TXQ using TXAT[1:0] (CxFIFOCONy[22:21] and CxTXQCON[22:21],
+            respectively).</p>
+        <p class="- topic/p p">In case RTXAT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, unlimited retransmission attempts will be used for
+            all transmit FIFOs and the TXQ and TXATx will be ignored.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-87521999-9DE0-4148-A7D0-F069EB6EACB2.html">38.5.9.1 Retransmission Attempts Disabled</a></li><li><a href="GUID-4F82E35C-9B97-439D-81A8-8A1F6A6CBBD8.html">38.5.9.2 Three Retransmission Attempts</a></li><li><a href="GUID-EC7A5E7F-854A-4961-84E0-1F03C8350CB0.html">38.5.9.3 Unlimited Retransmission</a></li></ul>
+</nav>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.11.3.6 System Error Interrupt (SERRIF) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0983CBD0-3CB8-4DBC-A501-341E39494503.html"/>
+<link rel="next" href="GUID-A460E863-341B-4200-9562-7B823C9BDF21.html"/>
+<link rel="up" href="GUID-CDDCE0D8-24C2-4963-ACC8-BDDCE011AF44.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197.html">38.11 Interrupts</a></li><li><a href="GUID-CDDCE0D8-24C2-4963-ACC8-BDDCE011AF44.html">38.11.3 Main Interrupts</a></li><li>38.11.3.6 System Error Interrupt (SERRIF)</li></ol>
+  <div class="sib"><span>← <a href="GUID-0983CBD0-3CB8-4DBC-A501-341E39494503.html" rel="prev">CAN Timer Interrupt (TBCIF)</a></span><span><a href="GUID-A460E863-341B-4200-9562-7B823C9BDF21.html" rel="next">Interrupt Handling</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-121A13C9-8DF9-488B-AB82-8022D839B6B6__GUID-685310DB-8567-4ECE-8351-CCC6BEFCBF0C" style="">38.11.3.6 System Error Interrupt (SERRIF)</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Bus Bandwidth Error</strong></p>
+        <p class="- topic/p p">Bandwidth errors can happen during receive and transmit.</p>
+        <p class="- topic/p p">Receive Message Assembly Buffer (RX MAB) overflow occurs when the module is unable to
+            write a received CAN message to RAM before the next message arrives.</p>
+        <p class="- topic/p p">Transmit Message Assembly Buffer (TX MAB) underflow occurs when the module cannot feed
+            the TX MAB fast enough to provide consistent data to the Bit Stream Processor.</p>
+        <p class="- topic/p p">The SERRIF flag will be set and the ICODE[6:0] bits (C1VEC[6:0]) will be set
+            to <code class="+ topic/ph pr-d/codeph ph codeph">100 0101</code>.</p>
+        <p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Handling of RX MAB Overflow Errors</strong></p>
+        <p class="- topic/p p">RX MAB overflows are not acceptable for some applications. To prevent overflows, frame
+            filtering and data saving starts as early as possible; the latest at the beginning of
+            the CRC field of the received message. Updating the FIFO status has to wait until the
+            beginning of the 7th bit of the EOF field, since the received frame is only valid at
+            this point. The complete message has to be saved and the FIFO has to be updated until
+            the end of the arbitration field of the next message.</p>
+        <p class="- topic/p p">In case of an RX MAB overflow, the new message that caused the overflow will be
+            discarded. The module continues to store the message that is completely received and
+            filtered. Afterwards, the module will be able to receive new messages on the bus. The
+            application will be notified using the SERRIF bit.</p>
+        <p class="- topic/p p">The SERRIF bit (CxINT[12]) will be cleared by writing a zero to the bit.
+            This will also clear the SERRIF condition from the ICODEx bits.</p>
+        <p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Handling of TX MAB Underflow Errors</strong></p>
+        <p class="- topic/p p">ISO11898-1:2015 requires MAC data consistency: a transmitted message must contain
+            consistent data. If data errors occur due to ECC errors or TX MAB underflow, the
+            transmission will not start. If the transmission is in progress, it will stop and the
+            module will transition to either Restricted Operation or Listen Only mode, which is
+            selectable using the SERRLOM bit (CxCON[18]).</p>
+        <p class="- topic/p p">The module handles these errors by stopping the transmission and transitioning to
+            Restricted Operation or Listen Only mode. The CxTX pin will be forced high.
+            Additionally, all TXREQs will be ignored. The application will be notified using SERRIF.
+            The module will continue to receive messages.</p>
+    </div>
+
+</body>
+</html>

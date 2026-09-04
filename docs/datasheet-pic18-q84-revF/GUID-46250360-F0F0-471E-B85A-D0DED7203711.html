@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.4 Acknowledge Sequence — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E4740A38-CADD-4345-AB81-4F87CFD77E65.html"/>
+<link rel="next" href="GUID-EBD0C643-A58E-4542-9737-700164CBD0CA.html"/>
+<link rel="up" href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li>37.3.4 Acknowledge Sequence</li></ol>
+  <div class="sib"><span>← <a href="GUID-E4740A38-CADD-4345-AB81-4F87CFD77E65.html" rel="prev">Start Condition</a></span><span><a href="GUID-EBD0C643-A58E-4542-9737-700164CBD0CA.html" rel="next">Restart Condition</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-46250360-F0F0-471E-B85A-D0DED7203711__GUID-F5A25082-722A-4DD6-A1B1-B02B9F88015F" style="">37.3.4 Acknowledge Sequence</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The 9th SCL pulse for any transferred address/data byte is reserved for the Acknowledge
+                (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>) sequence. During an Acknowledge sequence, the
+            transmitting device relinquishes control of the SDA line to the receiving device. At
+            this time, the receiving device must decide whether to pull the SDA line low
+                (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>) or allow the line to float high (NACK). Since the
+            Acknowledge sequence is an active-low signal, pulling the SDA line low informs the
+            transmitter that the receiver has successfully received the transmitted data.</p>
+        <div class="- topic/p p">The Acknowledge Data (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_TCX_VCP_LGB" title="Acknowledge Data(1,2)"><span><span>ACKDT</span></span></a>) bit holds the value to be transmitted during an Acknowledge sequence while the <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>
+            register is nonzero (I2CxCNT != <code class="+ topic/ph pr-d/codeph ph codeph">0</code>). When a client device receives a
+            matching address, or a receiver receives valid data, the ACKDT bit is cleared by user
+            software to indicate an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>. If the client does not receive a
+            matching address, user software sets the ACKDT bit, indicating a NACK. In Client or
+            Multi-Host modes, if the Address Interrupt and Hold Enable (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_LFC_QSV_LGB" title="Address Interrupt and Hold Enable(1,4)"><span><span>ADRIE</span></span></a>) or Write Interrupt and Hold Enable (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_SDM_CSV_LGB" title="Data Write Interrupt and Hold Enable(1,3)"><span><span>WRIE</span></span></a>) bits are set, the clock is stretched after receiving a matching address or after the
+            8th falling edge of SCL when a data byte is received. This allows user software time to
+            determine the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>/NACK response to send back to the
+            transmitter.</div>
+        <div class="- topic/p p">The Acknowledge End of Count (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#GUID-F2D33B25-A469-4E33-B952-D4813928CD27" title="Acknowledge End of Count(2)"><span><span>ACKCNT</span></span></a>) bit holds the value that will be transmitted once the <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>
+            register reaches a zero value (I2CxCNT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>). When the I2CxCNT register
+            reaches a zero value, the ACKCNT bit can be cleared (ACKCNT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>),
+            indicating an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>, or ACKCNT can be set (ACKCNT =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), indicating a NACK. </div>
+        <div class="- topic/note note important note_important" id="GUID-46250360-F0F0-471E-B85A-D0DED7203711__GUID-933877F4-3459-4354-9FE6-A23CDBBC0C8D" data-ofbid="GUID-46250360-F0F0-471E-B85A-D0DED7203711__GUID-933877F4-3459-4354-9FE6-A23CDBBC0C8D"><span class="note__title">Important:</span> The <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#GUID-F2D33B25-A469-4E33-B952-D4813928CD27" title="Acknowledge End of Count(2)">ACKCNT</a> bit is only used when the <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>
+            register is zero, otherwise the <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_TCX_VCP_LGB" title="Acknowledge Data(1,2)">ACKDT</a> bit is used for <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>/NACK sequences.</div>
+        <div class="- topic/p p">In Host Write or Client Read modes, the Acknowledge Status (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_CM5_PDP_LGB" title="Acknowledge Status (Transmission only)"><span><span>ACKSTAT</span></span></a>) bit holds the result of the Acknowledge sequence transmitted by the receiving
+            device. The ACKSTAT bit is cleared when the receiver sends an
+                <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>, and is set when the receiver does not Acknowledge
+            (NACK). </div>
+        <p class="- topic/p p">The Acknowledge Time Status (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_VG2_C2P_LGB" title="Acknowledge Time Status"><span><span>ACKT</span></span></a>) bit indicates whether or not the bus is in an Acknowledge sequence. The ACKT bit is
+            set during an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>/NACK sequence on the 8th falling edge of SCL,
+            and is cleared on the 9th rising edge of SCL, indicating that the bus is not in an
+                <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>/NACK sequence. </p>
+        <p class="- topic/p p">Certain conditions will cause a NACK sequence to be sent automatically. A NACK sequence
+            is generated by module hardware when any of the following bits are set:</p>
+        <ul class="- topic/ul ul" id="GUID-46250360-F0F0-471E-B85A-D0DED7203711__UL_P2Q_KT2_KGB" data-ofbid="GUID-46250360-F0F0-471E-B85A-D0DED7203711__UL_P2Q_KT2_KGB">
+            <li class="- topic/li li" id="GUID-46250360-F0F0-471E-B85A-D0DED7203711__GUID-A5475732-0635-4F10-BFBD-482F7068B20F" data-ofbid="GUID-46250360-F0F0-471E-B85A-D0DED7203711__GUID-A5475732-0635-4F10-BFBD-482F7068B20F">Transmit Write Error Status (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#GUID-7A9B3629-D7FD-432A-AE45-E8A97DD638CA" title="Transmit Write Error Status(1)"><span><span>TXWE</span></span></a>)</li>
+            <li class="- topic/li li" id="GUID-46250360-F0F0-471E-B85A-D0DED7203711__GUID-E4F04551-F319-4ABF-AC6B-00448CCF5BA0" data-ofbid="GUID-46250360-F0F0-471E-B85A-D0DED7203711__GUID-E4F04551-F319-4ABF-AC6B-00448CCF5BA0">Transmit Underflow Status (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_ZKN_TFP_LGB" title="Transmit Underflow Status (used only when MODE = 0xx or MODE = 11x)(3)"><span><span>TXU</span></span></a>)</li>
+            <li class="- topic/li li" id="GUID-46250360-F0F0-471E-B85A-D0DED7203711__GUID-B4F33E58-52B8-4EE9-A803-4D43450DA55F" data-ofbid="GUID-46250360-F0F0-471E-B85A-D0DED7203711__GUID-B4F33E58-52B8-4EE9-A803-4D43450DA55F">Receive Read Error Status (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_BDH_V5P_LGB" title="Receive Read Error Status(1)"><span><span>RXRE</span></span></a>)</li>
+            <li class="- topic/li li" id="GUID-46250360-F0F0-471E-B85A-D0DED7203711__GUID-A130A819-1D8A-46DE-B075-2EAEE15AB11B" data-ofbid="GUID-46250360-F0F0-471E-B85A-D0DED7203711__GUID-A130A819-1D8A-46DE-B075-2EAEE15AB11B">Receive Overflow Status (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_H5T_P2P_LGB" title="Receive Overflow Status (used only when MODE = 0xx or MODE = 11x)(3)">RXO</a>)</li>
+        </ul>
+        <div class="- topic/note note important note_important" id="GUID-46250360-F0F0-471E-B85A-D0DED7203711__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-46250360-F0F0-471E-B85A-D0DED7203711__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> Once a NACK is
+            detected on the bus, all subsequent Acknowledge sequences will consist of a NACK until
+            all Error conditions are cleared.</div>
+        <p class="- topic/p p">The following figure shows <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span> and NACK sequences.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-46250360-F0F0-471E-B85A-D0DED7203711__FIG_SB4_NT2_KGB" data-ofbid="GUID-46250360-F0F0-471E-B85A-D0DED7203711__FIG_SB4_NT2_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-5. <span id="GUID-46250360-F0F0-471E-B85A-D0DED7203711__GUID-9354277B-B0C3-4C0E-8221-8B07ECB56829" class="fig--title"><span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>/NACK
+                Sequences</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-46250360-F0F0-471E-B85A-D0DED7203711__IMAGE_TB4_NT2_KGB" src="GUID-6E4241A7-CCC7-4A06-A634-5DFFD290F51D-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

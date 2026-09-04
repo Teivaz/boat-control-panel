@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>46.1 External Resistor Selection — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2691243F-9E90-401E-8612-0EB77C360C8E.html"/>
+<link rel="next" href="GUID-1B4519A4-F967-4CF9-909E-955783805ABB.html"/>
+<link rel="up" href="GUID-2691243F-9E90-401E-8612-0EB77C360C8E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2691243F-9E90-401E-8612-0EB77C360C8E.html">46 ZCD - Zero-Cross Detection Module</a></li><li>46.1 External Resistor Selection</li></ol>
+  <div class="sib"><span>← <a href="GUID-2691243F-9E90-401E-8612-0EB77C360C8E.html" rel="prev">ZCD - Zero-Cross Detection Module</a></span><span><a href="GUID-1B4519A4-F967-4CF9-909E-955783805ABB.html" rel="next">ZCD Logic Output</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__GUID-EDA50EC1-83C9-457D-9243-C1C2CA7EF63C" style="">46.1 External Resistor Selection</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <section class="- topic/section section" id="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__GUID-18FEB157-A731-4CC4-90D6-AC69DF5C71B9" data-ofbid="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__GUID-18FEB157-A731-4CC4-90D6-AC69DF5C71B9">
+         <p class="- topic/p p" id="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__ID-42143-00000013" data-ofbid="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__ID-42143-00000013">The ZCD module requires a current-limiting resistor in series
+            with the external voltage source. The impedance and rating of this resistor depends on
+            the external source peak voltage. Select a resistor value that will drop all of the peak
+            voltage when the current through the resistor is less than the maximum input current
+            (ZC02). Refer to the <strong class="+ topic/ph hi-d/b ph b">“Electrical Specifications”</strong> chapter for more details. Make
+            sure that the ZCD I/O pin internal weak pull-up is disabled so it does not interfere
+            with the current source and sink.</p>
+      </section>
+      <section class="- topic/section section" id="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__GUID-E0FE14BA-9ABF-4A07-882F-0C19F907642A" data-ofbid="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__GUID-E0FE14BA-9ABF-4A07-882F-0C19F907642A">
+         <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__EQUATION-DISPLAY_P2W_23D_P1B" data-ofbid="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__EQUATION-DISPLAY_P2W_23D_P1B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 46-1. <span id="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__GUID-0DFCF092-BFF4-4179-AD10-35290CAF5C30" class="fig--title">External Resistor</span></span></figcaption>
+            
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                     <mrow>
+                        <msub>
+                           <mrow>
+                              <mi>R</mi>
+                           </mrow>
+                           <mrow>
+                              <mi>S</mi>
+                              <mi>E</mi>
+                              <mi>R</mi>
+                              <mi>I</mi>
+                              <mi>E</mi>
+                              <mi>S</mi>
+                           </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <mfrac>
+                           <mrow>
+                              <msub>
+                                 <mrow>
+                                    <mi>V</mi>
+                                 </mrow>
+                                 <mrow>
+                                    <mi>P</mi>
+                                    <mi>E</mi>
+                                    <mi>A</mi>
+                                    <mi>K</mi>
+                                 </mrow>
+                              </msub>
+                           </mrow>
+                           <mrow>
+                              <msub>
+                                 <mrow>
+                                    <mi>I</mi>
+                                 </mrow>
+                                 <mrow>
+                                    <mi>Z</mi>
+                                    <mi>C</mi>
+                                    <mi>D</mi>
+                                 </mrow>
+                              </msub>
+                           </mrow>
+                        </mfrac>
+                     </mrow>
+                  </math></div>
+         </figure>
+      </section>
+      <section class="- topic/section section" id="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__GUID-6495A475-DFF6-4597-AA61-D4763F5AA1B9" data-ofbid="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__GUID-6495A475-DFF6-4597-AA61-D4763F5AA1B9">
+         <figure class="- topic/fig fig fignone" id="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__FIG_GPW_VVX_HZ" data-ofbid="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__FIG_GPW_VVX_HZ"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 46-2. <span id="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5__GUID-2BA28987-0FA7-4985-8BBE-8021FD64A3E6" class="fig--title">External Voltage Source</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-D3E482F1-C86D-4E05-8D28-D4DCEC60BE67-high.pdf#toolbar=1" width="450" height="198.92300943189295"></iframe></span>
+         </figure>
+      </section>
+   </div>
+
+</body>
+</html>

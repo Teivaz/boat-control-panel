@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.9.4 Transmit Queue Behavior — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192.html"/>
+<link rel="next" href="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE.html"/>
+<link rel="up" href="GUID-18BE65DA-2E61-49D8-AAE7-AC56D4A9B739.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-18BE65DA-2E61-49D8-AAE7-AC56D4A9B739.html">38.9 FIFO Behavior</a></li><li>38.9.4 Transmit Queue Behavior</li></ol>
+  <div class="sib"><span>← <a href="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192.html" rel="prev">Receive FIFO Behavior</a></span><span><a href="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE.html" rel="next">Transmit Event FIFO Behavior</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__GUID-76CFFE52-8524-470A-B646-EDDEC67B23C7" style="">38.9.4 Transmit Queue Behavior</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">C1TXQCON is used to control the TXQ. C1TXQSTA contains the status flags and
+            the TXQ index (TXQCIx). C1TXQUA contains the user address of the next transmit message
+            object to be loaded.</p>
+        <p class="- topic/p p">The TXQCI[4:0] bits are used by the CAN FD Protocol module to calculate the
+            next message to transmit. TXQCIx bits are not incremented linearly. They are
+            recalculated every time a message gets transmitted or TXREQ gets set.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_LRZ_Q43_Q3B"><span>Figure 38-32</span></a> through <a class="- topic/xref xref" href="#GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_J3Y_TQ3_Q3B"><span>Figure 38-37</span></a>
+            illustrate how the status flags and user address are updated. There is no need for the
+            user application to use TXQCIx; therefore, it is not shown in the figures.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_LRZ_Q43_Q3B"><span>Figure 38-32</span></a> shows the status of the TXQ after Reset. Message objects, MO0 to
+            MO7, are empty. All status flags are set. The user address points to MO0.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_LRZ_Q43_Q3B" data-ofbid="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_LRZ_Q43_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-32. <span id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__GUID-AEB068A2-174A-44A3-A883-EEA1AD6A0392" class="fig--title">TXQ - Initial State</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__IMAGE_MRZ_Q43_Q3B" src="GUID-E6C44DC8-6C01-4EAF-AB20-29F89DE4008A-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_YVM_X43_Q3B"><span>Figure 38-33</span></a> illustrates the status of the TXQ after the first message (MSG0) is
+            loaded. MO0 now contains MSG0. The user application sets the UINC bit, which causes the
+            FIFO head to advance. The user address now points to MO1. TXQEIF is cleared, since the
+            queue is not empty anymore. The user application now sets TXREQ to request the
+            transmission of MSG0.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_YVM_X43_Q3B" data-ofbid="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_YVM_X43_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-33. <span id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__GUID-44530C5D-D50E-431D-8862-100A75157008" class="fig--title">TXQ - First Message Loaded</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__IMAGE_ZVM_X43_Q3B" src="GUID-AFDCF780-8A4E-4C2B-BC61-6669AAB10630-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_P5V_1P3_Q3B"><span>Figure 38-34</span></a> illustrates the status of the TXQ after MSG0 is transmitted. The TXQ
+            is empty again. TXQEIF is set and TXREQ is cleared. The user address still points to MO1
+            because UINC is not set.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_P5V_1P3_Q3B" data-ofbid="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_P5V_1P3_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-34. <span id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__GUID-A13504A1-9DFE-44E1-9F12-A2AC3527D2FB" class="fig--title">TXQ - First Message Transmitted</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__IMAGE_Q5V_1P3_Q3B" src="GUID-F1DA1413-EC59-4966-A88C-7E7B65F5A1F3-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_MSZ_QQ3_Q3B"><span>Figure 38-35</span></a> illustrates the status of the TXQ after MSG1 is loaded and UINC is
+            set. The user address now points to the next free message object: MO0.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_MSZ_QQ3_Q3B" data-ofbid="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_MSZ_QQ3_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-35. <span id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__GUID-7130CD32-76DF-4BE9-8EEB-8CA38C1E6B93" class="fig--title">TXQ - Next Message Loaded</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__IMAGE_NSZ_QQ3_Q3B" src="GUID-FE142A9A-D107-4C09-82A1-4DE8D7A068A7-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_Q4Q_SQ3_Q3B"><span>Figure 38-36</span></a> illustrates the status of the TXQ after six more messages are
+            loaded: MSG2-MSG7. The user address now points to the last free message object: MO7.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_Q4Q_SQ3_Q3B" data-ofbid="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_Q4Q_SQ3_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-36. <span id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__GUID-E7019EDB-B6F2-443C-BAF7-CB995E2B08E9" class="fig--title">TXQ - Next Six Messages Loaded</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__IMAGE_R4Q_SQ3_Q3B" src="GUID-3C85EA3C-4D42-4BB2-A2BA-28FDB10FAEC8-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_J3Y_TQ3_Q3B"><span>Figure 38-37</span></a> illustrates the status of the TXQ after MSG8 is loaded and UINC is
+            set. The TXQ is now full, all flags are cleared. The user address now points to MO0. The
+            user application now sets TXREQ. The messages will be transmitted based on the priority
+            of their IDs.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_J3Y_TQ3_Q3B" data-ofbid="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__FIG_J3Y_TQ3_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-37. <span id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__GUID-93FB806D-D4A4-4DEF-94A0-0F8379F6E33F" class="fig--title">TXQ - Full</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21__IMAGE_K3Y_TQ3_Q3B" src="GUID-05E7D812-756D-4919-873D-5938618747EA-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

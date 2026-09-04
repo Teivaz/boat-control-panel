@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>25.9 Timer1 Operation During Sleep — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9.html"/>
+<link rel="next" href="GUID-980282E6-00F2-4822-8F7A-4380A8CD3403.html"/>
+<link rel="up" href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html">25 TMR1 - Timer1 Module with Gate Control</a></li><li>25.9 Timer1 Operation During Sleep</li></ol>
+  <div class="sib"><span>← <a href="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9.html" rel="prev">Timer1 Interrupt</a></span><span><a href="GUID-980282E6-00F2-4822-8F7A-4380A8CD3403.html" rel="next">CCP Capture/Compare Time Base</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__GUID-EE238FC1-4D1B-4EED-BD83-0A220F818C1E" style="">25.9 Timer1 Operation During Sleep</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__ID-42141-00000D73" data-ofbid="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__ID-42141-00000D73">Timer1 can only operate during Sleep when configured as an
+            asynchronous counter. In this mode, many clock sources can be used to increment the
+            counter. To set up the timer to wake the device:</p>
+        <ul class="- topic/ul ul" id="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__UL_DDK_T1T_TGB" data-ofbid="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__UL_DDK_T1T_TGB">
+            <li class="- topic/li li" id="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__ID-42141-00000D75" data-ofbid="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__ID-42141-00000D75">The <a class="- topic/xref xref" href="GUID-3797E08A-EF99-449F-8DE3-136F554E8BAF.html#ID-0000008E" title="Timer On"><span><span>ON</span></span></a> bit
+                must be set</li>
+            <li class="- topic/li li" id="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__ID-42141-00000D77" data-ofbid="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__ID-42141-00000D77">The TMRxIE bit of the PIEx register must be set</li>
+            <li class="- topic/li li" id="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__ID-42141-00000D7B" data-ofbid="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__ID-42141-00000D7B">Global interrupts must be enabled</li>
+            <li class="- topic/li li" id="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__ID-42141-00000D7D" data-ofbid="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__ID-42141-00000D7D">The <a class="- topic/xref xref" href="GUID-3797E08A-EF99-449F-8DE3-136F554E8BAF.html#ID-0000007D" title="Timer External Clock Input Synchronization Control"><span><span>SYNC</span></span></a> bit
+                must be set</li>
+            <li class="- topic/li li" id="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__ID-42141-00000D80" data-ofbid="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__ID-42141-00000D80">Configure the <a class="- topic/xref xref" href="GUID-94AF80CD-C533-40D3-ADAA-2B580D697C0E.html" title="TxCLK">TxCLK</a>
+                register for using any clock source other than F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> and
+                F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4</li>
+        </ul>
+        <p class="- topic/p p" id="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__ID-42141-00000D85" data-ofbid="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B__ID-42141-00000D85">The device will wake up on an overflow and execute the next
+            instruction. If global interrupts are enabled, the device will call the IRS. The
+            secondary oscillator will continue to operate in Sleep regardless of the <a class="- topic/xref xref" href="GUID-3797E08A-EF99-449F-8DE3-136F554E8BAF.html#ID-0000007D" title="Timer External Clock Input Synchronization Control"><span><span>SYNC</span></span></a> bit
+            setting.</p>
+    </div>
+
+</body>
+</html>

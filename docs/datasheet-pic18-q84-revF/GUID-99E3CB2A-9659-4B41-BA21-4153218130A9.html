@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>25.8 Timer1 Interrupt — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-80D9F5E5-CFEA-40B9-88A3-E4E344AF1847.html"/>
+<link rel="next" href="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B.html"/>
+<link rel="up" href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html">25 TMR1 - Timer1 Module with Gate Control</a></li><li>25.8 Timer1 Interrupt</li></ol>
+  <div class="sib"><span>← <a href="GUID-80D9F5E5-CFEA-40B9-88A3-E4E344AF1847.html" rel="prev">Timer1 Gate Event Interrupt</a></span><span><a href="GUID-AF08171D-F91E-4122-8C9D-B9AA38E10E4B.html" rel="next">Timer1 Operation During Sleep</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__GUID-51C8C7BC-5DE8-4EAD-9EB0-A0BA872E82C4" style="">25.8 Timer1 Interrupt</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__ID-42141-00000D54" data-ofbid="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__ID-42141-00000D54">The TMRx register increments to FFFFh and rolls over to 0000h.
+            When TMRx rolls over, the Timer1 interrupt flag bit of the PIRx register is set. To
+            enable the interrupt-on-rollover, the following bits must be set:</p>
+        <ul class="- topic/ul ul" id="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__UL_GJ1_N1T_TGB" data-ofbid="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__UL_GJ1_N1T_TGB">
+            <li class="- topic/li li" id="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__ID-42141-00000D5A" data-ofbid="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__ID-42141-00000D5A">The <a class="- topic/xref xref" href="GUID-3797E08A-EF99-449F-8DE3-136F554E8BAF.html#ID-0000008E" title="Timer On"><span><span>ON</span></span></a> bit
+                of the TxCON register</li>
+            <li class="- topic/li li" id="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__ID-42141-00000D5C" data-ofbid="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__ID-42141-00000D5C">The TMRxIE bits of the PIEx register</li>
+            <li class="- topic/li li" id="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__ID-42141-00000D62" data-ofbid="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__ID-42141-00000D62">Global interrupts must be enabled</li>
+        </ul>
+        <p class="- topic/p p" id="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__ID-42141-00000D64" data-ofbid="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__ID-42141-00000D64">The interrupt is cleared by clearing the TMRxIF bit as a task in
+            the Interrupt Service Routine. </p>
+        <div class="- topic/note note important note_important" id="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__ID-42141-00000D6E" data-ofbid="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9__ID-42141-00000D6E"><span class="note__title">Important:</span> The TMRx register and the TMRxIF bit must be
+            cleared before enabling interrupts.</div>
+    </div>
+
+</body>
+</html>

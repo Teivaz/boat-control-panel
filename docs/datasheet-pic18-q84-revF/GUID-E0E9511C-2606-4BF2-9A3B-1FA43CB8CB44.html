@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.2.3 Full Bridge Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A.html"/>
+<link rel="next" href="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676.html"/>
+<link rel="up" href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li><a href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html">32.2 Operating Modes</a></li><li>32.2.3 Full Bridge Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A.html" rel="prev">Push-Pull Mode</a></span><span><a href="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676.html" rel="next">Direction Change in Full Bridge Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__GUID-DA98EAE8-EEEA-40AE-90E8-DD0D14B8A430" style="">32.2.3 Full Bridge Mode</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-0000008E" data-ofbid="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-0000008E">In Forward and Reverse Full Bridge modes, three outputs drive
+            static values while the fourth is modulated by the input data signal. The mode selection
+            may be toggled between forward and reverse by toggling the MODE[0] bit of the CWGxCON0
+            register while keeping the MODE[2:1] bits static, without disabling the CWG module. When
+            connected, as shown in <a class="- topic/xref xref" href="#GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-00000099"><span>Figure 32-5</span></a>, the outputs
+            are appropriate for a full-bridge motor driver. Each CWG output signal has independent
+            polarity control, so the circuit can be adapted to high-active and low-active drivers. A
+            simplified block diagram for the Full Bridge modes is shown in <a class="- topic/xref xref" href="#GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-0000009F"><span>Figure 32-6</span></a>.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-00000099" data-ofbid="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-00000099"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 32-5. <span id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__GUID-0145B704-5EA7-422D-A69E-406B821B0F6B" class="fig--title">Example of Full-Bridge
+                Application</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-5D7400EA-8FCE-4259-BCDA-817AD8AA2F32-high.pdf#toolbar=1" width="450" height="287.9348087563147"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-0000009F" data-ofbid="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-0000009F"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 32-6. <span id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__GUID-4E4AFAE1-AB63-498D-AAE2-34ECC46218FC" class="fig--title">Simplified CWG Block Diagram
+                (Forward and Reverse Full Bridge Modes)</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-99C91121-99BC-4F9E-AB20-72DABDB10C93-high.pdf#toolbar=1" width="450" height="634.082119622718"></iframe></span>
+        </figure>
+        <p class="- topic/p p" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-000000AF" data-ofbid="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-000000AF">In Forward Full Bridge mode (<a class="- topic/xref xref" href="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B.html#ID-00000013" title="CWG Mode">MODE</a> = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-000000B0">‘b010</code>), CWGxA is driven to
+            its Active state, CWGxB and CWGxC are driven to their Inactive state, and CWGxD is
+            modulated by the input signal, as shown in <a class="- topic/xref xref" href="#GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-000000B9"><span>Figure 32-7</span></a>.</p>
+        <p class="- topic/p p" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-000000B2" data-ofbid="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-000000B2">In Reverse Full Bridge mode (<a class="- topic/xref xref" href="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B.html#ID-00000013" title="CWG Mode">MODE</a> = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-000000B3">‘b011</code>), CWGxC is driven to
+            its Active state, CWGxA and CWGxD are driven to their Inactive states, and CWGxB is
+            modulated by the input signal, as shown in <a class="- topic/xref xref" href="#GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-000000B9"><span>Figure 32-7</span></a>.</p>
+        <p class="- topic/p p" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-000000B5" data-ofbid="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-000000B5">In Full Bridge mode, the dead-band period is used when there is a
+            switch from forward to reverse or vice versa. This dead-band control is described in the
+                <a class="- topic/xref xref" href="GUID-5C04399A-2325-4ADC-8B5A-800341DB32CE.html">Dead-Band
+                Control</a> section, with additional details in the <a class="- topic/xref xref" href="GUID-02BFEFB4-65CE-4F19-BD84-A6D591607D40.html">Rising Edge and
+                Reverse Dead Band</a> and <a class="- topic/xref xref" href="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682.html">Falling Edge and Forward Dead Band</a> sections. Steering modes are
+            not used with either of the Full Bridge modes.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-000000B9" data-ofbid="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__ID-42115-000000B9"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 32-7. <span id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__GUID-99F99225-115D-48B0-A761-9884657F3A1F" class="fig--title">Example of Full-Bridge
+                Output</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__IMAGE_XKM_VT4_TZ" src="GUID-35DC45B4-8A96-4502-B231-0139EA052E5B-high.svg"/></span>
+            <div class="- topic/note note notype note_notype" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__GUID-363DD41A-014F-4D50-804D-C15B08DFB741" data-ofbid="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__GUID-363DD41A-014F-4D50-804D-C15B08DFB741"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__OL_PDZ_VT4_TZ" data-ofbid="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__OL_PDZ_VT4_TZ">
+                    <li class="- topic/li li" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__GUID-6186C45A-1138-4816-89D0-2DC2E519E61B" data-ofbid="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__GUID-6186C45A-1138-4816-89D0-2DC2E519E61B">A rising CWG data input
+                        creates a rising event on the modulated output.</li>
+                    <li class="- topic/li li" id="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__GUID-3BC9BF9A-5F46-449B-84CF-1EE4D2472412" data-ofbid="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44__GUID-3BC9BF9A-5F46-449B-84CF-1EE4D2472412">Output signals shown as
+                        active-high; all <a class="- topic/xref xref" href="GUID-2EA8EF2E-9030-424D-BE37-7E5A7AA6098D.html#ID-00000029" title="CWG Output ‘y’ Polarity">POLy</a> bits are clear.</li>
+                </ol>
+            </div>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676.html">32.2.3.1 Direction Change in Full Bridge Mode</a></li><li><a href="GUID-769A811B-D65D-4581-BCCD-A79247CD3795.html">32.2.3.2 Dead-Band Delay in Full Bridge Mode</a></li></ul>
+</nav>
+</body>
+</html>

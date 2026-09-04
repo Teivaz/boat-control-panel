@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.3.2 Fail-Safe Operation - FOSC Fail-Safe Clock Monitor — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4DE60C98-B4EE-4FC3-A62C-363391FCF437.html"/>
+<link rel="next" href="GUID-0E92653A-FADA-469F-A74C-81A1FF8638E5.html"/>
+<link rel="up" href="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-6C4D7D8A-4240-4725-A2F6-76A73A20FFFB.html">12.3 Fail-Safe Clock Monitor (FSCM)</a></li><li>12.3.2 Fail-Safe Operation - FOSC Fail-Safe Clock Monitor</li></ol>
+  <div class="sib"><span>← <a href="GUID-4DE60C98-B4EE-4FC3-A62C-363391FCF437.html" rel="prev">Fail-Safe Detection</a></span><span><a href="GUID-0E92653A-FADA-469F-A74C-81A1FF8638E5.html" rel="next">Fail-Safe Operation - Primary and Secondary Fail-Safe Clock Monitors</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-FB65206A-8CF9-4DC5-8013-8B2239B5AA06__GUID-17541924-1C13-4BDD-8510-32B6182A84E3" style="">12.3.2 Fail-Safe Operation - FOSC Fail-Safe Clock
+        Monitor</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p">When the system clock (F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>) fails, the Oscillator Fail Interrupt Flag (OSFIF)
+                        bit of the PIR registers, as well as the corresponding FSCM failure status
+                        (FSCMFEV) bit, will be set. If the Oscillator Fail Interrupt Enable (OSFIE)
+                        bit was set, an interrupt will be generated when OSFIF is high. If enabled,
+                        the F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> Fail-Safe Clock Monitor will switch the system clock to
+                        HFINTOSC when a failure is detected by overwriting the <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a>/<a class="- topic/xref xref" href="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7.html#GUID-97A74ABE-A6FE-4387-88C8-D2D02745E246" title="Current Oscillator Source Select (read-only)(1)">COSC</a> bits. The frequency of HFINTOSC will depend on the
+                        previous state of the <a class="- topic/xref xref" href="GUID-1EEB4FE6-E7C6-4660-A0D1-7B2F5A722DB3.html#GUID-D18FC875-28E0-4140-8038-017D80B74F1B" title="HFINTOSC Frequency Selection">FRQ</a> bits and the state of the <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GHR_WSL_YGB" title="New Divider Selection Request">NDIV</a>/<a class="- topic/xref xref" href="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7.html#DMW_BTH_ZGB" title="Current Divider Select (read-only)">CDIV</a> bits. Once a failure is detected, software can be used
+                        to take steps to mitigate the repercussions of the oscillator failure. The
+                        FSCM will switch the system clock to HFINTOSC, and the device will continue
+                        to operate from HFINTOSC until the external oscillator has been restarted.
+                        Once the external source is operational, it is up to the user to confirm
+                        that the clock source is stable and to switch the system clock back to the
+                        external oscillator using the NOSC/NDIV bits.</div>
+</div>
+
+</body>
+</html>

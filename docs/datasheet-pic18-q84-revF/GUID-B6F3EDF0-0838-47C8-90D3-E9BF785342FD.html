@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.4.3 Timer Period Register — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0.html"/>
+<link rel="next" href="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2.html"/>
+<link rel="up" href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html">28.4 UTMR Operation</a></li><li>28.4.3 Timer Period Register</li></ol>
+  <div class="sib"><span>← <a href="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0.html" rel="prev">Timer Counter and Capture Registers</a></span><span><a href="GUID-665E9D22-23BD-4B33-B573-3A465DFE75A2.html" rel="next">External Reset Source (ERS)</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD__GUID-39F8E8B5-697B-4207-8852-FFB6F87FB28F" style="">28.4.3 Timer Period Register</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The TUxyPR period register establishes the period of the periodic timer
+            operation or the duration of hardware limit timing. The register size is the same as the
+            timer size and is initialized to the maximum value.</p>
+        <div class="- topic/p p">The TUxyPR period register is double-buffered to simplify software timing and
+            provide atomic updates. Writing to the higher bytes of TUxyPR always stores data into
+            buffer registers, but does not change the effective PR value. If the timer is not
+            counting (ON = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), writing to the Least Significant Byte will change
+            the effective PR value immediately to the full buffered value. If the timer is counting
+            (ON = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), writing to the LSB of TUxyPR is also buffered and is
+            considered armed for an update. When a second qualifying event occurs, which is a Reset
+            event, the effective PR value is changed to the full buffered value.<div class="- topic/note note important note_important" id="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD__GUID-51F2C7D7-1BE1-43A3-B77F-501335302737" data-ofbid="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD__GUID-51F2C7D7-1BE1-43A3-B77F-501335302737"><span class="note__title">Important:</span> 
+                <ol class="- topic/ol ol" id="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD__OL_B2X_BBH_R3B" data-ofbid="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD__OL_B2X_BBH_R3B">
+                    <li class="- topic/li li" id="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD__GUID-BCD7FD78-3A57-479C-B995-F2DE8BE23550" data-ofbid="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD__GUID-BCD7FD78-3A57-479C-B995-F2DE8BE23550">Writing to MSBs after arming
+                        the load can lead to corrupted operation.</li>
+                    <li class="- topic/li li" id="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD__GUID-6A6F7578-4169-49AD-9550-524876AA3F0A" data-ofbid="GUID-B6F3EDF0-0838-47C8-90D3-E9BF785342FD__GUID-6A6F7578-4169-49AD-9550-524876AA3F0A">Reading the TUxyPR period
+                        register returns the most-recently written value, not necessarily the
+                        current effective PR value.</li>
+                </ol>
+            </div></div>
+        
+    </div>
+
+</body>
+</html>

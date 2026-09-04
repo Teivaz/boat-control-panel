@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>29.4.2 Setup for PWM Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C148635E-2BAC-4402-A159-F2C3B83BB78A.html"/>
+<link rel="next" href="GUID-51BE6410-F96B-4539-9DAF-342E747FBF2A.html"/>
+<link rel="up" href="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html">29 CCP - Capture/Compare/PWM Module</a></li><li><a href="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE.html">29.4 PWM Overview</a></li><li>29.4.2 Setup for PWM Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-C148635E-2BAC-4402-A159-F2C3B83BB78A.html" rel="prev">Standard PWM Operation</a></span><span><a href="GUID-51BE6410-F96B-4539-9DAF-342E747FBF2A.html" rel="next">Timer2 Timer Resource</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__GUID-31AE7E50-AFB4-4BEF-8C24-D917F1A76342" style="">29.4.2 Setup for PWM Operation</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006B4" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006B4">The following steps illustrate how to configure the CCP module for
+         standard PWM operation:</p>
+      <ol class="- topic/ol ol" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__GUID-EB167A45-5169-46C9-B030-788CED0D877D" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__GUID-EB167A45-5169-46C9-B030-788CED0D877D">
+         <li class="- topic/li li" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006B5" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006B5">Select the desired output pin with the RxyPPS control to select
+            CCPx as the source. Disable the selected pin output driver by setting the associated
+            TRIS bit. The output will be enabled later at the end of the PWM setup.</li>
+         <li class="- topic/li li" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006B7" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006B7">Load the selected timer TxPR period register with the PWM period
+            value.</li>
+         <li class="- topic/li li" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006B9" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006B9">Configure the CCP module for the PWM mode by loading the CCPxCON register with the appropriate values.</li>
+         <li class="- topic/li li" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006BB" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006BB">Load the CCPRx register with the PWM duty cycle value and
+            configure the <a class="- topic/xref xref" href="GUID-B5E1B30C-10E2-4929-B5C4-0F271B634DD1.html#ID-00000011" title="CCPxRH:L Value Alignment (PWM mode)">FMT</a> bit to set the proper register alignment.</li>
+         <li class="- topic/li li" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006BD" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006BD">Configure and start the selected timer:<ul class="- topic/ul ul">
+               <li class="- topic/li li" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006BF" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006BF">Clear the TMRxIF Interrupt Flag bit of the PIRx register.
+                  See the Important Note below.</li>
+               <li class="- topic/li li" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006C3" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006C3">Select the timer clock source to be as F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4.
+                  This is required for correct operation of the PWM module.</li>
+               <li class="- topic/li li" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006C6" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006C6">Configure the TxCKPS bits of the TxCON register with the
+                  desired timer prescale value.</li>
+               <li class="- topic/li li" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006C8" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006C8">Enable the timer by setting the TxON bit.</li>
+            </ul></li>
+         <li class="- topic/li li" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006CA" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006CA">Enable the PWM output:<ul class="- topic/ul ul">
+               <li class="- topic/li li" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006CC" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006CC">Wait until the timer overflows and the TMRxIF bit of the
+                  PIRx register is set. See the Important Note below.</li>
+               <li class="- topic/li li" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006D0" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006D0">Enable the CCPx pin output driver by clearing the
+                  associated TRIS bit.<div class="- topic/note note important note_important" id="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006D9" data-ofbid="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935__ID-42109-000006D9"><span class="note__title">Important:</span> To send a
+                     complete duty cycle and period on the first PWM output, the above steps must be
+                     included in the setup sequence. If it is not critical to start with a complete
+                     PWM signal on the first output, then step 6 may be ignored.</div></li>
+            </ul></li>
+      </ol>
+      
+   </div>
+
+</body>
+</html>

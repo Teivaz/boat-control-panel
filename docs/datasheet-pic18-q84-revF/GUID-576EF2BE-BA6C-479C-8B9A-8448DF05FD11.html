@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>19.2 PORTx - Data Register — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2AE94120-B50B-4C5D-BDF2-2366EA55C5B0.html"/>
+<link rel="next" href="GUID-F5752F82-5814-4C59-A68D-AE5697778E8B.html"/>
+<link rel="up" href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html">19 I/O Ports</a></li><li>19.2 PORTx - Data Register</li></ol>
+  <div class="sib"><span>← <a href="GUID-2AE94120-B50B-4C5D-BDF2-2366EA55C5B0.html" rel="prev">Overview</a></span><span><a href="GUID-F5752F82-5814-4C59-A68D-AE5697778E8B.html" rel="next">LATx - Output Latch</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-576EF2BE-BA6C-479C-8B9A-8448DF05FD11__GUID-96B7AC69-2955-4619-A27A-BDDB88CA0B06" style="">19.2 PORTx - Data Register</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-576EF2BE-BA6C-479C-8B9A-8448DF05FD11__ID-42127-000000B8" data-ofbid="GUID-576EF2BE-BA6C-479C-8B9A-8448DF05FD11__ID-42127-000000B8"><a class="- topic/xref xref" href="GUID-803A78D7-296C-42A9-8D20-4E2BC3254DA0.html" title="PORTx">PORTx</a> is a bidirectional
+            port and its corresponding data direction register is <a class="- topic/xref xref" href="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D.html" title="TRISx">TRISx</a>.</p>
+        <p class="- topic/p p" id="GUID-576EF2BE-BA6C-479C-8B9A-8448DF05FD11__ID-42127-000000BD" data-ofbid="GUID-576EF2BE-BA6C-479C-8B9A-8448DF05FD11__ID-42127-000000BD">Reading the PORTx register reads the status of the pins, whereas
+            writing to it will write to the PORT latch. All write operations are Read-Modify-Write
+            operations. Therefore, a write to a port implies that the PORT pins are read, and this
+            value is modified and then written to the PORT data latch (LATx). The PORT data latch
+                <a class="- topic/xref xref" href="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26.html" title="LATx">LATx</a>
+            holds the output port data and contains the latest value of a LATx or PORTx write. The
+            example below shows how to initialize PORTA.</p>
+        <div class="- topic/example example" id="GUID-576EF2BE-BA6C-479C-8B9A-8448DF05FD11__GUID-6DF5FD9C-0DDC-419D-A7BE-0E461BDA24A4" data-ofbid="GUID-576EF2BE-BA6C-479C-8B9A-8448DF05FD11__GUID-6DF5FD9C-0DDC-419D-A7BE-0E461BDA24A4"><h2 class="- topic/title title sectiontitle">Initializing PORTA in
+                Assembly</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock avrasm"><code>
+; This code example illustrates initializing the PORTA register. 
+; The other ports are initialized in the same manner.
+
+    BANKSEL    PORTA        ;
+    CLRF       PORTA        ;Clear PORTA
+    BANKSEL    LATA         ;
+    CLRF       LATA         ;Clear Data Latch
+    BANKSEL    ANSELA       ;
+    CLRF       ANSELA       ;Enable digital drivers
+    BANKSEL    TRISA        ;
+    MOVLW      B'00111000'  ;Set RA[5:3] as inputs
+    MOVWF      TRISA        ;and set others as outputs
+</code></pre>
+        </div>
+        <div class="- topic/example example" id="GUID-576EF2BE-BA6C-479C-8B9A-8448DF05FD11__GUID-5368844D-A180-49B1-831A-DAEF7F3BF43C" data-ofbid="GUID-576EF2BE-BA6C-479C-8B9A-8448DF05FD11__GUID-5368844D-A180-49B1-831A-DAEF7F3BF43C"><h2 class="- topic/title title sectiontitle">Initializing PORTA in C</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c">
+<em class="hl-comment">// This code example illustrates initializing the PORTA register. </em>
+<em class="hl-comment">// The other ports are initialized in the same manner.</em>
+
+    PORTA  = <span class="hl-number">0x00</span>;       <em class="hl-comment">// Clear PORTA</em>
+    LATA   = <span class="hl-number">0x00</span>;       <em class="hl-comment">// Clear Data Latch </em>
+    ANSELA = <span class="hl-number">0x00</span>;       <em class="hl-comment">// Enable digital drivers</em>
+    TRISA  = <span class="hl-number">0x38</span>;       <em class="hl-comment">// Set RA[5:3] as inputs and set others as outputs</em>
+</pre>
+        </div>
+        <div class="- topic/note note important note_important" id="GUID-576EF2BE-BA6C-479C-8B9A-8448DF05FD11__GUID-09F49FD2-818F-4FEE-A072-C1CD1F1DDB71" data-ofbid="GUID-576EF2BE-BA6C-479C-8B9A-8448DF05FD11__GUID-09F49FD2-818F-4FEE-A072-C1CD1F1DDB71"><span class="note__title">Important:</span> Most PORT pins share
+            functions with device peripherals, both analog and digital. In general, when a
+            peripheral is enabled on a PORT pin, that pin cannot be used as a general purpose
+            output; however, the pin can still be read.</div>
+    </div>
+
+</body>
+</html>

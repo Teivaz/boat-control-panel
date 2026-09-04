@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>47.2.3 Byte-Oriented and Bit-Oriented Instructions in Indexed Literal Offset Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-107198FB-0958-40E8-BFC7-F00F3E1A2661.html"/>
+<link rel="next" href="GUID-088E2BBE-A48C-47C7-B575-4D6592FB6C3F.html"/>
+<link rel="up" href="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-136E7F45-6464-4E35-80B5-A6E3A67AD53F.html">47 Instruction Set Summary</a></li><li><a href="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9.html">47.2 Extended Instruction Set</a></li><li>47.2.3 Byte-Oriented and Bit-Oriented Instructions in Indexed Literal Offset Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-107198FB-0958-40E8-BFC7-F00F3E1A2661.html" rel="prev">Extended Instruction Set</a></span><span><a href="GUID-088E2BBE-A48C-47C7-B575-4D6592FB6C3F.html" rel="next">Extended Instruction Syntax with Standard PIC18 Commands</a> →</span></div>
+</nav>
+
+	<h1 class="- topic/title title topictitle1" id="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672__GUID-3C06953B-9157-4338-807E-B213384FB419" style="">47.2.3 Byte-Oriented and Bit-Oriented Instructions
+		in Indexed Literal Offset Mode</h1>
+	<div class="- topic/body concept/conbody body conbody">
+		<div class="- topic/note note important note_important" id="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672__ID-42120-00003D49" data-ofbid="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672__ID-42120-00003D49"><span class="note__title">Important:</span> Enabling the PIC18 instruction set extension may
+			cause legacy applications to behave erratically or fail entirely.</div>
+		<p class="- topic/p p" id="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672__ID-42120-00003D4B" data-ofbid="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672__ID-42120-00003D4B">In addition to the new commands in the extended set, enabling the
+			extended instruction set also enables Indexed Literal Offset Addressing mode (see the
+				<strong class="+ topic/ph hi-d/b ph b">“Indexed Addressing with Literal Offset”</strong> section in the <strong class="+ topic/ph hi-d/b ph b">“Memory
+				Organization”</strong> chapter). This has a significant impact on the way many commands
+			of the standard PIC18 instruction set are interpreted.</p>
+		<p class="- topic/p p" id="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672__ID-42120-00003D4F" data-ofbid="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672__ID-42120-00003D4F">When the extended set is disabled, addresses embedded in opcodes are
+			treated as literal memory locations, either as a location in the Access Bank (‘a’ =
+				<code class="+ topic/ph pr-d/codeph ph codeph">0</code>) or in a GPR bank designated by the BSR (‘a’ =
+			<code class="+ topic/ph pr-d/codeph ph codeph">1</code>). When the extended instruction set is enabled and ‘a’ =
+				<code class="+ topic/ph pr-d/codeph ph codeph">0</code>, however, a file register argument of <code class="+ topic/ph pr-d/codeph ph codeph">5Fh</code> or
+			less is interpreted as an offset from the pointer value in FSR2 and not as a literal
+			address. For practical purposes, this means that all instructions using the Access RAM
+			bit as an argument – that is, all byte-oriented and bit-oriented instructions, or almost
+			half of the core PIC18 instructions – may behave differently when the extended
+			instruction set is enabled.</p>
+		<p class="- topic/p p" id="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672__ID-42120-00003D53" data-ofbid="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672__ID-42120-00003D53">When the content of FSR2 is <code class="+ topic/ph pr-d/codeph ph codeph">00h</code>, the boundaries of the
+Access RAM are essentially remapped to their original values. This may be useful in creating
+backward compatible code. If this technique is used, it may be necessary to save the value of FSR2
+and restore it when moving back and forth between C and assembly routines to preserve the Stack
+Pointer. Users must also keep in mind the syntax requirements of the extended instruction set (see
+<a class="- topic/xref xref" href="GUID-088E2BBE-A48C-47C7-B575-4D6592FB6C3F.html">Extended Instruction Syntax
+with Standard PIC18 Commands</a>).</p>
+		<p class="- topic/p p" id="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672__ID-42120-00003D55" data-ofbid="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672__ID-42120-00003D55">Although the Indexed Literal Offset Addressing mode can be very useful
+			for dynamic stack and pointer manipulation, it can also be very annoying if a simple arithmetic
+			operation is carried out on the wrong register. Users who are accustomed to the PIC18 programming
+			must keep in mind that, when the extended instruction set is enabled, register addresses of
+				<code class="+ topic/ph pr-d/codeph ph codeph">5Fh</code> or less are used for Indexed Literal Offset Addressing.</p>
+		<p class="- topic/p p" id="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672__ID-42120-00003D56" data-ofbid="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672__ID-42120-00003D56">Representative examples of typical byte-oriented and bit-oriented
+			instructions in the Indexed Literal Offset Addressing mode are provided in the <a class="- topic/xref xref" href="GUID-1CCF23CB-4FA5-4227-9302-ECA4AA20708C.html">Considerations when
+				Enabling the Extended Instruction Set</a> section to show how execution is
+			affected. The operand conditions shown in the examples are applicable to all
+			instructions of these types.</p>
+	</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-088E2BBE-A48C-47C7-B575-4D6592FB6C3F.html">47.2.3.1 Extended Instruction Syntax with Standard PIC18 Commands</a></li></ul>
+</nav>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.8 Falling Edge and Forward Dead Band — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-02BFEFB4-65CE-4F19-BD84-A6D591607D40.html"/>
+<link rel="next" href="GUID-50ECCA95-BC5C-48C4-8F7C-F2444CD552E6.html"/>
+<link rel="up" href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li>32.8 Falling Edge and Forward Dead Band</li></ol>
+  <div class="sib"><span>← <a href="GUID-02BFEFB4-65CE-4F19-BD84-A6D591607D40.html" rel="prev">Rising Edge and Reverse Dead Band</a></span><span><a href="GUID-50ECCA95-BC5C-48C4-8F7C-F2444CD552E6.html" rel="next">Dead-Band Jitter</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682__GUID-B6F8230D-CC32-40A8-8C1D-2F47A6940A9D" style="">32.8 Falling Edge and Forward Dead Band</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682__ID-42115-00000214" data-ofbid="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682__ID-42115-00000214">In Half Bridge mode, the falling edge dead band delays the turn-on
+            of the CWGxB output at the falling edge of the CWG data input. In Full Bridge mode, the
+            forward dead-band delay is only inserted when changing directions from Reverse mode to
+            Forward mode, and only the modulated output, CWGxD, is affected.</p>
+        <p class="- topic/p p" id="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682__ID-42115-00000215" data-ofbid="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682__ID-42115-00000215">The <a class="- topic/xref xref" href="GUID-88A94B60-24F9-4E80-9F10-3B89CCC1CDD3.html#GUID-88A94B60-24F9-4E80-9F10-3B89CCC1CDD3" title="CWGxDBF">CWGxDBF</a> register determines the duration of the dead-band
+            interval on the falling edge of the input source signal. This duration is from 0 to 64
+            periods of the CWG clock.</p>
+        <p class="- topic/p p" id="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682__ID-42115-00000216" data-ofbid="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682__ID-42115-00000216">Dead-band delay is always initiated on the edge of the input
+            source signal. A count of zero indicates that no dead band is present.</p>
+        <p class="- topic/p p" id="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682__ID-42115-00000217" data-ofbid="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682__ID-42115-00000217">If the input source signal reverses polarity before the dead-band
+            count is completed, then no signal will be seen on the respective output.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682__ID-42115-0000022A" data-ofbid="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682__ID-42115-0000022A"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 32-13. <span id="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682__GUID-9DDD2DFC-419E-4DCB-9110-45E0E586FDE2" class="fig--title">Dead-Band Operation, CWGxDBR =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">0x03</code>, CWGxDBF = <code class="+ topic/ph pr-d/codeph ph codeph">0x06</code>, Source Shorter Than Dead
+                Band</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-FD2774B4-9736-4C94-BFF2-AED6BB2CC682__IMAGE_SG5_PNB_5Z" src="GUID-C616A5CB-ECE4-4663-8D85-2C8ABC7B0C3E-high.svg"/></span>
+        </figure>
+        <div class="- topic/p p">The CWGxDBF register value is double-buffered. When <a class="- topic/xref xref" href="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B.html#ID-00000005" title="CWG Enable">EN</a>
+            = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, the buffer is loaded when CWGxDBF is written. When EN =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the buffer will be loaded at the rising edge following the first
+            falling edge of the data input after the <a class="- topic/xref xref" href="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B.html#ID-0000000C" title="CWG1 Load Buffers(1)">LD</a>
+            bit is set.</div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>17.1.1 Doze Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4CB9D045-5AA7-4008-B134-E37F066CC2DD.html"/>
+<link rel="next" href="GUID-BD5588AB-E8D5-43E6-BA71-463862EA4BF2.html"/>
+<link rel="up" href="GUID-4CB9D045-5AA7-4008-B134-E37F066CC2DD.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html">17 Power-Saving Modes</a></li><li><a href="GUID-4CB9D045-5AA7-4008-B134-E37F066CC2DD.html">17.1 Doze Mode</a></li><li>17.1.1 Doze Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-4CB9D045-5AA7-4008-B134-E37F066CC2DD.html" rel="prev">Doze Mode</a></span><span><a href="GUID-BD5588AB-E8D5-43E6-BA71-463862EA4BF2.html" rel="next">Interrupts During Doze</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__GUID-E3AB6166-6E42-4C79-A6E4-F3C2511063EB" style="">17.1.1 Doze Operation</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__ID-42139-00000013" data-ofbid="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__ID-42139-00000013">The Doze operation is illustrated in <a class="- topic/xref xref" href="#GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__FIG_YGN_CSM_YGB"><span>Figure 17-1</span></a>. As with normal operation, the instruction is fetched for
+         the next instruction cycle while the previous instruction is executed. The Q-clocks to the
+         peripherals continue throughout the periods in which no instructions are fetched or
+         executed. The following configuration settings apply for this example:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__ID-42139-00000015" data-ofbid="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__ID-42139-00000015">Doze enabled (<a class="- topic/xref xref" href="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354.html#ID-0000001E" title="Doze Enable(1)">DOZEN</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>)</li>
+         <li class="- topic/li li" id="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__ID-42139-00000018" data-ofbid="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__ID-42139-00000018">CPU instruction cycle to peripheral instruction cycle ratio of
+            1:4</li>
+         <li class="- topic/li li" id="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__ID-42139-0000001B" data-ofbid="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__ID-42139-0000001B">Recover-on-Interrupt enabled (<a class="- topic/xref xref" href="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354.html#ID-00000025" title="Recover-on-Interrupt(1)">ROI</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>)</li>
+      </ul>
+      <figure class="- topic/fig fig fignone" id="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__FIG_YGN_CSM_YGB" data-ofbid="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__FIG_YGN_CSM_YGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 17-1. <span id="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__GUID-DEAEBACF-67BC-4174-9501-57F75BB059CF" class="fig--title">Doze Mode Operation Example</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-ED9A98F3-E8D9-4E8D-8A4E-883D8D83EFB3-high.pdf#toolbar=1" width="474" height="339"></iframe></span>
+      </figure>
+      <div class="- topic/note note notype note_notype" id="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__GUID-A18086AD-19F1-4C65-AB3B-DEEE0EB617AA" data-ofbid="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__GUID-A18086AD-19F1-4C65-AB3B-DEEE0EB617AA"><span class="note__title">Note:</span> 
+         <ol class="- topic/ol ol" id="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__OL_QSG_2TL_YGB" data-ofbid="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__OL_QSG_2TL_YGB">
+            <li class="- topic/li li" id="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__GUID-F82411D1-24A9-4F1A-847E-AF211D8F1C9D" data-ofbid="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__GUID-F82411D1-24A9-4F1A-847E-AF211D8F1C9D">Multicycle instructions are executed
+               to completion before fetching <code class="+ topic/ph pr-d/codeph ph codeph">0x0004</code>.</li>
+            <li class="- topic/li li" id="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__GUID-4DC9A15B-D0F6-416D-8DDB-C56EAB0332FE" data-ofbid="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350__GUID-4DC9A15B-D0F6-416D-8DDB-C56EAB0332FE">If the prefetched instruction clears GIE, the ISR will not occur, but DOZEN is still
+               cleared and the CPU will resume execution at full speed. </li>
+         </ol>
+      </div>
+   </div>
+
+</body>
+</html>

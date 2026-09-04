@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>9.6.2 Instructions Affected by Indexed Literal Offset Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A07B431F-79B6-4567-AD1E-37CF2C865D9D.html"/>
+<link rel="next" href="GUID-DFA9AFE4-3A13-41A0-A3B3-7800CAB24922.html"/>
+<link rel="up" href="GUID-31BCEB2D-AAEB-4339-9CB8-C9EE861A5F38.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2BAB2696-5102-45C6-8EF2-0812A58B9EC7.html">9 Memory Organization</a></li><li><a href="GUID-31BCEB2D-AAEB-4339-9CB8-C9EE861A5F38.html">9.6 Data Memory and the Extended Instruction Set</a></li><li>9.6.2 Instructions Affected by Indexed Literal Offset Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-A07B431F-79B6-4567-AD1E-37CF2C865D9D.html" rel="prev">Indexed Addressing with Literal Offset</a></span><span><a href="GUID-DFA9AFE4-3A13-41A0-A3B3-7800CAB24922.html" rel="next">Mapping the Access Bank in Indexed Literal Offset Mode</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-6CDE6497-5465-439B-A5DB-2A9C137726C7__GUID-788B5303-E1DF-474C-9610-3D5704A70535" style="">9.6.2 Instructions Affected by Indexed Literal
+      Offset Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-6CDE6497-5465-439B-A5DB-2A9C137726C7__ID-42129-0000661D" data-ofbid="GUID-6CDE6497-5465-439B-A5DB-2A9C137726C7__ID-42129-0000661D">Any of the core PIC18 instructions that can use Direct Addressing
+         are potentially affected by the Indexed Literal Offset Addressing mode. This includes all
+         byte-oriented and bit-oriented instructions or almost one-half of the standard PIC18
+         instruction set. Instructions that only use Inherent or Literal Addressing modes are
+         unaffected.</p>
+      <p class="- topic/p p" id="GUID-6CDE6497-5465-439B-A5DB-2A9C137726C7__ID-42129-0000661E" data-ofbid="GUID-6CDE6497-5465-439B-A5DB-2A9C137726C7__ID-42129-0000661E">Additionally, byte-oriented and bit-oriented instructions are not
+         affected if they do not use the Access Bank (Access RAM bit is ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’) or
+         include a file address of 60h or above. Instructions meeting these criteria will continue
+         to execute as before. A comparison of the different possible Addressing modes when the
+         extended instruction set is enabled is shown in the following figure.</p>
+      <p class="- topic/p p" id="GUID-6CDE6497-5465-439B-A5DB-2A9C137726C7__ID-42129-00006621" data-ofbid="GUID-6CDE6497-5465-439B-A5DB-2A9C137726C7__ID-42129-00006621">Those who desire to use byte-oriented or bit-oriented instructions
+         in the Indexed Literal Offset mode need to note the changes to assembler syntax for this
+         mode. This is described in more detail in the <strong class="+ topic/ph hi-d/b ph b">“Extended Instruction Syntax”</strong> section. </p>
+      <figure class="- topic/fig fig fignone" id="GUID-6CDE6497-5465-439B-A5DB-2A9C137726C7__ID-42129-00006623" data-ofbid="GUID-6CDE6497-5465-439B-A5DB-2A9C137726C7__ID-42129-00006623"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 9-6. <span id="GUID-6CDE6497-5465-439B-A5DB-2A9C137726C7__GUID-527C3F29-2DDE-446D-8AF5-33EFFC4933BD" class="fig--title">Comparing Addressing Options for
+            Bit-Oriented and Byte-Oriented Instructions (Extended Instruction Set Enabled)</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-818601DD-22B0-4701-92D1-2D53A90F085E-high.pdf#toolbar=1" width="552.67" height="786.23"></iframe></span>
+      </figure>
+   </div>
+
+</body>
+</html>

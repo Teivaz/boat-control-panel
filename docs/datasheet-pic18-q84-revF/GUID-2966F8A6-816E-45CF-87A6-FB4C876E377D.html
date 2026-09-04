@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.2.2.2 Receiving Data — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5.html"/>
+<link rel="next" href="GUID-5E356814-0336-401E-9354-1F579534A656.html"/>
+<link rel="up" href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html">35.2 UART Asynchronous Modes</a></li><li><a href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html">35.2.2 UART Asynchronous Receiver</a></li><li>35.2.2.2 Receiving Data</li></ol>
+  <div class="sib"><span>← <a href="GUID-C3C0368E-414D-4229-9FF1-7E45F945C1E5.html" rel="prev">Enabling the Receiver</a></span><span><a href="GUID-5E356814-0336-401E-9354-1F579534A656.html" rel="next">Receive Data Polarity</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-2966F8A6-816E-45CF-87A6-FB4C876E377D__GUID-1C29CF1C-6753-44F5-900E-DC53D3DD21D5" style="">35.2.2.2 Receiving Data</h1><div class="- topic/body body"><p class="- topic/p p">Data are recovered from the bit stream by timing to the center of the bits and sampling the input
+      level. In High-Speed mode, there are four BRG clocks per bit and only one sample is taken per
+      bit. In Normal Speed mode, there are 16 BRG clocks per bit and three samples are taken per
+      bit.</p><p class="- topic/p p">The receiver data recovery circuit initiates character reception on the falling edge of the Start bit. The Start bit is always a ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span>’. The Start bit is qualified in the middle of the bit. In Normal Speed mode only, the Start bit is also qualified at the leading edge of the bit. The following paragraphs describe the majority-detect sampling of the Normal Speed mode without inverted polarity.</p><p class="- topic/p p">The falling edge starts the Baud Rate Generator (BRG) clock. The input is sampled at the first and second BRG clocks.</p><p class="- topic/p p">If both samples are high, then the falling edge is deemed a glitch and the UART returns to the Start bit detection state without generating an error.</p><p class="- topic/p p">If either sample is low, the data recovery circuit continues counting BRG clocks and takes samples at clock counts: 7, 8 and 9. When less than two samples are low, the Start bit is deemed invalid and the data recovery circuit aborts character reception, without generating an error, and resumes looking for the falling edge of the Start bit.</p><p class="- topic/p p">When two or more samples are low, the Start bit is deemed valid and the data recovery continues. After a valid Start bit is detected, the BRG clock counter continues and resets at count 16. This is the beginning of the first data bit.</p><p class="- topic/p p">The data recovery circuit counts the BRG clocks from the beginning of the bit and takes samples at clocks 7, 8 and 9. The bit value is determined from the majority of the samples. The resulting ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’ or ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’ is shifted into the RSR. The BRG clock counter continues and resets at count 16. This sequence repeats until all data bits have been sampled and shifted into the RSR.</p><p class="- topic/p p">After all data bits have been shifted in, the first Stop bit is sampled. Stop bits are always a ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span>’. If the bit sampling determines that a ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span>’ is in the Stop bit position, the framing error is set for this character. Otherwise, the framing error is cleared for this character. See the <a class="- topic/xref xref" href="GUID-54CB9908-D26F-43DA-BBFF-E3F03CDCBF6C.html#GUID-54CB9908-D26F-43DA-BBFF-E3F03CDCBF6C">Receive Framing Error</a> section for more information on framing errors.</p></div>
+</body>
+</html>

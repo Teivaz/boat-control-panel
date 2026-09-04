@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26.1 Timer2 Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html"/>
+<link rel="next" href="GUID-EF02F41D-A8C1-4508-8B1C-55433057CB3B.html"/>
+<link rel="up" href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html">26 TMR2 - Timer2 Module</a></li><li>26.1 Timer2 Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html" rel="prev">TMR2 - Timer2 Module</a></span><span><a href="GUID-EF02F41D-A8C1-4508-8B1C-55433057CB3B.html" rel="next">Free-Running Period Mode</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__GUID-E268A9C1-1AAC-413D-A3A1-56F12F265C85" style="">26.1 Timer2 Operation</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011B2" data-ofbid="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011B2">Timer2 operates in three major modes:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011B3" data-ofbid="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011B3">Free-Running Period</li>
+         <li class="- topic/li li" id="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011B5" data-ofbid="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011B5">One Shot</li>
+         <li class="- topic/li li" id="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011B7" data-ofbid="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011B7">Monostable</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011B9" data-ofbid="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011B9">Within each operating mode, there are several options for starting,
+         stopping and Reset. <a class="- topic/xref xref" href="GUID-B74F7E86-4EB4-45C9-91B7-597023F74CDC.html#GUID-B74F7E86-4EB4-45C9-91B7-597023F74CDC__ID-42141-000011EB"><span>Table 26-1</span></a> lists the options.</p>
+      <p class="- topic/p p" id="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011BB" data-ofbid="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011BB">In all modes, the T2TMR count register increments on the rising edge
+         of the clock signal from the programmable prescaler. When T2TMR equals T2PR, a high level
+         output to the postscaler counter is generated. T2TMR is cleared on the next clock
+         input.</p>
+      <p class="- topic/p p" id="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011BC" data-ofbid="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011BC">An external signal from hardware can also be configured to gate the
+         timer operation or force a T2TMR count Reset. In Gate modes, the counter stops when the
+         gate is disabled and resumes when the gate is enabled. In Reset modes, the T2TMR count is
+         reset on either the level or edge from the external source.</p>
+      <p class="- topic/p p" id="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011BD" data-ofbid="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011BD">The T2TMR and T2PR registers are both directly readable and
+         writable. The T2TMR register is cleared and the T2PR register initializes to
+            <code class="+ topic/ph pr-d/codeph ph codeph">0xFF</code> on any device Reset. Both the prescaler and postscaler counters
+         are cleared on the following events:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011BE" data-ofbid="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011BE">A write to the T2TMR register</li>
+         <li class="- topic/li li" id="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011C0" data-ofbid="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011C0">A write to the T2CON register</li>
+         <li class="- topic/li li" id="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011C2" data-ofbid="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011C2">Any device Reset</li>
+         <li class="- topic/li li" id="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011C4" data-ofbid="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011C4">External Reset source event that resets the timer<div class="- topic/note note important note_important" id="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011CC" data-ofbid="GUID-8389C941-BAEB-416A-900E-CCACBBC2578F__ID-42141-000011CC"><span class="note__title">Important:</span> T2TMR is not cleared when T2CON is
+               written.</div></li>
+      </ul>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-EF02F41D-A8C1-4508-8B1C-55433057CB3B.html">26.1.1 Free-Running Period Mode</a></li><li><a href="GUID-E08EBFED-6878-4B4C-99E4-81ECC83FAC4D.html">26.1.2 One Shot Mode</a></li><li><a href="GUID-7A11840C-02D1-41B3-914E-0E7242BD6357.html">26.1.3 Monostable Mode</a></li></ul>
+</nav>
+</body>
+</html>

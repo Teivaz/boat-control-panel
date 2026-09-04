@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.16.3 Auto Wake-on-Break — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-9CEC6C92-D5A5-4F5F-9852-B7DC8DA60801.html"/>
+<link rel="next" href="GUID-F5390C1C-4DE0-4A69-BCA2-C6A13F0D8C86.html"/>
+<link rel="up" href="GUID-5D554793-676E-4F0B-8022-67C65136118D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-5D554793-676E-4F0B-8022-67C65136118D.html">35.16 UART Baud Rate Generator</a></li><li>35.16.3 Auto Wake-on-Break</li></ol>
+  <div class="sib"><span>← <a href="GUID-9CEC6C92-D5A5-4F5F-9852-B7DC8DA60801.html" rel="prev">Auto-Baud Overflow</a></span><span><a href="GUID-F5390C1C-4DE0-4A69-BCA2-C6A13F0D8C86.html" rel="next">Auto-Wake-Up Special Considerations</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__GUID-8C380F3E-F54E-454C-9AA6-A54B0C382AEC" style="">35.16.3 Auto Wake-on-Break</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">During Sleep mode, all clocks to the UART are suspended. Because of this, the Baud
+            Rate Generator is inactive and a proper character reception cannot be performed. The
+            Auto Wake-on-Break feature allows the controller to wake up due to activity on the RX
+            line.</p>
+        <p class="- topic/p p">The Auto-Wake-up feature is enabled by setting both the <a class="- topic/xref xref" href="GUID-AFEE23AF-E917-46D3-BF17-879043534F4E.html#BITFIELD_XWQ_NRL_BBB" title="Wake-Up Enable"><span><span>WUE</span></span></a> bit and the UxIE bit in the PIEx register. Once set, the normal receive sequence on
+            RX is disabled, and the UART remains in an Idle state, monitoring for a wake-up event
+            independent of the CPU mode. A wake-up event consists of a transition out of the Idle
+            state on the RX line (this coincides with the start of a Break or a wake-up signal
+            character for the LIN protocol).</p>
+        <p class="- topic/p p">The UART module generates a <a class="- topic/xref xref" href="GUID-6FE1EBC7-3CDD-4B04-B97B-84C683051951.html#BITFIELD_MQF_ZNS_YY" title="Wake-Up Interrupt"><span><span>WUIF</span></span></a>
+            interrupt coincident with the wake-up event. The interrupt is generated synchronously to
+            the Q clocks in normal CPU operating modes (<a class="- topic/xref xref" href="#GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__FIG_DLV_KFF_DBB"><span>Figure 35-13</span></a>) and asynchronously if the device is in Sleep mode (<a class="- topic/xref xref" href="#GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__FIG_T5C_4FF_DBB"><span>Figure 35-14</span></a>). The interrupt condition is cleared by
+            clearing the WUIF bit. </p>
+        <figure class="- topic/fig fig fignone" id="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__FIG_DLV_KFF_DBB" data-ofbid="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__FIG_DLV_KFF_DBB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 35-13. <span id="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__GUID-FB56B9C6-1E8D-4FAF-A334-8AED6544FD13" class="fig--title">Auto-Wake-Up Timing During Normal
+                Operation</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-C639458D-C349-41F3-9EA5-3D4527DD9002-high.pdf#toolbar=1" width="512.94" height="230.49"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__FIG_T5C_4FF_DBB" data-ofbid="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__FIG_T5C_4FF_DBB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 35-14. <span id="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__GUID-31856843-19E1-4725-BF60-A6CF14B438E2" class="fig--title">Auto-Wake-Up Timing During
+                Sleep</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-35C232AD-4EA2-4DE4-8E19-00C8A517B23F-high.pdf#toolbar=1" width="523.56" height="255.47"></iframe></span>
+        </figure>
+        <div class="- topic/p p">To generate an interrupt on a wake-up event, all the following bits must be
+                set:<ul class="- topic/ul ul" id="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__UL_EZ4_V2F_DBB" data-ofbid="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__UL_EZ4_V2F_DBB">
+                <li class="- topic/li li" id="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__GUID-9F95E668-E625-41F2-8591-6534CD610FEB" data-ofbid="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__GUID-9F95E668-E625-41F2-8591-6534CD610FEB">The UxIE bit in the PIEx
+                    register</li>
+                <li class="- topic/li li" id="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__GUID-308BFEDD-D877-40F9-95E7-ACEB64B77348" data-ofbid="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907__GUID-308BFEDD-D877-40F9-95E7-ACEB64B77348">Global interrupt enables</li>
+            </ul></div>
+        <p class="- topic/p p">The WUE bit is automatically cleared by the transition to the Idle state on the RX line
+            at the end of the Break. This signals to the user that the Break event is over. At this
+            point, the UART module is in Idle mode, waiting to receive the next character.</p>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-F5390C1C-4DE0-4A69-BCA2-C6A13F0D8C86.html">35.16.3.1 Auto-Wake-Up Special Considerations</a></li></ul>
+</nav>
+</body>
+</html>

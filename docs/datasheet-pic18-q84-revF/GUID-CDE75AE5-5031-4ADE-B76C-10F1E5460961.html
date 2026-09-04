@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>9.4.1 Bank Select Register — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E8A37015-8879-450D-9885-A44657281D06.html"/>
+<link rel="next" href="GUID-635ACD25-5869-49B1-B733-95E8ED3C4FBC.html"/>
+<link rel="up" href="GUID-E8A37015-8879-450D-9885-A44657281D06.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2BAB2696-5102-45C6-8EF2-0812A58B9EC7.html">9 Memory Organization</a></li><li><a href="GUID-E8A37015-8879-450D-9885-A44657281D06.html">9.4 Data Memory Organization</a></li><li>9.4.1 Bank Select Register</li></ol>
+  <div class="sib"><span>← <a href="GUID-E8A37015-8879-450D-9885-A44657281D06.html" rel="prev">Data Memory Organization</a></span><span><a href="GUID-635ACD25-5869-49B1-B733-95E8ED3C4FBC.html" rel="next">Access Bank</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__GUID-03B61A67-04DC-43E6-8640-23191023ABA2" style="">9.4.1 Bank Select Register</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__ID-42129-00000812" data-ofbid="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__ID-42129-00000812">To rapidly access the RAM space in PIC18 devices, the memory is
+         split using the banking scheme. This divides the memory space into contiguous banks of 256
+         bytes each. Depending on the instruction, each location can be addressed directly by its
+         full address or by an 8-bit low-order address and a bank pointer.</p>
+      <p class="- topic/p p" id="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__ID-42129-00000813" data-ofbid="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__ID-42129-00000813">Most instructions in the PIC18 instruction set make use of the bank
+         pointer known as the Bank Select Register (<a class="- topic/xref xref" href="GUID-B0DF845D-8458-4019-9817-044DA05CF3C8.html#GUID-B0DF845D-8458-4019-9817-044DA05CF3C8" title="BSR">BSR</a>). This SFR holds the Most Significant bits of a location’s
+         address; the instruction itself includes the eight Least Significant bits. The BSR can be
+         loaded directly by using the <code class="+ topic/ph pr-d/codeph ph codeph">MOVLB</code> instruction.</p>
+      <p class="- topic/p p" id="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__ID-42129-00000817" data-ofbid="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__ID-42129-00000817">The value of the BSR indicates the bank in data memory being
+         accessed; the eight bits in the instruction show the location in the bank and can be
+         thought of as an offset from the bank’s lower boundary. The relationship between the BSR’s
+         value and the bank division in data memory is shown in <a class="- topic/xref xref" href="#GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__ID-42129-00000C1A"><span>Figure 9-4</span></a>.</p>
+      <p class="- topic/p p" id="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__ID-42129-0000081B" data-ofbid="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__ID-42129-0000081B">When writing the firmware in assembly, the user must ensure that the
+         proper bank is selected before performing a data read or write. When using the C compiler
+         to write the firmware, the BSR is tracked and maintained by the compiler.</p>
+      <p class="- topic/p p" id="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__ID-42129-0000081C" data-ofbid="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__ID-42129-0000081C">While any bank can be selected, only those banks that are actually
+         implemented can be read or written to. Writes to unimplemented banks are ignored, while
+         reads from unimplemented banks will return ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’. Refer to <a class="- topic/xref xref" href="GUID-E8A37015-8879-450D-9885-A44657281D06.html#GUID-E8A37015-8879-450D-9885-A44657281D06__FIG_R2C_25D_D1B"><span>Figure 9-3</span></a> for a list of implemented banks.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__ID-42129-00000C1A" data-ofbid="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__ID-42129-00000C1A"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 9-4. <span id="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__GUID-964F9968-EB57-4A91-943F-FFCC793F22BB" class="fig--title">Use of the Bank Select Register
+            (Direct Addressing)</span></span></figcaption>
+         
+         <span class=""><img class="- topic/image image" id="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961__IMAGE_T33_FJG_YGB" src="GUID-BE9CDAFE-D522-4E56-B5FF-CA150DD726F3-high.svg"/></span>
+      </figure>
+   </div>
+
+</body>
+</html>

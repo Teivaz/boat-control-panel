@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.12.2 Recovery from Bus Off State — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-EFCBD576-D3E5-43D8-BCAB-7520CB41B35D.html"/>
+<link rel="next" href="GUID-241B161B-B09D-4E83-B372-38ACC8C472CD.html"/>
+<link rel="up" href="GUID-DAEF6086-6F8E-4CF1-9E54-A43F6F740060.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-DAEF6086-6F8E-4CF1-9E54-A43F6F740060.html">38.12 Error Handling</a></li><li>38.12.2 Recovery from Bus Off State</li></ol>
+  <div class="sib"><span>← <a href="GUID-EFCBD576-D3E5-43D8-BCAB-7520CB41B35D.html" rel="prev">Bus Diagnostic Registers</a></span><span><a href="GUID-241B161B-B09D-4E83-B372-38ACC8C472CD.html" rel="next">Register Definitions: CAN FD Control</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-C3FCE377-6576-4F9A-9D6B-9D98C83D3773__GUID-B9A23798-772F-4941-BF05-931D0704E4F7" style="">38.12.2 Recovery from Bus Off State</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">If the TEC exceeds 255, the TXBO (CxTREC[21]) and CERRIF (CxINT[13]) bits
+            will be set. The module will go to bus off and start the bus off recovery sequence.</p>
+        <p class="- topic/p p">The bus off recovery sequence starts automatically. The module will transition out of the
+            Bus Off state only after the detection of 128 Idle conditions (see “ISO11898-1:2015: Bus
+            Off Management”). The module will set FRESET for all transmit FIFOs when entering the
+            Bus Off state to ensure that the module does not try to retransmit indefinitely. The
+            application will be notified by CERRIF and has the option to queue new messages for
+            transmission.</p>
+        <p class="- topic/p p">The module signals the exit from the Bus Off state with the CERRIF bit and by setting the
+            TXBOERR bit (CxBDIAG1[23]). Additionally, C1TREC will be Reset.</p>
+    </div>
+
+</body>
+</html>

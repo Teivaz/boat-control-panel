@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10.3.10.4 Table Write Operations — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-19412C65-E482-42D0-A3BD-D46C9616EBC4.html"/>
+<link rel="next" href="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF.html"/>
+<link rel="up" href="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html">10 NVM - Nonvolatile Memory Module</a></li><li><a href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html">10.3 Program Flash Memory (PFM)</a></li><li><a href="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4.html">10.3.10 Table Pointer Operations</a></li><li>10.3.10.4 Table Write Operations</li></ol>
+  <div class="sib"><span>← <a href="GUID-19412C65-E482-42D0-A3BD-D46C9616EBC4.html" rel="prev">Table Read Operations</a></span><span><a href="GUID-3FF443D5-6813-4BB4-BDB5-F3120F98B0FF.html" rel="next">Table Pointer Boundaries</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-7EE745D1-6925-4561-98DA-4A3649C2A566__GUID-DDEC69A8-DC4A-4AF3-88E2-217644D91F84" style="">10.3.10.4 Table Write Operations</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-7EE745D1-6925-4561-98DA-4A3649C2A566__ID-42121-0000017F" data-ofbid="GUID-7EE745D1-6925-4561-98DA-4A3649C2A566__ID-42121-0000017F">The table write operation stores one byte of data from the TABLAT
+            register into a buffer RAM register. The following figure shows the operation of a table
+            write from the TABLAT register to the buffer RAM space. The procedure to write the
+            contents of the buffer RAM into program memory is detailed in the <a class="- topic/xref xref" href="GUID-17EED875-D101-43C7-A8B3-1AB08122F073.html">“Page Write”</a> section.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-7EE745D1-6925-4561-98DA-4A3649C2A566__ID-42121-00000188" data-ofbid="GUID-7EE745D1-6925-4561-98DA-4A3649C2A566__ID-42121-00000188"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 10-4. <span id="GUID-7EE745D1-6925-4561-98DA-4A3649C2A566__GUID-B3DB5525-13EC-4B2F-82B2-4169DF3D2C3B" class="fig--title">Table Write Operation</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-BD1B4C95-D5E6-46E7-9BC1-9F754F6959AC-high.pdf#toolbar=1" width="516.51" height="344.88"></iframe></span>
+        </figure>
+        <p class="- topic/p p" id="GUID-7EE745D1-6925-4561-98DA-4A3649C2A566__ID-42121-00000182" data-ofbid="GUID-7EE745D1-6925-4561-98DA-4A3649C2A566__ID-42121-00000182">Table operations work with byte entities. Tables containing data,
+            rather than program instructions, are not required to be word-aligned. Therefore, a
+            table can start and end at any byte address. If a table write is being used to write
+            executable code into program memory, program instructions will need to be
+            word-aligned.</p>
+    </div>
+
+</body>
+</html>

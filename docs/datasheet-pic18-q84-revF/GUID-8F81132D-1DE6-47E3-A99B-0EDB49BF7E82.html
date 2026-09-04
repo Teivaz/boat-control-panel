@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Power-Saving Functionality — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-82AA62C3-5BB6-4638-9666-E457BB3EE9B6.html"/>
+<link rel="next" href="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC.html"/>
+<link rel="up" href="GUID-113CC601-7B6A-42CD-BF1D-1A1AC01EC33F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-113CC601-7B6A-42CD-BF1D-1A1AC01EC33F.html">Features</a></li><li>Power-Saving Functionality</li></ol>
+  <div class="sib"><span>← <a href="GUID-82AA62C3-5BB6-4638-9666-E457BB3EE9B6.html" rel="prev">Operating Characteristics</a></span><span><a href="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC.html" rel="next">Digital Peripherals</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__GUID-BE5A2DF4-0E28-4CC2-B5DF-3E87A582AF1E" style=""> Power-Saving Functionality</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <ul class="- topic/ul ul" id="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__UL_ZNL_GQY_CFB" data-ofbid="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__UL_ZNL_GQY_CFB">
+            <li class="- topic/li li" id="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__ID-42113-00000071" data-ofbid="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__ID-42113-00000071">Doze: CPU and Peripherals Running at Different Cycle Rates
+                (Typically CPU Is Lower)</li>
+            <li class="- topic/li li" id="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__ID-42113-00000073" data-ofbid="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__ID-42113-00000073">Idle: CPU Halted While Peripherals Operate</li>
+            <li class="- topic/li li" id="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__ID-42113-00000075" data-ofbid="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__ID-42113-00000075">Sleep: Lowest Power Consumption</li>
+            <li class="- topic/li li" id="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__ID-42113-00000077" data-ofbid="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__ID-42113-00000077">Peripheral Module Disable (PMD):<ul class="- topic/ul ul" id="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__UL_A4L_GQY_CFB" data-ofbid="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__UL_A4L_GQY_CFB">
+                    <li class="- topic/li li" id="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__ID-42113-00000079" data-ofbid="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__ID-42113-00000079">Ability to selectively disable hardware module to
+                        minimize active power consumption of unused peripherals</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__GUID-FBD58164-C70D-40C2-B120-E21BD255C784" data-ofbid="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__GUID-FBD58164-C70D-40C2-B120-E21BD255C784">Low-Power Mode Features:<ul class="- topic/ul ul" id="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__UL_UZK_WX4_SBB" data-ofbid="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__UL_UZK_WX4_SBB">
+                    <li class="- topic/li li" id="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__GUID-51A3858C-3DF3-401E-A9A0-B0EA1B816C8E" data-ofbid="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__GUID-51A3858C-3DF3-401E-A9A0-B0EA1B816C8E">Sleep: &lt; 1 µA typical @
+                        3V</li>
+                    <li class="- topic/li li" id="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__GUID-87873406-9FD6-46D6-A40A-3B69340FE608" data-ofbid="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__GUID-87873406-9FD6-46D6-A40A-3B69340FE608">Operating current:<ul class="- topic/ul ul" id="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__UL_UQD_PQY_CFB" data-ofbid="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__UL_UQD_PQY_CFB">
+                            <li class="- topic/li li" id="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__GUID-24BE3B34-AE44-4C71-98A3-58EF075F951A" data-ofbid="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82__GUID-24BE3B34-AE44-4C71-98A3-58EF075F951A">48 µA @ 32 kHz, 3V,
+                                typical</li>
+                        </ul></li>
+                </ul></li>
+        </ul>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.11.3.1 Invalid Message Interrupt - IVMIF — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-CDDCE0D8-24C2-4963-ACC8-BDDCE011AF44.html"/>
+<link rel="next" href="GUID-539CCC91-553B-482C-BE93-F88B6B22F46F.html"/>
+<link rel="up" href="GUID-CDDCE0D8-24C2-4963-ACC8-BDDCE011AF44.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197.html">38.11 Interrupts</a></li><li><a href="GUID-CDDCE0D8-24C2-4963-ACC8-BDDCE011AF44.html">38.11.3 Main Interrupts</a></li><li>38.11.3.1 Invalid Message Interrupt - IVMIF</li></ol>
+  <div class="sib"><span>← <a href="GUID-CDDCE0D8-24C2-4963-ACC8-BDDCE011AF44.html" rel="prev">Main Interrupts</a></span><span><a href="GUID-539CCC91-553B-482C-BE93-F88B6B22F46F.html" rel="next">Wake-Up Interrupt (WAKIF)</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-6E87B5CE-8DDA-4808-AAED-10E84C7D964D__GUID-11B9373B-1342-45D4-B95D-29F58EE9A9FA" style="">38.11.3.1 Invalid Message Interrupt - IVMIF</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">If a CAN bus error or DLC mismatch is detected during the last message
+            transmitted or received, the IVMIF bit will be set. The CxBDIAG1 register sets a flag
+            for each error. The flag must be cleared by the application.</p>
+        <p class="- topic/p p">The following CAN bus errors will trigger the interrupt in case an error frame is
+            transmitted: CRC, stuff bit, form, bit or ACK.</p>
+        <p class="- topic/p p">The flag will not be set if the ESI of a received message is set.</p>
+    </div>
+
+</body>
+</html>

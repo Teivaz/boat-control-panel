@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.4.7 One Shot Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D1F7014F-A181-4D45-95B1-B19202FE7C4C.html"/>
+<link rel="next" href="GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2.html"/>
+<link rel="up" href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html">28.4 UTMR Operation</a></li><li>28.4.7 One Shot Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-D1F7014F-A181-4D45-95B1-B19202FE7C4C.html" rel="prev">Hardware Limit Mode</a></span><span><a href="GUID-5AFB7EEF-3A8B-4E7D-9DB4-C038D47396A2.html" rel="next">Run Status Flag</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-658EC3E2-3D89-43D1-97A0-6D9373CD6594__GUID-A9EDB5D3-3173-4C2D-A779-F6FFD27B12B2" style="">28.4.7 One Shot Mode</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The One Shot mode is enabled by setting the <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#ID-0000000C" title="One Shot Mode Enable(3,4)">OSEN</a> bit in the TUxyCON1 register. When the OSEN bit is set, the
+            counter/timer will increment until a Stop condition is detected. At that time, the ON
+            bit will be cleared and the counter/timer will stop. See <a class="- topic/xref xref" href="#GUID-658EC3E2-3D89-43D1-97A0-6D9373CD6594__FIG_CLS_M3K_Q3B"><span>Figure 28-12</span></a> for an example of One Shot mode.</div>
+        <div class="- topic/p p">
+            <div class="- topic/note note important note_important" id="GUID-658EC3E2-3D89-43D1-97A0-6D9373CD6594__GUID-4952197C-EF64-407F-8E58-93FAF0121398" data-ofbid="GUID-658EC3E2-3D89-43D1-97A0-6D9373CD6594__GUID-4952197C-EF64-407F-8E58-93FAF0121398"><span class="note__title">Important:</span> In One Shot mode,
+                a Stop condition clears the ON bit, even if it coincides with another Start event.
+                If a Stop event occurs prior to Start, that Stop condition does not clear ON
+                bit.</div>
+        </div>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-658EC3E2-3D89-43D1-97A0-6D9373CD6594__FIG_CLS_M3K_Q3B" data-ofbid="GUID-658EC3E2-3D89-43D1-97A0-6D9373CD6594__FIG_CLS_M3K_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 28-12. <span id="GUID-658EC3E2-3D89-43D1-97A0-6D9373CD6594__GUID-FEED9CF3-D72A-47A5-AFE5-9F2A893C8A1F" class="fig--title">One
+                    Shot Mode</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-0892054F-E297-452B-A31E-845533D38E55-high.pdf#toolbar=1" width="491.85" height="478.72"></iframe></span>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

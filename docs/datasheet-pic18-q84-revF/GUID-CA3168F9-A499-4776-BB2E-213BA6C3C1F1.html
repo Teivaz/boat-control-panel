@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.4 CAN FD Message Frames — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A.html"/>
+<link rel="next" href="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978.html"/>
+<link rel="up" href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li>38.4 CAN FD Message Frames</li></ol>
+  <div class="sib"><span>← <a href="GUID-EB80A665-D678-48A3-A517-9A3C4FFA962A.html" rel="prev">Calculation of Required Message Memory</a></span><span><a href="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978.html" rel="next">ISO vs. Non-ISO CRC</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1__GUID-6128A150-5702-474E-9861-2894B021F7EB" style="">38.4 CAN FD Message Frames</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The ISO11898-1:2015 describes the different CAN message frames in detail. <a class="- topic/xref xref" href="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978.html#GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_ALY_MLH_P3B"><span>Figure 38-7</span></a> through <a class="- topic/xref xref" href="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978.html#GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_Y2K_CMH_P3B"><span>Figure 38-12</span></a> explain and summarize the construction of the messages and fields. </p>
+        <div class="- topic/p p">There are four different CAN data/remote frames (see <a class="- topic/xref xref" href="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978.html#GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_LDZ_NLH_P3B"><span>Figure 38-8</span></a>):<ul class="- topic/ul ul" id="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1__UL_JLX_NTL_43B" data-ofbid="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1__UL_JLX_NTL_43B">
+                <li class="- topic/li li" id="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1__GUID-C3A207EC-C2BF-4662-8004-DEC73DC62F83" data-ofbid="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1__GUID-C3A207EC-C2BF-4662-8004-DEC73DC62F83"><strong class="+ topic/ph hi-d/b ph b">CAN Base Frame:</strong> Classic
+                    CAN 2.0 frame using Standard ID</li>
+                <li class="- topic/li li" id="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1__GUID-0EE6F09F-AED8-4D44-A9B8-D3FF320D9ED3" data-ofbid="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1__GUID-0EE6F09F-AED8-4D44-A9B8-D3FF320D9ED3"><strong class="+ topic/ph hi-d/b ph b">CAN FD Base Frame:</strong> CAN FD
+                    frame using Standard ID</li>
+                <li class="- topic/li li" id="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1__GUID-86930299-AF8E-48CA-8045-597693C6C41D" data-ofbid="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1__GUID-86930299-AF8E-48CA-8045-597693C6C41D"><strong class="+ topic/ph hi-d/b ph b">CAN Extended Frame:</strong>
+                    Classic CAN 2.0 frame using Extended ID</li>
+                <li class="- topic/li li" id="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1__GUID-DBE5A591-3C3A-44A8-ACC1-552107DBFC4F" data-ofbid="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1__GUID-DBE5A591-3C3A-44A8-ACC1-552107DBFC4F"><strong class="+ topic/ph hi-d/b ph b">CAN FD Extended Frame:</strong> CAN
+                    FD frame using Extended ID</li>
+            </ul></div>
+        <p class="- topic/p p">There are no remote frames in CAN FD frames; therefore, the RTR bit is replaced with the
+            RRS bit (see <a class="- topic/xref xref" href="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978.html#GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_LDZ_NLH_P3B"><span>Figure 38-8</span></a>). The RRS bit in the CAN FD base frame can be used to extend the SID
+            to 12 bits. When enabled, it is referred to as SID11; it is the Least Significant bit
+            (LSb) of SID[11:0]. </p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978.html#GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_VQD_VLH_P3B"><span>Figure 38-9</span></a> specifies the control field of the different CAN messages. Before
+            CAN FD was added to the ISO11898-1:2015, the FDF bit was a reserved bit. Now the FDF bit
+            selects between Classic and CAN FD formats.</p>
+        <div class="- topic/p p">The BRS bit selects if the bit rate needs to be switched in the data phase of CAN FD
+            frames. <a class="- topic/xref xref" href="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978.html#GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_Y2K_CMH_P3B"><span>Figure 38-12</span></a> illustrates the error and overload frames. These special frames do
+            not change.<div class="- topic/note note notype note_notype" id="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1__GUID-4CEEBA92-3CF1-4505-A48D-2E0BB78FFA29" data-ofbid="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1__GUID-4CEEBA92-3CF1-4505-A48D-2E0BB78FFA29"><span class="note__title">Note:</span> If an error is detected
+                during the data phase of a CAN FD frame, the bit rate will be switched back to the
+                Nominal Bit Rate (NBR). Error frames are always transmitted at the arbitration bit
+                rate.</div></div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978.html">38.4.1 ISO vs. Non-ISO CRC</a></li></ul>
+</nav>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.3.1 Multi-Host Mode Clock Synchronization — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-023C912B-1251-4318-9328-9FA6A0765D88.html"/>
+<link rel="next" href="GUID-901A5608-134E-499B-9F81-8E52489E52C0.html"/>
+<link rel="up" href="GUID-023C912B-1251-4318-9328-9FA6A0765D88.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-023C912B-1251-4318-9328-9FA6A0765D88.html">37.4.3 I2C Multi-Host Mode Operation</a></li><li>37.4.3.1 Multi-Host Mode Clock Synchronization</li></ol>
+  <div class="sib"><span>← <a href="GUID-023C912B-1251-4318-9328-9FA6A0765D88.html" rel="prev">I2C Multi-Host Mode Operation</a></span><span><a href="GUID-901A5608-134E-499B-9F81-8E52489E52C0.html" rel="next">Multi-Host Mode Bus Arbitration</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-228E8DFD-F414-47E2-820C-3D3FD2EB86F1__GUID-31D0B0EE-85CC-4F83-BC2D-9A4298926FA8" style="">37.4.3.1 Multi-Host Mode Clock
+        Synchronization</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">In a multi-host system, each host may begin to generate a clock signal as soon as the bus
+            is Idle. Clock synchronization allows all devices on the bus to use a single SCL
+            signal.</p>
+        <p class="- topic/p p">When a high-to-low transition on SCL occurs, all active host devices begin SCL low period
+            timing, with their clocks held low until their low hold time expires and the High state
+            is reached. If one host’s clock signal is still low, SCL will be held low until that
+            host reaches its High state. During this time, all other host devices are held in a Wait
+            state (see <a class="- topic/xref xref" href="#GUID-228E8DFD-F414-47E2-820C-3D3FD2EB86F1__FIG_WJX_QTT_KGB"><span>Figure 37-41</span></a>).</p>
+        <p class="- topic/p p">Once all hosts have counted off their low period times, SCL is released high, and all
+            host devices begin counting their high periods. The first host to complete its high
+            period pulls the SCL line low again.</p>
+        <p class="- topic/p p">This means that when the clocks are synchronized, the SCL low period is determined by the
+            host with the longest SCL low period, while the SCL high period is determined by the
+            host device with the shortest SCL high period.</p>
+        <div class="- topic/note note important note_important" id="GUID-228E8DFD-F414-47E2-820C-3D3FD2EB86F1__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-228E8DFD-F414-47E2-820C-3D3FD2EB86F1__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C
+            Specification does not require the SCL signal to have a 50% duty cycle. In other words,
+            one host’s clock signal may have a low time that is 60% of the SCL period and a high
+            time that is 40% of the SCL period, while another host may be 50/50. This creates a
+            timing difference between the two clock signals, which may result in data loss.</div>
+        <figure class="- topic/fig fig fignone" id="GUID-228E8DFD-F414-47E2-820C-3D3FD2EB86F1__FIG_WJX_QTT_KGB" data-ofbid="GUID-228E8DFD-F414-47E2-820C-3D3FD2EB86F1__FIG_WJX_QTT_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-41. <span id="GUID-228E8DFD-F414-47E2-820C-3D3FD2EB86F1__GUID-8514FE16-C988-4BE6-801D-DAE9A15C5675" class="fig--title">Clock Synchronization During
+                Arbitration</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-228E8DFD-F414-47E2-820C-3D3FD2EB86F1__IMAGE_XJX_QTT_KGB" src="GUID-698AEAF5-8C0A-43A9-9809-F697DBB77A5E-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

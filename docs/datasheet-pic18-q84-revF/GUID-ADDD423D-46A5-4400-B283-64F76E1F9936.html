@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.3.5.1 Hardware Client Select Control — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4BC8F27E-3E41-451C-9818-50F70EC044AE.html"/>
+<link rel="next" href="GUID-FFF37CAF-A8EB-4E4C-8463-1B08B54E71FA.html"/>
+<link rel="up" href="GUID-4BC8F27E-3E41-451C-9818-50F70EC044AE.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-58292C67-26C3-49E8-9D78-1E217D2E4B0C.html">36.3 Host Mode</a></li><li><a href="GUID-4BC8F27E-3E41-451C-9818-50F70EC044AE.html">36.3.5 Host Mode Client Select Control</a></li><li>36.3.5.1 Hardware Client Select Control</li></ol>
+  <div class="sib"><span>← <a href="GUID-4BC8F27E-3E41-451C-9818-50F70EC044AE.html" rel="prev">Host Mode Client Select Control</a></span><span><a href="GUID-FFF37CAF-A8EB-4E4C-8463-1B08B54E71FA.html" rel="next">Software Client Select Control</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-ADDD423D-46A5-4400-B283-64F76E1F9936__GUID-578F2470-C7B6-462F-BB0B-B73DFA3E7051" style="">36.3.5.1 Hardware Client Select Control</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The SPI module allows for direct hardware control of a Client Select output. The Client
+            Select output (SS_out) is controlled both directly, through the <a class="- topic/xref xref" href="GUID-D60A9AB9-68EF-4F33-8387-7BA9792E0965.html#BITFIELD_RKG_H5F_RFB" title="Client Select Enable"><span><span>SSET</span></span></a> bit, and
+            indirectly by the hardware, while the transfer counter is nonzero (see the <a class="- topic/xref xref" href="GUID-38725C10-0F95-484B-825E-B276E4433803.html">Transfer
+                Counter</a> section). The SS_out pin is selected with the PPS controls. The
+            SS_out polarity is controlled by the <a class="- topic/xref xref" href="GUID-52CDBCA4-7047-4EA0-97A9-D00504F5E217.html#BITFIELD_QJR_NMZ_RFB" title="Client Select Input/Output Polarity Control"><span><span>SSP</span></span></a> bit. </p>
+        <p class="- topic/p p">Setting the SSET bit will assert SS_out. Clearing the SSET bit will leave
+            SS_out to be controlled by the transfer counter. When the transfer counter is loaded,
+            the SPI module will automatically assert SS_out. When the transfer counter decrements to
+            zero, the SPI module will deassert SS_out either one baud period after the final SCK
+            pulse of the final transfer (when CKE/SMP = <code class="+ topic/ph pr-d/codeph ph codeph">0/1</code>) or one half baud
+            period otherwise, as shown in the following figure.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-ADDD423D-46A5-4400-B283-64F76E1F9936__FIG_VV4_RQ3_SFB" data-ofbid="GUID-ADDD423D-46A5-4400-B283-64F76E1F9936__FIG_VV4_RQ3_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 36-6. <span id="GUID-ADDD423D-46A5-4400-B283-64F76E1F9936__GUID-512FE3AE-6C70-4CBA-9826-DC93098BBB90" class="fig--title">SPI Host SS Operation - CKE =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, BMODE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, TWIDTH = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, SSP
+                = <code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-E2CE1C2E-76C3-4320-8FD8-DFBB165307C1-high.pdf#toolbar=1" width="450" height="1065.3307851827756"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

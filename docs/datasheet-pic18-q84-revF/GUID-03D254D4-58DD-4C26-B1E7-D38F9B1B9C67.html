@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.5.15 Resetting Transmit Queue — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3DF418F4-0BC0-46BE-8B8F-EFB30F2F9C29.html"/>
+<link rel="next" href="GUID-5538E23F-5F84-4814-9FB6-39172949A455.html"/>
+<link rel="up" href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html">38.5 Message Transmission</a></li><li>38.5.15 Resetting Transmit Queue</li></ol>
+  <div class="sib"><span>← <a href="GUID-3DF418F4-0BC0-46BE-8B8F-EFB30F2F9C29.html" rel="prev">Resetting Transmit FIFO</a></span><span><a href="GUID-5538E23F-5F84-4814-9FB6-39172949A455.html" rel="next">Transmit Event FIFO (TEF)</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-03D254D4-58DD-4C26-B1E7-D38F9B1B9C67__GUID-D1385186-A0FC-4E8B-A116-53D318DC402E" style="">38.5.15 Resetting Transmit Queue</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p">The Transmit Queue can be reset by:<ul class="- topic/ul ul" id="GUID-03D254D4-58DD-4C26-B1E7-D38F9B1B9C67__UL_IPB_1XH_P3B" data-ofbid="GUID-03D254D4-58DD-4C26-B1E7-D38F9B1B9C67__UL_IPB_1XH_P3B">
+                <li class="- topic/li li" id="GUID-03D254D4-58DD-4C26-B1E7-D38F9B1B9C67__GUID-FC032E6A-2312-4D8C-B0E5-09B2E2C153A3" data-ofbid="GUID-03D254D4-58DD-4C26-B1E7-D38F9B1B9C67__GUID-FC032E6A-2312-4D8C-B0E5-09B2E2C153A3">Setting FRESET (CxTXQCON[10]) or</li>
+                <li class="- topic/li li" id="GUID-03D254D4-58DD-4C26-B1E7-D38F9B1B9C67__GUID-C92A8FD5-32D6-4DD9-B403-639AAAD15091" data-ofbid="GUID-03D254D4-58DD-4C26-B1E7-D38F9B1B9C67__GUID-C92A8FD5-32D6-4DD9-B403-639AAAD15091">Placing the module in
+                    Configuration mode (OPMOD[2:0] = <code class="+ topic/ph pr-d/codeph ph codeph">100</code>).</li>
+            </ul></div>
+        <p class="- topic/p p">Resetting the TXQ will reset the head and tail pointers and the CxTXQSTA register. The
+            settings in the CxTXQCON register will not change.</p>
+        <p class="- topic/p p">Before resetting the TXQ using FRESET, ensure no transmissions are pending.</p>
+    </div>
+
+</body>
+</html>

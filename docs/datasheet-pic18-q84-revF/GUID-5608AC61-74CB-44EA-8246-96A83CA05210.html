@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>7.3.3 16x16 Signed Multiplication Algorithm — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-AC65D292-1034-4C03-973F-2641C5376474.html"/>
+<link rel="next" href="GUID-14DFAAAF-B702-4D1F-8136-9925B6B4DA46.html"/>
+<link rel="up" href="GUID-4CDA8BD0-8C39-47CE-8297-FB61A0890E23.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html">7 PIC18 CPU</a></li><li><a href="GUID-4CDA8BD0-8C39-47CE-8297-FB61A0890E23.html">7.3 8x8 Hardware Multiplier</a></li><li>7.3.3 16x16 Signed Multiplication Algorithm</li></ol>
+  <div class="sib"><span>← <a href="GUID-AC65D292-1034-4C03-973F-2641C5376474.html" rel="prev">16x16 Unsigned Multiplication Algorithm</a></span><span><a href="GUID-14DFAAAF-B702-4D1F-8136-9925B6B4DA46.html" rel="next">PIC18 Instruction Cycle</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-5608AC61-74CB-44EA-8246-96A83CA05210__GUID-D3EDD1D1-5BC3-4FE1-B761-55557D036EFC" style="">7.3.3 16x16 Signed Multiplication Algorithm</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-5608AC61-74CB-44EA-8246-96A83CA05210__ID-42106-00000122" data-ofbid="GUID-5608AC61-74CB-44EA-8246-96A83CA05210__ID-42106-00000122"><a class="- topic/xref xref" href="#GUID-5608AC61-74CB-44EA-8246-96A83CA05210__GUID-43E13CE8-678D-4F03-8F6A-97851225BD5C"><span>16x16 Signed Multiply Routine</span></a> shows the sequence to do a 16x16 signed multiply. <a class="- topic/xref xref" href="#GUID-5608AC61-74CB-44EA-8246-96A83CA05210__GUID-9E8387AE-6EE3-489B-AEAB-0C3478A614C4"><span>16x16 Signed Multiply Algorithm</span></a> shows the algorithm used. The 32-bit result is stored
+            in four registers. To account for the sign bits of the arguments, the MSb for each
+            argument pair is tested and the appropriate subtractions are done. </p>
+        <div class="- topic/example example" id="GUID-5608AC61-74CB-44EA-8246-96A83CA05210__GUID-9E8387AE-6EE3-489B-AEAB-0C3478A614C4" data-ofbid="GUID-5608AC61-74CB-44EA-8246-96A83CA05210__GUID-9E8387AE-6EE3-489B-AEAB-0C3478A614C4"><h2 class="- topic/title title sectiontitle">16x16 Signed Multiply
+                Algorithm</h2>
+            
+            <div class="+ topic/div equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <mi>R</mi>
+                            <mi>E</mi>
+                            <mi>S</mi>
+                            <mn>3</mn>
+                            <mo>:</mo>
+                            <mi>R</mi>
+                            <mi>E</mi>
+                            <mi>S</mi>
+                            <mn>0</mn>
+                            <mo>=</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>H</mi>
+                            <mo>:</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>L</mi>
+                            <mo>•</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>H</mi>
+                            <mo>:</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>L</mi>
+                            <mo>=</mo>
+                            <mo>(</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>H</mi>
+                            <mo>•</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>H</mi>
+                            <mo>•</mo>
+                            <msup>
+                                <mrow>
+                                    <mn>2</mn>
+                                </mrow>
+                                <mrow>
+                                    <mn>16</mn>
+                                </mrow>
+                            </msup>
+                            <mo>)</mo>
+                            <mo>+</mo>
+                            <mo>(</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>H</mi>
+                            <mo>•</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>L</mi>
+                            <mo>•</mo>
+                            <msup>
+                                <mrow>
+                                    <mn>2</mn>
+                                </mrow>
+                                <mrow>
+                                    <mn>8</mn>
+                                </mrow>
+                            </msup>
+                            <mo>)</mo>
+                            <mo>+</mo>
+                            <mo>(</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>L</mi>
+                            <mo>•</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>H</mi>
+                            <mo>•</mo>
+                            <msup>
+                                <mrow>
+                                    <mn>2</mn>
+                                </mrow>
+                                <mrow>
+                                    <mn>8</mn>
+                                </mrow>
+                            </msup>
+                            <mo>)</mo>
+                            <mo>+</mo>
+                            <mo>(</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>L</mi>
+                            <mo>•</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>L</mi>
+                            <mo>)</mo>
+                            <mo>+</mo>
+                            <mo>(</mo>
+                            <mo>−</mo>
+                            <mn>1</mn>
+                            <mo>•</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>H</mi>
+                            <mo>&lt;</mo>
+                            <mn>7</mn>
+                            <mo>&gt;</mo>
+                            <mo>•</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>H</mi>
+                            <mo>:</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>L</mi>
+                            <mo>•</mo>
+                            <msup>
+                                <mrow>
+                                    <mn>2</mn>
+                                </mrow>
+                                <mrow>
+                                    <mn>16</mn>
+                                </mrow>
+                            </msup>
+                            <mo>)</mo>
+                            <mo>+</mo>
+                            <mo>(</mo>
+                            <mo>−</mo>
+                            <mn>1</mn>
+                            <mo>•</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>H</mi>
+                            <mo>&lt;</mo>
+                            <mn>7</mn>
+                            <mo>&gt;</mo>
+                            <mo>•</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>H</mi>
+                            <mo>:</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>L</mi>
+                            <mo>•</mo>
+                            <msup>
+                                <mrow>
+                                    <mn>2</mn>
+                                </mrow>
+                                <mrow>
+                                    <mn>16</mn>
+                                </mrow>
+                            </msup>
+                            <mo>)</mo>
+                        </mrow>
+                    </math></div>
+        </div>
+        <div class="- topic/example example" id="GUID-5608AC61-74CB-44EA-8246-96A83CA05210__GUID-43E13CE8-678D-4F03-8F6A-97851225BD5C" data-ofbid="GUID-5608AC61-74CB-44EA-8246-96A83CA05210__GUID-43E13CE8-678D-4F03-8F6A-97851225BD5C"><h2 class="- topic/title title sectiontitle">16x16 Signed Multiply
+                Routine</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c" id="GUID-5608AC61-74CB-44EA-8246-96A83CA05210__ID-42106-00000145" data-ofbid="GUID-5608AC61-74CB-44EA-8246-96A83CA05210__ID-42106-00000145">
+        MOVF    ARG1L, W
+        MULW    ARG2L           ; ARG1L * ARG2L → PRODH:PRODL 
+        MOVF    PRODH, RES1     ;
+        MOVFF   PRODL, RES0     ;
+;
+        MOVF    ARG1H, W
+        MULWF   ARG2H           ; ARG1H * ARG2H → PRODH:PRODL
+        MOVFF   PRODH, RES3     ;
+        MOVFF   PRODL, RES2     ;
+;
+        MOVF    ARG1L, W
+        MULWF   ARG2H           ; ARG1L * ARG2H → PRODH:PRODL
+        MOVF    PRODL, W        ;
+        ADDWF   RES1, F         ; Add cross products
+        MOVF    PRODH, W        ;
+        ADDWFC  RES2, F         ;
+        CLRF    WREG            ;
+        ADDWFC  RES3, F         ;
+;
+        MOVF    ARG1H, W        ;
+        MULWF   ARG2L           ; ARG1H * ARG2L → PRODH:PRODL
+        MOVF    PRODL, W        ;
+        ADDWF   RES1, F         ; Add cross products
+        MOVF    PRODH, W        ;
+        ADDWFC  RES2, F         ;
+        CLRF    WREG            ;
+        ADDWFC  RES3, F         ;
+;
+        BTFSS   ARG2H, <span class="hl-number">7</span>        ; ARG2H:ARG2L neg?
+        BRA     SIGN_ARG1       ; no, check ARG1
+        MOVF    ARG1L, W        ;
+        SUBWF   RES2            ;
+        MOVF    ARG1H, W        ;
+        SUBWFB  RES3 
+; 
+&#x2028;SIGN_ARG1:
+        BTFSS   ARG1H, <span class="hl-number">7</span>        ; ARG1H:ARG1L neg?
+        BRA     CONT_CODE       ; no, done
+        MOVF    ARG2L, W        ;
+        SUBWF   RES2            ;
+        MOVF    ARG2H, W        ;
+        SUBWFB  RES3
+;
+CONT_CODE:
+          :
+
+</pre>
+        </div>
+    </div>
+
+</body>
+</html>

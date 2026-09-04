@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.2 Clock Switching — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC.html"/>
+<link rel="next" href="GUID-EE6A06F4-A04B-4D85-BA51-9C9047654FE5.html"/>
+<link rel="up" href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li>12.2 Clock Switching</li></ol>
+  <div class="sib"><span>← <a href="GUID-6AC5F300-7E37-4F3C-A6D2-C56B5A60A8BC.html" rel="prev">Oscillator Status and Manual Enable</a></span><span><a href="GUID-EE6A06F4-A04B-4D85-BA51-9C9047654FE5.html" rel="next">NOSC and NDIV Bits</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-26C95464-A09C-4F40-954D-AACD69628A0E__GUID-7785CB6F-9B78-4C6C-A9B0-9B1D5BEC2D47" style="">12.2 Clock Switching</h1>
+<div class="- topic/body body">
+<div class="- topic/p p">The system clock source can be switched between external and internal clock sources
+            via software using the New Oscillator Source Request (<a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a>) and New Divider Selection Request (<a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GHR_WSL_YGB" title="New Divider Selection Request">NDIV</a>) bits. The following sources can be selected:<ul class="- topic/ul ul" id="GUID-26C95464-A09C-4F40-954D-AACD69628A0E__UL_O5M_DWD_YGB" data-ofbid="GUID-26C95464-A09C-4F40-954D-AACD69628A0E__UL_O5M_DWD_YGB">
+                <li class="- topic/li li" id="GUID-26C95464-A09C-4F40-954D-AACD69628A0E__GUID-97EEB5AD-6B9B-49E1-8A8E-272B6B3C790E" data-ofbid="GUID-26C95464-A09C-4F40-954D-AACD69628A0E__GUID-97EEB5AD-6B9B-49E1-8A8E-272B6B3C790E">External Oscillator (EXTOSC)</li>
+                <li class="- topic/li li" id="GUID-26C95464-A09C-4F40-954D-AACD69628A0E__GUID-9FC86651-E456-4A8F-AF46-FB083BD15EBA" data-ofbid="GUID-26C95464-A09C-4F40-954D-AACD69628A0E__GUID-9FC86651-E456-4A8F-AF46-FB083BD15EBA">EXTOSC with 4x PLL</li>
+                <li class="- topic/li li" id="GUID-26C95464-A09C-4F40-954D-AACD69628A0E__GUID-22E6F376-BDAA-4292-B1C1-C761C716D94D" data-ofbid="GUID-26C95464-A09C-4F40-954D-AACD69628A0E__GUID-22E6F376-BDAA-4292-B1C1-C761C716D94D">High-Frequency Internal
+                    Oscillator (HFINTOSC)</li>
+                <li class="- topic/li li" id="GUID-26C95464-A09C-4F40-954D-AACD69628A0E__GUID-F32AD870-09F2-475A-8116-0122670F777C" data-ofbid="GUID-26C95464-A09C-4F40-954D-AACD69628A0E__GUID-F32AD870-09F2-475A-8116-0122670F777C">Low-Frequency Internal Oscillator
+                    (LFINTOSC)</li>
+                <li class="- topic/li li" id="GUID-26C95464-A09C-4F40-954D-AACD69628A0E__GUID-54A0F353-9F85-4F46-9585-25AE2583BDC2" data-ofbid="GUID-26C95464-A09C-4F40-954D-AACD69628A0E__GUID-54A0F353-9F85-4F46-9585-25AE2583BDC2">Secondary Oscillator (SOSC)</li>
+            </ul></div>
+        <div class="- topic/p p">The Clock Switch Enable (CSWEN) Configuration bit can be used to enable or
+            disable the clock switching capability. When CSWEN is set (CSWEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>),
+            writes to <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a> and <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GHR_WSL_YGB" title="New Divider Selection Request">NDIV</a> by user software will allow the system clock to switch
+            between sources or frequencies. When CSWEN is clear (CSWEN = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), writes
+            to NOSC and NDIV are ignored, preventing the system clock from switching from one source
+            to another.</div>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-EE6A06F4-A04B-4D85-BA51-9C9047654FE5.html">12.2.1 NOSC and NDIV Bits</a></li><li><a href="GUID-BB1A8A69-FF43-4A25-9131-F1DA42CAAB18.html">12.2.2 COSC and CDIV Bits</a></li><li><a href="GUID-62590B6D-4A64-4135-B351-CBBCFF83B793.html">12.2.3 CSWHOLD</a></li><li><a href="GUID-303128D4-96DB-4AB4-9068-7CD2A08AE796.html">12.2.4 PLL Input Switch</a></li><li><a href="GUID-854C5FFD-71EE-4FE2-AB62-B44462FBBE03.html">12.2.5 Clock Switch and Sleep</a></li></ul>
+</nav>
+</body>
+</html>

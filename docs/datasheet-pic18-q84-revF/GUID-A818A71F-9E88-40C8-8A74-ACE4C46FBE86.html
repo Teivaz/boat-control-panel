@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.2.7 Host Operation in 7-Bit Addressing Modes — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248.html"/>
+<link rel="next" href="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E.html"/>
+<link rel="up" href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html">37.4.2 I2C Host Mode Operation</a></li><li>37.4.2.7 Host Operation in 7-Bit Addressing Modes</li></ol>
+  <div class="sib"><span>← <a href="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248.html" rel="prev">Stop Condition Timing</a></span><span><a href="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E.html" rel="next">Host Transmission (7-Bit Addressing Mode)</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-A818A71F-9E88-40C8-8A74-ACE4C46FBE86__GUID-0755FD8F-B3AF-4097-A107-C3666F94A246" style="">37.4.2.7 Host Operation in 7-Bit Addressing
+        Modes</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">In Host 7-bit Addressing modes, the client’s 7-bit address and
+                R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit value are loaded into either <a class="- topic/xref xref" href="GUID-51DC1914-5FC6-4DB6-849E-AC7B6E17D460.html" title="I2CxADB1">I2CxADB1</a> or
+                <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a>,
+            depending on the Address Buffer Disable (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a>) bit setting. When the host wishes to read data from the client,
+            software must set the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). When the host wishes to write data to the client, software must
+            clear the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>).</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-07DD63C4-C56A-457F-9A5F-4CA65CE8980E.html">37.4.2.7.1 Host Transmission (7-Bit Addressing Mode)</a></li><li><a href="GUID-D8A5DED1-9129-4E0D-A171-D08AC5C14DC5.html">37.4.2.7.2 Host Reception (7-Bit Addressing Mode)</a></li></ul>
+</nav>
+</body>
+</html>

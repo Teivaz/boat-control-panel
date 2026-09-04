@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.2 I2C Host Mode Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF.html"/>
+<link rel="next" href="GUID-049CEACE-8FFA-4FC0-AA1D-E869D5037CAB.html"/>
+<link rel="up" href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li>37.4.2 I2C Host Mode Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF.html" rel="prev">Client Reception (10-Bit Addressing Mode)</a></span><span><a href="GUID-049CEACE-8FFA-4FC0-AA1D-E869D5037CAB.html" rel="next">Bus Free Time</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__GUID-09C5E3A2-875D-4679-97AD-AD3A0A2BB078" style="">37.4.2 I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Host Mode Operation</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C module provides two Host Operation modes as selected by the I2C Mode
+            Select (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_MST_254_LGB" title="I2C Mode Select">MODE</a>) bits:</div>
+        <ul class="- topic/ul ul" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__UL_GMM_1JL_KGB" data-ofbid="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__UL_GMM_1JL_KGB">
+            <li class="- topic/li li" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__GUID-32935A08-CF6C-4082-9E03-4CAD31DD6D5E" data-ofbid="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__GUID-32935A08-CF6C-4082-9E03-4CAD31DD6D5E">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Host mode with 7-bit
+                addressing</li>
+            <li class="- topic/li li" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__GUID-D2A54619-A90D-4D65-A369-B4FB225220E4" data-ofbid="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__GUID-D2A54619-A90D-4D65-A369-B4FB225220E4">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Host mode with 10-bit
+                addressing</li>
+        </ul>
+        <div class="- topic/p p">To begin any I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C communication, host hardware checks to ensure that the bus is
+            in an Idle state, which means both the SCL and SDA lines are floating in a high Logic
+            state as indicated by the Bus Free Status (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#GUID-967969A7-72DF-42E8-8CE4-4AD59A4CBE74" title="Bus Free Status(2)">BFRE</a>) bit.</div>
+        <div class="- topic/p p">Once Host hardware has determined that the bus is free (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#GUID-967969A7-72DF-42E8-8CE4-4AD59A4CBE74" title="Bus Free Status(2)">BFRE</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), it examines the state of the
+            Address Buffer Disable (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a>) bit. The ABD bit determines whether the I2CxADB registers are used.</div>
+        <p class="- topic/p p">When <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> is clear (ABD = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), address buffers <a class="- topic/xref xref" href="GUID-E7CC5B44-63E1-40F0-8F67-30D643607BC5.html">I2CxADB0</a> and
+                <a class="- topic/xref xref" href="GUID-51DC1914-5FC6-4DB6-849E-AC7B6E17D460.html" title="I2CxADB1">I2CxADB1</a>
+            are active. In 7-bit Addressing mode, software loads I2CxADB1 with the 7-bit client
+            address and R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit setting and also loads <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> with
+            the first byte of data. In 10-bit Addressing mode, software loads I2CxADB1 with the
+            address high byte and I2CxADB0 with the address low byte and also loads I2CxTXB with the
+            first data byte. Software must issue a Start condition to initiate communication with
+            the client.</p>
+        <div class="- topic/p p">When <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> is set (ABD = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the address buffers are
+            inactive. In this case, communication begins as soon as software loads the client
+            address into <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a>. Writes to the Start (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_YPG_M34_LGB" title="Host Start (used only when MODE = 1xx)">S</a>) bit are ignored.</div>
+        <p class="- topic/p p">In 7-bit Addressing mode, the Least Significant bit (LSb) of the 7-bit address byte acts
+            as the Read/not Write (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span>) information bit, while in 10-bit
+            Addressing mode, the LSb of the address high byte is reserved as the
+                R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit. When R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> is set, the host
+            intends to read data from the client (see the figure below). When
+                R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> is clear, the host intends to write data to the client
+            (see the figure below). The host may also wish to read or write data to a specific
+            location, such as writing to a specific EEPROM location. In this case, the host issues a
+            Start condition, followed by the client’s address with the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span>
+            bit clear. Once the client acknowledges the address, the first data byte following the
+            7-bit or 10-bit address is used as the client’s specific register location. If the host
+            intends to read data from the specific location, it must issue a Restart condition,
+            followed by the client address with the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit set (see the
+            figure below). If the addressed client device exists on the bus, it must respond with an
+            Acknowledge (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>) sequence.</p>
+        <p class="- topic/p p">Once a client has acknowledged its address, the host begins to receive data from the
+            client or transmits data to the client. Data are always transmitted Most Significant bit
+            (MSb) first. When the host wishes to halt further communication, it transmits either a
+            Stop condition, signaling to the client that communication is to be terminated, or a
+            Restart condition, informing the bus that the current host wishes to hold the bus to
+            communicate with the same or other client devices.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__FIG_XMY_ZJM_KGB" data-ofbid="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__FIG_XMY_ZJM_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-23. <span id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__GUID-541D42B5-261C-4A4D-A941-37F29FC4D0C5" class="fig--title">7-Bit Host Read Diagram</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__IMAGE_YMY_ZJM_KGB" src="GUID-DF19F9FE-FE3A-4FCA-AB07-3D149D4C9EF5-high.svg"/></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__FIG_KD2_3KM_KGB" data-ofbid="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__FIG_KD2_3KM_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-24. <span id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__GUID-5A6ED55A-0DA3-4599-8837-F21A7564E62E" class="fig--title">7-Bit Host Read Diagram (from a
+                specific memory/register location)</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__IMAGE_LD2_3KM_KGB" src="GUID-AB93233E-34DD-4949-8FE3-1C534D39B700-high.svg"/></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__FIG_XHB_LKM_KGB" data-ofbid="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__FIG_XHB_LKM_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-25. <span id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__GUID-196D44F0-2A0E-4477-9F87-A97B1DBC32D9" class="fig--title">10-Bit Host Read Diagram</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__IMAGE_YHB_LKM_KGB" src="GUID-674DBB39-8419-48BD-A6AB-7D79BA4886E1-high.svg"/></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__FIG_PJN_NKM_KGB" data-ofbid="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__FIG_PJN_NKM_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-26. <span id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__GUID-53363A08-6ECF-439F-9044-E75968CBB6DE" class="fig--title">7-Bit Host Write Diagram</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__IMAGE_QJN_NKM_KGB" src="GUID-AA3AA720-2B82-4558-B285-1EAF755228BD-high.svg"/></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__FIG_OVZ_QKM_KGB" data-ofbid="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__FIG_OVZ_QKM_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-27. <span id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__GUID-6F226F16-27A8-4BB2-A12F-1BCBDB3B9DC8" class="fig--title">7-Bit Host Write Diagram (to a
+                specific memory/register location)</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__IMAGE_PVZ_QKM_KGB" src="GUID-1F101069-952B-40FE-BDEC-BB0DFDBCB805-high.svg"/></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__FIG_O2H_5KM_KGB" data-ofbid="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__FIG_O2H_5KM_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-28. <span id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__GUID-71FF2B22-C6DA-4AB6-91C9-B3CC61BEC021" class="fig--title">10-Bit Host Write Diagram</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514__IMAGE_P2H_5KM_KGB" src="GUID-783132C8-3EE3-438F-80B4-FE80950B2966-high.svg"/></span>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-049CEACE-8FFA-4FC0-AA1D-E869D5037CAB.html">37.4.2.1 Bus Free Time</a></li><li><a href="GUID-F9FC65EE-A139-4C91-B508-5B24574998AC.html">37.4.2.2 Host Clock Timing</a></li><li><a href="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977.html">37.4.2.3 Start Condition Timing</a></li><li><a href="GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57.html">37.4.2.4 Acknowledge Sequence Timing</a></li><li><a href="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76.html">37.4.2.5 Restart Condition Timing</a></li><li><a href="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248.html">37.4.2.6 Stop Condition Timing</a></li><li><a href="GUID-A818A71F-9E88-40C8-8A74-ACE4C46FBE86.html">37.4.2.7 Host Operation in 7-Bit Addressing Modes</a></li><li><a href="GUID-CB37BA3E-2338-4295-A2F3-534ACB1DACF0.html">37.4.2.8 Host Operation in 10-Bit Addressing Modes</a></li></ul>
+</nav>
+</body>
+</html>

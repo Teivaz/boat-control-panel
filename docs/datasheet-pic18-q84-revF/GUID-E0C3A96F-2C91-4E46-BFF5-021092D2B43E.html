@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.1 Overview — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html"/>
+<link rel="next" href="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923.html"/>
+<link rel="up" href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li>11.1 Overview</li></ol>
+  <div class="sib"><span>← <a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html" rel="prev">VIC - Vectored Interrupt Controller Module</a></span><span><a href="GUID-48D973E4-C3B1-4EBE-9923-F6C802069923.html" rel="next">Interrupt Control and Status Registers</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__GUID-991321BF-1183-4C4A-8965-1713A0E07CC4" style="">11.1 Overview</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The Vectored Interrupt Controller (VIC) module reduces the numerous
+            peripheral interrupt request signals to a single interrupt request signal to the CPU.
+            This module includes the following major features:</p>
+        <div class="- topic/p p">
+            <ul class="- topic/ul ul" id="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__UL_KYK_CMG_5FB" data-ofbid="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__UL_KYK_CMG_5FB">
+                <li class="- topic/li li" id="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__GUID-4DD61D31-F159-46A5-A6D7-1E593CCF45FD" data-ofbid="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__GUID-4DD61D31-F159-46A5-A6D7-1E593CCF45FD">Interrupt Vector Table (IVT) with
+                    a unique vector for each interrupt source</li>
+                <li class="- topic/li li" id="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__GUID-E4DA0BA8-743A-4755-B8DA-93C6305C6AAA" data-ofbid="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__GUID-E4DA0BA8-743A-4755-B8DA-93C6305C6AAA">Fixed and ensured interrupt
+                    latency</li>
+                <li class="- topic/li li" id="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__GUID-A08A4490-C1F5-4C0C-9E7C-C9FE101EB025" data-ofbid="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__GUID-A08A4490-C1F5-4C0C-9E7C-C9FE101EB025">Programmable base address for IVT
+                    with lock</li>
+                <li class="- topic/li li" id="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__GUID-1B45E29D-A902-44F4-B628-2FA4CDC1592B" data-ofbid="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__GUID-1B45E29D-A902-44F4-B628-2FA4CDC1592B">Two user-selectable priority
+                    levels - High priority and low priority</li>
+                <li class="- topic/li li" id="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__GUID-FA6B820E-FC2E-418C-B436-13FC45490B40" data-ofbid="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__GUID-FA6B820E-FC2E-418C-B436-13FC45490B40">Two levels of context saving</li>
+                <li class="- topic/li li" id="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__GUID-A6CEE750-7666-4147-8643-51FF6C36BEA5" data-ofbid="GUID-E0C3A96F-2C91-4E46-BFF5-021092D2B43E__GUID-A6CEE750-7666-4147-8643-51FF6C36BEA5">Interrupt state Status bits to
+                    indicate the current execution status of the CPU</li>
+            </ul>
+        </div>
+        <p class="- topic/p p">The VIC module assembles all of the interrupt request signals and resolves the interrupts
+            based on both a fixed natural order priority (i.e., determined by the IVT) and a
+            user-assigned priority (i.e., determined by the IPRx registers), thereby eliminating
+            scanning of interrupt sources. </p>
+    </div>
+
+</body>
+</html>

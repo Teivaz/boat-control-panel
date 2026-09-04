@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>27.1.6.5 Windowed Measurement Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-AB5B1B36-86AD-49F2-99CF-4E6B1FA9DA8F.html"/>
+<link rel="next" href="GUID-CB90F4E1-E55A-4549-A6E9-E9DB8C30D9C9.html"/>
+<link rel="up" href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3.html">27 SMT - Signal Measurement Timer</a></li><li><a href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html">27.1 SMT Operation</a></li><li><a href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html">27.1.6 Modes of Operation</a></li><li>27.1.6.5 Windowed Measurement Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-AB5B1B36-86AD-49F2-99CF-4E6B1FA9DA8F.html" rel="prev">High and Low Measurement Mode</a></span><span><a href="GUID-CB90F4E1-E55A-4549-A6E9-E9DB8C30D9C9.html" rel="next">Gated Window Measurement Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-7E85A348-2DC5-42EF-8398-8CE490CC36DE__GUID-B38C2678-6751-4798-9C26-B7E97C05607F" style="">27.1.6.5 Windowed Measurement Mode</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">This mode measures the period of the SMT_window input, selected with the <a class="- topic/xref xref" href="GUID-9CF014AF-C963-4096-BD92-BEF39165AFD7.html#BITFIELD_PVX_5S2_VZ" title="SMT Window Signal Selection">WSEL</a> bits, relative to the SMT clock. On the rising edge of the window
+            input, the SMTxTMR register value is written to the SMTxCPR register. In Repeat mode,
+            the SMTxTMR register is reset and continues to increment. The capture and Reset process
+            repeats on the next rising edge. Refer to the figures below.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-7E85A348-2DC5-42EF-8398-8CE490CC36DE__FIG_F1P_X1Z_1BB" data-ofbid="GUID-7E85A348-2DC5-42EF-8398-8CE490CC36DE__FIG_F1P_X1Z_1BB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 27-10. <span id="GUID-7E85A348-2DC5-42EF-8398-8CE490CC36DE__GUID-26303358-97F1-4F25-BEB9-E8AE8840C272" class="fig--title">Windowed Measurement Mode, Repeat
+                Acquisition Timing Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-D21D146C-1DCF-4226-B155-4275E851A46A-high.pdf#toolbar=1" width="450" height="1286.5783822476735"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-7E85A348-2DC5-42EF-8398-8CE490CC36DE__FIG_MCY_X1Z_1BB" data-ofbid="GUID-7E85A348-2DC5-42EF-8398-8CE490CC36DE__FIG_MCY_X1Z_1BB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 27-11. <span id="GUID-7E85A348-2DC5-42EF-8398-8CE490CC36DE__GUID-7ABF0C19-206D-4BC3-9ED8-7A2813FF18D4" class="fig--title">Windowed Measurement Mode, Single
+                Acquisition Timing Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-EC85F596-7101-4A17-83D9-1EEE6AF32B26-high.pdf#toolbar=1" width="450" height="1246.2698961937717"></iframe></span>
+        </figure>
+        
+    </div>
+
+</body>
+</html>

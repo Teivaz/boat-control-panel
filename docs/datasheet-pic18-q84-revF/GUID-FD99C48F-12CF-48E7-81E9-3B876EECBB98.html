@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>39.1.2 TAP Controller — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B5940FA5-11F5-44D1-8F0B-C9A6AC861A48.html"/>
+<link rel="next" href="GUID-9E3787FA-6F24-4DDC-B6CA-D0D4ACC2E9ED.html"/>
+<link rel="up" href="GUID-E2B0B0B9-FED8-49DC-89BC-920E93849E12.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF.html">39 JTAG Boundary Scan</a></li><li><a href="GUID-E2B0B0B9-FED8-49DC-89BC-920E93849E12.html">39.1 Test Access Port (TAP) and TAP Controller</a></li><li>39.1.2 TAP Controller</li></ol>
+  <div class="sib"><span>← <a href="GUID-B5940FA5-11F5-44D1-8F0B-C9A6AC861A48.html" rel="prev">TAP</a></span><span><a href="GUID-9E3787FA-6F24-4DDC-B6CA-D0D4ACC2E9ED.html" rel="next">JTAG Registers</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-FD99C48F-12CF-48E7-81E9-3B876EECBB98__GUID-A9891877-18B4-4E9F-BF01-703113BA50B7" style="">39.1.2 TAP Controller</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The TAP controller on <span class="- topic/ph ph">PIC18-Q84</span> family devices is a
+            synchronous finite state machine that implements the standard 16 states for JTAG. <a class="- topic/xref xref" href="#GUID-FD99C48F-12CF-48E7-81E9-3B876EECBB98__FIG_AYD_SYF_R3B"><span>Figure 39-3</span></a> shows all the module states of the TAP
+            controller. All Boundary Scan Test (BST) instructions and test results are communicated
+            through the TAP via the TDI pin in a serial format, Least Significant bit first.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-FD99C48F-12CF-48E7-81E9-3B876EECBB98__FIG_AYD_SYF_R3B" data-ofbid="GUID-FD99C48F-12CF-48E7-81E9-3B876EECBB98__FIG_AYD_SYF_R3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 39-3. <span id="GUID-FD99C48F-12CF-48E7-81E9-3B876EECBB98__GUID-F04C20D3-B3E6-4672-AB85-57CC6AF97977" class="fig--title">TAP Controller Module State
+                    Diagram</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-FD99C48F-12CF-48E7-81E9-3B876EECBB98__IMAGE_BYD_SYF_R3B" src="GUID-9474EE57-C6E4-4BFD-9670-F98B269BEFF4-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p">By manipulating the state of TMS and the clock pulses on TCK, the TAP controller can be
+            moved through all of the defined module states to capture, shift and update various
+            instruction and/or data registers. <a class="- topic/xref xref" href="#GUID-FD99C48F-12CF-48E7-81E9-3B876EECBB98__FIG_AYD_SYF_R3B"><span>Figure 39-3</span></a> shows
+            the state changes on TMS as the controller cycles through its state machine. <a class="- topic/xref xref" href="#GUID-FD99C48F-12CF-48E7-81E9-3B876EECBB98__FIG_FGM_24G_R3B"><span>Figure 39-4</span></a> shows the timing of TMS and TCK while
+            transitioning the controller through the appropriate module states for shifting in an
+            instruction. In this example, the sequence shown demonstrates how an instruction is read
+            by the TAP controller. All TAP controller states are entered on the rising edge of the
+            TCK pin. In this example, the TAP controller starts in the Test-Logic Reset state. Since
+            the state of the TAP controller is dependent on the previous instruction and, therefore,
+            may be unknown, it is good programming practice to begin in the Test-Logic Reset
+            state.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-FD99C48F-12CF-48E7-81E9-3B876EECBB98__FIG_FGM_24G_R3B" data-ofbid="GUID-FD99C48F-12CF-48E7-81E9-3B876EECBB98__FIG_FGM_24G_R3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 39-4. <span id="GUID-FD99C48F-12CF-48E7-81E9-3B876EECBB98__GUID-439ED861-53F2-41CC-8950-1986C40FC1F6" class="fig--title">TAP State Transitions for
+                    Shifting in an Instruction</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-FD99C48F-12CF-48E7-81E9-3B876EECBB98__IMAGE_GGM_24G_R3B" src="GUID-865BFDD9-5CD1-48D8-B017-12D21A32E0A9-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p">When TMS is asserted low on the next rising edge of TCK, the TAP controller will move
+            into the Run-Test/Idle state. On the next two rising edges of TCK, TMS is high; this
+            moves the TAP controller to the Select-IR-Scan state. </p>
+        <p class="- topic/p p">On the next two rising edges of TCK, TMS is held low; this moves the TAP controller into
+            the Shift-IR state. An instruction is shifted into the Instruction Shift register via
+            the TDI on the next four rising edges of TCK. After the TAP controller enters this
+            state, the TDO pin goes from a High-Impedance state to Active. The controller shifts out
+            the initial state of the Instruction Register (IR) on the TDO pin, on the falling edges
+            of TCK, and continues to shift out the contents of the Instruction Register while in the
+            Shift-IR state. The TDO returns to the High-Impedance state on the first falling edge of
+            TCK upon exiting the Shift state.</p>
+        <p class="- topic/p p">On the next three rising edges of TCK, the TAP controller exits the Shift-IR state,
+            updates the Instruction Register and then moves back to the Run-Test/Idle state. Data,
+            or another instruction, can now be shifted into the appropriate Data or Instruction
+            Register.</p>
+    </div>
+
+</body>
+</html>

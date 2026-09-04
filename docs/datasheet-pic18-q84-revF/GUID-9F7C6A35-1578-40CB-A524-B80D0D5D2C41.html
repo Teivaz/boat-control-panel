@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>33.5 Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-9CE9BCBC-0918-47BB-B3BF-0113FD19CFF8.html"/>
+<link rel="next" href="GUID-C0CDFEB7-4CB7-4608-B97F-86D14CC8A067.html"/>
+<link rel="up" href="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-DE52E8B8-AC6B-4DFB-9E66-9A084F976574.html">33 NCO - Numerically Controlled Oscillator Module</a></li><li>33.5 Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-9CE9BCBC-0918-47BB-B3BF-0113FD19CFF8.html" rel="prev">Output Polarity Control</a></span><span><a href="GUID-C0CDFEB7-4CB7-4608-B97F-86D14CC8A067.html" rel="next">Effects of a Reset</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-9F7C6A35-1578-40CB-A524-B80D0D5D2C41__GUID-BD824D11-1A3B-4375-A376-9B9C3F43751A" style="">33.5 Interrupts</h1>
+<div class="- topic/body concept/conbody body conbody">
+<div class="- topic/p p">When the accumulator overflows, the NCO Interrupt Flag bit, NCOxIF, in the associated
+            PIR register is set. To enable interrupt service on this event, the following bits must
+            be set:<ul class="- topic/ul ul" id="GUID-9F7C6A35-1578-40CB-A524-B80D0D5D2C41__UL_IHQ_PZ5_T1B" data-ofbid="GUID-9F7C6A35-1578-40CB-A524-B80D0D5D2C41__UL_IHQ_PZ5_T1B">
+                <li class="- topic/li li" id="GUID-9F7C6A35-1578-40CB-A524-B80D0D5D2C41__GUID-7C13CE39-DE0B-4E0A-A358-E1EB94B5BF7F" data-ofbid="GUID-9F7C6A35-1578-40CB-A524-B80D0D5D2C41__GUID-7C13CE39-DE0B-4E0A-A358-E1EB94B5BF7F"><a class="- topic/xref xref" href="GUID-D920EAEF-31A2-486C-8B11-A344DD40CD24.html#ID-0000001B" title="NCO Enable">EN</a> bit</li>
+                <li class="- topic/li li" id="GUID-9F7C6A35-1578-40CB-A524-B80D0D5D2C41__GUID-247BC91B-A43A-40D9-B2D7-D6674ACF9D11" data-ofbid="GUID-9F7C6A35-1578-40CB-A524-B80D0D5D2C41__GUID-247BC91B-A43A-40D9-B2D7-D6674ACF9D11">NCOxIE bit in the associated PIE
+                    register</li>
+                <li class="- topic/li li" id="GUID-9F7C6A35-1578-40CB-A524-B80D0D5D2C41__GUID-CD43707D-2BDC-4869-99C7-E37427125AED" data-ofbid="GUID-9F7C6A35-1578-40CB-A524-B80D0D5D2C41__GUID-CD43707D-2BDC-4869-99C7-E37427125AED">Peripheral and Global Interrupt
+                    Enable bits</li>
+            </ul></div>
+        <p class="- topic/p p">The interrupt must be cleared by software by clearing the NCOxIF bit in the
+            Interrupt Service Routine.</p>
+</div>
+
+</body>
+</html>

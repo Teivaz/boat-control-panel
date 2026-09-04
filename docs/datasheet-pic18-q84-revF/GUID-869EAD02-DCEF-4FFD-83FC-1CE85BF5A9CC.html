@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Digital Peripherals — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82.html"/>
+<link rel="next" href="GUID-0AE06A74-939F-40A9-90DB-EB56ACD23921.html"/>
+<link rel="up" href="GUID-113CC601-7B6A-42CD-BF1D-1A1AC01EC33F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-113CC601-7B6A-42CD-BF1D-1A1AC01EC33F.html">Features</a></li><li>Digital Peripherals</li></ol>
+  <div class="sib"><span>← <a href="GUID-8F81132D-1DE6-47E3-A99B-0EDB49BF7E82.html" rel="prev">Power-Saving Functionality</a></span><span><a href="GUID-0AE06A74-939F-40A9-90DB-EB56ACD23921.html" rel="next">Analog Peripherals</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-F149FE94-39F7-4642-97DF-2D96625BCCAF" style=""> Digital Peripherals</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_DQ1_1RY_CFB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_DQ1_1RY_CFB">
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-D1846DF2-6B2F-474F-A051-049BA95C0391" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-D1846DF2-6B2F-474F-A051-049BA95C0391">Four 16-Bit Pulse-Width Modulators
+                    (PWM):<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_Y3P_VZY_CFB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_Y3P_VZY_CFB">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-1D789198-A057-49F0-801C-6FD908761AA7" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-1D789198-A057-49F0-801C-6FD908761AA7">Dual outputs for each PWM
+                        module</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-864A471B-AD1B-4DF9-AD87-A2CCB0372D76" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-864A471B-AD1B-4DF9-AD87-A2CCB0372D76">Integrated 16-bit
+                        timer/counter</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-13BB5FD7-9F3B-4CC4-A2F6-6236617A23AC" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-13BB5FD7-9F3B-4CC4-A2F6-6236617A23AC">Double-buffered user
+                        registers for duty cycles</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-4C4554D0-C84B-4F56-8717-2F5CDD6614A8" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-4C4554D0-C84B-4F56-8717-2F5CDD6614A8">Right/Left/Center/Variable
+                        aligned modes of operation</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-D4B57940-F4CC-4B28-9F4A-092C65F38CF3" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-D4B57940-F4CC-4B28-9F4A-092C65F38CF3">Multiple clock and Reset
+                        signal selections</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-3BD9C70D-A257-4BA2-B0ED-BB43E425B835" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-3BD9C70D-A257-4BA2-B0ED-BB43E425B835">Three 16-Bit Timers (TMR0/1/3)</li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-AAD9AA43-0022-4BA8-928A-9406F47D27C9" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-AAD9AA43-0022-4BA8-928A-9406F47D27C9">Three 8-Bit Timers (TMR2/4/6) with
+                Hardware Limit Timer (HLT)</li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-8D178DD6-3E9E-4E21-8D4C-9275BFF88CBF" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-8D178DD6-3E9E-4E21-8D4C-9275BFF88CBF">Two Universal Timers
+                    (TMRU16A/16B):<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_DRN_1CJ_S3B" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_DRN_1CJ_S3B">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-22CEA581-CC9E-4547-BB64-FA011FB317A3" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-22CEA581-CC9E-4547-BB64-FA011FB317A3">New Timer modules with
+                        features of TMR0/TMR1/TMR2 (Gate, Hardware Limit)</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-2D026484-7064-428D-95FA-5805E7C0E6A2" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-2D026484-7064-428D-95FA-5805E7C0E6A2">Two 16-bit timers can be
+                        chained together to create a combined 32-bit timer</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-8DBC58DA-FCBF-4B97-A67D-FFBE7A67B5B9" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-8DBC58DA-FCBF-4B97-A67D-FFBE7A67B5B9">Eight Configurable Logic Cell
+                    (CLC):<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_LYL_Q1Z_CFB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_LYL_Q1Z_CFB">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-A3009E80-7A19-47C8-BAAC-EEDE40DB6100" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-A3009E80-7A19-47C8-BAAC-EEDE40DB6100">Integrated combinational and
+                        sequential logic</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-A50DE2EF-01D3-4EEB-A8A3-37FF8E609213" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-A50DE2EF-01D3-4EEB-A8A3-37FF8E609213">Three Complimentary Waveform
+                Generators (CWG):<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_ND4_51Z_CFB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_ND4_51Z_CFB">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-1AC9C665-68B4-4B6B-90AE-B4B1108A0DB1" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-1AC9C665-68B4-4B6B-90AE-B4B1108A0DB1">Rising and falling edge
+                        dead-band control</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-D0BE7ED8-0096-4BA1-A76F-E4B311B4BC6B" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-D0BE7ED8-0096-4BA1-A76F-E4B311B4BC6B">Full-bridge, half-bridge,
+                        1-channel drive</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-6979466E-2E7B-4D7A-8884-FAF74D97C53B" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-6979466E-2E7B-4D7A-8884-FAF74D97C53B">Multiple signal sources</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-0C0F5FDC-BD89-4E40-BBD8-A82F35CC59C6" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-0C0F5FDC-BD89-4E40-BBD8-A82F35CC59C6">Programmable dead band</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-3C9BAAED-5752-4EAF-8F08-04D36626F2B8" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-3C9BAAED-5752-4EAF-8F08-04D36626F2B8">Fault-shutdown input</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-141CC481-1DDF-48C8-8718-FD832E2E8077" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-141CC481-1DDF-48C8-8718-FD832E2E8077">Three Capture/Compare/PWM (CCP)
+                    Modules:<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_WJN_XWG_GFB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_WJN_XWG_GFB">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-1ACDBF32-F097-4605-95EC-8934F766EDEF" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-1ACDBF32-F097-4605-95EC-8934F766EDEF">16-bit resolution for
+                        Capture/Compare modes</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-F5D7FFC6-8FBA-4343-A8B4-6ECA3CBD8C69" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-F5D7FFC6-8FBA-4343-A8B4-6ECA3CBD8C69">10-bit resolution for PWM
+                        mode</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-E0E3EE15-D0B5-4A09-994A-78016A4CB169" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-E0E3EE15-D0B5-4A09-994A-78016A4CB169">Three Numerically Controlled
+                Oscillators (NCO):<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_NYS_X1Z_CFB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_NYS_X1Z_CFB">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-91F48C4F-5C16-44D9-B56E-D758CF87CD1C" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-91F48C4F-5C16-44D9-B56E-D758CF87CD1C">Generates true linear
+                        frequency control and increased frequency resolution</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-0B098D9F-FB40-4F4F-BFA5-8FD2621D9F37" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-0B098D9F-FB40-4F4F-BFA5-8FD2621D9F37">Input clock up to 64 MHz</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-29FBAD39-F2F9-4D64-86FE-759DDB720003" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-29FBAD39-F2F9-4D64-86FE-759DDB720003">Signal Measurement Timer (SMT):<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_O5D_4CZ_CFB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_O5D_4CZ_CFB">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-4D9E5E96-14DE-4C88-8D16-8DEC0367045C" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-4D9E5E96-14DE-4C88-8D16-8DEC0367045C">24-bit timer/counter with
+                        prescaler</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-E7853D26-BC86-4572-A2F7-FF45EDE1285F" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-E7853D26-BC86-4572-A2F7-FF45EDE1285F">Several modes of operation
+                        like Time-of-Flight, Period and Duty Cycle measurement, etc.</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-58EA13AF-F65C-4F0B-8794-39858875D8B4" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-58EA13AF-F65C-4F0B-8794-39858875D8B4">Data Signal Modulator (DSM):<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_K5N_CBZ_CFB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_K5N_CBZ_CFB">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-06C90598-BBDF-4F4A-8E06-3D205EAF91A5" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-06C90598-BBDF-4F4A-8E06-3D205EAF91A5">Multiplex two carrier clocks,
+                        with glitch prevention feature</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-DEB92177-D4C3-4CA2-B499-6E6F182DAEF0" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-DEB92177-D4C3-4CA2-B499-6E6F182DAEF0">Multiple sources for each
+                        carrier</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-0CCD1A77-DB33-4BEE-96B4-3B2E03081F79" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-0CCD1A77-DB33-4BEE-96B4-3B2E03081F79">Programmable CRC with Memory Scan:<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_Y2N_5JT_1JB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_Y2N_5JT_1JB">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-EB2EEAB7-1F6D-4A39-B303-39BBD55E9AF8" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-EB2EEAB7-1F6D-4A39-B303-39BBD55E9AF8">Reliable data/program memory
+                        monitoring for Fail-Safe operation (e.g., Class B)</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-4FEE2BB6-0EBD-489A-ACEA-B1EA8492A703" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-4FEE2BB6-0EBD-489A-ACEA-B1EA8492A703">Calculate 16-bit CRC over any
+                        portion of Program Flash Memory</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-DA62C65B-701C-4302-B577-8FF8FD044195" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-DA62C65B-701C-4302-B577-8FF8FD044195">CAN Flexible Data-Rate (FD)
+                    Module:<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_IF4_5JT_1JB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_IF4_5JT_1JB">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-128E30AE-07AA-46B2-98A8-3DF1E05C1578" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-128E30AE-07AA-46B2-98A8-3DF1E05C1578">Functional in CAN FD or CAN
+                        2.0B modes</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-5EE8418D-ACB3-4688-9EEB-83E263167DB3" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-5EE8418D-ACB3-4688-9EEB-83E263167DB3">One dedicated transmit
+                        FIFO</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-DB45F95A-B0C5-4E8C-808C-C48BE13E52DC" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-DB45F95A-B0C5-4E8C-808C-C48BE13E52DC">Three programmable
+                        transmit/receive FIFOs</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-5430B8B5-F832-415D-8C78-A3160C245123" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-5430B8B5-F832-415D-8C78-A3160C245123">One transmit event queue</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-DC7EDAA3-5544-4C80-ACED-3FDAFEE13472" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-DC7EDAA3-5544-4C80-ACED-3FDAFEE13472">12 acceptance
+                        masks/filters</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-E2D65D0B-B422-45A1-8A79-9F7C29C1D440" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-E2D65D0B-B422-45A1-8A79-9F7C29C1D440">Five UART Modules:<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_L1Y_HBZ_CFB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_L1Y_HBZ_CFB">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-8AC055AC-D32E-4926-8C45-C43ABBA6B7FE" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-8AC055AC-D32E-4926-8C45-C43ABBA6B7FE">LIN host and client, DMX
+                        mode, DALI gear and device protocols</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-3E1EA0E3-9AEC-45E3-884D-F5C69229C581" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-3E1EA0E3-9AEC-45E3-884D-F5C69229C581">Asynchronous UART, RS-232,
+                        RS-485 compatible</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-F3E0CBDB-07A7-44C5-930A-E1AB339ACAD6" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-F3E0CBDB-07A7-44C5-930A-E1AB339ACAD6">Automatic and user timed
+                        BREAK period generation</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-B6F67AC5-3034-4862-90C4-8DFAD107021F" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-B6F67AC5-3034-4862-90C4-8DFAD107021F">Automatic checksums</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-A51955C0-59A3-4382-B7BC-87FDF0718D10" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-A51955C0-59A3-4382-B7BC-87FDF0718D10">Programmable 1, 1.5, and two
+                        Stop bits</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-EB99827D-44C1-462B-A4DA-E67CCDB2B931" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-EB99827D-44C1-462B-A4DA-E67CCDB2B931">Wake-up on BREAK
+                        reception</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-E281F8D6-6307-468E-8F16-98BA3A6EBEB0" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-E281F8D6-6307-468E-8F16-98BA3A6EBEB0">DMA compatible</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-92EA5176-5BA7-4AE6-92C8-146B000E8EB3" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-92EA5176-5BA7-4AE6-92C8-146B000E8EB3">Two SPI Modules:<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_VTF_PBZ_CFB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_VTF_PBZ_CFB">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-646F5894-9EA1-4D62-916E-861E730087AB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-646F5894-9EA1-4D62-916E-861E730087AB">Configurable length
+                        bytes</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-907CBE38-4492-4726-BFF5-4DB6AB90CBFF" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-907CBE38-4492-4726-BFF5-4DB6AB90CBFF">Arbitrary length data
+                        packets</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-EFC9BC9C-747A-4CF8-BD28-82D539F5E262" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-EFC9BC9C-747A-4CF8-BD28-82D539F5E262">Transmit-without-receive and
+                        receive-without-transmit options</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-83D0F484-6D6F-424C-9025-69E4D7AF0D9F" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-83D0F484-6D6F-424C-9025-69E4D7AF0D9F">Transfer byte counter</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-9D09BEAB-24F6-47DF-9174-D97810A81029" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-9D09BEAB-24F6-47DF-9174-D97810A81029">Separate transmit and receive
+                        buffers with 2-byte FIFO and DMA capabilities</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-83FE19AB-350B-40D4-B4CA-A2DEB85581A1" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-83FE19AB-350B-40D4-B4CA-A2DEB85581A1">One I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C module, SMBus,
+                PMBus™ Compatible:<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_XWC_5BZ_CFB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_XWC_5BZ_CFB">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-ED783A30-2F65-409A-AAD1-7DF48DAC30DA" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-ED783A30-2F65-409A-AAD1-7DF48DAC30DA">7-bit and 10-bit Addressing
+                        modes with Address Masking modes</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-36D79699-E425-4536-B469-DA1A78C053E0" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-36D79699-E425-4536-B469-DA1A78C053E0">Dedicated address, transmit
+                        and receive buffers and DMA capabilities</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-04F648AF-FC01-4E4B-84D0-5B150A3775B3" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-04F648AF-FC01-4E4B-84D0-5B150A3775B3">Bus collision detection with
+                        arbitration</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-13790668-178E-48DB-8EEF-B6ED62886A4C" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-13790668-178E-48DB-8EEF-B6ED62886A4C">Bus time-out detection and
+                        handling</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-64DDAA83-F654-48CF-B44B-213F79873470" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-64DDAA83-F654-48CF-B44B-213F79873470">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C, SMBus 2.0 and
+                        SMBus 3.0, and 1.8V input level selections</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-D7A7EB64-38DC-4E53-95EA-A08F91F78881" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-D7A7EB64-38DC-4E53-95EA-A08F91F78881">Multi-Host mode, including
+                        self-addressing</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-DC6EA9A3-5A47-4CAA-8A51-AB890459284D" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-DC6EA9A3-5A47-4CAA-8A51-AB890459284D">Device I/O Port Features:<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_GJN_CCZ_CFB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_GJN_CCZ_CFB">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-C8018B36-2F14-4859-88BD-141CCAA88A02" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-C8018B36-2F14-4859-88BD-141CCAA88A02">25
+                        I/O pins <span class="- topic/ph ph">(PIC18F26/27Q84)</span></li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-C2E52FAD-AE76-4B7F-84AA-080887314707" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-C2E52FAD-AE76-4B7F-84AA-080887314707">36 I/O pins
+                            <span class="- topic/ph ph">(PIC18F46/47Q84)</span></li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-E8436822-BD14-4379-BEDC-021016F7F070" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-E8436822-BD14-4379-BEDC-021016F7F070">44
+                        I/O pins <span class="- topic/ph ph">(PIC18F56/57Q84)</span></li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-CFC47007-9604-4623-9ACF-98F638C8E3B7" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-CFC47007-9604-4623-9ACF-98F638C8E3B7">Individually programmable I/O
+                        direction, open-drain, slew rate and weak pull-up control</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-9C0F5890-0864-4144-A619-04EAAA1B6E09" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-9C0F5890-0864-4144-A619-04EAAA1B6E09">Interrupt-on-change on most
+                        pins</li>
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-E359D4FF-92F7-453E-83CB-3F79F8A8966B" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-E359D4FF-92F7-453E-83CB-3F79F8A8966B">Three programmable external
+                        interrupt pins</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-24F8CF9F-DCA3-4C85-8CCF-2E6A01B00E8C" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-24F8CF9F-DCA3-4C85-8CCF-2E6A01B00E8C">Peripheral Pin Select (PPS):<ul class="- topic/ul ul" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_C3K_MCZ_CFB" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__UL_C3K_MCZ_CFB">
+                    <li class="- topic/li li" id="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-A923FF25-DF65-4B68-A156-99A8CAE1A5DA" data-ofbid="GUID-869EAD02-DCEF-4FFD-83FC-1CE85BF5A9CC__GUID-A923FF25-DF65-4B68-A156-99A8CAE1A5DA">Enables pin mapping of
+                        digital I/O</li>
+                </ul></li>
+        </ul>
+    </div>
+
+</body>
+</html>

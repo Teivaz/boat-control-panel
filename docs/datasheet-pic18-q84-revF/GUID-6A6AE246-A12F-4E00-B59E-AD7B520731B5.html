@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>8.5.8 CONFIG8 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-53D2A7F4-E6E5-4939-9A93-3D4A448F7588.html"/>
+<link rel="next" href="GUID-517B081F-B6A6-46A9-B5DC-85AC16D4E412.html"/>
+<link rel="up" href="GUID-D56F3DCB-5B4C-46C6-ABF8-8DE8C2AE1CD8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9C35573A-184E-4015-8E03-D617F440E66E.html">8 Device Configuration</a></li><li><a href="GUID-D56F3DCB-5B4C-46C6-ABF8-8DE8C2AE1CD8.html">8.5 Register Definitions: Configuration Words</a></li><li>8.5.8 CONFIG8</li></ol>
+  <div class="sib"><span>← <a href="GUID-53D2A7F4-E6E5-4939-9A93-3D4A448F7588.html" rel="prev">CONFIG7</a></span><span><a href="GUID-517B081F-B6A6-46A9-B5DC-85AC16D4E412.html" rel="next">CONFIG9</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__ID-00000001" style="">8.5.8  CONFIG8</h1><section id="GUID-28AFC053-07BA-4A4D-9253-10D1570CF230" class="- topic/section reference/section sidsc-register/registerDescription ">Configuration Byte 8<div class="- topic/note note notype note_notype endnote" id="GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-D1DE2FF0-15F6-478C-A8F1-FBD630066F94" data-ofbid="GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-D1DE2FF0-15F6-478C-A8F1-FBD630066F94"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__OL_DWS_FTG_P2B" data-ofbid="GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__OL_DWS_FTG_P2B">
+               <li class="- topic/li li" id="GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-86A0D2E2-291E-4EF0-9ED3-41FFA2C8103D" data-ofbid="GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-86A0D2E2-291E-4EF0-9ED3-41FFA2C8103D"> Once protection is enabled
+                  through ICSP™ or a self-write, it can only be reset through a Bulk Erase.</li>
+               <li class="- topic/li li" id="GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-8701B36E-FA2A-4228-A26A-3F62F363A1BC" data-ofbid="GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-8701B36E-FA2A-4228-A26A-3F62F363A1BC"> Applicable only if
+                     <span class="+ topic/ph sidscDomain-d/active-low ph active-low">SAFEN</span> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>.</li>
+               <li class="- topic/li li" id="GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-2AF182E3-50ED-4D36-998D-4D4DC09BCDBA" data-ofbid="GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-2AF182E3-50ED-4D36-998D-4D4DC09BCDBA"> Applicable only if
+                     <span class="+ topic/ph sidscDomain-d/active-low ph active-low">BBEN</span> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>.</li>
+            </ol>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>CONFIG8</td></tr><tr><td style="font-weight:bold;">Address: </td><td>30 0007h
+            </td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-DA441629-FF64-4362-8159-43D578605586" data-ofbid="GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-DA441629-FF64-4362-8159-43D578605586"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0"><span class="+ topic/ph sidscDomain-d/active-low ph active-low">WRTAPP</span></td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0"><span class="+ topic/ph sidscDomain-d/active-low ph active-low">WRTSAF</span></td><td class="- topic/entry entry align-center colsep-0 rowsep-0"><span class="+ topic/ph sidscDomain-d/active-low ph active-low">WRTD</span></td><td class="- topic/entry entry align-center colsep-0 rowsep-0"><span class="+ topic/ph sidscDomain-d/active-low ph active-low">WRTC</span></td><td class="- topic/entry entry align-center colsep-0 rowsep-0"><span class="+ topic/ph sidscDomain-d/active-low ph active-low">WRTB</span></td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-28AFC053-07BA-4A4D-9253-10D1570CF230" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_GRC_V3G_P2B__GUID-319B451D-C663-47D7-BF55-D27CA4B47E99" id="BITFIELD_GRC_V3G_P2B">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_GRC_V3G_P2B__GUID-319B451D-C663-47D7-BF55-D27CA4B47E99" style=""> Bit 7 – <span class="+ topic/ph sidscDomain-d/active-low ph active-low">WRTAPP</span> <span>
+         Application Block Write Protection<a class="- topic/xref xref" href="#GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-86A0D2E2-291E-4EF0-9ED3-41FFA2C8103D"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_GRC_V3G_P2B__GUID-47F2D8EC-3A07-44C3-B34B-CA7A0A07AF48" data-ofbid="BITFIELD_GRC_V3G_P2B__GUID-47F2D8EC-3A07-44C3-B34B-CA7A0A07AF48"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_GRC_V3G_P2B__BITFIELDVALUES_IRC_V3G_P2B" data-ofbid="BITFIELD_GRC_V3G_P2B__BITFIELDVALUES_IRC_V3G_P2B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_GRC_V3G_P2B__GUID-06E11B62-4198-4ECA-8FE0-66A3A653A44C">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_GRC_V3G_P2B__GUID-CFBBB429-78D6-4CC5-81FA-9C0F36DD9D0D">Application
+                  Block is not write-protected</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_GRC_V3G_P2B__GUID-374CE262-6001-4C95-8E01-0AB426918402">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_GRC_V3G_P2B__GUID-3D79BDD1-71F3-49C9-AEFB-77B545F5FE1F">Application
+                  Block is write-protected</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_RWY_RSG_P2B__GUID-6B072AE7-32CD-4D94-9190-9D3A5472E703" id="BITFIELD_RWY_RSG_P2B">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_RWY_RSG_P2B__GUID-6B072AE7-32CD-4D94-9190-9D3A5472E703" style=""> Bit 3 – <span class="+ topic/ph sidscDomain-d/active-low ph active-low">WRTSAF</span> <span>
+         Storage Area Flash (SAF) Write Protection<a class="- topic/xref xref" href="#GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-86A0D2E2-291E-4EF0-9ED3-41FFA2C8103D"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1,2)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_RWY_RSG_P2B__GUID-13B3C134-264A-472B-B011-70A58D82346C" data-ofbid="BITFIELD_RWY_RSG_P2B__GUID-13B3C134-264A-472B-B011-70A58D82346C"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_RWY_RSG_P2B__BITFIELDVALUES_TWY_RSG_P2B" data-ofbid="BITFIELD_RWY_RSG_P2B__BITFIELDVALUES_TWY_RSG_P2B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_RWY_RSG_P2B__GUID-EA36C273-6B70-4437-9D8A-731DE9B5A5EC">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_RWY_RSG_P2B__GUID-AA6D6A5E-B7D9-4B5A-8CE7-73E42BED4EC9">SAF is not
+                  write-protected</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_RWY_RSG_P2B__GUID-41E93E2D-08B9-42A0-98DC-44897F31D579">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_RWY_RSG_P2B__GUID-0B821C40-062D-4621-9D6B-0D55AF5229BF">SAF is
+                  write-protected</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_LHD_WSG_P2B__GUID-BDFC9937-1A3D-41D5-A814-81687A861EF0" id="BITFIELD_LHD_WSG_P2B">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_LHD_WSG_P2B__GUID-BDFC9937-1A3D-41D5-A814-81687A861EF0" style=""> Bit 2 – <span class="+ topic/ph sidscDomain-d/active-low ph active-low">WRTD</span> <span>
+         Data EEPROM Write Protection<a class="- topic/xref xref" href="#GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-86A0D2E2-291E-4EF0-9ED3-41FFA2C8103D"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_LHD_WSG_P2B__GUID-B18F9146-5E63-41FE-BE45-CC97560EA9C5" data-ofbid="BITFIELD_LHD_WSG_P2B__GUID-B18F9146-5E63-41FE-BE45-CC97560EA9C5"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_LHD_WSG_P2B__BITFIELDVALUES_NHD_WSG_P2B" data-ofbid="BITFIELD_LHD_WSG_P2B__BITFIELDVALUES_NHD_WSG_P2B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LHD_WSG_P2B__GUID-44D16FE8-60D8-4D49-9ECE-3B46332FDFEC">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LHD_WSG_P2B__GUID-4AB23A0C-8681-4A18-9E7A-25DE665AB5E4">Data EEPROM
+                  is not write-protected</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_LHD_WSG_P2B__GUID-8E477120-BEAF-4DD4-BE38-5413571ED56E">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_LHD_WSG_P2B__GUID-4F8402DE-4D84-486F-8A12-4E05D21DFA99">Data EEPROM
+                  is write-protected</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_OWB_1TG_P2B__GUID-6042C0C5-719E-4FEF-96EB-59854D16068E" id="BITFIELD_OWB_1TG_P2B">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_OWB_1TG_P2B__GUID-6042C0C5-719E-4FEF-96EB-59854D16068E" style=""> Bit 1 – <span class="+ topic/ph sidscDomain-d/active-low ph active-low">WRTC</span> <span>
+         Configuration Register Write Protection<a class="- topic/xref xref" href="#GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-86A0D2E2-291E-4EF0-9ED3-41FFA2C8103D"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_OWB_1TG_P2B__GUID-98E10ADA-6D40-4EB2-A300-6727A605A9DC" data-ofbid="BITFIELD_OWB_1TG_P2B__GUID-98E10ADA-6D40-4EB2-A300-6727A605A9DC"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_OWB_1TG_P2B__BITFIELDVALUES_QWB_1TG_P2B" data-ofbid="BITFIELD_OWB_1TG_P2B__BITFIELDVALUES_QWB_1TG_P2B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_OWB_1TG_P2B__GUID-25F8CB73-55ED-42E3-95F8-D225978F4B79">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_OWB_1TG_P2B__GUID-250142F5-8067-4960-A1F7-EEF98EF9A445">Configuration registers are not write-protected</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_OWB_1TG_P2B__GUID-A59D8ACC-52DD-46C6-B0CE-F04298D1BBCB">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_OWB_1TG_P2B__GUID-D21B9D06-7434-49E2-8168-F7003BF38334">Configuration registers are write-protected</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_FRH_CTG_P2B__GUID-45D3856A-71C9-45EE-86A3-2A398047929B" id="BITFIELD_FRH_CTG_P2B">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_FRH_CTG_P2B__GUID-45D3856A-71C9-45EE-86A3-2A398047929B" style=""> Bit 0 – <span class="+ topic/ph sidscDomain-d/active-low ph active-low">WRTB</span> <span>
+         Boot Block Write Protection<a class="- topic/xref xref" href="#GUID-6A6AE246-A12F-4E00-B59E-AD7B520731B5__GUID-86A0D2E2-291E-4EF0-9ED3-41FFA2C8103D"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1,3)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_FRH_CTG_P2B__GUID-8E7C474B-F474-4B30-AF8E-DCE2ED24A9C2" data-ofbid="BITFIELD_FRH_CTG_P2B__GUID-8E7C474B-F474-4B30-AF8E-DCE2ED24A9C2"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_FRH_CTG_P2B__BITFIELDVALUES_HRH_CTG_P2B" data-ofbid="BITFIELD_FRH_CTG_P2B__BITFIELDVALUES_HRH_CTG_P2B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_FRH_CTG_P2B__GUID-6D0F7963-260E-44BF-8615-DB73FF467FF8">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_FRH_CTG_P2B__GUID-1F037CE2-2F99-40CC-8C9C-E4FC8686F772">Boot Block
+                  is not write-protected</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_FRH_CTG_P2B__GUID-FAC57B22-E9EF-413F-823F-DDD8F2EF4EB7">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_FRH_CTG_P2B__GUID-41680A97-E0FA-4B9A-9ADD-2BBBB4BC8F46">Boot Block
+                  is write-protected</td>
+            </tr></tbody></table>
+      </div>
+   </article>
+            
+                Once protection is enabled
+                  through ICSP™ or a self-write, it can only be reset through a Bulk Erase.
+                Applicable only if
+                     SAFEN = 0.
+                Applicable only if
+                     BBEN = 0.
+            
+         
+</body>
+</html>

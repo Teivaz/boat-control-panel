@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.2.1 Mode Change — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-84A4D028-1C85-48B1-A96D-5816A098641F.html"/>
+<link rel="next" href="GUID-4EC753FF-45D3-47AF-8C79-0ED0B1459519.html"/>
+<link rel="up" href="GUID-84A4D028-1C85-48B1-A96D-5816A098641F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-84A4D028-1C85-48B1-A96D-5816A098641F.html">38.2 Modes of Operation</a></li><li>38.2.1 Mode Change</li></ol>
+  <div class="sib"><span>← <a href="GUID-84A4D028-1C85-48B1-A96D-5816A098641F.html" rel="prev">Modes of Operation</a></span><span><a href="GUID-4EC753FF-45D3-47AF-8C79-0ED0B1459519.html" rel="next">Changing Between Normal Modes</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-3860E9DB-B154-461D-A7F6-A3F312ED98FD__GUID-8C93EC47-8922-4214-8F0C-639BCCA83727" style="">38.2.1 Mode Change</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p"><a class="- topic/xref xref" href="GUID-F4B5E92A-8014-4F2E-8363-62819F9B7434.html#GUID-F4B5E92A-8014-4F2E-8363-62819F9B7434__FIG_AWD_GDT_43B"><span>Figure 38-2</span></a> illustrates the possible mode transitions. New modes of
+            operation are requested by writing to the REQOP[2:0] (C1CON[26:24]) bits. The modes of
+            operations do not change immediately. The modes will only change when the bus is Idle. </p>
+        <p class="- topic/p p">The current operating mode is indicated by the OPMOD[2:0] (C1CON[23:21])
+            bits. The application can enable an interrupt on an OPMODx change or poll the OPMODx
+            bits. </p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-4EC753FF-45D3-47AF-8C79-0ED0B1459519.html">38.2.1.1 Changing Between Normal Modes</a></li><li><a href="GUID-DB9886A0-CEDA-4FB0-A6B2-9DEF030DA79F.html">38.2.1.2 Changing Between Debug Modes</a></li><li><a href="GUID-3226690B-A7DA-4192-89ED-A52E0B03855F.html">38.2.1.3 Exiting Normal Mode</a></li><li><a href="GUID-F0ED77D2-EDCA-4878-8713-89FCB960E55F.html">38.2.1.4 Entering and Exiting Disable Mode</a></li><li><a href="GUID-F4B5E92A-8014-4F2E-8363-62819F9B7434.html">38.2.1.5 Bus Integrating Mode</a></li></ul>
+</nav>
+</body>
+</html>

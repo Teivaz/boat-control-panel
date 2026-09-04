@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>39 JTAG Boundary Scan — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4BA31CDB-9A5A-4544-BCF8-81959BC69366.html"/>
+<link rel="next" href="GUID-E2B0B0B9-FED8-49DC-89BC-920E93849E12.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>39 JTAG Boundary Scan</li></ol>
+  <div class="sib"><span>← <a href="GUID-4BA31CDB-9A5A-4544-BCF8-81959BC69366.html" rel="prev">Register Summary - CAN FD</a></span><span><a href="GUID-E2B0B0B9-FED8-49DC-89BC-920E93849E12.html" rel="next">Test Access Port (TAP) and TAP Controller</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__GUID-9EFBC38F-017B-4F96-B739-F7706B5E3471" style="">39 JTAG Boundary Scan</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">As the complexity and density of board design increases, testing electrical connections
+            between the components on fully assembled circuit boards poses many challenges. To
+            address these challenges, the Joint Test Action Group (JTAG) developed a method for
+            boundary scan testing that was later standardized as IEEE 1149.1-2001, “<em class="+ topic/ph hi-d/i ph i">IEEE Standard
+                Test Access Port and Boundary Scan Architecture</em>”.</p>
+        <p class="- topic/p p">The JTAG boundary scan method is the process of adding a Shift register stage adjacent to
+            each of the component’s I/O pins. This permits signals at the component boundaries to be
+            controlled and observed, using a defined set of scan test principles. An external tester
+            or controller provides instructions and reads the results in a serial format. The
+            external device also provides common clock and control signals. Depending on the
+            implementation, access to all test signals is provided through a standardized 4-pin or
+            5-pin interface.</p>
+        <p class="- topic/p p">In system-level applications, individual JTAG enabled components are connected through
+            their individual testing interfaces (in addition to their more standard
+            application-specific connections). Devices are connected in a series or daisy-chained
+            format, with the test output of one device connected exclusively to the test input of
+            the next device in the chain. Instructions in the JTAG boundary scan protocol allow the
+            testing of any one device in the chain, or any combination of devices, without testing
+            the entire chain. In this method, connections between components, as well as connections
+            at the boundary of the application, may be tested.</p>
+        <p class="- topic/p p">A typical application incorporating the JTAG boundary scan interface is shown in <a class="- topic/xref xref" href="#GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__FIG_NCH_ZL2_R3B"><span>Figure 39-1</span></a>. In this example, a PIC microcontroller is
+            daisy-chained to a second JTAG compliant device. Note that the TDI line from the
+            external tester supplies data to the TDI pin of the first device in the chain (in this
+            case, the microcontroller). The resulting test data for this two-device chain is
+            provided from the TDO pin of the second device to the TDO line of the tester. This
+            section describes the JTAG module and its general boundary scan use. The <span class="- topic/ph ph">PIC18-Q84</span> JTAG module does not currently support
+            programming over JTAG.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__FIG_NCH_ZL2_R3B" data-ofbid="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__FIG_NCH_ZL2_R3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 39-1. <span id="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__GUID-226DA5BE-59B2-44CD-A960-4A93BE04A898" class="fig--title">Overview of PIC18F-Based JTAG
+                    Compliant Application Showing Daisy-Chaining of Components</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__IMAGE_OCH_ZL2_R3B" src="GUID-A41C7614-308C-4912-9BA4-67E67577BE85-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p">In <span class="- topic/ph ph">PIC18-Q84</span> devices, hardware for the JTAG boundary
+            scan is a Core Independent Peripheral (CIP) with additional integrated logic in all I/O
+            ports. A logical block diagram of the JTAG module is shown in <a class="- topic/xref xref" href="#GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__FIG_EYY_ZP2_R3B"><span>Figure 39-2</span></a>. It consists of the following key
+            elements:</p>
+        <ul class="- topic/ul ul" id="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__UL_RR3_QGS_VGB" data-ofbid="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__UL_RR3_QGS_VGB">
+            <li class="- topic/li li" id="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__ID-42107-00000012" data-ofbid="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__ID-42107-00000012">TAP Interface Pins (TDI, TMS, TCK and
+                TDO)</li>
+            <li class="- topic/li li" id="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__ID-42107-0000001C" data-ofbid="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__ID-42107-0000001C">TAP Controller</li>
+            <li class="- topic/li li" id="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__GUID-869F8D51-2D58-4F1E-9F75-9C3CDFFCB3CC" data-ofbid="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__GUID-869F8D51-2D58-4F1E-9F75-9C3CDFFCB3CC">Instruction Shift
+                Register and Instruction Register (IR)</li>
+            <li class="- topic/li li" id="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__GUID-B05C56B2-66F6-4A84-BFD4-2162A73B7504" data-ofbid="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__GUID-B05C56B2-66F6-4A84-BFD4-2162A73B7504">Data Registers</li>
+        </ul>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__FIG_EYY_ZP2_R3B" data-ofbid="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__FIG_EYY_ZP2_R3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 39-2. <span id="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__GUID-A059A534-67CE-497A-9E11-3112F62F37F1" class="fig--title">JTAG Logical Block
+                    Diagram</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF__IMAGE_FYY_ZP2_R3B" src="GUID-E05E7AF7-E57E-4F3A-9951-53FD3E83573A-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-E2B0B0B9-FED8-49DC-89BC-920E93849E12.html">39.1 Test Access Port (TAP) and TAP Controller</a></li><li><a href="GUID-9E3787FA-6F24-4DDC-B6CA-D0D4ACC2E9ED.html">39.2 JTAG Registers</a></li><li><a href="GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC.html">39.3 Boundary Scan Register (BSR)</a></li><li><a href="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033.html">39.4 JTAG Instructions</a></li><li><a href="GUID-4B860315-1651-4C47-B16B-DD6E7DBC35F5.html">39.5 Boundary Scan Testing</a></li><li><a href="GUID-8564D221-9A24-439C-A703-46E343D01D51.html">39.6 Effects of Reset</a></li></ul>
+</nav>
+</body>
+</html>

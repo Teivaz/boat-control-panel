@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26.8.1 Software Gate Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html"/>
+<link rel="next" href="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD.html"/>
+<link rel="up" href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html">26 TMR2 - Timer2 Module</a></li><li><a href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html">26.8 Operation Examples</a></li><li>26.8.1 Software Gate Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23.html" rel="prev">Operation Examples</a></span><span><a href="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD.html" rel="next">Hardware Gate Mode</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-1CC48BA7-A6F8-4E4A-8CC0-5A5B412F9B77__GUID-E0A1840E-4F1D-4404-8965-45C245FE8024" style="">26.8.1 Software Gate Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-1CC48BA7-A6F8-4E4A-8CC0-5A5B412F9B77__ID-42141-000013A5" data-ofbid="GUID-1CC48BA7-A6F8-4E4A-8CC0-5A5B412F9B77__ID-42141-000013A5">This mode corresponds to legacy Timer2 operation. The timer
+         increments with each clock input when ON = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-1CC48BA7-A6F8-4E4A-8CC0-5A5B412F9B77__ID-42141-000013A6">1</code> and
+         does not increment when ON = <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-1CC48BA7-A6F8-4E4A-8CC0-5A5B412F9B77__ID-42141-000013A7">0</code>. When the TxTMR
+         count equals the TxPR period count, the timer resets on the next clock and continues
+         counting from zero. Operation with the ON bit software controlled is illustrated in <a class="- topic/xref xref" href="#GUID-1CC48BA7-A6F8-4E4A-8CC0-5A5B412F9B77__ID-42141-000013B0"><span>Figure 26-3</span></a>. With TxPR = <code class="+ topic/ph pr-d/codeph ph codeph">5</code>,
+         the counter advances until TxTMR = <code class="+ topic/ph pr-d/codeph ph codeph">5</code> and goes to zero with the next
+         clock.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-1CC48BA7-A6F8-4E4A-8CC0-5A5B412F9B77__ID-42141-000013B0" data-ofbid="GUID-1CC48BA7-A6F8-4E4A-8CC0-5A5B412F9B77__ID-42141-000013B0"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 26-3. <span id="GUID-1CC48BA7-A6F8-4E4A-8CC0-5A5B412F9B77__GUID-8ED39783-E0D2-44B1-AD1A-E37FC9BE750A" class="fig--title">Software Gate Mode Timing Diagram
+            (MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b00000</code>)</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-4DE36109-C5D6-49F8-801F-2C82A791EDD8-high.pdf#toolbar=1" width="450" height="266.91768826619966"></iframe></span>
+      </figure>
+   </div>
+
+</body>
+</html>

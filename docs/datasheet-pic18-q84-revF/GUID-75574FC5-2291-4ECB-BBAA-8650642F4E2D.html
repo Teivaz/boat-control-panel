@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.11.3 XON/XOFF Flow Control — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-198BF5DF-3B2D-4CF1-A328-6D0CC7F9DA3E.html"/>
+<link rel="next" href="GUID-CF86A33F-3619-4700-9C22-AB4609BA462F.html"/>
+<link rel="up" href="GUID-05BB831A-75A1-40B1-8559-EA222777E0D2.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-05BB831A-75A1-40B1-8559-EA222777E0D2.html">35.11 Flow Control</a></li><li>35.11.3 XON/XOFF Flow Control</li></ol>
+  <div class="sib"><span>← <a href="GUID-198BF5DF-3B2D-4CF1-A328-6D0CC7F9DA3E.html" rel="prev">RS-485 Transceiver Control</a></span><span><a href="GUID-CF86A33F-3619-4700-9C22-AB4609BA462F.html" rel="next">Checksum (Full-Featured UARTs Only)</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-75574FC5-2291-4ECB-BBAA-8650642F4E2D__GUID-29EE880D-6815-4872-A59F-F005BD461B91" style="">35.11.3 XON/XOFF Flow Control</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">XON/XOFF flow control is selected by setting the <a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_MXQ_2FM_BBB" title="Handshake Flow Control"><span><span>FLO</span></span></a> bits to ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">01</span>’.</p>
+        <p class="- topic/p p">XON/XOFF is a data-based flow control method. The signals to suspend and
+            resume transmission are special characters sent by the receiver to the transmitter. The
+            advantage is that additional hardware lines are not needed.</p>
+        <p class="- topic/p p">XON/XOFF flow control requires full-duplex operation because the transmitter
+            must be able to receive the signal to suspend transmitting while the transmission is in
+            progress. Although XON and XOFF are not defined in the ASCII code, the generally
+            accepted values are <span class="+ topic/keyword sw-d/cmdname keyword cmdname">13h</span> for XOFF and <span class="+ topic/keyword sw-d/cmdname keyword cmdname">11h</span> for XON. The UART uses those codes.</p>
+        <p class="- topic/p p">The transmitter defaults to XON, or transmitter enabled. This state is also indicated by
+            the read-only <a class="- topic/xref xref" href="GUID-2A8CC206-1569-40FD-9221-4BB29D97CE3C.html#BITFIELD_MXQ_2FM_BBB" title="Software Flow Control Transmit Enable Status"><span><span>XON</span></span></a> bit.</p>
+        <p class="- topic/p p">When an XOFF character is received, the transmitter stops transmitting after completing
+            the character actively being transmitted. The transmitter remains disabled until an XON
+            character is received.</p>
+        <p class="- topic/p p">XON will be forced on when software toggles the TXEN bit.</p>
+        <p class="- topic/p p">When the <a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_MQF_ZNS_YY" title="Run During Overflow Control"><span><span>RUNOVF</span></span></a> bit is set, the XON and XOFF characters continue to be received and
+            processed without the need to clear the input FIFO by reading UxRXB. However, if the
+            RUNOVF bit is clear then UxRXB must be read to avoid a receive overflow which will
+            suspend flow control when the receive buffer overflows.</p>
+</div>
+
+</body>
+</html>

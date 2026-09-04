@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.1.1.3 Oscillator Start-Up Timer (OST) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5CCFD60B-12E4-4D48-AAEE-E971893FC7B4.html"/>
+<link rel="next" href="GUID-9C3B5A50-CA98-49E7-A086-DCB3E8B7BFCA.html"/>
+<link rel="up" href="GUID-5DED24A3-7549-4229-9627-680F5E81FE14.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A.html">12.1 Clock Source Types</a></li><li><a href="GUID-5DED24A3-7549-4229-9627-680F5E81FE14.html">12.1.1 External Clock Sources</a></li><li>12.1.1.3 Oscillator Start-Up Timer (OST)</li></ol>
+  <div class="sib"><span>← <a href="GUID-5CCFD60B-12E4-4D48-AAEE-E971893FC7B4.html" rel="prev">LP, XT, HS Modes</a></span><span><a href="GUID-9C3B5A50-CA98-49E7-A086-DCB3E8B7BFCA.html" rel="next">4x PLL</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-3EE354E0-7D09-461D-BC1C-8958A352AB97__GUID-0BFE32D9-E12D-44A9-9430-4F1E8849AFA3" style="">12.1.1.3 Oscillator Start-Up Timer (OST)</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The Oscillator Start-up Timer (OST) ensures that the oscillator circuit has started and is
+      providing a stable system clock to the oscillator module. Quartz crystals or ceramic
+      resonators do not start immediately and may take a few hundred cycles before the oscillator
+      becomes stable. The oscillations must build up until sufficient amplitude is generated to
+      properly toggle between logic states. The OST counts 1024 oscillation periods from the OSC1
+      input following a Power-on Reset (POR), Brown-out Reset (BOR), or wake-up from Sleep event to
+      ensure that the oscillator has enough time to reach stable and accurate operation. Once the
+      OST has completed its count, module hardware sets the External Oscillator Ready (<a class="- topic/xref xref" href="GUID-56425695-1C07-4B9A-A4DC-F86CD572BBCC.html#GUID-19E8906D-A770-4024-9141-1FC69127057C" title="External Oscillator Ready">EXTOR</a>) bit, indicating that the oscillator is stable and ready to use.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.7.2 ADCON1 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html"/>
+<link rel="next" href="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D.html"/>
+<link rel="up" href="GUID-8FD3470F-42C5-4581-A564-B1DDFA17FB4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-8FD3470F-42C5-4581-A564-B1DDFA17FB4B.html">43.7 Register Definitions: ADC Control</a></li><li>43.7.2 ADCON1</li></ol>
+  <div class="sib"><span>← <a href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html" rel="prev">ADCON0</a></span><span><a href="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D.html" rel="next">ADCON2</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-91A099AA-6FF5-4C34-ABF1-6C3EFCAF1E11__ID-00000028" style="">43.7.2  ADCON1</h1><section id="GUID-F4FA237A-3F32-4F23-AED0-68E8E47B6245" class="- topic/section reference/section sidsc-register/registerDescription ">ADC Control Register
+         1</section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>ADCON1</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x3F4</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-91A099AA-6FF5-4C34-ABF1-6C3EFCAF1E11__GUID-606A26C1-FD7F-4DD6-991D-189A742D8CDD" data-ofbid="GUID-91A099AA-6FF5-4C34-ABF1-6C3EFCAF1E11__GUID-606A26C1-FD7F-4DD6-991D-189A742D8CDD"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-91A099AA-6FF5-4C34-ABF1-6C3EFCAF1E11"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">PPOL</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">IPEN</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">GPOL</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">DSEN</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-F4FA237A-3F32-4F23-AED0-68E8E47B6245" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_GRT_BFH_KZ__GUID-FE9B01D6-0E81-4CD1-AB29-5D06F4D74350" id="BITFIELD_GRT_BFH_KZ">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_GRT_BFH_KZ__GUID-FE9B01D6-0E81-4CD1-AB29-5D06F4D74350" style=""> Bit 7 – PPOL <span>Precharge Polarity</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_GRT_BFH_KZ__GUID-FB4CD68A-8C8B-46E7-9756-1CE0AD8C68EF" data-ofbid="BITFIELD_GRT_BFH_KZ__GUID-FB4CD68A-8C8B-46E7-9756-1CE0AD8C68EF">Action During
+               1<sup class="+ topic/ph hi-d/sup ph sup">st</sup> Precharge Stage</section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition" id="BITFIELD_GRT_BFH_KZ__BITFIELDVALUES_XDH_KW2_B1B" data-ofbid="BITFIELD_GRT_BFH_KZ__BITFIELDVALUES_XDH_KW2_B1B"><colgroup><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_GRT_BFH_KZ__GUID-4B3CC192-80B6-409C-83AB-DEDA2D6300EA">x</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">ADPRE = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_GRT_BFH_KZ__GUID-55230F50-ED77-41F2-8AF3-6977151EA644">Bit has no effect</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_GRT_BFH_KZ__GUID-FE6A91EF-9D34-45B9-9923-09A06E0C2916">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">ADPRE &gt; <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_GRT_BFH_KZ__GUID-1035C08E-977D-4603-9871-7DE924CC0D26">
+                  <p class="- topic/p p">External analog I/O pin is connected to V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub></p>
+                  <p class="- topic/p p">Internal AD sampling capacitor (C<sub class="+ topic/ph hi-d/sub ph sub">HOLD</sub>) is connected to
+                        V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub></p>
+               </td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_GRT_BFH_KZ__GUID-F26F286E-1DFA-4455-BF79-47F20A6C98BC">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">ADPRE &gt; <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_GRT_BFH_KZ__GUID-BDF1BA9E-5B57-4011-A4A8-6CD86B9F9AF5">
+                  <p class="- topic/p p">External analog I/O pin is connected to V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub></p>
+                  <p class="- topic/p p">Internal AD sampling capacitor (C<sub class="+ topic/ph hi-d/sub ph sub">HOLD</sub>) is connected to
+                        V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub></p>
+               </td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000002C__ID-42107-00001A97" id="ID-0000002C">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000002C__ID-42107-00001A97" style=""> Bit 6 – IPEN <span>A/D
+         Inverted Precharge Enable</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000002C__GUID-8987A842-0A63-4BC7-ADE7-792B811B0EAC" data-ofbid="ID-0000002C__GUID-8987A842-0A63-4BC7-ADE7-792B811B0EAC"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition"><colgroup><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/><col style="width:33.33333333333333%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000002C__GUID-D64491F5-524D-4FF4-9776-EB72AC17D342">x</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">DSEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000002C__GUID-A27B6B8D-39D8-4839-899E-C8E58FD3D054">Bit has no effect</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000002C__ID-42107-00001A99">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">DSEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000002C__GUID-29152F11-8BD5-4BDA-AC57-6C3139EC8DD2">The
+                  precharge and guard signals in the second conversion cycle are the opposite
+                  polarity of the first cycle</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000002C__ID-42107-00001A9C">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">DSEN = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000002C__GUID-52E9223D-EC07-47B5-BA70-17AFA9CED934">Both Conversion cycles use the precharge and guards specified by PPOL and
+                  GPOL</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000036__ID-42107-00001AA0" id="ID-00000036">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000036__ID-42107-00001AA0" style=""> Bit 5 – GPOL <span>Guard Ring Polarity Selection</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000036__GUID-BCBBF35A-F517-4162-B07F-BBD2026D4B55" data-ofbid="ID-00000036__GUID-BCBBF35A-F517-4162-B07F-BBD2026D4B55"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000036__ID-42107-00001AA2">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000036__GUID-B9DEEA1A-C752-491F-9B5D-E8346E7BF175">ADC guard
+                  Ring outputs start as digital high during Precharge
+                  stage</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000036__ID-42107-00001AA5">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000036__GUID-A7F30141-0E37-4227-A8C4-55313B6A1ACC">ADC guard
+                  Ring outputs start as digital low during Precharge
+                  stage</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000003D__ID-42107-00001AA9" id="ID-0000003D">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000003D__ID-42107-00001AA9" style=""> Bit 0 – DSEN <span>Double-Sample Enable</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000003D__GUID-05F983AE-C59F-4F41-AEF7-EA801118F08F" data-ofbid="ID-0000003D__GUID-05F983AE-C59F-4F41-AEF7-EA801118F08F"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000003D__ID-42107-00001AAB">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000003D__GUID-08207799-3BDB-47CB-A288-75B5B66BA079">Two
+                  conversions are processed as a pair. The selected computation is performed after
+                  every second conversion.</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000003D__ID-42107-00001AAE">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000003D__GUID-4C5D9CF7-DBC0-4DCC-AA68-1A78E7155D26">Selected
+                  computation is performed after every conversion</td>
+            </tr></tbody></table>
+      </div>
+   </article>
+</body>
+</html>

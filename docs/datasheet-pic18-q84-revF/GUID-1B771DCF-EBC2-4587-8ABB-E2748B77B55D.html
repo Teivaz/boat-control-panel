@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>19.14.3 TRISx — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26.html"/>
+<link rel="next" href="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6.html"/>
+<link rel="up" href="GUID-D3680739-69E1-4BC6-8FED-0F0AE91735AB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html">19 I/O Ports</a></li><li><a href="GUID-D3680739-69E1-4BC6-8FED-0F0AE91735AB.html">19.14 Register Definitions: Port Control</a></li><li>19.14.3 TRISx</li></ol>
+  <div class="sib"><span>← <a href="GUID-32DF690C-6FCD-42BA-B380-81DA1FDC2B26.html" rel="prev">LATx</a></span><span><a href="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6.html" rel="next">ANSELx</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D__ID-0000000C" style="">19.14.3  TRISx</h1><section id="GUID-07BC0D54-B069-4FDD-B30E-ED8D2D979E44" class="- topic/section reference/section sidsc-register/registerDescription ">Tri-State Control
+            Register<div class="- topic/note note important note_important endnote" id="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D__ID-42127-0000071C" data-ofbid="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D__ID-42127-0000071C"><span class="note__title">Important:</span> 
+            <ul class="- topic/ul ul" id="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D__UL_XTD_15H_N3B" data-ofbid="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D__UL_XTD_15H_N3B">
+               <li class="- topic/li li" id="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D__GUID-4CD1CFF0-FFF5-42AB-A1E4-87ABA806560B" data-ofbid="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D__GUID-4CD1CFF0-FFF5-42AB-A1E4-87ABA806560B">The TRIS bit associated with the
+                     <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span> pin is read-only and the value is
+                     ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’</li>
+               <li class="- topic/li li" id="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D__GUID-0FFE3653-1959-49B8-B873-6F61D4314EBF" data-ofbid="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D__GUID-0FFE3653-1959-49B8-B873-6F61D4314EBF">Refer to the <strong class="+ topic/ph hi-d/b ph b">“Pin Allocation
+                     Table”</strong> for details about <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span> pin and pin
+                  availability per port</li>
+               <li class="- topic/li li" id="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D__GUID-6A7DC88C-FA37-4254-9CCC-F6EEB1BB189E" data-ofbid="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D__GUID-6A7DC88C-FA37-4254-9CCC-F6EEB1BB189E">Unimplemented bits will read back
+                  as ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’</li>
+            </ul>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>TRISx</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D__GUID-8B540D4B-ECA4-44AF-A0E9-9BBC91535EB2" data-ofbid="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D__GUID-8B540D4B-ECA4-44AF-A0E9-9BBC91535EB2"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TRISx7</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TRISx6</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TRISx5</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TRISx4</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TRISx3</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TRISx2</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TRISx1</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TRISx0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-07BC0D54-B069-4FDD-B30E-ED8D2D979E44" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_BD2_BTB_R1B__GUID-8B245542-10FD-4EAC-8B87-85D4924CF980" id="BITFIELD_BD2_BTB_R1B">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_BD2_BTB_R1B__GUID-8B245542-10FD-4EAC-8B87-85D4924CF980" style=""> Bits 0, 1, 2, 3, 4, 5, 6, 7 – TRISxn <span>Port I/O Tri-state
+         Control</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_BD2_BTB_R1B__GUID-1A84EA86-096E-4BC0-A4DC-67F2939AD568" data-ofbid="BITFIELD_BD2_BTB_R1B__GUID-1A84EA86-096E-4BC0-A4DC-67F2939AD568"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_BD2_BTB_R1B__BITFIELDVALUES_DD2_BTB_R1B" data-ofbid="BITFIELD_BD2_BTB_R1B__BITFIELDVALUES_DD2_BTB_R1B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_BD2_BTB_R1B__GUID-7045D757-AD85-4987-85D2-6BA5AB21B23A"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_BD2_BTB_R1B__GUID-59717813-B900-48CC-9E7A-94064E096060">PORTx output
+                  driver is disabled. PORTx pin configured as an input
+                  (tri-stated).</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_BD2_BTB_R1B__GUID-EC7E8F1F-BE6E-473B-99B1-85B196FD7153"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_BD2_BTB_R1B__GUID-888D2D31-0F3F-431D-8E65-4F6294EDF32D">PORTx output
+                  driver is enabled. PORTx pin configured as an output.</td>
+            </tr></tbody></table>
+      </div>
+   </article>
+            
+               The TRIS bit associated with the
+                     MCLR pin is read-only and the value is
+                     ‘1’
+               Refer to the “Pin Allocation
+                     Table” for details about MCLR pin and pin
+                  availability per port
+               Unimplemented bits will read back
+                  as ‘0’
+            
+         
+</body>
+</html>

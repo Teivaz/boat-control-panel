@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.3.4.2.5 Clearing the EN Bit — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D101A449-84B8-45FC-ABF2-34AD01EA44D1.html"/>
+<link rel="next" href="GUID-DFAEA367-729B-47CF-94B3-6C25921DA243.html"/>
+<link rel="up" href="GUID-EBD671AC-0CCE-4BF8-9852-B901310EC575.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li><a href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html">16.3 DMA Interface</a></li><li><a href="GUID-129A63BF-383B-4E30-91DE-858C4D6CC236.html">16.3.4 DMA Message Transfers</a></li><li><a href="GUID-EBD671AC-0CCE-4BF8-9852-B901310EC575.html">16.3.4.2 Stopping DMA Message Transfers</a></li><li>16.3.4.2.5 Clearing the EN Bit</li></ol>
+  <div class="sib"><span>← <a href="GUID-D101A449-84B8-45FC-ABF2-34AD01EA44D1.html" rel="prev">Destination Count Reload</a></span><span><a href="GUID-DFAEA367-729B-47CF-94B3-6C25921DA243.html" rel="next">Disable DMA Message Transfer Upon Completion</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-ED0C1678-C695-45DE-B80D-E119C6DEBC4E__GUID-3AF02061-7F13-4E71-94E4-34B69D4681A4" style="">16.3.4.2.5 Clearing the EN Bit</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">If the user clears the <a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#GUID-1C79FAB1-2A96-4E11-9081-8E6B0B1B3A4E" title="DMA Module Enable"><span><span>EN</span></span></a> bit, the message will be stopped and the DMA will
+            return to its default configuration. This is also referred to as a hard stop, as the DMA
+            cannot resume operation from where it was stopped.</p>
+        <div class="- topic/note note important note_important" id="GUID-ED0C1678-C695-45DE-B80D-E119C6DEBC4E__GUID-C3EF66D3-FE5A-4717-871F-9455269A9F13" data-ofbid="GUID-ED0C1678-C695-45DE-B80D-E119C6DEBC4E__GUID-C3EF66D3-FE5A-4717-871F-9455269A9F13"><span class="note__title">Important:</span> After the DMA message
+            transfer is stopped, it requires an extra instruction cycle before the Stop condition
+            takes effect. Thus, after the Stop condition has occurred, a source read or a
+            destination write can occur depending on the source or destination bus
+            availability.</div>
+    </div>
+
+</body>
+</html>

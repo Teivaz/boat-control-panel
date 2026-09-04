@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>31.4 External Period Resets — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E80E8757-71E8-4436-A122-DC37416E9E90.html"/>
+<link rel="next" href="GUID-4AF3530B-864D-4647-8384-64437383C175.html"/>
+<link rel="up" href="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE.html">31 PWM - Pulse-Width Modulator with Compare</a></li><li>31.4 External Period Resets</li></ol>
+  <div class="sib"><span>← <a href="GUID-E80E8757-71E8-4436-A122-DC37416E9E90.html" rel="prev">Clock Prescaler</a></span><span><a href="GUID-4AF3530B-864D-4647-8384-64437383C175.html" rel="next">Buffered Period and Parameter Registers</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-C7CBCFD0-0DE3-445F-AA00-1568A64A6B3F__GUID-2562135E-5B52-437A-A5B8-746CA562E416" style="">31.4 External Period Resets</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The period timer can be reset and held at zero by a logic level from one of
+            various sources. The Reset event also resets the postscaler counter. The resetting
+            source is selected with the <a class="- topic/xref xref" href="GUID-3248E636-A7FD-49F8-AAF0-63DD07C3281B.html#ID-00000005" title="External Reset Source Select"><span><span>ERS</span></span></a> bits.</p>
+        <p class="- topic/p p">The Reset can be configured with the <a class="- topic/xref xref" href="GUID-0D5C847B-F70B-49A7-ADF9-3CCCF3193A17.html#BITFIELD_WGR_NNK_TGB" title="External Reset Mode Select"><span><span>ERSNOW</span></span></a> bit to occur on either the next PWM clock or the next PWM period Reset event. When
+            the ERSNOW bit is set, then the Reset will occur on the next PWM clock. When the ERSNOW
+            bit is cleared, then the Reset will be held off until the timer resets at the end of the
+            period. The difference between a normal period Reset and an ERS Reset is that once the
+            timer is reset, it is held at zero until the ERS signal goes false. The following timing
+            diagrams illustrate the two types of external Reset.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-C7CBCFD0-0DE3-445F-AA00-1568A64A6B3F__FIG_Z4D_X1L_VGB" data-ofbid="GUID-C7CBCFD0-0DE3-445F-AA00-1568A64A6B3F__FIG_Z4D_X1L_VGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 31-15. <span id="GUID-C7CBCFD0-0DE3-445F-AA00-1568A64A6B3F__GUID-1F2F082D-A44B-41DA-90E8-61BBC3A24EE2" class="fig--title">Right Aligned Mode with ERSNOW =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-24368764-3CAC-45CC-A781-45B70901309D-high.pdf#toolbar=1" width="606.45" height="271.65"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-C7CBCFD0-0DE3-445F-AA00-1568A64A6B3F__FIG_S43_DBL_VGB" data-ofbid="GUID-C7CBCFD0-0DE3-445F-AA00-1568A64A6B3F__FIG_S43_DBL_VGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 31-16. <span id="GUID-C7CBCFD0-0DE3-445F-AA00-1568A64A6B3F__GUID-910EA93F-B400-49BB-A591-EB687AE846D4" class="fig--title">Left Aligned Mode with ERSNOW =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-21322B96-7B9C-4028-8BE8-8E82C3885B82-high.pdf#toolbar=1" width="606.45" height="271.65"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

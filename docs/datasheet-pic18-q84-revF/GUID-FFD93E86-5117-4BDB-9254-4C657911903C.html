@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>45.2 Comparator Control — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6.html"/>
+<link rel="next" href="GUID-C1BB8C7E-0D68-4A69-BEFE-4B7D21DE7C56.html"/>
+<link rel="up" href="GUID-90365EBC-43EB-4517-8E49-99028902B25E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-90365EBC-43EB-4517-8E49-99028902B25E.html">45 CMP - Comparator Module</a></li><li>45.2 Comparator Control</li></ol>
+  <div class="sib"><span>← <a href="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6.html" rel="prev">Comparator Overview</a></span><span><a href="GUID-C1BB8C7E-0D68-4A69-BEFE-4B7D21DE7C56.html" rel="next">Comparator Enable</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__GUID-91283945-ED68-446A-B834-64202E7F95DD" style="">45.2 Comparator Control</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-00000471" data-ofbid="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-00000471">Each comparator has two control registers: CMxCON0 and
+            CMxCON1.</p>
+        <p class="- topic/p p" id="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-00000472" data-ofbid="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-00000472">The <a class="- topic/xref xref" href="GUID-C5F2A580-5B50-44B4-ACEA-C3B046C9B983.html" title="CMxCON0">CMxCON0</a> register contains Control and Status bits
+            for the following:</p>
+        <ul class="- topic/ul ul" id="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__UL_D1X_S1T_MGB" data-ofbid="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__UL_D1X_S1T_MGB">
+            <li class="- topic/li li" id="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-00000474" data-ofbid="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-00000474">Enable</li>
+            <li class="- topic/li li" id="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-00000476" data-ofbid="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-00000476">Output</li>
+            <li class="- topic/li li" id="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-00000478" data-ofbid="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-00000478">Output Polarity</li>
+            <li class="- topic/li li" id="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-0000047A" data-ofbid="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-0000047A">Hysteresis Enable</li>
+            <li class="- topic/li li" id="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-0000047C" data-ofbid="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-0000047C">Timer1 Output Synchronization</li>
+        </ul>
+        <p class="- topic/p p" id="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-0000047E" data-ofbid="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-0000047E">The <a class="- topic/xref xref" href="GUID-97595BD8-32FB-4A49-95F4-416D9ABC4A17.html" title="CMxCON1">CMxCON1</a> register contains Control bits for the
+            following:</p>
+        <ul class="- topic/ul ul" id="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__UL_E1X_S1T_MGB" data-ofbid="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__UL_E1X_S1T_MGB">
+            <li class="- topic/li li" id="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-00000480" data-ofbid="GUID-FFD93E86-5117-4BDB-9254-4C657911903C__ID-42111-00000480">Interrupt on Positive/Negative Edge Enables</li>
+        </ul>
+        <p class="- topic/p p">The CMxPCH and CMxNCH registers are used to select the positive and negative input
+            channels, respectively.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-C1BB8C7E-0D68-4A69-BEFE-4B7D21DE7C56.html">45.2.1 Comparator Enable</a></li><li><a href="GUID-DD4518DE-A0D0-4FF6-A85D-3EC5BD6828D5.html">45.2.2 Comparator Output</a></li><li><a href="GUID-E2AB0DBF-3232-433F-A72E-E47C4CBB2BB8.html">45.2.3 Comparator Output Polarity</a></li></ul>
+</nav>
+</body>
+</html>

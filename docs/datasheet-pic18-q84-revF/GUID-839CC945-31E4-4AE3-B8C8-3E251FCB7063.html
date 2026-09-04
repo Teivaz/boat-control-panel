@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>29.2 Capture Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-8DB62217-10F4-4743-B0B6-90704FC9CBD6.html"/>
+<link rel="next" href="GUID-E67CD23A-7EB7-4068-9D70-2B5D6F723D47.html"/>
+<link rel="up" href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html">29 CCP - Capture/Compare/PWM Module</a></li><li>29.2 Capture Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-8DB62217-10F4-4743-B0B6-90704FC9CBD6.html" rel="prev">Open-Drain Output Option</a></span><span><a href="GUID-E67CD23A-7EB7-4068-9D70-2B5D6F723D47.html" rel="next">Capture Sources</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__GUID-147A6047-D740-4C5D-B853-4991F15C200D" style="">29.2 Capture Mode</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005CD" data-ofbid="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005CD">Capture mode makes use of the 16-bit odd numbered timer resources
+         (Timer1, Timer3, etc.). When an event occurs on the capture source, the 16-bit CCPRx
+         register captures and stores the 16-bit value of the TMRx register. An event is defined as
+         one of the following and is configured by the <a class="- topic/xref xref" href="GUID-B5E1B30C-10E2-4929-B5C4-0F271B634DD1.html#ID-0000001D" title="CCP Mode Select">MODE</a>
+         bits:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005CE" data-ofbid="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005CE">Every falling edge of CCPx input</li>
+         <li class="- topic/li li" id="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005D0" data-ofbid="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005D0">Every rising edge of CCPx input</li>
+         <li class="- topic/li li" id="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005D2" data-ofbid="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005D2">Every 4<sup class="+ topic/ph hi-d/sup ph sup">th</sup> rising edge of CCPx input</li>
+         <li class="- topic/li li" id="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005D4" data-ofbid="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005D4">Every 16<sup class="+ topic/ph hi-d/sup ph sup">th</sup> rising edge of CCPx input</li>
+         <li class="- topic/li li" id="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005D6" data-ofbid="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005D6">Every edge of CCPx input (rising or falling)</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005D8" data-ofbid="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005D8">When a capture is made, the Interrupt Request Flag bit CCPxIF of the
+         PIRx register is set. The interrupt flag must be cleared in software. If another capture
+         occurs before the value in the CCPRx register is read, the old captured value is
+         overwritten by the new captured value. The following figure shows a simplified diagram of
+         the capture operation.</p>
+      <div class="- topic/note note important note_important" id="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005E2" data-ofbid="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005E2"><span class="note__title">Important:</span> If an event occurs during a 2-byte read, the
+         high and low-byte data will be from different events. It is recommended while reading the
+         CCPRx register pair to either disable the module or read the register pair twice for data
+         integrity.</div>
+      <p class="- topic/p p" id="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005E4" data-ofbid="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__ID-42109-000005E4"></p>
+      <figure class="- topic/fig fig fignone" id="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__FIG_OLD_GDH_YZ" data-ofbid="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__FIG_OLD_GDH_YZ"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 29-1. <span id="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063__GUID-EBE32DCF-8969-4AB4-B300-A3EB6A85A0E5" class="fig--title">Capture Mode Operation Block
+            Diagram</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-652C3B12-12AD-4849-B1F4-57440EF592C3-high.pdf#toolbar=1" width="450" height="1170.0159616919395"></iframe></span>
+      </figure>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-E67CD23A-7EB7-4068-9D70-2B5D6F723D47.html">29.2.1 Capture Sources</a></li><li><a href="GUID-DF94A9DA-C5AA-4211-A20E-FBDA0ABAD572.html">29.2.2 Timer1 Mode for Capture</a></li><li><a href="GUID-BFE44D87-36BB-492E-8E6C-61696E030738.html">29.2.3 Software Interrupt Mode</a></li><li><a href="GUID-974B2E44-00AB-4E06-B007-19461C81B9F1.html">29.2.4 CCP Prescaler</a></li><li><a href="GUID-7B628A8B-F890-4A20-A46F-73466460E057.html">29.2.5 Capture During Sleep</a></li></ul>
+</nav>
+</body>
+</html>

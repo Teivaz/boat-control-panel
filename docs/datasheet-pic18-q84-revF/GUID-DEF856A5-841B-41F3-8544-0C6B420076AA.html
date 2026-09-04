@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.3.3 Receive Only Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5E5BC450-4F2B-4510-9416-58E79BB51595.html"/>
+<link rel="next" href="GUID-B9EF5201-0D42-4D13-98B4-717FF06D915F.html"/>
+<link rel="up" href="GUID-58292C67-26C3-49E8-9D78-1E217D2E4B0C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-58292C67-26C3-49E8-9D78-1E217D2E4B0C.html">36.3 Host Mode</a></li><li>36.3.3 Receive Only Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-5E5BC450-4F2B-4510-9416-58E79BB51595.html" rel="prev">Transmit Only Mode</a></span><span><a href="GUID-B9EF5201-0D42-4D13-98B4-717FF06D915F.html" rel="next">Transfer Off Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-DEF856A5-841B-41F3-8544-0C6B420076AA__GUID-B1ECD64A-9AE0-4DAE-A8F6-EBC80B8ACE0C" style="">36.3.3 Receive Only Mode</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">When RXR is set and TXR is clear, the SPI host is in Receive Only mode. In this mode,
+            data transfers when the receive FIFO is not full and the transfer counter is nonzero. In
+            this mode, writing a value to SPIxTCNTL will start the clocks for transfer. The clocks
+            will suspend while the receive FIFO is full and will cease when the SPIxTCNT reaches
+            zero (see the <a class="- topic/xref xref" href="GUID-38725C10-0F95-484B-825E-B276E4433803.html">Transfer Counter</a> section). If there is any data in the transmit FIFO, the
+            first data written to SPIxTXB will be transmitted on each data exchange, although the
+            transmit FIFO occupancy will not change, meaning that the same message will be sent on
+            each transmission. If there is no data in the transmit FIFO, the most recently received
+            data will be transmitted. The following figure shows an example of sending a command
+            using the Transmit Only mode and then receiving a byte of data using the Receive Only
+            mode.</p>
+        <div class="- topic/note note important note_important" id="GUID-DEF856A5-841B-41F3-8544-0C6B420076AA__GUID-F5CF90B9-0D4C-428E-951A-D786540C6B9F" data-ofbid="GUID-DEF856A5-841B-41F3-8544-0C6B420076AA__GUID-F5CF90B9-0D4C-428E-951A-D786540C6B9F"><span class="note__title">Important:</span> When operating in
+            Receive Only mode and the size of every SPI transaction is less than 8 bits, it is
+            recommended to operate in BMODE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> mode. The size of the packet can be
+            configured using the SPIxTWIDTH register.</div>
+        <figure class="- topic/fig fig fignone" id="GUID-DEF856A5-841B-41F3-8544-0C6B420076AA__FIG_C25_T33_SFB" data-ofbid="GUID-DEF856A5-841B-41F3-8544-0C6B420076AA__FIG_C25_T33_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 36-5. <span id="GUID-DEF856A5-841B-41F3-8544-0C6B420076AA__GUID-6AB878C1-EB49-4C66-A43F-1C7D9D0F550E" class="fig--title">SPI Host Operation - Command+Read
+                Data, TXR = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, RXR = <code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-C323D6FA-7053-4B4E-A525-571ED6005BE8-high.pdf#toolbar=1" width="450" height="699.1012523532783"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

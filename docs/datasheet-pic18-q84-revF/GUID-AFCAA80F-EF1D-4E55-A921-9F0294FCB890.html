@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.11.2 FIFO Combined Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-72AAFFEF-B61D-4170-8937-AAEB44CA03F0.html"/>
+<link rel="next" href="GUID-CDDCE0D8-24C2-4963-ACC8-BDDCE011AF44.html"/>
+<link rel="up" href="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197.html">38.11 Interrupts</a></li><li>38.11.2 FIFO Combined Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-72AAFFEF-B61D-4170-8937-AAEB44CA03F0.html" rel="prev">Transmit Event FIFO Interrupts (TEFIF)</a></span><span><a href="GUID-CDDCE0D8-24C2-4963-ACC8-BDDCE011AF44.html" rel="next">Main Interrupts</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-AFCAA80F-EF1D-4E55-A921-9F0294FCB890__GUID-6B403C16-5352-4FAC-8D9A-6B5C475688B0" style="">38.11.2 FIFO Combined Interrupts</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p">The following interrupts are individual FIFO interrupts:<ul class="- topic/ul ul" id="GUID-AFCAA80F-EF1D-4E55-A921-9F0294FCB890__UL_H2Q_Z2J_Q3B" data-ofbid="GUID-AFCAA80F-EF1D-4E55-A921-9F0294FCB890__UL_H2Q_Z2J_Q3B">
+                <li class="- topic/li li" id="GUID-AFCAA80F-EF1D-4E55-A921-9F0294FCB890__GUID-4A747545-1D73-4116-B45C-1992259DF92B" data-ofbid="GUID-AFCAA80F-EF1D-4E55-A921-9F0294FCB890__GUID-4A747545-1D73-4116-B45C-1992259DF92B">FIFOs/TXQ: RFIFx, TFIFx, RFOVIFx and TFATIFx</li>
+            </ul></div>
+        <div class="- topic/p p">They are combined into single Interrupt Status registers:<ul class="- topic/ul ul" id="GUID-AFCAA80F-EF1D-4E55-A921-9F0294FCB890__UL_CYJ_1FJ_Q3B" data-ofbid="GUID-AFCAA80F-EF1D-4E55-A921-9F0294FCB890__UL_CYJ_1FJ_Q3B">
+                <li class="- topic/li li" id="GUID-AFCAA80F-EF1D-4E55-A921-9F0294FCB890__GUID-34635397-1403-4E48-8370-36FA0CF2E41C" data-ofbid="GUID-AFCAA80F-EF1D-4E55-A921-9F0294FCB890__GUID-34635397-1403-4E48-8370-36FA0CF2E41C">CxRXIF, CxTXIF, CxRXOVIF and CxTXATIF</li>
+            </ul></div>
+        <p class="- topic/p p">The bits in the status registers are mapped to the FIFOs as follows: Bit 0
+            to TXQ, Bit 1 to FIFO 1, Bit 2 to FIFO 2, up to Bit 3 to FIFO 3. Since Bit 0 corresponds
+            to the TXQ, Bit 0 of CxRXIF and CxRXOVIF is reserved. Hence, by reading one register,
+            the application can check the status of all FIFOs for a particular interrupt (e.g., any
+            RFIFx pending).</p>
+        <p class="- topic/p p">The FIFO interrupts are enabled in CxFIFOCONy.</p>
+        <p class="- topic/p p">TXQ interrupts are enabled in CxTXQCON.</p>
+        <p class="- topic/p p">Clearing of the FIFO interrupts is explained in <a class="- topic/xref xref" href="GUID-E84F6F7C-8A43-425D-BD4C-3BF6D52B7772.html#GUID-E84F6F7C-8A43-425D-BD4C-3BF6D52B7772__GUID-B2807907-DC17-411B-B647-7EFA9274C020">FIFO Individual Interrupts</a>.</p>
+    </div>
+
+</body>
+</html>

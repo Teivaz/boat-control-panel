@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.1.5 Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4609D2B7-0888-46E9-B7C3-48E31E2B8788.html"/>
+<link rel="next" href="GUID-271ECB8F-050A-4C81-86D4-94A6E902E3FC.html"/>
+<link rel="up" href="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52.html">43.1 ADC Configuration</a></li><li>43.1.5 Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-4609D2B7-0888-46E9-B7C3-48E31E2B8788.html" rel="prev">Conversion Clock</a></span><span><a href="GUID-271ECB8F-050A-4C81-86D4-94A6E902E3FC.html" rel="next">Result Formatting</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA__GUID-ECB8A3FD-A933-4B94-863F-3499872D23A8" style="">43.1.5 Interrupts</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA__ID-42107-00000232" data-ofbid="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA__ID-42107-00000232">The ADC module allows for the ability to
+            generate an interrupt upon completion of an Analog-to-Digital Conversion. The ADC
+            interrupt flag is the ADIF bit in the PIRx register. The ADC interrupt enable is the
+            ADIE bit in the PIEx register. The ADIF bit must be cleared by software.</p>
+        <div class="- topic/note note important note_important" id="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA__GUID-A6F48B15-5BF2-4859-8777-CF0B88AA54D2" data-ofbid="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA__GUID-A6F48B15-5BF2-4859-8777-CF0B88AA54D2"><span class="note__title">Important:</span> 
+            <ol class="- topic/ol ol" id="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA__GUID-22FE39FE-F12B-42D6-8DC7-68553AFFF4EF" data-ofbid="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA__GUID-22FE39FE-F12B-42D6-8DC7-68553AFFF4EF">
+                <li class="- topic/li li" id="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA__ID-42107-00000239" data-ofbid="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA__ID-42107-00000239">The ADIF bit is set at the completion
+                    of every conversion, regardless of whether or not the ADC interrupt is
+                    enabled.</li>
+                <li class="- topic/li li" id="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA__ID-42107-0000023B" data-ofbid="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA__ID-42107-0000023B">The ADC operates during Sleep only
+                    when the ADCRC oscillator is selected.</li>
+            </ol>
+        </div>
+        <p class="- topic/p p" id="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA__ID-42107-0000023E" data-ofbid="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA__ID-42107-0000023E">This interrupt will be generated while the
+            device is operating and while in Sleep. If the device is in Sleep, the interrupt will
+            wake up the device. Upon waking from Sleep, the next instruction following the <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA__ID-42107-0000023F">SLEEP</code> instruction is
+            always executed. If the user is attempting to wake up from Sleep and resume in-line code
+            execution, the ADIE bit and the GIEL bit must both be set and the GIE bit must be
+            cleared. When all three of these bits are set, the execution will switch to the
+            Interrupt Service Routine.</p>
+    </div>
+
+</body>
+</html>

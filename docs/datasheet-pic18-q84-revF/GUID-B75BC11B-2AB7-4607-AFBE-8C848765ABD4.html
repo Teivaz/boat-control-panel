@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.3.3.4 Synchronization — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7D07131B-6085-413D-A85F-35899E920955.html"/>
+<link rel="next" href="GUID-F9987E20-4B38-4273-AD25-284CF0520896.html"/>
+<link rel="up" href="GUID-1D45D3A2-247B-4C23-ACD6-4131BDF1900C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html">38.3 Configuration</a></li><li><a href="GUID-1D45D3A2-247B-4C23-ACD6-4131BDF1900C.html">38.3.3 CAN FD Bit Time Configuration</a></li><li>38.3.3.4 Synchronization</li></ol>
+  <div class="sib"><span>← <a href="GUID-7D07131B-6085-413D-A85F-35899E920955.html" rel="prev">Transmitter Delay Compensation (TDC)</a></span><span><a href="GUID-F9987E20-4B38-4273-AD25-284CF0520896.html" rel="next">Synchronization Jump Width</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-B75BC11B-2AB7-4607-AFBE-8C848765ABD4__GUID-7E15D6A5-9FAC-48BF-A070-12050A3FBF02" style="">38.3.3.4 Synchronization</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">To compensate for phase shifts between the oscillator frequencies of the nodes on the CAN
+            bus, each CAN controller must be able to synchronize to the relevant edge of the
+            incoming signal. The CAN controller expects an edge in the received signal to occur
+            within the SYNC segment. Only recessive-to-dominant edges are used for
+            synchronization.</p>
+        <div class="- topic/p p">There are two mechanisms used for synchronization:<ul class="- topic/ul ul" id="GUID-B75BC11B-2AB7-4607-AFBE-8C848765ABD4__UL_ND3_MH1_P3B" data-ofbid="GUID-B75BC11B-2AB7-4607-AFBE-8C848765ABD4__UL_ND3_MH1_P3B">
+                <li class="- topic/li li" id="GUID-B75BC11B-2AB7-4607-AFBE-8C848765ABD4__GUID-B07BB315-63F7-4BDA-AC4A-0BD4F60DC60C" data-ofbid="GUID-B75BC11B-2AB7-4607-AFBE-8C848765ABD4__GUID-B07BB315-63F7-4BDA-AC4A-0BD4F60DC60C"><strong class="+ topic/ph hi-d/b ph b">Hard Synchronization</strong> – Forces the edge that has occurred to lie within
+                    the SYNC segment. The bit time counter is restarted with SYNC.</li>
+                <li class="- topic/li li" id="GUID-B75BC11B-2AB7-4607-AFBE-8C848765ABD4__GUID-036F0699-7677-401A-B789-A3DD40639814" data-ofbid="GUID-B75BC11B-2AB7-4607-AFBE-8C848765ABD4__GUID-036F0699-7677-401A-B789-A3DD40639814"><strong class="+ topic/ph hi-d/b ph b">Resynchronization</strong> – If the edge falls outside the SYNC segment, PHSEG1 or
+                    PHSEG2 will be adjusted.</li>
+            </ul></div>
+        <p class="- topic/p p">For a more detailed description of the CAN synchronization, refer to ISO11898-1:2015.</p>
+    </div>
+
+</body>
+</html>

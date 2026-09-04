@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.1.1.1 EC Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5DED24A3-7549-4229-9627-680F5E81FE14.html"/>
+<link rel="next" href="GUID-5CCFD60B-12E4-4D48-AAEE-E971893FC7B4.html"/>
+<link rel="up" href="GUID-5DED24A3-7549-4229-9627-680F5E81FE14.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A.html">12.1 Clock Source Types</a></li><li><a href="GUID-5DED24A3-7549-4229-9627-680F5E81FE14.html">12.1.1 External Clock Sources</a></li><li>12.1.1.1 EC Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-5DED24A3-7549-4229-9627-680F5E81FE14.html" rel="prev">External Clock Sources</a></span><span><a href="GUID-5CCFD60B-12E4-4D48-AAEE-E971893FC7B4.html" rel="next">LP, XT, HS Modes</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__GUID-2F635184-CB62-4BBD-85F7-9C4B70FAFA60" style="">12.1.1.1 EC Mode</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The External Clock (EC) mode allows an externally generated logic level signal to be
+            the system clock source. When operating in EC mode, an external clock source is
+            connected to the OSC1/CLKIN input pin. The OSC2/CLKOUT pin is available as a general
+            purpose I/O pin or as the CLKOUT signal pin.</p>
+        <div class="- topic/p p">EC mode provides three Power mode selections:<ul class="- topic/ul ul" id="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__UL_BJC_Y33_SGB" data-ofbid="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__UL_BJC_Y33_SGB">
+                <li class="- topic/li li" id="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__GUID-ADA8E202-C273-472B-87BE-46E983BFD2FD" data-ofbid="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__GUID-ADA8E202-C273-472B-87BE-46E983BFD2FD">ECH: High-Power mode</li>
+                <li class="- topic/li li" id="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__GUID-87695EC0-5D72-4EF2-8D43-EB52789A6E76" data-ofbid="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__GUID-87695EC0-5D72-4EF2-8D43-EB52789A6E76">ECM: Medium-Power mode</li>
+                <li class="- topic/li li" id="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__GUID-2CF48A00-E1CA-4442-B4C8-DA40850C4002" data-ofbid="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__GUID-2CF48A00-E1CA-4442-B4C8-DA40850C4002">ECL: Low-Power mode</li>
+            </ul></div>
+        <p class="- topic/p p">The Oscillator Start-up Timer (OST) is disabled when EC mode is selected; therefore,
+            there is no delay in operation after a Power-on Reset (POR) or wake-up from Sleep.
+            Because the PIC<sup class="+ topic/ph hi-d/sup ph sup">®</sup> MCU design is fully static, stopping the external clock
+            input will have the effect of halting the device while leaving all data intact. Upon
+            restarting the external clock, the device will resume operation as if no time had
+            elapsed.</p>
+        <p class="- topic/p p">The figure below shows the pin connections for EC mode.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__FIG_LXY_4P3_SGB" data-ofbid="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__FIG_LXY_4P3_SGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 12-2. <span id="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__GUID-4FD2AE55-2CD3-4EAE-8BDA-F73AD2AF7F5D" class="fig--title">External Clock (EC) Mode Operation</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__IMAGE_MXY_4P3_SGB" src="GUID-7423538D-F2C8-46D3-9742-641C5D79CCEA-high.svg"/></span>
+        </figure>
+        <div class="- topic/note note notype note_notype" id="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__GUID-3F8C8ADA-171F-4C33-9F48-DBC0632E2238" data-ofbid="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__GUID-3F8C8ADA-171F-4C33-9F48-DBC0632E2238"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__OL_TGK_5P3_SGB" data-ofbid="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__OL_TGK_5P3_SGB">
+                <li class="- topic/li li" id="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__GUID-5C31FE93-57BA-48BC-8691-EBE3E4896FCC" data-ofbid="GUID-50DDAF49-CF1E-4D8E-B3E1-A499026532B5__GUID-5C31FE93-57BA-48BC-8691-EBE3E4896FCC">Output depends on the setting of
+                    the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CLKOUTEN</span> Configuration bit.</li>
+            </ol>
+        </div>
+</div>
+
+</body>
+</html>

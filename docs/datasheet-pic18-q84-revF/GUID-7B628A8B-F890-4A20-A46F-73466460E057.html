@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>29.2.5 Capture During Sleep — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-974B2E44-00AB-4E06-B007-19461C81B9F1.html"/>
+<link rel="next" href="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944.html"/>
+<link rel="up" href="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html">29 CCP - Capture/Compare/PWM Module</a></li><li><a href="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063.html">29.2 Capture Mode</a></li><li>29.2.5 Capture During Sleep</li></ol>
+  <div class="sib"><span>← <a href="GUID-974B2E44-00AB-4E06-B007-19461C81B9F1.html" rel="prev">CCP Prescaler</a></span><span><a href="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944.html" rel="next">Compare Mode</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-7B628A8B-F890-4A20-A46F-73466460E057__GUID-C639CA48-AB6F-4511-AF05-BDB7066BBD58" style="">29.2.5 Capture During Sleep</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-7B628A8B-F890-4A20-A46F-73466460E057__ID-42109-0000063E" data-ofbid="GUID-7B628A8B-F890-4A20-A46F-73466460E057__ID-42109-0000063E">Capture mode depends upon the Timer1 module for proper operation.
+         There are two options for driving the Timer1 module in Capture mode. It can be driven by
+         the instruction clock (F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4) or by an external clock source.</p>
+      <p class="- topic/p p" id="GUID-7B628A8B-F890-4A20-A46F-73466460E057__ID-42109-00000640" data-ofbid="GUID-7B628A8B-F890-4A20-A46F-73466460E057__ID-42109-00000640">When Timer1 is clocked by F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4, Timer1 will not
+         increment during Sleep. When the device wakes from Sleep, Timer1 will continue from its
+         previous state.</p>
+      <p class="- topic/p p" id="GUID-7B628A8B-F890-4A20-A46F-73466460E057__ID-42109-00000642" data-ofbid="GUID-7B628A8B-F890-4A20-A46F-73466460E057__ID-42109-00000642">Capture mode will operate during Sleep when Timer1 is clocked by an external clock source.</p>
+   </div>
+
+</body>
+</html>

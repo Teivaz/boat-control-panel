@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.9.5 Transmit Event FIFO Behavior — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21.html"/>
+<link rel="next" href="GUID-F2BBDA5E-C2FB-4B5E-811C-F2D9D498ED30.html"/>
+<link rel="up" href="GUID-18BE65DA-2E61-49D8-AAE7-AC56D4A9B739.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-18BE65DA-2E61-49D8-AAE7-AC56D4A9B739.html">38.9 FIFO Behavior</a></li><li>38.9.5 Transmit Event FIFO Behavior</li></ol>
+  <div class="sib"><span>← <a href="GUID-CFAD65F2-CDBD-458C-B5C8-A3B56E141D21.html" rel="prev">Transmit Queue Behavior</a></span><span><a href="GUID-F2BBDA5E-C2FB-4B5E-811C-F2D9D498ED30.html" rel="next">Timestamping</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__GUID-9EE012D7-68C7-471A-816D-353A180CE86E" style="">38.9.5 Transmit Event FIFO Behavior</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">C1TEFCONL and C1TEFCONH are used to control the TEF. C1TEFSTA contains the status flags.
+            C1TEFUAL and C1TEFUAH contain the user address of the next message object to read.</p>
+        <p class="- topic/p p">The actual RAM address is calculated using <a class="- topic/xref xref" href="GUID-AE1D2BFE-614E-473A-B7E1-55FFA1126E87.html#GUID-AE1D2BFE-614E-473A-B7E1-55FFA1126E87__EQUATION-FIGURE_I1D_GXH_P3B"><span>Equation 38-21</span></a>.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_ENK_J53_Q3B"><span>Figure 38-38</span></a> through <a class="- topic/xref xref" href="#GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_UKZ_HW3_Q3B"><span>Figure 38-45</span></a> illustrate how the status flags and user address are
+            updated. The TEF stores transmitted messages; therefore, the flags behave similarly to
+            an RX FIFO.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_ENK_J53_Q3B"><span>Figure 38-38</span></a> shows the status of the TEF after Reset. Message
+            objects, MO0 to MO11, are empty. All status flags are cleared. The user address points
+            to MO0.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_ENK_J53_Q3B" data-ofbid="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_ENK_J53_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-38. <span id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__GUID-46D389ED-99A5-4EC2-ADC1-BB8E91C5C568" class="fig--title">TEF - Initial State</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__IMAGE_FNK_J53_Q3B" src="GUID-FBACAEDC-088E-4B0E-8973-18C3D1C3DC15-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p">Figure <a class="- topic/xref xref" href="#GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_Y4C_N53_Q3B"><span>Figure 38-39</span></a>
+            shows the status of the TEF after the first transmit message is stored. MO0 contains
+            ID0, the ID of MSG0. TEFNEIF is set since the TEF is not empty. The user address points
+            to MO0.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_Y4C_N53_Q3B" data-ofbid="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_Y4C_N53_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-39. <span id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__GUID-3510BEC2-025B-4F8E-AF74-E7F79479A176" class="fig--title">TEF - First Transmit Message is Stored</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__IMAGE_Z4C_N53_Q3B" src="GUID-39B67AB0-5EB0-454F-8B92-42398AB02C55-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_EVZ_X53_Q3B"><span>Figure 38-40</span></a> illustrates the status of the TEF after ID0 is read. The user
+            application reads the ID from RAM and sets the UINC bit (C1TEFCONL[8]). The user address
+            increments and points to MO1. The TEF is empty again. All flags are cleared.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_EVZ_X53_Q3B" data-ofbid="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_EVZ_X53_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-40. <span id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__GUID-519EDF19-EF6E-4EE7-AB59-7D73D73AF929" class="fig--title">TEF - First ID Read</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__IMAGE_FVZ_X53_Q3B" src="GUID-D3771EB8-B697-4E23-A6AA-7F36CC2CFF20-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_UCQ_CV3_Q3B"><span>Figure 38-41</span></a> illustrates the status of the TEF after six more
+            messages are transmitted: MSG1-MSG6. The user address points to MO1. TEFNEIF and TEFHIF
+            are set because the TEF is now half full.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_UCQ_CV3_Q3B" data-ofbid="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_UCQ_CV3_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-41. <span id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__GUID-B1215DAE-6DAC-4ABD-A0F1-9A9F1CEF7288" class="fig--title">TEF - Half Full</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__IMAGE_VCQ_CV3_Q3B" src="GUID-2D027245-3012-4AF0-85F1-F594FAE043C6-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_DPX_KV3_Q3B"><span>Figure 38-42</span></a> illustrates the status of the TEF after five more
+            messages are transmitted: MSG7-MSG11. The user address still points to MO1. TEFNEIF and
+            TEFHIF are set. </p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_DPX_KV3_Q3B" data-ofbid="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_DPX_KV3_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-42. <span id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__GUID-503D88D1-E094-468C-94A7-A5D454506356" class="fig--title">TEF- Almost Full</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__IMAGE_EPX_KV3_Q3B" src="GUID-927644CD-7CDA-4D40-BC70-F6A632470C4C-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_F3V_NV3_Q3B"><span>Figure 38-43</span></a> illustrates the status of the TEF after one more
+            message is transmitted: MSG12. All status flags are set because the TEF is full. The
+            user address points to MO1. </p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_F3V_NV3_Q3B" data-ofbid="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_F3V_NV3_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-43. <span id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__GUID-00A5C3AE-B246-47E4-B7CA-D695B7E099A6" class="fig--title">TEF - Full</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__IMAGE_G3V_NV3_Q3B" src="GUID-9DD0152B-BAF3-4699-BD1C-70649F897894-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_HNH_GW3_Q3B"><span>Figure 38-44</span></a> illustrates the status of the TEF after one more message
+            is transmitted. Since the TEF is already full, an overflow occurs. The ID is discarded
+            and TEFOVIF is set. The user address remains unchanged.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_HNH_GW3_Q3B" data-ofbid="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_HNH_GW3_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-44. <span id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__GUID-7E5A4DDE-0D06-49D2-B8D3-AB239FA537F1" class="fig--title">TEF - Overflow</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__IMAGE_INH_GW3_Q3B" src="GUID-AC760DD1-3175-42F7-A7A2-3952FCA6C2D4-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_UKZ_HW3_Q3B"><span>Figure 38-45</span></a> illustrates the status of the TEF after the application cleared
+            TEFOVIF and read one more message. TEFFIF is clear because the TEF is not full anymore.
+            The user address points to MO2. </p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_UKZ_HW3_Q3B" data-ofbid="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__FIG_UKZ_HW3_Q3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-45. <span id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__GUID-FF903E8E-43AA-49A1-A6DE-AAA463E34676" class="fig--title">TEF - One More ID Read</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-2925B7EC-20DC-4089-AF07-F1E687317DFE__IMAGE_VKZ_HW3_Q3B" src="GUID-AA633C8D-8226-439F-A807-F725F460956D-high.svg"/></span>
+            </figure>
+        </div>
+</div>
+
+</body>
+</html>

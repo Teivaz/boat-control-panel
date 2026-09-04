@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>22.1.1 Data Selection — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-49EE042B-EC05-42F5-9CB0-A92AFD80A996.html"/>
+<link rel="next" href="GUID-93137823-2E14-4469-8325-B4EB104372D1.html"/>
+<link rel="up" href="GUID-49EE042B-EC05-42F5-9CB0-A92AFD80A996.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812.html">22 CLC - Configurable Logic Cell</a></li><li><a href="GUID-49EE042B-EC05-42F5-9CB0-A92AFD80A996.html">22.1 CLC Setup</a></li><li>22.1.1 Data Selection</li></ol>
+  <div class="sib"><span>← <a href="GUID-49EE042B-EC05-42F5-9CB0-A92AFD80A996.html" rel="prev">CLC Setup</a></span><span><a href="GUID-93137823-2E14-4469-8325-B4EB104372D1.html" rel="next">Data Gating</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-FB7DA898-BA4C-4771-8C73-323D5DCAA144__GUID-FDAB493E-B643-4CB0-871C-C7F585D4E495" style="">22.1.1 Data Selection</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p">Data inputs are selected with <a class="- topic/xref xref" href="GUID-3084CA8C-D2C0-41E2-B45D-BCC3B573DB1F.html" title="CLCnSEL0">CLCnSEL0</a> through CLCnSEL3 registers.<div class="- topic/note note important note_important" id="GUID-FB7DA898-BA4C-4771-8C73-323D5DCAA144__GUID-E8F7867B-0F09-45BC-BF34-9631BCB26C6D" data-ofbid="GUID-FB7DA898-BA4C-4771-8C73-323D5DCAA144__GUID-E8F7867B-0F09-45BC-BF34-9631BCB26C6D"><span class="note__title">Important:</span> Data selections are undefined at power-up.</div></div>
+<p class="- topic/p p">Depending on the number of bits implemented in the CLCnSELy
+                        registers, there can be as many as 256 sources available as inputs to the
+                        configurable logic. Four multiplexers are used to independently select these
+                        inputs to pass on to the next stage as indicated on the left side of the
+                        following diagram.</p>
+                <p class="- topic/p p">Data inputs in the figure are identified by a
+                        generic numbered input name.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-FB7DA898-BA4C-4771-8C73-323D5DCAA144__FIG_ZWS_XWD_F1B" data-ofbid="GUID-FB7DA898-BA4C-4771-8C73-323D5DCAA144__FIG_ZWS_XWD_F1B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 22-2. <span id="GUID-FB7DA898-BA4C-4771-8C73-323D5DCAA144__GUID-B55BB866-E9A2-4020-A7C5-060C895104C6" class="fig--title">Input Data Selection and Gating</span></span></figcaption>
+                        
+                        <span class=""><iframe src="GUID-D6DC7EA1-0C1B-498C-8049-5E2FDE5D0B0E-high.pdf#toolbar=1" width="450" height="484.86460941092326"></iframe></span>
+                        <div class="- topic/note note notype note_notype" id="GUID-FB7DA898-BA4C-4771-8C73-323D5DCAA144__GUID-4D3503A4-BE5D-4740-958A-3ADE51397F83" data-ofbid="GUID-FB7DA898-BA4C-4771-8C73-323D5DCAA144__GUID-4D3503A4-BE5D-4740-958A-3ADE51397F83"><span class="note__title">Note:</span> All controls are
+                                undefined at power-up.</div>
+                </figure>
+        <p class="- topic/p p">The <a class="- topic/xref xref" href="GUID-3084CA8C-D2C0-41E2-B45D-BCC3B573DB1F.html#BITFIELD_ZM1_CR3_F1B__GUID-80EBA57E-EF41-4AE4-8918-E7EB84CC87D6">CLC Input Selection</a> table
+                        correlates the generic input name to the actual signal for each CLC module.
+                        The table column labeled ‘DyS Value’ indicates the MUX selection code for
+                        the selected data input. DyS is an abbreviation for the MUX select input
+                        codes, D1S through D4S, where ‘y’ is the gate number.</p>
+</div>
+
+</body>
+</html>

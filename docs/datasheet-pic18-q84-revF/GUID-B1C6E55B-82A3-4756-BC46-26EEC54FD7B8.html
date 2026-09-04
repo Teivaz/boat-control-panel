@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.12.4 Output Pin Setup — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706.html"/>
+<link rel="next" href="GUID-478F5C1C-3D45-4B20-9516-C1B762D14FF8.html"/>
+<link rel="up" href="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li><a href="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA.html">13.12 CRC-on-Boot Module Overview</a></li><li>13.12.4 Output Pin Setup</li></ol>
+  <div class="sib"><span>← <a href="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706.html" rel="prev">Memory Selection</a></span><span><a href="GUID-478F5C1C-3D45-4B20-9516-C1B762D14FF8.html" rel="next">CRC Calculation</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-B1C6E55B-82A3-4756-BC46-26EEC54FD7B8__GUID-2DE3EB8B-3EEE-4E58-BB3E-EDA7DD331AF0" style="">13.12.4 Output Pin Setup</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The output of the CRC-on-boot module will output low while performing the CRC calculation and
+      will output high upon confirming a match. The ODCON Configuration bit, when set, allows the
+      pin to drive both high and low. Clearing the ODCON bit will cause the pin to only drive low,
+      relying on an external pull-up for the high level. The BOOTPINSEL Configuration bits allow for
+      a selection of four different CRC mismatch error output pins. The selected pin will be
+      completely controlled by the CRC-on-boot module and therefore will be unusable by any other
+      modules. Clearing the BPEN Configuration bit enables the output of the CRC-on-boot module.
+      While this bit is set, the CRC may still occur, but the output pin selected by BOOTPINSEL will
+      not indicate the status of the check and remain available for other peripheral functions.</p>
+</div>
+
+</body>
+</html>

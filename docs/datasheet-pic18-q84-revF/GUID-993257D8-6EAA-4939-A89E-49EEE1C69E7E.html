@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>46.4 ZCD Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0339D53C-501B-410E-B109-98A508DD9661.html"/>
+<link rel="next" href="GUID-245BCE02-61B9-4188-85E2-1A60578FAD39.html"/>
+<link rel="up" href="GUID-2691243F-9E90-401E-8612-0EB77C360C8E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2691243F-9E90-401E-8612-0EB77C360C8E.html">46 ZCD - Zero-Cross Detection Module</a></li><li>46.4 ZCD Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-0339D53C-501B-410E-B109-98A508DD9661.html" rel="prev">ZCD Logic Polarity</a></span><span><a href="GUID-245BCE02-61B9-4188-85E2-1A60578FAD39.html" rel="next">Correction for ZCPINV Offset</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__GUID-B8868986-D186-4244-B7FE-F13FFC664453" style="">46.4 ZCD Interrupts</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__ID-42143-00000036" data-ofbid="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__ID-42143-00000036">An interrupt will be generated upon a change in the ZCD logic output
+         when the appropriate interrupt enables are set. The ZCD module has a rising edge detector
+         and a falling edge detector.</p>
+      <p class="- topic/p p" id="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__ID-42143-00000037" data-ofbid="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__ID-42143-00000037">The ZCDIF bit of the PIRx register will be set when either edge
+         detector is triggered and its associated enable bit is set. The <a class="- topic/xref xref" href="GUID-AF40482A-B1BF-4BA5-83CF-612DC12249AB.html#ID-0000001F" title="Zero-Cross Detect Positive-Going Edge Interrupt Enable">INTP</a> enables rising edge interrupts and the <a class="- topic/xref xref" href="GUID-AF40482A-B1BF-4BA5-83CF-612DC12249AB.html#ID-00000026" title="Zero-Cross Detect Negative-Going Edge Interrupt Enable">INTN</a> bit enables falling edge interrupts.</p>
+      <p class="- topic/p p" id="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__ID-42143-00000038" data-ofbid="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__ID-42143-00000038">To fully enable the interrupt, the following bits must be set:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__ID-42143-00000039" data-ofbid="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__ID-42143-00000039">ZCDIE bit of the PIEx register</li>
+         <li class="- topic/li li" id="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__GUID-E4DDEA41-19EE-4AA2-B409-A76DF547B31C" data-ofbid="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__GUID-E4DDEA41-19EE-4AA2-B409-A76DF547B31C">INTP bit for rising edge detection</li>
+         <li class="- topic/li li" id="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__GUID-67CDBF8B-A0B9-4E32-8A02-4424FC841056" data-ofbid="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__GUID-67CDBF8B-A0B9-4E32-8A02-4424FC841056">INTN bit for falling edge detection</li>
+         <li class="- topic/li li" id="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__ID-42143-0000003F" data-ofbid="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__ID-42143-0000003F">GIEL and GIE bits of the INTCON0 register</li>
+      </ul>
+      <p class="- topic/p p" id="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__ID-42143-00000041" data-ofbid="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__ID-42143-00000041">Changing the POL bit will cause an interrupt, regardless of the
+         level of the <a class="- topic/xref xref" href="GUID-AF40482A-B1BF-4BA5-83CF-612DC12249AB.html#ID-00000005" title="Zero-Cross Detect Software Enable">SEN</a> bit.</p>
+      <p class="- topic/p p" id="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__ID-42143-00000042" data-ofbid="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E__ID-42143-00000042">The ZCDIF bit of the PIRx register must be cleared in software as
+         part of the interrupt service. If another edge is detected while this flag is being
+         cleared, the flag will still be set at the end of the sequence.</p>
+   </div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.1.2.1.1 HFINTOSC Frequency Tuning — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F9786274-3838-4FC7-9C13-EEBA65D5712B.html"/>
+<link rel="next" href="GUID-E5B524DC-26B1-4792-9E74-4B7C02CA5846.html"/>
+<link rel="up" href="GUID-F9786274-3838-4FC7-9C13-EEBA65D5712B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A.html">12.1 Clock Source Types</a></li><li><a href="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7.html">12.1.2 Internal Clock Sources</a></li><li><a href="GUID-F9786274-3838-4FC7-9C13-EEBA65D5712B.html">12.1.2.1 HFINTOSC</a></li><li>12.1.2.1.1 HFINTOSC Frequency Tuning</li></ol>
+  <div class="sib"><span>← <a href="GUID-F9786274-3838-4FC7-9C13-EEBA65D5712B.html" rel="prev">HFINTOSC</a></span><span><a href="GUID-E5B524DC-26B1-4792-9E74-4B7C02CA5846.html" rel="next">MFINTOSC</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-3479F767-AFAA-4442-B14B-C06D12A20F29__GUID-2003AF22-B6A4-4CAF-97EC-95BA9AC05461" style="">12.1.2.1.1 HFINTOSC Frequency Tuning</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The HFINTOSC frequency can be fine-tuned via the HFINTOSC Tuning (<a class="- topic/xref xref" href="GUID-E9218AC7-E06A-403D-A3D6-54192CA94BCB.html" title="OSCTUNE">OSCTUNE</a>)
+            register. The OSCTUNE register is used by Active Clock Tuning hardware or user software
+            to provide small adjustments to the HFINTOSC nominal frequency.</p>
+        <p class="- topic/p p">The <a class="- topic/xref xref" href="GUID-E9218AC7-E06A-403D-A3D6-54192CA94BCB.html" title="OSCTUNE">OSCTUNE</a>
+            register contains the HFINTOSC Frequency Tuning (<a class="- topic/xref xref" href="GUID-E9218AC7-E06A-403D-A3D6-54192CA94BCB.html#GUID-4E3F0A7F-F4D5-40D2-BC32-FE64ECEFC3AA" title="HFINTOSC Frequency Tuning">TUN</a>) bits. The TUN bits default to a 6-bit, two’s complement
+            value of <code class="+ topic/ph pr-d/codeph ph codeph">0x00</code>, which indicates that the oscillator is operating at the
+            selected frequency. When a value between <code class="+ topic/ph pr-d/codeph ph codeph">0x01</code> and <code class="+ topic/ph pr-d/codeph ph codeph">0x1F</code>
+            is written to the TUN bits, the HFINTOSC frequency is increased. When a value between
+                <code class="+ topic/ph pr-d/codeph ph codeph">0x3F</code> and <code class="+ topic/ph pr-d/codeph ph codeph">0x20</code> is written to the TUN bits, the
+            HFINTOSC frequency is decreased.</p>
+        <p class="- topic/p p">When the <a class="- topic/xref xref" href="GUID-E9218AC7-E06A-403D-A3D6-54192CA94BCB.html" title="OSCTUNE">OSCTUNE</a> register is modified, the oscillator will begin to shift to the new
+            frequency. Code execution continues during this shift. There is no indication that the
+            frequency shift occurred.</p>
+        <div class="- topic/note note important note_important" id="GUID-3479F767-AFAA-4442-B14B-C06D12A20F29__GUID-2BE4B826-80C6-45A5-8E32-5F470B609EC8" data-ofbid="GUID-3479F767-AFAA-4442-B14B-C06D12A20F29__GUID-2BE4B826-80C6-45A5-8E32-5F470B609EC8"><span class="note__title">Important:</span> <a class="- topic/xref xref" href="GUID-E9218AC7-E06A-403D-A3D6-54192CA94BCB.html" title="OSCTUNE">OSCTUNE</a> tuning
+            does not affect the LFINTOSC frequency.</div>
+    </div>
+
+</body>
+</html>

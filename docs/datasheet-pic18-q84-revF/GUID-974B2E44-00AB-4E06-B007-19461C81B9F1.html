@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>29.2.4 CCP Prescaler — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BFE44D87-36BB-492E-8E6C-61696E030738.html"/>
+<link rel="next" href="GUID-7B628A8B-F890-4A20-A46F-73466460E057.html"/>
+<link rel="up" href="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html">29 CCP - Capture/Compare/PWM Module</a></li><li><a href="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063.html">29.2 Capture Mode</a></li><li>29.2.4 CCP Prescaler</li></ol>
+  <div class="sib"><span>← <a href="GUID-BFE44D87-36BB-492E-8E6C-61696E030738.html" rel="prev">Software Interrupt Mode</a></span><span><a href="GUID-7B628A8B-F890-4A20-A46F-73466460E057.html" rel="next">Capture During Sleep</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-974B2E44-00AB-4E06-B007-19461C81B9F1__GUID-DA6BEDB8-4BD0-4E5E-A7CE-690315B49587" style="">29.2.4 CCP Prescaler</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-974B2E44-00AB-4E06-B007-19461C81B9F1__ID-42109-0000062F" data-ofbid="GUID-974B2E44-00AB-4E06-B007-19461C81B9F1__ID-42109-0000062F">There are four prescaler settings specified by the <a class="- topic/xref xref" href="GUID-B5E1B30C-10E2-4929-B5C4-0F271B634DD1.html#ID-0000001D" title="CCP Mode Select">MODE</a>
+         bits. Whenever the CCP module is turned off or when the CCP module is not in Capture mode,
+         the prescaler counter is cleared. Any Reset will clear the prescaler counter.</p>
+      <p class="- topic/p p" id="GUID-974B2E44-00AB-4E06-B007-19461C81B9F1__ID-42109-00000630" data-ofbid="GUID-974B2E44-00AB-4E06-B007-19461C81B9F1__ID-42109-00000630">Switching from one capture prescaler to another does not clear the
+         prescaler and may generate a false interrupt. To avoid this unexpected operation, turn the
+         module off by clearing the CCPxCON register before changing the prescaler. The example
+         below demonstrates the code to perform this function.</p>
+      <div class="- topic/example example" id="GUID-974B2E44-00AB-4E06-B007-19461C81B9F1__GUID-6B1C255D-8E67-483C-82C6-84B903A528FC" data-ofbid="GUID-974B2E44-00AB-4E06-B007-19461C81B9F1__GUID-6B1C255D-8E67-483C-82C6-84B903A528FC"><h2 class="- topic/title title sectiontitle">Changing between Capture
+            Prescalers</h2>
+         
+         <pre class="+ topic/pre pr-d/codeblock pre codeblock" id="GUID-974B2E44-00AB-4E06-B007-19461C81B9F1__ID-42109-00000634" data-ofbid="GUID-974B2E44-00AB-4E06-B007-19461C81B9F1__ID-42109-00000634"><code>BANKSEL CCP1CON        ;only needed when CCP1CON is not in ACCESS space
+CLRF    CCP1CON        ;Turn CCP module off
+MOVLW   NEW_CAPT_PS    ;CCP ON and Prescaler select → W
+MOVWF   CCP1CON        ;Load CCP1CON with this value
+</code></pre>
+      </div>
+   </div>
+
+</body>
+</html>

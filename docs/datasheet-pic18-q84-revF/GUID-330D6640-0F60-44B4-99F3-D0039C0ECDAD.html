@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>14.10 Start-Up Sequence — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4B644A64-1829-474D-8AEB-9A682565F48F.html"/>
+<link rel="next" href="GUID-C67DC5AB-1A53-473D-9966-DB6802A6E73C.html"/>
+<link rel="up" href="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F.html">14 Resets</a></li><li>14.10 Start-Up Sequence</li></ol>
+  <div class="sib"><span>← <a href="GUID-4B644A64-1829-474D-8AEB-9A682565F48F.html" rel="prev">Power-up Timer (PWRT)</a></span><span><a href="GUID-C67DC5AB-1A53-473D-9966-DB6802A6E73C.html" rel="next">Memory Execution Violation</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__GUID-D54BCEEE-405D-44D0-AAB7-7A7AA6BD6DE9" style="">14.10 Start-Up Sequence</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002D6" data-ofbid="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002D6">Upon the release of a POR or BOR, the following must occur before
+            the device will begin executing:</p>
+        <ol class="- topic/ol ol" id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__GUID-94E2E5A2-2BF6-426B-BC7E-0BFBCAC6BC20" data-ofbid="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__GUID-94E2E5A2-2BF6-426B-BC7E-0BFBCAC6BC20">
+            <li class="- topic/li li" id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002D7" data-ofbid="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002D7">Power-up Timer runs to completion (if enabled).</li>
+            <li class="- topic/li li" id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002D9" data-ofbid="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002D9">Oscillator Start-up Timer runs to completion (if required for
+                selected oscillator source).</li>
+            <li class="- topic/li li" id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002DB" data-ofbid="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002DB"><span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002DD">MCLR</span> must be
+                released (if enabled).</li>
+        </ol>
+        <p class="- topic/p p" id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002DE" data-ofbid="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002DE">The total time-out will vary based on the oscillator configuration
+            and Power-up Timer configuration.</p>
+        <p class="- topic/p p" id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002E0" data-ofbid="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002E0">The Power-up Timer and Oscillator Start-up Timer run independently
+            of <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002E1">MCLR</span> Reset. If <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002E2">MCLR</span> is kept low long enough, the Power-up Timer
+            and Oscillator Start-up Timer will expire. Upon bringing <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002E3">MCLR</span> high, the device will begin execution after
+            10 F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> cycles (see the figure below). This is useful for testing purposes or
+            to synchronize more than one device operating in parallel.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002E6" data-ofbid="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__ID-42138-000002E6"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 14-4. <span id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__GUID-2373DA6E-6C58-4D74-8DB3-05D6154E972E" class="fig--title">Reset Start-Up Sequence</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD__IMAGE_MSJ_H2F_4Z" src="GUID-9F6BFE16-C962-49C1-8351-08CF35C192A0-high.svg"/></span>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-C67DC5AB-1A53-473D-9966-DB6802A6E73C.html">14.10.1 Memory Execution Violation</a></li></ul>
+</nav>
+</body>
+</html>

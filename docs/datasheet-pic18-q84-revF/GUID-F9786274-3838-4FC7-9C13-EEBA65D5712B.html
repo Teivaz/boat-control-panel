@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.1.2.1 HFINTOSC — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7.html"/>
+<link rel="next" href="GUID-3479F767-AFAA-4442-B14B-C06D12A20F29.html"/>
+<link rel="up" href="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A.html">12.1 Clock Source Types</a></li><li><a href="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7.html">12.1.2 Internal Clock Sources</a></li><li>12.1.2.1 HFINTOSC</li></ol>
+  <div class="sib"><span>← <a href="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7.html" rel="prev">Internal Clock Sources</a></span><span><a href="GUID-3479F767-AFAA-4442-B14B-C06D12A20F29.html" rel="next">HFINTOSC Frequency Tuning</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-F9786274-3838-4FC7-9C13-EEBA65D5712B__GUID-A622661A-A855-472E-B7AA-3FB4BF8540C3" style="">12.1.2.1 HFINTOSC</h1>
+<div class="- topic/body body">
+<div class="- topic/p p">The High-Frequency Internal Oscillator (HFINTOSC) is a factory-calibrated, precision
+            digitally-controlled internal clock source that produces a wide range of stable clock
+            frequencies. The HFINTOSC can be enabled through one of the following methods:<ul class="- topic/ul ul" id="GUID-F9786274-3838-4FC7-9C13-EEBA65D5712B__UL_YG3_2PQ_XGB" data-ofbid="GUID-F9786274-3838-4FC7-9C13-EEBA65D5712B__UL_YG3_2PQ_XGB">
+                <li class="- topic/li li" id="GUID-F9786274-3838-4FC7-9C13-EEBA65D5712B__GUID-7F57925F-180B-45E5-B806-5A13AE8F90B3" data-ofbid="GUID-F9786274-3838-4FC7-9C13-EEBA65D5712B__GUID-7F57925F-180B-45E5-B806-5A13AE8F90B3">Program the RSTOSC Configuration
+                    bits to select the HFINTOSC upon device Reset or power-up.</li>
+                <li class="- topic/li li" id="GUID-F9786274-3838-4FC7-9C13-EEBA65D5712B__GUID-6243F982-0421-4867-9865-9070D5F033A1" data-ofbid="GUID-F9786274-3838-4FC7-9C13-EEBA65D5712B__GUID-6243F982-0421-4867-9865-9070D5F033A1">Write to the New Oscillator
+                    Source Request (<a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a>) bits to select the HFINTOSC during run time.</li>
+            </ul></div>
+        <p class="- topic/p p">The HFINTOSC frequency is selected via the HFINTOSC Frequency Selection
+                (<a class="- topic/xref xref" href="GUID-1EEB4FE6-E7C6-4660-A0D1-7B2F5A722DB3.html#GUID-D18FC875-28E0-4140-8038-017D80B74F1B" title="HFINTOSC Frequency Selection"><span><span>FRQ</span></span></a>) bits. Fine-tuning of the HFINTOSC is done via the
+            HFINTOSC Frequency Tuning (<a class="- topic/xref xref" href="GUID-E9218AC7-E06A-403D-A3D6-54192CA94BCB.html#GUID-4E3F0A7F-F4D5-40D2-BC32-FE64ECEFC3AA" title="HFINTOSC Frequency Tuning">TUN</a>) bits. The HFINTOSC output frequency can be
+            divided (post-scaled) via the New Divider Selection Request (<a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GHR_WSL_YGB" title="New Divider Selection Request">NDIV</a>) bits.</p>
+</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-3479F767-AFAA-4442-B14B-C06D12A20F29.html">12.1.2.1.1 HFINTOSC Frequency Tuning</a></li></ul>
+</nav>
+</body>
+</html>

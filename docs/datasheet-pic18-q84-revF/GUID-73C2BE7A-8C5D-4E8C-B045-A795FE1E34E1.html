@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.10.3 External Input Source — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-6B7E62D2-06F8-480F-AF12-489AC6550E63.html"/>
+<link rel="next" href="GUID-DBCC2102-C1D8-4666-B327-AC089C0E7117.html"/>
+<link rel="up" href="GUID-6197F686-AADF-4660-B041-D3FEDC67F6B4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li><a href="GUID-6197F686-AADF-4660-B041-D3FEDC67F6B4.html">32.10 Auto-Shutdown</a></li><li>32.10.3 External Input Source</li></ol>
+  <div class="sib"><span>← <a href="GUID-6B7E62D2-06F8-480F-AF12-489AC6550E63.html" rel="prev">Software Generated Shutdown</a></span><span><a href="GUID-DBCC2102-C1D8-4666-B327-AC089C0E7117.html" rel="next">Pin Override Levels</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-73C2BE7A-8C5D-4E8C-B045-A795FE1E34E1__GUID-2CEEDE42-C549-429A-B72B-308B613469BE" style="">32.10.3 External Input Source</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p" id="GUID-73C2BE7A-8C5D-4E8C-B045-A795FE1E34E1__ID-42115-0000024B" data-ofbid="GUID-73C2BE7A-8C5D-4E8C-B045-A795FE1E34E1__ID-42115-0000024B">External shutdown inputs provide the fastest way to safely suspend
+            CWG operation in the event of a Fault condition. When any of the selected shutdown
+            inputs goes active, the CWG outputs will immediately go to the selected override levels
+            without software delay. The override levels are selected by the <a class="- topic/xref xref" href="GUID-AA068E9E-929B-4A65-997C-47FC96B43629.html#BITFIELD_PVX_5S2_VZ" title="CWGxB and CWGxD Auto-Shutdown State Control"><span><span>LSBD</span></span></a>
+            and <a class="- topic/xref xref" href="GUID-AA068E9E-929B-4A65-997C-47FC96B43629.html#BITFIELD_FCR_ZS2_VZ" title="CWGxA and CWGxC Auto-Shutdown State Control"><span><span>LSAC</span></span></a> bits. Several input sources can be selected to cause a Shutdown
+            condition. All input sources are active-low. The shutdown input sources are individually
+            enabled by the <a class="- topic/xref xref" href="GUID-9DFD4E36-B662-42E5-A4A5-DCB02106F04B.html#ID-0000009E" title="CWG Auto-Shutdown Source Enable(1,2)"><span><span>ASyE</span></span></a> bits.</div>
+        <div class="- topic/note note important note_important" id="GUID-73C2BE7A-8C5D-4E8C-B045-A795FE1E34E1__ID-42115-00000261" data-ofbid="GUID-73C2BE7A-8C5D-4E8C-B045-A795FE1E34E1__ID-42115-00000261"><span class="note__title">Important:</span> Shutdown inputs are level sensitive, not edge
+            sensitive. The Shutdown state cannot be cleared, except by disabling auto-shutdown, as
+            long as the shutdown input level persists.</div>
+    </div>
+
+</body>
+</html>

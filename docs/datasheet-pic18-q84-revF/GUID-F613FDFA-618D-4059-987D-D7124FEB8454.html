@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.1 SPI Controls — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html"/>
+<link rel="next" href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html"/>
+<link rel="up" href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li>36.1 SPI Controls</li></ol>
+  <div class="sib"><span>← <a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html" rel="prev">SPI - Serial Peripheral Interface Module</a></span><span><a href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html" rel="next">SPI Operation</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-27EEF233-395D-4CDC-A00C-4CF2CD4B50DA" style="">36.1 SPI Controls</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The following registers control the SPI operation:<ul class="- topic/ul ul" id="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__UL_P1J_HQB_SFB" data-ofbid="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__UL_P1J_HQB_SFB">
+                <li class="- topic/li li" id="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-A3EE396E-924F-4BCB-AD28-BDB685A99D39" data-ofbid="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-A3EE396E-924F-4BCB-AD28-BDB685A99D39">SPI Interrupt Flag (SPIxINTF)
+                    Register</li>
+                <li class="- topic/li li" id="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-EDF46227-CD49-490E-8EA7-E6437C797B4C" data-ofbid="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-EDF46227-CD49-490E-8EA7-E6437C797B4C">SPI Interrupt Enable (SPIxINTE)
+                    Register</li>
+                <li class="- topic/li li" id="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-BCCFD3A1-8149-4660-9687-A2CFE3A9CC95" data-ofbid="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-BCCFD3A1-8149-4660-9687-A2CFE3A9CC95">SPI Byte Count High and Low
+                    (SPIxTCNTH/L) Registers</li>
+                <li class="- topic/li li" id="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-EE85E630-D71F-4CAA-ACA2-6991456BD330" data-ofbid="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-EE85E630-D71F-4CAA-ACA2-6991456BD330">SPI Bit Count (SPIxTWIDTH)
+                    Register</li>
+                <li class="- topic/li li" id="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-9D263398-0091-4496-9A70-ACC3A20BF8A6" data-ofbid="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-9D263398-0091-4496-9A70-ACC3A20BF8A6">SPI Baud Rate (SPIxBAUD)
+                    Register</li>
+                <li class="- topic/li li" id="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-CD2D8F92-3B29-4667-A6BA-FB2AB20312FD" data-ofbid="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-CD2D8F92-3B29-4667-A6BA-FB2AB20312FD">SPI Control (SPIxCON0) Register
+                    0</li>
+                <li class="- topic/li li" id="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-30032785-A478-4DF7-9B97-6D1B7C16A3A2" data-ofbid="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-30032785-A478-4DF7-9B97-6D1B7C16A3A2">SPI Control (SPIxCON1) Register
+                    1</li>
+                <li class="- topic/li li" id="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-B2E22902-2BBF-4E83-8B43-232C9BF5438B" data-ofbid="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-B2E22902-2BBF-4E83-8B43-232C9BF5438B">SPI Control (SPIxCON2) Register
+                    2</li>
+                <li class="- topic/li li" id="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-03CBA2B5-EE09-41ED-869A-1140F4C98076" data-ofbid="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-03CBA2B5-EE09-41ED-869A-1140F4C98076">SPI FIFO Status (SPIxSTATUS)
+                    Register</li>
+                <li class="- topic/li li" id="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-BDFEBAF5-2AB4-4055-A59A-6329173D0B8B" data-ofbid="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-BDFEBAF5-2AB4-4055-A59A-6329173D0B8B">SPI Receiver Buffer (SPIxRXB)
+                    Register</li>
+                <li class="- topic/li li" id="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-11234915-CA47-4029-977E-759328914860" data-ofbid="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-11234915-CA47-4029-977E-759328914860">SPI Transmit Buffer (SPIxTXB)
+                    Register</li>
+                <li class="- topic/li li" id="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-79B164FE-D2FC-4673-A17A-1CF524605E03" data-ofbid="GUID-F613FDFA-618D-4059-987D-D7124FEB8454__GUID-79B164FE-D2FC-4673-A17A-1CF524605E03">SPI Clock Select (SPIxCLK)
+                    Register</li>
+            </ul></div>
+        <p class="- topic/p p">SPIxCON0, SPIxCON1 and SPIxCON2 are control registers for the SPI module.</p>
+        <p class="- topic/p p">SPIxSTATUS reflects the status of both the SPI module and the receive and transmit
+            FIFOs.</p>
+        <p class="- topic/p p">SPIxBAUD and SPIxCLK control the Baud Rate Generator (BRG) of the SPI module when in Host
+            mode. The SPIxCLK selects the clock source that is used by the BRG. The SPIxBAUD
+            configures the clock divider used on that clock source. More information on the BRG is
+            available in the <a class="- topic/xref xref" href="GUID-FAB3070C-BF7D-4A6F-8883-4BF0A5307358.html">Host Mode SPI Clock Configuration</a> section.</p>
+        <p class="- topic/p p">SPIxTxB and SPIxRxB are the Transmit and Receive Buffer registers used to send and
+            receive data on the SPI bus. The Transmit and Receive Buffer registers offer indirect
+            access to Shift registers that are used for shifting the data in and out. Both registers
+            access the multibyte FIFOs, allowing for multiple transmissions or receptions to be
+            stored between software transfers of the data.</p>
+        <p class="- topic/p p">The SPIxTCNTH:L register pair either count or control the number of bits or bytes in a
+            data transfer. When BMODE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the SPIxTCNT value signifies bytes and
+            the SPIxTWIDTH value signifies the number of bits in a byte. When BMODE =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, the SPIxTCNT value is concatenated with the SPIxTWIDTH register
+            to signify bits. In Host Receive Only mode (TXR = <code class="+ topic/ph pr-d/codeph ph codeph">0 </code>and RXR =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the data transfer is initiated by writing SPIxTCNT with the
+            desired bit or byte value to transfer. In Host Transmit mode (TXR = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>),
+            the data transfer is initiated by writing the SPIxTxB register, in which case the
+            SPIxTCNT is a down counter for the bits or bytes transferred.</p>
+        <p class="- topic/p p">The SPIxINTF and SPIxINTE are the flags and enables, respectively, for SPI specific
+            interrupts. They are tied to the SPIxIF flag and SPIxIE enable bit in the PIR and PIE
+            registers, which is triggered when any interrupt contained in the SPIxINTF/SPIxINTE
+            registers is triggered. The PIR/PIE registers also contain SPIxTXIF/SPIxTXIE bits, which
+            are the Interrupt flag and Enable bit for the SPI Transmit Interrupt, as well as the
+            SPIxRXIF/SPIxRXIE bits, which are the Interrupt flag and Enable bit for the SPI receive
+            interrupt.</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>21.5.1 PPS One-Way Lock — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9.html"/>
+<link rel="next" href="GUID-4AB719D1-24EC-4388-A038-878341C11D2E.html"/>
+<link rel="up" href="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-A7E197E5-2D8F-44E9-94D3-3B9DAD0D6AC8.html">21 PPS - Peripheral Pin Select Module</a></li><li><a href="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9.html">21.5 PPS Lock</a></li><li>21.5.1 PPS One-Way Lock</li></ol>
+  <div class="sib"><span>← <a href="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9.html" rel="prev">PPS Lock</a></span><span><a href="GUID-4AB719D1-24EC-4388-A038-878341C11D2E.html" rel="next">Operation During Sleep</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-4BD2CD04-94B8-4D53-A3A5-FF549699E9F1__GUID-B07886F4-964E-4AE0-B039-C622AE8468F9" style="">21.5.1 PPS One-Way Lock</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-4BD2CD04-94B8-4D53-A3A5-FF549699E9F1__ID-41521-00001978" data-ofbid="GUID-4BD2CD04-94B8-4D53-A3A5-FF549699E9F1__ID-41521-00001978">The PPS1WAY Configuration bit can also be used to prevent
+         inadvertent modification to the PPS selection registers.</p>
+      <p class="- topic/p p">When the PPS1WAY bit is set (PPS1WAY = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the <a class="- topic/xref xref" href="GUID-B48CE7C7-3402-4DEC-9EB0-F02B28E2EF76.html#GUID-12FF6187-133A-4CEB-8EA8-E10D65A1F000" title="PPS Locked">PPSLOCKED</a> bit can only be set one time after a device
+         Reset. Once the PPSLOCKED bit has been set, it cannot be cleared again unless a device
+         Reset is executed.</p>
+      <p class="- topic/p p">When the PPS1WAY bit is clear (PPS1WAY = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the PPSLOCKED
+         bit can be set or cleared as needed; however, the PPS lock/unlock sequences must be
+         executed.</p>
+   </div>
+
+</body>
+</html>

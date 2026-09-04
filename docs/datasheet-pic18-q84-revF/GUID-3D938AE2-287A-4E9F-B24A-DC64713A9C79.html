@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>45.3 Comparator Output Synchronization — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E2AB0DBF-3232-433F-A72E-E47C4CBB2BB8.html"/>
+<link rel="next" href="GUID-A93C1588-5D33-4E5D-A3F9-D0308AF7CA01.html"/>
+<link rel="up" href="GUID-90365EBC-43EB-4517-8E49-99028902B25E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-90365EBC-43EB-4517-8E49-99028902B25E.html">45 CMP - Comparator Module</a></li><li>45.3 Comparator Output Synchronization</li></ol>
+  <div class="sib"><span>← <a href="GUID-E2AB0DBF-3232-433F-A72E-E47C4CBB2BB8.html" rel="prev">Comparator Output Polarity</a></span><span><a href="GUID-A93C1588-5D33-4E5D-A3F9-D0308AF7CA01.html" rel="next">Comparator Hysteresis</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-3D938AE2-287A-4E9F-B24A-DC64713A9C79__GUID-1A859908-5F59-4EAA-BDB1-D457F8BC20C8" style="">45.3 Comparator Output Synchronization</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-3D938AE2-287A-4E9F-B24A-DC64713A9C79__ID-42111-000004DF" data-ofbid="GUID-3D938AE2-287A-4E9F-B24A-DC64713A9C79__ID-42111-000004DF">The output from a comparator can be synchronized with Timer1 by
+            setting the <a class="- topic/xref xref" href="GUID-C5F2A580-5B50-44B4-ACEA-C3B046C9B983.html#ID-00000025" title="Comparator Output Synchronous Mode"><span><span>SYNC</span></span></a> bit.</p>
+        <p class="- topic/p p" id="GUID-3D938AE2-287A-4E9F-B24A-DC64713A9C79__ID-42111-000004E0" data-ofbid="GUID-3D938AE2-287A-4E9F-B24A-DC64713A9C79__ID-42111-000004E0">Once enabled, the comparator output is latched on the falling edge
+            of the Timer1 source clock. If a prescaler is used with Timer1, the comparator output is
+            latched after the prescaling function. To prevent a Race condition, the comparator
+            output is latched on the falling edge of the Timer1 clock source and Timer1 increments
+            on the rising edge of its clock source. A simplified block diagram of the comparator
+            module is shown in <a class="- topic/xref xref" href="GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6.html#GUID-31DDCE5B-FBBA-4BC9-9CA8-C8D4EE2992D6__FIG_XWB_XLS_MGB"><span>Figure 45-2</span></a>. Refer to the <strong class="+ topic/ph hi-d/b ph b">“TMR1 - Timer1 Module with Gate Control”</strong>
+            chapter for more details.</p>
+    </div>
+
+</body>
+</html>

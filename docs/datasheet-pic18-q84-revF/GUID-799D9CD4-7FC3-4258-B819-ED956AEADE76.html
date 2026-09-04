@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.2.5 Restart Condition Timing — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57.html"/>
+<link rel="next" href="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248.html"/>
+<link rel="up" href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html">37.4.2 I2C Host Mode Operation</a></li><li>37.4.2.5 Restart Condition Timing</li></ol>
+  <div class="sib"><span>← <a href="GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57.html" rel="prev">Acknowledge Sequence Timing</a></span><span><a href="GUID-DDAAB0EA-CD84-4F45-A486-D7DDCA6F5248.html" rel="next">Stop Condition Timing</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76__GUID-5CCF7D4E-2FE3-4CAE-AB8F-B4005FA77CD1" style="">37.4.2.5 Restart Condition Timing</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">A Restart condition is identical to a Start condition. A host device may issue a Restart
+            instead of a Stop condition if it intends to hold the bus after completing the current
+            data transfer. A Restart condition occurs when the Restart Enable (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_U3D_1YT_KGB" title="Restart Enable (used only when MODE = 1xx)">RSEN</a>) bit is set (RSEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), either <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> is
+            zero (I2CxCNT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) or <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_CM5_PDP_LGB" title="Acknowledge Status (Transmission only)">ACKSTAT</a> is set (ACKSTAT = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), and either host hardware
+                (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) or user software (ABD =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) sets the Start (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_YPG_M34_LGB" title="Host Start (used only when MODE = 1xx)">S</a>) bit.</div>
+        <div class="- topic/p p">When the Start bit is set, host hardware releases SDA (SDA floats high) for half of an
+            SCL clock period (T<sub class="+ topic/ph hi-d/sub ph sub">SCL</sub>/2) and then releases SCL for another half of an SCL
+            period, then samples SDA (see <a class="- topic/xref xref" href="#GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76__FIG_TVT_HVM_KGB"><span>Figure 37-35</span></a>). If SDA
+            is sampled low while SCL is sampled high, a bus collision has occurred. In this case,
+            the Bus Collision Detect Interrupt Flag (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_PNL_CHV_LGB" title="Bus Collision Detect Interrupt Flag(1)">BCLIF</a>)
+            is set, and if the Bus Collision Detect Interrupt Enable (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_LSV_KKV_LGB" title="Bus Collision Detect Interrupt Enable">BCLIE</a>)
+            bit is also set, the generic I2CxEIF is set and the module goes Idle. If SDA is sampled
+            high while SCL is also sampled high, host hardware issues a Start condition. Once the
+            Restart condition is detected on the bus, the Restart Condition Interrupt Flag (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_P5X_TPV_LGB" title="Restart Condition Interrupt Flag(1)">RSCIF</a>) is set by hardware, and if the Restart Condition Interrupt Enable
+                (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_QYX_CWV_LGB" title="Restart Condition Interrupt Enable(1)">RSCIE</a>)
+            bit is set, the generic I2CxIF is also set.</div>
+        <figure class="- topic/fig fig fignone" id="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76__FIG_TVT_HVM_KGB" data-ofbid="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76__FIG_TVT_HVM_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-35. <span id="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76__GUID-75D2558F-5E7D-48F8-A495-B525106E2C52" class="fig--title">Restart Condition Timing</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76__IMAGE_XQQ_KPM_PGB" src="GUID-32CE2904-15EC-48B1-B024-3A88D1326A7B-high.svg"/></span>
+        </figure>
+        <div class="- topic/note note important note_important" id="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> 
+            <ol class="- topic/ol ol" id="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76__OL_JXX_QPM_PGB" data-ofbid="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76__OL_JXX_QPM_PGB">
+                <li class="- topic/li li" id="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76__GUID-C8FB311E-1644-4BF1-8C4F-078FD06C499A" data-ofbid="GUID-799D9CD4-7FC3-4258-B819-ED956AEADE76__GUID-C8FB311E-1644-4BF1-8C4F-078FD06C499A">See the device data sheet for
+                    Restart condition setup times.</li>
+            </ol>
+        </div>
+    </div>
+
+</body>
+</html>

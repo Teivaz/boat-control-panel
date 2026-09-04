@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>19.7 INLVLx - Input Threshold Control — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-97E43E99-A95C-402D-81F8-EB129BDE0E6F.html"/>
+<link rel="next" href="GUID-E55494A6-BCE4-46FD-8F94-81BC7A76CFE4.html"/>
+<link rel="up" href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html">19 I/O Ports</a></li><li>19.7 INLVLx - Input Threshold Control</li></ol>
+  <div class="sib"><span>← <a href="GUID-97E43E99-A95C-402D-81F8-EB129BDE0E6F.html" rel="prev">WPUx - Weak Pull-Up Control</a></span><span><a href="GUID-E55494A6-BCE4-46FD-8F94-81BC7A76CFE4.html" rel="next">SLRCONx - Slew Rate Control</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-CFB5D105-7F42-4329-A440-E6D2AC8EB3AC__GUID-FE06DAC1-4695-414A-B19C-677572E0D534" style="">19.7 INLVLx - Input Threshold Control</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-CFB5D105-7F42-4329-A440-E6D2AC8EB3AC__ID-42127-00000101" data-ofbid="GUID-CFB5D105-7F42-4329-A440-E6D2AC8EB3AC__ID-42127-00000101">The <a class="- topic/xref xref" href="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608.html" title="INLVLx">INLVLx</a>
+            register controls the input voltage threshold for each of the available PORTx input
+            pins. A selection between the Schmitt Trigger CMOS and the TTL compatible thresholds is
+            available. The input threshold is important in determining the value of a read of the
+            PORTx register and also the level at which an interrupt-on-change occurs, if that
+            feature is enabled. Refer to the I/O Ports table in the <strong class="+ topic/ph hi-d/b ph b">“Electrical
+                Specifications”</strong> chapter for more details on threshold levels.</p>
+        
+        
+        
+        
+        <div class="- topic/note note important note_important" id="GUID-CFB5D105-7F42-4329-A440-E6D2AC8EB3AC__ID-42127-0000010A" data-ofbid="GUID-CFB5D105-7F42-4329-A440-E6D2AC8EB3AC__ID-42127-0000010A"><span class="note__title">Important:</span> Changing the input threshold selection must be
+            performed while all peripheral modules are disabled. Changing the threshold level during
+            the time a module is active may inadvertently generate a transition associated with an
+            input pin, regardless of the actual voltage level on that pin.</div>
+    </div>
+
+</body>
+</html>

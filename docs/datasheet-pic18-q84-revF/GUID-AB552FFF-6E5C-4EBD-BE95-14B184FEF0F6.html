@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>19.14.4 ANSELx — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D.html"/>
+<link rel="next" href="GUID-F29BB9D7-BDF7-4F12-BF50-996751E0D2FC.html"/>
+<link rel="up" href="GUID-D3680739-69E1-4BC6-8FED-0F0AE91735AB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html">19 I/O Ports</a></li><li><a href="GUID-D3680739-69E1-4BC6-8FED-0F0AE91735AB.html">19.14 Register Definitions: Port Control</a></li><li>19.14.4 ANSELx</li></ol>
+  <div class="sib"><span>← <a href="GUID-1B771DCF-EBC2-4587-8ABB-E2748B77B55D.html" rel="prev">TRISx</a></span><span><a href="GUID-F29BB9D7-BDF7-4F12-BF50-996751E0D2FC.html" rel="next">WPUx</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6__ID-00000020" style="">19.14.4  ANSELx</h1><section id="GUID-F472EC8D-B7A3-4A3B-A45A-F4DF2F8677C3" class="- topic/section reference/section sidsc-register/registerDescription ">Analog Select
+            Register<div class="- topic/note note important note_important endnote" id="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6__ID-42127-0000071C" data-ofbid="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6__ID-42127-0000071C"><span class="note__title">Important:</span> 
+            <ul class="- topic/ul ul">
+               <li class="- topic/li li" id="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6__GUID-6841D669-729A-4297-B041-7CF71FB8C18A" data-ofbid="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6__GUID-6841D669-729A-4297-B041-7CF71FB8C18A">When setting a pin as an analog
+                  input, the corresponding TRIS bit must be set to Input mode to allow external
+                  control of the voltage on the pin</li>
+               <li class="- topic/li li" id="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6__GUID-92C3C753-E56F-493E-B7CA-B417E5ACFAE8" data-ofbid="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6__GUID-92C3C753-E56F-493E-B7CA-B417E5ACFAE8">Refer to the “<strong class="+ topic/ph hi-d/b ph b">Pin Allocation
+                     Table</strong>” for details about pin availability per port</li>
+               <li class="- topic/li li" id="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6__GUID-6A7DC88C-FA37-4254-9CCC-F6EEB1BB189E" data-ofbid="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6__GUID-6A7DC88C-FA37-4254-9CCC-F6EEB1BB189E">Unimplemented bits will read back
+                  as ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’</li>
+            </ul>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>ANSELx</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6__GUID-35BFD054-84E3-4225-99F6-02DED78F8698" data-ofbid="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6__GUID-35BFD054-84E3-4225-99F6-02DED78F8698"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ANSELx7</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ANSELx6</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ANSELx5</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ANSELx4</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ANSELx3</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ANSELx2</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ANSELx1</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ANSELx0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-F472EC8D-B7A3-4A3B-A45A-F4DF2F8677C3" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000024__ID-42127-0000161B" id="ID-00000024">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000024__ID-42127-0000161B" style=""> Bits 0, 1, 2, 3, 4, 5, 6, 7 – ANSELxn <span>Analog Select on RX
+         Pin</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000024__GUID-2DEE79B3-A891-47E4-8025-8CE6BF176CFF" data-ofbid="ID-00000024__GUID-2DEE79B3-A891-47E4-8025-8CE6BF176CFF"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000024__ID-42127-0000161D"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000024__GUID-14C268D3-2B82-40B5-842C-F8672B94063B">Analog
+                  input. Pin is assigned as analog input. Digital input buffer
+                  disabled.</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000024__ID-42127-00001620"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000024__GUID-2D74630B-5D7D-42D3-9204-34DA300A6878">Digital I/O.
+                  Pin is assigned to port or digital special function.</td>
+            </tr></tbody></table>
+      </div>
+   </article>
+            
+               When setting a pin as an analog
+                  input, the corresponding TRIS bit must be set to Input mode to allow external
+                  control of the voltage on the pin
+               Refer to the “Pin Allocation
+                     Table” for details about pin availability per port
+               Unimplemented bits will read back
+                  as ‘0’
+            
+         
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.5.4 Requesting Transmission of Message in Transmit FIFO — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2CA3B0CB-194E-4DB3-8CE0-91E2D97BB56C.html"/>
+<link rel="next" href="GUID-A4BC4959-9F8B-4287-AF9D-C1B0CB2034BF.html"/>
+<link rel="up" href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html">38.5 Message Transmission</a></li><li>38.5.4 Requesting Transmission of Message in Transmit FIFO</li></ol>
+  <div class="sib"><span>← <a href="GUID-2CA3B0CB-194E-4DB3-8CE0-91E2D97BB56C.html" rel="prev">Loading Messages Into Transmit Queue</a></span><span><a href="GUID-A4BC4959-9F8B-4287-AF9D-C1B0CB2034BF.html" rel="next">Requesting Transmission of Message in Transmit Queue</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-D850CEA4-B3CA-4E17-A3D6-412F16CED4B7__GUID-4F32E175-B052-402F-94E4-B60B6D19CA27" style="">38.5.4 Requesting Transmission of Message in Transmit FIFO</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">After a message is loaded into a transmit FIFO, the message is ready for
+            transmission. The application initiates the transmission of all messages in a FIFO by
+            setting the TXREQ bit (CxFIFOCONy[9]) or by setting the corresponding bit in the C1TXREQ
+            register. When all messages are transmitted, TXREQ gets cleared. The application can
+            request transmission of multiple FIFOs and the TXQ simultaneously. The FIFO or TXQ with
+            the highest priority will start transmitting first. Messages in a FIFO will be
+            transmitted First-In First-Out.</p>
+        <p class="- topic/p p">Messages can be loaded into a FIFO while the FIFO is transmitting messages.
+            Since TXREQ is cleared by the FIFO automatically after the FIFO empties, UINC and TXREQ
+            of the CxFIFOCONy register must be set at the same time after appending a message. This
+            ensures that all messages in the FIFO are transmitted, including the appended
+            messages.</p>
+    </div>
+
+</body>
+</html>

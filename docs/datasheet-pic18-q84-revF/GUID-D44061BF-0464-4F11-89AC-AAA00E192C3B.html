@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.14.1 CWGxCON0 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E594CFDB-0B54-4A0C-A473-ECD012AE3CAC.html"/>
+<link rel="next" href="GUID-2EA8EF2E-9030-424D-BE37-7E5A7AA6098D.html"/>
+<link rel="up" href="GUID-E594CFDB-0B54-4A0C-A473-ECD012AE3CAC.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li><a href="GUID-E594CFDB-0B54-4A0C-A473-ECD012AE3CAC.html">32.14 Register Definitions: CWG Control</a></li><li>32.14.1 CWGxCON0</li></ol>
+  <div class="sib"><span>← <a href="GUID-E594CFDB-0B54-4A0C-A473-ECD012AE3CAC.html" rel="prev">Register Definitions: CWG Control</a></span><span><a href="GUID-2EA8EF2E-9030-424D-BE37-7E5A7AA6098D.html" rel="next">CWGxCON1</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B__ID-00000001" style="">32.14.1  CWGxCON0</h1><section id="GUID-11F261F7-581D-482D-B46B-32F3C46CA8BE" class="- topic/section reference/section sidsc-register/registerDescription ">CWG Control Register 0<div class="- topic/p p"><div class="- topic/note note notype note_notype endnote" id="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B__GUID-37CFECC4-7455-4834-8466-B3EFE1DBA4B8" data-ofbid="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B__GUID-37CFECC4-7455-4834-8466-B3EFE1DBA4B8"><span class="note__title">Note:</span> 
+ <ol class="- topic/ol ol" id="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B__OL_X3H_FMN_HZ" data-ofbid="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B__OL_X3H_FMN_HZ">
+ <li class="- topic/li li" id="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B__GUID-0C7F7E04-D134-434B-8B68-DB39C437768A" data-ofbid="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B__GUID-0C7F7E04-D134-434B-8B68-DB39C437768A">This bit can only be set after
+ EN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>; it cannot be set in the same cycle when EN is
+ set.</li>
+ </ol>
+ </div></div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>CWGxCON0</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x3C0,0x3C9,0x3D2</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B__GUID-B0D48FBD-146B-4298-8FFE-FA6621C10629" data-ofbid="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B__GUID-B0D48FBD-146B-4298-8FFE-FA6621C10629"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">EN</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">LD</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="3">MODE[2:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HC</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-11F261F7-581D-482D-B46B-32F3C46CA8BE" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000005__ID-42115-00000C9A" id="ID-00000005">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000005__ID-42115-00000C9A" style=""> Bit 7 – EN <span>CWG Enable</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000005__GUID-8A6C65DA-5089-4C66-A1BA-29CEE5B94E3E" data-ofbid="ID-00000005__GUID-8A6C65DA-5089-4C66-A1BA-29CEE5B94E3E"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000005__ID-42115-00000C9C">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000005__GUID-5524BEA3-5213-4D77-AC43-2B930E0DEE50">Module is
+                  enabled</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000005__ID-42115-00000C9F">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000005__GUID-0A862B09-4176-4D2B-963C-C75544FA6C37">Module is
+                  disabled</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-0000000C__ID-42115-00000CA3" id="ID-0000000C">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-0000000C__ID-42115-00000CA3" style=""> Bit 6 – LD <span>
+         CWG1 Load Buffers<a class="- topic/xref xref" href="#GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B__GUID-37CFECC4-7455-4834-8466-B3EFE1DBA4B8"><strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong></a>
+      </span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-0000000C__GUID-F006104E-F941-468D-B713-2E3DB3017EEF" data-ofbid="ID-0000000C__GUID-F006104E-F941-468D-B713-2E3DB3017EEF"> </section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000000C__ID-42115-00000CA5">1</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000000C__GUID-B0948387-D2CB-4147-8DE3-412E5E4188D6">Dead-band
+                  count buffers to be loaded on CWG data rising edge, following first falling edge
+                  after this bit is set</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-0000000C__ID-42115-00000CA8">0</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-0000000C__GUID-9D3DFE56-2488-4662-BEA3-B2676D156341">Buffers
+                  remain unchanged</td>
+            </tr></tbody></table>
+      </div>
+   </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000013__ID-42115-00000CAD" id="ID-00000013">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000013__ID-42115-00000CAD" style=""> Bits 2:0 – MODE[2:0] <span>CWG Mode</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000013__GUID-E540245D-1F83-4C16-B15F-089008939A58" data-ofbid="ID-00000013__GUID-E540245D-1F83-4C16-B15F-089008939A58"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000013__ID-42115-00000CAF">111</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000013__GUID-8BD32F3C-2DD7-4BE5-81AC-959501E41EDB">Reserved</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000013__ID-42115-00000CB2">110</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000013__GUID-56EFE9E6-BD37-4462-927F-15E6DFCE504E">Reserved</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000013__ID-42115-00000CB5">101</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000013__GUID-45192DAC-54BD-4AC8-A284-44FD605C198E">CWG outputs
+                  operate in Push-Pull mode</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000013__ID-42115-00000CB8">100</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000013__GUID-A4E19817-DAE0-4B6E-94FF-761925099967">CWG outputs
+                  operate in Half Bridge mode</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000013__ID-42115-00000CBB">011</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000013__GUID-F5DA5A28-5B0D-4FE3-9493-9E47566ABA88">CWG outputs
+                  operate in Reverse Full Bridge mode</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000013__ID-42115-00000CBE">010</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000013__GUID-BF29BF6A-F050-4C9E-8D67-66444DA9E006">CWG outputs
+                  operate in Forward Full Bridge mode</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000013__ID-42115-00000CC1">001</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000013__GUID-2A6E2754-4C81-48E0-A45C-7FBF4C1CF223">CWG outputs
+                  operate in Synchronous Steering mode</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000013__ID-42115-00000CC4">000</td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000013__GUID-FBA95108-6987-4FCB-81CE-9EC683083CF0">CWG outputs
+                  operate in Asynchronous Steering mode</td>
+            </tr></tbody></table>
+      </div>
+   </article>
+ 
+ This bit can only be set after
+ EN = 1; it cannot be set in the same cycle when EN is
+ set.
+ 
+ 
+</body>
+</html>

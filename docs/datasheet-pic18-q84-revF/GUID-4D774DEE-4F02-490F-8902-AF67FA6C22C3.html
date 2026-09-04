@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>15.5 Clearing the Watchdog Timer — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-899D6189-CEDC-457B-AB83-CC3CE3A2E5FC.html"/>
+<link rel="next" href="GUID-55AA16B1-076D-44E3-917D-785B1C4788C6.html"/>
+<link rel="up" href="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80.html">15 WWDT - Windowed Watchdog Timer</a></li><li>15.5 Clearing the Watchdog Timer</li></ol>
+  <div class="sib"><span>← <a href="GUID-899D6189-CEDC-457B-AB83-CC3CE3A2E5FC.html" rel="prev">Watchdog Window</a></span><span><a href="GUID-55AA16B1-076D-44E3-917D-785B1C4788C6.html" rel="next">CLRWDT Considerations (Windowed Mode)</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-1197A6F3-9922-4C75-856C-3283E9D3B13F" style="">15.5 Clearing the Watchdog Timer</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p">The Watchdog Timer is cleared when any of the following conditions occur: <ul class="- topic/ul ul" id="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__UL_BC5_B1V_PGB" data-ofbid="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__UL_BC5_B1V_PGB">
+                <li class="- topic/li li" id="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-5C5470A9-0CE5-4C85-AC25-7E261A1D42A6" data-ofbid="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-5C5470A9-0CE5-4C85-AC25-7E261A1D42A6">Any Reset</li>
+                <li class="- topic/li li" id="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-5C4DB434-FF7D-451E-AB2A-BA2134D8D70F" data-ofbid="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-5C4DB434-FF7D-451E-AB2A-BA2134D8D70F">A valid <code class="+ topic/ph pr-d/codeph ph codeph">CLRWDT</code>
+                    instruction is executed</li>
+                <li class="- topic/li li" id="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-DA53E575-FAEA-4B63-B023-5DA0CB0C70A5" data-ofbid="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-DA53E575-FAEA-4B63-B023-5DA0CB0C70A5">The device enters Sleep</li>
+                <li class="- topic/li li" id="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-03E7B131-4587-477D-90B0-F085982A0167" data-ofbid="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-03E7B131-4587-477D-90B0-F085982A0167">The devices exits Sleep by
+                    Interrupt</li>
+                <li class="- topic/li li" id="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-198A03BA-613D-4E81-BBFA-62870FD383C5" data-ofbid="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-198A03BA-613D-4E81-BBFA-62870FD383C5">The WWDT is disabled</li>
+                <li class="- topic/li li" id="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-82081E49-38C0-4F39-B63B-D35A18E88299" data-ofbid="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-82081E49-38C0-4F39-B63B-D35A18E88299">The Oscillator Start-up Timer
+                    (OST) is running</li>
+                <li class="- topic/li li" id="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-30A6D36A-D967-40B4-BF64-E2564419DBC6" data-ofbid="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3__GUID-30A6D36A-D967-40B4-BF64-E2564419DBC6">Any write to the <a class="- topic/xref xref" href="GUID-928F7E9B-3D02-40EC-AB34-06E396FC2D3D.html#GUID-928F7E9B-3D02-40EC-AB34-06E396FC2D3D" title="WDTCON0">WDTCON0</a> or <a class="- topic/xref xref" href="GUID-F5513084-0987-48C2-839A-FAFED6B70A66.html#GUID-F5513084-0987-48C2-839A-FAFED6B70A66" title="WDTCON1">WDTCON1</a> registers</li>
+            </ul></div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-55AA16B1-076D-44E3-917D-785B1C4788C6.html">15.5.1 CLRWDT Considerations (Windowed Mode)</a></li></ul>
+</nav>
+</body>
+</html>

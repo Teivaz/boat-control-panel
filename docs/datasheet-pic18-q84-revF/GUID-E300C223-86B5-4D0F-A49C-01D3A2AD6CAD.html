@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.7 Bus Time-Out — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-38CB246B-2620-4978-B122-E5E13D40DC20.html"/>
+<link rel="next" href="GUID-72E0AB3E-D1ED-4E72-BBBC-59AB77DBD2E1.html"/>
+<link rel="up" href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li>37.3.7 Bus Time-Out</li></ol>
+  <div class="sib"><span>← <a href="GUID-38CB246B-2620-4978-B122-E5E13D40DC20.html" rel="prev">Stop Condition</a></span><span><a href="GUID-72E0AB3E-D1ED-4E72-BBBC-59AB77DBD2E1.html" rel="next">Address Buffers</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__GUID-8C9D369F-5527-4336-A73E-749FA37725D6" style="">37.3.7 Bus Time-Out</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The SMBus protocol requires a bus watchdog to prevent a stalled device from holding the
+            bus indefinitely. The I2C Bus Time-Out Clock Source Selection (<a class="- topic/xref xref" href="GUID-0148F891-DCB6-4528-85A5-066F0AE5F70D.html" title="I2CxBTOC">I2CxBTOC</a>)
+            register provides several clock sources that can be used as the time-out time base. The
+            I2C Bus Time-Out (<a class="- topic/xref xref" href="GUID-55DF820D-DB41-4F6B-AD97-4FF7D5D2341F.html" title="I2CxBTO">I2CxBTO</a>) register is used to determine the actual bus time-out time period,
+            as well as how the module responds to a time-out.</p>
+        <div class="- topic/p p">The bus time-out hardware monitors for the following conditions:<ul class="- topic/ul ul" id="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__UL_G4J_FWJ_43B" data-ofbid="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__UL_G4J_FWJ_43B">
+                <li class="- topic/li li" id="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__GUID-DA625ABE-56E4-4C3B-9B43-ABBCC5FB998D" data-ofbid="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__GUID-DA625ABE-56E4-4C3B-9B43-ABBCC5FB998D">SCL = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>
+                    (regardless of whether or not the bus is Active)</li>
+                <li class="- topic/li li" id="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__GUID-891C4360-72E4-416D-A504-10F3F602C647" data-ofbid="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__GUID-891C4360-72E4-416D-A504-10F3F602C647">SCL = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> and SDA
+                    = <code class="+ topic/ph pr-d/codeph ph codeph">0</code> while the bus is Active</li>
+            </ul></div>
+        <p class="- topic/p p">If either of these conditions are true, an internal time-out counter increments and
+            continues to increment as long as the condition stays true or until the time-out period
+            has expired. If these conditions change (e.g. SCL = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the internal
+            time-out counter is reset by module hardware. </p>
+        <p class="- topic/p p">The Bus Time-Out Clock Source Selection (<a class="- topic/xref xref" href="GUID-0148F891-DCB6-4528-85A5-066F0AE5F70D.html#GUID-263D8094-5C70-4D4D-A5B7-A3F51273AC3A" title="Bus Time-Out Clock Source Selection">BTOC</a>) bits select the time-out clock source. If an oscillator
+            is selected as the time-out clock source, such as the LFINTOSC, the time-out clock base
+            period is approximately 1 ms. If a timer is selected as the time-out clock source, the
+            timer can be configured to produce a variety of time periods.</p>
+        <div class="- topic/note note remember note_remember" id="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__GUID-0B61DB47-2E8F-453C-B730-296B9E3459E3" data-ofbid="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__GUID-0B61DB47-2E8F-453C-B730-296B9E3459E3"><span class="note__title">Remember:</span> The SMBus protocol
+            dictates a 25 ms time-out for client devices and a 35 ms time-out for host
+            devices.</div>
+        <div class="- topic/p p">The Time-Out Time Selection (<a class="- topic/xref xref" href="GUID-55DF820D-DB41-4F6B-AD97-4FF7D5D2341F.html#BITFIELD_BHF_4RK_43B" title="Time-Out Time Selection">TOTIME</a>) bits and the Time-Out Prescaler Extension Enable (<a class="- topic/xref xref" href="GUID-55DF820D-DB41-4F6B-AD97-4FF7D5D2341F.html#BITFIELD_DQS_KQK_43B" title="Time-Out Prescaler Extension Enable(2)">TOBY32</a>) bit are used to determine the time-out period. The value written
+            into TOTIME multiplies the base time-out clock period. For example, if a value of
+                ‘<code class="+ topic/ph pr-d/codeph ph codeph">35</code>’ is written into the TOTIME bits, and the LFINTOSC is selected
+            as the time-out clock source, the time-out period is approximately 35 ms (35 x 1 ms). If
+            the TOBY32 bit is set (TOBY32 = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the time-out period determined by
+            the TOTIME bits is multiplied by 32. If TOBY32 is clear (TOBY32 = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>),
+            the time-out period determined by the TOTIME bits is used as the time-out period.</div>
+        <p class="- topic/p p">The examples below illustrate possible time-out configurations.</p>
+        <div class="- topic/example example autowidth" id="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__GUID-249B2750-D19E-4CFB-8738-A1DF06E34C78" data-ofbid="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__GUID-249B2750-D19E-4CFB-8738-A1DF06E34C78"><h2 class="- topic/title title sectiontitle">35 ms BTO Period
+                Configuration</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><strong class="hl-keyword">void</strong> <span class="hl-functions">Init_BTO_35</span>(<strong class="hl-keyword">void</strong>)        <em class="hl-comment">// Selections produce a 35 ms BTO period</em>
+{
+  I2C1BTOC = <span class="hl-number">0x06</span>;              <em class="hl-comment">// LFINTOSC as BTO clock source</em>
+  I2C1BTObits.TOREC = <span class="hl-number">1</span>;        <em class="hl-comment">// Reset I2C interface, set BTOIF            </em>
+  I2C1BTObits.TOBY32 = <span class="hl-number">0</span>;       <em class="hl-comment">// BTO time = TOTIME * T</em><sub class="+ topic/ph hi-d/sub ph sub">BTOCLK</sub>        
+  I2C1BTObits.TOTIME = <span class="hl-number">0x23</span>;    <em class="hl-comment">// TOTIME = T</em><sub class="+ topic/ph hi-d/sub ph sub">BTOCLK</sub> * <span class="hl-number">35</span> 
+                                <em class="hl-comment">// = 1 ms * 35 = 35 ms</em>
+           
+}</pre>
+        </div>
+        <div class="- topic/example example autowidth" id="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__GUID-707764DF-B15F-4DC6-9154-1ECB9C0FE3BA" data-ofbid="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__GUID-707764DF-B15F-4DC6-9154-1ECB9C0FE3BA"><h2 class="- topic/title title sectiontitle">64 ms BTO Configuration</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><strong class="hl-keyword">void</strong> <span class="hl-functions">Init_BTO_64</span>(<strong class="hl-keyword">void</strong>)    <em class="hl-comment">// Selections produce a 64 ms BTO period</em>
+{
+  I2C1BTOC = <span class="hl-number">0x06</span>;                <em class="hl-comment">// LFINTOSC as BTO clock source</em>
+  I2C1BTObits.TOREC = <span class="hl-number">1</span>;          <em class="hl-comment">// Reset I2C interface, set BTOIF</em>
+  I2C1BTObits.TOBY32 = <span class="hl-number">1</span>;         <em class="hl-comment">// BTO time = TOTIME * T</em><sub class="+ topic/ph hi-d/sub ph sub">BTOCLK</sub> * <span class="hl-number">32</span> 
+                                  <em class="hl-comment">// = 2 ms * 32 = 64 ms    </em>
+  I2C1BTObits.TOTIME = <span class="hl-number">0x02</span>;      <em class="hl-comment">// TOTIME = T</em><sub class="+ topic/ph hi-d/sub ph sub">BTOCLK</sub> * <span class="hl-number">2</span> 
+                                  <em class="hl-comment">// = 1 ms * 2 = 2 ms</em>
+}</pre>
+        </div>
+        <p class="- topic/p p"> </p>
+        <div class="- topic/p p">The Time-Out Recovery Selection (<a class="- topic/xref xref" href="GUID-55DF820D-DB41-4F6B-AD97-4FF7D5D2341F.html#GUID-B1267C3E-BC77-4775-82E1-D4FF2C7B69B8" title="Time-Out Recovery Selection">TOREC</a>) bit determines how the module will respond to a bus
+            time-out. When a bus time-out occurs and TOREC is set (TOREC = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the
+            I2C module is reset and module hardware sets the Bus Time-Out Interrupt Flag (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4" title="Bus Time-Out Interrupt Flag(1,2)">BTOIF</a>). If the Bus Time-Out Interrupt Enable (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_WB5_BKV_LGB" title="Bus Time-Out Interrupt Enable">BTOIE</a>) is also set, an interrupt will be generated. If a bus time-out occurs
+            and TOREC is clear (TOREC = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the BTOIF bit is set, but the module is
+            not reset.</div>
+        <div class="- topic/p p">If the module is configured in Client mode with <a class="- topic/xref xref" href="GUID-55DF820D-DB41-4F6B-AD97-4FF7D5D2341F.html#GUID-B1267C3E-BC77-4775-82E1-D4FF2C7B69B8" title="Time-Out Recovery Selection">TOREC</a> set (TOREC = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) and a bus time-out event occurs
+            (regardless of the state of the Client Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_GRY_CQP_LGB" title="Client Mode Active Status">SMA</a>)
+            bit), the module is immediately reset, the SMA and Client Clock Stretching (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a>) bits are cleared, and the Bus Time-Out Interrupt Flag (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4" title="Bus Time-Out Interrupt Flag(1,2)">BTOIF</a>) bit is set.</div>
+        <div class="- topic/p p">If the module is configured in Client mode with <a class="- topic/xref xref" href="GUID-55DF820D-DB41-4F6B-AD97-4FF7D5D2341F.html#GUID-B1267C3E-BC77-4775-82E1-D4FF2C7B69B8" title="Time-Out Recovery Selection">TOREC</a> clear (TOREC = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) and a bus time-out event occurs
+            (regardless of the state of the Client Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_GRY_CQP_LGB" title="Client Mode Active Status">SMA</a>)
+            bit), the <a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4" title="Bus Time-Out Interrupt Flag(1,2)">BTOIF</a> bit is set, but user software must reset the module.</div>
+        <div class="- topic/note note important note_important" id="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__GUID-072B0CF3-DB91-4FF5-B93F-4DDF84AC84BF" data-ofbid="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__GUID-072B0CF3-DB91-4FF5-B93F-4DDF84AC84BF"><span class="note__title">Important:</span> It is recommended to
+            set <a class="- topic/xref xref" href="GUID-55DF820D-DB41-4F6B-AD97-4FF7D5D2341F.html#GUID-B1267C3E-BC77-4775-82E1-D4FF2C7B69B8" title="Time-Out Recovery Selection">TOREC</a> (TOREC = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) when operating in Client
+            mode.</div>
+        <div class="- topic/p p">If the module is configured in Host mode with <a class="- topic/xref xref" href="GUID-55DF820D-DB41-4F6B-AD97-4FF7D5D2341F.html#GUID-B1267C3E-BC77-4775-82E1-D4FF2C7B69B8" title="Time-Out Recovery Selection">TOREC</a> set (TOREC = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) and the bus time-out event occurs
+            while the Host is active (Host Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a>) =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the Host Data Ready (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a>)
+            bit is cleared, the module will immediately attempt to transmit a Stop condition and the
+                <a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4" title="Bus Time-Out Interrupt Flag(1,2)">BTOIF</a> bit is set. Stop condition generation may be delayed if a client
+            device is stretching the clock, but will resume once the clock is released or if the
+            client holding the bus also has a time-out event occur. The MMA bit is only cleared
+            after the Stop condition has been generated.</div>
+        <div class="- topic/p p">If the module is configured in Host mode with <a class="- topic/xref xref" href="GUID-55DF820D-DB41-4F6B-AD97-4FF7D5D2341F.html#GUID-B1267C3E-BC77-4775-82E1-D4FF2C7B69B8" title="Time-Out Recovery Selection">TOREC</a> clear (TOREC = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) and the bus time-out event occurs
+            while the Host is active (Host Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a>) =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a> bit
+            is cleared and the <a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#GUID-18B3A125-ABE6-4AE0-A613-016C6B2081D4" title="Bus Time-Out Interrupt Flag(1,2)">BTOIF</a> bit is set, but user software must initiate the Stop condition by
+            setting the <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_GHZ_PXK_43B" title="Host Stop(4)">P</a>
+            bit.</div>
+        <p class="- topic/p p">The figure below shows an example of a Bus Time-Out event when the module is operating in
+            Host mode.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__FIG_C3L_KY2_KGB" data-ofbid="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__FIG_C3L_KY2_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-8. <span id="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__GUID-ABEA47D1-0356-45BA-9846-095CE4CFF754" class="fig--title">Host Mode Bus Time-Out
+                Example</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD__IMAGE_D3L_KY2_KGB" src="GUID-E35FBDE8-5117-4A13-AAC7-67B5A25AE5F9-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

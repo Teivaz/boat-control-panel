@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>27.1.6.2 Gated Timer Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-113E7345-CDAF-4F72-A0B4-1AB7AFAF271E.html"/>
+<link rel="next" href="GUID-DC9F6824-4CD1-4A0A-8DCB-DBF8EE5E3347.html"/>
+<link rel="up" href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3.html">27 SMT - Signal Measurement Timer</a></li><li><a href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html">27.1 SMT Operation</a></li><li><a href="GUID-09881487-AAB7-437B-B3BE-935DF1A7A50F.html">27.1.6 Modes of Operation</a></li><li>27.1.6.2 Gated Timer Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-113E7345-CDAF-4F72-A0B4-1AB7AFAF271E.html" rel="prev">Timer Mode</a></span><span><a href="GUID-DC9F6824-4CD1-4A0A-8DCB-DBF8EE5E3347.html" rel="next">Period and Duty Cycle Measurement Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-C3300C35-E5CA-4A0E-9161-EA705B4B9742__GUID-8494AE2E-9CD4-48A3-913D-1AEB5758FFC7" style="">27.1.6.2 Gated Timer Mode</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">Gated Timer mode uses the SMT_signal input, selected with the <a class="- topic/xref xref" href="GUID-F0FDE8F3-4817-4960-B756-08F349F1A191.html#BITFIELD_PVX_5S2_VZ" title="SMT Signal Selection">SSEL</a> bits, to control whether or not the SMTxTMR register will
+            increment. Upon a falling edge of the signal, the SMTxCPW register will update to the
+            current value of the SMTxTMR register. Example waveforms for both repeated and single
+            acquisitions are provided in the figures below.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-C3300C35-E5CA-4A0E-9161-EA705B4B9742__FIG_ZL3_YXY_1BB" data-ofbid="GUID-C3300C35-E5CA-4A0E-9161-EA705B4B9742__FIG_ZL3_YXY_1BB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 27-4. <span id="GUID-C3300C35-E5CA-4A0E-9161-EA705B4B9742__GUID-FF87BFB7-2017-463A-9762-F8FC229EB03B" class="fig--title">Gated Timer Mode, Repeat
+                Acquisition Timing Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-F3F31A24-5C7F-4456-8C94-B280CFAF4597-high.pdf#toolbar=1" width="450" height="1146.4694776589051"></iframe></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-C3300C35-E5CA-4A0E-9161-EA705B4B9742__FIG_ZBK_YXY_1BB" data-ofbid="GUID-C3300C35-E5CA-4A0E-9161-EA705B4B9742__FIG_ZBK_YXY_1BB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 27-5. <span id="GUID-C3300C35-E5CA-4A0E-9161-EA705B4B9742__GUID-63164F83-8EB2-489B-B297-945E27245CD1" class="fig--title">Gated Timer Mode, Single
+                Acquisition Timing Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-AD02EA8C-DBDD-4765-82E7-DCF75DF8D813-high.pdf#toolbar=1" width="450" height="1177.6638546398442"></iframe></span>
+        </figure>
+        
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.4.1 ISO vs. Non-ISO CRC — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1.html"/>
+<link rel="next" href="GUID-E3A641D3-CD93-4D89-B4FE-7D723EF2523B.html"/>
+<link rel="up" href="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1.html">38.4 CAN FD Message Frames</a></li><li>38.4.1 ISO vs. Non-ISO CRC</li></ol>
+  <div class="sib"><span>← <a href="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1.html" rel="prev">CAN FD Message Frames</a></span><span><a href="GUID-E3A641D3-CD93-4D89-B4FE-7D723EF2523B.html" rel="next">DLC Encoding</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__GUID-03C29523-A8F1-417A-8C9E-BD69B1510E44" style="">38.4.1 ISO vs. Non-ISO CRC</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">To support the system validation of non-ISO CRC ECUs, the CAN FD Controller
+            module supports both ISO CRC (according to ISO11898-1:2015) and non-ISO CRC (see <a class="- topic/xref xref" href="#GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_LJL_WLH_P3B"><span>Figure 38-10</span></a> and <a class="- topic/xref xref" href="#GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_RGM_XLH_P3B"><span>Figure 38-11</span></a>). The CRC field is selectable using the ISOCRCEN bit
+            (C1CON[5]). The ISO CRC field contains the stuff count. This count was not included in
+            the original CAN FD specification; it was added to fix a minor issue in the error
+            detection of the original specification.</p>
+        <p class="- topic/p p">CAN FD frames use two different lengths of CRC: 17-bit for up to 16 data bytes and 21-bit
+            for 20 or more data bytes. Technically, there are a total of six different CAN
+            data/remote frames in the CAN FD.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_ALY_MLH_P3B" data-ofbid="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_ALY_MLH_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-7. <span id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__GUID-2F95CA6B-57AE-432F-B0AC-C2BE4D2B7220" class="fig--title">General Data Frame</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__IMAGE_BLY_MLH_P3B" src="GUID-43FCCC56-3264-47C5-889A-19E1EE6BF8AD-high.svg"/></span>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_LDZ_NLH_P3B" data-ofbid="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_LDZ_NLH_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-8. <span id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__GUID-3DB30D6C-BC47-4426-ADA8-004B9A81A469" class="fig--title">Arbitration Field</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__IMAGE_MDZ_NLH_P3B" src="GUID-B693406C-354F-427A-9B53-FCC0ED1284FE-high.svg"/></span>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_VQD_VLH_P3B" data-ofbid="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_VQD_VLH_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-9. <span id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__GUID-6241D30C-4826-40C2-8D07-E2C06ABA665B" class="fig--title">Control Field</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__IMAGE_WQD_VLH_P3B" src="GUID-C412BB53-FFC3-4969-83CA-D2D0F82041DD-high.svg"/></span>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_LJL_WLH_P3B" data-ofbid="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_LJL_WLH_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-10. <span id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__GUID-67B24139-AA02-4C2E-A0A3-C48F8E9392CD" class="fig--title">ISO CRC Field</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__IMAGE_MJL_WLH_P3B" src="GUID-7B24514B-9027-4F98-AEF5-8F83ECADB115-high.svg"/></span>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_RGM_XLH_P3B" data-ofbid="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_RGM_XLH_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-11. <span id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__GUID-79C465AF-4E48-4785-90CE-DAF0D70434E8" class="fig--title">NON_ISO CRC Field</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__IMAGE_SGM_XLH_P3B" src="GUID-36A1411C-1F50-4167-92FE-B234AE21151A-high.svg"/></span>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_Y2K_CMH_P3B" data-ofbid="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__FIG_Y2K_CMH_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-12. <span id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__GUID-F69B1D76-B5BD-436D-A67D-EEA975BC099C" class="fig--title">Error and Overload Frame</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-B450C10C-7D95-44C5-BB33-51988FC0E978__IMAGE_Z2K_CMH_P3B" src="GUID-2A7B3FD7-D7CA-4CFC-BA08-68D8C0B3C4B1-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-E3A641D3-CD93-4D89-B4FE-7D723EF2523B.html">38.4.1.1 DLC Encoding</a></li></ul>
+</nav>
+</body>
+</html>

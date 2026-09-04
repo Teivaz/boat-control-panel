@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4 I2C Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5A9D0BD2-C6BD-4ACB-98FB-1F6B164C0EA1.html"/>
+<link rel="next" href="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC.html"/>
+<link rel="up" href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li>37.4 I2C Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-5A9D0BD2-C6BD-4ACB-98FB-1F6B164C0EA1.html" rel="prev">Operation in Sleep</a></span><span><a href="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC.html" rel="next">I2C Client Mode Operation</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1__GUID-9C855DA5-FBE1-47B8-A387-1BB52C3DF5D8" style="">37.4 I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Operation</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">All I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C communication is performed in 9-bit segments consisting of an 8-bit
+            address/data segment followed by a 1-bit acknowledgement segment. Address and data bytes
+            are transmitted with the Most Significant bit (MSb) first. Interaction between the
+                I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C module and other devices on the bus is controlled and monitored
+            through several I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Control, Status, and Interrupt registers. </p>
+        <div class="- topic/p p">To begin any I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C communication, mater hardware checks to ensure that the bus
+            is in an Idle state as indicated by the Bus Free Status (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#GUID-967969A7-72DF-42E8-8CE4-4AD59A4CBE74" title="Bus Free Status(2)">BFRE</a>) bit. When BFRE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, both SDA and SCL
+            lines are floating to a logic high and the bus is considered ‘Idle’. When the host
+            detects an Idle bus, it transmits a Start condition, followed by the address of the
+            client it intends to communicate with. The client address can be either 7-bit or 10-bit,
+            depending on the application design.</div>
+        <p class="- topic/p p">In 7-bit Addressing mode, the Least Significant bit (LSb) of the 7-bit client address is
+            reserved for the Read/not Write (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span>) bit, while in 10-bit
+            Addressing mode, the LSb of the high address byte is reserved as the
+                R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit. If the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit is clear
+                (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the host intends to read
+            information from the client. If R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> is set
+                (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the host intends to write
+            information to the client. If the addressed client exists on the bus, it must respond
+            with an Acknowledgement (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>) sequence.</p>
+        <p class="- topic/p p">Once a client has been successfully addressed, the host will continue to receive data
+            from the client, write data to the client, or a combination of both. Data are always
+            transmitted Most Significant bit (MSb) first. When the host has completed its
+            transactions, it can either issue a Stop condition, signaling to the client that
+            communication is to be terminated, or a Restart condition, informing the bus that the
+            current host wishes to hold the bus to communicate with the same or other client
+            devices.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC.html">37.4.1 I2C Client Mode Operation</a></li><li><a href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html">37.4.2 I2C Host Mode Operation</a></li><li><a href="GUID-023C912B-1251-4318-9328-9FA6A0765D88.html">37.4.3 I2C Multi-Host Mode Operation</a></li></ul>
+</nav>
+</body>
+</html>

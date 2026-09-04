@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.12.1 Auto-Load I2CxCNT — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E4A12FB1-8569-4368-B42D-F4B7D8A7DBE0.html"/>
+<link rel="next" href="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9.html"/>
+<link rel="up" href="GUID-E4A12FB1-8569-4368-B42D-F4B7D8A7DBE0.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li><a href="GUID-E4A12FB1-8569-4368-B42D-F4B7D8A7DBE0.html">37.3.12 Data Byte Count</a></li><li>37.3.12.1 Auto-Load I2CxCNT</li></ol>
+  <div class="sib"><span>← <a href="GUID-E4A12FB1-8569-4368-B42D-F4B7D8A7DBE0.html" rel="prev">Data Byte Count</a></span><span><a href="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9.html" rel="next">DMA Integration</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-B2ABA7F2-C9A8-49B1-9B5E-A54B4454B484__GUID-D39680EB-8F48-45DB-BF05-C67C1D303A21" style="">37.3.12.1 Auto-Load I2CxCNT</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNTL</a>
+            register can be automatically loaded. Auto-loading of the I2CxCNTL register is enabled
+            when the Auto-Load I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Count Register Enable (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#GUID-6D5A49FB-4A79-42D9-A056-BE07C73D4B87" title="Auto-Load I2C Count Register Enable">ACNT</a>) bit is set (ACNT = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>).</div>
+        <p class="- topic/p p">In Host Transmit mode, the first byte following either the 7-bit or 10-bit client address
+            is transferred from <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> into both <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNTL</a> and the transmit shift register.</p>
+        <div class="- topic/p p">In Host Reception mode, the first byte received from the client are loaded into both
+                <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNTL</a>
+            and <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a>.
+            The value of the Acknowledge Data (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_TCX_VCP_LGB" title="Acknowledge Data(1,2)">ACKDT</a>) bit is used as the host’s acknowledgement response to prevent a false
+            NACK from being generated before the I2CxCNTL register is updated with the new count
+            value.</div>
+        <div class="- topic/p p">In Client Reception mode, the first byte received after receiving a matching 7-bit or
+            10-bit address is loaded into both <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNTL</a> and
+                <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a>,
+            and the value of the <a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_TCX_VCP_LGB" title="Acknowledge Data(1,2)">ACKDT</a> bit is used as the client’s acknowledgement response.</div>
+        <p class="- topic/p p">In Client Transmit mode, the first byte loaded into <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a>
+            following the reception of a matching 7-bit or 10-bit address is transferred into both
+                <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNTL</a>
+            and the transmit shift register. </p>
+        <div class="- topic/note note important note_important" id="GUID-B2ABA7F2-C9A8-49B1-9B5E-A54B4454B484__GUID-1C47612E-F00C-42BB-9B8F-4005D0B857D8" data-ofbid="GUID-B2ABA7F2-C9A8-49B1-9B5E-A54B4454B484__GUID-1C47612E-F00C-42BB-9B8F-4005D0B857D8"><span class="note__title">Important:</span> It is not necessary to
+            preload the <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> register when using the auto-load feature. If no value is loaded by
+            the 9th falling SCL edge following an address transmission or reception, the Byte Count
+            Interrupt Flag (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#GUID-9822260B-0146-4538-BAAB-AC8C3856312F" title="Byte Count Interrupt Flag(1)">CNTIF</a>) will be set by module hardware and must be cleared by software to
+            prevent an interrupt event before I2CxCNTL is updated. Alternatively, I2CxCNTL can be
+            preloaded with a nonzero value to prevent the CNTIF from being set. In this case, the
+            preloaded value will be overwritten once the new count value has been loaded into
+            I2CxCNTL.</div>
+    </div>
+
+</body>
+</html>

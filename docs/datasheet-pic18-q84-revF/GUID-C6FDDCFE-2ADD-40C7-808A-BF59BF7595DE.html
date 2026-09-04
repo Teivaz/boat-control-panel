@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.7.2.3 Filtering on Data Bytes — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BA224378-C9C7-490B-9B1E-2DF80A58F302.html"/>
+<link rel="next" href="GUID-A97F2FF7-DEC6-4CEE-A24B-855538054389.html"/>
+<link rel="up" href="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-2FBE3C3E-EDE4-4ABD-A9FA-D9AC9D794D77.html">38.7 Message Filtering</a></li><li><a href="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735.html">38.7.2 Filtering a Received Message</a></li><li>38.7.2.3 Filtering on Data Bytes</li></ol>
+  <div class="sib"><span>← <a href="GUID-BA224378-C9C7-490B-9B1E-2DF80A58F302.html" rel="prev">Mask Bits</a></span><span><a href="GUID-A97F2FF7-DEC6-4CEE-A24B-855538054389.html" rel="next">12-Bit Standard ID</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__GUID-8471397F-E95A-4D7A-8E61-97FE234DA555" style="">38.7.2.3 Filtering on Data Bytes</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">When the filter is configured to receive standard frames, the EID part of
+            the filter and mask object can be selected to filter the data bytes. The DNCNT[4:0] bits
+            in the C1CONL register are used to select how many bits in the data bytes are compared.
+                <a class="- topic/xref xref" href="GUID-A97F2FF7-DEC6-4CEE-A24B-855538054389.html#GUID-A97F2FF7-DEC6-4CEE-A24B-855538054389__TABLE_PNX_ZTM_P3B"><span>Table 38-9</span></a> explains how many data bits are compared, and which filter bits and
+            data bits are compared.</p>
+        <div class="- topic/p p">If DNCNTx is:<ul class="- topic/ul ul" id="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__UL_XMK_RTM_P3B" data-ofbid="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__UL_XMK_RTM_P3B">
+                <li class="- topic/li li" id="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__GUID-8B956D2D-009C-46BC-8B09-2BD4918034AD" data-ofbid="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__GUID-8B956D2D-009C-46BC-8B09-2BD4918034AD">‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’, then data
+                    byte filtering is disabled.</li>
+                <li class="- topic/li li" id="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__GUID-4BB571DC-19BB-4FEA-AD18-9C96F2439744" data-ofbid="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__GUID-4BB571DC-19BB-4FEA-AD18-9C96F2439744">Nonzero, the filtering will
+                    commence on as many data bits as specified in DNCNTx. A filter hit will require
+                    matching of the SIDx bits and a match of n data bits with the filter’s EID[0:17]
+                    bits. Data Byte 0[7] is always compared to EID[0], Data Byte 0[6] to EID[1],
+                    Data Byte 2[6] to EID[17].</li>
+                <li class="- topic/li li" id="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__GUID-8BD963D2-83A3-47E8-A88F-F018D3228BE4" data-ofbid="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__GUID-8BD963D2-83A3-47E8-A88F-F018D3228BE4">Greater than 18, indicating that the user-selected number of bits is greater
+                    than the total number of EIDx bits. The filter comparison will terminate with
+                    the 18th bit of the data.</li>
+                <li class="- topic/li li" id="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__GUID-1A8A4C87-3350-4B01-A0DC-05F5C0445A74" data-ofbid="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__GUID-1A8A4C87-3350-4B01-A0DC-05F5C0445A74">Greater than 16, and the received message has DLC = 2, indicating a payload of
+                    two data bytes. The filter comparison will terminate with the 16th bit of the
+                    data.</li>
+                <li class="- topic/li li" id="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__GUID-81EBE2EC-D61D-4EDD-BB26-9EC3E06C1D9E" data-ofbid="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__GUID-81EBE2EC-D61D-4EDD-BB26-9EC3E06C1D9E">Greater than 8, and the received message has DLC = 1, indicating a payload of
+                    one data byte. The filter comparison will terminate with the 8th bit of the
+                    data.</li>
+                <li class="- topic/li li" id="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__GUID-909E1703-E94B-4F7A-A834-F55E2A90C2A0" data-ofbid="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE__GUID-909E1703-E94B-4F7A-A834-F55E2A90C2A0">Greater than 0, and the received message has DLC = 0, indicating no data
+                    payload. The filter comparison will terminate with the identifier.</li>
+            </ul></div>
+    </div>
+
+</body>
+</html>

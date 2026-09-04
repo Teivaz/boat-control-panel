@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>45.2.2 Comparator Output — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C1BB8C7E-0D68-4A69-BEFE-4B7D21DE7C56.html"/>
+<link rel="next" href="GUID-E2AB0DBF-3232-433F-A72E-E47C4CBB2BB8.html"/>
+<link rel="up" href="GUID-FFD93E86-5117-4BDB-9254-4C657911903C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-90365EBC-43EB-4517-8E49-99028902B25E.html">45 CMP - Comparator Module</a></li><li><a href="GUID-FFD93E86-5117-4BDB-9254-4C657911903C.html">45.2 Comparator Control</a></li><li>45.2.2 Comparator Output</li></ol>
+  <div class="sib"><span>← <a href="GUID-C1BB8C7E-0D68-4A69-BEFE-4B7D21DE7C56.html" rel="prev">Comparator Enable</a></span><span><a href="GUID-E2AB0DBF-3232-433F-A72E-E47C4CBB2BB8.html" rel="next">Comparator Output Polarity</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-DD4518DE-A0D0-4FF6-A85D-3EC5BD6828D5__GUID-2787FF82-0BFC-4C65-880D-33D5DB1CDB77" style="">45.2.2 Comparator Output</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-DD4518DE-A0D0-4FF6-A85D-3EC5BD6828D5__ID-42111-0000048B" data-ofbid="GUID-DD4518DE-A0D0-4FF6-A85D-3EC5BD6828D5__ID-42111-0000048B">The output of the comparator can be monitored in two different
+            registers. Each output can be read individually by reading the <a class="- topic/xref xref" href="GUID-C5F2A580-5B50-44B4-ACEA-C3B046C9B983.html#ID-0000000C" title="Comparator Output"><span><span>OUT</span></span></a> bit. Outputs of all the comparators can be collectively accessed by
+            reading the <a class="- topic/xref xref" href="GUID-E6427064-7A95-4BF1-8D31-C921175C70F2.html" title="CMOUT">CMOUT</a> register.</p>
+        <p class="- topic/p p" id="GUID-DD4518DE-A0D0-4FF6-A85D-3EC5BD6828D5__ID-42111-0000048C" data-ofbid="GUID-DD4518DE-A0D0-4FF6-A85D-3EC5BD6828D5__ID-42111-0000048C">The comparator output can also be routed to an external pin
+            through the RxyPPS register. Refer to the <strong class="+ topic/ph hi-d/b ph b">“PPS - Peripheral Pin Select Module”</strong>
+            chapter for more details. The corresponding TRIS bit must be clear to enable the pin as
+            an output.</p>
+        <div class="- topic/note note important note_important" id="GUID-DD4518DE-A0D0-4FF6-A85D-3EC5BD6828D5__GUID-49479A59-C6C6-4F26-AA59-D5232E32E143" data-ofbid="GUID-DD4518DE-A0D0-4FF6-A85D-3EC5BD6828D5__GUID-49479A59-C6C6-4F26-AA59-D5232E32E143"><span class="note__title">Important:</span> The internal output of the comparator is latched with each instruction cycle. Unless
+            otherwise specified, external outputs are not latched.</div>
+    </div>
+
+</body>
+</html>

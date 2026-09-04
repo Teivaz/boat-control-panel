@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.13.1 7-Bit Host Transmission — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9.html"/>
+<link rel="next" href="GUID-9E38DEA9-0B12-4ED1-957D-B8E0F61C71E1.html"/>
+<link rel="up" href="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li><a href="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9.html">37.3.13 DMA Integration</a></li><li>37.3.13.1 7-Bit Host Transmission</li></ol>
+  <div class="sib"><span>← <a href="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9.html" rel="prev">DMA Integration</a></span><span><a href="GUID-9E38DEA9-0B12-4ED1-957D-B8E0F61C71E1.html" rel="next">10-Bit Host Transmission</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-A0AAD4E6-C8B3-4A58-A705-384F9DF2E32F__GUID-6D06F206-0462-451E-BACE-50C972612CAA" style="">37.3.13.1 7-Bit Host Transmission</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">When address buffers are enabled (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), <a class="- topic/xref xref" href="GUID-51DC1914-5FC6-4DB6-849E-AC7B6E17D460.html" title="I2CxADB1">I2CxADB1</a> is
+            loaded with the client address, and <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> is
+            loaded with a count value. At this point, <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> does
+            not contain data, and the Transmit Buffer Empty (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_KS4_K5P_LGB" title="Transmit Buffer Empty Status(2)">TXBE</a>) bit is set (TXBE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). The I2CxTXIF bit is not set
+            since it can only be set when the Host Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a>) and TXBE bits are set. Once software sets the Start (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_YPG_M34_LGB" title="Host Start (used only when MODE = 1xx)">S</a>) bit, the MMA bit is set and hardware transmits the client address. Upon
+            the 8th falling SCL edge, since TXBE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the Host Data Request (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a>) and I2CxTXIF bits are set, and hardware stretches the clock while the
+            DMA loads I2CxTXB with data. Once the DMA loads I2CxTXB, the TXBE, MDR and I2CxTXIF bits
+            are cleared by hardware, and the DMA waits for the next occurrence of I2CxTXIF being
+            set. </div>
+        <p class="- topic/p p">When address buffers are disabled (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), software must load <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> with
+            the client address to begin transmission. This is because I2CxTXIF can only be set when
+                <a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, and since a Start has not occurred,
+            MMA = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>. Once the address has been transmitted, I2CxTXIF will be set,
+            triggering the DMA to load I2CxTXB with data. </p>
+    </div>
+
+</body>
+</html>

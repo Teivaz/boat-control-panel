@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28 UTMR - Universal Timer Module — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DFDAD911-B85C-44AF-8350-6C9A65EB6B9F.html"/>
+<link rel="next" href="GUID-76C2A8EF-400D-4BCE-95CC-2358C2D51BEB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>28 UTMR - Universal Timer Module</li></ol>
+  <div class="sib"><span>← <a href="GUID-DFDAD911-B85C-44AF-8350-6C9A65EB6B9F.html" rel="prev">Register Summary - SMT Control</a></span><span><a href="GUID-76C2A8EF-400D-4BCE-95CC-2358C2D51BEB.html" rel="next">Module Nomenclature</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-C1CC90BE-101C-4F23-A6A7-E90C0D179D3C" style="">28 UTMR - Universal Timer Module</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The UTMR Universal Timer module is a <span class="- topic/ph ph">16</span>-bit timer/counter with
+            a combination of signal measurement and hardware limit timer functions. It is designed
+            to provide all timer/counter related functions in a single peripheral and includes the
+            following list of features:</p>
+        <ul class="- topic/ul ul" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__UL_MDB_LFK_43B" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__UL_MDB_LFK_43B">
+            <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-F84086FE-F60D-4D18-9331-2F137D0055CC" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-F84086FE-F60D-4D18-9331-2F137D0055CC">Main/Secondary chaining, which allows
+                two timer/counters to be combined into a single larger timer/counter with a single
+                set of control registers</li>
+            <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-880635D3-9D99-4F23-AEBD-DFBADD6B15CB" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-880635D3-9D99-4F23-AEBD-DFBADD6B15CB">Software independent operation,
+                including both signal measurement and hardware limit features<ul class="- topic/ul ul" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__UL_NDB_LFK_43B" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__UL_NDB_LFK_43B">
+                    <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-4C58691B-989E-4E43-AA6B-04FF030DAB84" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-4C58691B-989E-4E43-AA6B-04FF030DAB84">External Reset (ERS)
+                        inputs</li>
+                    <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-23DEB630-1DD1-47C7-B1A1-19113DB9E115" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-23DEB630-1DD1-47C7-B1A1-19113DB9E115">Individual control of Start,
+                        Stop and Reset</li>
+                    <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-40D989A3-1A82-4A81-B3F9-A5DF58188498" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-40D989A3-1A82-4A81-B3F9-A5DF58188498">Hardware Limit mode</li>
+                    <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-94C87E8C-563F-47F9-84B8-0BD7ADBBF865" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-94C87E8C-563F-47F9-84B8-0BD7ADBBF865">One Shot mode </li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-B27E7A9F-0BF7-4B4A-85CB-FBD830585201" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-B27E7A9F-0BF7-4B4A-85CB-FBD830585201">Full asynchronous clocking<ul class="- topic/ul ul" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__UL_ODB_LFK_43B" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__UL_ODB_LFK_43B">
+                    <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-A8933453-3A48-4F2D-B123-FCB8FD0EAF76" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-A8933453-3A48-4F2D-B123-FCB8FD0EAF76">Multiple clock
+                        selections</li>
+                    <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-5E9AFD08-6969-48DD-8F22-49912249D3FC" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-5E9AFD08-6969-48DD-8F22-49912249D3FC">Synchronization circuitry for
+                        control bit and ERS inputs</li>
+                    <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-19120AEA-3449-410B-818B-C3EA8C7AF8E1" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-19120AEA-3449-410B-818B-C3EA8C7AF8E1">Integrated fully programmable
+                        prescaler</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-40A35A53-95B0-4F61-BA64-71B8D48D5208" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-40A35A53-95B0-4F61-BA64-71B8D48D5208">Dual Output modes<ul class="- topic/ul ul" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__UL_PDB_LFK_43B" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__UL_PDB_LFK_43B">
+                    <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-0DD3DC89-5530-4DAD-80B3-40FD55651A4D" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-0DD3DC89-5530-4DAD-80B3-40FD55651A4D">Pulse output</li>
+                    <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-18B16CD1-D98D-4942-BA54-B98C4A5AB95C" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-18B16CD1-D98D-4942-BA54-B98C4A5AB95C">Level output</li>
+                    <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-B6CDFC54-2F2F-4020-A0C8-3ACA1BB63DD4" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-B6CDFC54-2F2F-4020-A0C8-3ACA1BB63DD4">Output polarity control</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-CEE7C5AA-77E4-4127-83C3-CB2DC8EB375E" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-CEE7C5AA-77E4-4127-83C3-CB2DC8EB375E">Double-buffered period register<ul class="- topic/ul ul" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__UL_QDB_LFK_43B" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__UL_QDB_LFK_43B">
+                    <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-2B0A3717-EEBF-491F-A2BA-C231BD77F6F7" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-2B0A3717-EEBF-491F-A2BA-C231BD77F6F7">Compatible with DMA
+                        control</li>
+                    <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-43B9ADCB-6BBA-48F4-8609-143D243A033D" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-43B9ADCB-6BBA-48F4-8609-143D243A033D">Interrupt, Stop or Reset On
+                        Match</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-9536F8B3-4314-4C5E-A46E-AB31EAB1B237" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-9536F8B3-4314-4C5E-A46E-AB31EAB1B237">Interrupt on Start, Stop and
+                Reset</li>
+        </ul>
+       
+            <figure class="- topic/fig fig fignone rotatepage" id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__FIG_VCY_XNL_M3B" data-ofbid="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__FIG_VCY_XNL_M3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 28-1. <span id="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846__GUID-DD5C5A13-2C49-409A-9258-2353C47B5955" class="fig--title">Universal Timer Block Diagram</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-0CB18F9A-06C6-490E-9773-7DD24E5D8E4F-high.pdf#toolbar=1" width="748.07" height="658.01"></iframe></span>
+            </figure>
+        
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-76C2A8EF-400D-4BCE-95CC-2358C2D51BEB.html">28.1 Module Nomenclature</a></li><li><a href="GUID-1B6BBB62-379D-4C37-91B0-0834ABA11866.html">28.2 Clock Source Selection</a></li><li><a href="GUID-42001B0C-D3B0-4A07-809C-BD73A2E59F1C.html">28.3 UTMR Prescaler</a></li><li><a href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html">28.4 UTMR Operation</a></li><li><a href="GUID-2C6AC9E0-B2F9-45E3-844B-AA678647BB10.html">28.5 UTMR Output Modes</a></li><li><a href="GUID-D57A6D43-987D-4EF7-99A8-2B4418273E38.html">28.6 Interrupt and DMA Triggers</a></li><li><a href="GUID-301A5CE2-A3DB-4622-8072-4704E042FCCF.html">28.7 Operation During Sleep</a></li><li><a href="GUID-D1BAE205-3BED-421F-959D-6854F354A525.html">28.8 Chaining Counter Timers</a></li><li><a href="GUID-7463E9BA-CF26-4B25-8FCB-C8F606187580.html">28.9 Register Definitions: Universal Timer</a></li><li><a href="GUID-C47966E9-1F0D-4087-998F-4D2B84A4E87E.html">28.10 Register Summary - Universal Timer</a></li></ul>
+</nav>
+</body>
+</html>

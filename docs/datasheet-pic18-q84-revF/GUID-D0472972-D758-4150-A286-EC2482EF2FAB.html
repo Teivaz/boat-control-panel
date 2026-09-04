@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.13.5 IVTLOCK — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2655611D-A5D7-46DC-98AB-79A4ED0BFD5B.html"/>
+<link rel="next" href="GUID-7CE3BD7E-AC15-46E1-B03F-7A04202F9E02.html"/>
+<link rel="up" href="GUID-602D87A7-D67E-4F60-9A0D-E6A6EFDB7CE1.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li><a href="GUID-602D87A7-D67E-4F60-9A0D-E6A6EFDB7CE1.html">11.13 Register Definitions: Interrupt Control</a></li><li>11.13.5 IVTLOCK</li></ol>
+  <div class="sib"><span>← <a href="GUID-2655611D-A5D7-46DC-98AB-79A4ED0BFD5B.html" rel="prev">IVTAD</a></span><span><a href="GUID-7CE3BD7E-AC15-46E1-B03F-7A04202F9E02.html" rel="next">SHADCON</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-D0472972-D758-4150-A286-EC2482EF2FAB__GUID-18F6CAB1-AC1C-485D-BE6B-715ACEBB1418" style="">11.13.5  IVTLOCK</h1><section id="GUID-80AB110B-1DBC-4AB4-83DB-037EF171483A" class="- topic/section reference/section sidsc-register/registerDescription ">Interrupt Vector Table
+            Lock Register<div class="- topic/note note note note_note endnote" id="GUID-D0472972-D758-4150-A286-EC2482EF2FAB__GUID-747BC0DB-E07A-4E65-998F-3C38AF644FBA" data-ofbid="GUID-D0472972-D758-4150-A286-EC2482EF2FAB__GUID-747BC0DB-E07A-4E65-998F-3C38AF644FBA"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-D0472972-D758-4150-A286-EC2482EF2FAB__OL_TLV_RBL_CGB" data-ofbid="GUID-D0472972-D758-4150-A286-EC2482EF2FAB__OL_TLV_RBL_CGB">
+                    <li class="- topic/li li" id="GUID-D0472972-D758-4150-A286-EC2482EF2FAB__GUID-31F2D8F8-3CFF-4A1F-A395-693FD8EFD415" data-ofbid="GUID-D0472972-D758-4150-A286-EC2482EF2FAB__GUID-31F2D8F8-3CFF-4A1F-A395-693FD8EFD415">The IVTLOCKED bit can only be
+                        set or cleared after the unlock sequence in <a class="- topic/xref xref" href="GUID-9F62C3BC-B3F2-4D06-B469-C4FB94C742AC.html#GUID-9F62C3BC-B3F2-4D06-B469-C4FB94C742AC__GUID-41555B63-8206-41B8-9A83-ADEAD40CFDDC"><span>IVT Unlock Sequence</span></a>.</li>
+                    <li class="- topic/li li" id="GUID-D0472972-D758-4150-A286-EC2482EF2FAB__GUID-309ED75B-1334-47CE-8DA8-C46382008431" data-ofbid="GUID-D0472972-D758-4150-A286-EC2482EF2FAB__GUID-309ED75B-1334-47CE-8DA8-C46382008431">If IVT1WAY =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the IVTLOCKED bit cannot be cleared after it has
+                        been set.</li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>IVTLOCK</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x459</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-D0472972-D758-4150-A286-EC2482EF2FAB__GUID-44BEBA08-1399-4BDC-87C1-FD1172E4434C" data-ofbid="GUID-D0472972-D758-4150-A286-EC2482EF2FAB__GUID-44BEBA08-1399-4BDC-87C1-FD1172E4434C"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-D0472972-D758-4150-A286-EC2482EF2FAB"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">IVTLOCKED</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-80AB110B-1DBC-4AB4-83DB-037EF171483A" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-A8B0B3B8-0F7F-4D0E-8CB0-5A125A11FD7F__GUID-8E8FE3E2-5B42-44DE-9BE6-0E2AB704C398" id="GUID-A8B0B3B8-0F7F-4D0E-8CB0-5A125A11FD7F">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-A8B0B3B8-0F7F-4D0E-8CB0-5A125A11FD7F__GUID-8E8FE3E2-5B42-44DE-9BE6-0E2AB704C398" style=""> Bit 0 – IVTLOCKED <span>
+            IVT Registers Lock<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1,2)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-A8B0B3B8-0F7F-4D0E-8CB0-5A125A11FD7F__GUID-331B2584-B66A-4791-AD9A-D2443EFDED39" data-ofbid="GUID-A8B0B3B8-0F7F-4D0E-8CB0-5A125A11FD7F__GUID-331B2584-B66A-4791-AD9A-D2443EFDED39"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-A8B0B3B8-0F7F-4D0E-8CB0-5A125A11FD7F__GUID-E91E6B15-D27D-4CC8-A594-547B8475113F">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-A8B0B3B8-0F7F-4D0E-8CB0-5A125A11FD7F__GUID-3098AEA4-E00A-42B9-AB5E-443098C8F641">IVTBASE
+                        Registers are locked and cannot be written</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-A8B0B3B8-0F7F-4D0E-8CB0-5A125A11FD7F__GUID-B0A08F00-5AFA-48FA-BF29-3E22963132CB">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-A8B0B3B8-0F7F-4D0E-8CB0-5A125A11FD7F__GUID-F13BEC86-78D7-4AF4-8EA8-5B08622A0DA8">IVTBASE
+                        Registers can be modified by write operations</td>
+                </tr></tbody></table>
+        </div>
+    </article>
+                
+                    The IVTLOCKED bit can only be
+                        set or cleared after the unlock sequence in IVT Unlock Sequence.
+                    If IVT1WAY =
+                            1, the IVTLOCKED bit cannot be cleared after it has
+                        been set.
+                
+            
+</body>
+</html>

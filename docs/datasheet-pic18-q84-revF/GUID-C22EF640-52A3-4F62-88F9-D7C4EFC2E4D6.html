@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.8.6 Abort Trigger, Message Complete — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-ABD8FEFB-C4E8-4594-B2AA-B293E6771CAA.html"/>
+<link rel="next" href="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E.html"/>
+<link rel="up" href="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li><a href="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA.html">16.8 DMA Setup and Operation</a></li><li>16.8.6 Abort Trigger, Message Complete</li></ol>
+  <div class="sib"><span>← <a href="GUID-ABD8FEFB-C4E8-4594-B2AA-B293E6771CAA.html" rel="prev">Overrun Condition</a></span><span><a href="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E.html" rel="next">Abort Trigger, Message in Progress</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6__GUID-7FDB0525-3E92-4656-9F12-FB696247A559" style="">16.8.6 Abort Trigger, Message Complete</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The AIRQEN needs to be set in order for the DMA to sample abort interrupt
+            sources. When an abort interrupt is received, the <a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#BITFIELD_QJJ_143_F1B" title="Start of Transfer Interrupt Request Enable"><span><span>SIRQEN</span></span></a> bit is cleared and the <a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#UV1_PQ4_3GB" title="Abort of Transfer Interrupt Request Enable"><span><span>AIRQEN</span></span></a> bit is cleared to avoid receiving further abort triggers.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6__FIG_QRK_JHD_TFB" data-ofbid="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6__FIG_QRK_JHD_TFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 16-11. <span id="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6__GUID-C3F2E271-12F8-4AE4-BB5E-290E9A94A192" class="fig--title">Abort at the End of
+                Message</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-83401D16-CA92-4104-B5A8-50A01893D387-high.pdf#toolbar=1" width="597.74" height="469.58"></iframe></span>
+        </figure>
+        <div class="- topic/note note notype note_notype" id="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6__GUID-37100B82-00DD-4E1E-BC49-509D63946F49" data-ofbid="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6__GUID-37100B82-00DD-4E1E-BC49-509D63946F49"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6__OL_YPV_ZFX_SFB" data-ofbid="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6__OL_YPV_ZFX_SFB">
+                <li class="- topic/li li" id="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6__GUID-F7253568-F7A7-4E98-AAF2-B38E221D7FDA" data-ofbid="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6__GUID-F7253568-F7A7-4E98-AAF2-B38E221D7FDA">SR - Source Read</li>
+                <li class="- topic/li li" id="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6__GUID-FC9EF6A6-97A5-4394-977C-B2395E1F7193" data-ofbid="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6__GUID-FC9EF6A6-97A5-4394-977C-B2395E1F7193">DW - Destination Write</li>
+            </ol>
+        </div>
+        
+    </div>
+
+</body>
+</html>

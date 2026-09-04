@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.4.2 Client Mode Receive Options — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F98C1956-1B7E-4428-B972-A1E5F3E9494A.html"/>
+<link rel="next" href="GUID-D036B070-9F0A-4705-B66B-2BC11922EE56.html"/>
+<link rel="up" href="GUID-312D4604-FDB9-4FC4-9D6A-94EC2AE8B3C5.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-312D4604-FDB9-4FC4-9D6A-94EC2AE8B3C5.html">36.4 Client Mode</a></li><li>36.4.2 Client Mode Receive Options</li></ol>
+  <div class="sib"><span>← <a href="GUID-F98C1956-1B7E-4428-B972-A1E5F3E9494A.html" rel="prev">SDO Output Data</a></span><span><a href="GUID-D036B070-9F0A-4705-B66B-2BC11922EE56.html" rel="next">Client Mode Client Select</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-1A71E931-A30B-4B94-B35B-9E198DC6F53C__GUID-725B41FB-BB58-46F5-8DA0-F1947BF37641" style="">36.4.2 Client Mode Receive Options</h1><div class="- topic/body body"><p class="- topic/p p">The RXR bit controls the nature of receptions in Client mode. When RXR is set, the SDI input data will be stored in the receive FIFO if it is not full. If the receive FIFO is full, the RXOIF bit will be set to indicate a receive FIFO overflow error and the data are discarded. When RXR is cleared, all received data will be ignored and not stored in the receive FIFO (although it may still be used for transmission if the transmit FIFO is empty).</p><p class="- topic/p p">The following figure presents a typical Client mode communication, showing a case where the host writes two and then three bytes, showing interrupts as well as the behavior of the transfer counter in Client mode (see the <a class="- topic/xref xref" href="GUID-5A577801-04BA-4C3C-B620-B1721A3265E1.html">Transfer Counter in Client Mode</a> section for more details on the transfer counter in Client mode as well as the <a class="- topic/xref xref" href="GUID-3B049106-A068-4D06-BD06-17396A19D766.html">SPI Interrupts</a> section for more information on interrupts).</p><figure class="- topic/fig fig fignone" id="GUID-1A71E931-A30B-4B94-B35B-9E198DC6F53C__FIG_BDW_KWV_SFB" data-ofbid="GUID-1A71E931-A30B-4B94-B35B-9E198DC6F53C__FIG_BDW_KWV_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 36-11. <span id="GUID-1A71E931-A30B-4B94-B35B-9E198DC6F53C__GUID-50C820B5-AF2F-4FE2-9F64-3D0560F790DF" class="fig--title">SPI Client Mode Operation – Interrupt-Driven, Host Writes 2+3 Bytes</span></span></figcaption><span class=""><iframe src="GUID-BE42CC86-10E4-4E74-8893-F01574466338-high.pdf#toolbar=1" width="450" height="754.8009748172218"></iframe></span></figure></div>
+</body>
+</html>

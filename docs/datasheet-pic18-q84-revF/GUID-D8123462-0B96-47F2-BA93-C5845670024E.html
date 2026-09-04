@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.8 Scanning Modes — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1825F76E-B176-438D-9330-EC60AFE5ADAE.html"/>
+<link rel="next" href="GUID-D4DD395D-7D24-4E1F-B6A7-E71B3026FDB1.html"/>
+<link rel="up" href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li>13.8 Scanning Modes</li></ol>
+  <div class="sib"><span>← <a href="GUID-1825F76E-B176-438D-9330-EC60AFE5ADAE.html" rel="prev">Scanner Module Overview</a></span><span><a href="GUID-D4DD395D-7D24-4E1F-B6A7-E71B3026FDB1.html" rel="next">TRIGEN = 0, BURSTMD = 0</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-D8123462-0B96-47F2-BA93-C5845670024E__GUID-BC141C1E-5E01-4946-9EAF-EDB2902180D5" style="">13.8 Scanning Modes</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The interaction of the scanner with the system operation is controlled by the priority
+            selection in the system arbiter (refer to the <strong class="+ topic/ph hi-d/b ph b">“Memory Access Scheme”</strong> section for
+            more details). When using the scanner module in conjunction with the CRC module, the
+            system arbiter needs to be configured such that the scanner has a higher priority than
+            the CPU to ensure that a memory access request is granted when it occurs. Additionally,
+                <a class="- topic/xref xref" href="GUID-954A61C6-F5B6-4625-8868-91C5E0693D11.html#ID-000000AD" title="Scanner Burst Mode(5)"><span><span>BURSTMD</span></span></a>
+            and <a class="- topic/xref xref" href="GUID-954A61C6-F5B6-4625-8868-91C5E0693D11.html#ID-00000098" title="Scanner Trigger Enable(2,5)"><span><span>TRIGEN</span></span></a>
+            bits also determine the operation of the scanner.</div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-D4DD395D-7D24-4E1F-B6A7-E71B3026FDB1.html">13.8.1 TRIGEN = 0, BURSTMD = 0</a></li><li><a href="GUID-7AFF5AA4-8623-4B63-87A1-DF953B2CEB35.html">13.8.2 TRIGEN = 1, BURSTMD = 0</a></li><li><a href="GUID-4019D800-9451-4115-967F-B7376DE1AAEC.html">13.8.3 TRIGEN = x, BURSTMD = 1</a></li><li><a href="GUID-A2E82686-5D12-45A0-9101-4E5D90C11C19.html">13.8.4 WWDT Interaction</a></li></ul>
+</nav>
+</body>
+</html>

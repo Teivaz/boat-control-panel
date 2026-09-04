@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>7.7.5 PRLOCK — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5D7D9A10-99B9-44A3-A55A-4E76485F687F.html"/>
+<link rel="next" href="GUID-F43CF349-913A-4FA3-B684-CA2800175177.html"/>
+<link rel="up" href="GUID-CE10AC1F-1AB6-49CA-9907-53EC14CE51E2.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html">7 PIC18 CPU</a></li><li><a href="GUID-CE10AC1F-1AB6-49CA-9907-53EC14CE51E2.html">7.7 Register Definitions: System Arbiter</a></li><li>7.7.5 PRLOCK</li></ol>
+  <div class="sib"><span>← <a href="GUID-5D7D9A10-99B9-44A3-A55A-4E76485F687F.html" rel="prev">SCANPR</a></span><span><a href="GUID-F43CF349-913A-4FA3-B684-CA2800175177.html" rel="next">PROD</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-1EDFAC7F-18E9-4F04-AB80-B193AF5652E9__GUID-9575B65F-CD95-4BB3-99D4-492A392E596D" style="">7.7.5  PRLOCK</h1><section id="GUID-6758792A-A66C-474C-BFEE-59B568C79BAD" class="- topic/section reference/section sidsc-register/registerDescription "><div class="- topic/note note important note_important endnote" id="GUID-1EDFAC7F-18E9-4F04-AB80-B193AF5652E9__GUID-63103254-97A7-4905-BAF9-535D0C5B7187" data-ofbid="GUID-1EDFAC7F-18E9-4F04-AB80-B193AF5652E9__GUID-63103254-97A7-4905-BAF9-535D0C5B7187"><span class="note__title">Important:</span> 
+				<ol class="- topic/ol ol" id="GUID-1EDFAC7F-18E9-4F04-AB80-B193AF5652E9__OL_OSQ_LTF_RFB" data-ofbid="GUID-1EDFAC7F-18E9-4F04-AB80-B193AF5652E9__OL_OSQ_LTF_RFB">
+					<li class="- topic/li li" id="GUID-1EDFAC7F-18E9-4F04-AB80-B193AF5652E9__GUID-1C4EE972-134C-4937-8E19-3961E98BAA0B" data-ofbid="GUID-1EDFAC7F-18E9-4F04-AB80-B193AF5652E9__GUID-1C4EE972-134C-4937-8E19-3961E98BAA0B">The PRLOCKED bit can only be set or cleared
+						after the unlock sequence.</li>
+					<li class="- topic/li li" id="GUID-1EDFAC7F-18E9-4F04-AB80-B193AF5652E9__GUID-433FFE69-020A-4381-BC44-7D43C294DC69" data-ofbid="GUID-1EDFAC7F-18E9-4F04-AB80-B193AF5652E9__GUID-433FFE69-020A-4381-BC44-7D43C294DC69">If the Configuration Bit PR1WAY =
+							<code class="+ topic/ph pr-d/codeph ph codeph">1</code>, the PRLOCKED bit cannot be cleared after it has been set. A device Reset
+						will clear the bit and allow one more set.</li>
+				</ol>
+			</div>Priority Lock Register</section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>PRLOCK</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x0B4</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-1EDFAC7F-18E9-4F04-AB80-B193AF5652E9__GUID-FCA9A017-C2F3-4505-AE1E-FCEA78E07BC2" data-ofbid="GUID-1EDFAC7F-18E9-4F04-AB80-B193AF5652E9__GUID-FCA9A017-C2F3-4505-AE1E-FCEA78E07BC2"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-1EDFAC7F-18E9-4F04-AB80-B193AF5652E9"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">PRLOCKED</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-6758792A-A66C-474C-BFEE-59B568C79BAD" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B__GUID-BD9C55B0-6D3E-4774-A632-4DA9DB9ACD23" id="GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B">
+		<h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B__GUID-BD9C55B0-6D3E-4774-A632-4DA9DB9ACD23" style=""> Bit 0 – PRLOCKED <span>PR Register
+			Lock</span></h2>
+		
+		<div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+			<section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B__GUID-010C2B0F-57BE-4FFC-A382-961B6DC71D52" data-ofbid="GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B__GUID-010C2B0F-57BE-4FFC-A382-961B6DC71D52"></section>
+			
+			<table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B__BITFIELDVALUES_J3H_KX4_5FB" data-ofbid="GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B__BITFIELDVALUES_J3H_KX4_5FB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+					<td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B__GUID-ED2BB7CB-35CC-41F7-BB05-BCA453FEBAE2">1</td>
+					<td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B__GUID-1F8DBE9D-7C20-4EED-B402-330848F37BD1">Priority registers are
+						locked and cannot be written; Peripherals have access to the
+						memory</td>
+				</tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+					<td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B__GUID-F6620935-A4BC-4277-8990-2CD1A58CCA96">0</td>
+					<td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B__GUID-F6AF7B76-EE34-4321-9362-1AB26A3F80F7">Priority registers can
+						be modified by write operations; Peripherals do not have access to the
+						memory</td>
+				</tr></tbody></table>
+		</div>
+	</article>
+				
+					The PRLOCKED bit can only be set or cleared
+						after the unlock sequence.
+					If the Configuration Bit PR1WAY =
+							1, the PRLOCKED bit cannot be cleared after it has been set. A device Reset
+						will clear the bit and allow one more set.
+				
+			
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.11.1 Clock Stretching for Buffer Operations — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1D1EC34C-7EE8-456C-8216-130FC0C35670.html"/>
+<link rel="next" href="GUID-B50B0395-277E-4FF7-AC78-D1E1903DE349.html"/>
+<link rel="up" href="GUID-1D1EC34C-7EE8-456C-8216-130FC0C35670.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li><a href="GUID-1D1EC34C-7EE8-456C-8216-130FC0C35670.html">37.3.11 Clock Stretching</a></li><li>37.3.11.1 Clock Stretching for Buffer Operations</li></ol>
+  <div class="sib"><span>← <a href="GUID-1D1EC34C-7EE8-456C-8216-130FC0C35670.html" rel="prev">Clock Stretching</a></span><span><a href="GUID-B50B0395-277E-4FF7-AC78-D1E1903DE349.html" rel="next">Clock Stretching for Other Client Operations</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-5A9D5085-8CFB-4675-8B52-AC4C6D634AE7__GUID-1AB93B15-6B3A-4970-85AA-CF70A3579590" style="">37.3.11.1 Clock Stretching for Buffer
+        Operations</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">When enabled (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_KNG_JGP_LGB" title="Clock Stretching Disable (used only when MODE = 0xx or MODE = 11x)">CSD</a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), clock stretching is forced during buffer read/write operations.
+            This allows the client device time to either load <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> with transmit data
+            or read data from <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> to clear the buffer. </div>
+        <div class="- topic/p p">In Client Receive mode, clock stretching prevents receive data overflows. When the first
+            seven bits of a new byte are received into the receive shift register while <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> is
+            full (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), client hardware automatically
+            stretches the clock and sets <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a>. When the client has read the data in I2CxRXB, client hardware
+            automatically clears CSTR to release the SCL line and continue communication (see <a class="- topic/xref xref" href="#GUID-5A9D5085-8CFB-4675-8B52-AC4C6D634AE7__FIG_QJB_MDF_KGB"><span>Figure 37-9</span></a>).</div>
+        <figure class="- topic/fig fig fignone" id="GUID-5A9D5085-8CFB-4675-8B52-AC4C6D634AE7__FIG_QJB_MDF_KGB" data-ofbid="GUID-5A9D5085-8CFB-4675-8B52-AC4C6D634AE7__FIG_QJB_MDF_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-9. <span id="GUID-5A9D5085-8CFB-4675-8B52-AC4C6D634AE7__GUID-3D4D7F56-D86B-43E7-9F1D-5D02932E6D77" class="fig--title">Receive Buffer Clock
+                Stretching</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-7D5337BB-D768-448D-A41E-7BBD1EB970CB-high.pdf#toolbar=1" width="450" height="353.42105263157896"></iframe></span>
+        </figure>
+        <div class="- topic/p p">In Client Transmit mode, clock stretching prevents transmit underflows. When <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> is
+            empty (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_KS4_K5P_LGB" title="Transmit Buffer Empty Status(2)">TXBE</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) and the <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>
+            register is nonzero (I2CxCNT != <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), client hardware stretches the clock
+            and sets <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a> upon the 8th falling SCL edge. Once the client has loaded
+            new data into I2CxTXB, client hardware automatically clears CSTR to release the SCL line
+            and allow further communication (see <a class="- topic/xref xref" href="#GUID-5A9D5085-8CFB-4675-8B52-AC4C6D634AE7__FIG_ZM3_RDF_KGB"><span>Figure 37-10</span></a>).</div>
+        <figure class="- topic/fig fig fignone" id="GUID-5A9D5085-8CFB-4675-8B52-AC4C6D634AE7__FIG_ZM3_RDF_KGB" data-ofbid="GUID-5A9D5085-8CFB-4675-8B52-AC4C6D634AE7__FIG_ZM3_RDF_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-10. <span id="GUID-5A9D5085-8CFB-4675-8B52-AC4C6D634AE7__GUID-71F87A60-93B5-41D6-A708-803C22181397" class="fig--title">Transmit Buffer Clock
+                Stretching</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-CF198F93-1D05-46F4-8B65-67E8A34AC8AC-high.pdf#toolbar=1" width="450" height="336.25"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

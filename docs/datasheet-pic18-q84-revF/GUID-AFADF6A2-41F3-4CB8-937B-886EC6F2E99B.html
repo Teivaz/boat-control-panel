@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>9.5.1 Inherent and Literal Addressing — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D6ED03D2-3DA7-4418-9192-E7A83494ECF4.html"/>
+<link rel="next" href="GUID-9BC574E9-54B7-46FD-A005-3D363BF68F42.html"/>
+<link rel="up" href="GUID-D6ED03D2-3DA7-4418-9192-E7A83494ECF4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2BAB2696-5102-45C6-8EF2-0812A58B9EC7.html">9 Memory Organization</a></li><li><a href="GUID-D6ED03D2-3DA7-4418-9192-E7A83494ECF4.html">9.5 Data Addressing Modes</a></li><li>9.5.1 Inherent and Literal Addressing</li></ol>
+  <div class="sib"><span>← <a href="GUID-D6ED03D2-3DA7-4418-9192-E7A83494ECF4.html" rel="prev">Data Addressing Modes</a></span><span><a href="GUID-9BC574E9-54B7-46FD-A005-3D363BF68F42.html" rel="next">Direct Addressing</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-AFADF6A2-41F3-4CB8-937B-886EC6F2E99B__GUID-18399A58-65D2-44C9-BAE7-B632F5A31CAF" style="">9.5.1 Inherent and Literal Addressing</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-AFADF6A2-41F3-4CB8-937B-886EC6F2E99B__ID-42129-000065AE" data-ofbid="GUID-AFADF6A2-41F3-4CB8-937B-886EC6F2E99B__ID-42129-000065AE">Many PIC18 control instructions do not need any argument at all;
+         they either perform an operation that globally affects the device or they operate
+         implicitly on one register. This Addressing mode is known as Inherent Addressing. Examples
+         include <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code>, <code class="+ topic/ph pr-d/codeph ph codeph">RESET</code> and <code class="+ topic/ph pr-d/codeph ph codeph">DAW</code>.</p>
+      <p class="- topic/p p" id="GUID-AFADF6A2-41F3-4CB8-937B-886EC6F2E99B__ID-42129-000065B5" data-ofbid="GUID-AFADF6A2-41F3-4CB8-937B-886EC6F2E99B__ID-42129-000065B5">Other instructions work in a similar way but require an additional
+         explicit argument in the opcode. This is known as Literal Addressing mode because they
+         require some literal value as an argument. Examples include <code class="+ topic/ph pr-d/codeph ph codeph">ADDLW</code> and
+            <code class="+ topic/ph pr-d/codeph ph codeph">MOVLW</code>, which, respectively, add or move a literal value to the W
+         register. Other examples include <code class="+ topic/ph pr-d/codeph ph codeph">CALL</code> and <code class="+ topic/ph pr-d/codeph ph codeph">GOTO</code>, which
+         include a program memory address.</p>
+   </div>
+
+</body>
+</html>

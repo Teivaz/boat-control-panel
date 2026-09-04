@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>7.3.2 16x16 Unsigned Multiplication Algorithm — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A829EEDC-7297-452F-BCCE-041A7D1FD041.html"/>
+<link rel="next" href="GUID-5608AC61-74CB-44EA-8246-96A83CA05210.html"/>
+<link rel="up" href="GUID-4CDA8BD0-8C39-47CE-8297-FB61A0890E23.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html">7 PIC18 CPU</a></li><li><a href="GUID-4CDA8BD0-8C39-47CE-8297-FB61A0890E23.html">7.3 8x8 Hardware Multiplier</a></li><li>7.3.2 16x16 Unsigned Multiplication Algorithm</li></ol>
+  <div class="sib"><span>← <a href="GUID-A829EEDC-7297-452F-BCCE-041A7D1FD041.html" rel="prev">Operation</a></span><span><a href="GUID-5608AC61-74CB-44EA-8246-96A83CA05210.html" rel="next">16x16 Signed Multiplication Algorithm</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-AC65D292-1034-4C03-973F-2641C5376474__GUID-94673FC9-07CF-4680-A10B-E2C457F8D5C2" style="">7.3.2 16x16 Unsigned Multiplication
+        Algorithm</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-AC65D292-1034-4C03-973F-2641C5376474__ID-42106-000000EC" data-ofbid="GUID-AC65D292-1034-4C03-973F-2641C5376474__ID-42106-000000EC"><a class="- topic/xref xref" href="#GUID-AC65D292-1034-4C03-973F-2641C5376474__GUID-7DF87E8B-B738-45FE-90D0-A43493B181A9"><span>16x16 Unsigned Multiply Routine</span></a> shows the sequence to do a 16x16 unsigned multiplication. <a class="- topic/xref xref" href="#GUID-AC65D292-1034-4C03-973F-2641C5376474__GUID-DFE8CB78-013D-4B80-BB6B-87FBE55490E9"><span>16x16 Unsigned Multiply Algorithm</span></a> shows the
+            algorithm that is used. The 32-bit result is stored in four registers. </p>
+        <div class="- topic/example example" id="GUID-AC65D292-1034-4C03-973F-2641C5376474__GUID-DFE8CB78-013D-4B80-BB6B-87FBE55490E9" data-ofbid="GUID-AC65D292-1034-4C03-973F-2641C5376474__GUID-DFE8CB78-013D-4B80-BB6B-87FBE55490E9"><h2 class="- topic/title title sectiontitle">16x16 Unsigned Multiply
+                Algorithm</h2>
+            
+            <div class="+ topic/div equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <mi>R</mi>
+                            <mi>E</mi>
+                            <mi>S</mi>
+                            <mn>3</mn>
+                            <mo>:</mo>
+                            <mi>R</mi>
+                            <mi>E</mi>
+                            <mi>S</mi>
+                            <mn>0</mn>
+                            <mo>=</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>H</mi>
+                            <mo>:</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>L</mi>
+                            <mo>•</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>H</mi>
+                            <mo>:</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>L</mi>
+                            <mo>=</mo>
+                            <mo>(</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>H</mi>
+                            <mo>•</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>H</mi>
+                            <mo>•</mo>
+                            <msup>
+                                <mrow>
+                                    <mn>2</mn>
+                                </mrow>
+                                <mrow>
+                                    <mn>16</mn>
+                                </mrow>
+                            </msup>
+                            <mo>)</mo>
+                            <mo>+</mo>
+                            <mo>(</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>H</mi>
+                            <mo>•</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>L</mi>
+                            <mo>•</mo>
+                            <msup>
+                                <mrow>
+                                    <mn>2</mn>
+                                </mrow>
+                                <mrow>
+                                    <mn>8</mn>
+                                </mrow>
+                            </msup>
+                            <mo>)</mo>
+                            <mo>+</mo>
+                            <mo>(</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>L</mi>
+                            <mo>•</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>H</mi>
+                            <mo>•</mo>
+                            <msup>
+                                <mrow>
+                                    <mn>2</mn>
+                                </mrow>
+                                <mrow>
+                                    <mn>8</mn>
+                                </mrow>
+                            </msup>
+                            <mo>)</mo>
+                            <mo>+</mo>
+                            <mo>(</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>1</mn>
+                            <mi>L</mi>
+                            <mo>•</mo>
+                            <mi>A</mi>
+                            <mi>R</mi>
+                            <mi>G</mi>
+                            <mn>2</mn>
+                            <mi>L</mi>
+                            <mo>)</mo>
+                        </mrow>
+                    </math></div>
+        </div>
+        
+        <div class="- topic/example example" id="GUID-AC65D292-1034-4C03-973F-2641C5376474__GUID-7DF87E8B-B738-45FE-90D0-A43493B181A9" data-ofbid="GUID-AC65D292-1034-4C03-973F-2641C5376474__GUID-7DF87E8B-B738-45FE-90D0-A43493B181A9"><h2 class="- topic/title title sectiontitle">16x16 Unsigned Multiply
+                Routine</h2>
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c" id="GUID-AC65D292-1034-4C03-973F-2641C5376474__ID-42106-00000105" data-ofbid="GUID-AC65D292-1034-4C03-973F-2641C5376474__ID-42106-00000105">
+        MOVF    ARG1L, W
+        MULWF   ARG2L           ; ARG1L * ARG2L → PRODH:PRODL
+        MOVFF   PRODH, RES1     ;
+        MOVFF   PRODL, RES0     ;
+;
+        MOVF    ARG1H, W        ;
+        MULWF   ARG2H           ; ARG1H * ARG2H → PRODH:PRODL
+        MOVFF   PRODH, RES3     ;
+        MOVFF   PRODL, RES2     ;
+;
+        MOVF    ARG1L, W
+        MULWF   ARG2H           ; ARG1L * ARG2H → PRODH:PRODL
+        MOVF    PRODL, W        ;
+        ADDWF   RES1, F         ; Add cross products
+        MOVF    PRODH, W        ;
+        ADDWFC  RES2, F         ;
+        CLRF    WREG            ;
+        ADDWFC  RES3, F         ;
+;
+        MOVF    ARG1H, W        ;
+        MULWF   ARG2L           ; ARG1H * ARG2L → PRODH:PRODL
+        MOVF    PRODL, W        ;
+        ADDWF   RES1, F         ; Add cross products
+        MOVF    PRODH, W        ; 
+        ADDWFC  RES2, F         ;
+        CLRF    WREG            ;
+        ADDWFC  RES3, F         ;</pre>
+        </div>
+    </div>
+
+</body>
+</html>

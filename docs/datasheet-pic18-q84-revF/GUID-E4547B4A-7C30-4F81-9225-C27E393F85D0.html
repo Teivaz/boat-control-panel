@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>25.5 Timer1 Operation in Asynchronous Counter Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-ACDC4323-C442-405C-AEA7-FE1BAD702A90.html"/>
+<link rel="next" href="GUID-D91AE7F7-D2B1-4B6A-9EF6-FD5BA1105A30.html"/>
+<link rel="up" href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html">25 TMR1 - Timer1 Module with Gate Control</a></li><li>25.5 Timer1 Operation in Asynchronous Counter Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-ACDC4323-C442-405C-AEA7-FE1BAD702A90.html" rel="prev">Secondary Oscillator</a></span><span><a href="GUID-D91AE7F7-D2B1-4B6A-9EF6-FD5BA1105A30.html" rel="next">Reading and Writing TMRx in Asynchronous Counter Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-E4547B4A-7C30-4F81-9225-C27E393F85D0__GUID-6FF103FA-A61F-4FAE-AFDD-56029FBB3CE6" style="">25.5 Timer1 Operation in Asynchronous Counter Mode</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-E4547B4A-7C30-4F81-9225-C27E393F85D0__ID-42141-00000C9C" data-ofbid="GUID-E4547B4A-7C30-4F81-9225-C27E393F85D0__ID-42141-00000C9C">When the <a class="- topic/xref xref" href="GUID-3797E08A-EF99-449F-8DE3-136F554E8BAF.html#ID-0000007D" title="Timer External Clock Input Synchronization Control">SYNC</a> Control bit is set, the external clock input is not synchronized. The
+            timer increments asynchronously to the internal phase clocks. If the external clock
+            source is selected, then the timer will continue to run during Sleep and can generate an
+            interrupt on overflow, which will wake up the processor. However, special precautions in
+            software are needed to read/write the timer.</p>
+        <div class="- topic/note note important note_important" id="GUID-E4547B4A-7C30-4F81-9225-C27E393F85D0__ID-42141-00000CA5" data-ofbid="GUID-E4547B4A-7C30-4F81-9225-C27E393F85D0__ID-42141-00000CA5"><span class="note__title">Important:</span> When switching from synchronous to
+            asynchronous operation, it is possible to skip an increment. When switching from
+            asynchronous to synchronous operation, it is possible to produce an additional
+            increment.</div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-D91AE7F7-D2B1-4B6A-9EF6-FD5BA1105A30.html">25.5.1 Reading and Writing TMRx in Asynchronous Counter Mode</a></li></ul>
+</nav>
+</body>
+</html>

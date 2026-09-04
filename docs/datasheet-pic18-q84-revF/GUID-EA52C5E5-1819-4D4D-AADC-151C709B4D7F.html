@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.2.8.2 Host Reception (10-Bit Addressing Mode) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-33D9D29E-8924-4A62-866E-7F7DE0D1C365.html"/>
+<link rel="next" href="GUID-023C912B-1251-4318-9328-9FA6A0765D88.html"/>
+<link rel="up" href="GUID-CB37BA3E-2338-4295-A2F3-534ACB1DACF0.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html">37.4.2 I2C Host Mode Operation</a></li><li><a href="GUID-CB37BA3E-2338-4295-A2F3-534ACB1DACF0.html">37.4.2.8 Host Operation in 10-Bit Addressing Modes</a></li><li>37.4.2.8.2 Host Reception (10-Bit Addressing Mode)</li></ol>
+  <div class="sib"><span>← <a href="GUID-33D9D29E-8924-4A62-866E-7F7DE0D1C365.html" rel="prev">Host Transmission (10-Bit)</a></span><span><a href="GUID-023C912B-1251-4318-9328-9FA6A0765D88.html" rel="next">I2C Multi-Host Mode Operation</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-DDBB5490-0099-4BA3-9E88-77A6C0717F80" style="">37.4.2.8.2 Host Reception (10-Bit Addressing
+        Mode)</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The following section describes the sequence of events that occur when the module is
+            receiving data in 10-bit Addressing mode:</p>
+        <ol class="- topic/ol ol" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__OL_TK3_2GT_KGB" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__OL_TK3_2GT_KGB">
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-80676F7E-C4C4-43DB-9A1C-5272E68822BD" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-80676F7E-C4C4-43DB-9A1C-5272E68822BD">Depending on the configuration of the
+                Address Buffer Disable (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a>) bit, one of two methods may be used to begin
+                    communication:<ol class="- topic/ol ol" type="a" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__OL_LNN_FGT_KGB" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__OL_LNN_FGT_KGB">
+                    <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-3F18D933-27C1-460A-BADD-CA95256E52AC" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-3F18D933-27C1-460A-BADD-CA95256E52AC">When <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> is clear (ABD = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the
+                        address buffers, <a class="- topic/xref xref" href="GUID-E7CC5B44-63E1-40F0-8F67-30D643607BC5.html">I2CxADB0</a> and <a class="- topic/xref xref" href="GUID-51DC1914-5FC6-4DB6-849E-AC7B6E17D460.html" title="I2CxADB1">I2CxADB1</a>, are enabled. In this case, the address high byte and
+                            R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit are loaded into I2CxADB1, with
+                            R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> clear (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">0</code>). The address low byte is loaded into I2CxADB0, and
+                        the Restart Enable (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_U3D_1YT_KGB" title="Restart Enable (used only when MODE = 1xx)">RSEN</a>) bit is set by software. After these registers
+                        are loaded, software must set the Start (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_YPG_M34_LGB" title="Host Start (used only when MODE = 1xx)">S</a>) bit to begin communication. Once the S bit is
+                        set, host hardware waits for the Bus Free (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#GUID-967969A7-72DF-42E8-8CE4-4AD59A4CBE74" title="Bus Free Status(2)">BFRE</a>) bit to be set before transmitting the Start
+                        condition to avoid bus collisions.</li>
+                    <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-A7E656BE-FB30-4D36-8573-9291ED8E4434" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-A7E656BE-FB30-4D36-8573-9291ED8E4434">When <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> is set (ABD = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the address
+                        buffers are disabled. In this case, the number of expected received bytes
+                        are loaded into <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>, the address high byte and
+                            R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit are loaded into <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a>, with R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> clear
+                            (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>). A write to I2CxTXB
+                        will cause host hardware to automatically issue a Start condition once the
+                        bus is Idle (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#GUID-967969A7-72DF-42E8-8CE4-4AD59A4CBE74" title="Bus Free Status(2)">BFRE</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). Software writes to the
+                        Start bit are ignored.</li>
+                </ol></li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-250D00AA-5794-412B-8A0A-0530D6203809" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-250D00AA-5794-412B-8A0A-0530D6203809">Host hardware waits for <a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#GUID-967969A7-72DF-42E8-8CE4-4AD59A4CBE74" title="Bus Free Status(2)">BFRE</a> to be set, then shifts out the Start condition. Module
+                hardware sets the Host Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a>) bit and the Start Condition Interrupt Flag (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_W3K_BQV_LGB" title="Start Condition Interrupt Flag(1)">SCIF</a>). If the Start Condition Interrupt Enable (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_CFJ_MWV_LGB" title="Stop Condition Interrupt Enable(1)">SCIE</a>) bit is set, the generic I2CxIF is also set.</li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-1947017E-26B2-4DEA-AE36-A6C5579979DF" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-1947017E-26B2-4DEA-AE36-A6C5579979DF">Host hardware transmits the address
+                high byte and R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit.</li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-AC5FBA7C-BB79-4EBD-A500-1BB7F0730DAB" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-AC5FBA7C-BB79-4EBD-A500-1BB7F0730DAB">Host hardware samples SCL to
+                determine if the client is stretching the clock and continues to sample SCL until
+                the line is sampled high.</li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-B4980FD7-D03A-40A8-AA09-50811B63CD6C" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-B4980FD7-D03A-40A8-AA09-50811B63CD6C">Host hardware transmits the 9th clock
+                pulse and receives the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>/NACK response from the
+                    client.<div class="- topic/p p">If a NACK was received, the NACK Detect Interrupt Flag (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_YQQ_P3V_LGB" title="NACK Detect Interrupt Flag(1,3,4)">NACKIF</a>) is set and the host immediately issues a Stop
+                    condition.</div><p class="- topic/p p">If an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span> was received, module
+                    hardware transmits the address low byte.</p></li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-534A13AF-83FF-489A-82E9-9A8D4C5DD80F" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-534A13AF-83FF-489A-82E9-9A8D4C5DD80F">Host hardware samples SCL to
+                determine if the client is stretching the clock and continues to sample SCL until
+                the line is sampled high.</li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-B7864EA9-6BEF-4CB0-B043-FB25D1F79765" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-B7864EA9-6BEF-4CB0-B043-FB25D1F79765">Host hardware transmits the 9th clock
+                pulse and receives the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>/NACK response from the
+                    client.<div class="- topic/p p">If an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span> is received, hardware sets <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a> and waits for hardware or software to set the Start
+                    bit.</div><div class="- topic/p p">If a NACK is received, hardware sets <a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_YQQ_P3V_LGB" title="NACK Detect Interrupt Flag(1,3,4)">NACKIF</a>, and:</div><ol class="- topic/ol ol" type="a" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__OL_WBL_5GT_KGB" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__OL_WBL_5GT_KGB">
+                    <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-A1313DAE-C8A5-44D3-8CC4-A39F01B2607B" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-A1313DAE-C8A5-44D3-8CC4-A39F01B2607B"><a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>: Host generates a Stop condition or
+                        sets the <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a> bit (if <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_U3D_1YT_KGB" title="Restart Enable (used only when MODE = 1xx)">RSEN</a> is also set) and waits for software to set the Start bit to
+                        generate a Restart condition.</li>
+                    <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-D6AB915F-9198-454E-8664-9BD9683C637D" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-D6AB915F-9198-454E-8664-9BD9683C637D"><a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>: Host generates a Stop condition or
+                        sets the MDR bit (if RSEN is also set) and waits for software to load a new
+                        address into <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a>.
+                        Software writes to the Start bit are ignored.</li>
+                </ol><p class="- topic/p p">If the NACK Detect Interrupt Enable (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html#BITFIELD_YLC_SKV_LGB" title="NACK Detect Interrupt Enable">NACKIE</a>) is also set, hardware sets the generic I2CxEIF bit.</p></li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-3F19C9E3-DDD0-4202-9911-E93959AC564E" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-3F19C9E3-DDD0-4202-9911-E93959AC564E">Software loads <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>
+                with the expected number of received bytes.</li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-A7686467-46A6-4431-9860-DF8B9BEAAEA7" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-A7686467-46A6-4431-9860-DF8B9BEAAEA7">If <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> is clear (ABD = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), software sets the
+                Start bit. If ABD is set (ABD = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), software writes the address
+                high byte with R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit into <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a>,
+                with R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> set (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">1</code>).</li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-8D50DED2-AE14-4B05-9428-4C27F1EEF0CF" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-8D50DED2-AE14-4B05-9428-4C27F1EEF0CF">Host hardware transmits the Restart
+                condition, which sets the Restart Condition Interrupt Flag (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_P5X_TPV_LGB" title="Restart Condition Interrupt Flag(1)">RSCIF</a>) bit. If the Restart Condition Interrupt Enable
+                    (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_QYX_CWV_LGB" title="Restart Condition Interrupt Enable(1)">RSCIE</a>) bit is set, the generic I2CxIF is set by
+                hardware.</li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-55EF2BEC-1F02-483F-857D-016C980A15B7" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-55EF2BEC-1F02-483F-857D-016C980A15B7">Host hardware transmits the high
+                address byte and R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit.</li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-2DE13957-5977-42E7-84E7-CD72A515F66D" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-2DE13957-5977-42E7-84E7-CD72A515F66D">Host hardware samples SCL to
+                determine if the client is stretching the clock and continues to sample SCL until
+                the line is sampled high.</li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-32A0ECA6-9D31-4688-A0E4-27BA14C1B117" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-32A0ECA6-9D31-4688-A0E4-27BA14C1B117">Host hardware transmits the 9th clock
+                pulse and receives the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>/NACK response from the
+                    client.<p class="- topic/p p">If an <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span> is received, host hardware receives
+                    the first seven bits of the data byte into the receive shift register.</p><p class="- topic/p p">If
+                    a NACK is received, and:</p><ol class="- topic/ol ol" type="a" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__OL_QPZ_RHT_KGB" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__OL_QPZ_RHT_KGB">
+                    <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-52324979-FD14-4D08-930C-A1034A534D63" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-52324979-FD14-4D08-930C-A1034A534D63"><a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>: Host generates a Stop condition or
+                        sets the <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a> bit (if <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_U3D_1YT_KGB" title="Restart Enable (used only when MODE = 1xx)">RSEN</a> is also set) and waits for software to set the Start bit to
+                        generate a Restart condition.</li>
+                    <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-910D43A0-A7A5-4461-93AB-E272211CC517" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-910D43A0-A7A5-4461-93AB-E272211CC517">ABD = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>:
+                        Host generates a Stop condition or sets the MDR bit (if RSEN is also set)
+                        and waits for software to load a new address into <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a>.
+                        Software writes to the Start bit are ignored.</li>
+                </ol></li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-E18849A7-A6FD-4A69-A940-7816A14478E3" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-E18849A7-A6FD-4A69-A940-7816A14478E3">If previous data are currently in
+                    <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) when the first seven bits are received by the
+                receive shift register, hardware sets <a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_P3J_BS4_LGB" title="Host Data Request (Host pause)">MDR</a>, and the clock is stretched after the 7th falling edge of SCL. This
+                allows software to read I2CxRXB, which clears the RXBF bit and prevents a receive
+                buffer overflow. Once the RXBF bit is cleared, hardware releases SCL. </li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-A3F63944-C5E1-4079-83C2-A83763F69045" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-A3F63944-C5E1-4079-83C2-A83763F69045">Host hardware clocks in the 8th bit
+                of the data byte into the receive shift register, then transfers the complete byte
+                into <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a>, which sets the I2CxRXIF and <a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a> bits. If I2CxRXIE is also set, hardware sets the
+                generic I2CxIF bit. <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> is decremented by one.</li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-573879A2-F56F-42C6-BA30-A917F5DF46F2" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-573879A2-F56F-42C6-BA30-A917F5DF46F2">Hardware checks <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>
+                for a zero value.<div class="- topic/p p">If <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> is nonzero (I2CxCNT != <code class="+ topic/ph pr-d/codeph ph codeph">0</code>),
+                    hardware transmits the value of the Acknowledge Data (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_TCX_VCP_LGB" title="Acknowledge Data(1,2)">ACKDT</a>) bit as the acknowledgement response to the
+                    client. It is up to user software to properly configure ACKDT. In most cases,
+                    ACKDT must be clear (ACKDT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), which indicates an
+                        <span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span> response.</div><div class="- topic/p p">If <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> is zero (I2CxCNT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), hardware transmits
+                    the value of the Acknowledge End of Count (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#GUID-F2D33B25-A469-4E33-B952-D4813928CD27" title="Acknowledge End of Count(2)">ACKCNT</a>) bit as the acknowledgement response to the
+                    client. <a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#GUID-9822260B-0146-4538-BAAB-AC8C3856312F" title="Byte Count Interrupt Flag(1)">CNTIF</a> is set, and host hardware either issues a Stop
+                    condition or a Restart condition. It is up to user software to properly
+                    configure ACKCNT. In most cases, ACKCNT must be set (ACKCNT =
+                    <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), which indicates a NACK response. When hardware detects a
+                    NACK on the bus, it automatically issues a Stop condition. If a NACK is not
+                    detected, the Stop will not be generated, which may lead to a stalled Bus
+                    condition.</div></li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-3F2A1944-A039-4B8D-9C1B-76EA520A05CE" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-3F2A1944-A039-4B8D-9C1B-76EA520A05CE">Host hardware receives the first
+                seven bits of the next data byte into the receive shift register.</li>
+            <li class="- topic/li li" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-3B2A2CFC-9031-4FAE-A17C-A42A3350736D" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-3B2A2CFC-9031-4FAE-A17C-A42A3350736D">Repeat Steps 14 – 17 until all
+                expected bytes have been received.</li>
+        </ol>
+        <figure class="- topic/fig fig fignone rotatepage" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__FIG_BM4_3ST_KGB" data-ofbid="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__FIG_BM4_3ST_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-40. <span id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__GUID-FA5462EB-17A7-4CC4-B061-9166CEE3B54E" class="fig--title">10-Bit Host Mode Reception</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F__IMAGE_FCG_QRN_PGB" src="GUID-D46A59F8-4840-42C7-97BA-A585026FDA9E-high.svg"/></span>
+        </figure>
+    </div>
+
+</body>
+</html>

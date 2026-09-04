@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>31.7.1 Period Interrupt — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-23C3750C-DF66-47DA-9966-AF83570509D4.html"/>
+<link rel="next" href="GUID-FB7DA367-3C10-4D3C-AA34-2F6238CE58C0.html"/>
+<link rel="up" href="GUID-23C3750C-DF66-47DA-9966-AF83570509D4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE.html">31 PWM - Pulse-Width Modulator with Compare</a></li><li><a href="GUID-23C3750C-DF66-47DA-9966-AF83570509D4.html">31.7 Interrupts</a></li><li>31.7.1 Period Interrupt</li></ol>
+  <div class="sib"><span>← <a href="GUID-23C3750C-DF66-47DA-9966-AF83570509D4.html" rel="prev">Interrupts</a></span><span><a href="GUID-FB7DA367-3C10-4D3C-AA34-2F6238CE58C0.html" rel="next">Period Interrupt Postscaler</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-27E3F34F-7B8E-4231-AC64-8943373993E7__GUID-FCCAFC2A-A481-4F99-B658-8662971C4C0F" style="">31.7.1 Period Interrupt</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The period interrupt occurs when the PWMx timer value matches the PR value,
+            thereby also resetting the PWMx timer. Refer to <a class="- topic/xref xref" href="GUID-2E08BAA2-1143-46E4-94FC-DBA58E4A2CC3.html#GUID-2E08BAA2-1143-46E4-94FC-DBA58E4A2CC3__FIG_LW4_PWQ_VGB"><span>Figure 31-2</span></a> for a timing example. The period interrupt is indicated
+            with the PWMxPIF flag bit in one of the PIR registers and is set whether or not the
+            interrupt is enabled. This flag must be reset by software. The PWMxPIF interrupt is
+            enabled with the PWMxPIE bit in the corresponding PIE register.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-FB7DA367-3C10-4D3C-AA34-2F6238CE58C0.html">31.7.1.1 Period Interrupt Postscaler</a></li></ul>
+</nav>
+</body>
+</html>

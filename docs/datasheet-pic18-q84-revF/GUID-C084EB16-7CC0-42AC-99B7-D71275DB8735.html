@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.7.2 Filtering a Received Message — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-87E3C552-4BF9-4001-AFC3-A3DC4D9C102C.html"/>
+<link rel="next" href="GUID-7D887803-AFCC-4FA1-B45A-2CB438AED875.html"/>
+<link rel="up" href="GUID-2FBE3C3E-EDE4-4ABD-A9FA-D9AC9D794D77.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-2FBE3C3E-EDE4-4ABD-A9FA-D9AC9D794D77.html">38.7 Message Filtering</a></li><li>38.7.2 Filtering a Received Message</li></ol>
+  <div class="sib"><span>← <a href="GUID-87E3C552-4BF9-4001-AFC3-A3DC4D9C102C.html" rel="prev">Filter Configuration</a></span><span><a href="GUID-7D887803-AFCC-4FA1-B45A-2CB438AED875.html" rel="next">Filtering Standard or Extended Frames</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__GUID-BD4285AE-0A6C-48BE-938E-5A1E20DD0814" style="">38.7.2 Filtering a Received Message</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The CAN FD Protocol module starts acceptance filtering after the arbitration
+            field and when the first three data bytes of a message are received. <a class="- topic/xref xref" href="#GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__FIG_DQM_J4M_P3B"><span>Figure 38-14</span></a> describes the flow of message filtering.</p>
+        <p class="- topic/p p">The module loops through all the filters, starting with Filter 0, which is the highest
+            priority filter. The message in the Receive Message Assembly Buffer (RXMAB) is compared
+            to the filter and mask. In case the message matches the filter and it is received
+            without any errors, the message will be stored into the RX FIFO pointed to by the FnBP.
+            Acceptance filtering is stopped and the associated RFIF bit is set.</p>
+        <div class="- topic/p p">In case an RTR is received, the TXREQ bit of the TX FIFO pointed to by FnBP
+            will be set. Filtering will continue with the next filter and RXOVIF will be set only
+            when one of the following happens:<ul class="- topic/ul ul" id="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__UL_DQW_NNM_P3B" data-ofbid="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__UL_DQW_NNM_P3B">
+                <li class="- topic/li li" id="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__GUID-007A1272-F157-4BAB-9DBD-52FAEB9AC8E5" data-ofbid="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__GUID-007A1272-F157-4BAB-9DBD-52FAEB9AC8E5">A filter matches, but the RX FIFO is full.</li>
+                <li class="- topic/li li" id="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__GUID-15913B9C-59A2-4249-B09F-55D282D9798A" data-ofbid="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__GUID-15913B9C-59A2-4249-B09F-55D282D9798A">When multiple filters match the same message and all matching RX FIFOs are full,
+                    only the RXOVIF of the FIFO pointed to by the highest priority filter will be
+                    set.</li>
+                <li class="- topic/li li" id="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__GUID-93D5354F-13C3-4A8E-B5C9-913DB99E563C" data-ofbid="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__GUID-93D5354F-13C3-4A8E-B5C9-913DB99E563C">The RXOVIF bit will be set if the
+                    TX FIFO is empty during an RTR (TXEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, RTREN =
+                        <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). </li>
+            </ul></div>
+        <p class="- topic/p p">If none of the filters match, the received message will be discarded.</p>
+        <div class="- topic/note note notype note_notype" id="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__GUID-8BD60ADB-276B-452B-A7B3-7A02733E323E" data-ofbid="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__GUID-8BD60ADB-276B-452B-A7B3-7A02733E323E"><span class="note__title">Note:</span> If the module receives a message that
+            matches a filter, but the corresponding FIFO is a TX FIFO (TXEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>,
+            RTREN = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the module will discard the received message.</div>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__FIG_DQM_J4M_P3B" data-ofbid="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__FIG_DQM_J4M_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-14. <span id="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__GUID-92274D19-816D-457A-AC51-6DEF71590CC3" class="fig--title">Message Filtering Flow</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-C084EB16-7CC0-42AC-99B7-D71275DB8735__IMAGE_EQM_J4M_P3B" src="GUID-132F4696-4C02-41E1-8BDF-A07BACFCBDF5-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-7D887803-AFCC-4FA1-B45A-2CB438AED875.html">38.7.2.1 Filtering Standard or Extended Frames</a></li><li><a href="GUID-BA224378-C9C7-490B-9B1E-2DF80A58F302.html">38.7.2.2 Mask Bits</a></li><li><a href="GUID-C6FDDCFE-2ADD-40C7-808A-BF59BF7595DE.html">38.7.2.3 Filtering on Data Bytes</a></li><li><a href="GUID-A97F2FF7-DEC6-4CEE-A24B-855538054389.html">38.7.2.4 12-Bit Standard ID</a></li></ul>
+</nav>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>14.4.1 MCLR Enabled — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-6C45DE18-EED3-4ABA-89EB-B5C3F9FD33AB.html"/>
+<link rel="next" href="GUID-29993E62-3573-40C5-B1F7-2FC741920923.html"/>
+<link rel="up" href="GUID-6C45DE18-EED3-4ABA-89EB-B5C3F9FD33AB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F.html">14 Resets</a></li><li><a href="GUID-6C45DE18-EED3-4ABA-89EB-B5C3F9FD33AB.html">14.4 MCLR Reset</a></li><li>14.4.1 MCLR Enabled</li></ol>
+  <div class="sib"><span>← <a href="GUID-6C45DE18-EED3-4ABA-89EB-B5C3F9FD33AB.html" rel="prev">MCLR Reset</a></span><span><a href="GUID-29993E62-3573-40C5-B1F7-2FC741920923.html" rel="next">MCLR Disabled</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-4692ED11-D96E-4171-A597-A21A88E715B9__GUID-5263E383-91E0-4072-9229-C405E15998FB" style="">14.4.1 <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span> Enabled</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-4692ED11-D96E-4171-A597-A21A88E715B9__ID-42138-0000029A" data-ofbid="GUID-4692ED11-D96E-4171-A597-A21A88E715B9__ID-42138-0000029A">When <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span> is enabled and the pin is held
+            low, the device is held in Reset. The <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span> pin is connected to
+                V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> through an internal weak pull-up.</p>
+        <p class="- topic/p p" id="GUID-4692ED11-D96E-4171-A597-A21A88E715B9__ID-42138-000002A0" data-ofbid="GUID-4692ED11-D96E-4171-A597-A21A88E715B9__ID-42138-000002A0">The device has a noise filter in the <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-4692ED11-D96E-4171-A597-A21A88E715B9__ID-42138-000002A1">MCLR</span> Reset path. The filter will detect and
+            ignore small pulses.</p>
+        <div class="- topic/note note important note_important" id="GUID-4692ED11-D96E-4171-A597-A21A88E715B9__ID-42138-000002A8" data-ofbid="GUID-4692ED11-D96E-4171-A597-A21A88E715B9__ID-42138-000002A8"><span class="note__title">Important:</span> An internal Reset event
+                (<code class="+ topic/ph pr-d/codeph ph codeph">RESET</code> instruction, BOR, WWDT, POR, STKOVF, STKUNF) does not drive
+            the <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-4692ED11-D96E-4171-A597-A21A88E715B9__ID-42138-000002AA">MCLR</span> pin low.</div>
+    </div>
+
+</body>
+</html>

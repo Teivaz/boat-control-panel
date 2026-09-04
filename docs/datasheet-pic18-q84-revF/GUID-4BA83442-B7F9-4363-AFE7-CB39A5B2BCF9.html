@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.4.2.1 LIN Client Receiver — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087.html"/>
+<link rel="next" href="GUID-6DD538CA-E858-4710-9854-EF644E1B545B.html"/>
+<link rel="up" href="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37.html">35.4 LIN Modes (Full-Featured UARTs Only)</a></li><li><a href="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087.html">35.4.2 LIN Client Mode</a></li><li>35.4.2.1 LIN Client Receiver</li></ol>
+  <div class="sib"><span>← <a href="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087.html" rel="prev">LIN Client Mode</a></span><span><a href="GUID-6DD538CA-E858-4710-9854-EF644E1B545B.html" rel="next">LIN Client Transmitter</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-4BA83442-B7F9-4363-AFE7-CB39A5B2BCF9__GUID-5BB405EC-1AB5-44C8-A74B-202C6332D11A" style="">35.4.2.1 LIN Client Receiver</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">When the Client process is a Receiver, the software performs the following tasks:</p>
+        <ul class="- topic/ul ul" id="GUID-4BA83442-B7F9-4363-AFE7-CB39A5B2BCF9__UL_RSN_TMW_CBB" data-ofbid="GUID-4BA83442-B7F9-4363-AFE7-CB39A5B2BCF9__UL_RSN_TMW_CBB">
+            <li class="- topic/li li" id="GUID-4BA83442-B7F9-4363-AFE7-CB39A5B2BCF9__GUID-7172CE90-4BDF-498B-BB89-CF2C08D30F61" data-ofbid="GUID-4BA83442-B7F9-4363-AFE7-CB39A5B2BCF9__GUID-7172CE90-4BDF-498B-BB89-CF2C08D30F61">The UxP3 register is written with a
+                value equal to the number of data bytes to receive</li>
+            <li class="- topic/li li" id="GUID-4BA83442-B7F9-4363-AFE7-CB39A5B2BCF9__GUID-5B01B3CA-2F7E-4E95-89BD-7243077E86DF" data-ofbid="GUID-4BA83442-B7F9-4363-AFE7-CB39A5B2BCF9__GUID-5B01B3CA-2F7E-4E95-89BD-7243077E86DF">The C0EN bit is set or cleared to
+                select the appropriate checksum. This must be completed before the Start bit of the
+                checksum byte is received.</li>
+            <li class="- topic/li li" id="GUID-4BA83442-B7F9-4363-AFE7-CB39A5B2BCF9__GUID-B3F17034-9A8B-4437-9AA2-E3B68BC884A7" data-ofbid="GUID-4BA83442-B7F9-4363-AFE7-CB39A5B2BCF9__GUID-B3F17034-9A8B-4437-9AA2-E3B68BC884A7">Each byte of the process response is
+                read from UxRXB when UxRXIF is set</li>
+        </ul>
+        <p class="- topic/p p">The UART updates the checksum on each received byte. When the last data byte
+            is received, the computed checksum total is stored in the UxRXCHK register. The next
+            received byte is saved in the receive FIFO and added with the value in UxRXCHK. The
+            result of this addition is not accessible. However, if the result is not all ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span>’s, the <a class="- topic/xref xref" href="GUID-0335D11B-CDF0-4C1B-B750-F220FDA16575.html#BITFIELD_BYJ_N5L_BBB" title="Checksum Error Interrupt Flag">CERIF</a> bit is set. The CERIF flag persists until cleared by
+            software. Software needs to read UxRXB to remove the checksum byte from the FIFO, but
+            the byte can be discarded if not needed for any other purpose.</p>
+        <p class="- topic/p p">After the checksum is received, the UART ignores all activity on the RX pin until a Break
+            starts the next transaction.</p>
+</div>
+
+</body>
+</html>

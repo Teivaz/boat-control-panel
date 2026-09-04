@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.11.4.2 Interrupt Status Register — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-39F86344-F459-411A-A7B1-C684F7CFFFCD.html"/>
+<link rel="next" href="GUID-DA4D7AC7-C1F4-4160-A3DF-D7CDD47B1157.html"/>
+<link rel="up" href="GUID-A460E863-341B-4200-9562-7B823C9BDF21.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197.html">38.11 Interrupts</a></li><li><a href="GUID-A460E863-341B-4200-9562-7B823C9BDF21.html">38.11.4 Interrupt Handling</a></li><li>38.11.4.2 Interrupt Status Register</li></ol>
+  <div class="sib"><span>← <a href="GUID-39F86344-F459-411A-A7B1-C684F7CFFFCD.html" rel="prev">Interrupt Look-up Table</a></span><span><a href="GUID-DA4D7AC7-C1F4-4160-A3DF-D7CDD47B1157.html" rel="next">Interrupt Flags</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-A8CAA0FD-C48E-413C-BB51-CDCF1F9BDAA9__GUID-1E45F766-9720-4408-92EE-2D9EC9FDBBB3" style="">38.11.4.2 Interrupt Status Register</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p">The CAN FD Protocol module contains three FIFOs and a TXQ. It would be
+            complex to use the ICODEx bits since the interrupt priorities are determined by the
+            module. Therefore, the following measures are taken to ensure efficient servicing of
+                interrupts:<ul class="- topic/ul ul" id="GUID-A8CAA0FD-C48E-413C-BB51-CDCF1F9BDAA9__UL_HGJ_HGJ_Q3B" data-ofbid="GUID-A8CAA0FD-C48E-413C-BB51-CDCF1F9BDAA9__UL_HGJ_HGJ_Q3B">
+                <li class="- topic/li li" id="GUID-A8CAA0FD-C48E-413C-BB51-CDCF1F9BDAA9__GUID-8F7FFCE1-8BC4-4549-9FE8-A3F0EE1E683C" data-ofbid="GUID-A8CAA0FD-C48E-413C-BB51-CDCF1F9BDAA9__GUID-8F7FFCE1-8BC4-4549-9FE8-A3F0EE1E683C">CxINT contains all main interrupt
+                    sources. The application can identify the categories of interrupts that are
+                    pending and decide the order in which interrupts are to be serviced (e.g.,
+                    RXIF).</li>
+                <li class="- topic/li li" id="GUID-A8CAA0FD-C48E-413C-BB51-CDCF1F9BDAA9__GUID-4197FABB-82AB-4DF9-9E10-EA847E39638C" data-ofbid="GUID-A8CAA0FD-C48E-413C-BB51-CDCF1F9BDAA9__GUID-4197FABB-82AB-4DF9-9E10-EA847E39638C">All categories of interrupts for
+                    all FIFOs are combined into individual registers: CxRXIF, CxTXIF, CxRXOVIF and
+                    CxTXATIF. The application can identify the RFIFx bits that are pending by
+                    reading only one register. The same is true for TFIFx, RXOVIF and TXATIF.</li>
+                <li class="- topic/li li" id="GUID-A8CAA0FD-C48E-413C-BB51-CDCF1F9BDAA9__GUID-6AE63AF4-4602-4870-B809-ABBB4C9C4112" data-ofbid="GUID-A8CAA0FD-C48E-413C-BB51-CDCF1F9BDAA9__GUID-6AE63AF4-4602-4870-B809-ABBB4C9C4112"> In the register map, the
+                    Interrupt Status registers are arranged in a single block: CxVEC, followed by
+                    CxINT, CxRXIF, CxTXIF, CxRXOVIF and CxTXATIF. This arrangement allows all status
+                    registers to be read with a single read access.</li>
+            </ul></div>
+    </div>
+
+</body>
+</html>

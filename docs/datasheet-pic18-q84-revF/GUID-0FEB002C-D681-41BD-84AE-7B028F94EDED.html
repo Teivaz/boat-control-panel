@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.4 CRC Check Value — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0CF74B06-0277-4A3C-AB97-D7104A8285C2.html"/>
+<link rel="next" href="GUID-EF904F08-55BA-4EEF-888C-4698D605D451.html"/>
+<link rel="up" href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li>13.4 CRC Check Value</li></ol>
+  <div class="sib"><span>← <a href="GUID-0CF74B06-0277-4A3C-AB97-D7104A8285C2.html" rel="prev">CRC from Flash</a></span><span><a href="GUID-EF904F08-55BA-4EEF-888C-4698D605D451.html" rel="next">CRC Interrupt</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-0FEB002C-D681-41BD-84AE-7B028F94EDED__GUID-2857EE21-F951-4441-8A1C-7B495323B21C" style="">13.4 CRC Check Value</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The CRC check value can be accessed using the <a class="- topic/xref xref" href="GUID-EACD1E2B-D427-41A2-8B8D-F61D5D52B5C5.html" title="CRCOUT">CRCOUT</a>
+            registers after a CRC calculation has completed. The check value is dependent on the
+            configuration of the <a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html#ID-0000001A" title="Accumulator Mode"><span><span>ACCM</span></span></a> and <a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html#ID-00000021" title="Shift Mode"><span><span>SHIFTM</span></span></a> mode
+            settings. When the ACCM bit is set, the CRC module will augment the data with a number
+            of zeros equal to the length of the polynomial to align the final check value. When the
+            ACCM bit is not set, the CRC will stop at the end of the data and no additional zeroes
+            will be augmented to the final value. The user can manually augment a number of
+            additional zeroes equal to the length of the polynomial by entering them into the <a class="- topic/xref xref" href="GUID-F3874916-83FF-4A49-99B7-71ADB25F92C9.html" title="CRCDATA">CRCDATA</a>
+            register, which will yield the same check value as Augmented mode. Alternatively, the
+            expected check value can be entered at this point to make the final result equal
+            zero.</p>
+        <p class="- topic/p p">When the CRC check value is computed with the SHIFTM (LSb first) and ACCM
+            bits set, the final value in the CRCOUT registers will be reversed such that the LSb
+            will be in the MSb position and vice versa (<a class="- topic/xref xref" href="GUID-26D53175-1097-43A2-8333-2C02C4211D98.html#GUID-26D53175-1097-43A2-8333-2C02C4211D98__FIG_X3G_GTS_M3B"><span>Figure 13-1</span></a>). </p>
+        <div class="- topic/p p">When creating a check value to be appended to a data stream, then a reversal
+            must be performed on the final value to achieve the correct checksum. The CRC can be
+            used to do this reversal by following the steps below. <ol class="- topic/ol ol" id="GUID-0FEB002C-D681-41BD-84AE-7B028F94EDED__OL_JQM_QJV_K3B" data-ofbid="GUID-0FEB002C-D681-41BD-84AE-7B028F94EDED__OL_JQM_QJV_K3B">
+                <li class="- topic/li li" id="GUID-0FEB002C-D681-41BD-84AE-7B028F94EDED__GUID-29BB58B8-0C04-4AF9-99E9-7BFC5B7059B1" data-ofbid="GUID-0FEB002C-D681-41BD-84AE-7B028F94EDED__GUID-29BB58B8-0C04-4AF9-99E9-7BFC5B7059B1">Save CRCOUT value in user RAM
+                    space.</li>
+                <li class="- topic/li li" id="GUID-0FEB002C-D681-41BD-84AE-7B028F94EDED__GUID-AA53DEF4-4A76-4336-A462-8A657209872E" data-ofbid="GUID-0FEB002C-D681-41BD-84AE-7B028F94EDED__GUID-AA53DEF4-4A76-4336-A462-8A657209872E">Clear the CRCOUT registers.</li>
+                <li class="- topic/li li" id="GUID-0FEB002C-D681-41BD-84AE-7B028F94EDED__GUID-6BCD879B-F446-4A1E-9DAB-83E6014603FA" data-ofbid="GUID-0FEB002C-D681-41BD-84AE-7B028F94EDED__GUID-6BCD879B-F446-4A1E-9DAB-83E6014603FA">Clear the <a class="- topic/xref xref" href="GUID-E9C44536-06E7-4270-B08A-FA3F2525E806.html" title="CRCXOR">CRCXOR</a> registers.</li>
+                <li class="- topic/li li" id="GUID-0FEB002C-D681-41BD-84AE-7B028F94EDED__GUID-BD0B245C-18BB-43A9-8714-F1E8887C7558" data-ofbid="GUID-0FEB002C-D681-41BD-84AE-7B028F94EDED__GUID-BD0B245C-18BB-43A9-8714-F1E8887C7558">Write the saved CRCOUT value to
+                    the CRCDATA input.</li>
+            </ol>
+        </div>
+        <p class="- topic/p p">If the steps listed above were followed completely, the properly orientated check value
+            will be in the CRCOUT registers.</p>
+</div>
+
+</body>
+</html>

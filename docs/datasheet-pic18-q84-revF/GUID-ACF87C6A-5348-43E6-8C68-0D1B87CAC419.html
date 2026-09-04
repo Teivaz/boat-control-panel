@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>4.3 Master Clear (MCLR) Pin — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2F64D96F-7A6E-4493-8EB1-126C9357BE7A.html"/>
+<link rel="next" href="GUID-D4FA6B32-2871-4E49-A386-987C6F608148.html"/>
+<link rel="up" href="GUID-248C7349-0CF1-4585-B0FE-5311789D4EBE.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-248C7349-0CF1-4585-B0FE-5311789D4EBE.html">4 Guidelines for Getting Started with PIC18-Q84 Microcontrollers</a></li><li>4.3 Master Clear (MCLR) Pin</li></ol>
+  <div class="sib"><span>← <a href="GUID-2F64D96F-7A6E-4493-8EB1-126C9357BE7A.html" rel="prev">Tank Capacitors</a></span><span><a href="GUID-D4FA6B32-2871-4E49-A386-987C6F608148.html" rel="next">In-Circuit Serial Programming (ICSP) Pins</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__GUID-4BDC0414-C762-40DE-B338-38FF553DD2D6" style="">4.3 Master Clear (<span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-00000057">MCLR</span>) Pin</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-00000058" data-ofbid="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-00000058">The <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-00000059">MCLR</span> pin
+         provides two specific device functions: Device Reset and Device Programming and Debugging.
+         If programming and debugging are not required in the end application, a direct connection
+         to V<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-000000A2">DD</sub> may be all that is required. The addition of other
+         components, to help increase the application’s resistance to spurious Resets from voltage
+         sags, may be beneficial. A typical configuration is shown in <a class="- topic/xref xref" href="GUID-F32A1602-863F-4D11-A8B9-6E632120974D.html#GUID-F32A1602-863F-4D11-A8B9-6E632120974D__ID-42123-00000033"><span>Figure 4-1</span></a>. Other circuit designs may be implemented, depending on the
+         application’s requirements.</p>
+      <p class="- topic/p p" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-0000005C" data-ofbid="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-0000005C">During programming and debugging, the resistance and capacitance
+         that can be added to the pin must be considered. Device programmers and debuggers drive the
+            <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-0000005D">MCLR</span> pin. Consequently, specific voltage
+         levels (V<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-000000A3">IH</sub> and V<sub class="+ topic/ph hi-d/sub ph sub" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-000000A4">IL</sub>)
+         and fast signal transitions must not be adversely affected. Therefore, specific values of
+         R1 and C1 will need to be adjusted based on the application and PCB requirements. For
+         example, it is recommended that the capacitor, C1, be isolated from the <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-00000060">MCLR</span> pin during programming and debugging operations
+         by using a jumper (<a class="- topic/xref xref" href="#GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-00000064"><span>Figure 4-2</span></a>). The jumper
+         is replaced for normal run-time operations.</p>
+      <p class="- topic/p p" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-00000062" data-ofbid="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-00000062">Any components associated with the <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-00000063">MCLR</span> pin need to be placed within 0.25 inch (6 mm)
+         of the pin.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-00000064" data-ofbid="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-00000064"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 4-2. <span id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__GUID-41F3AE50-0882-4880-9358-0B77E771EC43" class="fig--title">Example of <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__ID-42123-00000066">MCLR</span> Pin Connections</span></span></figcaption>
+         
+         <span class=""><img class="- topic/image image" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__IMAGE_NCJ_DZR_XGB" src="GUID-11A0DF74-37A0-4716-994F-C45128BCDF7A-high.svg"/></span>
+      </figure>
+      <div class="- topic/note note notype note_notype" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__GUID-48397533-61B3-4EAD-9467-FF938BA7E97B" data-ofbid="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__GUID-48397533-61B3-4EAD-9467-FF938BA7E97B"><span class="note__title">Note:</span> 
+         <ol class="- topic/ol ol" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__OL_EDF_D24_FZ" data-ofbid="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__OL_EDF_D24_FZ">
+            <li class="- topic/li li" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__GUID-480C7F90-0ED9-488B-9676-B10C816822EC" data-ofbid="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__GUID-480C7F90-0ED9-488B-9676-B10C816822EC">R1 ≤ 10 kΩ is recommended. A
+               suggested starting value is 10 kΩ. Ensure that the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span> pin
+                  V<sub class="+ topic/ph hi-d/sub ph sub">IH</sub> and V<sub class="+ topic/ph hi-d/sub ph sub">IL</sub> specifications are met.</li>
+            <li class="- topic/li li" id="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__GUID-EE0BD021-0DE9-4DA0-93A8-616AD2D3DF20" data-ofbid="GUID-ACF87C6A-5348-43E6-8C68-0D1B87CAC419__GUID-EE0BD021-0DE9-4DA0-93A8-616AD2D3DF20">R2 ≤ 470Ω will limit any current
+               flowing into <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span> from the extended capacitor, C1, in the
+               event of <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span> pin breakdown, due to Electrostatic Discharge
+               (ESD) or Electrical Overstress (EOS). Ensure that the <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MCLR</span>
+               pin V<sub class="+ topic/ph hi-d/sub ph sub">IH</sub> and V<sub class="+ topic/ph hi-d/sub ph sub">IL</sub> specifications are met.</li>
+         </ol>
+      </div>
+   </div>
+
+</body>
+</html>

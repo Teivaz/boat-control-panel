@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.6.2 Channel Sequencer — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BC25B262-5F01-471E-ABAF-E5C5E129FA4E.html"/>
+<link rel="next" href="GUID-D3F18B5C-83DF-4C73-85D3-A6BD3667046B.html"/>
+<link rel="up" href="GUID-FFD3990B-49D0-45A3-848F-CA83EFB5B536.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-FFD3990B-49D0-45A3-848F-CA83EFB5B536.html">43.6 Channel Sequencer and Context</a></li><li>43.6.2 Channel Sequencer</li></ol>
+  <div class="sib"><span>← <a href="GUID-BC25B262-5F01-471E-ABAF-E5C5E129FA4E.html" rel="prev">Channel Context Configuration Example</a></span><span><a href="GUID-D3F18B5C-83DF-4C73-85D3-A6BD3667046B.html" rel="next">DMA Access</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__GUID-FD81BF8A-8166-426D-9693-EFA9675524F2" style="">43.6.2 Channel Sequencer</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The channel sequencer automatically performs the operations defined by each channel
+            context. The channel sequencer is enabled when the Context Scan Enable (<a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#BITFIELD_GC3_LYR_M3B" title="ADC Context Scan Enable">CSEN</a>) bit is set (CSEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), and the scan sequence is
+            executed when the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000021" title="ADC Conversion Status(1,2)">GO</a> bit is set by software or by the reception of an
+            auto-conversion trigger.</div>
+        <div class="- topic/p p">The sequence includes all channel contexts that are enabled via the context’s Channel
+            Scan Enable (<a class="- topic/xref xref" href="GUID-DA12383C-144A-44CC-A015-02554D000181.html#GUID-6CBAC0E0-1363-4469-B3BF-6F8018BDFFFF" title="ADC Channel Scan Enable">CHEN</a>) bit. A context channel is included in the scan sequence
+            when the CHEN bit is set (CHEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). If all context channels’ CHEN bits
+            are clear (CHEN = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000021" title="ADC Conversion Status(1,2)">GO</a>
+            bit is immediately cleared and no conversions or interrupts will occur.</div>
+        <div class="- topic/p p">A sequence always begins with Context 1, as long as its <a class="- topic/xref xref" href="GUID-DA12383C-144A-44CC-A015-02554D000181.html#GUID-6CBAC0E0-1363-4469-B3BF-6F8018BDFFFF" title="ADC Channel Scan Enable">CHEN</a> bit is enabled. If Context 1’s <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-0000000C" title="ADC Continuous Operation Enable">CONT</a> bit is set (CONT = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the sequencer will scan Context
+            1 and continue scanning until the threshold test invokes the ADC Channel Threshold
+            Interrupt flag (ADCHxIF). If the ADC Stop On Interrupt (<a class="- topic/xref xref" href="GUID-C3D871FC-51E7-44E4-A754-55BAA4D71143.html#ID-00000070" title="ADC Stop-on-Interrupt">SOI</a>) bit is set (SOI = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) and the channel threshold
+            interrupt occurs, the scanner will proceed to check Context 1’s ADC Scan Stop On
+            Interrupt (<a class="- topic/xref xref" href="GUID-DA12383C-144A-44CC-A015-02554D000181.html#BITFIELD_XZV_QTR_M3B" title="ADC Stop Scan on Interrupt">SSI</a>) bit to determine whether to proceed to the next channel
+            context. If SSI is set (SSI = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the scanner will clear the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000021" title="ADC Conversion Status(1,2)">GO</a>
+            bit and the scanner will stop. If the SSI bit is clear (SSI = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the
+            scanner proceeds to the next channel context that has the CHEN bit set.</div>
+        <div class="- topic/p p">If Context 1’s <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-0000000C" title="ADC Continuous Operation Enable">CONT</a> bit is set, the <a class="- topic/xref xref" href="GUID-C3D871FC-51E7-44E4-A754-55BAA4D71143.html#ID-00000070" title="ADC Stop-on-Interrupt">SOI</a> bit is clear (SOI = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) and the scanner will repeatedly
+            scan Context 1 until software clears the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000021" title="ADC Conversion Status(1,2)">GO</a>
+            bit.</div>
+        <div class="- topic/note note important note_important" id="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__GUID-43018049-3AF3-4BE9-9BD5-2AA57CDC8790" data-ofbid="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__GUID-43018049-3AF3-4BE9-9BD5-2AA57CDC8790"><span class="note__title">Important:</span> If a context’s <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-0000000C" title="ADC Continuous Operation Enable">CONT</a> bit is set and both the <a class="- topic/xref xref" href="GUID-C3D871FC-51E7-44E4-A754-55BAA4D71143.html#ID-00000070" title="ADC Stop-on-Interrupt">SOI</a> and <a class="- topic/xref xref" href="GUID-DA12383C-144A-44CC-A015-02554D000181.html#BITFIELD_XZV_QTR_M3B" title="ADC Stop Scan on Interrupt">SSI</a> bits are clear, the scanner will repeatedly scan that context
+            indefinitely without scanning any further channels.</div>
+        <div class="- topic/p p">If Context 1’s <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-0000000C" title="ADC Continuous Operation Enable">CONT</a> bit is clear (CONT = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the sequencer
+            will scan Context 1, and when the conversion completes, the channel threshold test is
+            performed. If ADCH1IF is set, the sequencer checks Context 1’s <a class="- topic/xref xref" href="GUID-DA12383C-144A-44CC-A015-02554D000181.html#BITFIELD_XZV_QTR_M3B" title="ADC Stop Scan on Interrupt">SSI</a> bit to determine whether to proceed to the next channel context. If SSI
+            is set, the sequencer clears <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000021" title="ADC Conversion Status(1,2)">GO</a>
+            and the scanner stops. If the SSI bit is clear, the sequencer will proceed to the next
+            channel that has the <a class="- topic/xref xref" href="GUID-DA12383C-144A-44CC-A015-02554D000181.html#GUID-6CBAC0E0-1363-4469-B3BF-6F8018BDFFFF" title="ADC Channel Scan Enable">CHEN</a> bit set.</div>
+        <div class="- topic/note note important note_important" id="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__GUID-00B0350A-C7C0-46EB-897A-E168C8A017DA" data-ofbid="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__GUID-00B0350A-C7C0-46EB-897A-E168C8A017DA"><span class="note__title">Important:</span> When the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-0000000C" title="ADC Continuous Operation Enable">CONT</a> bit is clear, the <a class="- topic/xref xref" href="GUID-C3D871FC-51E7-44E4-A754-55BAA4D71143.html#ID-00000070" title="ADC Stop-on-Interrupt">SOI</a> bit is ignored.</div>
+        <div class="- topic/p p">The scan sequence ends when any context’s channel threshold interrupt occurs and that
+            context’s <a class="- topic/xref xref" href="GUID-DA12383C-144A-44CC-A015-02554D000181.html#BITFIELD_XZV_QTR_M3B" title="ADC Stop Scan on Interrupt">SSI</a> bit
+            is set. If the sequencer has scanned all enabled channels and no interrupt occurs or no
+            context’s SSI bit is set, the sequencer will return to Context 1 (or the first enabled
+            channel context) and repeat the scanning process until software clears the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000021" title="ADC Conversion Status(1,2)">GO</a>
+            bit.</div>
+        <div class="- topic/note note important note_important" id="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__GUID-E3B701B2-0562-43FD-ADC9-5955545DC71A" data-ofbid="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__GUID-E3B701B2-0562-43FD-ADC9-5955545DC71A"><span class="note__title">Important:</span> The final channel in a
+            sequence need to set the Threshold Interrupt Mode Select (<a class="- topic/xref xref" href="GUID-C3D871FC-51E7-44E4-A754-55BAA4D71143.html#ID-00000078" title="Threshold Interrupt Mode Select">TMD</a>) bits to “Interrupt regardless of the threshold test results” (TMD =
+                <code class="+ topic/ph pr-d/codeph ph codeph">111</code>) and set the <a class="- topic/xref xref" href="GUID-DA12383C-144A-44CC-A015-02554D000181.html#BITFIELD_XZV_QTR_M3B" title="ADC Stop Scan on Interrupt">SSI</a> bit. These settings allow the scanner to stop after the scan sequence
+            has completed.</div>
+        <p class="- topic/p p">The figure below illustrates the operation of the channel sequencer.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__FIG_TCV_43J_L3B" data-ofbid="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__FIG_TCV_43J_L3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 43-11. <span id="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__GUID-77FF1217-F480-402A-B9C8-4392DBB71FF5" class="fig--title">Channel Sequencer
+                Operation</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-4E8A829B-296F-4E96-AC38-CDB5170BEA00-high.pdf#toolbar=1" width="477" height="420"></iframe></span>
+            <div class="- topic/note note notype note_notype" id="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__GUID-4E571EB6-9B25-47A1-9CE5-F1B3B2A01350" data-ofbid="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__GUID-4E571EB6-9B25-47A1-9CE5-F1B3B2A01350"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__OL_BMC_Q3J_L3B" data-ofbid="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__OL_BMC_Q3J_L3B">
+                    <li class="- topic/li li" id="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__GUID-16382B4E-6468-42C3-BB2A-52E73EE68D88" data-ofbid="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__GUID-16382B4E-6468-42C3-BB2A-52E73EE68D88">If all channels are disabled
+                        (ADCSEL[1..4].CHEN = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the scanner stops, but the <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-00000021" title="ADC Conversion Status(1,2)">GO</a> bit remains set. No interrupts will occur. If
+                        software relies on a hardware clear of GO to continue code execution, the
+                        program will stall indefinitely.</li>
+                    <li class="- topic/li li" id="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__GUID-EC5FE7E7-0C17-4508-AF66-31B4A6452E88" data-ofbid="GUID-EC63A41E-D0BA-46A9-9682-1E51521539D1__GUID-EC5FE7E7-0C17-4508-AF66-31B4A6452E88">ADC computation modes
+                        (Average, Burst Average, etc.) are included in the ‘Perform ADC Operation’
+                        block.</li>
+                </ol>
+            </div>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-D3F18B5C-83DF-4C73-85D3-A6BD3667046B.html">43.6.2.1 DMA Access</a></li><li><a href="GUID-85340D31-6865-4CA0-8ECA-E5DDE772193A.html">43.6.2.2 Channel Sequencer Configuration Examples</a></li></ul>
+</nav>
+</body>
+</html>

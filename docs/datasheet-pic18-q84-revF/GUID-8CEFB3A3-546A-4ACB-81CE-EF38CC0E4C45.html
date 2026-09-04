@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.10.1 FIFO Status — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C75CCD6E-F156-44D3-B559-BDCBD6B2914E.html"/>
+<link rel="next" href="GUID-055F1303-369F-45B8-98DC-AC4B619CEA9A.html"/>
+<link rel="up" href="GUID-C75CCD6E-F156-44D3-B559-BDCBD6B2914E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-C75CCD6E-F156-44D3-B559-BDCBD6B2914E.html">35.10 Receive and Transmit Buffers</a></li><li>35.10.1 FIFO Status</li></ol>
+  <div class="sib"><span>← <a href="GUID-C75CCD6E-F156-44D3-B559-BDCBD6B2914E.html" rel="prev">Receive and Transmit Buffers</a></span><span><a href="GUID-055F1303-369F-45B8-98DC-AC4B619CEA9A.html" rel="next">FIFO Reset</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-8CEFB3A3-546A-4ACB-81CE-EF38CC0E4C45__GUID-B4CC2D69-0EC8-41EF-A2EC-AEB1C33A99A7" style="">35.10.1 FIFO Status</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The <a class="- topic/xref xref" href="GUID-2A8CC206-1569-40FD-9221-4BB29D97CE3C.html#GUID-2A8CC206-1569-40FD-9221-4BB29D97CE3C" title="UxFIFO">UxFIFO</a> register contains several Status bits for
+            determining the state of the receive and transmit buffers.</p>
+        <p class="- topic/p p">The RXBE bit indicates that the receive FIFO is empty. This bit is essentially the
+            inverse of UxRXIF. The RXBF bit indicates that the receive FIFO is full.</p>
+        <p class="- topic/p p">The TXBE bit indicates that the transmit buffer is empty (same as UxTXIF) and
+            the TXBF bit indicates that the buffer is full. A third transmitter Status bit, TXWRE
+            (transmit write error), is set whenever a UxTXB write is performed when the TXBF bit is
+            set. This indicates that the write was unsuccessful.</p>
+</div>
+
+</body>
+</html>

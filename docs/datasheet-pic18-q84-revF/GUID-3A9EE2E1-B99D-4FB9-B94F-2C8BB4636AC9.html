@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>24.1.2 16-Bit Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D26FDC45-8E9C-4883-9639-825F66AD7FC4.html"/>
+<link rel="next" href="GUID-C43D9745-BC2D-4099-957D-F8E2580DBE5A.html"/>
+<link rel="up" href="GUID-A64AE238-4933-4C03-8550-A92F9313DFD2.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-CF65B906-948A-4657-9750-90DB15690B84.html">24 TMR0 - Timer0 Module</a></li><li><a href="GUID-A64AE238-4933-4C03-8550-A92F9313DFD2.html">24.1 Timer0 Operation</a></li><li>24.1.2 16-Bit Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-D26FDC45-8E9C-4883-9639-825F66AD7FC4.html" rel="prev">8-Bit Mode</a></span><span><a href="GUID-C43D9745-BC2D-4099-957D-F8E2580DBE5A.html" rel="next">Clock Selection</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-3A9EE2E1-B99D-4FB9-B94F-2C8BB4636AC9__GUID-4A7287F5-5D2D-494B-B997-963A88E07EB9" style="">24.1.2 16-Bit Mode</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">In this mode, Timer0 increments on the rising edge of the selected clock source. A prescaler on
+            the clock input gives several prescale options (see the prescaler control bits, <a class="- topic/xref xref" href="GUID-9E53EAD1-67C5-4976-A53D-4F952BAFB65D.html#ID-000000F3" title="Prescaler Rate Select"><span><span>CKPS</span></span></a>). In
+            this mode, TMR0H:TMR0L form the 16-bit timer value. As shown in <a class="- topic/xref xref" href="GUID-CF65B906-948A-4657-9750-90DB15690B84.html#GUID-CF65B906-948A-4657-9750-90DB15690B84__FIG_RYS_KTR_TGB"><span>Figure 24-1</span></a>, reads and writes of the TMR0H register are buffered. The TMR0H
+            register is updated with the contents of the high byte of Timer0 when the <a class="- topic/xref xref" href="GUID-950CE0F0-F9C7-4B63-83E0-58BD96008453.html#GUID-950CE0F0-F9C7-4B63-83E0-58BD96008453" title="TMR0L">TMR0L</a> register is read. Similarly, writing the TMR0L register
+            causes a transfer of the TMR0H register value to the Timer0 high byte. </p>
+        <p class="- topic/p p">This buffering allows all 16 bits of Timer0 to be read and written at the same time.
+            Timer0 rolls over to <code class="+ topic/ph pr-d/codeph ph codeph">0x0000</code> on incrementing past
+                <code class="+ topic/ph pr-d/codeph ph codeph">0xFFFF</code>. This makes the timer free-running. While actively operating
+            in 16-bit mode, the Timer0 value can be read but not written. </p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10.3.1 Page Erase — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html"/>
+<link rel="next" href="GUID-26A56168-E3B0-44E5-8510-2B180787A881.html"/>
+<link rel="up" href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html">10 NVM - Nonvolatile Memory Module</a></li><li><a href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html">10.3 Program Flash Memory (PFM)</a></li><li>10.3.1 Page Erase</li></ol>
+  <div class="sib"><span>← <a href="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E.html" rel="prev">Program Flash Memory (PFM)</a></span><span><a href="GUID-26A56168-E3B0-44E5-8510-2B180787A881.html" rel="next">Page Read</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-FE9A33B4-5805-4819-BE65-7E7EBB3485DD" style="">10.3.1 Page Erase</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-0000023D" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-0000023D">The erase size is always 128 words. Only through the use of an
+         external programmer can larger areas of program memory be Bulk Erased. Word erase in the
+         program memory is not supported.</p>
+      <p class="- topic/p p" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-0000023F" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-0000023F">When initiating an erase sequence from user code, a page of 128
+         words of program memory is erased. The <span class="- topic/ph ph">NVMADR[21:8]</span> bits point to the page being
+         erased. The <span class="- topic/ph ph">NVMADR[7:0]</span> bits are ignored. The NVMCON0 and NVMCON1 registers
+         command the erase operation. The <a class="- topic/xref xref" href="GUID-0EEEF66D-6FAA-4BC6-B759-A3A7E60F6A6C.html#BITFIELD_OYT_PF2_KGB" title="NVM Command"><span><span>NVMCMD</span></span></a>
+         bits are set to select the erase operation. The <a class="- topic/xref xref" href="GUID-E05C5D94-F489-42E8-8DC8-B64719A787B5.html#GUID-B9008A8B-38DB-4CCD-A1FD-5C35D1DE6562" title="Start Operation Control"><span><span>GO</span></span></a> bit is set to initiate the erase operation as the last step in the
+         unlock sequence.</p>
+      <p class="- topic/p p" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-00000241" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-00000241">The NVM unlock sequence described in the <a class="- topic/xref xref" href="GUID-5B2102CA-3255-43DC-B4BA-610CE1880E7D.html">Unlock Sequence</a>
+         section must be used; this guards against accidental writes. Instruction execution is
+         halted during the erase cycle. The erase cycle is terminated by the internal programming
+         timer.</p>
+      <p class="- topic/p p" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-00000246" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-00000246">The sequence of events for erasing a page of PFM is:</p>
+      <ol class="- topic/ol ol" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-EFDAA95F-C192-42F6-91CD-4985A09D69E8" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-EFDAA95F-C192-42F6-91CD-4985A09D69E8">
+         <li class="- topic/li li" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-114F8860-A29D-47E6-91ED-5646F9AA27E4" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-114F8860-A29D-47E6-91ED-5646F9AA27E4">Set the <a class="- topic/xref xref" href="GUID-C527108F-A4F1-421C-8804-FCDE70E8924B.html" title="NVMADR">NVMADR</a>
+            registers to an address within the intended page.</li>
+         <li class="- topic/li li" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-00000247" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-00000247">Set the <a class="- topic/xref xref" href="GUID-0EEEF66D-6FAA-4BC6-B759-A3A7E60F6A6C.html#BITFIELD_OYT_PF2_KGB" title="NVM Command"><span><span>NVMCMD</span></span></a>
+            control bits to <code class="+ topic/ph pr-d/codeph ph codeph">‘b110</code> (Page Erase).</li>
+         <li class="- topic/li li" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-989B1AB7-3FAD-4CA9-9376-1B7ED764D8F0" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-989B1AB7-3FAD-4CA9-9376-1B7ED764D8F0">Disable all interrupts.</li>
+         <li class="- topic/li li" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-0000024B" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-0000024B">Perform the unlock sequence as described in the <a class="- topic/xref xref" href="GUID-5B2102CA-3255-43DC-B4BA-610CE1880E7D.html">Unlock
+               Sequence</a> section.</li>
+         <li class="- topic/li li" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-AB5751FD-0758-4CF3-9122-0E5826E751B1" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-AB5751FD-0758-4CF3-9122-0E5826E751B1">Set the <a class="- topic/xref xref" href="GUID-E05C5D94-F489-42E8-8DC8-B64719A787B5.html#GUID-B9008A8B-38DB-4CCD-A1FD-5C35D1DE6562" title="Start Operation Control"><span><span>GO</span></span></a> bit to start the PFM page erase.</li>
+         <li class="- topic/li li" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-1EFED972-0118-4692-A1FA-25DA656E422C" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-1EFED972-0118-4692-A1FA-25DA656E422C">Monitor the GO bit or NVMIF interrupt
+            flag to determine when the erase has completed.</li>
+         <li class="- topic/li li" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-D2652CC5-8114-46B8-B56C-E6F6A10D1124" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-D2652CC5-8114-46B8-B56C-E6F6A10D1124">Interrupts can be enabled after the GO
+            bit is clear.</li>
+         <li class="- topic/li li" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-88124C9B-E945-4FC3-8087-C71453E15BDC" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-88124C9B-E945-4FC3-8087-C71453E15BDC">Set the NVMCMD control bits to
+               <code class="+ topic/ph pr-d/codeph ph codeph">‘b000</code>.</li>
+      </ol>
+      <p class="- topic/p p" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-0000024E" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-0000024E">If the PFM address is write-protected, the GO bit will be cleared,
+         the erase operation will not take place, and the <a class="- topic/xref xref" href="GUID-0EEEF66D-6FAA-4BC6-B759-A3A7E60F6A6C.html#GUID-E2F70FF0-FA6F-4B04-A534-AEE5AD5CE465" title="NVM Write Error"><span><span>WRERR</span></span></a> bit will be set.</p>
+      <p class="- topic/p p" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-00000250" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-00000250">While erasing the PFM page, the CPU operation is suspended and then
+         resumes when the operation is complete. Upon erase completion, the GO bit is cleared in
+         hardware, the NVMIF is set, and an interrupt will occur (if the NVMIE bit is set and
+         interrupts are enabled).</p>
+      <p class="- topic/p p" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-00000251" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-00000251">The buffer RAM data are not affected by erase operations and the
+         NVMCMD bits will remain unchanged throughout the erase opeation.</p>
+      <section class="- topic/section section" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-56563EB3-6453-42E7-B749-C5E334D403E1" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-56563EB3-6453-42E7-B749-C5E334D403E1">
+         <figure class="- topic/fig fig fignone" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-0000027D" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__ID-42121-0000027D"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 10-1. <span id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-55A83BB8-9693-4E20-9D41-CF236C124324" class="fig--title">PFM Page Erase Flowchart</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-22773B97-A440-4C29-98A2-7FBBBDC8EA4F-high.pdf#toolbar=1" width="450" height="1387.7236693091731"></iframe></span>
+         </figure>
+      </section>
+      <div class="- topic/example example" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-27BBCBAB-DEB3-428E-A8F4-6AA1D35F8F6B" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-27BBCBAB-DEB3-428E-A8F4-6AA1D35F8F6B"><h2 class="- topic/title title sectiontitle">Erasing a Page of Program Flash
+            Memory in C</h2>
+         
+         <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><em class="hl-comment">// Code sequence to erase one page of PFM</em>
+<em class="hl-comment">// PFM target address is specified by PAGE_ADDR</em>
+
+<em class="hl-comment">// Save interrupt enable bit value</em>
+uint8_t GIEBitValue = INTCON0bits.GIE;
+
+<em class="hl-comment">// Load NVMADR with the base address of the memory page</em>
+NVMADR = PAGE_ADDR;              
+NVMCON1bits.CMD = <span class="hl-number">0x06</span>;            <em class="hl-comment">// Set the page erase command</em>
+INTCON0bits.GIE = <span class="hl-number">0</span>;               <em class="hl-comment">// Disable interrupts</em>
+<em class="hl-comment">//––––––––– Required Unlock Sequence ––––––––– </em>
+NVMLOCK = <span class="hl-number">0x55</span>;
+NVMLOCK = <span class="hl-number">0xAA</span>;
+NVMCON0bits.GO = <span class="hl-number">1</span>;                <em class="hl-comment">// Start page erase</em>
+<em class="hl-comment">//–––––––––––––––––––––––––––––––––––––––––––––</em>
+<strong class="hl-keyword">while</strong> (NVMCON0bits.GO);            <em class="hl-comment">// Wait for the erase operation to complete</em>
+<em class="hl-comment">// Verify erase operation success and call the recovery function if needed</em>
+<strong class="hl-keyword">if</strong> (NVMCON1bits.WRERR){             
+   ERASE_FAULT_RECOVERY();
+}
+
+INTCON0bits.GIE = GIEBitValue;     <em class="hl-comment">// Restore interrupt enable bit value</em>
+NVMCON1bits.CMD = <span class="hl-number">0x00</span>;            <em class="hl-comment">// Disable writes to memory</em></pre>
+      </div>
+      <section class="- topic/section section" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-BFC1DB18-919A-4FAA-BAB2-BAFD0C338ADA" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-BFC1DB18-919A-4FAA-BAB2-BAFD0C338ADA">
+         <div class="- topic/note note important note_important" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-E9B15602-ECF8-4CD1-8A1A-5F97134B1B2B" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-E9B15602-ECF8-4CD1-8A1A-5F97134B1B2B"><span class="note__title">Important:</span> 
+            <ul class="- topic/ul ul" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__UL_A2Q_J52_CNB" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__UL_A2Q_J52_CNB">
+               <li class="- topic/li li" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-5956AECB-E942-4478-98B7-9043DB7D190D" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-5956AECB-E942-4478-98B7-9043DB7D190D">If a write or erase operation is
+                  terminated by an unexpected Reset, the <a class="- topic/xref xref" href="GUID-0EEEF66D-6FAA-4BC6-B759-A3A7E60F6A6C.html#GUID-E2F70FF0-FA6F-4B04-A534-AEE5AD5CE465" title="NVM Write Error"><span><span>WRERR</span></span></a> bit will be set and the user can check to decide whether a
+                  rewrite of the location(s) is needed.</li>
+               <li class="- topic/li li" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-E9834155-EFE4-4A44-808C-959C814FE537" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-E9834155-EFE4-4A44-808C-959C814FE537">If a write or erase operation is attempted on a write-protected area, the WRERR
+                  bit will be set.</li>
+               <li class="- topic/li li" id="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-33839212-34C5-4579-B432-7B484F666ED7" data-ofbid="GUID-31100BDD-7756-4850-8F40-4DE896CB9916__GUID-33839212-34C5-4579-B432-7B484F666ED7">If a write or erase operation is
+                  attempted on an invalid address location, the WRERR bit is set (refer to the
+                  Program and Data Memory Map in the <strong class="+ topic/ph hi-d/b ph b">“Memory Organization”</strong> chapter for more
+                  information on valid address locations).</li>
+            </ul>
+         </div>
+      </section>
+   </div>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.3 Data Sources — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-8208B292-419A-41F3-A057-30FB13502904.html"/>
+<link rel="next" href="GUID-D7EA9CBC-4997-4B77-AC8D-A004C48FC8BA.html"/>
+<link rel="up" href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li>13.3 Data Sources</li></ol>
+  <div class="sib"><span>← <a href="GUID-8208B292-419A-41F3-A057-30FB13502904.html" rel="prev">Polynomial Implementation</a></span><span><a href="GUID-D7EA9CBC-4997-4B77-AC8D-A004C48FC8BA.html" rel="next">CRC from User Data</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-26D53175-1097-43A2-8333-2C02C4211D98__GUID-BDDB247A-9051-4BAF-8D2B-948702A9C9A7" style="">13.3 Data Sources</h1><div class="- topic/body body"><div class="- topic/p p">Data are supplied to the CRC module using the <a class="- topic/xref xref" href="GUID-F3874916-83FF-4A49-99B7-71ADB25F92C9.html" title="CRCDATA">CRCDATA</a> registers and can either be loaded manually or automatically by using the scanner module. The length of the data word being supplied to the CRC module is specified by the <a class="- topic/xref xref" href="GUID-A28EB3E5-010F-47AD-906C-EF2A14282EB1.html#ID-00000033" title="Data Length"><span><span>DLEN</span></span></a> bits and can be configured for data words up to 32 bits in length. The DLEN field indicates how many bits in the CRCDATA registers are valid and any bits outside of the specified data word size will be ignored. Data are moved into the <a class="- topic/xref xref" href="GUID-201968CE-D6A7-41C3-A13F-B922EB4EEF15.html" title="CRCSHIFT">CRCSHIFT</a> registers as an intermediate to calculate the check value located in the <a class="- topic/xref xref" href="GUID-EACD1E2B-D427-41A2-8B8D-F61D5D52B5C5.html" title="CRCOUT">CRCOUT</a> registers. The <a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html#ID-00000021" title="Shift Mode"><span><span>SHIFTM</span></span></a> bit is used to determine the bit order of the data being shifted into the accumulator and the bit order of the result.<figure class="- topic/fig fig fignone" id="GUID-26D53175-1097-43A2-8333-2C02C4211D98__FIG_X3G_GTS_M3B" data-ofbid="GUID-26D53175-1097-43A2-8333-2C02C4211D98__FIG_X3G_GTS_M3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 13-1. <span id="GUID-26D53175-1097-43A2-8333-2C02C4211D98__GUID-AA18F146-3E16-4581-BD50-CD8CD1AFB5AB" class="fig--title">CRC Process</span></span></figcaption><span class=""><iframe src="GUID-183C3B32-ED17-46BD-88BF-36B71E12A394-high.pdf#toolbar=1" width="582.15" height="383.62"></iframe></span></figure></div><p class="- topic/p p">When the SHIFTM bit is not set, data will be shifted into the CRC, MSb first and the result will be big-endian. When the SHIFTM bit is set, data will be shifted into the accumulator in the reverse order (LSb first) and the result will be little-endian. The CRC module can be seeded with an initial value by setting the CRCOUT registers to the appropriate value before beginning the CRC process.</p></div>
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-D7EA9CBC-4997-4B77-AC8D-A004C48FC8BA.html">13.3.1 CRC from User Data</a></li><li><a href="GUID-0CF74B06-0277-4A3C-AB97-D7104A8285C2.html">13.3.2 CRC from Flash</a></li></ul>
+</nav>
+</body>
+</html>

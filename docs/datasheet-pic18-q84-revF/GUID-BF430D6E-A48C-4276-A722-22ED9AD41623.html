@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>39.3.1 Boundary Scan Cell (BSC) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC.html"/>
+<link rel="next" href="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033.html"/>
+<link rel="up" href="GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF.html">39 JTAG Boundary Scan</a></li><li><a href="GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC.html">39.3 Boundary Scan Register (BSR)</a></li><li>39.3.1 Boundary Scan Cell (BSC)</li></ol>
+  <div class="sib"><span>← <a href="GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC.html" rel="prev">Boundary Scan Register (BSR)</a></span><span><a href="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033.html" rel="next">JTAG Instructions</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-BF430D6E-A48C-4276-A722-22ED9AD41623__GUID-063792BB-9CD8-4B3A-AD5F-B6607DE3DE9E" style="">39.3.1 Boundary Scan Cell (BSC)</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The function of the BSC is to capture and override I/O input or output data values when
+            JTAG is active. The BSC consists of three Single-Bit Capture register cells and two
+            Single-Bit Holding register cells. The capture cells are daisy-chained to capture the
+            port’s input, output and control (output-enable) data, as well as pass JTAG data along
+            the Boundary Scan register. Command signals from the TAP controller determine if the
+            port of JTAG data are captured and how and when it is clocked out of the BSC. The first
+            register either captures internal data destined to the output driver or provides
+            serially scanned in data for the output driver. The second register captures internal
+            output-enable control from the output driver and also provides serially scanned in
+            output-enable values. The third register captures the input data from the I/O’s input
+            buffer.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC.html#GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC__FIG_SNW_J4G_R3B"><span>Figure 39-5</span></a> shows a typical BSC and its relationship to the I/O port’s
+            structure.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-BF430D6E-A48C-4276-A722-22ED9AD41623__FIG_HXY_N4G_R3B" data-ofbid="GUID-BF430D6E-A48C-4276-A722-22ED9AD41623__FIG_HXY_N4G_R3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 39-6. <span id="GUID-BF430D6E-A48C-4276-A722-22ED9AD41623__GUID-6D99FE34-779F-478B-AEE5-4A2A685011A1" class="fig--title">Boundary Scan Cell and Its Relationship to the I/O Port</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-BF430D6E-A48C-4276-A722-22ED9AD41623__IMAGE_IXY_N4G_R3B" src="GUID-F16277D1-65EF-4343-9FD2-930BC5B320CE-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

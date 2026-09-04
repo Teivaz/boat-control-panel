@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10.3 Program Flash Memory (PFM) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5B2102CA-3255-43DC-B4BA-610CE1880E7D.html"/>
+<link rel="next" href="GUID-31100BDD-7756-4850-8F40-4DE896CB9916.html"/>
+<link rel="up" href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-9D492915-FF1F-4035-BDA9-4E1F38D30104.html">10 NVM - Nonvolatile Memory Module</a></li><li>10.3 Program Flash Memory (PFM)</li></ol>
+  <div class="sib"><span>← <a href="GUID-5B2102CA-3255-43DC-B4BA-610CE1880E7D.html" rel="prev">Unlock Sequence</a></span><span><a href="GUID-31100BDD-7756-4850-8F40-4DE896CB9916.html" rel="next">Page Erase</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__GUID-4AD5F6F0-941E-41C0-9DDE-EB8058573F44" style="">10.3 Program Flash Memory (PFM)</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000B6" data-ofbid="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000B6">The Program Flash Memory is readable, writable and erasable over the
+         entire V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> range.</p>
+      <p class="- topic/p p" id="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000B8" data-ofbid="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000B8">A 128-word PFM page is the only size that can be erased by user
+         software. A Bulk Erase operation cannot be issued from user code. A read from program
+         memory is executed either one byte, one word or a 128-word page at a time. A write to
+         program memory can be executed as either 1 or 128 words at a time.</p>
+      <p class="- topic/p p" id="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000BB" data-ofbid="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000BB">Writing or erasing program memory will cease instruction fetches
+         until the operation is complete. The program memory cannot be accessed during the write or
+         erase, so code cannot execute. An internal programming timer controls the write time of
+         program memory writes and erases.</p>
+      <p class="- topic/p p" id="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000BC" data-ofbid="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000BC">A value written to program memory does not need to be a valid
+         instruction. Executing a program memory location that forms an invalid instruction results
+         in a <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000BD">NOP</code>.</p>
+      <p class="- topic/p p" id="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000BE" data-ofbid="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000BE">It is important to understand the PFM memory structure for erase and
+         programming operations. Program memory word size is 16 bits wide. </p>
+      <p class="- topic/p p" id="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000C0" data-ofbid="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000C0">After a page has been erased, all or a portion of this page can be
+         programmed. Data can be written directly into PFM one 16-bit word at a time using the
+         NVMADR, NVMDAT and NVMCON1 controls or as a full page from the buffer RAM. The buffer RAM
+         is directly accessible as any other SFR/GPR register and also may be loaded via sequential
+         writes using the <a class="- topic/xref xref" href="GUID-9613776E-377B-4ED6-BEAE-52E21851DA3D.html" title="TABLAT">TABLAT</a> and <a class="- topic/xref xref" href="GUID-23BF27B8-E95B-449C-B987-532E5840650F.html" title="TBLPTR">TBLPTR</a> registers.</p>
+      <div class="- topic/note note important note_important" id="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000C8" data-ofbid="GUID-23110D28-6147-4643-A8BE-868FAB8FAF4E__ID-42121-000000C8"><span class="note__title">Important:</span> To modify only a portion of a previously
+         programmed page, the contents of the entire page must be read and saved in the buffer RAM
+         prior to the page erase. The Read Page operation is the easiest way to do this. The page
+         needs to be erased so that the new data can be written into the buffer RAM to reprogram the
+         page of PFM. However, any unprogrammed locations can be written using the single word Write
+         operation without first erasing the page.</div>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-31100BDD-7756-4850-8F40-4DE896CB9916.html">10.3.1 Page Erase</a></li><li><a href="GUID-26A56168-E3B0-44E5-8510-2B180787A881.html">10.3.2 Page Read</a></li><li><a href="GUID-1C0C93C2-98ED-4E5B-9E32-06E74D91A6F9.html">10.3.3 Word Read</a></li><li><a href="GUID-17EED875-D101-43C7-A8B3-1AB08122F073.html">10.3.4 Page Write</a></li><li><a href="GUID-988297AD-EB7E-481E-9FD5-2F4AED461F77.html">10.3.5 Word Write</a></li><li><a href="GUID-BC8AF0DC-02A4-412E-A6B4-7687B89E8C23.html">10.3.6 Word Modify</a></li><li><a href="GUID-15EACAB4-783F-4894-90EC-96AD2C944741.html">10.3.7 Write Verify</a></li><li><a href="GUID-B0C08B66-D57B-41E2-B128-7BB39DC54279.html">10.3.8 Unexpected Termination of Write Operation</a></li><li><a href="GUID-FD57818D-A937-47E0-BA94-6D9BE0CEF31F.html">10.3.9 User ID, Device ID, Configuration Settings Access, DIA and DCI</a></li><li><a href="GUID-7EBC5884-711E-47B9-A589-006E5CEE12D4.html">10.3.10 Table Pointer Operations</a></li></ul>
+</nav>
+</body>
+</html>

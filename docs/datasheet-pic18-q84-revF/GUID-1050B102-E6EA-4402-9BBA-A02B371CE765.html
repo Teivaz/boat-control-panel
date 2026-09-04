@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.2 DMA Organization — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812.html"/>
+<link rel="next" href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html"/>
+<link rel="up" href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li>16.2 DMA Organization</li></ol>
+  <div class="sib"><span>← <a href="GUID-2263B75E-F7CE-44C0-ABAB-CB75904D4812.html" rel="prev">DMA Registers</a></span><span><a href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html" rel="next">DMA Interface</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-1050B102-E6EA-4402-9BBA-A02B371CE765__GUID-E8D1A679-A99C-41C0-9092-74A014CEF84A" style="">16.2 DMA Organization</h1><div class="- topic/body body"><p class="- topic/p p">The DMA module is designed to move data by using the existing instruction bus and data bus without the need for any dual-porting of memory or peripheral systems (<a class="- topic/xref xref" href="#GUID-1050B102-E6EA-4402-9BBA-A02B371CE765__FIG_F5N_QYY_QFB"><span>Figure 16-1</span></a>). The DMA accesses the required bus when granted by the system arbiter.</p><figure class="- topic/fig fig fignone" id="GUID-1050B102-E6EA-4402-9BBA-A02B371CE765__FIG_F5N_QYY_QFB" data-ofbid="GUID-1050B102-E6EA-4402-9BBA-A02B371CE765__FIG_F5N_QYY_QFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 16-1. <span id="GUID-1050B102-E6EA-4402-9BBA-A02B371CE765__GUID-345769F2-BB1D-4210-95A6-2BA00C0DE21D" class="fig--title">DMA Functional Block Diagram</span></span></figcaption><span class=""><iframe src="GUID-F0AC34C5-0F21-48D0-84C5-7BC6C05666FC-high.pdf#toolbar=1" width="450" height="521.6336992793927"></iframe></span></figure><p class="- topic/p p">Depending on the priority of the DMA with respect to CPU execution (refer to the <strong class="+ topic/ph hi-d/b ph b">“Memory Access Scheme”</strong> section in the<strong class="+ topic/ph hi-d/b ph b"> “PIC18 CPU”</strong> chapter for more information), the DMA Controller can move data through two methods:</p><ul class="- topic/ul ul" id="GUID-1050B102-E6EA-4402-9BBA-A02B371CE765__UL_R2B_YYY_QFB" data-ofbid="GUID-1050B102-E6EA-4402-9BBA-A02B371CE765__UL_R2B_YYY_QFB"><li class="- topic/li li" id="GUID-1050B102-E6EA-4402-9BBA-A02B371CE765__GUID-A2572D05-73A5-4F93-B520-D357AF3399C3" data-ofbid="GUID-1050B102-E6EA-4402-9BBA-A02B371CE765__GUID-A2572D05-73A5-4F93-B520-D357AF3399C3">Stalling the CPU execution until it has completed its transfers (DMA has higher priority over the CPU in this mode of operation)</li><li class="- topic/li li" id="GUID-1050B102-E6EA-4402-9BBA-A02B371CE765__GUID-DA1D9B1D-4DFC-44BB-9D29-80A1942E0007" data-ofbid="GUID-1050B102-E6EA-4402-9BBA-A02B371CE765__GUID-DA1D9B1D-4DFC-44BB-9D29-80A1942E0007">Utilizing unused CPU cycles for DMA transfers
+                (CPU has higher priority over the DMA in this mode of operation). Unused CPU cycles
+                are referred to as bubbles, which are instruction cycles available for use by the
+                DMA to perform read and write operations. In this way, the effective bandwidth for
+                handling data are increased; at the same time, DMA operations can proceed without
+                causing a processor stall.</li></ul></div>
+</body>
+</html>

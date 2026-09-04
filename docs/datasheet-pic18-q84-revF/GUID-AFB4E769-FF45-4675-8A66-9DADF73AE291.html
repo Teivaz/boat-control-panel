@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.3.4.1.1 User Software Control — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-88A29055-5CF0-40B8-AB5D-B46F7711554D.html"/>
+<link rel="next" href="GUID-B49C0021-360B-40CE-895E-20BD181DDEA8.html"/>
+<link rel="up" href="GUID-88A29055-5CF0-40B8-AB5D-B46F7711554D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li><a href="GUID-03B253BE-3A44-451E-80F3-B4E515E1EC58.html">16.3 DMA Interface</a></li><li><a href="GUID-129A63BF-383B-4E30-91DE-858C4D6CC236.html">16.3.4 DMA Message Transfers</a></li><li><a href="GUID-88A29055-5CF0-40B8-AB5D-B46F7711554D.html">16.3.4.1 Starting DMA Message Transfers</a></li><li>16.3.4.1.1 User Software Control</li></ol>
+  <div class="sib"><span>← <a href="GUID-88A29055-5CF0-40B8-AB5D-B46F7711554D.html" rel="prev">Starting DMA Message Transfers</a></span><span><a href="GUID-B49C0021-360B-40CE-895E-20BD181DDEA8.html" rel="next">Hardware Trigger, SIRQ</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-AFB4E769-FF45-4675-8A66-9DADF73AE291__GUID-782E18F0-0472-48E8-A7EC-3D287C7836F3" style="">16.3.4.1.1 User Software Control</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">Software starts or stops DMA transaction by setting/clearing the <a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C" title="DMA Transaction"><span><span>DGO</span></span></a> bit. The DGO bit is also used to indicate whether a DMA hardware
+            trigger has been received and a message is in progress. </p>
+        <div class="- topic/note note important note_important" id="GUID-AFB4E769-FF45-4675-8A66-9DADF73AE291__GUID-C3EF66D3-FE5A-4717-871F-9455269A9F13" data-ofbid="GUID-AFB4E769-FF45-4675-8A66-9DADF73AE291__GUID-C3EF66D3-FE5A-4717-871F-9455269A9F13"><span class="note__title">Important:</span> 
+            <ol class="- topic/ol ol" id="GUID-AFB4E769-FF45-4675-8A66-9DADF73AE291__OL_YQX_BNM_MGB" data-ofbid="GUID-AFB4E769-FF45-4675-8A66-9DADF73AE291__OL_YQX_BNM_MGB">
+                <li class="- topic/li li" id="GUID-AFB4E769-FF45-4675-8A66-9DADF73AE291__GUID-8C987082-73D7-4115-A2B8-08FC8A7802B3" data-ofbid="GUID-AFB4E769-FF45-4675-8A66-9DADF73AE291__GUID-8C987082-73D7-4115-A2B8-08FC8A7802B3">Software start can only occur
+                    when the <a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#GUID-1C79FAB1-2A96-4E11-9081-8E6B0B1B3A4E" title="DMA Module Enable"><span><span>EN</span></span></a> bit is set.</li>
+                <li class="- topic/li li" id="GUID-AFB4E769-FF45-4675-8A66-9DADF73AE291__GUID-8F3625EE-0EDD-4DCE-8A67-768756DA0BEA" data-ofbid="GUID-AFB4E769-FF45-4675-8A66-9DADF73AE291__GUID-8F3625EE-0EDD-4DCE-8A67-768756DA0BEA">If the CPU writes to the <a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C" title="DMA Transaction"><span><span>DGO</span></span></a> bit while it is already set, there is no effect on the
+                    system, the DMA will continue to operate normally.</li>
+            </ol>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.2.3 Transmit and Receive FIFOs — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009.html"/>
+<link rel="next" href="GUID-1FCAD390-520F-4BF2-8946-3309833D58F5.html"/>
+<link rel="up" href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html">36.2 SPI Operation</a></li><li>36.2.3 Transmit and Receive FIFOs</li></ol>
+  <div class="sib"><span>← <a href="GUID-5F7563A5-01E7-4942-88CF-9F4BE0A04009.html" rel="prev">BUSY Bit</a></span><span><a href="GUID-1FCAD390-520F-4BF2-8946-3309833D58F5.html" rel="next">LSb vs. MSb-First Operation</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-348F54FD-8138-4C74-AC65-C7C2BE5908E2__GUID-7B18CD9B-276E-491B-8C8D-E233C6F98D4D" style="">36.2.3 Transmit and Receive FIFOs</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The transmission and reception of data from the SPI module is handled by two
+            FIFOs, one for reception and one for transmission. These are addressed by the SFRs,
+            SPIxRXB and SPIxTXB, respectively. </p>
+        <p class="- topic/p p">The transmit FIFO is written to by software and is read by the SPI module to
+            shift the data onto the SDO pin. The receive FIFO is written to by the SPI module as it
+            shifts in the data from the SDI pin and is read by software. Setting the <a class="- topic/xref xref" href="GUID-9E7E903C-D64D-4CAE-9342-243EC9029553.html#BITFIELD_DQY_N5F_RFB" title="Clear Buffer Control"><span><span>CLB</span></span></a> bit resets the occupancy for both FIFOs, emptying both buffers. The
+            FIFOs are also reset by clearing the EN bit, thus disabling the SPI module. </p>
+        <div class="- topic/note note important note_important" id="GUID-348F54FD-8138-4C74-AC65-C7C2BE5908E2__GUID-3F9604A9-1208-435B-AFC9-56BCBAAA7303" data-ofbid="GUID-348F54FD-8138-4C74-AC65-C7C2BE5908E2__GUID-3F9604A9-1208-435B-AFC9-56BCBAAA7303"><span class="note__title">Important:</span> The transmit and
+            receive FIFO occupancy refer to the number of bytes that are currently being stored in
+            each FIFO. These values are used in this chapter to illustrate the function of these
+            FIFOs and are not directly accessible through software.</div>
+        <p class="- topic/p p">The SPIxRXB register addresses the receive FIFO and is read-only. Reading from this
+            register will read from the first FIFO location that was written to by hardware and
+            decrease the receive FIFO occupancy. If the FIFO is empty, reading from this register
+            will instead return a value of ’<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’ and set the <a class="- topic/xref xref" href="GUID-9E7E903C-D64D-4CAE-9342-243EC9029553.html#BITFIELD_RKG_H5F_RFB" title="Receive Buffer Read Error"><span><span>RXRE</span></span></a> (Receive Buffer Read Error) bit. The RXRE bit must then be cleared in software to
+            properly reflect the status of the read error. When the receive FIFO is full, the <a class="- topic/xref xref" href="GUID-9E7E903C-D64D-4CAE-9342-243EC9029553.html#BITFIELD_Y3K_DXZ_RFB" title="Receive Buffer Full"><span><span>RXBF</span></span></a> bit will be set.</p>
+        <p class="- topic/p p">The SPIxTXB register addresses the transmit FIFO and is write-only. Writing
+            to the register will write to the first empty FIFO location and increase the occupancy.
+            If the FIFO is full, writing to this register will not affect the data and will set the
+                <a class="- topic/xref xref" href="GUID-9E7E903C-D64D-4CAE-9342-243EC9029553.html#GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B" title="Transmit Buffer Write Error"><span><span>TXWE</span></span></a> bit. When the transmit FIFO is empty, the <a class="- topic/xref xref" href="GUID-9E7E903C-D64D-4CAE-9342-243EC9029553.html#BITFIELD_TC3_3JF_RFB" title="Transmit Buffer Empty"><span><span>TXBE</span></span></a> bit will be set. </p>
+        <p class="- topic/p p">More details on enabling and disabling the receive and transmit functions is summarized
+            in <a class="- topic/xref xref" href="GUID-58292C67-26C3-49E8-9D78-1E217D2E4B0C.html#GUID-58292C67-26C3-49E8-9D78-1E217D2E4B0C__TABLE_D5L_43H_SFB"><span>Table 36-1</span></a> and <a class="- topic/xref xref" href="GUID-EDC18EB4-671C-4922-9DC8-FEA7439E6C65.html">Client Mode Transmit Options</a>.</p>
+    </div>
+
+</body>
+</html>

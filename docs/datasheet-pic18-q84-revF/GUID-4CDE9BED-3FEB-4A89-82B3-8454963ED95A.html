@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>22.1.3 Logic Function — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-93137823-2E14-4469-8325-B4EB104372D1.html"/>
+<link rel="next" href="GUID-CAF8855C-7FAE-4F73-84F0-78E3B3A2397F.html"/>
+<link rel="up" href="GUID-49EE042B-EC05-42F5-9CB0-A92AFD80A996.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812.html">22 CLC - Configurable Logic Cell</a></li><li><a href="GUID-49EE042B-EC05-42F5-9CB0-A92AFD80A996.html">22.1 CLC Setup</a></li><li>22.1.3 Logic Function</li></ol>
+  <div class="sib"><span>← <a href="GUID-93137823-2E14-4469-8325-B4EB104372D1.html" rel="prev">Data Gating</a></span><span><a href="GUID-CAF8855C-7FAE-4F73-84F0-78E3B3A2397F.html" rel="next">Output Polarity</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-D1546DB3-0383-4553-A6C5-46A922CC5570" style="">22.1.3 Logic
+        Function</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">There are eight available logic functions including:</p>
+        <ul class="- topic/ul ul" id="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__UL_Q5Y_ZVC_F1B" data-ofbid="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__UL_Q5Y_ZVC_F1B">
+            <li class="- topic/li li" id="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-721E3FDB-9377-4EA1-80A7-85C58B94059B" data-ofbid="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-721E3FDB-9377-4EA1-80A7-85C58B94059B">AND-OR</li>
+            <li class="- topic/li li" id="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-A5DF58C4-11A1-4B6B-AE05-0918A01A4F10" data-ofbid="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-A5DF58C4-11A1-4B6B-AE05-0918A01A4F10">OR-XOR</li>
+            <li class="- topic/li li" id="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-3B209D14-6819-4F1F-970D-19BAA0A15DC4" data-ofbid="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-3B209D14-6819-4F1F-970D-19BAA0A15DC4">AND</li>
+            <li class="- topic/li li" id="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-434E5C81-1C67-4588-8A0A-8BAC1AB55A76" data-ofbid="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-434E5C81-1C67-4588-8A0A-8BAC1AB55A76">SR Latch</li>
+            <li class="- topic/li li" id="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-28CF8D24-AC5C-4EE0-87D5-FA5882FCEC82" data-ofbid="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-28CF8D24-AC5C-4EE0-87D5-FA5882FCEC82">D Flip-Flop with
+                Set and Reset</li>
+            <li class="- topic/li li" id="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-31856A67-B5D3-457E-B7C6-3A94CCFAD795" data-ofbid="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-31856A67-B5D3-457E-B7C6-3A94CCFAD795">D Flip-Flop with
+                Reset </li>
+            <li class="- topic/li li" id="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-677B84FD-4613-4F2A-80E3-8FED54DD359E" data-ofbid="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-677B84FD-4613-4F2A-80E3-8FED54DD359E">J-K Flip-Flop
+                with Reset</li>
+            <li class="- topic/li li" id="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-2F25D524-0891-4451-90CD-1BEF96EF9B58" data-ofbid="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-2F25D524-0891-4451-90CD-1BEF96EF9B58">Transparent Latch
+                with Set and Reset</li>
+        </ul>
+        <p class="- topic/p p"> Logic functions are shown in the following diagram. Each logic
+            function has four inputs and one output. The four inputs are the four data gate outputs
+            of the previous stage. The output is fed to the inversion stage and, from there, to
+            other peripherals, an output pin, and back to the CLC itself.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__FIG_VCZ_2WC_F1B" data-ofbid="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__FIG_VCZ_2WC_F1B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 22-3. <span id="GUID-4CDE9BED-3FEB-4A89-82B3-8454963ED95A__GUID-AC037499-4810-4FA6-836B-A8FA3E8428C8" class="fig--title">Programmable Logic Functions</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-7057D00E-ED29-4869-8AC6-DD9CBAB5BC63-high.pdf#toolbar=1" width="450" height="490.6024096385542"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

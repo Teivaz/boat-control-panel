@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.6.3.2 Transfer Counter Is Zero Interrupt — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A5FF50FE-F787-44DC-961B-8F38ACD5A388.html"/>
+<link rel="next" href="GUID-E9A5E389-63E6-40A1-B1C5-FF0C5AA93D19.html"/>
+<link rel="up" href="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-3B049106-A068-4D06-BD06-17396A19D766.html">36.6 SPI Interrupts</a></li><li><a href="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6.html">36.6.3 SPI Status Interrupts</a></li><li>36.6.3.2 Transfer Counter Is Zero Interrupt</li></ol>
+  <div class="sib"><span>← <a href="GUID-A5FF50FE-F787-44DC-961B-8F38ACD5A388.html" rel="prev">Shift Register Empty Interrupt</a></span><span><a href="GUID-E9A5E389-63E6-40A1-B1C5-FF0C5AA93D19.html" rel="next">Start of Client Select and End of Client Select Interrupts</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-5A8B8E2D-CB38-4F0D-B728-CC470D137110__GUID-CC4317A2-FE6F-4CA6-AD5A-170D75883EF6" style="">36.6.3.2 Transfer Counter Is Zero Interrupt</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The Transfer Counter Is Zero Interrupt Flag and Transfer Counter Is Zero Interrupt Enable
+            are the  TCZIF and TCZIE bits, respectively. This interrupt will trigger when the
+            transfer counter (defined by BMODE, SPIxTCNT and SPIxTWIDTH) decrements from one to
+            zero. See <a class="- topic/xref xref" href="GUID-A5FF50FE-F787-44DC-961B-8F38ACD5A388.html#GUID-A5FF50FE-F787-44DC-961B-8F38ACD5A388__FIG_ZBL_FCX_SFB"><span>Figure 36-14</span></a> for more details on the timing of this interrupt as well as other
+            interrupts. This bit must be cleared in software.</p>
+        <div class="- topic/note note important note_important" id="GUID-5A8B8E2D-CB38-4F0D-B728-CC470D137110__GUID-E49160A3-AABD-4175-8AEF-4394B644F195" data-ofbid="GUID-5A8B8E2D-CB38-4F0D-B728-CC470D137110__GUID-E49160A3-AABD-4175-8AEF-4394B644F195"><span class="note__title">Important:</span> 
+            <div class="- topic/p p">The TCZIF flag only indicates that the transfer counter has decremented from one to
+                zero and may not indicate that the entire data transfer process is complete. Either
+                poll the <a class="- topic/xref xref" href="GUID-D60A9AB9-68EF-4F33-8387-7BA9792E0965.html#GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B" title="SPI Module Busy Status(1)"><span><span>BUSY</span></span></a> bit and wait for it to be cleared or use the Shift Register Empty Interrupt
+                (SRMTIF) to determine when a data transfer is fully complete.</div>
+        </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.8 Interrupt Latency — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B8E4B3AD-8EAB-460B-B27E-7DB69AD0E852.html"/>
+<link rel="next" href="GUID-3707A074-AF85-44E8-B73B-4C7A5CAEB6A9.html"/>
+<link rel="up" href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li>11.8 Interrupt Latency</li></ol>
+  <div class="sib"><span>← <a href="GUID-B8E4B3AD-8EAB-460B-B27E-7DB69AD0E852.html" rel="prev">Returning from Interrupt Service Routine (ISR)</a></span><span><a href="GUID-3707A074-AF85-44E8-B73B-4C7A5CAEB6A9.html" rel="next">Aborting Interrupts</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__GUID-399A51F0-E8EB-4C58-B7E7-D78AD35D1523" style="">11.8 Interrupt Latency</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">When MVECEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, there is a fixed latency of three instruction cycles
+            between the completion of the instruction active when the interrupt occurred and the
+            first instruction of the Interrupt Service Routine. <a class="- topic/xref xref" href="#GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__FIG_HGF_HXV_3GB"><span>Figure 11-7</span></a>, <a class="- topic/xref xref" href="#GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__FIG_D4C_JXV_3GB"><span>Figure 11-8</span></a> and <a class="- topic/xref xref" href="#GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__FIG_FQL_KXV_3GB"><span>Figure 11-9</span></a> illustrate the sequence of events when a
+            peripheral interrupt is asserted, when the last executed instruction is one-cycle,
+            two-cycle and three-cycle, respectively. </p>
+        <p class="- topic/p p">After the Interrupt Flag Status bit is set, the current instruction completes executing.
+            In the first latency cycle, the contents of the PC, STATUS, WREG, BSR, FSR0/1/2, PRODL/H
+            and PCLATH/U registers are context saved, and the IVTBASE + Vector number is calculated.
+            In the second latency cycle, the PC is loaded with the calculated vector table address
+            for the interrupt source, and the starting address of the ISR is fetched. In the third
+            latency cycle, the PC is loaded with the ISR address. All the latency cycles are
+            executed as <code class="+ topic/ph pr-d/codeph ph codeph">NOP</code> instructions. </p>
+        <p class="- topic/p p">When MVECEN = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, the interrupt controller requires two clock cycles to
+            vector to the ISR from the main routine. Note that, as this mode requires additional
+            software to determine which interrupt source caused the interrupt, the actual latency
+            between the trigger and the beginning of the specific ISR for each individual interrupt
+            will be longer than two clock cycles and will vary, when not using vectored
+            interrupts.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__FIG_HGF_HXV_3GB" data-ofbid="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__FIG_HGF_HXV_3GB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 11-7. <span id="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__GUID-EFAFA286-D2FF-4D6F-A638-3100A7E9BDFF" class="fig--title">Interrupt Timing Diagram:
+                One-Cycle Instruction</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__IMAGE_IGF_HXV_3GB" src="GUID-3193D198-1CFC-4A0B-94DA-BD1331E5085A-high.svg"/></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__FIG_D4C_JXV_3GB" data-ofbid="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__FIG_D4C_JXV_3GB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 11-8. <span id="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__GUID-8A384A4D-2A51-4483-85A9-531B3B2AA546" class="fig--title">Interrupt Timing Diagram:
+                Two-Cycle Instruction</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__IMAGE_E4C_JXV_3GB" src="GUID-F4D2E801-1D36-4802-822F-9BB9A6B23926-high.svg"/></span>
+        </figure>
+        <figure class="- topic/fig fig fignone" id="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__FIG_FQL_KXV_3GB" data-ofbid="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__FIG_FQL_KXV_3GB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 11-9. <span id="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__GUID-4A474DE7-EEB0-44D9-8723-94D463BCF059" class="fig--title">Interrupt Timing Diagram:
+                Three-Cycle Instruction</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-3938ED48-6E8E-40DB-8AFD-1CBF935C2046__IMAGE_GQL_KXV_3GB" src="GUID-B86F2351-21A2-4C5C-A55A-5DF70E0B80EC-high.svg"/></span>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-3707A074-AF85-44E8-B73B-4C7A5CAEB6A9.html">11.8.1 Aborting Interrupts</a></li></ul>
+</nav>
+</body>
+</html>

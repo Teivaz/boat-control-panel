@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>17.1.2 Interrupts During Doze — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350.html"/>
+<link rel="next" href="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC.html"/>
+<link rel="up" href="GUID-4CB9D045-5AA7-4008-B134-E37F066CC2DD.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html">17 Power-Saving Modes</a></li><li><a href="GUID-4CB9D045-5AA7-4008-B134-E37F066CC2DD.html">17.1 Doze Mode</a></li><li>17.1.2 Interrupts During Doze</li></ol>
+  <div class="sib"><span>← <a href="GUID-8765B2DD-B2AF-4BB0-BB53-536BA1861350.html" rel="prev">Doze Operation</a></span><span><a href="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC.html" rel="next">Sleep Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-BD5588AB-E8D5-43E6-BA71-463862EA4BF2__GUID-C9316972-09DE-4390-A579-44C908130D02" style="">17.1.2 Interrupts During Doze</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p" id="GUID-BD5588AB-E8D5-43E6-BA71-463862EA4BF2__ID-42139-00000026" data-ofbid="GUID-BD5588AB-E8D5-43E6-BA71-463862EA4BF2__ID-42139-00000026">System behavior for interrupts that may occur during Doze mode are
+            configured using the <a class="- topic/xref xref" href="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354.html#ID-00000025" title="Recover-on-Interrupt(1)">ROI</a> and <a class="- topic/xref xref" href="GUID-E385B46F-2FB3-4C6C-ADC8-B2341E834354.html#ID-0000002C" title="Doze-on-Exit(1)">DOE</a> bits. Refer to the example below for details about system behavior in
+            all cases for a transition from Main to ISR back to Main.</div>
+        <div class="- topic/example example" id="GUID-BD5588AB-E8D5-43E6-BA71-463862EA4BF2__GUID-4482A6E9-3F38-4B0B-A095-D7AA3DCC4E0C" data-ofbid="GUID-BD5588AB-E8D5-43E6-BA71-463862EA4BF2__GUID-4482A6E9-3F38-4B0B-A095-D7AA3DCC4E0C"><h2 class="- topic/title title sectiontitle">Doze Software Example</h2>
+            
+            <div class="- topic/p p">
+            
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c"><em class="hl-comment">// Mainline operation</em>
+bool somethingToDo = FALSE;
+
+<strong class="hl-keyword">void</strong> <span class="hl-functions">main</span>() {
+    initializeSystem();
+    <em class="hl-comment">// DOZE = 64:1 (for example) </em>
+    <em class="hl-comment">// ROI = 1; </em>
+    GIE = <span class="hl-number">1</span>; <em class="hl-comment">// enable interrupts </em>
+    <strong class="hl-keyword">while</strong> (<span class="hl-number">1</span>) {
+        <em class="hl-comment">// If ADC completed, process data </em>
+        <strong class="hl-keyword">if</strong> (somethingToDo) {
+            doSomething();
+            DOZEN = <span class="hl-number">1</span>; <em class="hl-comment">// resume low-power </em>
+        }
+    }
+}
+<em class="hl-comment">// Data interrupt handler </em>
+
+<strong class="hl-keyword">void</strong> <span class="hl-functions">interrupt</span>() {
+    <em class="hl-comment">// DOZEN = 0 because ROI = 1 </em>
+    <strong class="hl-keyword">if</strong> (ADIF) {
+        somethingToDo = TRUE;
+        DOE = <span class="hl-number">0</span>; <em class="hl-comment">// make main() go fast </em>
+        ADIF = <span class="hl-number">0</span>;
+    }
+    <em class="hl-comment">// else check other interrupts... </em>
+    <strong class="hl-keyword">if</strong> (TMR0IF) {
+        timerTick++;
+        DOE = <span class="hl-number">1</span>; <em class="hl-comment">// make main() go slow </em>
+        TMR0IF = <span class="hl-number">0</span>;
+    }
+}</pre>
+        </div>
+            <div class="- topic/note note notype note_notype" id="GUID-BD5588AB-E8D5-43E6-BA71-463862EA4BF2__GUID-A76F15EF-8C9D-45DA-9B5B-739C0310345E" data-ofbid="GUID-BD5588AB-E8D5-43E6-BA71-463862EA4BF2__GUID-A76F15EF-8C9D-45DA-9B5B-739C0310345E"><span class="note__title">Note:</span> User software can change the DOE
+                bit in the ISR.</div>
+        </div>
+    </div>
+
+</body>
+</html>

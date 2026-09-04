@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.5.4 OSCCON3 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7.html"/>
+<link rel="next" href="GUID-E9218AC7-E06A-403D-A3D6-54192CA94BCB.html"/>
+<link rel="up" href="GUID-C1498132-5FBC-414F-AC9D-CFFF65E4C262.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-C1498132-5FBC-414F-AC9D-CFFF65E4C262.html">12.5 Register Definitions: Oscillator Module</a></li><li>12.5.4 OSCCON3</li></ol>
+  <div class="sib"><span>← <a href="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7.html" rel="prev">OSCCON2</a></span><span><a href="GUID-E9218AC7-E06A-403D-A3D6-54192CA94BCB.html" rel="next">OSCTUNE</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694__GUID-399F29BD-318A-4C14-A26B-6F5DD191826E" style="">12.5.4  OSCCON3</h1><section id="GUID-0C749B50-E563-42B5-AD7B-547395A4E0AC" class="- topic/section reference/section sidsc-register/registerDescription ">Oscillator Control
+            Register 3<div class="- topic/note note notype note_notype endnote" id="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694__GUID-8440AC7C-C468-4D20-AEAF-2B6DFE70458A" data-ofbid="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694__GUID-8440AC7C-C468-4D20-AEAF-2B6DFE70458A"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694__OL_XH4_STH_ZGB" data-ofbid="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694__OL_XH4_STH_ZGB">
+                    <li class="- topic/li li" id="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694__GUID-BE82D063-368B-4199-AE14-A7C6FF3C34C1" data-ofbid="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694__GUID-BE82D063-368B-4199-AE14-A7C6FF3C34C1">If CSWHOLD =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, the user may not see this bit set (NOSCR =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). When the oscillator becomes ready, there may be a
+                        delay of one instruction cycle before NOSCR is set. The clock switch occurs
+                        in the next instruction cycle and NOSCR is cleared.</li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>OSCCON3</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x0AF</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694__GUID-592BBF79-6D7A-47EA-82B7-8B07A2913161" data-ofbid="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694__GUID-592BBF79-6D7A-47EA-82B7-8B07A2913161"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">CSWHOLD</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">SOSCPWR</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">ORDY</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">NOSCR</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HC</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-0C749B50-E563-42B5-AD7B-547395A4E0AC" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE__GUID-B7F022C0-982E-4EA3-BE82-4A9D802EF4E7" id="GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE__GUID-B7F022C0-982E-4EA3-BE82-4A9D802EF4E7" style=""> Bit 7 – CSWHOLD <span>Clock Switch Hold
+            Control</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE__GUID-0BB9F289-2C21-4FA2-AE59-F717FC20E542" data-ofbid="GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE__GUID-0BB9F289-2C21-4FA2-AE59-F717FC20E542"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE__GUID-B36B8F45-00DA-459B-B0B5-442A1E1B9B8A">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE__GUID-5CFF30AC-9275-4A91-917E-8CA664BF2E0D">Clock
+                        switch (and interrupt) will hold when the oscillator selected by <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a> is ready</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE__GUID-A18EC2FF-BAF3-467E-81A6-FA610890F48C">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-EFC7871F-C271-4778-8096-8FFABD4B7BAE__GUID-6F51D5B6-3262-4D33-9FEF-DB5F64EC229A">Clock
+                        switch will proceed when the oscillator selected by <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a> is ready</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_DBH_3YH_ZGB__GUID-F8896EBC-F202-482A-A3E5-82AF3B890314" id="BITFIELD_DBH_3YH_ZGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_DBH_3YH_ZGB__GUID-F8896EBC-F202-482A-A3E5-82AF3B890314" style=""> Bit 6 – SOSCPWR <span>Secondary
+            Oscillator Power Mode Select</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_DBH_3YH_ZGB__BITFIELDDESCRIPTION_EBH_3YH_ZGB" data-ofbid="BITFIELD_DBH_3YH_ZGB__BITFIELDDESCRIPTION_EBH_3YH_ZGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_DBH_3YH_ZGB__BITFIELDVALUES_KNP_PYH_ZGB" data-ofbid="BITFIELD_DBH_3YH_ZGB__BITFIELDVALUES_KNP_PYH_ZGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_DBH_3YH_ZGB__GUID-D4D86E28-91AA-4490-BA7A-A07F17AA495B">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_DBH_3YH_ZGB__GUID-E0990648-7E56-4767-B96A-6C499DDA6B8F">Secondary Oscillator operates in High-Power mode</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_DBH_3YH_ZGB__GUID-BBCB2425-2F45-44E7-B460-4725363D6C17">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_DBH_3YH_ZGB__GUID-AFA711C0-DBFD-4A03-8781-C5DDF1999B64">Secondary Oscillator operates in Low-Power mode</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_WSY_YYH_ZGB__GUID-C02F06BE-4172-4A5F-9BC5-91A1552B9FD3" id="BITFIELD_WSY_YYH_ZGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_WSY_YYH_ZGB__GUID-C02F06BE-4172-4A5F-9BC5-91A1552B9FD3" style=""> Bit 4 – ORDY <span>Oscillator Ready
+            (read-only)</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_WSY_YYH_ZGB__BITFIELDDESCRIPTION_XSY_YYH_ZGB" data-ofbid="BITFIELD_WSY_YYH_ZGB__BITFIELDDESCRIPTION_XSY_YYH_ZGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_WSY_YYH_ZGB__BITFIELDVALUES_JVM_3ZH_ZGB" data-ofbid="BITFIELD_WSY_YYH_ZGB__BITFIELDVALUES_JVM_3ZH_ZGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_WSY_YYH_ZGB__GUID-E2FBB64E-A46B-4F0F-A748-AEDA24DFF026">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_WSY_YYH_ZGB__GUID-2D251632-64F1-42A4-98D6-5BC45767AEA7"><a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html" title="OSCCON1">OSCCON1</a> = <a class="- topic/xref xref" href="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7.html" title="OSCCON2">OSCCON2</a>; the current system clock is the clock
+                        specified by <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a></td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_WSY_YYH_ZGB__GUID-CDA174EF-AAA4-4349-BCC4-D984C338EB6C">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_WSY_YYH_ZGB__GUID-54D088A2-DFA2-4FFF-AB7A-FC8B1DF9A1E6">A clock
+                        switch is in progress</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_QYH_QZH_ZGB__GUID-E28C007D-3550-4152-87DF-850154F2CA67" id="BITFIELD_QYH_QZH_ZGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_QYH_QZH_ZGB__GUID-E28C007D-3550-4152-87DF-850154F2CA67" style=""> Bit 3 – NOSCR <span>
+            New Oscillator is Ready (read-only)<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694__GUID-BE82D063-368B-4199-AE14-A7C6FF3C34C1">1</a>)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_QYH_QZH_ZGB__BITFIELDDESCRIPTION_RYH_QZH_ZGB" data-ofbid="BITFIELD_QYH_QZH_ZGB__BITFIELDDESCRIPTION_RYH_QZH_ZGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_QYH_QZH_ZGB__BITFIELDVALUES_EDH_WZH_ZGB" data-ofbid="BITFIELD_QYH_QZH_ZGB__BITFIELDVALUES_EDH_WZH_ZGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_QYH_QZH_ZGB__GUID-94CBCF92-0900-42B3-8A07-2C9D1A0F9755">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_QYH_QZH_ZGB__GUID-301A4EBB-7242-4A81-A565-66F4DF2904EB">A clock
+                        switch is in progress and the oscillator selected by <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a> indicates a Ready
+                        condition</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_QYH_QZH_ZGB__GUID-B5B46F33-8486-4654-9C26-1D3F065CAB70">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_QYH_QZH_ZGB__GUID-1FE7803C-D573-48C1-895E-29B6C2016829">A clock
+                        switch is not in progress, or the <a class="- topic/xref xref" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html#GUID-48A84485-060C-4613-A0AC-66D5C2971513" title="New Oscillator Source Request(1,2,3)">NOSC</a>-selected oscillator is not
+                        ready</td>
+                </tr></tbody></table>
+        </div>
+    </article>
+                
+                    If CSWHOLD =
+                            0, the user may not see this bit set (NOSCR =
+                            1). When the oscillator becomes ready, there may be a
+                        delay of one instruction cycle before NOSCR is set. The clock switch occurs
+                        in the next instruction cycle and NOSCR is cleared.
+                
+            
+</body>
+</html>

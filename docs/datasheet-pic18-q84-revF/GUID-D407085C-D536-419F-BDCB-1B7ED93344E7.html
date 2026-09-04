@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>19.12 I/O Priorities — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B644BD32-CEF9-446C-9CC6-AF192DA34698.html"/>
+<link rel="next" href="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80.html"/>
+<link rel="up" href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html">19 I/O Ports</a></li><li>19.12 I/O Priorities</li></ol>
+  <div class="sib"><span>← <a href="GUID-B644BD32-CEF9-446C-9CC6-AF192DA34698.html" rel="prev">I2C Pad Control</a></span><span><a href="GUID-B19CD709-9865-49D4-AF1C-E4DF032D9A80.html" rel="next">MCLR/VPP/RE3 Pin</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__GUID-6B2E8D31-C946-446C-B2FA-ED594DA15CDE" style="">19.12 I/O Priorities</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000A1" data-ofbid="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000A1">Each pin defaults to the data latch after Reset. Other functions
+            are selected with the Peripheral Pin Select logic. Refer to the <strong class="+ topic/ph hi-d/b ph b">“PPS - Peripheral Pin
+                Select Module”</strong> chapter for more details.</p>
+        <p class="- topic/p p" id="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000A3" data-ofbid="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000A3">Analog input functions, such as ADC and comparator inputs, are not
+            shown in the Peripheral Pin Select lists. These inputs are active when the I/O pin is
+            set for Analog mode using the <a class="- topic/xref xref" href="GUID-AB552FFF-6E5C-4EBD-BE95-14B184FEF0F6.html" title="ANSELx">ANSELx</a> register. Digital output functions may continue to
+            control the pin when it is in Analog mode.</p>
+        <p class="- topic/p p" id="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000A4" data-ofbid="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000A4">Analog outputs, when enabled, take priority over digital outputs
+            and force the digital output driver into a High-Impedance state.</p>
+        <p class="- topic/p p" id="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000A5" data-ofbid="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000A5">The pin function priorities are as follows:</p>
+        <ol class="- topic/ol ol" id="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__GUID-F571010D-B1AB-4536-A912-6E354B8FAD3E" data-ofbid="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__GUID-F571010D-B1AB-4536-A912-6E354B8FAD3E">
+            <li class="- topic/li li" id="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000A6" data-ofbid="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000A6">Port functions determined by the Configuration bits.</li>
+            <li class="- topic/li li" id="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000A8" data-ofbid="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000A8">Analog outputs (input buffers must be disabled).</li>
+            <li class="- topic/li li" id="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000AA" data-ofbid="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000AA">Analog inputs.</li>
+            <li class="- topic/li li" id="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000AC" data-ofbid="GUID-D407085C-D536-419F-BDCB-1B7ED93344E7__ID-42127-000000AC">Port inputs and outputs from PPS.</li>
+        </ol>
+    </div>
+
+</body>
+</html>

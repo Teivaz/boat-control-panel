@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.3.3 Interrupt Vector Table Address Calculation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-01EA66D8-D50D-49C1-92DA-0D4E8C13824A.html"/>
+<link rel="next" href="GUID-9F62C3BC-B3F2-4D06-B469-C4FB94C742AC.html"/>
+<link rel="up" href="GUID-62FC3E7B-300F-4961-9F3E-68300C0CBDBF.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li><a href="GUID-62FC3E7B-300F-4961-9F3E-68300C0CBDBF.html">11.3 Interrupt Vector Table</a></li><li>11.3.3 Interrupt Vector Table Address Calculation</li></ol>
+  <div class="sib"><span>← <a href="GUID-01EA66D8-D50D-49C1-92DA-0D4E8C13824A.html" rel="prev">Interrupt Vector Table Contents</a></span><span><a href="GUID-9F62C3BC-B3F2-4D06-B469-C4FB94C742AC.html" rel="next">Access Control for IVTBASE Registers</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162__GUID-5D535541-C24A-476A-8EF9-EEAE926F1364" style="">11.3.3 Interrupt Vector Table Address
+		Calculation</h1><div class="- topic/body body"><p class="- topic/p p"><u class="+ topic/ph hi-d/u ph u">MVECEN = <code class="+ topic/ph pr-d/codeph ph codeph">0</code></u></p><p class="- topic/p p">When the MVECEN Configuration bit is cleared, the address pointed to by <a class="- topic/xref xref" href="GUID-68C0FDF3-7A26-4084-B1D8-A08C90901A11.html" title="IVTBASE">IVTBASE</a> is used as the
+high-priority interrupt vector address. The low-priority interrupt vector address is offset eight
+instruction words from the address in IVTBASE. </p><p class="- topic/p p">For PIC18 devices, IVTBASE defaults to 000008h, hence the high-priority interrupt vector
+			address will be 000008h and the low-priority interrupt vector address will be 000018h.</p><p class="- topic/p p"><u class="+ topic/ph hi-d/u ph u">MVECEN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code></u></p><p class="- topic/p p">Each interrupt has a unique vector number associated with it, as defined in the IVT. This
+			vector number is used for calculating the location of the interrupt vector for a particular
+			interrupt source.</p><p class="- topic/p p">Interrupt Vector Address = IVTBASE + (2*Vector Number). This calculated interrupt vector
+address value is stored in the <a class="- topic/xref xref" href="GUID-2655611D-A5D7-46DC-98AB-79A4ED0BFD5B.html" title="IVTAD">IVTAD</a> register when an interrupt is received. </p><p class="- topic/p p">User-assigned software priority, when assigned using the IPRx registers, does not affect
+			address calculation and is only used to resolve concurrent interrupts.</p><div class="- topic/note note important note_important" id="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162__GUID-DA6A1BD3-4104-45D8-A2CC-A03281EFE856" data-ofbid="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162__GUID-DA6A1BD3-4104-45D8-A2CC-A03281EFE856"><span class="note__title">Important:</span> If for any reason the
+			address of the ISR cannot be fetched from the vector table, it will cause the system to reset and
+			clear the Memory Execution Violation flag in the Power Control register. This can occur due to
+			any one of the following:<ul class="- topic/ul ul" id="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162__UL_SDL_WFM_WFB" data-ofbid="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162__UL_SDL_WFM_WFB"><li class="- topic/li li" id="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162__GUID-669FE57D-C432-42A2-A31E-9EB381AF9BFD" data-ofbid="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162__GUID-669FE57D-C432-42A2-A31E-9EB381AF9BFD">The entry for the interrupt in the vector
+					table lies outside the executable program memory area</li><li class="- topic/li li" id="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162__GUID-01B19B41-52BD-447D-9D49-0CA7625F499F" data-ofbid="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162__GUID-01B19B41-52BD-447D-9D49-0CA7625F499F">ISR pointed by the vector table lies outside
+					the executable program memory area</li></ul></div><div class="- topic/p p">
+			<div class="table-container"><table class="- topic/table table nozebra" id="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162__TABLE_MK5_YTZ_1GB" data-ofbid="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162__TABLE_MK5_YTZ_1GB" data-cols="4"><caption class="- topic/title title tablecap" data-caption-side="top" data-is-repeated="true"><span class="table--title-label"><span class="table--title-label">Table 11-1. </span></span><span class="table--title" id="GUID-F958A7D3-98F6-4BAC-9F7B-4DBD938FC162__GUID-26E5E156-5CA7-4CE0-8C2D-A1254039BB2F">IVT Calculations Summary</span></caption><colgroup><col style="width:28.57142857142857%"/><col style="width:14.285714285714285%"/><col style="width:28.57142857142857%"/><col style="width:28.57142857142857%"/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-0 rowsep-0" rowspan="2" colspan="2"><strong class="+ topic/ph hi-d/b ph b">IVT Address Calculation</strong></td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="2"><strong class="+ topic/ph hi-d/b ph b">Interrupt Priority INTCON0 Register, IPEN
+								Bit</strong></td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-0 rowsep-0"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></td><td class="- topic/entry entry align-center colsep-0 rowsep-0"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-0 rowsep-0 valign-middle" rowspan="3">Multivector Enable,<p class="- topic/p p">MVECEN Configuration
+									bit</p>
+							</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" rowspan="2"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></td><td class="- topic/entry entry align-center colsep-0 rowsep-0" rowspan="2">IVTBASE</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">High-priority IVTBASE</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-0 rowsep-0">Low-priority IVTBASE + 8 words</td></tr><tr class="- topic/row"><td class="- topic/entry entry align-center colsep-0 rowsep-0"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="2">IVTBASE + 2*(Vector Number)</td></tr></tbody></table></div>
+		</div></div>
+</body>
+</html>

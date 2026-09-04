@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.11.3 Main Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-AFCAA80F-EF1D-4E55-A921-9F0294FCB890.html"/>
+<link rel="next" href="GUID-6E87B5CE-8DDA-4808-AAED-10E84C7D964D.html"/>
+<link rel="up" href="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197.html">38.11 Interrupts</a></li><li>38.11.3 Main Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-AFCAA80F-EF1D-4E55-A921-9F0294FCB890.html" rel="prev">FIFO Combined Interrupts</a></span><span><a href="GUID-6E87B5CE-8DDA-4808-AAED-10E84C7D964D.html" rel="next">Invalid Message Interrupt - IVMIF</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-CDDCE0D8-24C2-4963-ACC8-BDDCE011AF44__GUID-77677C12-0022-4339-99AA-4FBD32061716" style="">38.11.3 Main Interrupts</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The CxINT register contains all the main interrupts. The following interrupts
+            are a logical ‘OR’ of all combined FIFO interrupts: RXIF, TXIF, RXOVIF and TXATIF. These
+            flags are read-only and must be cleared in preceding hierarchies.</p>
+        <p class="- topic/p p">The TEFIF is generated in the TEF. This flag is read-only and must be cleared in
+            preceding hierarchies.</p>
+        <p class="- topic/p p">All interrupts in CxINT can be enabled individually.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-6E87B5CE-8DDA-4808-AAED-10E84C7D964D.html">38.11.3.1 Invalid Message Interrupt - IVMIF</a></li><li><a href="GUID-539CCC91-553B-482C-BE93-F88B6B22F46F.html">38.11.3.2 Wake-Up Interrupt (WAKIF)</a></li><li><a href="GUID-742F8D44-8645-48F3-B861-8C49E3549F94.html">38.11.3.3 CAN Bus Error Interrupt (CERRIF)</a></li><li><a href="GUID-1A8297DC-820C-4FC6-A1ED-A0A6FA7F4F36.html">38.11.3.4 CAN Mode Change Interrupt (MODIF)</a></li><li><a href="GUID-0983CBD0-3CB8-4DBC-A501-341E39494503.html">38.11.3.5 CAN Timer Interrupt (TBCIF)</a></li><li><a href="GUID-121A13C9-8DF9-488B-AB82-8022D839B6B6.html">38.11.3.6 System Error Interrupt (SERRIF)</a></li></ul>
+</nav>
+</body>
+</html>

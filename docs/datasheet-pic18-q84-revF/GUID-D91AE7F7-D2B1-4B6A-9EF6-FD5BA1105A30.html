@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>25.5.1 Reading and Writing TMRx in Asynchronous Counter Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E4547B4A-7C30-4F81-9225-C27E393F85D0.html"/>
+<link rel="next" href="GUID-7C1EE732-0070-410F-8E22-750A992E9F38.html"/>
+<link rel="up" href="GUID-E4547B4A-7C30-4F81-9225-C27E393F85D0.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html">25 TMR1 - Timer1 Module with Gate Control</a></li><li><a href="GUID-E4547B4A-7C30-4F81-9225-C27E393F85D0.html">25.5 Timer1 Operation in Asynchronous Counter Mode</a></li><li>25.5.1 Reading and Writing TMRx in Asynchronous Counter Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-E4547B4A-7C30-4F81-9225-C27E393F85D0.html" rel="prev">Timer1 Operation in Asynchronous Counter Mode</a></span><span><a href="GUID-7C1EE732-0070-410F-8E22-750A992E9F38.html" rel="next">Timer1 16-Bit Read/Write Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-D91AE7F7-D2B1-4B6A-9EF6-FD5BA1105A30__GUID-8140E660-5384-4A2E-8609-8EBA601C848E" style="">25.5.1 Reading and Writing TMRx in Asynchronous
+                Counter Mode</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-D91AE7F7-D2B1-4B6A-9EF6-FD5BA1105A30__ID-42141-00000CAA" data-ofbid="GUID-D91AE7F7-D2B1-4B6A-9EF6-FD5BA1105A30__ID-42141-00000CAA">Reading TMRxH or TMRxL while the timer is running from an external
+                        asynchronous clock will ensure a valid read (taken care of in hardware).
+                        However, the user must keep in mind that reading the 16-bit timer in two
+                        8-bit values itself poses certain problems, since there may be a carry-out
+                        of TMRxL to TMRxH between the reads. </p>
+                <p class="- topic/p p">For writes, it is recommended that the user simply stop the timer and write the
+                        desired values. A write contention may occur by writing to the timer
+                        registers, while the register is incrementing. This may produce an
+                        unpredictable value in the TMRxH:TMRxL register pair.</p>
+    </div>
+
+</body>
+</html>

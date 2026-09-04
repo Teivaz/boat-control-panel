@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.5.7 Transmit Priority — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5A5D3C71-6477-4D5C-B1CE-A6BE1B4785CD.html"/>
+<link rel="next" href="GUID-DCD901D1-5DEF-4433-8261-812C95C8F9D3.html"/>
+<link rel="up" href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html">38.5 Message Transmission</a></li><li>38.5.7 Transmit Priority</li></ol>
+  <div class="sib"><span>← <a href="GUID-5A5D3C71-6477-4D5C-B1CE-A6BE1B4785CD.html" rel="prev">C1TXREQ Register</a></span><span><a href="GUID-DCD901D1-5DEF-4433-8261-812C95C8F9D3.html" rel="next">Transmit Priority of Messages in FIFO</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-59C585AC-6EE8-4791-8431-1E3299BF3EDA__GUID-CAFDCB54-E552-4132-9EAA-F4384F49828B" style="">38.5.7 Transmit Priority</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The transmit priority of the FIFOs and TXQ needs to be configured using the
+            TXPRIx bits (CxFIFOCONy[20:16] and CxTXQCON[20:16]).</p>
+        <p class="- topic/p p">Before transmitting a message, the priorities of the TXQ and the TX FIFOs queued for
+            transmission are compared. The FIFO/TXQ with the highest priority will be transmitted
+            first. For example, if transmit FIFO 1 has a higher priority setting than FIFO 3, all
+            messages in FIFO 1 will be transmitted first. If multiple FIFOs have the same priority,
+            the FIFO with the highest index is transmitted. For example, if FIFO 1 and FIFO 3 have
+            the same priority setting, all messages in FIFO 3 will be transmitted first. If the TXQ
+            and one or more FIFOs have the same priority, all messages in the TXQ will be
+            transmitted first.</p>
+        <p class="- topic/p p">The transmit priority will be recalculated after every successful transmission of a
+            single message.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-DCD901D1-5DEF-4433-8261-812C95C8F9D3.html">38.5.7.1 Transmit Priority of Messages in FIFO</a></li><li><a href="GUID-99E01A86-66E8-4B1E-8D07-7FD2E55FF03F.html">38.5.7.2 Transmit Priority of Messages in TXQ</a></li><li><a href="GUID-369BD587-420E-4A19-8BAC-8961610EC0C3.html">38.5.7.3 Transmit Priority Based on ID</a></li></ul>
+</nav>
+</body>
+</html>

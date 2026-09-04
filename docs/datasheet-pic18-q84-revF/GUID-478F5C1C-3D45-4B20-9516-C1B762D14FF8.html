@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.12.5 CRC Calculation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B1C6E55B-82A3-4756-BC46-26EEC54FD7B8.html"/>
+<link rel="next" href="GUID-F546D623-7E89-45E0-8489-1817163148C0.html"/>
+<link rel="up" href="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li><a href="GUID-88BBC34D-F7B3-4070-820A-3724DC1F6ECA.html">13.12 CRC-on-Boot Module Overview</a></li><li>13.12.5 CRC Calculation</li></ol>
+  <div class="sib"><span>← <a href="GUID-B1C6E55B-82A3-4756-BC46-26EEC54FD7B8.html" rel="prev">Output Pin Setup</a></span><span><a href="GUID-F546D623-7E89-45E0-8489-1817163148C0.html" rel="next">Mismatch Condition</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-478F5C1C-3D45-4B20-9516-C1B762D14FF8__GUID-42BB246D-6B3A-407C-8DDC-5A247F00ADA7" style="">13.12.5 CRC Calculation</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">When the module is enabled (upon POR), the device will scan the regions selected (as
+            defined in <a class="- topic/xref xref" href="GUID-17267C6D-A3AE-4A6A-87E9-5D175E41E706.html"><span><span>Memory Selection</span></span></a>) and
+            run respective CRCs for them, using the 32-bit CRC module. For the boot section, the CRC
+            polynomial (CRCXOR) is determined by the BCRCPOL value in configuration memory, the seed
+            value (CRCOUT) is determined by the BCRCSEED value in configuration memory, the CRC
+            Accumulator mode is configured to augment the data with zeroes (<a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html#ID-0000001A" title="Accumulator Mode">ACCM</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>) and the data are read in 16-bit segments (<a class="- topic/xref xref" href="GUID-A28EB3E5-010F-47AD-906C-EF2A14282EB1.html" title="CRCCON2">CRCCON2</a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0x0F</code>). The resulting check value is compared to the BCRCERES value
+            in configuration memory.</p>
+        <p class="- topic/p p"> For the non-boot sections (application, SAF, configuration and data EEPROM), all
+            selected sections are scanned and calculated together using the polynomial from the
+            CRCPOL value in configuration memory, the seed from the CRCSEED value in configuration
+            memory and is compared against the CRCERES value in configuration memory. Like the boot
+            section, the CRC for non-boot sections is configured to augment the data with zeroes
+                (<a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html#ID-0000001A" title="Accumulator Mode">ACCM</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). For the application and SAF sections, the data
+            are read in 16-bit segments (<a class="- topic/xref xref" href="GUID-A28EB3E5-010F-47AD-906C-EF2A14282EB1.html" title="CRCCON2">CRCCON2</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0x0F</code>), while for the configuration
+            and data EEPROM sections, the data are read in 8-bit segments (<a class="- topic/xref xref" href="GUID-A28EB3E5-010F-47AD-906C-EF2A14282EB1.html" title="CRCCON2">CRCCON2</a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0x07</code>). </p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>14.2.5 BOR and Bulk Erase — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-62CD76E0-CE2A-42E4-ABCE-D2C32CE46D95.html"/>
+<link rel="next" href="GUID-75D2EF46-1461-4B54-9289-F5FB106CF677.html"/>
+<link rel="up" href="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F.html">14 Resets</a></li><li><a href="GUID-FDA1C255-56D5-4DD8-AF69-E03BB390A83B.html">14.2 Brown-out Reset (BOR)</a></li><li>14.2.5 BOR and Bulk Erase</li></ol>
+  <div class="sib"><span>← <a href="GUID-62CD76E0-CE2A-42E4-ABCE-D2C32CE46D95.html" rel="prev">BOR Is Always Off</a></span><span><a href="GUID-75D2EF46-1461-4B54-9289-F5FB106CF677.html" rel="next">Low-Power Brown-out Reset (LPBOR)</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-7C2E68AF-57D7-464E-A104-91E9B6A9D3E1__GUID-91954F79-9BA2-48FE-B2E2-535E8927BE85" style="">14.2.5 BOR and Bulk Erase</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-7C2E68AF-57D7-464E-A104-91E9B6A9D3E1__ID-42138-000001E8" data-ofbid="GUID-7C2E68AF-57D7-464E-A104-91E9B6A9D3E1__ID-42138-000001E8">BOR is forced ON during PFM Bulk Erase operations to make sure
+            that the system code protection cannot be compromised by reducing V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub>.</p>
+        <p class="- topic/p p" id="GUID-7C2E68AF-57D7-464E-A104-91E9B6A9D3E1__ID-42138-000001EA" data-ofbid="GUID-7C2E68AF-57D7-464E-A104-91E9B6A9D3E1__ID-42138-000001EA">During Bulk Erase, the BOR is enabled at the lowest BOR threshold
+            level, even if it is configured to some other value. If V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> falls, the erase
+            cycle will be aborted, but the device will not be reset.</p>
+    </div>
+
+</body>
+</html>

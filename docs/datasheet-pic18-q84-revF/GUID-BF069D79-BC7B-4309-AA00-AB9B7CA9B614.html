@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>31.1.2.3 Center-Aligned Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-128425A3-A49D-4171-AC56-182E3682FC5F.html"/>
+<link rel="next" href="GUID-5A286661-7A99-4AD0-854D-07C62C0E2FE3.html"/>
+<link rel="up" href="GUID-F52944FE-418C-4129-9CD2-09F171BF6ECE.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-842EDB63-E9F6-41F6-B344-D72973B553FE.html">31 PWM - Pulse-Width Modulator with Compare</a></li><li><a href="GUID-EDAB9182-6E78-4A05-8B19-C26925E4D20D.html">31.1 Output Slices</a></li><li><a href="GUID-F52944FE-418C-4129-9CD2-09F171BF6ECE.html">31.1.2 Operating Modes</a></li><li>31.1.2.3 Center-Aligned Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-128425A3-A49D-4171-AC56-182E3682FC5F.html" rel="prev">Right Aligned Mode</a></span><span><a href="GUID-5A286661-7A99-4AD0-854D-07C62C0E2FE3.html" rel="next">Variable Alignment Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-BF069D79-BC7B-4309-AA00-AB9B7CA9B614__GUID-908E5F54-7BE7-4C44-8846-E4913BA3DD86" style="">31.1.2.3 Center-Aligned Mode</h1>
+<div class="- topic/body body">
+<div class="- topic/p p">In Center-Aligned mode, the active duty cycle is centered in the period. The period for this mode
+            is twice that of other modes, as shown in the following equation.<figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-BF069D79-BC7B-4309-AA00-AB9B7CA9B614__EQUATION-DISPLAY_HL5_1NS_VGB" data-ofbid="GUID-BF069D79-BC7B-4309-AA00-AB9B7CA9B614__EQUATION-DISPLAY_HL5_1NS_VGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 31-1. <span id="GUID-BF069D79-BC7B-4309-AA00-AB9B7CA9B614__GUID-3FE2EB9F-1044-43F8-B90E-A9DDC8EFB97D" class="fig--title">Center-Aligned Period</span></span></figcaption>
+                
+                <div class="+ topic/div equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                            <mrow>
+                                <mi>P</mi>
+                                <mi>e</mi>
+                                <mi>r</mi>
+                                <mi>i</mi>
+                                <mi>o</mi>
+                                <mi>d</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mrow>
+                                        <mrow>
+                                            <mo>(</mo>
+                                            <mi>P</mi>
+                                            <mi>R</mi>
+                                            <mo>+</mo>
+                                            <mn>1</mn>
+                                            <mo>)</mo>
+                                        </mrow>
+                                        <mo>×</mo>
+                                        <mn>2</mn>
+                                    </mrow>
+                                    <mrow>
+                                        <msub>
+                                            <mrow>
+                                                <mi>F</mi>
+                                            </mrow>
+                                            <mrow>
+                                                <mi>P</mi>
+                                                <mi>W</mi>
+                                                <mi>M</mi>
+                                                <mi>x</mi>
+                                                <mi>_</mi>
+                                                <mi>c</mi>
+                                                <mi>l</mi>
+                                                <mi>k</mi>
+                                            </mrow>
+                                        </msub>
+                                    </mrow>
+                                </mfrac>
+                            </mrow>
+                        </math></div>
+            </figure> The parameter register specifies the number of PWM clock periods that
+            the output goes Active before the period center. The output goes inactive the same
+            number of prescaled PWM clock periods after the period center. Block and timing diagrams
+                follow.<figure class="- topic/fig fig fignone" id="GUID-BF069D79-BC7B-4309-AA00-AB9B7CA9B614__FIG_YKV_CXX_VGB" data-ofbid="GUID-BF069D79-BC7B-4309-AA00-AB9B7CA9B614__FIG_YKV_CXX_VGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 31-5. <span id="GUID-BF069D79-BC7B-4309-AA00-AB9B7CA9B614__GUID-C7AE869B-6502-4839-A2FC-E96163F6970A" class="fig--title">Center-Aligned Block
+                    Diagram</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-C362D63B-C6BA-4EB7-A281-7B39FFD999C2-high.pdf#toolbar=1" width="488.1" height="331.65"></iframe></span>
+            </figure><figure class="- topic/fig fig fignone" id="GUID-BF069D79-BC7B-4309-AA00-AB9B7CA9B614__FIG_EXJ_2XX_VGB" data-ofbid="GUID-BF069D79-BC7B-4309-AA00-AB9B7CA9B614__FIG_EXJ_2XX_VGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 31-6. <span id="GUID-BF069D79-BC7B-4309-AA00-AB9B7CA9B614__GUID-E753A4B0-4C1F-4E48-8683-1A68FA2AB93F" class="fig--title">Center-Aligned Timing
+                    Diagram</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-1486D0D3-A59F-41A5-BE3A-B9E1BF79F476-high.pdf#toolbar=1" width="609.52" height="305.22"></iframe></span>
+            </figure></div>
+        
+</div>
+
+</body>
+</html>

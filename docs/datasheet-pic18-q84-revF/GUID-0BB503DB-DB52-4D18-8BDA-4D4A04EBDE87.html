@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.1.4 Client Operation in 10-Bit Addressing Modes — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0CE63B54-2CC4-49E3-A21A-393D95521A7D.html"/>
+<link rel="next" href="GUID-616050A8-1C5F-40B5-B95F-9D4F3F9EA326.html"/>
+<link rel="up" href="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-00CC8FE0-4D95-45E7-B513-53CFA7111CBC.html">37.4.1 I2C Client Mode Operation</a></li><li>37.4.1.4 Client Operation in 10-Bit Addressing Modes</li></ol>
+  <div class="sib"><span>← <a href="GUID-0CE63B54-2CC4-49E3-A21A-393D95521A7D.html" rel="prev">Client Reception (7-Bit Addressing Mode)</a></span><span><a href="GUID-616050A8-1C5F-40B5-B95F-9D4F3F9EA326.html" rel="next">Client Transmission (10-Bit Addressing Mode)</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-0BB503DB-DB52-4D18-8BDA-4D4A04EBDE87__GUID-74390086-100C-4058-9256-474BC32C1ADF" style="">37.4.1.4 Client Operation in 10-Bit Addressing
+        Modes</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">In 10-bit Addressing modes, the first two bytes following a Start condition form the
+            10-bit address (see <a class="- topic/xref xref" href="#GUID-0BB503DB-DB52-4D18-8BDA-4D4A04EBDE87__FIG_SMX_MSF_KGB"><span>Figure 37-20</span></a>). The first byte (address high byte) holds the upper two address
+            bits, the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit, and a five digit code
+                (<code class="+ topic/ph pr-d/codeph ph codeph">11110</code>) as defined by the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Specification. The second
+            byte (address low byte) holds the lower eight address bits. In all 10-bit Addressing
+            modes, the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> value contained in the first byte must always be
+            zero (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>). If the host intends to read
+            data from the client, it must issue a Restart condition, followed by the address high
+            byte with R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> set (R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>).</p>
+        <div class="- topic/p p">The first byte is compared to the values in the <a class="- topic/xref xref" href="GUID-9467813D-E19F-44CB-ACF1-357C867EB439.html" title="I2CxADR1">I2CxADR1</a> and <a class="- topic/xref xref" href="GUID-5FB3E556-DEB9-4761-9345-4EC5A7B9E170.html" title="I2CxADR3">I2CxADR3</a>
+            registers in 10-bit Addressing mode or to the masked value of I2CxADR1 in 10-bit
+            Addressing with Masking mode. The second byte is compared to the values in the <a class="- topic/xref xref" href="GUID-B58F548D-6BF9-4193-BD8A-56D39F47B0F2.html" title="I2CxADR0">I2CxADR0</a> and
+                <a class="- topic/xref xref" href="GUID-9ECB3772-CBC7-4B06-BB3D-E72E9E5BF6A8.html" title="I2CxADR2">I2CxADR2</a>
+            registers in 10-bit Addressing mode or to the masked value of I2CxADR0 in 10-bit
+            Addressing with Masking mode. If an address high byte match occurs, the high address
+            byte is copied to <a class="- topic/xref xref" href="GUID-51DC1914-5FC6-4DB6-849E-AC7B6E17D460.html" title="I2CxADB1">I2CxADB1</a> and the R/<span class="+ topic/ph sidscDomain-d/active-low ph active-low">W</span> bit value is copied to the
+            Read Information (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_VMJ_FSP_LGB" title="Read Information(1)">R</a>) bit,
+            and if an address low byte match occurs, the low address byte is copied to <a class="- topic/xref xref" href="GUID-E7CC5B44-63E1-40F0-8F67-30D643607BC5.html">I2CxADB0</a>.</div>
+        <figure class="- topic/fig fig fignone" id="GUID-0BB503DB-DB52-4D18-8BDA-4D4A04EBDE87__FIG_SMX_MSF_KGB" data-ofbid="GUID-0BB503DB-DB52-4D18-8BDA-4D4A04EBDE87__FIG_SMX_MSF_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-20. <span id="GUID-0BB503DB-DB52-4D18-8BDA-4D4A04EBDE87__GUID-2E699A8C-9D21-411A-9092-B9DED153CA25" class="fig--title">Upper and Lower 10-Bit Address
+                Bytes</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-0BB503DB-DB52-4D18-8BDA-4D4A04EBDE87__IMAGE_TMX_MSF_KGB" src="GUID-5C73257E-4E00-4A85-BC3C-EB3F0E8B1B54-high.svg"/></span>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-616050A8-1C5F-40B5-B95F-9D4F3F9EA326.html">37.4.1.4.1 Client Transmission (10-Bit Addressing Mode)</a></li><li><a href="GUID-A7C850A9-0037-4ED3-887C-1BB680CB3BDF.html">37.4.1.4.2 Client Reception (10-Bit Addressing Mode)</a></li></ul>
+</nav>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>14.10.1 Memory Execution Violation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD.html"/>
+<link rel="next" href="GUID-7F8ECE9D-42A1-486A-BD12-AC9DB1FABF1F.html"/>
+<link rel="up" href="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F.html">14 Resets</a></li><li><a href="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD.html">14.10 Start-Up Sequence</a></li><li>14.10.1 Memory Execution Violation</li></ol>
+  <div class="sib"><span>← <a href="GUID-330D6640-0F60-44B4-99F3-D0039C0ECDAD.html" rel="prev">Start-Up Sequence</a></span><span><a href="GUID-7F8ECE9D-42A1-486A-BD12-AC9DB1FABF1F.html" rel="next">Determining the Cause of a Reset</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-C67DC5AB-1A53-473D-9966-DB6802A6E73C__GUID-F4D9BA32-1C6F-428C-A515-608902EF022B" style="">14.10.1 Memory Execution Violation</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p">A memory execution violation Reset occurs if executing an instruction being
+            fetched from outside the valid execution area. The invalid execution areas are:<ol class="- topic/ol ol" id="GUID-C67DC5AB-1A53-473D-9966-DB6802A6E73C__OL_ITN_L1S_VGB" data-ofbid="GUID-C67DC5AB-1A53-473D-9966-DB6802A6E73C__OL_ITN_L1S_VGB">
+                <li class="- topic/li li" id="GUID-C67DC5AB-1A53-473D-9966-DB6802A6E73C__GUID-029D5B0A-937D-4EC0-93AA-834F95F9BD49" data-ofbid="GUID-C67DC5AB-1A53-473D-9966-DB6802A6E73C__GUID-029D5B0A-937D-4EC0-93AA-834F95F9BD49">Addresses outside implemented
+                    program memory.</li>
+                <li class="- topic/li li" id="GUID-C67DC5AB-1A53-473D-9966-DB6802A6E73C__GUID-3846614A-DE42-4E9E-81CF-1462218CA9EA" data-ofbid="GUID-C67DC5AB-1A53-473D-9966-DB6802A6E73C__GUID-3846614A-DE42-4E9E-81CF-1462218CA9EA">Storage Area Flash (SAF) inside
+                    program memory, if it is enabled.</li>
+            </ol></div>
+        <p class="- topic/p p">When a memory execution violation is generated, the device is reset and the
+                <a class="- topic/xref xref" href="GUID-CF2E33A7-A0A9-4E7D-A0DD-459DD614A9A4.html#BITFIELD_UK3_PHR_VGB" title="Memory Violation Reset Flag"><span class="+ topic/ph sidscDomain-d/active-low ph active-low">MEMV</span></a> bit is cleared to
+            signal the cause of the Reset. The <span class="+ topic/ph sidscDomain-d/active-low ph active-low">MEMV</span> bit must be set in the
+            user code after a memory execution violation Reset has occurred to detect further
+            violation Resets.</p>
+    </div>
+
+</body>
+</html>

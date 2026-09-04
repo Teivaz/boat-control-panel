@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.9 Operation After FIFO Overflow — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A3BBD7A8-AE90-4568-A041-9F17376536B3.html"/>
+<link rel="next" href="GUID-C75CCD6E-F156-44D3-B559-BDCBD6B2914E.html"/>
+<link rel="up" href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li>35.9 Operation After FIFO Overflow</li></ol>
+  <div class="sib"><span>← <a href="GUID-A3BBD7A8-AE90-4568-A041-9F17376536B3.html" rel="prev">Delayed Receive Interrupt</a></span><span><a href="GUID-C75CCD6E-F156-44D3-B559-BDCBD6B2914E.html" rel="next">Receive and Transmit Buffers</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-F19C980D-B2C3-4290-AEB3-DE26CFEB34FC__GUID-6973B808-CB50-4B4C-B62A-63325E963E5E" style="">35.9 Operation After FIFO Overflow</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The Receive Shift Register (RSR) can be configured to stop or continue running during a
+            receive FIFO Overflow condition. Stopped operation is the Legacy mode.</p>
+        <p class="- topic/p p">When the RSR continues to run during an Overflow condition, the first word received after
+            clearing the overflow will always be valid.</p>
+        <p class="- topic/p p">When the RSR is stopped during an Overflow condition, the synchronization with the Start
+            bits is lost. Therefore, the first word received after the overflow is cleared may start
+            in the middle of a word.</p>
+        <p class="- topic/p p">Operation during overflow is selected with the <a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_MQF_ZNS_YY" title="Run During Overflow Control">RUNOVF</a> bit. When the RUNOVF bit is set, the receiver maintains
+            synchronization with the Start bits throughout the Overflow condition.</p>
+    </div>
+
+</body>
+</html>

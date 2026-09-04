@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.8 DMA Setup and Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A74C89C5-9B59-47D6-B369-CF06D50B9826.html"/>
+<link rel="next" href="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4.html"/>
+<link rel="up" href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li>16.8 DMA Setup and Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-A74C89C5-9B59-47D6-B369-CF06D50B9826.html" rel="prev">Overrun Interrupt</a></span><span><a href="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4.html" rel="next">Source Stop</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-2714747C-0C4A-45FD-B26A-7063DDB798E7" style="">16.8 DMA Setup and Operation</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The following steps illustrate how to configure the DMA for data
+            transfer:</p>
+        <ol class="- topic/ol ol" id="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__OL_DPY_WBJ_SFB" data-ofbid="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__OL_DPY_WBJ_SFB">
+            <li class="- topic/li li" id="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-B7D70A5C-1BE4-435D-84B4-416FDF9D3374" data-ofbid="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-B7D70A5C-1BE4-435D-84B4-416FDF9D3374">Select the desired DMA using the
+                    <a class="- topic/xref xref" href="GUID-141BC43E-B279-48B4-B399-2C31E7BB5331.html" title="DMASELECT">DMASELECT</a> register.</li>
+            <li class="- topic/li li" id="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-B84F555C-646C-43AF-9102-10B3BD1A6857" data-ofbid="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-B84F555C-646C-43AF-9102-10B3BD1A6857">Program the appropriate source and
+                destination addresses for the transaction into the DMAnSSA and DMAnDSA
+                registers.</li>
+            <li class="- topic/li li" id="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-5A4B55BC-F520-4C49-9ED7-5C532B21BBCD" data-ofbid="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-5A4B55BC-F520-4C49-9ED7-5C532B21BBCD"> Select the source memory region that
+                is being addressed by the DMAnSSA register, using the <a class="- topic/xref xref" href="GUID-2A5BB90C-F4F7-4EDC-8B9F-71709DC67C52.html#GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C" title="Source Memory Region Selection"><span><span>SMR</span></span></a> bits.</li>
+            <li class="- topic/li li" id="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-D6B9FD44-25D5-4A67-833B-B1C1D76C312A" data-ofbid="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-D6B9FD44-25D5-4A67-833B-B1C1D76C312A">Program the <a class="- topic/xref xref" href="GUID-2A5BB90C-F4F7-4EDC-8B9F-71709DC67C52.html#BITFIELD_RCN_QS4_3GB" title="Source Address Mode Selection">SMODE</a> and <a class="- topic/xref xref" href="GUID-2A5BB90C-F4F7-4EDC-8B9F-71709DC67C52.html#GUID-1C79FAB1-2A96-4E11-9081-8E6B0B1B3A4E" title="Destination Address Mode Selection"><span><span>DMODE</span></span></a> bits to select the Addressing mode. </li>
+            <li class="- topic/li li" id="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-3A879C3D-81EE-4DFC-98EA-C5F246207BB9" data-ofbid="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-3A879C3D-81EE-4DFC-98EA-C5F246207BB9">Program the source size (DMAnSSZ) and
+                destination size (DMAnDSZ) registers with the number of bytes to be transferred. It
+                is recommended for proper operation that the size registers be a multiple of each
+                other.</li>
+            <li class="- topic/li li" id="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-8965540D-0222-42DD-AA72-9BE3B01A358C" data-ofbid="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-8965540D-0222-42DD-AA72-9BE3B01A358C">If the user desires to disable data
+                transfers once the message has completed, then the <a class="- topic/xref xref" href="GUID-2A5BB90C-F4F7-4EDC-8B9F-71709DC67C52.html#BITFIELD_ZKF_5S4_3GB" title="Source Counter Reload Stop"><span><span>SSTP</span></span></a> and <a class="- topic/xref xref" href="GUID-2A5BB90C-F4F7-4EDC-8B9F-71709DC67C52.html#BITFIELD_QJJ_143_F1B" title="Destination Counter Reload Stop"><span><span>DSTP</span></span></a> bits need to be set (see the <a class="- topic/xref xref" href="GUID-BA6B557D-696A-4665-B89A-BD476295E43F.html">Source/Destination Stop</a> section).</li>
+            <li class="- topic/li li" id="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-EADC8D43-0EF2-4D7B-9225-1F54B4A8694C" data-ofbid="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-EADC8D43-0EF2-4D7B-9225-1F54B4A8694C">If using hardware triggers for data
+                transfer, set up the hardware trigger interrupt sources for the starting and
+                aborting DMA transfers (DMAnSIRQ and DMAnAIRQ), and set the corresponding Interrupt
+                Request Enable (<a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#BITFIELD_QJJ_143_F1B" title="Start of Transfer Interrupt Request Enable"><span><span>SIRQEN</span></span></a> and <a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#UV1_PQ4_3GB" title="Abort of Transfer Interrupt Request Enable"><span><span>AIRQEN</span></span></a>)
+                bits.</li>
+            <li class="- topic/li li" id="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-8565E1C8-AD7F-4CCF-80E3-1E4C88E3298A" data-ofbid="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-8565E1C8-AD7F-4CCF-80E3-1E4C88E3298A">Select the priority level for the DMA
+                (see the <strong class="+ topic/ph hi-d/b ph b">“System Arbitration”</strong> section in the <strong class="+ topic/ph hi-d/b ph b">“PIC18 CPU”</strong> chapter) and
+                lock the priorities (see the <strong class="+ topic/ph hi-d/b ph b">“Priority Lock”</strong> section in the <strong class="+ topic/ph hi-d/b ph b">“PIC18
+                    CPU”</strong> chapter).</li>
+            <li class="- topic/li li" id="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-0F02814A-1384-47E8-8CEC-2C9AB44F4BAB" data-ofbid="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-0F02814A-1384-47E8-8CEC-2C9AB44F4BAB">Enable the DMA by setting the <a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#GUID-1C79FAB1-2A96-4E11-9081-8E6B0B1B3A4E" title="DMA Module Enable"><span><span>EN</span></span></a> bit.</li>
+            <li class="- topic/li li" id="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-5777BC13-4CC2-4A2B-B9BC-221D790D7431" data-ofbid="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-5777BC13-4CC2-4A2B-B9BC-221D790D7431">If using software control for data
+                transfer, set the <a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C" title="DMA Transaction"><span><span>DGO</span></span></a> bit, else this bit will be set by the hardware
+                trigger.</li>
+        </ol>
+        <p class="- topic/p p">Once the DMA is set up, <a class="- topic/xref xref" href="#GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__FIG_BKB_BWW_SFB"><span>Figure 16-5</span></a> describes the sequence of operation when the DMA uses
+            hardware triggers and utilizes the unused CPU cycles (bubble) for DMA transfers.</p>
+        <p class="- topic/p p">The following sections describe with visual reference the sequence of events
+            for different configurations of the DMA module.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__FIG_BKB_BWW_SFB" data-ofbid="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__FIG_BKB_BWW_SFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 16-5. <span id="GUID-C24B40EA-7FA2-483D-A0F7-A422D39175EA__GUID-B5FC698C-7EDF-4C21-9170-D82066F811DC" class="fig--title">DMA Operation with Hardware
+                Trigger</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-D8F77F5C-CEB4-48C6-913D-2EA92B86C31D-high.pdf#toolbar=1" width="450" height="894.9537337031181"></iframe></span>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-0E9137D4-BAFA-4C15-A2F8-3A96D21B8DF4.html">16.8.1 Source Stop</a></li><li><a href="GUID-AE44F94A-ED8C-40B1-A147-29DDCB210A49.html">16.8.2 Destination Stop</a></li><li><a href="GUID-4B10417A-17B1-49E2-8354-DC4F21B38510.html">16.8.3 Continuous Transfer</a></li><li><a href="GUID-B831B66E-9FD4-45EB-A552-402CE09BB66D.html">16.8.4 Transfer from SFR to GPR</a></li><li><a href="GUID-ABD8FEFB-C4E8-4594-B2AA-B293E6771CAA.html">16.8.5 Overrun Condition</a></li><li><a href="GUID-C22EF640-52A3-4F62-88F9-D7C4EFC2E4D6.html">16.8.6 Abort Trigger, Message Complete</a></li><li><a href="GUID-76105E06-ECE6-4FB2-A217-DB3B9F45768E.html">16.8.7 Abort Trigger, Message in Progress</a></li></ul>
+</nav>
+</body>
+</html>

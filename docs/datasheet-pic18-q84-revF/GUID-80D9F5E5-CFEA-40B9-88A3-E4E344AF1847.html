@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>25.7.6 Timer1 Gate Event Interrupt — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B761FC16-B172-4692-84F1-CBAAC6DEFA2E.html"/>
+<link rel="next" href="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9.html"/>
+<link rel="up" href="GUID-BA690294-A6ED-4AE0-86FE-CD2BF16037F8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-A6391803-F4AF-4119-AB3D-3CC800E050B4.html">25 TMR1 - Timer1 Module with Gate Control</a></li><li><a href="GUID-BA690294-A6ED-4AE0-86FE-CD2BF16037F8.html">25.7 Timer1 Gate</a></li><li>25.7.6 Timer1 Gate Event Interrupt</li></ol>
+  <div class="sib"><span>← <a href="GUID-B761FC16-B172-4692-84F1-CBAAC6DEFA2E.html" rel="prev">Timer1 Gate Value Status</a></span><span><a href="GUID-99E3CB2A-9659-4B41-BA21-4153218130A9.html" rel="next">Timer1 Interrupt</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-80D9F5E5-CFEA-40B9-88A3-E4E344AF1847__GUID-AADBCD6D-002F-40CD-91D2-1E2785A7D2D7" style="">25.7.6 Timer1 Gate Event Interrupt</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-80D9F5E5-CFEA-40B9-88A3-E4E344AF1847__ID-42141-00000D4A" data-ofbid="GUID-80D9F5E5-CFEA-40B9-88A3-E4E344AF1847__ID-42141-00000D4A">When Timer1 gate event interrupt is enabled, it is possible to
+            generate an interrupt upon the completion of a gate event. When the falling edge of GVAL
+            occurs, the TMRxGIF flag bit in one of the PIR registers will be set. If the TMRxGIE bit
+            in the corresponding PIE register is set, then an interrupt will be recognized.</p>
+        <p class="- topic/p p" id="GUID-80D9F5E5-CFEA-40B9-88A3-E4E344AF1847__ID-42141-00000D4C" data-ofbid="GUID-80D9F5E5-CFEA-40B9-88A3-E4E344AF1847__ID-42141-00000D4C">The TMRxGIF flag bit operates even when the Timer1 gate is not
+            enabled (the GE bit is cleared). </p>
+    </div>
+
+</body>
+</html>

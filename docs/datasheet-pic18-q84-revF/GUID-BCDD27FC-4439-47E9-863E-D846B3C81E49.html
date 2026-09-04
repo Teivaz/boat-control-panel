@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.1.1 Module Functionality — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3784254A-3310-43C5-A771-2A8DAEC07962.html"/>
+<link rel="next" href="GUID-84A4D028-1C85-48B1-A96D-5816A098641F.html"/>
+<link rel="up" href="GUID-3784254A-3310-43C5-A771-2A8DAEC07962.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-3784254A-3310-43C5-A771-2A8DAEC07962.html">38.1 Module Overview</a></li><li>38.1.1 Module Functionality</li></ol>
+  <div class="sib"><span>← <a href="GUID-3784254A-3310-43C5-A771-2A8DAEC07962.html" rel="prev">Module Overview</a></span><span><a href="GUID-84A4D028-1C85-48B1-A96D-5816A098641F.html" rel="next">Modes of Operation</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-0085CFBA-B603-4295-9BFE-71CF7CB489CA" style="">38.1.1 Module Functionality</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The CAN FD module consists of the CAN message/protocol handler and the device
+            RAM devoted to CAN FIFOs. The protocol handler performs the needed CAN protocol actions,
+            transferring data in and out of the FIFOs as defined by the firmware (see <a class="- topic/xref xref" href="#GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__FIG_MJT_3S1_SJB"><span>Figure 38-1</span></a>). </p>
+        <p class="- topic/p p">The following sequence illustrates the necessary initialization steps before the CAN
+            module can be used to transmit or receive a message. Steps can be added or removed
+            depending on the requirements of the application.</p>
+        <ol class="- topic/ol ol" id="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__OL_MBT_VMK_43B" data-ofbid="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__OL_MBT_VMK_43B">
+            <li class="- topic/li li" id="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-4356C828-E0E8-480F-A760-9CEA006D2FB9" data-ofbid="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-4356C828-E0E8-480F-A760-9CEA006D2FB9">Use the CANRXPPS and appropriate RxyPPS registers to map the CANRX and CANTX
+                functions to the desired pins of the device. </li>
+            <li class="- topic/li li" id="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-D2C34E8C-53AB-4EFB-B5EF-D512FDBB6B38" data-ofbid="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-D2C34E8C-53AB-4EFB-B5EF-D512FDBB6B38">Initialize LAT, TRIS and ANSEL bits
+                for the selected CANRX and CANTX pins.</li>
+            <li class="- topic/li li" id="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-4CC3C3A2-49B6-4A94-89B2-441F0DE08C20" data-ofbid="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-4CC3C3A2-49B6-4A94-89B2-441F0DE08C20">Ensure that the CAN module is in
+                Configuration mode. </li>
+            <li class="- topic/li li" id="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-147BACBC-B707-4B52-9D0A-196D84576BA4" data-ofbid="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-147BACBC-B707-4B52-9D0A-196D84576BA4">Set up Baud Rate registers.</li>
+            <li class="- topic/li li" id="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-97D10B69-870A-437E-896F-DEB9D3785988" data-ofbid="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-97D10B69-870A-437E-896F-DEB9D3785988">Ensure FIFOs are properly configured
+                as transmit/receive.</li>
+            <li class="- topic/li li" id="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-EA31B3B5-DD13-48D0-89A9-FD0FC72D001A" data-ofbid="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-EA31B3B5-DD13-48D0-89A9-FD0FC72D001A">Set up Filter and Mask
+                registers.</li>
+            <li class="- topic/li li" id="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-4E21EF8B-70B1-4F43-A0BA-3BA9EE68B257" data-ofbid="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-4E21EF8B-70B1-4F43-A0BA-3BA9EE68B257">If desired, populate transmit FIFOs
+                with data to transmit.</li>
+            <li class="- topic/li li" id="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-3A9105A6-2120-46A6-9A7F-A98AA810DFAD" data-ofbid="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-3A9105A6-2120-46A6-9A7F-A98AA810DFAD">Set the CAN module to Normal/Normal CAN FD or any other mode required by the
+                application logic.</li>
+        </ol>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__FIG_MJT_3S1_SJB" data-ofbid="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__FIG_MJT_3S1_SJB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-1. <span id="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__GUID-9D511096-2A44-4ED9-944F-3E355E0EAD14" class="fig--title">CAN FD Module Simplified Block Diagram</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-BCDD27FC-4439-47E9-863E-D846B3C81E49__IMAGE_NJT_3S1_SJB" src="GUID-18F92694-4B0C-495B-AD9B-7894B5441A00-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

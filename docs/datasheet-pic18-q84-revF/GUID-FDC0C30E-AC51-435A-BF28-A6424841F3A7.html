@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.5.3 OSCCON2 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html"/>
+<link rel="next" href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html"/>
+<link rel="up" href="GUID-C1498132-5FBC-414F-AC9D-CFFF65E4C262.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-C1498132-5FBC-414F-AC9D-CFFF65E4C262.html">12.5 Register Definitions: Oscillator Module</a></li><li>12.5.3 OSCCON2</li></ol>
+  <div class="sib"><span>← <a href="GUID-E69563FD-E550-4A06-B816-634069D09D89.html" rel="prev">OSCCON1</a></span><span><a href="GUID-2DC873D2-9BC8-4C22-992D-612F57F5C694.html" rel="next">OSCCON3</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7__GUID-75BD259A-7426-47BD-AD09-26F3E8ADBEA9" style="">12.5.3  OSCCON2</h1><section id="GUID-17299ADC-ABAD-437F-8478-EF32EA27A2C6" class="- topic/section reference/section sidsc-register/registerDescription ">Oscillator Control
+            Register 2<div class="- topic/note note notype note_notype endnote" id="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7__GUID-A2C4CD01-25EC-46A0-A75D-3B32AED9F13C" data-ofbid="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7__GUID-A2C4CD01-25EC-46A0-A75D-3B32AED9F13C"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7__OL_YGT_BSH_ZGB" data-ofbid="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7__OL_YGT_BSH_ZGB">
+                    <li class="- topic/li li" id="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7__GUID-E4AD8B49-11BB-4CC9-804A-E0CDC1BC25DF" data-ofbid="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7__GUID-E4AD8B49-11BB-4CC9-804A-E0CDC1BC25DF">The RSTOSC value is the value
+                        present when user code execution begins. Refer to the RSTOSC Configuration
+                        bits or the RSTOSC selection table for the Reset Oscillator selections.</li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>OSCCON2</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x0AE</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7__GUID-5D80E406-A15C-4CD2-8C9F-27B163B81FEE" data-ofbid="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7__GUID-5D80E406-A15C-4CD2-8C9F-27B163B81FEE"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="3">COSC[2:0]</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="4">CDIV[3:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">f</td><td class="- topic/entry entry colsep-0 rowsep-0">f</td><td class="- topic/entry entry colsep-0 rowsep-0">f</td><td class="- topic/entry entry colsep-0 rowsep-0">f</td><td class="- topic/entry entry colsep-0 rowsep-0">f</td><td class="- topic/entry entry colsep-0 rowsep-0">f</td><td class="- topic/entry entry colsep-0 rowsep-0">f</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-17299ADC-ABAD-437F-8478-EF32EA27A2C6" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-97A74ABE-A6FE-4387-88C8-D2D02745E246__GUID-21490E5C-759D-47A4-B133-753BC951FE37" id="GUID-97A74ABE-A6FE-4387-88C8-D2D02745E246">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-97A74ABE-A6FE-4387-88C8-D2D02745E246__GUID-21490E5C-759D-47A4-B133-753BC951FE37" style=""> Bits 6:4 – COSC[2:0] <span>
+            Current Oscillator Source Select (read-only)<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7__GUID-E4AD8B49-11BB-4CC9-804A-E0CDC1BC25DF">1</a>)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-97A74ABE-A6FE-4387-88C8-D2D02745E246__GUID-0B77E526-087A-4E72-93C3-BC12B186B604" data-ofbid="GUID-97A74ABE-A6FE-4387-88C8-D2D02745E246__GUID-0B77E526-087A-4E72-93C3-BC12B186B604">Indicates the
+                current oscillator source per the <a class="- topic/xref xref" href="GUID-EE6A06F4-A04B-4D85-BA51-9C9047654FE5.html#GUID-EE6A06F4-A04B-4D85-BA51-9C9047654FE5__SECTION_ETP_PQT_DHB">NOSC/COSC Clock Source Selection
+                Table</a>.</section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="DMW_BTH_ZGB__GUID-6910FD81-D97C-4826-9DCE-D5A4DC195A49" id="DMW_BTH_ZGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="DMW_BTH_ZGB__GUID-6910FD81-D97C-4826-9DCE-D5A4DC195A49" style=""> Bits 3:0 – CDIV[3:0] <span>Current Divider
+            Select (read-only)</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="DMW_BTH_ZGB__GUID-B146DE62-8A77-4FEB-A20D-9EA9CC07FD6F" data-ofbid="DMW_BTH_ZGB__GUID-B146DE62-8A77-4FEB-A20D-9EA9CC07FD6F">Indicates the
+                current postscaler divider ratio per the <a class="- topic/xref xref" href="GUID-EE6A06F4-A04B-4D85-BA51-9C9047654FE5.html#GUID-EE6A06F4-A04B-4D85-BA51-9C9047654FE5__SECTION_SMN_1RT_DHB">NDIV/CDIV Clock Divider Table</a>.</section>
+            
+        </div>
+    </article>
+                
+                    The RSTOSC value is the value
+                        present when user code execution begins. Refer to the RSTOSC Configuration
+                        bits or the RSTOSC selection table for the Reset Oscillator selections.
+                
+            
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.3.2.2 Protocol Exception Disable — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-888EE78A-4035-48CA-8C43-C2716CB48967.html"/>
+<link rel="next" href="GUID-E0F870F4-4D74-4EEB-8078-F0CC18DA0152.html"/>
+<link rel="up" href="GUID-B5ABE4B5-585B-496B-B369-938C5BEFD314.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html">38.3 Configuration</a></li><li><a href="GUID-B5ABE4B5-585B-496B-B369-938C5BEFD314.html">38.3.2 CAN Configuration</a></li><li>38.3.2.2 Protocol Exception Disable</li></ol>
+  <div class="sib"><span>← <a href="GUID-888EE78A-4035-48CA-8C43-C2716CB48967.html" rel="prev">ISO CRC Enable</a></span><span><a href="GUID-E0F870F4-4D74-4EEB-8078-F0CC18DA0152.html" rel="next">Wake-up Filter</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-F2B32D30-E714-46B8-8547-972CA632F2A9__GUID-51C75141-F97E-41F1-BC4B-B9CD92FF99F7" style="">38.3.2.2 Protocol Exception Disable</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The negative edge between the FDF bit and the “reserved bit” in CAN FD frames is
+            important for the calculation of the transceiver delay and for hard synchronization.
+            Therefore, if the “reserved bit” following the FDF bit is detected recessive, the CAN FD
+            Protocol Module will treat this as a form error. This is called, “Protocol Exception
+            Event Detection Disabled” and is configured by setting the PXEDIS bit. The Protocol
+            Exception Event Detection Disabled can be enabled by clearing the PXEDIS bit. As a
+            reaction to the protocol exception event, the error counters are not changed, hard
+            synchronization is enabled, the module sends recessive bits and enters the Bus
+            Integration state.</p>
+    </div>
+
+</body>
+</html>

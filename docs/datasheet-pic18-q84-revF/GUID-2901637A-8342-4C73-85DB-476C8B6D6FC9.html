@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.5.10 Aborting Transmission — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-EC7A5E7F-854A-4961-84E0-1F03C8350CB0.html"/>
+<link rel="next" href="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A.html"/>
+<link rel="up" href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html">38.5 Message Transmission</a></li><li>38.5.10 Aborting Transmission</li></ol>
+  <div class="sib"><span>← <a href="GUID-EC7A5E7F-854A-4961-84E0-1F03C8350CB0.html" rel="prev">Unlimited Retransmission</a></span><span><a href="GUID-B8DF3374-FDD8-4A15-9D4E-93C0E388892A.html" rel="next">Remote Transmit Request (RTR)</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-2901637A-8342-4C73-85DB-476C8B6D6FC9__GUID-52C46AB3-A145-414C-95D5-46A3FB31FBEA" style="">38.5.10 Aborting Transmission</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">A pending transmission can only be aborted before the transmission of the message starts,
+            before the Start-of-Frame (SOF).</p>
+        <p class="- topic/p p">The transmission of a specific FIFO can be aborted by clearing TXREQ in the
+            CAN Transmit Queue Control register; it cannot be aborted by clearing the bits in the
+            CxTXREQ registers. Writing a ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’ to one of the bits in the CxTXREQ
+            registers will be ignored. The TXABT bit in the CAN FIFO Status y register will be set
+            after a successful abortion. TXREQ will remain set until the message either aborts or is
+            successfully transmitted.</p>
+        <p class="- topic/p p">Setting ABAT (CxCON[27]) will abort all pending messages of all FIFOs. After all TXREQx
+            bits are cleared, ABAT has to be cleared in order to transmit new messages.</p>
+        <p class="- topic/p p">Clearing TXREQ for a transmit FIFO will attempt to abort all transmissions in the FIFO.
+            If a message is successfully transmitted, the FIFO index will be updated as normal. If
+            the message is successfully aborted, the FIFO index will not change.</p>
+        <p class="- topic/p p">The user can then use the FIFO Message Index bits, FIFOCI[4:0]
+            (CxFIFOSTAy[12:8]), to identify messages that are transmitted. To reset the transmit
+            FIFO index and erase all pending messages, the user can set the FRESET bit. The FIFO can
+            then be loaded with new messages to be transmitted.</p>
+    </div>
+
+</body>
+</html>

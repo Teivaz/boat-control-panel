@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>19.9 ODCONx - Open-Drain Control — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E55494A6-BCE4-46FD-8F94-81BC7A76CFE4.html"/>
+<link rel="next" href="GUID-665115EC-91E3-4534-A8A0-A0B6A49A966B.html"/>
+<link rel="up" href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html">19 I/O Ports</a></li><li>19.9 ODCONx - Open-Drain Control</li></ol>
+  <div class="sib"><span>← <a href="GUID-E55494A6-BCE4-46FD-8F94-81BC7A76CFE4.html" rel="prev">SLRCONx - Slew Rate Control</a></span><span><a href="GUID-665115EC-91E3-4534-A8A0-A0B6A49A966B.html" rel="next">Edge Selectable Interrupt-on-Change</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-1B0F1CC7-B6E8-4673-AEB9-BED7A3D7E331__GUID-AE081392-5258-47C3-B5DE-571EC30263A7" style="">19.9 ODCONx - Open-Drain Control</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-1B0F1CC7-B6E8-4673-AEB9-BED7A3D7E331__ID-42127-000000EE" data-ofbid="GUID-1B0F1CC7-B6E8-4673-AEB9-BED7A3D7E331__ID-42127-000000EE">The <a class="- topic/xref xref" href="GUID-50DFED6A-CB8A-459A-A967-7315CAF7BF78.html" title="ODCONx">ODCONx</a> register controls the open-drain feature of
+            the port. Open-drain operation is independently selected for each pin. When a ODCONx bit
+            is set (ODCONx = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the corresponding port output becomes an
+            open-drain driver capable of sinking current only. When a ODCONx bit is cleared (ODCONx
+            = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the corresponding port output pin is the standard push-pull drive
+            capable of sourcing and sinking current.</p>
+    
+        <div class="- topic/note note important note_important" id="GUID-1B0F1CC7-B6E8-4673-AEB9-BED7A3D7E331__GUID-4037A721-612E-4EC5-A81E-7456B325334B" data-ofbid="GUID-1B0F1CC7-B6E8-4673-AEB9-BED7A3D7E331__GUID-4037A721-612E-4EC5-A81E-7456B325334B"><span class="note__title">Important:</span> It is necessary to set open-drain control when
+            using the pin for I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C.</div>
+    </div>
+
+</body>
+</html>

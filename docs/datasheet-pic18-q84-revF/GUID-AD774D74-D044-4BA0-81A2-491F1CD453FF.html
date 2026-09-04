@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>29.3.2 Timer1 Mode for Compare — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4A3ABF7E-DCD9-4904-8155-B3748CC526D7.html"/>
+<link rel="next" href="GUID-9DB92477-1080-40DF-BA49-D2D696DD20B2.html"/>
+<link rel="up" href="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html">29 CCP - Capture/Compare/PWM Module</a></li><li><a href="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944.html">29.3 Compare Mode</a></li><li>29.3.2 Timer1 Mode for Compare</li></ol>
+  <div class="sib"><span>← <a href="GUID-4A3ABF7E-DCD9-4904-8155-B3748CC526D7.html" rel="prev">CCPx Pin Configuration</a></span><span><a href="GUID-9DB92477-1080-40DF-BA49-D2D696DD20B2.html" rel="next">Compare During Sleep</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-AD774D74-D044-4BA0-81A2-491F1CD453FF__GUID-64F23D9F-A2AE-4175-B6DC-FC07AAB88538" style="">29.3.2 Timer1 Mode for Compare</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-AD774D74-D044-4BA0-81A2-491F1CD453FF__ID-42109-0000066E" data-ofbid="GUID-AD774D74-D044-4BA0-81A2-491F1CD453FF__ID-42109-0000066E">In Compare mode, Timer1 must be running in either Timer mode or
+         Synchronized Counter mode. The compare operation may not work in Asynchronous Counter
+         mode.</p>
+      <p class="- topic/p p" id="GUID-AD774D74-D044-4BA0-81A2-491F1CD453FF__ID-42109-0000066F" data-ofbid="GUID-AD774D74-D044-4BA0-81A2-491F1CD453FF__ID-42109-0000066F">See the “<strong class="+ topic/ph hi-d/b ph b">TMR1 - Timer1 Module with Gate Control</strong>” chapter for
+         more information on configuring Timer1.</p>
+      <div class="- topic/note note important note_important" id="GUID-AD774D74-D044-4BA0-81A2-491F1CD453FF__ID-42109-00000677" data-ofbid="GUID-AD774D74-D044-4BA0-81A2-491F1CD453FF__ID-42109-00000677"><span class="note__title">Important:</span> Clocking Timer1 from the system clock
+            (F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>) must not be used in Compare mode. For Compare mode to recognize the
+         trigger event on the CCPx pin, Timer1 must be clocked from the instruction clock
+            (F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4) or from an external clock source.</div>
+   </div>
+
+</body>
+</html>

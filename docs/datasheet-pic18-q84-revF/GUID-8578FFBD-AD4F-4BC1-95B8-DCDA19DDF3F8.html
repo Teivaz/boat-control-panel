@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.5.2 Loading Messages into Transmit FIFO — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8.html"/>
+<link rel="next" href="GUID-2CA3B0CB-194E-4DB3-8CE0-91E2D97BB56C.html"/>
+<link rel="up" href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html">38.5 Message Transmission</a></li><li>38.5.2 Loading Messages into Transmit FIFO</li></ol>
+  <div class="sib"><span>← <a href="GUID-1400DE4C-D66A-453B-AEE5-6E1D00240DD8.html" rel="prev">Transmit Message Object</a></span><span><a href="GUID-2CA3B0CB-194E-4DB3-8CE0-91E2D97BB56C.html" rel="next">Loading Messages Into Transmit Queue</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-8578FFBD-AD4F-4BC1-95B8-DCDA19DDF3F8__GUID-EA2D031F-D56C-4D86-9CA9-393FD2268052" style="">38.5.2 Loading Messages into Transmit
+        FIFO</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">Before loading a message into the FIFO, the application must ensure that the FIFO is not
+            full. There is space in the FIFO if TFNRFNIF (CxFIFOSTAy[0]) is set. Loading a message
+            into a full FIFO can corrupt a message that is being transmitted.</p>
+        <p class="- topic/p p">The FIFO user address (CxFIFOUAy) points to the RAM of the next transmit message object
+            where the application needs to store the message. T0 of the transmit message object is
+            loaded first, followed by T1, T2 and so on. The maximum number of data bytes is limited
+            by the configured payload. Only the number of data bytes specified by the DLC have to be
+            loaded.</p>
+        <p class="- topic/p p">After the message object is loaded into RAM, the FIFO needs to be incremented by setting
+            the UINC (CxFIFOCONy[8]) bit. Doing so will cause the CAN FD Protocol module to
+            increment the head of the FIFO and update CxFIFOUAy.</p>
+        <p class="- topic/p p">Now the message is ready for transmission and the next message can be loaded at the new
+            address.</p>
+    </div>
+
+</body>
+</html>

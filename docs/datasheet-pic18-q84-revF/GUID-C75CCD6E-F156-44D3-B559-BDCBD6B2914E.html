@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.10 Receive and Transmit Buffers — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F19C980D-B2C3-4290-AEB3-DE26CFEB34FC.html"/>
+<link rel="next" href="GUID-8CEFB3A3-546A-4ACB-81CE-EF38CC0E4C45.html"/>
+<link rel="up" href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li>35.10 Receive and Transmit Buffers</li></ol>
+  <div class="sib"><span>← <a href="GUID-F19C980D-B2C3-4290-AEB3-DE26CFEB34FC.html" rel="prev">Operation After FIFO Overflow</a></span><span><a href="GUID-8CEFB3A3-546A-4ACB-81CE-EF38CC0E4C45.html" rel="next">FIFO Status</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-C75CCD6E-F156-44D3-B559-BDCBD6B2914E__GUID-32244A6F-9366-4319-9F56-1C11182A03B1" style="">35.10 Receive and Transmit Buffers</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The UART uses small buffer areas to transmit and receive data. These are sometimes
+            referred to as FIFOs.</p>
+        <p class="- topic/p p">The receiver has a Receive Shift Register (RSR) and two or more buffer registers. The
+            buffer at the top of the FIFO (earliest byte to enter the FIFO) is retrieved by reading
+            the UxRXB register.</p>
+        <p class="- topic/p p">The transmitter has one or more Transmit Shift Register (TSR) and one buffer register.
+            Writes to UxTXB go to the transmit buffer and then immediately to the TSR, if it is
+            empty. When the TSR is not empty, writes to UxTXB are held and then transferred to the
+            TSR when it becomes available.</p>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-8CEFB3A3-546A-4ACB-81CE-EF38CC0E4C45.html">35.10.1 FIFO Status</a></li><li><a href="GUID-055F1303-369F-45B8-98DC-AC4B619CEA9A.html">35.10.2 FIFO Reset</a></li></ul>
+</nav>
+</body>
+</html>

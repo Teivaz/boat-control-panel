@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>27 SMT - Signal Measurement Timer — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5DE47E10-D6F7-42A1-8CDC-56496CABFDBF.html"/>
+<link rel="next" href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>27 SMT - Signal Measurement Timer</li></ol>
+  <div class="sib"><span>← <a href="GUID-5DE47E10-D6F7-42A1-8CDC-56496CABFDBF.html" rel="prev">Register Summary - Timer2</a></span><span><a href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html" rel="next">SMT Operation</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__GUID-3E407495-B01F-42E7-B644-C25DA7BF9B42" style="">27 SMT - Signal Measurement Timer</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">The Signal Measurement Timer (SMT) is a 24-bit counter with advanced clock
+            and gating logic, which can be configured for measuring a variety of digital signal
+            parameters such as pulse width, frequency and duty cycle, and the time difference
+            between edges on two signals.</p>
+        <div class="- topic/p p">Features of the SMT include:<ul class="- topic/ul ul" id="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__UL_ZMF_FFY_1BB" data-ofbid="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__UL_ZMF_FFY_1BB">
+                <li class="- topic/li li" id="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__GUID-0EF96C2B-4324-4767-A63D-764735A70A37" data-ofbid="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__GUID-0EF96C2B-4324-4767-A63D-764735A70A37">24-Bit Timer/Counter</li>
+                <li class="- topic/li li" id="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__GUID-D24BF24E-E198-4D40-9C6E-CA4C029D8EEE" data-ofbid="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__GUID-D24BF24E-E198-4D40-9C6E-CA4C029D8EEE">Two 24-Bit Measurement Capture
+                    Registers </li>
+                <li class="- topic/li li" id="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__GUID-349967F4-BB19-4876-9A35-5993BB0FC157" data-ofbid="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__GUID-349967F4-BB19-4876-9A35-5993BB0FC157">One 24-Bit Period Match Register </li>
+                <li class="- topic/li li" id="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__GUID-F2FB99DD-75D0-41E2-BB47-F572AA677CEA" data-ofbid="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__GUID-F2FB99DD-75D0-41E2-BB47-F572AA677CEA">Multi-Mode Operation, Including
+                    Relative Timing Measurement </li>
+                <li class="- topic/li li" id="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__GUID-F6DEB1D6-2C4D-4923-833D-25DF482D951F" data-ofbid="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__GUID-F6DEB1D6-2C4D-4923-833D-25DF482D951F">Interrupt-on-Period Match and
+                    Acquisition Complete </li>
+                <li class="- topic/li li" id="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__GUID-16BC34AD-A9C2-4667-9668-E713ECBDB802" data-ofbid="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__GUID-16BC34AD-A9C2-4667-9668-E713ECBDB802">Multiple Clock, Signal and Window
+                    Sources</li>
+            </ul>
+        </div>
+        <p class="- topic/p p">Below is the block diagram for the SMT module.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__FIG_MJL_53Y_1BB" data-ofbid="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__FIG_MJL_53Y_1BB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 27-1. <span id="GUID-AFBB46FB-3909-437E-A5C8-18AC6370F4C3__GUID-D53B3709-1802-4B9C-9DB2-E0FE3D7D85B5" class="fig--title">Signal Measurement Timer Block
+                Diagram</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-CCE97BA8-F8C3-4C85-B184-789823F93379-high.pdf#toolbar=1" width="450" height="298.95129754710274"></iframe></span>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-F6703E75-3BF9-4F99-BF1F-E83CFD6480FD.html">27.1 SMT Operation</a></li><li><a href="GUID-203FB944-5A88-4E30-A061-3DD9EF39FE20.html">27.2 Register Definitions: SMT Control</a></li><li><a href="GUID-DFDAD911-B85C-44AF-8350-6C9A65EB6B9F.html">27.3 Register Summary - SMT Control</a></li></ul>
+</nav>
+</body>
+</html>

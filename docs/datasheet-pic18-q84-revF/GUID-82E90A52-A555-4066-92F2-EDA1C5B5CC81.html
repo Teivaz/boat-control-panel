@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>39.2.2 Data Registers — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-822B7AEB-974D-4A29-B2FD-BE5D0D5DF4EE.html"/>
+<link rel="next" href="GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC.html"/>
+<link rel="up" href="GUID-9E3787FA-6F24-4DDC-B6CA-D0D4ACC2E9ED.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF.html">39 JTAG Boundary Scan</a></li><li><a href="GUID-9E3787FA-6F24-4DDC-B6CA-D0D4ACC2E9ED.html">39.2 JTAG Registers</a></li><li>39.2.2 Data Registers</li></ol>
+  <div class="sib"><span>← <a href="GUID-822B7AEB-974D-4A29-B2FD-BE5D0D5DF4EE.html" rel="prev">Instruction Shift Register and Instruction Register</a></span><span><a href="GUID-BA7BF6B2-22A1-49F9-8184-4E633AADB7DC.html" rel="next">Boundary Scan Register (BSR)</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-82E90A52-A555-4066-92F2-EDA1C5B5CC81__GUID-5E4BF093-DFE8-456A-A52B-8F50E1938FDD" style="">39.2.2 Data Registers</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">Once an instruction is shifted in and updated into the Instruction register,
+            the TAP controller places certain data registers between the TDI and TDO pins.
+            Additional data values can then be shifted into these data registers as needed. The <span class="- topic/ph ph">PIC18-Q84</span> device family supports two data
+                registers:<ul class="- topic/ul ul" id="GUID-82E90A52-A555-4066-92F2-EDA1C5B5CC81__UL_HYF_QRQ_G3B" data-ofbid="GUID-82E90A52-A555-4066-92F2-EDA1C5B5CC81__UL_HYF_QRQ_G3B">
+                <li class="- topic/li li" id="GUID-82E90A52-A555-4066-92F2-EDA1C5B5CC81__GUID-5613F887-94C2-49ED-B18D-EB6A511F43A3" data-ofbid="GUID-82E90A52-A555-4066-92F2-EDA1C5B5CC81__GUID-5613F887-94C2-49ED-B18D-EB6A511F43A3">Bypass register: A single-bit
+                    register which allows the boundary scan test data to pass through the selected
+                    device to adjacent devices. The Bypass register is placed between the TDI and
+                    TDO pins when the <code class="+ topic/ph pr-d/codeph ph codeph">BYPASS</code> instruction is active.</li>
+                <li class="- topic/li li" id="GUID-82E90A52-A555-4066-92F2-EDA1C5B5CC81__GUID-D8EDF47E-2E50-4B82-B541-8D453443B23F" data-ofbid="GUID-82E90A52-A555-4066-92F2-EDA1C5B5CC81__GUID-D8EDF47E-2E50-4B82-B541-8D453443B23F">Device ID Register: A 32-bit part
+                    identifier. It consists of an 11-bit manufacturer ID assigned by the IEEE (29h
+                    for Microchip Technology), device part number and device revision identifier.
+                    When the <code class="+ topic/ph pr-d/codeph ph codeph">IDCODE</code> instruction is active, the Device ID register
+                    is placed between the TDI and TDO pins. The device data ID is then shifted out
+                    onto the TDO pin, on the next 32 falling edges of TCK, after the TAP controller
+                    is in the Shift-DR.</li>
+            </ul></div>
+    </div>
+
+</body>
+</html>

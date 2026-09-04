@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>48.3 Common Programming Interfaces — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A.html"/>
+<link rel="next" href="GUID-323BE26C-E639-4280-B719-0D7F0531C876.html"/>
+<link rel="up" href="GUID-731B2320-D4A5-422C-B689-2C4EC7D428E5.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-731B2320-D4A5-422C-B689-2C4EC7D428E5.html">48 ICSP™ - In-Circuit Serial Programming™</a></li><li>48.3 Common Programming Interfaces</li></ol>
+  <div class="sib"><span>← <a href="GUID-E9CE3B75-AA5E-422B-A152-EAB64D8B6E9A.html" rel="prev">Low-Voltage Programming Entry Mode</a></span><span><a href="GUID-323BE26C-E639-4280-B719-0D7F0531C876.html" rel="next">Register Summary</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__GUID-EEAD2AD9-2D8B-4C60-8F3A-3B08E127C835" style="">48.3 Common Programming Interfaces</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000003B" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000003B">Connection to a target device is typically done through an ICSP
+         header. A commonly found connector on development tools is the RJ-11 in the 6P6C (6-pin,
+         6-connector) configuration. See <a class="- topic/xref xref" href="#GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__FIG_Y3G_4FY_VGB"><span>Figure 48-1</span></a>.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__FIG_Y3G_4FY_VGB" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__FIG_Y3G_4FY_VGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 48-1. <span id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__GUID-FC9A4923-358F-43DC-B8DB-3AEFD68E548C" class="fig--title">ICD RJ-11 Style Connector
+            Interface</span></span></figcaption>
+         
+         <span class=""><img class="- topic/image image" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__IMAGE_Z3G_4FY_VGB" src="GUID-9792EAB9-62BA-4DBB-8EAA-4DC3EB87D1E2-high.svg"/></span>
+      </figure>
+      <figure class="- topic/fig fig fignone" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-FIG-00000001" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-FIG-00000001">
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000047" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000047">Pin Description</p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000004B" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000004B">1 = V<sub class="+ topic/ph hi-d/sub ph sub">PP</sub>/<span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000004D">MCLR</span></p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000050" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000050">2 = V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> Target</p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000054" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000054">3 = V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub> (ground)</p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000058" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000058">4 = ICSPDAT</p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000005B" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000005B">5 = ICSPCLK</p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000005E" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000005E">6 = No Connect</p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000005F" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000005F">Another connector often found in use with the PICkit™ programmers
+            is a standard 6-pin header with 0.1 inch spacing. Refer to <a class="- topic/xref xref" href="#GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__FIG_L2N_BGY_VGB"><span>Figure 48-2</span></a>.</p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000061" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000061">For additional interface recommendations, refer to the specific
+            device programming manual prior to PCB design.</p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000062" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000062">It is recommended that isolation devices be used to separate the
+            programming pins from other circuitry. The type of isolation is highly dependent on the
+            specific application and may include devices such as resistors, diodes, or even jumpers.
+            See <a class="- topic/xref xref" href="#GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__FIG_TCC_DGY_VGB"><span>Figure 48-3</span></a> for more information.</p>
+      </figure>
+      <figure class="- topic/fig fig fignone" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__FIG_L2N_BGY_VGB" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__FIG_L2N_BGY_VGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 48-2. <span id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__GUID-A13CE706-89E9-4001-9153-C40BFD154D53" class="fig--title">PICkit™ Programmer Style Connector
+            Interface</span></span></figcaption>
+         
+         <span class=""><img class="- topic/image image" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__IMAGE_M2N_BGY_VGB" src="GUID-79D80B44-04E4-40AC-9C5F-3E9E5D9B4E56-high.svg"/></span>
+      </figure>
+      
+      <figure class="- topic/fig fig fignone" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-FIG-00000002" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-FIG-00000002">
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000071" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000071">Pin Description<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__OL_JK5_SLZ_ZZ">1</a>)</sup></strong>:</p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000075" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000075">1 = V<sub class="+ topic/ph hi-d/sub ph sub">PP</sub>/<span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000077">MCLR</span></p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000007A" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000007A">2 = V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> Target</p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000007E" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-0000007E">3 = V<sub class="+ topic/ph hi-d/sub ph sub">SS</sub> (ground)</p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000082" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000082">4 = ICSPDAT</p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000085" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000085">5 = ICSPCLK</p>
+         <p class="- topic/p p" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000088" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__ID-42125-00000088">6 = No Connect</p>
+         <div class="- topic/note note notype note_notype" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__GUID-2B89ECC0-73E5-4C0E-9578-17C3FDE4813F" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__GUID-2B89ECC0-73E5-4C0E-9578-17C3FDE4813F"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__OL_JK5_SLZ_ZZ" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__OL_JK5_SLZ_ZZ">
+               <li class="- topic/li li" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__GUID-49E3B405-D9B5-4261-BC1D-DFFD6C3AD15E" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__GUID-49E3B405-D9B5-4261-BC1D-DFFD6C3AD15E">The 6-pin header (0.100" spacing)
+                  accepts 0.025" square pins.</li>
+            </ol>
+         </div>
+      </figure>
+      <figure class="- topic/fig fig fignone" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__FIG_TCC_DGY_VGB" data-ofbid="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__FIG_TCC_DGY_VGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 48-3. <span id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__GUID-D8B6F1D0-8E8E-4C44-BD70-C2658525F91C" class="fig--title">Typical Connection for ICSP™
+            Programming</span></span></figcaption>
+         
+         <span class=""><img class="- topic/image image" id="GUID-00D52739-EFEB-44F7-A572-543AB8AF38C3__IMAGE_UCC_DGY_VGB" src="GUID-4B86A87C-7B07-408C-915E-C30ECEA0C071-high.svg"/></span>
+      </figure>
+   </div>
+
+</body>
+</html>

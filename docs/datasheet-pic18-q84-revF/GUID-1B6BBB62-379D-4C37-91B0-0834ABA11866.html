@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.2 Clock Source Selection — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-76C2A8EF-400D-4BCE-95CC-2358C2D51BEB.html"/>
+<link rel="next" href="GUID-42001B0C-D3B0-4A07-809C-BD73A2E59F1C.html"/>
+<link rel="up" href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li>28.2 Clock Source Selection</li></ol>
+  <div class="sib"><span>← <a href="GUID-76C2A8EF-400D-4BCE-95CC-2358C2D51BEB.html" rel="prev">Module Nomenclature</a></span><span><a href="GUID-42001B0C-D3B0-4A07-809C-BD73A2E59F1C.html" rel="next">UTMR Prescaler</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-1B6BBB62-379D-4C37-91B0-0834ABA11866__GUID-46E835CF-5897-482B-8816-B29325B202FF" style="">28.2 Clock Source Selection</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The <a class="- topic/xref xref" href="GUID-CC2BF5B6-6455-4D42-AE6F-ABD8553D1876.html" title="TUxyCLK">TUxyCLK</a>
+            register bits select the clock source for the UTMR module. These bits allow the
+            selection of several possible synchronous and asynchronous clock sources. Because the
+            selected clock source also controls the optional synchronization of all external signals
+            for the UTMR module, delays between the selection of a function and its action may vary
+            according to the frequency of the selected clock source relative to the
+            microcontroller’s clock frequency. See the <a class="- topic/xref xref" href="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB.html">Synchronous vs.
+                Asynchronous Operation</a> section for more details.</p>
+        <div class="- topic/p p">When an internal clock source is selected (clock derived from system oscillator), the
+            choice of clock source will affect the increment rate of the TUxyTMR register, relative
+            to the system instruction rate. When an external clock source is selected (a clock not
+            derived from the system oscillator), the UTMR module will work as either a timer or a
+            counter. When enabled to count and the <a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#ID-0000000C" title="Timer Clock Polarity Select(3,4)">CPOL</a> bit is set, the TUxyTMR counter register is incremented on the rising
+            edge of the selected external source. For increment on the falling edge of the selected
+            external clock source, the CPOL bit must be cleared. When operating from an external
+            clock source, the <a class="- topic/xref xref" href="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A.html#ID-0000000C" title="ERS Clock Synchronization Select(1,2)">CSYNC</a> bit must also be set to synchronize the controls and ERS
+            signals to the clock domain of the selected external clock. <div class="- topic/note note important note_important important" id="GUID-1B6BBB62-379D-4C37-91B0-0834ABA11866__GUID-83337CB8-0211-42B4-9A81-CCC86E6702CE" data-ofbid="GUID-1B6BBB62-379D-4C37-91B0-0834ABA11866__GUID-83337CB8-0211-42B4-9A81-CCC86E6702CE"><span class="note__title">Important:</span> Due to the
+                inherent uncertainty of reading or writing a <span class="- topic/ph ph">16</span>-bit timer
+                with an 8-bit bus and operating from an asynchronous clock source, it is recommended
+                that read/write of the timer registers use the <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#ID-00000021" title="Timer “Capture” Command(5,6,7,8,9)">CAPT</a> and the <a class="- topic/xref xref" href="GUID-70F0B282-CAF0-40F0-B6F5-99F10E9D1310.html#ID-00000013" title="Timer Counter “Clear” Command(5,6)">CLR</a> commands. Refer to the <a class="- topic/xref xref" href="GUID-50B83DF4-5425-40C5-80FD-C526BC99C3D0.html">Timer Counter and
+                    Capture Registers</a> section for more information.</div></div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.3 ADC Acquisition Requirements — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5.html"/>
+<link rel="next" href="GUID-9895C085-9A4F-4B3E-8AB9-CCFC96B8CA87.html"/>
+<link rel="up" href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li>43.3 ADC Acquisition Requirements</li></ol>
+  <div class="sib"><span>← <a href="GUID-0CDBC7BA-404A-49AD-B722-E9E7B4304CC5.html" rel="prev">ADC Conversion Procedure (Basic Mode)</a></span><span><a href="GUID-9895C085-9A4F-4B3E-8AB9-CCFC96B8CA87.html" rel="next">ADC Charge Pump</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__GUID-DE424B52-934D-4D62-9DA8-70D5D01E5E76" style="">43.3 ADC Acquisition Requirements</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__ID-42107-00000378" data-ofbid="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__ID-42107-00000378">For the ADC to meet its specified accuracy, the
+            charge holding capacitor (C<sub class="+ topic/ph hi-d/sub ph sub">HOLD</sub>) must be allowed
+            to fully charge to the input channel voltage level. The analog input model is shown in
+                <a class="- topic/xref xref" href="#GUID-27235A57-0619-428A-86DB-257BEE32FC2F__FIG_HBC_DVL_XGB"><span>Figure 43-4</span></a>. The source
+            impedance (R<sub class="+ topic/ph hi-d/sub ph sub">S</sub>) and the internal sampling switch
+                (R<sub class="+ topic/ph hi-d/sub ph sub">SS</sub>) impedance directly affect the time
+            required to charge the capacitor C<sub class="+ topic/ph hi-d/sub ph sub">HOLD</sub>. The
+            sampling switch (R<sub class="+ topic/ph hi-d/sub ph sub">SS</sub>) impedance varies over the
+            device voltage (V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub>). The maximum recommended
+            impedance for analog sources is 10 kΩ. As the source impedance is decreased, the
+            acquisition time may be decreased. After the analog input channel is selected (or
+            changed), an ADC acquisition time must be completed before the conversion can be
+            started. To calculate the minimum acquisition time, <a class="- topic/xref xref" href="#GUID-27235A57-0619-428A-86DB-257BEE32FC2F__EQUATION-DISPLAY_NYX_TJK_XGB"><span>Equation 43-1</span></a> may be used. This
+            equation assumes an error of 1/2 LSb. The 1/2 LSb error is the maximum error allowed for
+            the ADC to meet its specified resolution.</p>
+        
+        <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__EQUATION-DISPLAY_NYX_TJK_XGB" data-ofbid="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__EQUATION-DISPLAY_NYX_TJK_XGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 43-1. <span id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__GUID-63082047-2AB6-441E-8D63-6C9FB4BA1C4C" class="fig--title">Acquisition
+                Time Example</span></span></figcaption>
+            
+            <p class="- topic/p p">Assumptions: Temperature = 50°C; External impedance = 10 kΩ; V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> = 5.0V</p>
+            <p class="- topic/p p">T<sub class="+ topic/ph hi-d/sub ph sub">ACQ</sub> = Amplifier Settling
+                Time + Hold Capacitor Charging Time + Temperature Coefficient</p>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi>T</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>A</mi>
+                                    <mi>C</mi>
+                                    <mi>Q</mi>
+                                </mrow>
+                            </msub>
+                            <mo>=</mo>
+                            <mtext> </mtext>
+                            <msub>
+                                <mrow>
+                                    <mi>T</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>A</mi>
+                                    <mi>M</mi>
+                                    <mi>P</mi>
+                                </mrow>
+                            </msub>
+                            <mo>⁢</mo>
+                            <mtext> </mtext>
+                            <mo>+</mo>
+                            <msub>
+                                <mrow>
+                                    <mtext> </mtext>
+                                    <mtext> </mtext>
+                                    <mi>T</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>C</mi>
+                                </mrow>
+                            </msub>
+                            <mo>⁢</mo>
+                            <mtext> </mtext>
+                            <mo>+</mo>
+                            <mtext> </mtext>
+                            <msub>
+                                <mrow>
+                                    <mtext> </mtext>
+                                    <mi>T</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>C</mi>
+                                    <mi>O</mi>
+                                    <mi>F</mi>
+                                    <mi>F</mi>
+                                </mrow>
+                            </msub>
+                        </mrow>
+                    </math></div>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                    <mrow>
+                        <msub>
+                            <mrow>
+                                <mi>T</mi>
+                            </mrow>
+                            <mrow>
+                                <mi>A</mi>
+                                <mi>C</mi>
+                                <mi>Q</mi>
+                            </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <mtext> </mtext>
+                        <mn>2</mn>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>μ</mi>
+                        <mi>s</mi>
+                        <mo>+</mo>
+                        <mtext> </mtext>
+                        <msub>
+                            <mrow>
+                                <mi>T</mi>
+                            </mrow>
+                            <mrow>
+                                <mi>C</mi>
+                            </mrow>
+                        </msub>
+                        <mo>+</mo>
+                        <mtext> </mtext>
+                        <mo>[</mo>
+                        <mo>(</mo>
+                        <mi>T</mi>
+                        <mi>e</mi>
+                        <mi>m</mi>
+                        <mi>p</mi>
+                        <mi>e</mi>
+                        <mi>r</mi>
+                        <mi>a</mi>
+                        <mi>t</mi>
+                        <mi>u</mi>
+                        <mi>r</mi>
+                        <mi>e</mi>
+                        <mo>⁢</mo>
+                        <mo>−</mo>
+                        <mtext> </mtext>
+                        <mn>25</mn>
+                        <mo>°</mo>
+                        <mi>C</mi>
+                        <mo>)</mo>
+                        <mtext> </mtext>
+                        <mtext> </mtext>
+                        <mo>(</mo>
+                        <mn>0.05</mn>
+                        <mo>⁢</mo>
+                        <mtext> </mtext>
+                        <mi>μ</mi>
+                        <mi>s</mi>
+                        <mo>/</mo>
+                        <mo>°</mo>
+                        <mi>C</mi>
+                        <mo>)</mo>
+                        <mo>]</mo>
+                    </mrow>
+                </math>
+            <p class="- topic/p p">The value for T<sub class="+ topic/ph hi-d/sub ph sub">C</sub> can be
+                approximated with the following equations:</p>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi>V</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>A</mi>
+                                    <mi>P</mi>
+                                    <mi>P</mi>
+                                    <mi>L</mi>
+                                    <mi>I</mi>
+                                    <mi>E</mi>
+                                    <mi>D</mi>
+                                </mrow>
+                            </msub>
+                            <mo>(</mo>
+                            <mn>1</mn>
+                            <mo>−</mo>
+                            <mfrac>
+                                <mrow>
+                                    <mn>1</mn>
+                                </mrow>
+                                <mrow>
+                                    <mo>(</mo>
+                                    <msup>
+                                        <mrow>
+                                            <mn>2</mn>
+                                        </mrow>
+                                        <mrow>
+                                            <mi>n</mi>
+                                            <mo>+</mo>
+                                            <mn>1</mn>
+                                        </mrow>
+                                    </msup>
+                                    <mo>)</mo>
+                                    <mtext> </mtext>
+                                    <mo>−</mo>
+                                    <mtext> </mtext>
+                                    <mtext> </mtext>
+                                    <mn>1</mn>
+                                </mrow>
+                            </mfrac>
+                            <mo>)</mo>
+                            <mtext> </mtext>
+                            <mtext> </mtext>
+                            <mo>=</mo>
+                            <mtext> </mtext>
+                            <msub>
+                                <mrow>
+                                    <mi>V</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>C</mi>
+                                    <mi>H</mi>
+                                    <mi>O</mi>
+                                    <mi>L</mi>
+                                    <mi>D</mi>
+                                </mrow>
+                            </msub>
+                        </mrow>
+                    </math><span class="- topic/ph ph"> ; [1] V<sub class="+ topic/ph hi-d/sub ph sub">CHOLD</sub> charged to within ½ lsb</span></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi>V</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>A</mi>
+                                    <mi>P</mi>
+                                    <mi>P</mi>
+                                    <mi>L</mi>
+                                    <mi>I</mi>
+                                    <mi>E</mi>
+                                    <mi>D</mi>
+                                </mrow>
+                            </msub>
+                            <mo>(</mo>
+                            <mn>1</mn>
+                            <mo>−</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>e</mi>
+                                </mrow>
+                                <mrow>
+                                    <mfrac>
+                                        <mrow>
+                                            <mo>−</mo>
+                                            <msub>
+                                                <mrow>
+                                                  <mi>T</mi>
+                                                </mrow>
+                                                <mrow>
+                                                  <mi>C</mi>
+                                                </mrow>
+                                            </msub>
+                                        </mrow>
+                                        <mrow>
+                                            <mi>R</mi>
+                                            <mi>C</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </msup>
+                            <mo>)</mo>
+                            <mtext> </mtext>
+                            <mtext> </mtext>
+                            <mo>=</mo>
+                            <mtext> </mtext>
+                            <msub>
+                                <mrow>
+                                    <mi>V</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>C</mi>
+                                    <mi>H</mi>
+                                    <mi>O</mi>
+                                    <mi>L</mi>
+                                    <mi>D</mi>
+                                </mrow>
+                            </msub>
+                        </mrow>
+                    </math><span class="- topic/ph ph"> ; [2] V<sub class="+ topic/ph hi-d/sub ph sub">CHOLD</sub> charge response to V<sub class="+ topic/ph hi-d/sub ph sub">APPLIED</sub></span></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi>V</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>A</mi>
+                                    <mi>P</mi>
+                                    <mi>P</mi>
+                                    <mi>L</mi>
+                                    <mi>I</mi>
+                                    <mi>E</mi>
+                                    <mi>D</mi>
+                                </mrow>
+                            </msub>
+                            <mo>(</mo>
+                            <mn>1</mn>
+                            <mo>−</mo>
+                            <msup>
+                                <mrow>
+                                    <mi>e</mi>
+                                </mrow>
+                                <mrow>
+                                    <mfrac>
+                                        <mrow>
+                                            <mo>−</mo>
+                                            <msub>
+                                                <mrow>
+                                                  <mi>T</mi>
+                                                </mrow>
+                                                <mrow>
+                                                  <mi>C</mi>
+                                                </mrow>
+                                            </msub>
+                                        </mrow>
+                                        <mrow>
+                                            <mi>R</mi>
+                                            <mi>C</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </msup>
+                            <mo>)</mo>
+                            <mtext> </mtext>
+                            <mtext> </mtext>
+                            <mo>=</mo>
+                            <mtext> </mtext>
+                            <msub>
+                                <mrow>
+                                    <mi>V</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>A</mi>
+                                    <mi>P</mi>
+                                    <mi>P</mi>
+                                    <mi>L</mi>
+                                    <mi>I</mi>
+                                    <mi>E</mi>
+                                    <mi>D</mi>
+                                </mrow>
+                            </msub>
+                            <mo>(</mo>
+                            <mn>1</mn>
+                            <mo>−</mo>
+                            <mfrac>
+                                <mrow>
+                                    <mn>1</mn>
+                                </mrow>
+                                <mrow>
+                                    <mo>(</mo>
+                                    <msup>
+                                        <mrow>
+                                            <mn>2</mn>
+                                        </mrow>
+                                        <mrow>
+                                            <mi>n</mi>
+                                            <mo>+</mo>
+                                            <mn>1</mn>
+                                        </mrow>
+                                    </msup>
+                                    <mo>)</mo>
+                                    <mtext> </mtext>
+                                    <mo>−</mo>
+                                    <mtext> </mtext>
+                                    <mtext> </mtext>
+                                    <mn>1</mn>
+                                </mrow>
+                            </mfrac>
+                            <mo>)</mo>
+                        </mrow>
+                    </math>
+                <span class="- topic/ph ph">; Combining [1] and [2]</span></div>
+            <p class="- topic/p p">Note: Where n = ADC resolution in bits</p>
+            <p class="- topic/p p">Solving for T<sub class="+ topic/ph hi-d/sub ph sub">C</sub>:</p>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mtext> </mtext>
+                                    <mtext> </mtext>
+                                    <mi>T</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>C</mi>
+                                </mrow>
+                            </msub>
+                            <mo>=</mo>
+                            <mtext> </mtext>
+                            <mo>−</mo>
+                            <msub>
+                                <mrow>
+                                    <mi>C</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>H</mi>
+                                    <mi>O</mi>
+                                    <mi>L</mi>
+                                    <mi>D</mi>
+                                </mrow>
+                            </msub>
+                            <mo>(</mo>
+                            <msub>
+                                <mrow>
+                                    <mi>R</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>I</mi>
+                                    <mi>C</mi>
+                                </mrow>
+                            </msub>
+                            <mo>+</mo>
+                            <msub>
+                                <mrow>
+                                    <mi>R</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>S</mi>
+                                    <mi>S</mi>
+                                </mrow>
+                            </msub>
+                            <mo>+</mo>
+                            <msub>
+                                <mrow>
+                                    <mi>R</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>S</mi>
+                                </mrow>
+                            </msub>
+                            <mo>)</mo>
+                            <mtext> </mtext>
+                            <mtext> </mtext>
+                            <mi>l</mi>
+                            <mi>n</mi>
+                            <mo>⁡</mo>
+                            <mtext> </mtext>
+                            <mo>(</mo>
+                            <mn>1</mn>
+                            <mo>/</mo>
+                            <mn>8191</mn>
+                            <mo>)</mo>
+                            <mtext> </mtext>
+                        </mrow>
+                    </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mtext> </mtext>
+                                    <mtext> </mtext>
+                                    <mi>T</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>C</mi>
+                                </mrow>
+                            </msub>
+                            <mo>=</mo>
+                            <mtext> </mtext>
+                            <mo>−</mo>
+                            <mn>28</mn>
+                            <mo>⁢</mo>
+                            <mtext> </mtext>
+                            <mi>p</mi>
+                            <mi>F</mi>
+                            <mo>(</mo>
+                            <mn>1</mn>
+                            <mo>⁢</mo>
+                            <mtext> </mtext>
+                            <mi>k</mi>
+                            <mi mathvariant="normal">Ω</mi>
+                            <mo>⁢</mo>
+                            <mo>+</mo>
+                            <mn>7</mn>
+                            <mo>⁢</mo>
+                            <mtext> </mtext>
+                            <mi>k</mi>
+                            <mi mathvariant="normal">Ω</mi>
+                            <mo>+</mo>
+                            <mn>10</mn>
+                            <mo>⁢</mo>
+                            <mtext> </mtext>
+                            <mi>k</mi>
+                            <mi mathvariant="normal">Ω</mi>
+                            <mo>)</mo>
+                            <mtext> </mtext>
+                            <mtext> </mtext>
+                            <mi>l</mi>
+                            <mi>n</mi>
+                            <mo>⁡</mo>
+                            <mtext> </mtext>
+                            <mo>(</mo>
+                            <mn>0.0001221</mn>
+                            <mo>)</mo>
+                            <mtext> </mtext>
+                        </mrow>
+                    </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mtext> </mtext>
+                                    <mtext> </mtext>
+                                    <mi>T</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>C</mi>
+                                </mrow>
+                            </msub>
+                            <mo>=</mo>
+                            <mn>4.54</mn>
+                            <mo>⁢</mo>
+                            <mtext> </mtext>
+                            <mi>μ</mi>
+                            <mi>s</mi>
+                        </mrow>
+                    </math></div>
+            <p class="- topic/p p">Therefore:</p>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi>T</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>A</mi>
+                                    <mi>C</mi>
+                                    <mi>Q</mi>
+                                </mrow>
+                            </msub>
+                            <mo>⁢</mo>
+                            <mo>=</mo>
+                            <mtext> </mtext>
+                            <mn>2</mn>
+                            <mo>⁢</mo>
+                            <mtext> </mtext>
+                            <mi>μ</mi>
+                            <mi>s</mi>
+                            <mo>⁢</mo>
+                            <mo>+</mo>
+                            <mn>4.54</mn>
+                            <mo>⁢</mo>
+                            <mtext> </mtext>
+                            <mi>μ</mi>
+                            <mi>s</mi>
+                            <mo>⁢</mo>
+                            <mo>+</mo>
+                            <mo>[</mo>
+                            <mo>(</mo>
+                            <mn>50</mn>
+                            <mo>°</mo>
+                            <mi>C</mi>
+                            <mo>−</mo>
+                            <mn>25</mn>
+                            <mo>°</mo>
+                            <mi>C</mi>
+                            <mo>)</mo>
+                            <mtext> </mtext>
+                            <mtext> </mtext>
+                            <mo>(</mo>
+                            <mtext> </mtext>
+                            <mn>0.05</mn>
+                            <mo>⁢</mo>
+                            <mtext> </mtext>
+                            <mi>μ</mi>
+                            <mi>s</mi>
+                            <mo>/</mo>
+                            <mo>°</mo>
+                            <mi>C</mi>
+                            <mo>)</mo>
+                            <mo>]</mo>
+                        </mrow>
+                    </math></div>
+            <div class="+ topic/p equation-d/equation-block  eqn-block "><math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table" align="center">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi>T</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>A</mi>
+                                    <mi>C</mi>
+                                    <mi>Q</mi>
+                                </mrow>
+                            </msub>
+                            <mo>⁢</mo>
+                            <mo>=</mo>
+                            <mtext> </mtext>
+                            <mn>7.79</mn>
+                            <mo>⁢</mo>
+                            <mtext> </mtext>
+                            <mi>μ</mi>
+                            <mi>s</mi>
+                            <mo>⁢</mo>
+                        </mrow>
+                    </math></div>
+        </figure>
+        <div class="- topic/note note important note_important" id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__GUID-58C730AC-04F5-4DA1-A456-D534008917C1" data-ofbid="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__GUID-58C730AC-04F5-4DA1-A456-D534008917C1"><span class="note__title">Important:</span> 
+            <ul class="- topic/ul ul" id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__UL_VHZ_RJK_XGB" data-ofbid="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__UL_VHZ_RJK_XGB">
+                <li class="- topic/li li" id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__GUID-45ACADC6-B18A-46FC-9B65-0FAB12F0AF05" data-ofbid="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__GUID-45ACADC6-B18A-46FC-9B65-0FAB12F0AF05">The reference voltage (V<sub class="+ topic/ph hi-d/sub ph sub">REF</sub>) has no effect on the equation, since it cancels itself out.</li>
+                <li class="- topic/li li" id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__GUID-90B1DB69-1A3E-4F41-A173-E8CF4E7FC867" data-ofbid="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__GUID-90B1DB69-1A3E-4F41-A173-E8CF4E7FC867">The charge holding capacitor (C<sub class="+ topic/ph hi-d/sub ph sub">HOLD</sub>) is not discharged after each
+                    conversion.</li>
+                <li class="- topic/li li" id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__GUID-46E9682A-5F13-4CA3-B816-055DCD10AEB1" data-ofbid="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__GUID-46E9682A-5F13-4CA3-B816-055DCD10AEB1">The maximum recommended impedance for analog sources is 10
+                    kΩ. This is required to meet the pin leakage specification.</li>
+            </ul>
+        </div>
+        <section class="- topic/section section" id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__GUID-864F3BE7-4C38-4FA4-B5BD-E24C3934C60C" data-ofbid="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__GUID-864F3BE7-4C38-4FA4-B5BD-E24C3934C60C">
+            
+            <figure class="- topic/fig fig fignone" id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__FIG_HBC_DVL_XGB" data-ofbid="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__FIG_HBC_DVL_XGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 43-4. <span id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__GUID-2A39E9F4-B9BD-4384-A5A2-DC9BCD56E073" class="fig--title">Analog
+                    Input Model</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-1407559F-E1A3-477B-83A2-32ED6B9AD56D-high.pdf#toolbar=1" width="450" height="277.59242058331785"></iframe></span>
+            </figure>
+            
+            <figure class="- topic/fig fig fignone" id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__FIG_T2S_4JL_XGB" data-ofbid="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__FIG_T2S_4JL_XGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 43-5. <span id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__GUID-57FD71EB-DF00-415F-B7F2-AFCF6FF8BBC4" class="fig--title">ADC
+                    Transfer Function</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-27235A57-0619-428A-86DB-257BEE32FC2F__IMAGE_TZT_XJL_XGB" src="GUID-FD236658-FE7E-4EBA-8AED-7C1FB93F077A-high.svg"/></span>
+            </figure>
+        </section>
+    </div>
+
+</body>
+</html>

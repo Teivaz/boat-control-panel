@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>17.2.1 Wake-Up from Sleep — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC.html"/>
+<link rel="next" href="GUID-113F0247-2958-4313-A0FB-FE0D6207A438.html"/>
+<link rel="up" href="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html">17 Power-Saving Modes</a></li><li><a href="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC.html">17.2 Sleep Mode</a></li><li>17.2.1 Wake-Up from Sleep</li></ol>
+  <div class="sib"><span>← <a href="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC.html" rel="prev">Sleep Mode</a></span><span><a href="GUID-113F0247-2958-4313-A0FB-FE0D6207A438.html" rel="next">Wake-Up Using Interrupts</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__GUID-CCF55A42-5A4D-4E61-9599-DF71129983F8" style="">17.2.1 Wake-Up from Sleep</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-00000082" data-ofbid="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-00000082">The device can wake up from Sleep through one of the following
+         events:</p>
+      <ol class="- topic/ol ol" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__GUID-63166B59-0709-446D-B06F-079F39742E9C" data-ofbid="GUID-236895B1-6931-4C63-937F-02D53E8A1158__GUID-63166B59-0709-446D-B06F-079F39742E9C">
+         <li class="- topic/li li" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-00000083" data-ofbid="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-00000083">External Reset input on <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-00000085">MCLR</span> pin, if enabled.</li>
+         <li class="- topic/li li" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-00000086" data-ofbid="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-00000086">BOR Reset, if enabled.</li>
+         <li class="- topic/li li" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-00000088" data-ofbid="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-00000088">Low-Power Brown-out Reset (LPBOR), if enabled.</li>
+         <li class="- topic/li li" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-0000008A" data-ofbid="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-0000008A">POR Reset.</li>
+         <li class="- topic/li li" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-0000008C" data-ofbid="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-0000008C"><span class="- topic/ph ph">Windowed </span>Watchdog
+            Timer, if enabled.</li>
+         <li class="- topic/li li" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-0000008E" data-ofbid="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-0000008E">All interrupt sources except clock switch interrupt can wake up
+            the part.</li>
+      </ol>
+      <div class="- topic/p p" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-00000090" data-ofbid="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-00000090">
+         <div class="- topic/note note important note_important" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__GUID-E22113A5-8201-41EC-927F-B330671AFC61" data-ofbid="GUID-236895B1-6931-4C63-937F-02D53E8A1158__GUID-E22113A5-8201-41EC-927F-B330671AFC61"><span class="note__title">Important:</span> The first five events
+            will cause a device Reset. The last event in the list is considered a continuation of
+            program execution. For more information about determining whether a device Reset or
+            wake-up event occurred, refer to the <strong class="+ topic/ph hi-d/b ph b">“Resets”</strong> chapter. </div>
+      </div>
+      <p class="- topic/p p">When the <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-00000093">SLEEP</code> instruction is being executed, the
+         next instruction (PC + 2) is prefetched. For the device to wake up through an interrupt
+         event, the corresponding Interrupt Enable bit must be enabled in the PIEx register. Wake-up
+         will occur regardless of the state of the Global Interrupt Enable (GIE) bit. If the GIE bit
+         is disabled, the device will continue execution at the instruction after the <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-00000095">SLEEP</code> instruction. If the GIE bit is enabled, the device
+         executes the instruction after the <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-00000096">SLEEP</code>
+         instruction and then call the Interrupt Service Routine (ISR). </p>
+      <div class="- topic/note note important note_important" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__GUID-CA11353A-7435-4A65-96A1-03D208631558" data-ofbid="GUID-236895B1-6931-4C63-937F-02D53E8A1158__GUID-CA11353A-7435-4A65-96A1-03D208631558"><span class="note__title">Important:</span> It is recommended to add
+         a <code class="+ topic/ph pr-d/codeph ph codeph">NOP</code> as the immediate instruction after the <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code>
+         instruction.</div>
+      <p class="- topic/p p">The WDT is cleared when the device wakes up from Sleep, regardless of the source of
+         wake-up. Upon a wake-from-Sleep event, the core will wait for a combination of three
+         conditions before beginning execution. The conditions are:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-0000009C" data-ofbid="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-0000009C">PFM Ready</li>
+         <li class="- topic/li li" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-0000009E" data-ofbid="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-0000009E">System Clock Ready</li>
+         <li class="- topic/li li" id="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-000000A0" data-ofbid="GUID-236895B1-6931-4C63-937F-02D53E8A1158__ID-42139-000000A0">BOR Ready (unless BOR is disabled)</li>
+      </ul>
+   </div>
+
+</body>
+</html>

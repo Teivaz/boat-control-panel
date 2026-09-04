@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.2.3.2 Dead-Band Delay in Full Bridge Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676.html"/>
+<link rel="next" href="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289.html"/>
+<link rel="up" href="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li><a href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html">32.2 Operating Modes</a></li><li><a href="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44.html">32.2.3 Full Bridge Mode</a></li><li>32.2.3.2 Dead-Band Delay in Full Bridge Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676.html" rel="prev">Direction Change in Full Bridge Mode</a></span><span><a href="GUID-06023BE3-082E-4B8B-8570-5D75C80AA289.html" rel="next">Steering Modes</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__GUID-72EA7570-B091-42A5-83DC-77BFE336625B" style="">32.2.3.2 Dead-Band Delay in Full Bridge Mode</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__ID-42115-000000CA" data-ofbid="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__ID-42115-000000CA">Dead-band delay is important when either of the following
+            conditions is true:</p>
+        <ul class="- topic/ul ul" id="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__UL_HYY_D1J_SGB" data-ofbid="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__UL_HYY_D1J_SGB">
+            <li class="- topic/li li" id="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__GUID-E0C67457-EE44-4666-A712-E27A216D8ECC" data-ofbid="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__GUID-E0C67457-EE44-4666-A712-E27A216D8ECC">The direction of the CWG output
+                changes when the duty cycle of the data input is at or near 100%</li>
+            <li class="- topic/li li" id="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__GUID-C98687A9-C59B-4BF6-9684-CB5E3364B02B" data-ofbid="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__GUID-C98687A9-C59B-4BF6-9684-CB5E3364B02B">The turn-off time of the power
+                switch, including the power device and driver circuit, is greater than the turn-on
+                time</li>
+        </ul>
+        <p class="- topic/p p" id="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__ID-42115-000000CF" data-ofbid="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__ID-42115-000000CF">The dead-band delay is inserted only when changing directions and
+            only the modulated output is affected. The statically-configured outputs (CWGxA and
+            CWGxC) are not afforded dead band and switch essentially simultaneously.</p>
+        <p class="- topic/p p" id="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__ID-42115-000000D0" data-ofbid="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__ID-42115-000000D0"><a class="- topic/xref xref" href="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676.html#GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__ID-42115-000000DB"><span>Figure 32-8</span></a> shows an example of the CWG outputs changing directions from forward
+            to reverse, at near 100% duty cycle. In this example, at time t1, the output of CWGxA
+            and CWGxD becomes inactive, while the output of CWGxC becomes active. Since the turn-off
+            time of the power devices is longer than the turn-on time, a shoot-through current will
+            flow through the power devices QC and QD for the duration of ‘T’. The same phenomenon
+            will occur to power devices QA and QB for the CWG direction change from reverse to
+            forward.</p>
+        <p class="- topic/p p" id="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__ID-42115-000000D2" data-ofbid="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__ID-42115-000000D2">When changing the CWG direction at high duty cycle is required for
+            an application, two possible solutions for eliminating the shoot-through current
+            are:</p>
+        <ol class="- topic/ol ol" id="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__GUID-A48C3911-738E-4A7C-BB57-2B30A39AD3FA" data-ofbid="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__GUID-A48C3911-738E-4A7C-BB57-2B30A39AD3FA">
+            <li class="- topic/li li" id="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__ID-42115-000000D3" data-ofbid="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__ID-42115-000000D3">Reduce the CWG duty cycle for one period before changing
+                directions.</li>
+            <li class="- topic/li li" id="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__ID-42115-000000D5" data-ofbid="GUID-769A811B-D65D-4581-BCCD-A79247CD3795__ID-42115-000000D5">Use switch drivers that can drive the switches off faster
+                than they can drive them on.</li>
+        </ol>
+    </div>
+
+</body>
+</html>

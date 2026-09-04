@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.14 RX/TX Activity Time-Out — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-FB70590D-C48B-40AB-81CA-DC488BCBEB4E.html"/>
+<link rel="next" href="GUID-5826C264-AE14-4D81-AFD3-5BB426EF3A71.html"/>
+<link rel="up" href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li>35.14 RX/TX Activity Time-Out</li></ol>
+  <div class="sib"><span>← <a href="GUID-FB70590D-C48B-40AB-81CA-DC488BCBEB4E.html" rel="prev">Collision Detection (Full-Featured UARTs Only)</a></span><span><a href="GUID-5826C264-AE14-4D81-AFD3-5BB426EF3A71.html" rel="next">Clock Accuracy with Asynchronous Operation</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-3E039E51-4150-4536-A978-B579498D3C35__GUID-578DBC80-E5C3-451B-A4A2-A77B5C7EAC6F" style="">35.14 RX/TX Activity Time-Out</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The UART works in conjunction with the HLT timers to monitor activity on the RX and
+            TX lines. Use this feature to determine when there has been no activity on the receive
+            or transmit lines for a user-specified period of time.</p>
+        <p class="- topic/p p">To use this feature, set the HLT to the desired time-out period by a combination of the
+            HLT clock source, timer prescale value and timer period registers. Configure the HLT to
+            reset on the UART TX or RX line and start the HLT at the same time the UART is started.
+            UART activity will keep resetting the HLT to prevent a full HLT period from elapsing.
+            When there has been no activity on the selected TX or RX line for longer than the HLT
+            period, an HLT interrupt will occur signaling the time-out event.</p>
+        <div class="- topic/p p">For example, the following register settings will
+                        configure HLT2 for a 5 ms time-out of no activity on U1RX:<ul class="- topic/ul ul" id="GUID-3E039E51-4150-4536-A978-B579498D3C35__UL_B4Q_T32_DBB" data-ofbid="GUID-3E039E51-4150-4536-A978-B579498D3C35__UL_B4Q_T32_DBB">
+                                <li class="- topic/li li" id="GUID-3E039E51-4150-4536-A978-B579498D3C35__GUID-24388BC3-9F8F-433B-A693-7AD3A1CFACE3" data-ofbid="GUID-3E039E51-4150-4536-A978-B579498D3C35__GUID-24388BC3-9F8F-433B-A693-7AD3A1CFACE3">T2PR =
+                                                <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0x9C</span> (156 prescale periods)</li>
+                                <li class="- topic/li li" id="GUID-3E039E51-4150-4536-A978-B579498D3C35__GUID-A23F0E55-80EC-4189-AC7B-86E93817C5CD" data-ofbid="GUID-3E039E51-4150-4536-A978-B579498D3C35__GUID-A23F0E55-80EC-4189-AC7B-86E93817C5CD">T2CLKCON =
+                                                <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0x05</span> (500 kHz internal
+                                        oscillator)</li>
+                                <li class="- topic/li li" id="GUID-3E039E51-4150-4536-A978-B579498D3C35__GUID-DCBDA5AC-CBAD-4994-B645-200F752C87B6" data-ofbid="GUID-3E039E51-4150-4536-A978-B579498D3C35__GUID-DCBDA5AC-CBAD-4994-B645-200F752C87B6">T2HLT =
+                                                <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0x04</span> (free-running, Reset on
+                                        rising edge)</li>
+                                <li class="- topic/li li" id="GUID-3E039E51-4150-4536-A978-B579498D3C35__GUID-1E7D16DD-E6CF-4950-8071-D7F22949D39D" data-ofbid="GUID-3E039E51-4150-4536-A978-B579498D3C35__GUID-1E7D16DD-E6CF-4950-8071-D7F22949D39D">T2RST =
+                                                <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0x15</span> (Reset on U1RX)</li>
+                                <li class="- topic/li li" id="GUID-3E039E51-4150-4536-A978-B579498D3C35__GUID-20819D48-1A1C-4B8A-8250-D3E31D5D5D47" data-ofbid="GUID-3E039E51-4150-4536-A978-B579498D3C35__GUID-20819D48-1A1C-4B8A-8250-D3E31D5D5D47">T2CON =
+                                                <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0xC0</span> (Timer2 on with 1:16
+                                        prescale)</li>
+                        </ul></div>
+</div>
+
+</body>
+</html>

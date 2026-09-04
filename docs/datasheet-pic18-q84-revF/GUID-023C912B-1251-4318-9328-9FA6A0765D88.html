@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.3 I2C Multi-Host Mode Operation — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F.html"/>
+<link rel="next" href="GUID-228E8DFD-F414-47E2-820C-3D3FD2EB86F1.html"/>
+<link rel="up" href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li>37.4.3 I2C Multi-Host Mode Operation</li></ol>
+  <div class="sib"><span>← <a href="GUID-EA52C5E5-1819-4D4D-AADC-151C709B4D7F.html" rel="prev">Host Reception (10-Bit Addressing Mode)</a></span><span><a href="GUID-228E8DFD-F414-47E2-820C-3D3FD2EB86F1.html" rel="next">Multi-Host Mode Clock Synchronization</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-023C912B-1251-4318-9328-9FA6A0765D88__GUID-1CDE3C5D-5BF0-44B0-88F7-A42585104DE2" style="">37.4.3 I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Multi-Host Mode
+        Operation</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">In Multi-Host mode, multiple host devices reside on the same bus. A single device, or all
+            devices, may act as both a host and a client. Control of the bus is achieved through
+            clock synchronization and bus arbitration.</p>
+        <div class="- topic/p p">The Bus Free (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#GUID-967969A7-72DF-42E8-8CE4-4AD59A4CBE74" title="Bus Free Status(2)">BFRE</a>) bit is used to determine if the bus is free. When BFRE is
+            set (BFRE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the bus is in an Idle state, allowing a host device to
+            take control of the bus.</div>
+        <div class="- topic/p p">In Multi-Host mode, the Address Interrupt and Hold Enable (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_LFC_QSV_LGB" title="Address Interrupt and Hold Enable(1,4)">ADRIE</a>) bit must be set (ADRIE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), and the Clock
+            Stretching Disable (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_KNG_JGP_LGB" title="Clock Stretching Disable (used only when MODE = 0xx or MODE = 11x)">CSD</a>) bit must be clear (CSD = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), for a host device to be
+            addressed as a client.</div>
+        <div class="- topic/p p">When a matching address is received into the receive shift register, the <a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_GRY_CQP_LGB" title="Client Mode Active Status">SMA</a> bit is set, and the Address Interrupt Flag (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_ONC_54V_LGB" title="Address Interrupt Flag (used only when MODE = 0xx or MODE = 11x)(1)">ADRIF</a>) bit is set. Since <a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html#BITFIELD_LFC_QSV_LGB" title="Address Interrupt and Hold Enable(1,4)">ADRIE</a> is also set, hardware sets the Client Clock Stretching (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_LMJ_QP4_LGB" title="Client Clock Stretching(3)">CSTR</a>) bit, and hardware stretches the clock to allow time for software to
+            respond to the host device being addressed as a client. Once the address has been
+            processed, software must clear CSTR to resume communication.</div>
+        <div class="- topic/note note important note_important" id="GUID-023C912B-1251-4318-9328-9FA6A0765D88__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-023C912B-1251-4318-9328-9FA6A0765D88__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> Client hardware has
+            priority over host hardware in Multi-Host mode. Host mode communication can only be
+            initiated when <a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_GRY_CQP_LGB" title="Client Mode Active Status">SMA</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>.</div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-228E8DFD-F414-47E2-820C-3D3FD2EB86F1.html">37.4.3.1 Multi-Host Mode Clock Synchronization</a></li><li><a href="GUID-901A5608-134E-499B-9F81-8E52489E52C0.html">37.4.3.2 Multi-Host Mode Bus Arbitration</a></li></ul>
+</nav>
+</body>
+</html>

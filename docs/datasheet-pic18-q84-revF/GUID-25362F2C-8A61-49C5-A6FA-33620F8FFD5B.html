@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.1.1.5.1 SOSC Start-Up Timing — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5.html"/>
+<link rel="next" href="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7.html"/>
+<link rel="up" href="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-E9212808-ABFB-42C4-93C0-C856FE99C73A.html">12.1 Clock Source Types</a></li><li><a href="GUID-5DED24A3-7549-4229-9627-680F5E81FE14.html">12.1.1 External Clock Sources</a></li><li><a href="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5.html">12.1.1.5 Secondary Oscillator</a></li><li>12.1.1.5.1 SOSC Start-Up Timing</li></ol>
+  <div class="sib"><span>← <a href="GUID-FF56F3E0-538F-4BF6-B294-939C8A4A75B5.html" rel="prev">Secondary Oscillator</a></span><span><a href="GUID-D50F0E83-BC99-4C45-964E-43894E6AC1F7.html" rel="next">Internal Clock Sources</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-25362F2C-8A61-49C5-A6FA-33620F8FFD5B__GUID-AF085BB4-FAF9-4D2F-BBD1-8BF63F5FA589" style="">12.1.1.5.1 SOSC Start-Up Timing</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The SOSC utilizes the Oscillator Start-up Timer (OST) to ensure that the 32.768 kHz
+                                    crystal oscillator has started and is available for use. Since
+                                    crystal oscillators do not start immediately and may take a few
+                                    hundred cycles before achieving stable operation, the OST counts
+                                    1024 oscillation periods from the SOSCI input. Once the OST
+                                    completes its count, module hardware sets the Secondary
+                                    Oscillator Ready (<a class="- topic/xref xref" href="GUID-56425695-1C07-4B9A-A4DC-F86CD572BBCC.html#BITFIELD_AGH_LC3_ZGB" title="Secondary Oscillator (SOSC) Ready">SOR</a>) bit, indicating that the
+                                    SOSC is stable and ready to use.</p>
+</div>
+
+</body>
+</html>

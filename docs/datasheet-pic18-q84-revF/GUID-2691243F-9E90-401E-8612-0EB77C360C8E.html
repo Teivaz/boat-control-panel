@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>46 ZCD - Zero-Cross Detection Module — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5461E7F8-02D9-4654-A2A3-53121C9ED1F1.html"/>
+<link rel="next" href="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>46 ZCD - Zero-Cross Detection Module</li></ol>
+  <div class="sib"><span>← <a href="GUID-5461E7F8-02D9-4654-A2A3-53121C9ED1F1.html" rel="prev">Register Summary - Comparator</a></span><span><a href="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5.html" rel="next">External Resistor Selection</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__GUID-F651A445-FCED-4970-9F79-7B25F50C5B4C" style="">46 ZCD - Zero-Cross Detection Module</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-00000004" data-ofbid="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-00000004">The ZCD module detects when an A/C signal crosses through the ground
+         potential. The actual zero-crossing threshold is the zero-crossing reference voltage,
+            Z<sub class="+ topic/ph hi-d/sub ph sub">CPINV</sub>, which is typically 0.75V above ground.</p>
+      <p class="- topic/p p" id="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-00000006" data-ofbid="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-00000006">The connection to the signal to be detected is through a series
+         current-limiting resistor. The module applies a current source or sink to the ZCD pin to
+         maintain a constant voltage on the pin, thereby preventing the pin voltage from forward
+         biasing the ESD protection diodes. When the applied voltage is greater than the reference
+         voltage, the module sinks current. When the applied voltage is less than the reference
+         voltage, the module sources current. The current source and sink action keeps the pin
+         voltage constant over the full range of the applied voltage. The ZCD module is shown in the
+         following simplified block diagram. </p>
+      <figure class="- topic/fig fig fignone" id="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-0000001F" data-ofbid="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-0000001F"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 46-1. <span id="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__GUID-876FD91F-B32F-49E1-AACC-C6412DA0E9C0" class="fig--title">Simplified ZCD Block Diagram</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-2CFF061C-AF8E-453D-9841-1C48847885F8-high.pdf#toolbar=1" width="468.49" height="511.14"></iframe></span>
+      </figure>
+      <p class="- topic/p p" id="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-00000008" data-ofbid="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-00000008">The ZCD module is useful when monitoring an A/C waveform for, but
+         not limited to, the following purposes:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-00000009" data-ofbid="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-00000009">A/C period measurement</li>
+         <li class="- topic/li li" id="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-0000000B" data-ofbid="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-0000000B">Accurate long term time measurement</li>
+         <li class="- topic/li li" id="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-0000000D" data-ofbid="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-0000000D">Dimmer phase delayed drive</li>
+         <li class="- topic/li li" id="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-0000000F" data-ofbid="GUID-2691243F-9E90-401E-8612-0EB77C360C8E__ID-42143-0000000F">Low EMI cycle switching</li>
+      </ul>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-AE3F565B-E07A-4B07-9675-9E54F90CCDB5.html">46.1 External Resistor Selection</a></li><li><a href="GUID-1B4519A4-F967-4CF9-909E-955783805ABB.html">46.2 ZCD Logic Output</a></li><li><a href="GUID-0339D53C-501B-410E-B109-98A508DD9661.html">46.3 ZCD Logic Polarity</a></li><li><a href="GUID-993257D8-6EAA-4939-A89E-49EEE1C69E7E.html">46.4 ZCD Interrupts</a></li><li><a href="GUID-245BCE02-61B9-4188-85E2-1A60578FAD39.html">46.5 Correction for ZCPINV Offset</a></li><li><a href="GUID-85A3E5C7-02A8-4569-B4DA-A070FE132130.html">46.6 Handling VPEAK Variations</a></li><li><a href="GUID-B48E2D01-9B3D-409E-B40E-2BFB4253C7CE.html">46.7 Operation During Sleep</a></li><li><a href="GUID-D63A0FE6-370A-4B0E-AE35-35936BA144FB.html">46.8 Effects of a Reset</a></li><li><a href="GUID-5038F414-5547-4BE4-988C-0903D63080A7.html">46.9 Disabling the ZCD Module</a></li><li><a href="GUID-F846DE1A-AE1D-41FA-8DDE-3B39F8B31A8A.html">46.10 Register Definitions: ZCD Control</a></li><li><a href="GUID-349005B7-072D-40FC-8EFB-DE75779A7E93.html">46.11 Register Summary - ZCD</a></li></ul>
+</nav>
+</body>
+</html>

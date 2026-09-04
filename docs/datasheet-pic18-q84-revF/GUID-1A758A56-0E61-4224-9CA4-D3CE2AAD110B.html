@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.5.6 Low-Pass Filter Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3C6662B5-37CE-4D3F-BBDC-290063167876.html"/>
+<link rel="next" href="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1.html"/>
+<link rel="up" href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html">43.5 Computation Operation</a></li><li>43.5.6 Low-Pass Filter Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-3C6662B5-37CE-4D3F-BBDC-290063167876.html" rel="prev">Burst Average Mode</a></span><span><a href="GUID-D1D04CBA-AE90-4788-8CE9-FD814AE989F1.html" rel="next">Threshold Comparison</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-1A758A56-0E61-4224-9CA4-D3CE2AAD110B__GUID-8CB9C72C-DD91-41BF-9838-3E4CA07EA649" style="">43.5.6 Low-Pass Filter Mode</h1>
+<div class="- topic/body body">
+        <div class="- topic/p p" id="GUID-1A758A56-0E61-4224-9CA4-D3CE2AAD110B__ID-42107-0000056A" data-ofbid="GUID-1A758A56-0E61-4224-9CA4-D3CE2AAD110B__ID-42107-0000056A">The Low-Pass Filter mode (<a class="- topic/xref xref" href="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D.html#ID-00000061" title="ADC Operating Mode Selection(4)"><span><span>MD</span></span></a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-1A758A56-0E61-4224-9CA4-D3CE2AAD110B__ID-42107-0000056B">‘b100</code>) acts
+            similarly to the Average mode in how it handles samples; it accumulates samples until
+            the <a class="- topic/xref xref" href="GUID-C8E93DB7-E488-4F28-82A5-7B2AEBD489A6.html#ID-00000140" title="ADC Repeat Count">CNT</a> value is greater than or equal to <a class="- topic/xref xref" href="GUID-4EB6CD17-6360-49E7-AB97-1C468A16614B.html#ID-00000136" title="ADC Repeat Threshold"><span><span>RPT</span></span></a>, then
+            triggers a threshold comparison. But, instead of a simple average, it performs a
+            low-pass filter operation on all of the samples, reducing the effect of high-frequency
+            noise on the total, then performs a threshold comparison on the results. In this mode,
+            the <a class="- topic/xref xref" href="GUID-1577C016-FB3D-4685-974D-1C0D2C56F47D.html#ID-0000004F" title="ADC Accumulated Calculation Right Shift Select"><span><span>CRS</span></span></a>
+            bits determine the cutoff frequency of the low-pass filter (as demonstrated by <a class="- topic/xref xref" href="GUID-068ECAAA-18D6-4815-99F7-AC9509252C93.html">Digital
+                Filter/Average</a>). Refer to the <a class="- topic/xref xref" href="GUID-9FBF6A6A-3EDD-4670-A1FA-34AEFF167BC7.html">Computation
+                Operation</a> section for a more detailed description of the mathematical
+            operation.</div>
+        <div class="- topic/p p">For more information about Low-Pass Filter mode, refer to the
+            following Microchip application note, available at the corporate website (<a class="- topic/xref xref" href="http://www.microchip.com" target="_blank" rel="external noopener">www.microchip.com</a>):<ul class="- topic/ul ul" id="GUID-1A758A56-0E61-4224-9CA4-D3CE2AAD110B__UL_OJM_5SQ_XGB" data-ofbid="GUID-1A758A56-0E61-4224-9CA4-D3CE2AAD110B__UL_OJM_5SQ_XGB">
+                <li class="- topic/li li" id="GUID-1A758A56-0E61-4224-9CA4-D3CE2AAD110B__GUID-54DABCF2-1BD4-448C-BDD4-857EBDD067BA" data-ofbid="GUID-1A758A56-0E61-4224-9CA4-D3CE2AAD110B__GUID-54DABCF2-1BD4-448C-BDD4-857EBDD067BA">AN2749, <em class="+ topic/ph hi-d/i ph i">“PIC18 12-bit
+                            ADC<sup class="+ topic/ph hi-d/sup ph sup">2</sup> in Low-Pass Filter Mode”</em></li>
+            </ul></div>
+    </div>
+
+</body>
+</html>

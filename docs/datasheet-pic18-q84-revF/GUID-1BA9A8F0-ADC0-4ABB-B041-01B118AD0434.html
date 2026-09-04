@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>42.1.1 Temperature Indicator Range — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-527743BB-A762-47CC-868E-094B677241CB.html"/>
+<link rel="next" href="GUID-71C37078-FCB8-4976-8535-F225800AF523.html"/>
+<link rel="up" href="GUID-527743BB-A762-47CC-868E-094B677241CB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-3A66BF7F-43AE-483F-8EE3-3C694F3DAFF8.html">42 Temperature Indicator Module</a></li><li><a href="GUID-527743BB-A762-47CC-868E-094B677241CB.html">42.1 Module Operation</a></li><li>42.1.1 Temperature Indicator Range</li></ol>
+  <div class="sib"><span>← <a href="GUID-527743BB-A762-47CC-868E-094B677241CB.html" rel="prev">Module Operation</a></span><span><a href="GUID-71C37078-FCB8-4976-8535-F225800AF523.html" rel="next">Minimum Operating VDD</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-1BA9A8F0-ADC0-4ABB-B041-01B118AD0434__GUID-7C1D60A4-EB7F-49E8-9425-3B4B30871E63" style="">42.1.1 Temperature Indicator Range</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The temperature indicator circuit operates in either high or low range. The high
+            range, selected by setting the <a class="- topic/xref xref" href="GUID-32CE8D72-21A7-4124-B15D-F26C343FBB89.html#UV1_PQ4_3GB" title="Temperature Indicator Range Selection">TSRNG</a> bit, provides a wider output voltage. This provides more
+            resolution over the temperature range. High range requires a higher bias voltage to
+            operate and thus, a higher V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> is needed. The low range is selected by
+            clearing the TSRNG bit. The low range generates a lower sensor voltage and thus, a lower
+                V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> voltage is needed to operate the circuit. </p>
+        <div class="- topic/p p">The output voltage of the sensor is the highest value at <span class="- topic/ph ph">-40℃</span> and the lowest value at <span class="- topic/ph ph">+125℃</span>.<ul class="- topic/ul ul" id="GUID-1BA9A8F0-ADC0-4ABB-B041-01B118AD0434__UL_KHF_QJT_S1B" data-ofbid="GUID-1BA9A8F0-ADC0-4ABB-B041-01B118AD0434__UL_KHF_QJT_S1B">
+                <li class="- topic/li li" id="GUID-1BA9A8F0-ADC0-4ABB-B041-01B118AD0434__GUID-1B29CCBC-BB38-4C6C-B4C7-499E09D4E641" data-ofbid="GUID-1BA9A8F0-ADC0-4ABB-B041-01B118AD0434__GUID-1B29CCBC-BB38-4C6C-B4C7-499E09D4E641"><strong class="+ topic/ph hi-d/b ph b">High Range:</strong> The high range
+                    is used in applications with the reference for the ADC, V<sub class="+ topic/ph hi-d/sub ph sub">REF</sub> =
+                    2.048V. This range may not be suitable for battery-powered applications.</li>
+                <li class="- topic/li li" id="GUID-1BA9A8F0-ADC0-4ABB-B041-01B118AD0434__GUID-D87F6BA9-6CF7-4109-A012-7A2F82C05483" data-ofbid="GUID-1BA9A8F0-ADC0-4ABB-B041-01B118AD0434__GUID-D87F6BA9-6CF7-4109-A012-7A2F82C05483"><strong class="+ topic/ph hi-d/b ph b">Low Range:</strong> This mode is
+                    useful in applications in which the V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> is too low for high-range
+                    operation. The V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> in this mode can be as low as <span class="- topic/ph ph">1.8V</span>. However, V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> must be at least 0.5V higher than the
+                    maximum sensor voltage depending on the expected low operating temperature.</li>
+            </ul></div>
+        <div class="- topic/note note important note_important" id="GUID-1BA9A8F0-ADC0-4ABB-B041-01B118AD0434__GUID-FB8D1230-1324-4E36-B5F3-B1B089B41461" data-ofbid="GUID-1BA9A8F0-ADC0-4ABB-B041-01B118AD0434__GUID-FB8D1230-1324-4E36-B5F3-B1B089B41461"><span class="note__title">Important:</span> The standard
+            parameters for the Temperature Sensor for both high range and low range are stored in
+            the DIA table. Refer to the DIA table in the <strong class="+ topic/ph hi-d/b ph b">“Memory Organization”</strong> chapter for
+            more details.</div>
+</div>
+
+</body>
+</html>

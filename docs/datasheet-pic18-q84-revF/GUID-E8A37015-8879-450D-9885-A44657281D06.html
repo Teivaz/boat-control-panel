@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>9.4 Data Memory Organization — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A47F4BC9-6CFD-4E92-BAB4-E860E91F47A7.html"/>
+<link rel="next" href="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961.html"/>
+<link rel="up" href="GUID-2BAB2696-5102-45C6-8EF2-0812A58B9EC7.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2BAB2696-5102-45C6-8EF2-0812A58B9EC7.html">9 Memory Organization</a></li><li>9.4 Data Memory Organization</li></ol>
+  <div class="sib"><span>← <a href="GUID-A47F4BC9-6CFD-4E92-BAB4-E860E91F47A7.html" rel="prev">Device Configuration Information</a></span><span><a href="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961.html" rel="next">Bank Select Register</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-E8A37015-8879-450D-9885-A44657281D06__GUID-5236641D-59BA-4C06-8891-5B4D654DD921" style="">9.4 Data Memory Organization</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <div class="- topic/note note important note_important" id="GUID-E8A37015-8879-450D-9885-A44657281D06__ID-42129-000007FF" data-ofbid="GUID-E8A37015-8879-450D-9885-A44657281D06__ID-42129-000007FF"><span class="note__title">Important:</span> The operation of some aspects of data memory are
+         changed when the PIC18 extended instruction set is enabled. See the <a class="- topic/xref xref" href="GUID-1AA22732-5406-4AEA-B6C6-288322B6CF72.html#GUID-1AA22732-5406-4AEA-B6C6-288322B6CF72">PIC18 Instruction Execution and the Extended Instruction Set</a>
+         section for more information.</div>
+      <p class="- topic/p p" id="GUID-E8A37015-8879-450D-9885-A44657281D06__ID-42129-00000802" data-ofbid="GUID-E8A37015-8879-450D-9885-A44657281D06__ID-42129-00000802">The data memory in PIC18 devices is implemented as static RAM. The
+         memory space is divided into as many as 64 banks with 256 bytes each. The Data Memory Map
+         table below shows the data memory organization for all devices in the device family.</p>
+      <p class="- topic/p p" id="GUID-E8A37015-8879-450D-9885-A44657281D06__ID-42129-00000809" data-ofbid="GUID-E8A37015-8879-450D-9885-A44657281D06__ID-42129-00000809">The data memory contains Special Function Registers (SFRs) and
+         General Purpose Registers (GPRs). The SFRs are used for control and status of the
+         controller and peripheral functions, while GPRs are used for data storage and scratchpad
+         operations in the user’s application. Any read of an unimplemented location will read as
+            ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’.</p>
+      <p class="- topic/p p">The value in the Bank Select Register (BSR) determines which bank is being accessed. The
+         instruction set and architecture allow operations across all banks. The entire data memory
+         may be accessed by Direct, Indirect or Indexed Addressing modes. Addressing modes are
+         discussed later in this subsection.</p>
+      <p class="- topic/p p" id="GUID-E8A37015-8879-450D-9885-A44657281D06__ID-42129-0000080C" data-ofbid="GUID-E8A37015-8879-450D-9885-A44657281D06__ID-42129-0000080C">To ensure that commonly used registers (SFRs and select GPRs) can be
+         accessed in a single cycle, PIC18 devices implement an Access Bank. This is a virtual
+         256-byte memory space that provides fast access to SFRs and the top half of GPR Bank 5
+         without using the Bank Select Register. The <a class="- topic/xref xref" href="GUID-635ACD25-5869-49B1-B733-95E8ED3C4FBC.html#GUID-635ACD25-5869-49B1-B733-95E8ED3C4FBC">Access Bank</a> section provides a detailed description of the Access
+         RAM.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-E8A37015-8879-450D-9885-A44657281D06__FIG_R2C_25D_D1B" data-ofbid="GUID-E8A37015-8879-450D-9885-A44657281D06__FIG_R2C_25D_D1B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 9-3. <span id="GUID-E8A37015-8879-450D-9885-A44657281D06__GUID-163F3D4A-4D1C-4D13-A8D2-7D9EDD1B2953" class="fig--title">Data Memory Map</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-2C5D05A0-7051-456D-AAEA-B308F210BA8A-high.pdf#toolbar=1" width="612" height="852"></iframe></span>
+      </figure>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-CDE75AE5-5031-4ADE-B76C-10F1E5460961.html">9.4.1 Bank Select Register</a></li><li><a href="GUID-635ACD25-5869-49B1-B733-95E8ED3C4FBC.html">9.4.2 Access Bank</a></li></ul>
+</nav>
+</body>
+</html>

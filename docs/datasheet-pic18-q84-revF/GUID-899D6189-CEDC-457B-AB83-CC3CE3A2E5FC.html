@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>15.4 Watchdog Window — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-9C6DFD20-46AB-43F2-AE51-0B9F26876F46.html"/>
+<link rel="next" href="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3.html"/>
+<link rel="up" href="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80.html">15 WWDT - Windowed Watchdog Timer</a></li><li>15.4 Watchdog Window</li></ol>
+  <div class="sib"><span>← <a href="GUID-9C6DFD20-46AB-43F2-AE51-0B9F26876F46.html" rel="prev">Time-Out Period</a></span><span><a href="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3.html" rel="next">Clearing the Watchdog Timer</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-899D6189-CEDC-457B-AB83-CC3CE3A2E5FC__GUID-87C96D92-9FEA-4B63-82AB-6340420ECE8E" style="">15.4 Watchdog Window</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The Windowed Watchdog Timer has an optional Windowed mode that is controlled by either
+            the WDTCWS Configuration bits or the <a class="- topic/xref xref" href="GUID-F5513084-0987-48C2-839A-FAFED6B70A66.html#GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B" title="Watchdog Timer Window Select(2,4)"><span><span>WINDOW</span></span></a> bits. In the Windowed mode (WINDOW &lt; <code class="+ topic/ph pr-d/codeph ph codeph">‘b1111</code>),
+            the <code class="+ topic/ph pr-d/codeph ph codeph">CLRWDT</code> instruction must occur within the allowed window of the WDT
+            period. Any <code class="+ topic/ph pr-d/codeph ph codeph">CLRWDT</code> instruction that occurs outside of this window will
+            trigger a window violation and will cause a WWDT Reset, similar to a WWDT time-out. See
+                <a class="- topic/xref xref" href="#GUID-899D6189-CEDC-457B-AB83-CC3CE3A2E5FC__FIG_BVV_1CM_RGB"><span>Figure 15-2</span></a> for an example. </div>
+        <div class="- topic/p p">When the WDTCWS Configuration bits are <code class="+ topic/ph pr-d/codeph ph codeph">‘b111</code>, then the window size is
+            controlled by the <a class="- topic/xref xref" href="GUID-F5513084-0987-48C2-839A-FAFED6B70A66.html#GUID-C8C04894-E721-47E9-B9EC-B4C1D07C635B" title="Watchdog Timer Window Select(2,4)"><span><span>WINDOW</span></span></a> bits, otherwise the window size is controlled by the WDTCWS bits.
+            The five Most Significant bits of the <a class="- topic/xref xref" href="GUID-2D86B265-A645-4655-86B2-F98ED07EFCB9.html#GUID-2D86B265-A645-4655-86B2-F98ED07EFCB9" title="WDTTMR">WDTTMR</a> register are used to determine whether the window is
+            open, as defined by the window size. In the event of a window violation, a Reset will be
+            generated and the WDTWV bit of the PCON0 register will be cleared. This bit is set by a
+            POR and can be set by software.</div>
+        <figure class="- topic/fig fig fignone" id="GUID-899D6189-CEDC-457B-AB83-CC3CE3A2E5FC__FIG_BVV_1CM_RGB" data-ofbid="GUID-899D6189-CEDC-457B-AB83-CC3CE3A2E5FC__FIG_BVV_1CM_RGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 15-2. <span id="GUID-899D6189-CEDC-457B-AB83-CC3CE3A2E5FC__GUID-A2493334-DECF-4FCA-AFDA-E0A4075E80AD" class="fig--title">Window Period and Delay</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-AE19441A-B07D-438C-8161-9BB62AFF51EF-high.pdf#toolbar=1" width="450" height="175.67773008748077"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

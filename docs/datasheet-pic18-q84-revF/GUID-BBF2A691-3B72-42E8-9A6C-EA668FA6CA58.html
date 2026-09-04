@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3 I2C Module Overview — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D4EA6193-4947-4F4D-BAB7-7FDFEC870B3B.html"/>
+<link rel="next" href="GUID-4AF26B1E-964C-44CF-88FF-2107D47A7521.html"/>
+<link rel="up" href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li>37.3 I2C Module Overview</li></ol>
+  <div class="sib"><span>← <a href="GUID-D4EA6193-4947-4F4D-BAB7-7FDFEC870B3B.html" rel="prev">I2C Terminology</a></span><span><a href="GUID-4AF26B1E-964C-44CF-88FF-2107D47A7521.html" rel="next">Byte Format</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__GUID-8AA4C5AF-EDA2-4BDD-9B38-890492E7DC7E" style="">37.3 I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Module Overview</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C module provides a synchronous serial interface between the
+            microcontroller and other I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C-compatible devices using a bidirectional
+            two-wire bus. Devices operate in a host/client environment that may contain one or more
+            host devices and one or more client devices. The host device always initiates
+            communication. </p>
+        <p class="- topic/p p">The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C bus consists of two signal connections:</p>
+        <ul class="- topic/ul ul" id="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__UL_XDR_CLW_JGB" data-ofbid="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__UL_XDR_CLW_JGB">
+            <li class="- topic/li li" id="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__GUID-EAC0317E-5D39-4A7B-B961-FB976B8067F7" data-ofbid="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__GUID-EAC0317E-5D39-4A7B-B961-FB976B8067F7">Serial Clock (SCL)</li>
+            <li class="- topic/li li" id="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__GUID-F95597B8-3949-4E14-9C8C-077AA94C6FA5" data-ofbid="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__GUID-F95597B8-3949-4E14-9C8C-077AA94C6FA5">Serial Data (SDA)</li>
+        </ul>
+        <p class="- topic/p p">Both the SCL and SDA connections are open-drain lines, each line requiring pull-up
+            resistors to the application’s supply voltage. Pulling the line to ground is considered
+            a logic ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’, while allowing the line to float is considered a logic
+                ‘<code class="+ topic/ph pr-d/codeph ph codeph">1</code>’. It is important to note that the voltage levels of the logic
+            low and logic high are not fixed and are dependent on the bus supply voltage. According
+            to the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Specification, a logic low input level is up to 30% of
+                V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> (V<sub class="+ topic/ph hi-d/sub ph sub">IL</sub> ≤ 0.3 V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub>), while the logic high input
+            level is 70% to 100% of V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub> (V<sub class="+ topic/ph hi-d/sub ph sub">IH</sub> ≥ 0.7 V<sub class="+ topic/ph hi-d/sub ph sub">DD</sub>). Both
+            signal connections are considered bidirectional, although the SCL signal can only be an
+            output in Host mode and an input in Client mode. </p>
+        <p class="- topic/p p">All transactions on the bus are initiated and terminated by the host device. Depending on
+            the direction of the data being transferred, there are four main operations performed by
+            the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C module:</p>
+        <ul class="- topic/ul ul" id="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__UL_YDR_CLW_JGB" data-ofbid="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__UL_YDR_CLW_JGB">
+            <li class="- topic/li li" id="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__GUID-51772EAD-F6FA-4BBA-8947-C3AE1AF18B96" data-ofbid="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__GUID-51772EAD-F6FA-4BBA-8947-C3AE1AF18B96">Host Transmit: Host is transmitting
+                data to a client</li>
+            <li class="- topic/li li" id="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__GUID-A612977F-0927-4AF3-B39B-B5C3BE7BCBBE" data-ofbid="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__GUID-A612977F-0927-4AF3-B39B-B5C3BE7BCBBE">Host Receive: Host is receiving data
+                from a client</li>
+            <li class="- topic/li li" id="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__GUID-163F0913-94B6-4DEC-851A-D10D03DFF69D" data-ofbid="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__GUID-163F0913-94B6-4DEC-851A-D10D03DFF69D">Client Transmit: Client is
+                transmitting data to a host</li>
+            <li class="- topic/li li" id="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__GUID-4DAB8190-76BF-40D1-A85D-4CFC4E05FEAF" data-ofbid="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__GUID-4DAB8190-76BF-40D1-A85D-4CFC4E05FEAF">Client Receive: Client is receiving
+                data from a host</li>
+        </ul>
+        <p class="- topic/p p">The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C interface allows for a multi-host bus, meaning that there can be
+            several host devices present on the bus. A host can select a client device by
+            transmitting a unique address on the bus. When the address matches a client’s address,
+            the client responds with an Acknowledge (<span class="+ topic/ph sidscDomain-d/active-low ph active-low">ACK</span>) condition, and
+            communication between the host and that client can commence. All other devices connected
+            to the bus must ignore any transactions not intended for them.</p>
+        <p class="- topic/p p">The following figure shows a typical I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C bus configuration with one host and
+            two clients.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__FIG_GLW_2Q2_KGB" data-ofbid="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__FIG_GLW_2Q2_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-2. <span id="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__GUID-20A905FE-6DA1-4F24-99FA-501BD8A68BF7" class="fig--title">I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Host-Client
+                Connections</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58__IMAGE_HLW_2Q2_KGB" src="GUID-3FF25A4D-7C84-4E1B-8ED8-C6F5A573F62C-high.svg"/></span>
+        </figure>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-4AF26B1E-964C-44CF-88FF-2107D47A7521.html">37.3.1 Byte Format</a></li><li><a href="GUID-7CB39276-0096-417A-84BA-4017DE214891.html">37.3.2 SDA and SCL Pins</a></li><li><a href="GUID-E4740A38-CADD-4345-AB81-4F87CFD77E65.html">37.3.3 Start Condition</a></li><li><a href="GUID-46250360-F0F0-471E-B85A-D0DED7203711.html">37.3.4 Acknowledge Sequence</a></li><li><a href="GUID-EBD0C643-A58E-4542-9737-700164CBD0CA.html">37.3.5 Restart Condition</a></li><li><a href="GUID-38CB246B-2620-4978-B122-E5E13D40DC20.html">37.3.6 Stop Condition</a></li><li><a href="GUID-E300C223-86B5-4D0F-A49C-01D3A2AD6CAD.html">37.3.7 Bus Time-Out</a></li><li><a href="GUID-72E0AB3E-D1ED-4E72-BBBC-59AB77DBD2E1.html">37.3.8 Address Buffers</a></li><li><a href="GUID-9D7BE57D-DB90-47F1-BB91-48A058C048D0.html">37.3.9 Transmit Buffer</a></li><li><a href="GUID-261B9C6D-A800-4785-8551-91DD255D3C56.html">37.3.10 Receive Buffer</a></li><li><a href="GUID-1D1EC34C-7EE8-456C-8216-130FC0C35670.html">37.3.11 Clock Stretching</a></li><li><a href="GUID-E4A12FB1-8569-4368-B42D-F4B7D8A7DBE0.html">37.3.12 Data Byte Count</a></li><li><a href="GUID-A02004DA-1510-414A-A6B1-E85BD25B8CC9.html">37.3.13 DMA Integration</a></li><li><a href="GUID-B34AF77F-5737-430A-89C1-C8F50ADCD660.html">37.3.14 Interrupts</a></li><li><a href="GUID-5A9D0BD2-C6BD-4ACB-98FB-1F6B164C0EA1.html">37.3.15 Operation in Sleep</a></li></ul>
+</nav>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>22.6 CLC Setup Steps — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E3A0DBD2-78B2-403C-B685-E6ECA35D5DDE.html"/>
+<link rel="next" href="GUID-E29A477D-DC6A-4CF5-BD1F-A1E88C727828.html"/>
+<link rel="up" href="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-C909E868-10B9-4CC4-8D2E-A4B1B553D812.html">22 CLC - Configurable Logic Cell</a></li><li>22.6 CLC Setup Steps</li></ol>
+  <div class="sib"><span>← <a href="GUID-E3A0DBD2-78B2-403C-B685-E6ECA35D5DDE.html" rel="prev">Operation During Sleep</a></span><span><a href="GUID-E29A477D-DC6A-4CF5-BD1F-A1E88C727828.html" rel="next">Register Overlay</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-F6229757-6960-4122-B5F1-BC4D84F74974" style="">22.6 CLC Setup
+        Steps</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">These steps need to be followed when setting up the CLC:</p>
+        <ol class="- topic/ol ol" id="GUID-DB026086-8715-477A-866D-27D205A738B8__OL_VFD_JHQ_MGB" data-ofbid="GUID-DB026086-8715-477A-866D-27D205A738B8__OL_VFD_JHQ_MGB">
+            <li class="- topic/li li" id="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-9FF05F7D-5EDD-4167-8B8C-E7227F87E668" data-ofbid="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-9FF05F7D-5EDD-4167-8B8C-E7227F87E668">Disable the CLC
+                by clearing the <a class="- topic/xref xref" href="GUID-6E6A675F-E2D8-4427-B904-FF1F59785627.html#GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C" title="CLC Enable"><span><span>EN</span></span></a> bit.</li>
+            <li class="- topic/li li" id="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-DA64BA6E-0020-4469-859D-9340A0B18503" data-ofbid="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-DA64BA6E-0020-4469-859D-9340A0B18503">Select the
+                desired inputs using the <a class="- topic/xref xref" href="GUID-3084CA8C-D2C0-41E2-B45D-BCC3B573DB1F.html" title="CLCnSEL0">CLCnSEL0</a> through <a class="- topic/xref xref" href="GUID-6457BC4F-E41C-48FD-8E31-280EADAF20E7.html" title="CLCnSEL3">CLCnSEL3</a>
+                registers.</li>
+            <li class="- topic/li li" id="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-789687EB-E7E0-4C4C-8383-41D6912F0FCB" data-ofbid="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-789687EB-E7E0-4C4C-8383-41D6912F0FCB">Clear any ANSEL
+                bits associated with CLC input pins.</li>
+            <li class="- topic/li li" id="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-1E88A2A9-B698-4BB1-818B-D6B83AD207CD" data-ofbid="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-1E88A2A9-B698-4BB1-818B-D6B83AD207CD">Set all TRIS bits
+                associated with inputs. However, a CLC input will also operate if the pin is
+                configured as an output, in which case the TRIS bits must be cleared.</li>
+            <li class="- topic/li li" id="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-CAD2FA29-2641-487B-96E4-0EF73CBF2AD5" data-ofbid="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-CAD2FA29-2641-487B-96E4-0EF73CBF2AD5">Enable the chosen
+                inputs through the four gates using the <a class="- topic/xref xref" href="GUID-BE7F16CD-0A3A-4106-80FA-4881C51FAB16.html" title="CLCnGLS0">CLCnGLS0</a> through <a class="- topic/xref xref" href="GUID-697F9F99-1242-4EAF-82F3-EEFEE4A588B7.html" title="CLCnGLS3">CLCnGLS3</a> registers.</li>
+            <li class="- topic/li li" id="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-0B1208A0-6D9C-4C38-B421-65DD38E5D1F6" data-ofbid="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-0B1208A0-6D9C-4C38-B421-65DD38E5D1F6">Select the gate
+                output polarities with the <a class="- topic/xref xref" href="GUID-5218F39E-0128-4047-865C-8CE161B91915.html#BITFIELD_QJJ_143_F1B" title="Gate Output Polarity Control"><span><span>GyPOL</span></span></a> bits.</li>
+            <li class="- topic/li li" id="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-98BF6DDC-2F2C-4BAA-8B54-34505504651C" data-ofbid="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-98BF6DDC-2F2C-4BAA-8B54-34505504651C">Select the
+                desired logic function with the <a class="- topic/xref xref" href="GUID-6E6A675F-E2D8-4427-B904-FF1F59785627.html#BITFIELD_GRS_1P3_F1B" title="Configurable Logic Cell Functional Mode Selection"><span><span>MODE</span></span></a> bits.</li>
+            <li class="- topic/li li" id="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-A028AF8F-294E-4C53-89E1-857225609F4B" data-ofbid="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-A028AF8F-294E-4C53-89E1-857225609F4B">Select the
+                desired polarity of the logic output with the <a class="- topic/xref xref" href="GUID-5218F39E-0128-4047-865C-8CE161B91915.html#GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C" title="CLCxOUT Output Polarity Control"><span><span>POL</span></span></a> bit (this step may be combined with the previous gate output
+                polarity step).</li>
+            <li class="- topic/li li" id="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-941D2FCA-DE65-462F-AFF7-B7004D712271" data-ofbid="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-941D2FCA-DE65-462F-AFF7-B7004D712271">If driving a
+                device pin, configure the associated pin PPS control register and also clear the
+                TRIS bit corresponding to that output.</li>
+            <li class="- topic/li li" id="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-54287C3D-B49B-4E0C-AF95-1243B61C1A04" data-ofbid="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-54287C3D-B49B-4E0C-AF95-1243B61C1A04">Configure the
+                interrupts (optional). See the <a class="- topic/xref xref" href="GUID-04F60EC9-43BC-4542-B4F9-FE410EEA3E48.html#GUID-04F60EC9-43BC-4542-B4F9-FE410EEA3E48">CLC Interrupts</a> section.</li>
+            <li class="- topic/li li" id="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-595893E7-B928-4F27-AFA6-E35FCD1DA62B" data-ofbid="GUID-DB026086-8715-477A-866D-27D205A738B8__GUID-595893E7-B928-4F27-AFA6-E35FCD1DA62B">Enable the CLC by
+                setting the <a class="- topic/xref xref" href="GUID-6E6A675F-E2D8-4427-B904-FF1F59785627.html#GUID-14143BF2-0E0E-40D4-B0D5-4791E8BE0F1C" title="CLC Enable"><span><span>EN</span></span></a> bit.</li>
+        </ol>
+    </div>
+
+</body>
+</html>

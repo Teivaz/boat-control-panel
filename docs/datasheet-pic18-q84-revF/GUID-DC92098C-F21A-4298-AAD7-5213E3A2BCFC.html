@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.3 Clock Source — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-5F422254-9601-4C4A-87A2-B6B46D498EB9.html"/>
+<link rel="next" href="GUID-22B9E23C-C529-4271-BF88-9EF9E7A71CF7.html"/>
+<link rel="up" href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li>32.3 Clock Source</li></ol>
+  <div class="sib"><span>← <a href="GUID-5F422254-9601-4C4A-87A2-B6B46D498EB9.html" rel="prev">Start-Up Considerations</a></span><span><a href="GUID-22B9E23C-C529-4271-BF88-9EF9E7A71CF7.html" rel="next">Selectable Input Sources</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-DC92098C-F21A-4298-AAD7-5213E3A2BCFC__GUID-CA8C6D6D-8EAB-4954-85ED-E1900FE45EDC" style="">32.3 Clock Source</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-DC92098C-F21A-4298-AAD7-5213E3A2BCFC__ID-42115-0000012C" data-ofbid="GUID-DC92098C-F21A-4298-AAD7-5213E3A2BCFC__ID-42115-0000012C">The clock source is used to drive the dead-band timing circuits.
+            The CWG module allows the following clock sources to be selected:</p>
+        <ul class="- topic/ul ul" id="GUID-DC92098C-F21A-4298-AAD7-5213E3A2BCFC__UL_JXL_X34_PGB" data-ofbid="GUID-DC92098C-F21A-4298-AAD7-5213E3A2BCFC__UL_JXL_X34_PGB">
+            <li class="- topic/li li" id="GUID-DC92098C-F21A-4298-AAD7-5213E3A2BCFC__ID-42115-0000012D" data-ofbid="GUID-DC92098C-F21A-4298-AAD7-5213E3A2BCFC__ID-42115-0000012D">F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> (system clock)</li>
+            <li class="- topic/li li" id="GUID-DC92098C-F21A-4298-AAD7-5213E3A2BCFC__ID-42115-00000130" data-ofbid="GUID-DC92098C-F21A-4298-AAD7-5213E3A2BCFC__ID-42115-00000130">HFINTOSC</li>
+        </ul>
+        <p class="- topic/p p" id="GUID-DC92098C-F21A-4298-AAD7-5213E3A2BCFC__ID-42115-00000132" data-ofbid="GUID-DC92098C-F21A-4298-AAD7-5213E3A2BCFC__ID-42115-00000132">When the HFINTOSC is selected, the HFINTOSC will be kept running
+            during Sleep. Therefore, the CWG modes requiring dead band can operate in Sleep,
+            provided that the CWG data input is also active during Sleep. The clock sources are
+            selected using the <a class="- topic/xref xref" href="GUID-C1F16A32-028C-49AF-87B0-AD4D27670365.html#BITFIELD_PT3_TYV_TZ" title="CWG Clock Source Selection Select"><span><span>CS</span></span></a>
+            bit. The system clock F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> is disabled in Sleep and thus dead-band control
+            cannot be used.</p>
+    </div>
+
+</body>
+</html>

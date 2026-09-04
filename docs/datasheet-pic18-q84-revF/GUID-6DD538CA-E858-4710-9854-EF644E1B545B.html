@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.4.2.2 LIN Client Transmitter — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4BA83442-B7F9-4363-AFE7-CB39A5B2BCF9.html"/>
+<link rel="next" href="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB.html"/>
+<link rel="up" href="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-CA8B160B-53C1-465E-8E64-3785ADB0AD37.html">35.4 LIN Modes (Full-Featured UARTs Only)</a></li><li><a href="GUID-DD271013-EC41-4FBD-A5F3-ED41C1480087.html">35.4.2 LIN Client Mode</a></li><li>35.4.2.2 LIN Client Transmitter</li></ol>
+  <div class="sib"><span>← <a href="GUID-4BA83442-B7F9-4363-AFE7-CB39A5B2BCF9.html" rel="prev">LIN Client Receiver</a></span><span><a href="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB.html" rel="next">DALI Mode (Full-Featured UARTs Only)</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-6DD538CA-E858-4710-9854-EF644E1B545B__GUID-9A68C813-BC4A-4F9A-B2E3-F8C5A0A0D643" style="">35.4.2.2 LIN Client Transmitter</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">When the Client process is a transmitter, software performs the following tasks in the order
+            shown:</p>
+        <ul class="- topic/ul ul" id="GUID-6DD538CA-E858-4710-9854-EF644E1B545B__UL_ZL2_W1X_CBB" data-ofbid="GUID-6DD538CA-E858-4710-9854-EF644E1B545B__UL_ZL2_W1X_CBB">
+            <li class="- topic/li li" id="GUID-6DD538CA-E858-4710-9854-EF644E1B545B__GUID-915D39C6-8117-4A05-83A7-1F822E322518" data-ofbid="GUID-6DD538CA-E858-4710-9854-EF644E1B545B__GUID-915D39C6-8117-4A05-83A7-1F822E322518">The UxP2 register is written with a
+                value equal to the number of bytes to transmit. This will enable the UxTXIF flag
+                which is disabled when UxP2 is ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span>’.</li>
+            <li class="- topic/li li" id="GUID-6DD538CA-E858-4710-9854-EF644E1B545B__GUID-1EB0483B-342B-460C-A7AC-5E7083DFD542" data-ofbid="GUID-6DD538CA-E858-4710-9854-EF644E1B545B__GUID-1EB0483B-342B-460C-A7AC-5E7083DFD542">The C0EN bit is set or cleared to
+                select the appropriate checksum</li>
+            <li class="- topic/li li" id="GUID-6DD538CA-E858-4710-9854-EF644E1B545B__GUID-7A4B5D7D-93AF-46C7-9E3D-F6E00533C957" data-ofbid="GUID-6DD538CA-E858-4710-9854-EF644E1B545B__GUID-7A4B5D7D-93AF-46C7-9E3D-F6E00533C957">Each byte of the process response is written to UxTXB when UxTXIF is set</li>
+        </ul>
+        <p class="- topic/p p">The UART accumulates the checksum as each byte is written to UxTXB. After the last byte
+            is written, the UART stores the calculated checksum in the UxTXCHK register and
+            transmits the inverted result as the last byte in the response.</p>
+        <p class="- topic/p p">The UxTXIF flag is disabled when the number of bytes specified by the value
+            in the UxP2 register have been written. Any writes to UxTXB that exceed the UxP2 count
+            will be ignored and set the <a class="- topic/xref xref" href="GUID-2A8CC206-1569-40FD-9221-4BB29D97CE3C.html#BITFIELD_MQF_ZNS_YY" title="Transmit Write Error Status (must be cleared by software)">TXWRE</a> flag.</p>
+</div>
+
+</body>
+</html>

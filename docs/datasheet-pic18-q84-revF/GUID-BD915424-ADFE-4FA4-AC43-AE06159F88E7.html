@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.6.3.4 Receiver Overflow and Transmitter Underflow Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E9A5E389-63E6-40A1-B1C5-FF0C5AA93D19.html"/>
+<link rel="next" href="GUID-1BB54490-5E63-49EB-92C8-7842BE6E465B.html"/>
+<link rel="up" href="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-3B049106-A068-4D06-BD06-17396A19D766.html">36.6 SPI Interrupts</a></li><li><a href="GUID-84ACED0B-45A8-4BBF-B3DC-26BD38E9FDC6.html">36.6.3 SPI Status Interrupts</a></li><li>36.6.3.4 Receiver Overflow and Transmitter Underflow Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-E9A5E389-63E6-40A1-B1C5-FF0C5AA93D19.html" rel="prev">Start of Client Select and End of Client Select Interrupts</a></span><span><a href="GUID-1BB54490-5E63-49EB-92C8-7842BE6E465B.html" rel="next">Register Definitions: Serial Peripheral Interface</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-BD915424-ADFE-4FA4-AC43-AE06159F88E7__GUID-1788BF3F-2FDD-4B47-B731-E5F94D351764" style="">36.6.3.4 Receiver Overflow and Transmitter Underflow Interrupts</h1><div class="- topic/body body"><p class="- topic/p p">The receiver overflow interrupt triggers if data are received when the receive FIFO is already full and RXR = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>. In this case, the data will be discarded, and the <a class="- topic/xref xref" href="GUID-28CA1CAA-8734-4F85-8A9D-5B7892702B4A.html#BITFIELD_T5B_GKF_RFB" title="Receiver Overflow Interrupt Flag"><span><span>RXOIF</span></span></a> bit will be set. The Receiver Overflow Interrupt Enable bit is <a class="- topic/xref xref" href="GUID-73DEE9E2-8073-45FE-88D0-F2D6489F1BF5.html#BITFIELD_T5B_GKF_RFB" title="Receiver Overflow Interrupt Enable"><span><span>RXOIE</span></span></a>.</p><p class="- topic/p p">The Transmitter Underflow Interrupt flag triggers if a data transfer begins when the transmit FIFO is empty and TXR = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>. In this case, the most recently received data will be transmitted and the <a class="- topic/xref xref" href="GUID-28CA1CAA-8734-4F85-8A9D-5B7892702B4A.html#BITFIELD_YWF_NKF_RFB" title="Transmitter Underflow Interrupt Flag"><span><span>TXUIF</span></span></a> bit will be set. The Transmitter Underflow Interrupt Enable bit is <a class="- topic/xref xref" href="GUID-73DEE9E2-8073-45FE-88D0-F2D6489F1BF5.html#BITFIELD_YWF_NKF_RFB" title="Transmitter Underflow Interrupt Enable"><span><span>TXUIE</span></span></a>.</p><p class="- topic/p p">Both these interrupts will only occur in Client mode, as Host mode will not allow the receive FIFO to overflow or the transmit FIFO to underflow.</p></div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.12 Operation During Sleep — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-9A17A85B-2045-43E7-B014-9627421FBA33.html"/>
+<link rel="next" href="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B.html"/>
+<link rel="up" href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li>32.12 Operation During Sleep</li></ol>
+  <div class="sib"><span>← <a href="GUID-9A17A85B-2045-43E7-B014-9627421FBA33.html" rel="prev">Auto-Restart</a></span><span><a href="GUID-889CB4C2-A005-44B9-8ED7-3E5519F5A27B.html" rel="next">Configuring the CWG</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__GUID-5246C802-AC47-4DC5-AD05-9B2D3F018148" style="">32.12 Operation During Sleep</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__ID-42115-00000291" data-ofbid="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__ID-42115-00000291">The CWG module operates independently from the system clock and
+            will continue to run during Sleep, provided that the clock and input sources selected
+            remain active.</p>
+        <p class="- topic/p p" id="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__ID-42115-00000292" data-ofbid="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__ID-42115-00000292">The HFINTOSC remains active during Sleep when all the following
+            conditions are met:</p>
+        <ul class="- topic/ul ul" id="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__UL_EL1_MK4_PGB" data-ofbid="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__UL_EL1_MK4_PGB">
+            <li class="- topic/li li" id="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__ID-42115-00000293" data-ofbid="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__ID-42115-00000293">CWG module is enabled</li>
+            <li class="- topic/li li" id="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__ID-42115-00000295" data-ofbid="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__ID-42115-00000295">Input source is active</li>
+            <li class="- topic/li li" id="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__ID-42115-00000297" data-ofbid="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__ID-42115-00000297">HFINTOSC is selected as the clock source, regardless of the
+                system clock source selected.</li>
+        </ul>
+        <p class="- topic/p p" id="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__ID-42115-00000299" data-ofbid="GUID-E781325D-C356-4E0A-B255-A023B13EF1FF__ID-42115-00000299">In other words, if the HFINTOSC is simultaneously selected as the
+            system clock and the CWG clock source when the CWG is enabled and the input source is
+            active, then the CPU will go Idle during Sleep, but the HFINTOSC will remain active, and
+            the CWG will continue to operate. This will have a direct effect on the Sleep mode
+            current.</p>
+    </div>
+
+</body>
+</html>

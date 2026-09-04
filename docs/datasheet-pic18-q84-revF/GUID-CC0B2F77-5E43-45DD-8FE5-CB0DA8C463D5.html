@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.9.5 TUxyTMR (16-bit) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7EF7CCEF-884C-440C-9BF7-F5EFD3A6B809.html"/>
+<link rel="next" href="GUID-1C842ECB-8121-47AA-B989-2538383C51DD.html"/>
+<link rel="up" href="GUID-7463E9BA-CF26-4B25-8FCB-C8F606187580.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-7463E9BA-CF26-4B25-8FCB-C8F606187580.html">28.9 Register Definitions: Universal Timer</a></li><li>28.9.5 TUxyTMR (16-bit)</li></ol>
+  <div class="sib"><span>← <a href="GUID-7EF7CCEF-884C-440C-9BF7-F5EFD3A6B809.html" rel="prev">TU8yPS</a></span><span><a href="GUID-1C842ECB-8121-47AA-B989-2538383C51DD.html" rel="next">TU16yCR</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__ID-000001AC" style="">28.9.5  TUxyTMR (16-bit)</h1><section class="- topic/section reference/section sidsc-register/registerDescription " id="GUID-3FB448B3-A357-4D8F-8AD4-564E808C0AEB">Timer Counter Register for 16-bit version of
+         UTMR module. This register can only be addressed when RDSEL =
+            <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span>.<div class="- topic/note note notype note_notype endnote" id="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__GUID-87E84DCA-2F14-4C3F-BEAF-0A687E926E71" data-ofbid="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__GUID-87E84DCA-2F14-4C3F-BEAF-0A687E926E71"><span class="note__title">Note:</span> 
+            <ol class="- topic/ol ol" id="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__OL_ZGK_LGN_MJB" data-ofbid="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__OL_ZGK_LGN_MJB">
+               <li class="- topic/li li" id="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__GUID-66B77B9C-52FC-4D4D-9493-0290759D8A4C" data-ofbid="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__GUID-66B77B9C-52FC-4D4D-9493-0290759D8A4C">Writing to this register will
+                  change the raw counter value directly. The user must handle the operation
+                  correctly to avoid data corruption. There is no safeguard for atomic access.
+                  Reading or writing a running counter is not recommended. This register must only
+                  be accessed while clocking is disabled.</li>
+               <li class="- topic/li li" id="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__GUID-6B3A903D-0938-4BB0-A716-8F2A3C9E1D9E" data-ofbid="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__GUID-6B3A903D-0938-4BB0-A716-8F2A3C9E1D9E">The individual bytes in this
+                  multibyte register can be accessed with the following register names:<ul class="- topic/ul ul" id="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__UL_DG2_NGN_MJB" data-ofbid="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__UL_DG2_NGN_MJB">
+                     <li class="- topic/li li" id="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__GUID-7C771586-1E99-481F-B814-625F9C2F4E02" data-ofbid="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__GUID-7C771586-1E99-481F-B814-625F9C2F4E02">TUxyTMRH: Accesses the high
+                        byte TUxyTMR[15:8]</li>
+                     <li class="- topic/li li" id="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__GUID-A9D585A4-614F-4101-ACC2-FF53725CFCEB" data-ofbid="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__GUID-A9D585A4-614F-4101-ACC2-FF53725CFCEB">TUxyTMRL: Accesses the low
+                        byte TUxyTMR[7:0]</li>
+                  </ul></li>
+            </ol>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>TU16yTMR</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x38B,0x397</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__GUID-7DE51F67-AF0E-4D93-9339-4884C261D58A" data-ofbid="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5__GUID-7DE51F67-AF0E-4D93-9339-4884C261D58A"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-CC0B2F77-5E43-45DD-8FE5-CB0DA8C463D5"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">15</td><td class="- topic/entry entry colsep-0 rowsep-0">14</td><td class="- topic/entry entry colsep-0 rowsep-0">13</td><td class="- topic/entry entry colsep-0 rowsep-0">12</td><td class="- topic/entry entry colsep-0 rowsep-0">11</td><td class="- topic/entry entry colsep-0 rowsep-0">10</td><td class="- topic/entry entry colsep-0 rowsep-0">9</td><td class="- topic/entry entry colsep-0 rowsep-0">8</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="8">TMR[15:8]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="8">TMR[7:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section class="- topic/section reference/section sidsc-register/registerDescription " id="GUID-3FB448B3-A357-4D8F-8AD4-564E808C0AEB"></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-000001B0__ID-42107-00001C2F" id="ID-000001B0">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-000001B0__ID-42107-00001C2F" style=""> Bits 15:0 – TMR[15:0] <span>Timer value</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-000001B0__GUID-B36A7F0D-3CCA-4F2E-A3E0-0491ACF861E1" data-ofbid="ID-000001B0__GUID-B36A7F0D-3CCA-4F2E-A3E0-0491ACF861E1"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  0000000000000000</td></tr><tr><td>All Other Resets  =  uuuuuuuuuuuuuuuu</td></tr></tbody></table></td></tr></tbody></table>
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues columnname=Condition" id="ID-000001B0__BITFIELDVALUES_LRW_DTC_J3B" data-ofbid="ID-000001B0__BITFIELDVALUES_LRW_DTC_J3B"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Name</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">RDSEL = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-000001B0__GUID-97046364-A871-4981-9369-3F856B24BE85">The raw counter register is read or
+                  written; must only be accessed while clocking is disabled, i.e., when ON =
+                     <code class="+ topic/ph pr-d/codeph ph codeph">0</code></td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldGroup strow dataRow bitFieldGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueName stentry dataEntry bitFieldValueName">RDSEL = <span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-000001B0__GUID-4CE4B224-2EA5-4812-94BC-A514EF43E24F">Reserved. Do not
+                  use.</td>
+            </tr></tbody></table>
+      </div>
+   </article>
+            
+               Writing to this register will
+                  change the raw counter value directly. The user must handle the operation
+                  correctly to avoid data corruption. There is no safeguard for atomic access.
+                  Reading or writing a running counter is not recommended. This register must only
+                  be accessed while clocking is disabled.
+               The individual bytes in this
+                  multibyte register can be accessed with the following register names:
+                     TUxyTMRH: Accesses the high
+                        byte TUxyTMR[15:8]
+                     TUxyTMRL: Accesses the low
+                        byte TUxyTMR[7:0]
+                  
+            
+         
+</body>
+</html>

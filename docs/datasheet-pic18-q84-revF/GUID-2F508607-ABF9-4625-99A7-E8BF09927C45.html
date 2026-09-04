@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.5.5 I2CxSTAT1 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html"/>
+<link rel="next" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html"/>
+<link rel="up" href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-579E43EA-04B9-47C3-B90F-EFE743C6F92D.html">37.5 Register Definitions: I2C Control</a></li><li>37.5.5 I2CxSTAT1</li></ol>
+  <div class="sib"><span>← <a href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html" rel="prev">I2CxSTAT0</a></span><span><a href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html" rel="next">I2CxPIR</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45__GUID-2A539F23-FB51-47B8-B376-F5796B9FC667" style="">37.5.5  I2CxSTAT1</h1><section id="GUID-F585AAB7-4292-495A-BA1F-E88D48997D59" class="- topic/section reference/section sidsc-register/registerDescription ">I2C Status Register
+                1<div class="- topic/note note notype note_notype endnote" id="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45__GUID-11FBFE9C-1F65-4F9B-823D-A8F6F85477EA" data-ofbid="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45__GUID-11FBFE9C-1F65-4F9B-823D-A8F6F85477EA"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45__OL_HJC_CXP_LGB" data-ofbid="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45__OL_HJC_CXP_LGB">
+                    <li class="- topic/li li" id="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45__GUID-0AF1F572-9812-4C78-B5C8-3239BABB1266" data-ofbid="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45__GUID-0AF1F572-9812-4C78-B5C8-3239BABB1266">This bit, when set, will
+                        cause a NACK to be issued.</li>
+                    <li class="- topic/li li" id="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45__GUID-1EDE780E-C299-4C17-BD5C-F5D00D1EC31C" data-ofbid="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45__GUID-1EDE780E-C299-4C17-BD5C-F5D00D1EC31C">Used as a trigger source for
+                        DMA operations.</li>
+                    <li class="- topic/li li" id="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45__GUID-B8FE842D-C1FF-4463-AFDE-22497CEA8AA5" data-ofbid="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45__GUID-B8FE842D-C1FF-4463-AFDE-22497CEA8AA5">This bit is special function;
+                        it can only be set by user software and always reads
+                        ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’.</li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>I2CxSTAT1</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x0299</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45__GUID-3082C6E1-9A91-4382-B795-82D09F69C325" data-ofbid="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45__GUID-3082C6E1-9A91-4382-B795-82D09F69C325"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TXWE</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">TXBE</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">RXRE</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">CLRBF</td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">RXBF</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HS</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W/HS</td><td class="- topic/entry entry colsep-0 rowsep-0">R/S</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-F585AAB7-4292-495A-BA1F-E88D48997D59" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-7A9B3629-D7FD-432A-AE45-E8A97DD638CA__GUID-441AB562-BB8A-4257-9400-8DEA0C838F49" id="GUID-7A9B3629-D7FD-432A-AE45-E8A97DD638CA">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-7A9B3629-D7FD-432A-AE45-E8A97DD638CA__GUID-441AB562-BB8A-4257-9400-8DEA0C838F49" style=""> Bit 7 – TXWE <span>
+            Transmit Write Error Status<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(1)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-7A9B3629-D7FD-432A-AE45-E8A97DD638CA__GUID-9D63EBFC-046A-4D61-8AC8-431E075A9B2E" data-ofbid="GUID-7A9B3629-D7FD-432A-AE45-E8A97DD638CA__GUID-9D63EBFC-046A-4D61-8AC8-431E075A9B2E"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-7A9B3629-D7FD-432A-AE45-E8A97DD638CA__GUID-E578D87D-E276-4EA0-AFAC-58EA2E04CA54"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-7A9B3629-D7FD-432A-AE45-E8A97DD638CA__GUID-D5E24193-1B09-4F2C-ADDF-A1CC38DB5D6D">A new
+                        byte of data was written into <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> when it was full (<em class="+ topic/ph hi-d/i ph i">must be cleared by
+                        software</em>)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-7A9B3629-D7FD-432A-AE45-E8A97DD638CA__GUID-F4AD88CE-A0D6-4A4F-831F-1E9CDAF50553"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-7A9B3629-D7FD-432A-AE45-E8A97DD638CA__GUID-49E54980-FD6E-4059-813A-05A56E95F921">No
+                        transmit write error occurred </td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_KS4_K5P_LGB__GUID-A70A58DF-A351-4344-851B-77C4C090CA1C" id="BITFIELD_KS4_K5P_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_KS4_K5P_LGB__GUID-A70A58DF-A351-4344-851B-77C4C090CA1C" style=""> Bit 5 – TXBE <span>
+            Transmit Buffer Empty Status<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(2)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_KS4_K5P_LGB__BITFIELDDESCRIPTION_LS4_K5P_LGB" data-ofbid="BITFIELD_KS4_K5P_LGB__BITFIELDDESCRIPTION_LS4_K5P_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_KS4_K5P_LGB__BITFIELDVALUES_IDY_P5P_LGB" data-ofbid="BITFIELD_KS4_K5P_LGB__BITFIELDVALUES_IDY_P5P_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_KS4_K5P_LGB__GUID-C7AAF523-E32A-4CF8-BC40-C9496B1A3857"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_KS4_K5P_LGB__GUID-F2A9CB4C-2568-4DC2-A503-CAB52ED3E081"><a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> is empty (<em class="+ topic/ph hi-d/i ph i">cleared by writing to the
+                            I2CxTXB register</em>)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_KS4_K5P_LGB__GUID-ACF94E1A-B437-4AD0-8D23-BE4D3B4586CA"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_KS4_K5P_LGB__GUID-6021EBC6-7716-4936-9251-9F66EE648A23">I2CxTXB
+                        is full</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_BDH_V5P_LGB__GUID-4C2780DF-D66B-4689-8592-B6C0FBCFC82D" id="BITFIELD_BDH_V5P_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_BDH_V5P_LGB__GUID-4C2780DF-D66B-4689-8592-B6C0FBCFC82D" style=""> Bit 3 – RXRE <span>
+            Receive Read Error Status<sup class="+ topic/ph hi-d/sup ph sup">(1)</sup>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_BDH_V5P_LGB__BITFIELDDESCRIPTION_CDH_V5P_LGB" data-ofbid="BITFIELD_BDH_V5P_LGB__BITFIELDDESCRIPTION_CDH_V5P_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_BDH_V5P_LGB__BITFIELDVALUES_GLY_Z5P_LGB" data-ofbid="BITFIELD_BDH_V5P_LGB__BITFIELDVALUES_GLY_Z5P_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_BDH_V5P_LGB__GUID-1D4A74D2-C2A4-464F-9448-20E7CFCBAFE4"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_BDH_V5P_LGB__GUID-9C96A5A9-7048-4D91-9F0C-90990F665831">A byte
+                        of data was read from <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> when it was empty (<em class="+ topic/ph hi-d/i ph i">must be cleared by
+                            software</em>)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_BDH_V5P_LGB__GUID-C4B0CE9D-5618-4998-9F57-44D2BE05C152"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_BDH_V5P_LGB__GUID-21F2D047-CD80-478E-BB08-6C20713BD878">No receive overflow
+                        occurred</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_OJT_2VP_LGB__GUID-A9469598-51D7-4E85-BAE0-657B13313C9D" id="BITFIELD_OJT_2VP_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_OJT_2VP_LGB__GUID-A9469598-51D7-4E85-BAE0-657B13313C9D" style=""> Bit 2 – CLRBF <span>
+            Clear Buffer<sup class="+ topic/ph hi-d/sup ph sup">(3)</sup>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_OJT_2VP_LGB__BITFIELDDESCRIPTION_PJT_2VP_LGB" data-ofbid="BITFIELD_OJT_2VP_LGB__BITFIELDDESCRIPTION_PJT_2VP_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_OJT_2VP_LGB__BITFIELDVALUES_B1B_NVP_LGB" data-ofbid="BITFIELD_OJT_2VP_LGB__BITFIELDVALUES_B1B_NVP_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_OJT_2VP_LGB__GUID-B4CCF48D-82EE-4464-B85C-74043B9CBF7A"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_OJT_2VP_LGB__GUID-26986A6D-F10A-48D1-A584-294F408BC297">Setting
+                        this bit clears/empties the receive and transmit buffers, causing a Reset of
+                        RXBF and TXBE<p class="- topic/p p">Setting this bit clears the I2CxRXIF and
+                            I2CxTXIF interrupt flags</p></td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_R51_BWP_LGB__GUID-AF3157B7-71A0-4399-8269-BC6F06D6B334" id="BITFIELD_R51_BWP_LGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_R51_BWP_LGB__GUID-AF3157B7-71A0-4399-8269-BC6F06D6B334" style=""> Bit 0 – RXBF <span>
+            Receive Buffer Full Status<sup class="+ topic/ph hi-d/sup ph sup">(2)</sup>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_R51_BWP_LGB__BITFIELDDESCRIPTION_S51_BWP_LGB" data-ofbid="BITFIELD_R51_BWP_LGB__BITFIELDDESCRIPTION_S51_BWP_LGB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_R51_BWP_LGB__BITFIELDVALUES_H3W_QWP_LGB" data-ofbid="BITFIELD_R51_BWP_LGB__BITFIELDVALUES_H3W_QWP_LGB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_R51_BWP_LGB__GUID-A4BE9D7C-FCB4-4292-A6C0-3F8D818C819B"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_R51_BWP_LGB__GUID-EAFA450F-B91E-4E8D-8F3D-4E84E9281838"><a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> is full (<em class="+ topic/ph hi-d/i ph i">cleared by reading the I2CxRXB
+                            register</em>)</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_R51_BWP_LGB__GUID-8C238C13-78C6-4489-A92D-0AD0E1D73155"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_R51_BWP_LGB__GUID-D42E2BA5-7C58-41D8-804D-1DFD079E3103">I2CxRXB
+                        is empty</td>
+                </tr></tbody></table>
+        </div>
+    </article>
+                
+                    This bit, when set, will
+                        cause a NACK to be issued.
+                    Used as a trigger source for
+                        DMA operations.
+                    This bit is special function;
+                        it can only be set by user software and always reads
+                        ‘0’.
+                
+            
+</body>
+</html>

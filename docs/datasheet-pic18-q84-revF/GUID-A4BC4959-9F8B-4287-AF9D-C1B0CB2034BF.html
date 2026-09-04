@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.5.5 Requesting Transmission of Message in Transmit Queue — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-D850CEA4-B3CA-4E17-A3D6-412F16CED4B7.html"/>
+<link rel="next" href="GUID-5A5D3C71-6477-4D5C-B1CE-A6BE1B4785CD.html"/>
+<link rel="up" href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html">38.5 Message Transmission</a></li><li>38.5.5 Requesting Transmission of Message in Transmit Queue</li></ol>
+  <div class="sib"><span>← <a href="GUID-D850CEA4-B3CA-4E17-A3D6-412F16CED4B7.html" rel="prev">Requesting Transmission of Message in Transmit FIFO</a></span><span><a href="GUID-5A5D3C71-6477-4D5C-B1CE-A6BE1B4785CD.html" rel="next">C1TXREQ Register</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-A4BC4959-9F8B-4287-AF9D-C1B0CB2034BF__GUID-E57A11E6-3481-461E-AFDD-CE649C396C72" style="">38.5.5 Requesting Transmission of Message in Transmit Queue</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">After a message is loaded into the TXQ, the message is ready for
+            transmission. The application initiates the transmission of all messages in the queue by
+            setting TXREQ (CxTXQCON[9]). When all messages have been transmitted, TXREQ will be
+            cleared. The application can request transmission of the TXQ and multiple FIFOs
+            simultaneously. The TXQ or FIFO of the CxTXQCON register with the highest priority will
+            start transmitting first. Messages in the TXQ will be transmitted based on their ID. The
+            message with the highest priority ID and the lowest ID value will be transmitted
+            first.</p>
+        <p class="- topic/p p">Messages can be loaded into the TXQ while the TXQ is transmitting messages.
+            Since TXREQ is cleared by the TXQ automatically after the TXQ empties, UINC and TXREQ of
+            the CxTXQCON register must be set at the same time after appending a message. This
+            ensures that all messages in the TXQ are transmitted, including the appended
+            messages.</p>
+    </div>
+
+</body>
+</html>

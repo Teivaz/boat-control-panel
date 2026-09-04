@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>16.4.1 Clearing the SIRQEN Bit — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-DFAEA367-729B-47CF-94B3-6C25921DA243.html"/>
+<link rel="next" href="GUID-BA6B557D-696A-4665-B89A-BD476295E43F.html"/>
+<link rel="up" href="GUID-DFAEA367-729B-47CF-94B3-6C25921DA243.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1AA07AD8-BCC2-4770-A9F0-ED813F2A59C4.html">16 DMA - Direct Memory Access</a></li><li><a href="GUID-DFAEA367-729B-47CF-94B3-6C25921DA243.html">16.4 Disable DMA Message Transfer Upon Completion</a></li><li>16.4.1 Clearing the SIRQEN Bit</li></ol>
+  <div class="sib"><span>← <a href="GUID-DFAEA367-729B-47CF-94B3-6C25921DA243.html" rel="prev">Disable DMA Message Transfer Upon Completion</a></span><span><a href="GUID-BA6B557D-696A-4665-B89A-BD476295E43F.html" rel="next">Source/Destination Stop</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-BB426096-954D-49D8-A703-FB4A0CE57F5F__GUID-EFF4C612-E2EF-429D-A324-629C8D831EBC" style="">16.4.1 Clearing the SIRQEN Bit</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">Clearing the <a class="- topic/xref xref" href="GUID-0298429E-3841-43DC-8947-B2561D287B13.html#BITFIELD_QJJ_143_F1B" title="Start of Transfer Interrupt Request Enable"><span><span>SIRQEN</span></span></a> bit stops the sampling of external start interrupt triggers, hence
+            preventing further DMA message transfers.</p>
+        <p class="- topic/p p">An example is a communications peripheral with a level-triggered interrupt. The
+            peripheral will continue to request data (because its buffer is empty) even though there
+            is no more data to be moved. Disabling the SIRQEN bit prevents the DMA from processing
+            these requests.</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.14.1 High-Level Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B34AF77F-5737-430A-89C1-C8F50ADCD660.html"/>
+<link rel="next" href="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D.html"/>
+<link rel="up" href="GUID-B34AF77F-5737-430A-89C1-C8F50ADCD660.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li><a href="GUID-B34AF77F-5737-430A-89C1-C8F50ADCD660.html">37.3.14 Interrupts</a></li><li>37.3.14.1 High-Level Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-B34AF77F-5737-430A-89C1-C8F50ADCD660.html" rel="prev">Interrupts</a></span><span><a href="GUID-971AAB37-117B-4F52-A0C1-6779763AF82D.html" rel="next">Condition-Specific Interrupts</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__GUID-036B4428-2F3E-456F-A8A8-83C5503ACC15" style="">37.3.14.1 High-Level Interrupts</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">Module hardware provides four high-level interrupts: <ul class="- topic/ul ul" id="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__UL_MV2_R1K_4GB" data-ofbid="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__UL_MV2_R1K_4GB">
+                <li class="- topic/li li" id="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__GUID-54A01946-5BA3-4F90-AFAE-BB67DE85EB05" data-ofbid="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__GUID-54A01946-5BA3-4F90-AFAE-BB67DE85EB05">Transmit</li>
+                <li class="- topic/li li" id="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__GUID-D871F587-0D21-400F-BB62-F93FD6C957A5" data-ofbid="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__GUID-D871F587-0D21-400F-BB62-F93FD6C957A5">Receive</li>
+                <li class="- topic/li li" id="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__GUID-281A45FB-97E8-4F6D-82A4-E7286E613193" data-ofbid="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__GUID-281A45FB-97E8-4F6D-82A4-E7286E613193">General Purpose</li>
+                <li class="- topic/li li" id="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__GUID-E3B4E56E-AEA6-4CBE-BC52-BAD31596C327" data-ofbid="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__GUID-E3B4E56E-AEA6-4CBE-BC52-BAD31596C327">Error</li>
+            </ul>These flag bits are read-only bits and cannot be cleared by software.</div>
+        <div class="- topic/p p">The I2C Transmit Interrupt Flag (I2CxTXIF) bit is set when the <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a> register is nonzero
+            (I2CxCNT != <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) and the transmit buffer, <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a>, is empty as
+            indicated by the Transmit Buffer Empty Status (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_KS4_K5P_LGB" title="Transmit Buffer Empty Status(2)">TXBE</a>)
+            bit (TXBE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). If the I2C Transmit Interrupt Enable (I2CxTXIE) bit is
+            set, an interrupt event will occur when the I2CxTXIF bit becomes set. Writing new data
+            to <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a>
+            or setting the Clear Buffer (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_OJT_2VP_LGB" title="Clear Buffer(3)">CLRBF</a>)
+            bit will clear the interrupt condition. The I2CxTXIF bit is also used by the DMA as a
+            trigger source.</div>
+        <div class="- topic/note note important note_important" id="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> I2CxTXIF can only be
+            set when either the Client Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_GRY_CQP_LGB" title="Client Mode Active Status">SMA</a>) or Host Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a>) bits are set, and the <a class="- topic/xref xref" href="GUID-6C0F085C-CE3F-4F41-8F81-D23A7BCEDB0B.html" title="I2CxCNT">I2CxCNT</a>
+            register is nonzero (I2CxCNT != <code class="+ topic/ph pr-d/codeph ph codeph">0</code>). The SMA bit is only set after an
+            address has been successfully acknowledged by a client device, which prevents false
+            interrupts from being triggered on address reception. The MMA bit is set once the host
+            completes the transmission of a Start condition.</div>
+        <div class="- topic/p p">The I2C Receive Interrupt Flag (I2CxRXIF) bit is set when the receive shift register has
+            loaded new data into the receive buffer, <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a>. When new data are
+            loaded into I2CxRXB, the Receive Buffer Full Status (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a>)
+            bit is set (RXBF = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), which also sets I2CxRXIF. If the I2C Receive
+            Interrupt Enable (I2CxRXIE) bit is set, an interrupt event will occur when the I2CxRXIF
+            bit becomes set. Reading data from <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> or setting the <a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_OJT_2VP_LGB" title="Clear Buffer(3)">CLRBF</a> bit will clear the interrupt condition. The I2CxRXIF bit is also used
+            by the DMA as a trigger source.</div>
+        <div class="- topic/note note important note_important" id="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__GUID-4D7A901F-9C07-4D6F-B02F-786F3A62782A" data-ofbid="GUID-89EAFF00-9447-4037-A49A-7E05374041A2__GUID-4D7A901F-9C07-4D6F-B02F-786F3A62782A"><span class="note__title">Important:</span> I2CxRXIF can only be
+            set when either the Client Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_GRY_CQP_LGB" title="Client Mode Active Status">SMA</a>) or Host Mode Active (<a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#BITFIELD_KP3_MRP_LGB" title="Host Mode Active Status">MMA</a>) bits are set.</div>
+        <p class="- topic/p p">The I2C Interrupt Flag (I2CxIF) is the general purpose interrupt. I2CxIF is set whenever
+            any of the interrupt flag bits contained in the I2C Peripheral Interrupt (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html" title="I2CxPIR">I2CxPIR</a>)
+            Register and the associated interrupt enable bits contained in the I2C Peripheral
+            Interrupt Enable (<a class="- topic/xref xref" href="GUID-42A0DFED-25E0-4016-8339-F428E659A344.html" title="I2CxPIE">I2CxPIE</a>) Register are set. If I2CxIF becomes set while the I2C Interrupt
+            Enable (I2CxIE) bit is set, an interrupt event will occur. I2CxIF is cleared by module
+            hardware when all enabled interrupt flag bits in I2CxPIR are clear. </p>
+        <p class="- topic/p p">The I2C Error Interrupt Flag (I2CxEIF) is set whenever any of the interrupt flag bits
+            contained in the I2C Error (<a class="- topic/xref xref" href="GUID-8B7A0372-DB98-4BD6-AD15-CAAC94356055.html" title="I2CxERR">I2CxERR</a>) Register and their associated interrupt enable bits
+            are set. If I2CxEIF becomes set while the I2C Error Interrupt Enable (I2CxEIE) bit is
+            set, an interrupt event will occur. I2CxEIF is cleared by hardware when all enabled
+            error interrupt flag bits in the I2CxERR register are clear.</p>
+    </div>
+
+</body>
+</html>

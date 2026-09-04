@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.2.2.6 Receiver Parity Modes — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-54CB9908-D26F-43DA-BBFF-E3F03CDCBF6C.html"/>
+<link rel="next" href="GUID-4A8B083E-6442-4C63-8E3C-BCEF2B42B817.html"/>
+<link rel="up" href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html">35.2 UART Asynchronous Modes</a></li><li><a href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html">35.2.2 UART Asynchronous Receiver</a></li><li>35.2.2.6 Receiver Parity Modes</li></ol>
+  <div class="sib"><span>← <a href="GUID-54CB9908-D26F-43DA-BBFF-E3F03CDCBF6C.html" rel="prev">Receive Framing Error</a></span><span><a href="GUID-4A8B083E-6442-4C63-8E3C-BCEF2B42B817.html" rel="next">Receive FIFO Overflow</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-89720302-21EA-4810-AC8E-A9C8EDD3DE40__GUID-0A3B2436-7701-460D-BAED-42AB39D2AEA4" style="">35.2.2.6 Receiver Parity Modes</h1>
+<div class="- topic/body body">
+<div class="- topic/p p">Even or odd parity is automatically detected when the <a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_C5C_R5L_BBB" title="UART Mode Select(1)"><span><span>MODE</span></span></a> bits are set to ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">0011</span>’ or ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">0010</span>’, respectively.
+            The parity modes receive eight data bits and one parity bit for a total of nine bits for
+            each character. The <a class="- topic/xref xref" href="GUID-0335D11B-CDF0-4C1B-B750-F220FDA16575.html#BITFIELD_XWQ_NRL_BBB" title="Parity Error Interrupt Flag"><span><span>PERIF</span></span></a> bit represents the parity error of the top unread character of the receive FIFO
+            rather than the parity bit itself. The parity error must be read before the UxRXB
+            register is read because reading the UxRXB register will advance the FIFO pointer to the
+            next byte with its associated PERIF flag.</div>
+        <p class="- topic/p p">A parity error will generate a summary UxEIF interrupt when the <a class="- topic/xref xref" href="GUID-BCAA4B97-CF3B-483A-B40D-EFFFD716B63A.html#BITFIELD_XWQ_NRL_BBB" title="Parity Error Interrupt Enable"><span><span>PERIE</span></span></a> bit is set. The summary error is reset when the PERIF bit of the top
+            of the FIFO is ‘<span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span>’ or when all FIFO characters have been
+            retrieved.</p>
+        <div class="- topic/note note important note_important" id="GUID-89720302-21EA-4810-AC8E-A9C8EDD3DE40__GUID-B8CCF5C3-C550-4F59-845C-6189F9A1AA18" data-ofbid="GUID-89720302-21EA-4810-AC8E-A9C8EDD3DE40__GUID-B8CCF5C3-C550-4F59-845C-6189F9A1AA18"><span class="note__title">Important:</span> When PERIE is set, the
+            UxRXIF interrupts are suppressed by PERIF = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span>.</div>
+</div>
+
+</body>
+</html>

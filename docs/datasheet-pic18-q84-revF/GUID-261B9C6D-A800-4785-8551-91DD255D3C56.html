@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.3.10 Receive Buffer — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-9D7BE57D-DB90-47F1-BB91-48A058C048D0.html"/>
+<link rel="next" href="GUID-1D1EC34C-7EE8-456C-8216-130FC0C35670.html"/>
+<link rel="up" href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-BBF2A691-3B72-42E8-9A6C-EA668FA6CA58.html">37.3 I2C Module Overview</a></li><li>37.3.10 Receive Buffer</li></ol>
+  <div class="sib"><span>← <a href="GUID-9D7BE57D-DB90-47F1-BB91-48A058C048D0.html" rel="prev">Transmit Buffer</a></span><span><a href="GUID-1D1EC34C-7EE8-456C-8216-130FC0C35670.html" rel="next">Clock Stretching</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-261B9C6D-A800-4785-8551-91DD255D3C56__GUID-CC107EFB-32A1-466E-8BA2-B53AC091E594" style="">37.3.10 Receive Buffer</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C module has a dedicated receive buffer, <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a>, which
+            is independent from the transmit buffer.</p>
+        <div class="- topic/p p">Data received through the shift register is transferred to <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> when
+            the byte is complete. User software or the DMA can access the byte by reading the
+            I2CxRXB register. When new data are loaded into I2CxRXB, the Receive Buffer Full Status
+                (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a>) bit is set, allowing user software or the DMA to read the
+            new data. When the RXBF bit is set, the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C Receive Interrupt Flag (I2CxRXIF)
+            bit of the PIR registers is set and can be used to trigger the DMA. A read of the
+            I2CxRXB register will clear both RXBF and I2CxRXIF bits. Setting the <a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_OJT_2VP_LGB" title="Clear Buffer(3)">CLRBF</a> bit clears the I2CxRXIF bit and the I2CxRXB and <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a>
+            registers.</div>
+        <div class="- topic/p p">If the buffer is read while empty (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the Receive Read Error Status (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_BDH_V5P_LGB" title="Receive Read Error Status(1)">RXRE</a>) bit is set, and the module generates a NACK. User software
+            must clear RXRE to resume normal operation.</div>
+        <div class="- topic/p p">When the module attempts to transfer the contents of the receive shift
+            register to <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> while I2CxRXB is full (<a class="- topic/xref xref" href="GUID-2F508607-ABF9-4625-99A7-E8BF09927C45.html#BITFIELD_R51_BWP_LGB" title="Receive Buffer Full Status(2)">RXBF</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the Receive Overflow Status (<a class="- topic/xref xref" href="GUID-1BB63CBC-311E-4D8E-801E-8F4802223DAE.html#BITFIELD_H5T_P2P_LGB" title="Receive Overflow Status (used only when MODE = 0xx or MODE = 11x)(3)">RXO</a>) bit is set, and a NACK is generated. The data currently
+            stored in I2CxRXB remains unchanged, but the data in the receive shift register is
+            lost.</div>
+        <div class="- topic/note note important note_important" id="GUID-261B9C6D-A800-4785-8551-91DD255D3C56__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-261B9C6D-A800-4785-8551-91DD255D3C56__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> A receive overflow can
+            only occur when clock stretching is disabled. Clock stretching prevents receive
+            overflows because the receive shift register cannot receive any more data until user
+            software or the DMA reads <a class="- topic/xref xref" href="GUID-D591A335-D5E2-4EC0-9B70-10C0A8D9F98F.html" title="I2CxRXB">I2CxRXB</a> and the SCL line is released.</div>
+    </div>
+
+</body>
+</html>

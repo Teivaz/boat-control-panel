@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>19.14.6 INLVLx — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F29BB9D7-BDF7-4F12-BF50-996751E0D2FC.html"/>
+<link rel="next" href="GUID-30D9852B-E83B-4657-A212-3C068206C388.html"/>
+<link rel="up" href="GUID-D3680739-69E1-4BC6-8FED-0F0AE91735AB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7F7F7E61-5CE8-4783-A80A-EA168497EAD8.html">19 I/O Ports</a></li><li><a href="GUID-D3680739-69E1-4BC6-8FED-0F0AE91735AB.html">19.14 Register Definitions: Port Control</a></li><li>19.14.6 INLVLx</li></ol>
+  <div class="sib"><span>← <a href="GUID-F29BB9D7-BDF7-4F12-BF50-996751E0D2FC.html" rel="prev">WPUx</a></span><span><a href="GUID-30D9852B-E83B-4657-A212-3C068206C388.html" rel="next">SLRCONx</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608__ID-0000004C" style="">19.14.6  INLVLx</h1><section id="GUID-B69A87A4-46AA-4170-912F-86ABB9C032F9" class="- topic/section reference/section sidsc-register/registerDescription ">Input Level Control
+            Register<div class="- topic/note note important note_important endnote" id="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608__ID-42127-0000071C" data-ofbid="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608__ID-42127-0000071C"><span class="note__title">Important:</span> 
+            <ul class="- topic/ul ul" id="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608__UL_GR5_GKR_5QB" data-ofbid="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608__UL_GR5_GKR_5QB">
+               <li class="- topic/li li" id="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608__GUID-694EFB17-87AD-4383-BBDB-0FEC3BDBDCBC" data-ofbid="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608__GUID-694EFB17-87AD-4383-BBDB-0FEC3BDBDCBC">Refer to the “<strong class="+ topic/ph hi-d/b ph b">Pin Allocation Table</strong>” for details about pin availability per
+                  port</li>
+               <li class="- topic/li li" id="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608__GUID-6A7DC88C-FA37-4254-9CCC-F6EEB1BB189E" data-ofbid="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608__GUID-6A7DC88C-FA37-4254-9CCC-F6EEB1BB189E">Unimplemented bits will read back
+                  as ‘<code class="+ topic/ph pr-d/codeph ph codeph">0</code>’</li>
+               <li class="- topic/li li" id="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608__GUID-88E6F33F-1815-45F7-B716-9A47485D4401" data-ofbid="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608__GUID-88E6F33F-1815-45F7-B716-9A47485D4401">
+                  <p class="- topic/p p">Any peripheral using
+                     the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C pins read the I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C ST inputs when enabled via
+                     RxyI2C</p>
+                  
+               </li>
+            </ul>
+         </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>INLVLx</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608__GUID-A0605B03-4B5C-4D6F-A086-C1881B1D4F26" data-ofbid="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608__GUID-A0605B03-4B5C-4D6F-A086-C1881B1D4F26"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-CDCE89CC-98D7-46F1-96D2-31E35F9B3608"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">INLVLx7</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">INLVLx6</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">INLVLx5</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">INLVLx4</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">INLVLx3</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">INLVLx2</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">INLVLx1</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">INLVLx0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-B69A87A4-46AA-4170-912F-86ABB9C032F9" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="ID-00000050__ID-42127-00001643" id="ID-00000050">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="ID-00000050__ID-42127-00001643" style=""> Bits 0, 1, 2, 3, 4, 5, 6, 7 – INLVLxn <span>Input Level Select on RX
+         Pin</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="ID-00000050__GUID-EDE23E18-B56D-42AD-9732-DD8A12AF4C04" data-ofbid="ID-00000050__GUID-EDE23E18-B56D-42AD-9732-DD8A12AF4C04"></section>
+         
+         <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000050__ID-42127-00001645"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">1</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000050__GUID-3790AA1B-ACCF-4A8F-A78F-900AFBC469CA">ST input
+                  used for port reads and interrupt-on-change</td>
+            </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="ID-00000050__ID-42127-00001648"><span class="- topic/ph ph"><code class="+ topic/ph pr-d/codeph ph codeph">0</code></span></td>
+               <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="ID-00000050__GUID-7262CC0B-A4B3-4A3A-8701-9AC1E56345AC">TTL input
+                  used for port reads and interrupt-on-change</td>
+            </tr></tbody></table>
+      </div>
+   </article>
+            
+               Refer to the “Pin Allocation Table” for details about pin availability per
+                  port
+               Unimplemented bits will read back
+                  as ‘0’
+               
+                  Any peripheral using
+                     the I2C pins read the I2C ST inputs when enabled via
+                     RxyI2C
+                  
+               
+            
+         
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.7 Scanner Module Overview — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0D6A5768-E072-478C-9C35-7C9865E19F62.html"/>
+<link rel="next" href="GUID-D8123462-0B96-47F2-BA93-C5845670024E.html"/>
+<link rel="up" href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li>13.7 Scanner Module Overview</li></ol>
+  <div class="sib"><span>← <a href="GUID-0D6A5768-E072-478C-9C35-7C9865E19F62.html" rel="prev">Register Overlay</a></span><span><a href="GUID-D8123462-0B96-47F2-BA93-C5845670024E.html" rel="next">Scanning Modes</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-1825F76E-B176-438D-9330-EC60AFE5ADAE__GUID-C71840DD-A00B-45F2-AEBE-734D0F6ADD04" style="">13.7 Scanner Module Overview</h1><div class="- topic/body body"><div class="- topic/p p">The scanner allows segments of the Program Flash Memory or Data EEPROM to be read out (scanned) to the CRC peripheral. The scanner module interacts with the CRC module and supplies it with data, one word at a time. Data are fetched from the address range defined by <a class="- topic/xref xref" href="GUID-8356FF95-2A59-4EE2-81F2-C36C1BA3097F.html" title="SCANLADR">SCANLADR</a> registers up to the <a class="- topic/xref xref" href="GUID-78E3E2CA-5569-4BCC-99C6-0088CED621FA.html" title="SCANHADR">SCANHADR</a> registers. The scanner begins operation when the <a class="- topic/xref xref" href="GUID-954A61C6-F5B6-4625-8868-91C5E0693D11.html#ID-0000009F" title="Scanner GO(3,4)"><span><span>SGO</span></span></a> bit is set and ends when either SGO is cleared by the user or when SCANLADR increments past SCANHADR. The SGO bit is also cleared when the <a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html#ID-00000005" title="CRC Enable"><span><span>EN</span></span></a> bit in the <a class="- topic/xref xref" href="GUID-2AA7D2FD-2E40-424F-B406-09044B6BF12B.html" title="CRCCON0">CRCCON0</a> register is cleared.</div></div>
+</body>
+</html>

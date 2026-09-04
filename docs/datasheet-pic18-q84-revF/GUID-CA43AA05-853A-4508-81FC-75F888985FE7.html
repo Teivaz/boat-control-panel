@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>29.5.3 CCPRx — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E7458217-0041-4BCD-9DBE-7064E4D1A0E4.html"/>
+<link rel="next" href="GUID-B165BBF0-F3C4-4326-A3CE-9551C762BC04.html"/>
+<link rel="up" href="GUID-8D14290C-571C-49C4-8081-F36B06EA042B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html">29 CCP - Capture/Compare/PWM Module</a></li><li><a href="GUID-8D14290C-571C-49C4-8081-F36B06EA042B.html">29.5 Register Definitions: CCP Control</a></li><li>29.5.3 CCPRx</li></ol>
+  <div class="sib"><span>← <a href="GUID-E7458217-0041-4BCD-9DBE-7064E4D1A0E4.html" rel="prev">CCPxCAP</a></span><span><a href="GUID-B165BBF0-F3C4-4326-A3CE-9551C762BC04.html" rel="next">Register Summary - CCP Control</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__ID-000000B8" style="">29.5.3  CCPRx</h1><section id="GUID-DDDF2F69-28AB-4A3A-82C0-C69E28854D2A" class="- topic/section reference/section sidsc-register/registerDescription ">Capture/Compare/Pulse-Width Register<div class="- topic/note note notype note_notype endnote" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-DE108235-C68E-4948-84B7-42963D0C6BB6" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-DE108235-C68E-4948-84B7-42963D0C6BB6"><span class="note__title">Note:</span> The individual bytes in this multibyte register can be accessed
+            with the following register names:<ul class="- topic/ul ul" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__UL_MBM_1XM_WGB" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__UL_MBM_1XM_WGB">
+               <li class="- topic/li li" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-E9493AF9-2E08-403C-AD37-546419A0951D" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-E9493AF9-2E08-403C-AD37-546419A0951D">When MODE = Capture or Compare<ul class="- topic/ul ul" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__UL_PW5_2LD_MGB" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__UL_PW5_2LD_MGB">
+                     <li class="- topic/li li" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-59967EC2-4430-4F3C-9AC4-5393ADBC0D80" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-59967EC2-4430-4F3C-9AC4-5393ADBC0D80">CCPRxH: Accesses the high
+                        byte CCPR[15:8]</li>
+                     <li class="- topic/li li" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-FCB0833B-594C-4D60-A3F8-14EEA0A556CD" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-FCB0833B-594C-4D60-A3F8-14EEA0A556CD">CCPRxL: Accesses the low
+                        byte CCPR[7:0]</li>
+                  </ul></li>
+               <li class="- topic/li li" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-B818DA7E-6EE2-4EEE-8223-A25BDB6351E8" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-B818DA7E-6EE2-4EEE-8223-A25BDB6351E8">When MODE = PWM and FMT =
+                     <code class="+ topic/ph pr-d/codeph ph codeph">0</code><ul class="- topic/ul ul" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__UL_AKD_FXM_WGB" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__UL_AKD_FXM_WGB">
+                     <li class="- topic/li li" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-4C74BECD-6C0A-4A65-9122-8A12D31CE66B" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-4C74BECD-6C0A-4A65-9122-8A12D31CE66B">CCPRx[15:10]: Not used</li>
+                     <li class="- topic/li li" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-83BA7A08-84B5-4EB9-A2AE-C58FF9ECC52E" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-83BA7A08-84B5-4EB9-A2AE-C58FF9ECC52E">CCPRxH[1:0]: Accesses the
+                        two Most Significant bits CCPR[9:8]</li>
+                     <li class="- topic/li li" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-06C391A7-003B-4BD3-948C-006BFA64D567" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-06C391A7-003B-4BD3-948C-006BFA64D567">CCPRxL: Accesses the eight
+                        Least Significant bits CCPR[7:0]</li>
+                  </ul></li>
+               <li class="- topic/li li" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-F1CAFA16-1906-49F1-B3FC-D64EB387503C" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-F1CAFA16-1906-49F1-B3FC-D64EB387503C">When MODE = PWM and FMT =
+                     <code class="+ topic/ph pr-d/codeph ph codeph">1</code><ul class="- topic/ul ul" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__UL_RLW_TXM_WGB" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__UL_RLW_TXM_WGB">
+                     <li class="- topic/li li" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-E43895BB-13CA-45AE-B3AD-70795B12562D" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-E43895BB-13CA-45AE-B3AD-70795B12562D">CCPRxH: Accesses the eight
+                        Most Significant bits CCPR[9:2]</li>
+                     <li class="- topic/li li" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-5F420AC4-A8AA-4FC0-B463-95555DBBDAC6" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-5F420AC4-A8AA-4FC0-B463-95555DBBDAC6">CCPRxL[7:6]: Accesses the
+                        two Least Significant bits CCPR[1:0]</li>
+                     <li class="- topic/li li" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-7C72554A-DC46-46CB-925A-8887675798A2" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-7C72554A-DC46-46CB-925A-8887675798A2">CCPRx[5:0]: Not used</li>
+                  </ul></li>
+            </ul></div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>CCPRx</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x340,0x344,0x348</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-53BCEE82-F92A-4F63-8E5A-0C621BAB7125" data-ofbid="GUID-CA43AA05-853A-4508-81FC-75F888985FE7__GUID-53BCEE82-F92A-4F63-8E5A-0C621BAB7125"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-CA43AA05-853A-4508-81FC-75F888985FE7"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">15</td><td class="- topic/entry entry colsep-0 rowsep-0">14</td><td class="- topic/entry entry colsep-0 rowsep-0">13</td><td class="- topic/entry entry colsep-0 rowsep-0">12</td><td class="- topic/entry entry colsep-0 rowsep-0">11</td><td class="- topic/entry entry colsep-0 rowsep-0">10</td><td class="- topic/entry entry colsep-0 rowsep-0">9</td><td class="- topic/entry entry colsep-0 rowsep-0">8</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="8">CCPR[15:8]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="8">CCPR[7:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0">x</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-DDDF2F69-28AB-4A3A-82C0-C69E28854D2A" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_FPG_M45_ZZ__GUID-9CCF3F16-2328-4308-A94D-4ACE0C069A2B" id="BITFIELD_FPG_M45_ZZ">
+      <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_FPG_M45_ZZ__GUID-9CCF3F16-2328-4308-A94D-4ACE0C069A2B" style=""> Bits 15:0 – CCPR[15:0] <span>Capture/Compare/Pulse-Width</span></h2>
+      
+      <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+         <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_FPG_M45_ZZ__GUID-E18AB9C9-7377-4039-960A-4134B194ECC3" data-ofbid="BITFIELD_FPG_M45_ZZ__GUID-E18AB9C9-7377-4039-960A-4134B194ECC3"></section>
+         <table class="mchip-registerproperties"><tbody><tr><td>Reset States: </td><td><table><tbody><tr><td>POR/BOR  =  xxxxxxxxxxxxxxxx</td></tr><tr><td>All other Resets  =  uuuuuuuuuuuuuuuu</td></tr></tbody></table></td></tr></tbody></table>
+      </div>
+   </article>The individual bytes in this multibyte register can be accessed
+            with the following register names:
+               When MODE = Capture or Compare
+                     CCPRxH: Accesses the high
+                        byte CCPR[15:8]
+                     CCPRxL: Accesses the low
+                        byte CCPR[7:0]
+                  
+               When MODE = PWM and FMT =
+                     0
+                     CCPRx[15:10]: Not used
+                     CCPRxH[1:0]: Accesses the
+                        two Most Significant bits CCPR[9:8]
+                     CCPRxL: Accesses the eight
+                        Least Significant bits CCPR[7:0]
+                  
+               When MODE = PWM and FMT =
+                     1
+                     CCPRxH: Accesses the eight
+                        Most Significant bits CCPR[9:2]
+                     CCPRxL[7:6]: Accesses the
+                        two Least Significant bits CCPR[1:0]
+                     CCPRx[5:0]: Not used
+                  
+            
+</body>
+</html>

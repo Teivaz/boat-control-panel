@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38 CAN FD - Controller Area Network, Flexible Data-Rate — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-01FFE014-D99B-4B5B-8FEF-335722A9B4A4.html"/>
+<link rel="next" href="GUID-3784254A-3310-43C5-A771-2A8DAEC07962.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>38 CAN FD - Controller Area Network, Flexible Data-Rate</li></ol>
+  <div class="sib"><span>← <a href="GUID-01FFE014-D99B-4B5B-8FEF-335722A9B4A4.html" rel="prev">Register Summary - I2C</a></span><span><a href="GUID-3784254A-3310-43C5-A771-2A8DAEC07962.html" rel="next">Module Overview</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-F7146F1D-E768-45CD-9DC6-44CE391AB3FF" style="">38 CAN FD - Controller Area Network, Flexible
+        Data-Rate</h1>
+    <div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">This family of devices contain a Controller Area Network Flexible Data-Rate (CAN FD)
+            module. CAN FD is a serial interface which is useful for communicating with other
+            peripherals or microcontroller devices. This interface, or protocol, was designed to
+            allow communications within noisy environments.</p>
+        <p class="- topic/p p">The CAN FD module is a communication controller, implementing the CAN FD protocol as
+            defined in the BOSCH specification. This module supports CAN 1.2, CAN 2.0A, CAN 2.0B
+            Passive, CAN 2.0B Active and CAN FD versions of the protocol. The module implementation
+            is a full CAN FD system; however, the CAN specification is not covered within this data
+            sheet. Refer to the BOSCH CAN specification for further details.</p>
+        <div class="- topic/p p">CAN FD has two primary enhancements over CAN 2.0:<ul class="- topic/ul ul" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_MYZ_QNJ_43B" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_MYZ_QNJ_43B">
+                <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-E8A716B7-4493-4831-8166-B36CC6E9C977" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-E8A716B7-4493-4831-8166-B36CC6E9C977">The maximum data field size is
+                    increased from 8 bytes to 64 bytes</li>
+                <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-B7DF94BB-AB1D-4C2F-9FC9-DBC426278EC1" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-B7DF94BB-AB1D-4C2F-9FC9-DBC426278EC1">The data rate can optionally be
+                    switched to a faster bit rate after the arbitration field</li>
+            </ul></div>
+        <p class="- topic/p p">The CAN FD controller is capable of sending and receiving CAN 2.0 messages, and both CAN
+            FD messages and CAN 2.0 messages can exist on the same bus. However, this does not mean
+            that CAN FD and CAN 2.0 controllers need to be mixed on the same bus, as CAN 2.0
+            controllers will generate error frames upon receiving a CAN FD message. </p>
+        <p class="- topic/p p">Features of the CAN FD module include:</p>
+        <p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">General</strong></p>
+        <ul class="- topic/ul ul" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_VYN_SNJ_43B" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_VYN_SNJ_43B">
+            <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-8F86547D-DE4B-4FD3-A68C-CBFEE75DF04F" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-8F86547D-DE4B-4FD3-A68C-CBFEE75DF04F">Nominal (arbitration) bit rate up to
+                1 Mbps</li>
+            <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-CFCFD27C-F4CE-445A-8E8C-239611826850" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-CFCFD27C-F4CE-445A-8E8C-239611826850">Data bit rate up to 8 Mbps (dependent
+                on oscillator selection)</li>
+            <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-61D8A55D-4CAB-4BB8-8E25-79A53F049B83" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-61D8A55D-4CAB-4BB8-8E25-79A53F049B83">CAN FD Controller modes:<ul class="- topic/ul ul" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_WYN_SNJ_43B" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_WYN_SNJ_43B">
+                    <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-51CEB5BE-54B5-4691-A0EF-A841989575B0" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-51CEB5BE-54B5-4691-A0EF-A841989575B0">Mixed CAN 2.0B and CAN FD
+                        mode</li>
+                    <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-0891CE59-B5D6-47DA-942D-4918E8851E03" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-0891CE59-B5D6-47DA-942D-4918E8851E03">CAN 2.0B mode</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-66566725-DF29-4E17-8DE2-4C729D991461" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-66566725-DF29-4E17-8DE2-4C729D991461">Conforms to ISO11898-1:2015</li>
+        </ul>
+        <p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Message FIFOs</strong></p>
+        <ul class="- topic/ul ul" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_XYN_SNJ_43B" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_XYN_SNJ_43B">
+            <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-CFECD845-AADE-448C-B296-CE64F43829CA" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-CFECD845-AADE-448C-B296-CE64F43829CA">Three FIFOs configurable as transmit
+                or receive FIFOs</li>
+            <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-8403F8D9-0A18-4F44-809B-7B636B1360C5" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-8403F8D9-0A18-4F44-809B-7B636B1360C5">One Transmit Queue (TXQ)</li>
+            <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-E67F7070-BBE7-417E-B9B1-C46F3FE4E7B9" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-E67F7070-BBE7-417E-B9B1-C46F3FE4E7B9">Transmit Event FIFO (TEF) with 32-bit
+                timestamp</li>
+        </ul>
+        <p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Message Transmission</strong></p>
+        <ul class="- topic/ul ul" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_YYN_SNJ_43B" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_YYN_SNJ_43B">
+            <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-AB574909-106C-4FAC-9E55-C7E3A4474024" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-AB574909-106C-4FAC-9E55-C7E3A4474024">Message transmission
+                    prioritization:<ul class="- topic/ul ul" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_ZYN_SNJ_43B" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_ZYN_SNJ_43B">
+                    <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-520297CE-49F7-418B-864E-83AFB57B1351" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-520297CE-49F7-418B-864E-83AFB57B1351">Based on priority bit field
+                        and/or</li>
+                    <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-AF8C3105-0013-4A5A-AD72-0A5C017CF3D1" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-AF8C3105-0013-4A5A-AD72-0A5C017CF3D1">Message with lowest ID gets
+                        transmitted first using the TXQ</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-5A1ACAF0-A8CC-4E05-ABC8-0D05EA285583" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-5A1ACAF0-A8CC-4E05-ABC8-0D05EA285583">Programmable automatic retransmission
+                attempts: unlimited, three attempts or disabled</li>
+        </ul>
+        <p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Message Reception</strong></p>
+        <ul class="- topic/ul ul" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_AZN_SNJ_43B" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_AZN_SNJ_43B">
+            <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-83D7C4F8-3CAC-457B-AD27-E109A62FFF6E" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-83D7C4F8-3CAC-457B-AD27-E109A62FFF6E">12 flexible filter and mask
+                objects</li>
+            <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-DEE63428-A31D-4259-AC33-4A6E846F2303" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-DEE63428-A31D-4259-AC33-4A6E846F2303">Each object can be configured to
+                filter either:<ul class="- topic/ul ul" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_BZN_SNJ_43B" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__UL_BZN_SNJ_43B">
+                    <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-78ED3097-5238-44D2-A6A1-A6D33DBB6847" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-78ED3097-5238-44D2-A6A1-A6D33DBB6847">Standard ID and first 18 data
+                        bits or</li>
+                    <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-E9CD3CAA-A8F1-41B0-822A-FEB833D61C20" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-E9CD3CAA-A8F1-41B0-822A-FEB833D61C20">Extended ID</li>
+                </ul></li>
+            <li class="- topic/li li" id="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-AD346CB0-5881-4FB3-ADDE-C03DCCDC0C4F" data-ofbid="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638__GUID-AD346CB0-5881-4FB3-ADDE-C03DCCDC0C4F">32-bit timestamp</li>
+        </ul>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-3784254A-3310-43C5-A771-2A8DAEC07962.html">38.1 Module Overview</a></li><li><a href="GUID-84A4D028-1C85-48B1-A96D-5816A098641F.html">38.2 Modes of Operation</a></li><li><a href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html">38.3 Configuration</a></li><li><a href="GUID-CA3168F9-A499-4776-BB2E-213BA6C3C1F1.html">38.4 CAN FD Message Frames</a></li><li><a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html">38.5 Message Transmission</a></li><li><a href="GUID-5538E23F-5F84-4814-9FB6-39172949A455.html">38.6 Transmit Event FIFO (TEF)</a></li><li><a href="GUID-2FBE3C3E-EDE4-4ABD-A9FA-D9AC9D794D77.html">38.7 Message Filtering</a></li><li><a href="GUID-ABE11A28-ACFC-4D60-BEDB-BA3A1CF953C4.html">38.8 Message Reception</a></li><li><a href="GUID-18BE65DA-2E61-49D8-AAE7-AC56D4A9B739.html">38.9 FIFO Behavior</a></li><li><a href="GUID-F2BBDA5E-C2FB-4B5E-811C-F2D9D498ED30.html">38.10 Timestamping</a></li><li><a href="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197.html">38.11 Interrupts</a></li><li><a href="GUID-DAEF6086-6F8E-4CF1-9E54-A43F6F740060.html">38.12 Error Handling</a></li><li><a href="GUID-241B161B-B09D-4E83-B372-38ACC8C472CD.html">38.13 Register Definitions: CAN FD Control</a></li><li><a href="GUID-4BA31CDB-9A5A-4544-BCF8-81959BC69366.html">38.14 Register Summary - CAN FD</a></li></ul>
+</nav>
+</body>
+</html>

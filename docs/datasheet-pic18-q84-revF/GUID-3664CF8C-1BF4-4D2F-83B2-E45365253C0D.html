@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.4.5.1 Start Event — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF.html"/>
+<link rel="next" href="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907.html"/>
+<link rel="up" href="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html">28.4 UTMR Operation</a></li><li><a href="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF.html">28.4.5 Start, Stop and Reset Events</a></li><li>28.4.5.1 Start Event</li></ol>
+  <div class="sib"><span>← <a href="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF.html" rel="prev">Start, Stop and Reset Events</a></span><span><a href="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907.html" rel="next">Reset Event</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__GUID-396E03CF-9104-43A8-9E2C-CC3C5DBAEB8D" style="">28.4.5.1 Start Event</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The start event for the counter/timer start is selected using the <a class="- topic/xref xref" href="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A.html#ID-00000013" title="Counter Start Condition Select(3,4)">START</a> bits in the TUxyHLT register. The available options
+            include:</div>
+        <ol class="- topic/ol ol" id="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__OL_UFJ_NRK_43B" data-ofbid="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__OL_UFJ_NRK_43B">
+            <li class="- topic/li li" id="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__GUID-73A138D2-BC87-4D3D-846D-FB1498E19FB5" data-ofbid="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__GUID-73A138D2-BC87-4D3D-846D-FB1498E19FB5">No hardware Start: The counter/timer
+                starts when the <a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#ID-00000005" title="Timer Enable(1,2)">ON</a> bit is set. This is the software-based
+                start option. Any Stop events are ignored, but will still cause a capture.</li>
+            <li class="- topic/li li" id="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__GUID-1052620C-AA75-4637-B294-0CD12017A7F2" data-ofbid="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__GUID-1052620C-AA75-4637-B294-0CD12017A7F2">Either edge of the ERS signal
+                (edge-triggered): The counter/timer starts at the event of either the rising or
+                falling edge of the ERS signal.</li>
+            <li class="- topic/li li" id="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__GUID-376DDF2D-1A28-4DAA-BBED-79ED7A3C7BA2" data-ofbid="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__GUID-376DDF2D-1A28-4DAA-BBED-79ED7A3C7BA2">Rising edge of the ERS signal
+                (edge-triggered): The counter/timer starts at the event of a rising edge of the ERS
+                signal. When the <a class="- topic/xref xref" href="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A.html#ID-00000005" title="ERS Polarity Selection">EPOL</a> bit is set, the polarity is inverted and
+                the counter/timer starts at the event of a falling edge of ERS signal. See <a class="- topic/xref xref" href="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907.html#GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__FIG_YRN_CLV_WLB"><span>Figure 28-10</span></a> for an example of rising ERS edge Start and either ERS edge Stop
+                condition.</li>
+            <li class="- topic/li li" id="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__GUID-F7E1E19A-9CB6-4E2E-9D6D-CF14BB59F17C" data-ofbid="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__GUID-F7E1E19A-9CB6-4E2E-9D6D-CF14BB59F17C"><a class="- topic/xref xref" href="GUID-D61E82F2-29C8-4B25-901B-C4E187158945.html#ID-000000DA" title="External Reset Source Selector">ERS</a> = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> (level-triggered): The counter/timer
+                starts at the presence of a logic one of the ERS signal. When the EPOL bit is set,
+                the polarity is inverted and the counter/timer starts at the presence of a logic
+                zero of the ERS signal. Any Stop events that occur when ERS = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> (or
+                    <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, based on EPOL) are ignored, but will still cause a capture.
+                See <a class="- topic/xref xref" href="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907.html#GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__FIG_PF5_HLV_WLB"><span>Figure 28-11</span></a> for an example of level-triggered Start.</li>
+        </ol>
+        <div class="- topic/p p">
+            <div class="- topic/note note important note_important" id="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__GUID-8DD7AAF5-54C5-4CDA-9CE1-E7AC066459F9" data-ofbid="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__GUID-8DD7AAF5-54C5-4CDA-9CE1-E7AC066459F9"><span class="note__title">Important:</span> 
+                <ol class="- topic/ol ol" id="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__OL_B2X_BBH_R3B" data-ofbid="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__OL_B2X_BBH_R3B">
+                    <li class="- topic/li li" id="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__GUID-BCD7FD78-3A57-479C-B995-F2DE8BE23550" data-ofbid="GUID-3664CF8C-1BF4-4D2F-83B2-E45365253C0D__GUID-BCD7FD78-3A57-479C-B995-F2DE8BE23550"> In the event of a
+                        level-triggered Start/Reset, the active level must be asserted for at least
+                        one timer clock period to ensure proper sampling. If the duration of the
+                        asserted level is less than one timer clock, there is a possibility of the
+                        level trigger being missed and not sampled by the timer module.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

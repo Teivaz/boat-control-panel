@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.5.8 Transmit Bandwidth Sharing — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-369BD587-420E-4A19-8BAC-8961610EC0C3.html"/>
+<link rel="next" href="GUID-769B00F1-7A91-4A09-9AEA-E190BD998E39.html"/>
+<link rel="up" href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-42B56DE4-DA30-4BAB-B2B6-7B5633ACC196.html">38.5 Message Transmission</a></li><li>38.5.8 Transmit Bandwidth Sharing</li></ol>
+  <div class="sib"><span>← <a href="GUID-369BD587-420E-4A19-8BAC-8961610EC0C3.html" rel="prev">Transmit Priority Based on ID</a></span><span><a href="GUID-769B00F1-7A91-4A09-9AEA-E190BD998E39.html" rel="next">Retransmission Attempts</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-6E0E6B57-69B5-47D4-8E8F-B84413550E09__GUID-B36052CA-CDB1-4123-84C9-1F53CA359207" style="">38.5.8 Transmit Bandwidth Sharing</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p">The bandwidth sharing feature works as follows:<ul class="- topic/ul ul" id="GUID-6E0E6B57-69B5-47D4-8E8F-B84413550E09__UL_SZ3_L5H_P3B" data-ofbid="GUID-6E0E6B57-69B5-47D4-8E8F-B84413550E09__UL_SZ3_L5H_P3B">
+                <li class="- topic/li li" id="GUID-6E0E6B57-69B5-47D4-8E8F-B84413550E09__GUID-BBF21512-F57D-4131-8EBF-0E45579C886D" data-ofbid="GUID-6E0E6B57-69B5-47D4-8E8F-B84413550E09__GUID-BBF21512-F57D-4131-8EBF-0E45579C886D">After a successful transmission of a message, the module will remain Idle for n
+                    arbitration bit times before the module attempts to transmit the next message;
+                    it suspends the next transmission.</li>
+                <li class="- topic/li li" id="GUID-6E0E6B57-69B5-47D4-8E8F-B84413550E09__GUID-B59EC8A9-6425-48E1-8F5D-D9960A503277" data-ofbid="GUID-6E0E6B57-69B5-47D4-8E8F-B84413550E09__GUID-B59EC8A9-6425-48E1-8F5D-D9960A503277">After the device has received a message, the module can transmit the next
+                    message as soon as the bus is Idle.</li>
+            </ul></div>
+        <p class="- topic/p p">This allows other nodes on the bus to transmit their messages, even though they are of
+            lower priority.</p>
+        <p class="- topic/p p">The number of arbitration bit times between transmissions can be configured
+            using the TXBWS[3:0] bits (C1CON[31:28]).</p>
+    </div>
+
+</body>
+</html>

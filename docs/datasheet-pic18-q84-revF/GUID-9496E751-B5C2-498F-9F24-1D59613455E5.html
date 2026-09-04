@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>23.3 Selectable Duty Cycle — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7EB804FD-7AF9-4CFB-A570-F941DB6680B6.html"/>
+<link rel="next" href="GUID-4F2ECE49-B8DB-4ADE-9D6F-87068AC4606A.html"/>
+<link rel="up" href="GUID-547C55F6-AC0C-4F2D-8E34-2C59A4494C4D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-547C55F6-AC0C-4F2D-8E34-2C59A4494C4D.html">23 CLKREF - Reference Clock Output Module</a></li><li>23.3 Selectable Duty Cycle</li></ol>
+  <div class="sib"><span>← <a href="GUID-7EB804FD-7AF9-4CFB-A570-F941DB6680B6.html" rel="prev">Programmable Clock Divider</a></span><span><a href="GUID-4F2ECE49-B8DB-4ADE-9D6F-87068AC4606A.html" rel="next">Operation in Sleep Mode</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-9496E751-B5C2-498F-9F24-1D59613455E5__GUID-CB89BC67-75D7-4A99-AA87-EF419CA85315" style="">23.3 Selectable Duty Cycle</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <div class="- topic/p p" id="GUID-9496E751-B5C2-498F-9F24-1D59613455E5__ID-42137-00000049" data-ofbid="GUID-9496E751-B5C2-498F-9F24-1D59613455E5__ID-42137-00000049">The <a class="- topic/xref xref" href="GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30.html#ID-0000000C" title="Reference Clock Duty Cycle(1)"><span><span>DC</span></span></a> bits are
+         used to modify the duty cycle of the output clock. A duty cycle of 0%, 25%, 50%, or 75% can
+         be selected for all clock rates when the <a class="- topic/xref xref" href="GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30.html#ID-00000015" title="Reference Clock Divider"><span><span>DIV</span></span></a> value is
+         not <code class="+ topic/ph pr-d/codeph ph codeph">0b000</code>. When DIV = <code class="+ topic/ph pr-d/codeph ph codeph">0b000</code>, the duty cycle defaults to
+         50% for all values of DC except <code class="+ topic/ph pr-d/codeph ph codeph">0b00</code>, in which case the duty cycle is 0%
+         (constant low output).</div>
+      <div class="- topic/note note important note_important" id="GUID-9496E751-B5C2-498F-9F24-1D59613455E5__ID-42137-00000054" data-ofbid="GUID-9496E751-B5C2-498F-9F24-1D59613455E5__ID-42137-00000054"><span class="note__title">Important:</span> The <a class="- topic/xref xref" href="GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30.html#ID-0000000C" title="Reference Clock Duty Cycle(1)"><span><span>DC</span></span></a> value at Reset is <code class="+ topic/ph pr-d/codeph ph codeph">10</code>. This makes the default duty cycle 50% and not
+         0%.</div>
+      <div class="- topic/note note important note_important" id="GUID-9496E751-B5C2-498F-9F24-1D59613455E5__GUID-250D2482-59C9-4F94-B66B-78B3E8F5674A" data-ofbid="GUID-9496E751-B5C2-498F-9F24-1D59613455E5__GUID-250D2482-59C9-4F94-B66B-78B3E8F5674A"><span class="note__title">Important:</span> Clock dividers and clock
+         duty cycles can be changed while the module is enabled but doing so may cause glitches to
+         occur on the output. To avoid possible glitches, clock dividers and clock duty cycles will
+         be changed only when the <a class="- topic/xref xref" href="GUID-6E703058-00DA-4703-A41C-3AB0C8C3EE30.html#ID-00000005" title="Reference Clock Module Enable"><span><span>EN</span></span></a> bit is clear.</div>
+   </div>
+
+</body>
+</html>

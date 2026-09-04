@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.2.1 Half Bridge Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html"/>
+<link rel="next" href="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A.html"/>
+<link rel="up" href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li><a href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html">32.2 Operating Modes</a></li><li>32.2.1 Half Bridge Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html" rel="prev">Operating Modes</a></span><span><a href="GUID-34AA031C-3396-4930-88E4-DEC46141FE7A.html" rel="next">Push-Pull Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF__GUID-DBD687DE-90E6-4ECF-B14E-CEBEE0B78E1D" style="">32.2.1 Half Bridge Mode</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF__ID-42115-00000051" data-ofbid="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF__ID-42115-00000051">In Half Bridge mode, two output signals are generated as true and
+            inverted versions of the input as illustrated in <a class="- topic/xref xref" href="#GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF__ID-42115-00000069"><span>Figure 32-1</span></a>. A nonoverlap (dead band) time is inserted between the two outputs
+            to prevent shoot-through current in various power supply applications. Dead-band control
+            is described in the <a class="- topic/xref xref" href="GUID-5C04399A-2325-4ADC-8B5A-800341DB32CE.html">Dead-Band Control</a> section. The output steering feature cannot be used in
+            this mode. A basic block diagram of this mode is shown in <a class="- topic/xref xref" href="#GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF__FIG_K5K_1Q4_TZ"><span>Figure 32-2</span></a>.</p>
+        <p class="- topic/p p" id="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF__ID-42115-00000055" data-ofbid="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF__ID-42115-00000055">The unused outputs CWGxC and CWGxD drive similar signals as CWGxA
+            and CWGxB, with polarity independently controlled by the <a class="- topic/xref xref" href="GUID-2EA8EF2E-9030-424D-BE37-7E5A7AA6098D.html#ID-00000029" title="CWG Output ‘y’ Polarity">POLC</a> and <a class="- topic/xref xref" href="GUID-2EA8EF2E-9030-424D-BE37-7E5A7AA6098D.html#ID-00000029" title="CWG Output ‘y’ Polarity">POLD</a> bits, respectively.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF__ID-42115-00000069" data-ofbid="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF__ID-42115-00000069"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 32-1. <span id="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF__GUID-BF8B6F86-3252-4DC0-96B3-D9064F3BE98C" class="fig--title">CWG Half Bridge Mode
+                    Operation</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF__IMAGE_DBB_V3N_4Z" src="GUID-F2B7FF28-855C-47D0-B68D-873C7B80BB75-high.svg"/></span>
+            </figure>
+            <figure class="- topic/fig fig fignone" id="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF__FIG_K5K_1Q4_TZ" data-ofbid="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF__FIG_K5K_1Q4_TZ"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 32-2. <span id="GUID-53490CBB-82B1-48FD-8EA9-04AA40AF53FF__GUID-B214DD76-456C-46EA-910E-69A2DD76F0DD" class="fig--title">Simplified CWG Block Diagram
+                    (Half Bridge Mode, MODE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b100</code>)</span></span></figcaption>
+                
+                <span class=""><iframe src="GUID-0A5C1E1D-2CA9-48C8-BF4A-296A24B34D1D-high.pdf#toolbar=1" width="450" height="626.3354934856729"></iframe></span>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

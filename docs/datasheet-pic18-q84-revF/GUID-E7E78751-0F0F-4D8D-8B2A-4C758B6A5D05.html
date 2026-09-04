@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>13.1 Module Overview — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html"/>
+<link rel="next" href="GUID-8208B292-419A-41F3-A057-30FB13502904.html"/>
+<link rel="up" href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html">13 CRC - Cyclic Redundancy Check Module with Memory Scanner</a></li><li>13.1 Module Overview</li></ol>
+  <div class="sib"><span>← <a href="GUID-984F0282-D1B5-432F-9DFE-826FBD84B296.html" rel="prev">CRC - Cyclic Redundancy Check Module with Memory Scanner</a></span><span><a href="GUID-8208B292-419A-41F3-A057-30FB13502904.html" rel="next">Polynomial Implementation</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-E7E78751-0F0F-4D8D-8B2A-4C758B6A5D05__GUID-B66AC891-6D44-4FCA-994B-CA1FF88D9A67" style="">13.1 Module Overview</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">The CRC module is coupled with a memory scanner that provides a means of
+            performing CRC calculations in hardware, without CPU intervention. The memory scanner
+            can automatically provide data from program Flash memory to the CRC module. The CRC
+            module can also be operated by directly writing data to SFRs, without using a scanner. </p>
+        <p class="- topic/p p">The CRC module can be used to detect bit errors in the Flash memory using the
+            built-in memory scanner or through user input RAM. The CRC module can accept up to a
+            32-bit polynomial with up to a 32-bit seed value. A CRC calculated check value (or
+            checksum) will then be generated into the <a class="- topic/xref xref" href="GUID-EACD1E2B-D427-41A2-8B8D-F61D5D52B5C5.html" title="CRCOUT">CRCOUT</a> registers for user storage. The CRC module uses an XOR shift register
+            implementation to perform the polynomial division required for the CRC calculation. This
+            feature is useful for calculating CRC values of data being transmitted or received using
+            communications peripherals such as the SPI, UART or I<sup class="+ topic/ph hi-d/sup ph sup">2</sup>C. </p>
+    </div>
+
+</body>
+</html>

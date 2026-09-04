@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>21.5 PPS Lock — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F5266E8C-93B2-4F57-B843-D24FE03808AA.html"/>
+<link rel="next" href="GUID-4BD2CD04-94B8-4D53-A3A5-FF549699E9F1.html"/>
+<link rel="up" href="GUID-A7E197E5-2D8F-44E9-94D3-3B9DAD0D6AC8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-A7E197E5-2D8F-44E9-94D3-3B9DAD0D6AC8.html">21 PPS - Peripheral Pin Select Module</a></li><li>21.5 PPS Lock</li></ol>
+  <div class="sib"><span>← <a href="GUID-F5266E8C-93B2-4F57-B843-D24FE03808AA.html" rel="prev">Bidirectional Pins</a></span><span><a href="GUID-4BD2CD04-94B8-4D53-A3A5-FF549699E9F1.html" rel="next">PPS One-Way Lock</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__GUID-B60EDC54-3FD4-4D94-8F9E-2AA6C8681108" style="">21.5 PPS Lock</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__ID-41521-0000194A" data-ofbid="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__ID-41521-0000194A">The PPS module provides an extra layer of protection to prevent
+         inadvertent changes to the PPS selection registers. The <a class="- topic/xref xref" href="GUID-B48CE7C7-3402-4DEC-9EB0-F02B28E2EF76.html#GUID-12FF6187-133A-4CEB-8EA8-E10D65A1F000" title="PPS Locked">PPSLOCKED</a> bit is used in combination with specific
+         code execution blocks to lock/unlock the PPS selection registers. </p>
+      <div class="- topic/note note important note_important" id="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__ID-41521-00001905" data-ofbid="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__ID-41521-00001905"><span class="note__title">Important:</span> The PPSLOCKED bit is clear by default (PPSLOCKED
+         = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), which allows the PPS selection registers to be modified without an
+         unlock sequence.</div>
+      <p class="- topic/p p">PPS selection registers are locked when the PPSLOCKED bit is set (PPSLOCKED =
+            <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). Setting the PPSLOCKED bit requires a specific lock sequence as
+         shown in the examples below in both C and assembly languages.</p>
+      <p class="- topic/p p">PPS selection registers are unlocked when the PPSLOCKED bit is clear
+         (PPSLOCKED = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>). Clearing the PPSLOCKED bit requires a specific unlock
+         sequence as shown in the examples below in both C and assembly languages.</p>
+      <div class="- topic/note note important note_important" id="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__GUID-9EEB430E-8F6A-47E7-9F2B-82621DBDDC01" data-ofbid="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__GUID-9EEB430E-8F6A-47E7-9F2B-82621DBDDC01"><span class="note__title">Important:</span> All interrupts must be
+         disabled before starting the lock/unlock sequence to ensure proper execution.</div>
+      <div class="- topic/example example" id="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__GUID-F1CEBBE3-F221-4406-B30C-3CD9E317B7CD" data-ofbid="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__GUID-F1CEBBE3-F221-4406-B30C-3CD9E317B7CD"><h2 class="- topic/title title sectiontitle">PPS Lock Sequence (assembly
+            language)</h2>
+         
+         <pre class="+ topic/pre pr-d/codeblock pre codeblock avrasm"><code>
+ ; suspend interrupts
+    BCF      INTCON0,GIE
+    BANKSEL  PPSLOCK        
+ ; required sequence, next 5 instructions
+    MOVLW    0x55
+    MOVWF    PPSLOCK 
+    MOVLW    0xAA
+    MOVWF    PPSLOCK
+ ; Set PPSLOCKED bit 
+    BSF      PPSLOCK,PPSLOCKED
+ ; restore interrupts
+    BSF      INTCON0,GIE</code></pre>
+      </div>
+      <div class="- topic/example example" id="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__GUID-E07B3BC1-5921-4828-B710-2D481F72B6B0" data-ofbid="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__GUID-E07B3BC1-5921-4828-B710-2D481F72B6B0"><h2 class="- topic/title title sectiontitle">PPS Lock Sequence (C
+            language)</h2>
+         
+         <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c">
+INTCON0bits.GIE = <span class="hl-number">0</span>;         <em class="hl-comment">//Suspend interrupts</em>
+PPSLOCK = <span class="hl-number">0x55</span>;              <em class="hl-comment">//Required sequence</em>
+PPSLOCK = <span class="hl-number">0xAA</span>;              <em class="hl-comment">//Required sequence</em>
+PPSLOCKbits.PPSLOCKED = <span class="hl-number">1</span>;   <em class="hl-comment">//Set PPSLOCKED bit </em>
+INTCON0bits.GIE = <span class="hl-number">1</span>;         <em class="hl-comment">//Restore interrupts</em>
+</pre>
+      </div>
+      <div class="- topic/example example" id="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__GUID-85A9EDB7-CF41-4305-A057-8B727F2D36AE" data-ofbid="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__GUID-85A9EDB7-CF41-4305-A057-8B727F2D36AE"><h2 class="- topic/title title sectiontitle">PPS Unlock Sequence (assembly
+            language)</h2>
+         
+         <pre class="+ topic/pre pr-d/codeblock pre codeblock avrasm"><code>
+ ; suspend interrupts
+    BCF      INTCON0,GIE
+    BANKSEL  PPSLOCK
+ ; required sequence, next 5 instructions
+    MOVLW    0x55
+    MOVWF    PPSLOCK 
+    MOVLW    0xAA
+    MOVWF    PPSLOCK
+ ; Clear PPSLOCKED bit 
+    BCF      PPSLOCK,PPSLOCKED
+ ; restore interrupts
+    BSF      INTCON0,GIE</code></pre>
+      </div>
+      <div class="- topic/example example" id="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__GUID-A350A950-3F62-4119-BF38-EB0420354385" data-ofbid="GUID-F1917E2F-5261-4EF4-A800-ED66A2B05BC9__GUID-A350A950-3F62-4119-BF38-EB0420354385"><h2 class="- topic/title title sectiontitle">PPS Unlock Sequence (C
+            language)</h2>
+         
+         <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c">
+INTCON0bits.GIE = <span class="hl-number">0</span>;         <em class="hl-comment">//Suspend interrupts</em>
+PPSLOCK = <span class="hl-number">0x55</span>;              <em class="hl-comment">//Required sequence</em>
+PPSLOCK = <span class="hl-number">0xAA</span>;              <em class="hl-comment">//Required sequence</em>
+PPSLOCKbits.PPSLOCKED = <span class="hl-number">0</span>;   <em class="hl-comment">//Clear PPSLOCKED bit </em>
+INTCON0bits.GIE = <span class="hl-number">1</span>;         <em class="hl-comment">//Restore interrupts</em>
+</pre>
+      </div>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-4BD2CD04-94B8-4D53-A3A5-FF549699E9F1.html">21.5.1 PPS One-Way Lock</a></li></ul>
+</nav>
+</body>
+</html>

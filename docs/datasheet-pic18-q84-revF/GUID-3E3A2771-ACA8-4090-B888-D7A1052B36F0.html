@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.2.2.8 Asynchronous Reception Setup — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4A8B083E-6442-4C63-8E3C-BCEF2B42B817.html"/>
+<link rel="next" href="GUID-4109B660-A595-4B90-A307-4B6B8579F69D.html"/>
+<link rel="up" href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-F37FDF72-1D87-438A-A2F1-D70FD2AC07AC.html">35.2 UART Asynchronous Modes</a></li><li><a href="GUID-514FD840-FBAD-4A4F-BB69-D50B1E41F4B8.html">35.2.2 UART Asynchronous Receiver</a></li><li>35.2.2.8 Asynchronous Reception Setup</li></ol>
+  <div class="sib"><span>← <a href="GUID-4A8B083E-6442-4C63-8E3C-BCEF2B42B817.html" rel="prev">Receive FIFO Overflow</a></span><span><a href="GUID-4109B660-A595-4B90-A307-4B6B8579F69D.html" rel="next">Asynchronous Address Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-5341D9E9-DCB5-4DA3-A468-77D992C44A1E" style="">35.2.2.8 Asynchronous Reception Setup</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">Use the following steps as a guide for configuring the UART for asynchronous
+            reception: </p>
+        <ol class="- topic/ol ol" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__OL_W11_NP5_BBB" data-ofbid="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__OL_W11_NP5_BBB">
+            <li class="- topic/li li" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-34F41C5D-87A4-4C9F-979F-A3818289383D" data-ofbid="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-34F41C5D-87A4-4C9F-979F-A3818289383D">Initialize the <a class="- topic/xref xref" href="GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C.html#GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C" title="UxBRG">UxBRG</a> register pair and the <a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_MQF_ZNS_YY" title="Baud Rate Generator Speed Select"><span><span>BRGS</span></span></a> bit to achieve the desired baud rate.</li>
+            <li class="- topic/li li" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-4E16B555-4216-4694-B204-6493149204E9" data-ofbid="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-4E16B555-4216-4694-B204-6493149204E9">Configure the RXPPS register for the
+                desired RX pin.</li>
+            <li class="- topic/li li" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-D187EB34-47E0-4A2E-B546-01BD47E59FDE" data-ofbid="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-D187EB34-47E0-4A2E-B546-01BD47E59FDE">Clear the ANSEL bit for the RX pin (if applicable).</li>
+            <li class="- topic/li li" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-F37B7540-A5B6-495A-B8DE-A150B4FBE304" data-ofbid="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-F37B7540-A5B6-495A-B8DE-A150B4FBE304">Set the <a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_C5C_R5L_BBB" title="UART Mode Select(1)"><span><span>MODE</span></span></a> bits to the desired Asynchronous mode.</li>
+            <li class="- topic/li li" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-9A458625-E2E4-4EE6-A65B-458902464D91" data-ofbid="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-9A458625-E2E4-4EE6-A65B-458902464D91">Set the <a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_XWQ_NRL_BBB" title="Receive Polarity Control"><span><span>RXPOL</span></span></a> bit if the data stream is inverted.</li>
+            <li class="- topic/li li" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-2DA6DF2F-BE03-4B5B-9820-EB3A59A62A8C" data-ofbid="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-2DA6DF2F-BE03-4B5B-9820-EB3A59A62A8C">Enable the serial port by setting the <a class="- topic/xref xref" href="GUID-AFEE23AF-E917-46D3-BF17-879043534F4E.html#BITFIELD_MQF_ZNS_YY" title="Serial Port Enable"><span><span>ON</span></span></a> bit.</li>
+            <li class="- topic/li li" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-0C688F78-067D-43C0-A0D4-8912AC311D75" data-ofbid="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-0C688F78-067D-43C0-A0D4-8912AC311D75">If interrupts are desired, set the
+                UxRXIE bit in the PIEx register and enable global interrupts.</li>
+            <li class="- topic/li li" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-D5D1370B-131A-47C2-955B-9DBCA7320584" data-ofbid="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-D5D1370B-131A-47C2-955B-9DBCA7320584">Enable reception by setting the <a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_BYJ_N5L_BBB" title="Receive Enable Control(2)"><span><span>RXEN</span></span></a> bit.</li>
+            <li class="- topic/li li" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-140F036F-8D24-4CBB-A352-94A614290AC4" data-ofbid="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-140F036F-8D24-4CBB-A352-94A614290AC4">Read the UxERRIR register to get the error flags.</li>
+            <li class="- topic/li li" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-5F577798-567B-487E-9B4C-984B0AE69180" data-ofbid="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-5F577798-567B-487E-9B4C-984B0AE69180">The UxRXIF Interrupt Flag bit will be
+                set when a character is transferred from the RSR to the receive buffer. An interrupt
+                will be generated if the UxRXIE interrupt enable bit is also set.</li>
+            <li class="- topic/li li" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-D7E2BE38-AD32-47A5-8ADD-3C1D89C08004" data-ofbid="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-D7E2BE38-AD32-47A5-8ADD-3C1D89C08004">Read the UxRXB register to get the received byte.</li>
+            <li class="- topic/li li" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-9A3E5237-7A0C-4F19-AEF2-F7FBBAF286C9" data-ofbid="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-9A3E5237-7A0C-4F19-AEF2-F7FBBAF286C9">If an overrun occurred, clear the <a class="- topic/xref xref" href="GUID-0335D11B-CDF0-4C1B-B750-F220FDA16575.html#BITFIELD_OKF_Y3M_BBB" title="Receive FIFO Overflow Interrupt Flag"><span><span>RXFOIF</span></span></a> bit.</li>
+        </ol>
+        <figure class="- topic/fig fig fignone" id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__FIG_IBC_QMW_QFB" data-ofbid="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__FIG_IBC_QMW_QFB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 35-5. <span id="GUID-3E3A2771-ACA8-4090-B888-D7A1052B36F0__GUID-C175A3AD-C30E-4B2F-B732-405AEFBD0245" class="fig--title">UART Asynchronous Reception</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-E5AE7A5F-900B-4418-AC3E-440F7AAA9EDD-high.pdf#toolbar=1" width="482.98" height="330.11"></iframe></span>
+        </figure>
+</div>
+
+</body>
+</html>

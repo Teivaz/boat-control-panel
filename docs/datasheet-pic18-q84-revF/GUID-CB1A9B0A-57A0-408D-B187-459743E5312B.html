@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.5.1 Control Device — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB.html"/>
+<link rel="next" href="GUID-2C36C7AE-8077-4C2B-B8AB-BE74F439A0B3.html"/>
+<link rel="up" href="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB.html">35.5 DALI Mode (Full-Featured UARTs Only)</a></li><li>35.5.1 Control Device</li></ol>
+  <div class="sib"><span>← <a href="GUID-7C1592E7-3440-43E1-A123-F36BAB2718AB.html" rel="prev">DALI Mode (Full-Featured UARTs Only)</a></span><span><a href="GUID-2C36C7AE-8077-4C2B-B8AB-BE74F439A0B3.html" rel="next">Control Gear</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-03A232CD-6B7B-46EF-BADE-6491E6D905A1" style="">35.5.1 Control Device</h1>
+<div class="- topic/body body">
+<p class="- topic/p p">The Control Device mode is configured with the following settings:</p>
+        <ul class="- topic/ul ul" id="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__UL_QQH_MWC_DBB" data-ofbid="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__UL_QQH_MWC_DBB">
+            <li class="- topic/li li" id="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-0DDA0F02-32CA-44C2-949E-1FC2211733CB" data-ofbid="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-0DDA0F02-32CA-44C2-949E-1FC2211733CB"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_C5C_R5L_BBB" title="UART Mode Select(1)"><span><span>MODE</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">‘b1000</span></li>
+            <li class="- topic/li li" id="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-76360684-76D8-45FE-B75F-63D2FD6E3A71" data-ofbid="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-76360684-76D8-45FE-B75F-63D2FD6E3A71"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_K3M_SSL_BBB" title="Transmit Enable Control(2)"><span><span>TXEN</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+            <li class="- topic/li li" id="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-63EBDA87-B84A-4BCA-B6BD-F8D873B9D22F" data-ofbid="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-63EBDA87-B84A-4BCA-B6BD-F8D873B9D22F"><a class="- topic/xref xref" href="GUID-060A4A49-0653-450B-8DF9-AD93990293F7.html#BITFIELD_BYJ_N5L_BBB" title="Receive Enable Control(2)"><span><span>RXEN</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+            <li class="- topic/li li" id="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-76F57B1B-B7F7-431A-997C-F770970293BD" data-ofbid="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-76F57B1B-B7F7-431A-997C-F770970293BD"><a class="- topic/xref xref" href="GUID-471C59A9-2216-467A-93AD-12A52D1A299F.html#GUID-471C59A9-2216-467A-93AD-12A52D1A299F" title="UxP1">UxP1</a> = forward frames are held for transmission with this
+                number of half-bit periods after the completion of a forward or backward frame</li>
+            <li class="- topic/li li" id="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-55068BB8-26ED-4D7E-A37C-5DE7ADC3AA41" data-ofbid="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-55068BB8-26ED-4D7E-A37C-5DE7ADC3AA41"><a class="- topic/xref xref" href="GUID-DAF4A4A9-A3FB-4388-ADEA-5A0AB193AFBA.html#GUID-DAF4A4A9-A3FB-4388-ADEA-5A0AB193AFBA" title="UxP2">UxP2</a> = forward/backward frame threshold delimiter. Any
+                reception that starts this number of half-bit periods after the completion of a
+                forward or backward frame is detected as forward frame and sets the PERIF flag of
+                the corresponding received byte.</li>
+            <li class="- topic/li li" id="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-28C9934D-268D-4638-9D6E-C0D4243B4839" data-ofbid="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-28C9934D-268D-4638-9D6E-C0D4243B4839"><a class="- topic/xref xref" href="GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C.html#GUID-7F4EDC58-DA7D-4792-AF19-4D4712B6E09C" title="UxBRG">UxBRG</a> = value to achieve 1200 baud rate</li>
+            <li class="- topic/li li" id="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-8D617008-771E-40B1-A57C-C07597D9E7AA" data-ofbid="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-8D617008-771E-40B1-A57C-C07597D9E7AA"><a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_C5C_R5L_BBB" title="Transmit Control Polarity(1)">TXPOL</a> = appropriate polarity for interface
+                circuit</li>
+            <li class="- topic/li li" id="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-7AEEDE9F-016E-469A-9641-7629E4E16B55" data-ofbid="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-7AEEDE9F-016E-469A-9641-7629E4E16B55"><a class="- topic/xref xref" href="GUID-45ED2BB2-EFC9-4480-A083-C1E005A94A37.html#BITFIELD_K3M_SSL_BBB" title="Stop Bit Mode Control(1)"><span><span>STP</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">‘b10</span> for two Stop
+                bits</li>
+            <li class="- topic/li li" id="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-996BBC3D-EB3B-4F56-900E-3F13A9C142D7" data-ofbid="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-996BBC3D-EB3B-4F56-900E-3F13A9C142D7">RxyPPS = TX pin selection code</li>
+            <li class="- topic/li li" id="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-6B4F6A4C-5C78-4F93-9B3F-87E37AEC7F6C" data-ofbid="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-6B4F6A4C-5C78-4F93-9B3F-87E37AEC7F6C">TX pin TRIS control = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">0</span></li>
+            <li class="- topic/li li" id="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-E7E18AE2-D509-4450-89A6-85A691D73C8A" data-ofbid="GUID-CB1A9B0A-57A0-408D-B187-459743E5312B__GUID-E7E18AE2-D509-4450-89A6-85A691D73C8A"><a class="- topic/xref xref" href="GUID-AFEE23AF-E917-46D3-BF17-879043534F4E.html#BITFIELD_MQF_ZNS_YY" title="Serial Port Enable"><span><span>ON</span></span></a> = <span class="+ topic/keyword sw-d/cmdname keyword cmdname">1</span></li>
+        </ul>
+        <p class="- topic/p p">A forward frame is initiated by writing the control byte to the UxTXB register. After
+            sending the control byte, each data byte must be written to the UxTXB register as soon
+            as UxTXIF goes true. It is necessary to perform every write after UxTXIF goes true to
+            ensure that the transmit buffer is ready to accept the byte. Each write must also occur
+            before the <a class="- topic/xref xref" href="GUID-0335D11B-CDF0-4C1B-B750-F220FDA16575.html#BITFIELD_MQF_ZNS_YY" title="Transmit Shift Register Empty Interrupt Flag">TXMTIF</a>
+            bit goes true, to ensure that the bit stream of the forward frame is generated without
+            interruption.</p>
+        <p class="- topic/p p">When TXMTIF goes true, indicating the transmit shift register has completed sending the
+            last byte in the frame, the TX output is held in Idle state for the number of half-bit
+            periods selected by the STP bits.</p>
+        <p class="- topic/p p">After the last Stop bit, the TX output is held in the Idle state for an
+            additional wait time determined by the half-bit period count in the UxP1 register. For
+            example, a 2450 μs delay (~6 half-bit times) requires a value of 6 in UxP1L.</p>
+        <p class="- topic/p p">Any writes to the UxTXB register that occur after TXMTIF goes true, but
+            before the UxP1 wait time expires, are held and then transmitted immediately following
+            the wait time. If a backward frame is received during the wait time, any bytes that may
+            have been written to UxTXB will be transmitted after completion of the backward frame
+            reception plus the UxP1 wait time.</p>
+        <p class="- topic/p p">The wait timer is reset by the backward frame and starts over immediately
+            following the reception of the Stop bits of the backward frame. Data pending in the
+            transmit shift register will be sent when the wait time elapses.</p>
+        <p class="- topic/p p">To replace or delete any pending forward frame data, the <a class="- topic/xref xref" href="GUID-2A8CC206-1569-40FD-9221-4BB29D97CE3C.html#BITFIELD_K3M_SSL_BBB" title="Transmit Buffer Empty Status">TXBE</a> bit needs to be set to flush the shift register and transmit buffer. A
+            new control byte can then be written to the UxTXB register. The control byte will be
+            held in the buffer and sent at the beginning of the next forward frame following the
+            UxP1 wait time.</p>
+        <p class="- topic/p p">In Control Device mode, <a class="- topic/xref xref" href="GUID-0335D11B-CDF0-4C1B-B750-F220FDA16575.html#BITFIELD_XWQ_NRL_BBB" title="Parity Error Interrupt Flag">PERIF</a> is set when a forward frame is received. This helps the software to
+            determine whether the received byte is part of a forward frame from a Control Device
+            (either from the Control Device under consideration or from another Control Device on
+            the bus) or a backward frame from a Control Gear.</p>
+</div>
+
+</body>
+</html>

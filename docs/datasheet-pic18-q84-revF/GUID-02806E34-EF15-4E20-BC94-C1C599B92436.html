@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>11.12 Interrupt Compatibility — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-A9B7278E-252A-4D54-944F-66DF8C09F2C9.html"/>
+<link rel="next" href="GUID-602D87A7-D67E-4F60-9A0D-E6A6EFDB7CE1.html"/>
+<link rel="up" href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-D2A880FE-390E-4E0E-A5D8-890B9FE4F14B.html">11 VIC - Vectored Interrupt Controller Module</a></li><li>11.12 Interrupt Compatibility</li></ol>
+  <div class="sib"><span>← <a href="GUID-A9B7278E-252A-4D54-944F-66DF8C09F2C9.html" rel="prev">Wake-Up from Sleep</a></span><span><a href="GUID-602D87A7-D67E-4F60-9A0D-E6A6EFDB7CE1.html" rel="next">Register Definitions: Interrupt Control</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-02806E34-EF15-4E20-BC94-C1C599B92436__GUID-A1D7EF31-DBD7-4FD6-B086-3680D0031F46" style="">11.12 Interrupt Compatibility</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">When the MVECEN bit is cleared, the IVT feature is disabled and interrupts
+            are compatible with previous high performance 8-bit PIC18 microcontroller devices. In
+            this mode, the IVT priority has no effect. </p>
+        <p class="- topic/p p">When IPEN is also cleared, the interrupt priority feature is disabled and
+            interrupts are compatible with PIC16 microcontroller midrange devices. All interrupts
+            branch to address 0008h, since the interrupt priority is disabled.</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.11.2 RS-485 Transceiver Control — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-73E2D7CF-1873-4234-99CA-7882E14EE8AA.html"/>
+<link rel="next" href="GUID-75574FC5-2291-4ECB-BBAA-8650642F4E2D.html"/>
+<link rel="up" href="GUID-05BB831A-75A1-40B1-8559-EA222777E0D2.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-05BB831A-75A1-40B1-8559-EA222777E0D2.html">35.11 Flow Control</a></li><li>35.11.2 RS-485 Transceiver Control</li></ol>
+  <div class="sib"><span>← <a href="GUID-73E2D7CF-1873-4234-99CA-7882E14EE8AA.html" rel="prev">Hardware Flow Control</a></span><span><a href="GUID-75574FC5-2291-4ECB-BBAA-8650642F4E2D.html" rel="next">XON/XOFF Flow Control</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-198BF5DF-3B2D-4CF1-A328-6D0CC7F9DA3E__GUID-CC3FBE6B-5581-4C43-BA1B-F514C259169C" style="">35.11.2 RS-485 Transceiver Control</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The hardware flow control can be used to control the direction of an RS-485 transceiver
+            as shown in the following figure. The <span class="+ topic/ph sidscDomain-d/active-low ph active-low">CTS</span> input will be
+            configured to be always enabled by setting the UxCTSPPS selection to an unimplemented
+            PORT pin, such as RD0. When the signal and control lines are configured as shown in the
+            figure below, the UART will not receive its own transmissions. To verify that there are
+            no collisions on the RS-485 lines, the transceiver RE control can be disconnected from
+            TXDE and tied low, thereby enabling loopback reception of all transmissions. See the
+                <a class="- topic/xref xref" href="GUID-FB70590D-C48B-40AB-81CA-DC488BCBEB4E.html#GUID-FB70590D-C48B-40AB-81CA-DC488BCBEB4E">Collision Detection</a> section for more information.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-198BF5DF-3B2D-4CF1-A328-6D0CC7F9DA3E__FIG_YK4_NQD_DBB" data-ofbid="GUID-198BF5DF-3B2D-4CF1-A328-6D0CC7F9DA3E__FIG_YK4_NQD_DBB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 35-11. <span id="GUID-198BF5DF-3B2D-4CF1-A328-6D0CC7F9DA3E__GUID-8AE8A6E9-ADF3-47BB-8441-B223A9EB6677" class="fig--title">RS-485 Configuration</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-2A8D1DD9-22CE-4C84-BAC3-2A1541E31863-high.pdf#toolbar=1" width="450" height="440.357845064884"></iframe></span>
+        </figure>
+    </div>
+
+</body>
+</html>

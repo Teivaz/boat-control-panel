@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>36.2.6.1 Total Bit Count Mode (BMODE = 0) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-38725C10-0F95-484B-825E-B276E4433803.html"/>
+<link rel="next" href="GUID-3F03B3CC-533E-4185-8B1B-11516F2B93C0.html"/>
+<link rel="up" href="GUID-38725C10-0F95-484B-825E-B276E4433803.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-42463001-FB28-4F28-90CC-46EE338130D9.html">36 SPI - Serial Peripheral Interface Module</a></li><li><a href="GUID-C72B47E4-FEE5-4140-9A2A-3B9D749CDAF4.html">36.2 SPI Operation</a></li><li><a href="GUID-38725C10-0F95-484B-825E-B276E4433803.html">36.2.6 Transfer Counter</a></li><li>36.2.6.1 Total Bit Count Mode (BMODE = 0)</li></ol>
+  <div class="sib"><span>← <a href="GUID-38725C10-0F95-484B-825E-B276E4433803.html" rel="prev">Transfer Counter</a></span><span><a href="GUID-3F03B3CC-533E-4185-8B1B-11516F2B93C0.html" rel="next">Variable Transfer Size Mode (BMODE = 1)</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-EC23C857-1C50-459E-9D83-9BA96A6DB06E__GUID-685CBD9E-F5A1-4489-9856-9BCDAB900095" style="">36.2.6.1 Total Bit Count Mode (BMODE =
+            <code class="+ topic/ph pr-d/codeph ph codeph">0</code>)</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">In this mode, SPIxTCNT and SPIxTWIDTH are concatenated to determine the total number of
+            bits to be transferred. These bits will be loaded from/into the transmit/receive FIFOs
+            in 8-bit increments and the transfer counter will be decremented by eight until the
+            total number of remaining bits is less than eight. If there are any remaining bits
+            (SPIxTWIDTH ≠ <code class="+ topic/ph pr-d/codeph ph codeph">0</code>), the transmit FIFO will send out one final message
+            with any extra bits greater than the remainder ignored. </p>
+        <div class="- topic/p p">The SPIxTWIDTH is the remaining bit count but the value does not change as it does for
+            the SPIxTCNT value. The receiver will load a final byte into the receiver FIFO and pad
+            the extra bits with zeros. The <a class="- topic/xref xref" href="GUID-CD70C100-5F91-4E6F-86D4-583C754F39BE.html#BITFIELD_TC3_3JF_RFB" title="LSb-First Data Exchange Select(1)"><span><span>LSBF</span></span></a> bit determines whether the Most Significant or Least Significant bits of this final
+            byte are ignored or padded. For example, when LSBF = <code class="+ topic/ph pr-d/codeph ph codeph">0</code> and the final
+            transfer contains only two bits, if the last byte sent was 0x5F, the RXB of the receiver
+            will contain 0x40, which are the two MSbs of the final byte padded with zeros in the
+            LSbs.</div>
+        <p class="- topic/p p">In this mode, the SPI host will only transmit messages when the SPIxTCNT value is greater
+            than zero, regardless of the TXR and RXR settings. </p>
+        <p class="- topic/p p">In Host Transmit mode, the transfer starts with the data write to the SPIxTXB register or
+            the count value written to the SPIxTCNTL register, whichever occurs last. </p>
+        <p class="- topic/p p">In Host Receive Only mode, the transfer clocks start when the SPIxTCNTL value is written.
+            Transfer clocks are suspended when the receive FIFO is full and resume as the FIFO is
+            read.</p>
+</div>
+
+</body>
+</html>

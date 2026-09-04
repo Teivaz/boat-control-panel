@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.2.3.1 Direction Change in Full Bridge Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44.html"/>
+<link rel="next" href="GUID-769A811B-D65D-4581-BCCD-A79247CD3795.html"/>
+<link rel="up" href="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li><a href="GUID-F4E7FF1B-4D46-4087-813B-4855967AB66F.html">32.2 Operating Modes</a></li><li><a href="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44.html">32.2.3 Full Bridge Mode</a></li><li>32.2.3.1 Direction Change in Full Bridge Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-E0E9511C-2606-4BF2-9A3B-1FA43CB8CB44.html" rel="prev">Full Bridge Mode</a></span><span><a href="GUID-769A811B-D65D-4581-BCCD-A79247CD3795.html" rel="next">Dead-Band Delay in Full Bridge Mode</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__GUID-87D96665-523F-4BDB-926F-FEB1C7E4F5EC" style="">32.2.3.1 Direction Change in Full Bridge Mode</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__ID-42115-000000BF" data-ofbid="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__ID-42115-000000BF">In Full Bridge mode, changing the <a class="- topic/xref xref" href="GUID-D44061BF-0464-4F11-89AC-AAA00E192C3B.html#ID-00000013" title="CWG Mode">MODE[0]</a> bit controls the forward/reverse direction. Direction changes occur
+            on the next rising edge of the modulated input. The sequence, described as follows, is
+            illustrated in <a class="- topic/xref xref" href="#GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__ID-42115-000000DB"><span>Figure 32-8</span></a>.</p>
+        <ol class="- topic/ol ol" id="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__OL_EMJ_ZZ3_SGB" data-ofbid="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__OL_EMJ_ZZ3_SGB">
+            <li class="- topic/li li" id="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__GUID-23E08C1F-88FB-463E-94D2-C483D0318CA8" data-ofbid="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__GUID-23E08C1F-88FB-463E-94D2-C483D0318CA8">The associated active output CWGxA and the inactive output CWGxC are switched to
+                drive in the opposite direction.</li>
+            <li class="- topic/li li" id="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__GUID-02EAC9C1-D19E-4897-81AD-DC5AFD7E626B" data-ofbid="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__GUID-02EAC9C1-D19E-4897-81AD-DC5AFD7E626B">The previously modulated output CWGxD is switched to the Inactive state, and the
+                previously inactive output CWGxB begins to modulate.</li>
+            <li class="- topic/li li" id="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__GUID-4709CF92-9252-4862-A720-ED3E186972E4" data-ofbid="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__GUID-4709CF92-9252-4862-A720-ED3E186972E4">CWG modulation resumes after the direction-switch dead band has elapsed.</li>
+        </ol>
+        <figure class="- topic/fig fig fignone" id="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__ID-42115-000000DB" data-ofbid="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__ID-42115-000000DB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 32-8. <span id="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__GUID-586D104F-566A-4138-960D-567D0CA7E768" class="fig--title">Example of PWM Direction Change at
+                Near 100% Duty Cycle</span></span></figcaption>
+            
+        </figure>
+        <span class=""><img class="- topic/image image" id="GUID-A8706D96-3E3E-4C40-A1DF-67904FE0A676__IMAGE_CPY_HRV_PGB" src="GUID-49328FE2-21DA-4408-B907-5D9B7E59D2CF-high.svg"/></span>
+    </div>
+
+</body>
+</html>

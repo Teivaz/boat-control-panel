@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.11 Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F2BBDA5E-C2FB-4B5E-811C-F2D9D498ED30.html"/>
+<link rel="next" href="GUID-E84F6F7C-8A43-425D-BD4C-3BF6D52B7772.html"/>
+<link rel="up" href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li>38.11 Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-F2BBDA5E-C2FB-4B5E-811C-F2D9D498ED30.html" rel="prev">Timestamping</a></span><span><a href="GUID-E84F6F7C-8A43-425D-BD4C-3BF6D52B7772.html" rel="next">FIFO Individual Interrupts</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-78C817CB-B5F1-4B07-8FAD-46BC4E01A158" style="">38.11 Interrupts</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p">Interrupts can be classified into multiple layers. Lower layer interrupts
+            propagate to higher layers by multiplexing them into single interrupts. <a class="- topic/xref xref" href="#GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-BD2E4BD2-D7E1-43C6-8F9E-23D9893DBB6F"><span>Figure 38-46</span></a> illustrates the layers of interrupts.<ul class="- topic/ul ul" id="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__UL_V5Y_2Z3_Q3B" data-ofbid="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__UL_V5Y_2Z3_Q3B">
+                <li class="- topic/li li" id="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-7BC29C0D-9B02-4FCE-9D2D-2E62C8696754" data-ofbid="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-7BC29C0D-9B02-4FCE-9D2D-2E62C8696754">FIFO Individual Interrupts</li>
+                <li class="- topic/li li" id="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-9AC389B4-4098-49FB-9EB6-DBD3506011C2" data-ofbid="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-9AC389B4-4098-49FB-9EB6-DBD3506011C2">FIFO Combined Interrupts</li>
+                <li class="- topic/li li" id="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-2BC28932-7299-4561-B9C1-B2E518DEC4AA" data-ofbid="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-2BC28932-7299-4561-B9C1-B2E518DEC4AA">Main Interrupts</li>
+            </ul></div>
+        <div class="- topic/p p">These interrupts are then funneled into three separate module interrupts:<ul class="- topic/ul ul" id="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__UL_L2L_GZ3_Q3B" data-ofbid="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__UL_L2L_GZ3_Q3B">
+                <li class="- topic/li li" id="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-DB08644F-937A-40ED-BF5A-19DBAC7E277F" data-ofbid="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-DB08644F-937A-40ED-BF5A-19DBAC7E277F">Receive Interrupt</li>
+                <li class="- topic/li li" id="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-5B5ED5EB-D165-4C27-BB16-D3076038B9AA" data-ofbid="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-5B5ED5EB-D165-4C27-BB16-D3076038B9AA">Transmit Interrupt</li>
+                <li class="- topic/li li" id="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-538B4759-1AE9-4C0E-8688-973A35891765" data-ofbid="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-538B4759-1AE9-4C0E-8688-973A35891765">Information Interrupt</li>
+            </ul></div>
+        <p class="- topic/p p">All module interrupts are persistent, meaning the condition that caused the
+            interrupt must be cleared within the module for the interrupt request to be removed.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-BD2E4BD2-D7E1-43C6-8F9E-23D9893DBB6F" data-ofbid="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-BD2E4BD2-D7E1-43C6-8F9E-23D9893DBB6F"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-46. <span id="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197__GUID-25A2145D-9104-4CA5-8E10-8E65969C4F77" class="fig--title">Interrupt Multiplexing</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" src="GUID-94FE9C6D-0B62-4FAE-A92C-24FD7E50DB80-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-E84F6F7C-8A43-425D-BD4C-3BF6D52B7772.html">38.11.1 FIFO Individual Interrupts</a></li><li><a href="GUID-AFCAA80F-EF1D-4E55-A921-9F0294FCB890.html">38.11.2 FIFO Combined Interrupts</a></li><li><a href="GUID-CDDCE0D8-24C2-4963-ACC8-BDDCE011AF44.html">38.11.3 Main Interrupts</a></li><li><a href="GUID-A460E863-341B-4200-9562-7B823C9BDF21.html">38.11.4 Interrupt Handling</a></li><li><a href="GUID-DA4D7AC7-C1F4-4160-A3DF-D7CDD47B1157.html">38.11.5 Interrupt Flags</a></li></ul>
+</nav>
+</body>
+</html>

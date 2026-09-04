@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>39.4 JTAG Instructions — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BF430D6E-A48C-4276-A722-22ED9AD41623.html"/>
+<link rel="next" href="GUID-4B860315-1651-4C47-B16B-DD6E7DBC35F5.html"/>
+<link rel="up" href="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-BA93E8B1-6BE5-4E58-B117-A3775947C7BF.html">39 JTAG Boundary Scan</a></li><li>39.4 JTAG Instructions</li></ol>
+  <div class="sib"><span>← <a href="GUID-BF430D6E-A48C-4276-A722-22ED9AD41623.html" rel="prev">Boundary Scan Cell (BSC)</a></span><span><a href="GUID-4B860315-1651-4C47-B16B-DD6E7DBC35F5.html" rel="next">Boundary Scan Testing</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__GUID-C5A5CECB-CD6F-4F2F-A727-CAE570CAA39C" style="">39.4 JTAG Instructions</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p"><span class="- topic/ph ph">PIC18-Q84</span> family devices support the
+            mandatory instruction set specified by IEEE 1149.1, as well as several optional public
+            instructions defined in the specification.</p>
+        <div class="- topic/p p">The mandatory JTAG instructions are:<ul class="- topic/ul ul" id="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__UL_B2K_XMX_G3B" data-ofbid="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__UL_B2K_XMX_G3B">
+                <li class="- topic/li li" id="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__GUID-2C5654E7-2A69-4042-A9F6-91A3118E7EA2" data-ofbid="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__GUID-2C5654E7-2A69-4042-A9F6-91A3118E7EA2"><code class="+ topic/ph pr-d/codeph ph codeph">BYPASS</code> (Fh):
+                    Used for bypassing a device in a test chain; this allows the testing of off-chip
+                    circuitry and board-level interconnections.</li>
+                <li class="- topic/li li" id="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__GUID-6E68F291-A43E-470C-BC8E-5949D61D1BD7" data-ofbid="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__GUID-6E68F291-A43E-470C-BC8E-5949D61D1BD7"><code class="+ topic/ph pr-d/codeph ph codeph">SAMPLE/PRELOAD</code>
+                    (2h): Captures the I/O states of the component, providing a snapshot of its
+                    operation.</li>
+                <li class="- topic/li li" id="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__GUID-72F5ECBA-7325-46A8-B626-1A41243FA7FF" data-ofbid="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__GUID-72F5ECBA-7325-46A8-B626-1A41243FA7FF"><code class="+ topic/ph pr-d/codeph ph codeph">EXTEST</code> (6h):
+                    Allows the external circuitry and interconnections to be tested by either
+                    forcing various test patterns on the output pins or capturing test results from
+                    the input pins.</li>
+            </ul></div>
+        <div class="- topic/p p">The optional JTAG instructions implemented in <span class="- topic/ph ph">PIC18-Q84</span> devices are:<ul class="- topic/ul ul" id="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__UL_EZ1_BNX_G3B" data-ofbid="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__UL_EZ1_BNX_G3B">
+                <li class="- topic/li li" id="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__GUID-58E4BD7D-2F19-4E6A-8FB2-DE6A5E0E9A6B" data-ofbid="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__GUID-58E4BD7D-2F19-4E6A-8FB2-DE6A5E0E9A6B"><code class="+ topic/ph pr-d/codeph ph codeph">IDCODE</code> (1h):
+                    Causes the 32-bit device identification word to be shifted out on the TDO
+                    pin.</li>
+                <li class="- topic/li li" id="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__GUID-142D7D25-BFE7-4D89-A403-B3625D3C9CFE" data-ofbid="GUID-34C3BCEE-5205-4D16-99AD-64777C67E033__GUID-142D7D25-BFE7-4D89-A403-B3625D3C9CFE"><code class="+ topic/ph pr-d/codeph ph codeph">HIGHZ</code> (0h):
+                    Places the device into a state in which all I/O pins are in a High-Impedance
+                    state (driven inactive).</li>
+            </ul></div>
+    </div>
+
+</body>
+</html>

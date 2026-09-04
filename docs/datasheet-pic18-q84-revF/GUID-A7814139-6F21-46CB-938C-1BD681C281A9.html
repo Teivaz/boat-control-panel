@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>9.1.4.1 Computed GOTO — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-888EC5AB-CA17-4FFC-BDAB-FD023FDBAA6C.html"/>
+<link rel="next" href="GUID-B9F5B9C0-D596-42CA-9380-E1F40B8D27D6.html"/>
+<link rel="up" href="GUID-888EC5AB-CA17-4FFC-BDAB-FD023FDBAA6C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2BAB2696-5102-45C6-8EF2-0812A58B9EC7.html">9 Memory Organization</a></li><li><a href="GUID-4EA10348-9CC6-4369-BE11-FF8A7FBE4567.html">9.1 Program Memory Organization</a></li><li><a href="GUID-888EC5AB-CA17-4FFC-BDAB-FD023FDBAA6C.html">9.1.4 Look-up Tables in Program Memory</a></li><li>9.1.4.1 Computed GOTO</li></ol>
+  <div class="sib"><span>← <a href="GUID-888EC5AB-CA17-4FFC-BDAB-FD023FDBAA6C.html" rel="prev">Look-up Tables in Program Memory</a></span><span><a href="GUID-B9F5B9C0-D596-42CA-9380-E1F40B8D27D6.html" rel="next">Program Flash Memory Access</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-A7814139-6F21-46CB-938C-1BD681C281A9__GUID-EA86CC01-A635-408D-B95F-07996C9582E2" style="">9.1.4.1 Computed <code class="+ topic/ph pr-d/codeph ph codeph">GOTO</code></h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-A7814139-6F21-46CB-938C-1BD681C281A9__ID-42129-00000630" data-ofbid="GUID-A7814139-6F21-46CB-938C-1BD681C281A9__ID-42129-00000630">A computed <code class="+ topic/ph pr-d/codeph ph codeph">GOTO</code> is accomplished by adding an offset
+         to the Program Counter. An example is shown in the following code example.</p>
+      <p class="- topic/p p" id="GUID-A7814139-6F21-46CB-938C-1BD681C281A9__ID-42129-00000633" data-ofbid="GUID-A7814139-6F21-46CB-938C-1BD681C281A9__ID-42129-00000633">A Look-up Table can be formed with an <code class="+ topic/ph pr-d/codeph ph codeph">ADDWF PCL</code>
+         instruction and a group of <code class="+ topic/ph pr-d/codeph ph codeph">RETLW <em class="+ topic/ph hi-d/i ph i">nn</em></code> instructions. The W register is
+         loaded with an offset into the table before executing a call to that table. The first
+         instruction of the called routine is the <code class="+ topic/ph pr-d/codeph ph codeph">ADDWF PCL</code> instruction. The next
+         instruction executed will be one of the <code class="+ topic/ph pr-d/codeph ph codeph">RETLW <em class="+ topic/ph hi-d/i ph i">nn</em></code> instructions that
+         returns the value ‘<code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-A7814139-6F21-46CB-938C-1BD681C281A9__ID-42129-00000638">nn</code>’ to the calling function.</p>
+      <p class="- topic/p p" id="GUID-A7814139-6F21-46CB-938C-1BD681C281A9__ID-42129-00000639" data-ofbid="GUID-A7814139-6F21-46CB-938C-1BD681C281A9__ID-42129-00000639">The offset value (in WREG) specifies the number of bytes that the
+         Program Counter will advance and must be multiples of two (LSb = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>).</p>
+      <p class="- topic/p p" id="GUID-A7814139-6F21-46CB-938C-1BD681C281A9__ID-42129-0000063B" data-ofbid="GUID-A7814139-6F21-46CB-938C-1BD681C281A9__ID-42129-0000063B">In this method, only one data byte may be stored in each instruction
+         location and room on the return address stack is required.</p>
+      <div class="- topic/example example" id="GUID-A7814139-6F21-46CB-938C-1BD681C281A9__GUID-1460080A-93CF-4B9F-8C41-CD093EDEEC98" data-ofbid="GUID-A7814139-6F21-46CB-938C-1BD681C281A9__GUID-1460080A-93CF-4B9F-8C41-CD093EDEEC98"><h2 class="- topic/title title sectiontitle">Computed <code class="+ topic/ph pr-d/codeph ph codeph">GOTO</code> Using
+            an Offset Value</h2>
+         
+         <pre class="+ topic/pre pr-d/codeblock pre codeblock language-c" id="GUID-A7814139-6F21-46CB-938C-1BD681C281A9__ID-42129-0000063F" data-ofbid="GUID-A7814139-6F21-46CB-938C-1BD681C281A9__ID-42129-0000063F">     RLNCF   OFFSET, W   ; W must be an even number, Max OFFSET = <span class="hl-number">127</span>
+     CALL    TABLE
+
+     ORG     nn00h    ; <span class="hl-number">00</span> in LSByte ensures no addition overflow
+TABLE:
+     ADDWF   PCL      ; Add OFFSET to program counter
+     RETLW   <em class="+ topic/ph hi-d/i ph i">A</em>        ; Value @ OFFSET=<span class="hl-number">0</span>
+     RETLW   <em class="+ topic/ph hi-d/i ph i">B</em>        ; Value @ OFFSET=<span class="hl-number">1</span>
+     RETLW   <em class="+ topic/ph hi-d/i ph i">C</em>        ; Value @ OFFSET=<span class="hl-number">2</span>
+       .
+       .
+       .</pre>
+      </div>
+   </div>
+
+</body>
+</html>

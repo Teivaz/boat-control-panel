@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>15.1 Independent Clock Source — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80.html"/>
+<link rel="next" href="GUID-4A35D917-2C86-40F3-B4C5-F860637D828E.html"/>
+<link rel="up" href="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80.html">15 WWDT - Windowed Watchdog Timer</a></li><li>15.1 Independent Clock Source</li></ol>
+  <div class="sib"><span>← <a href="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80.html" rel="prev">WWDT - Windowed Watchdog Timer</a></span><span><a href="GUID-4A35D917-2C86-40F3-B4C5-F860637D828E.html" rel="next">WWDT Operating Modes</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-A4A5162D-D0E1-4E64-B62F-4479A5440FB4__GUID-B2642652-A3E7-4F59-BAD7-163EAA0DD790" style="">15.1 Independent Clock Source</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The WWDT can derive its time base from either the 31 KHz LFINTOSC or 31.25 kHz MFINTOSC
+            internal oscillators, depending on the value of WDT Operating Mode (WDTE) Configuration
+            bits. If WDTE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b1x</code>, then the clock source will be enabled depending
+            on the WDTCCS Configuration bits. If WDTE = <code class="+ topic/ph pr-d/codeph ph codeph">‘b01</code>, the <a class="- topic/xref xref" href="GUID-928F7E9B-3D02-40EC-AB34-06E396FC2D3D.html#BITFIELD_E5C_M3N_RGB" title="Software Enable/Disable for Watchdog Timer"><span><span>SEN</span></span></a> bit will be set by software to enable WWDT and the clock source is enabled by the
+                <a class="- topic/xref xref" href="GUID-F5513084-0987-48C2-839A-FAFED6B70A66.html#BITFIELD_RRB_FLN_RGB" title="Watchdog Timer Clock Select(1,3)"><span><span>CS</span></span></a> bits. Time
+            intervals in this chapter are based on a minimum nominal interval of 1 ms. See the
+            device Electrical Specifications for LFINTOSC and MFINTOSC tolerances.</div>
+    </div>
+
+</body>
+</html>

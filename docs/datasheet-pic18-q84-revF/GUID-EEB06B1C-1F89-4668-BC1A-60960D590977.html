@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>37.4.2.3 Start Condition Timing — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-F9FC65EE-A139-4C91-B508-5B24574998AC.html"/>
+<link rel="next" href="GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57.html"/>
+<link rel="up" href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-449CCDDD-0CBE-409F-856B-A5AA870B088C.html">37 I2C - Inter-Integrated Circuit Module</a></li><li><a href="GUID-A769AC35-6440-4A79-B914-9260E23A0EB1.html">37.4 I2C Operation</a></li><li><a href="GUID-0E4BE11A-ACC6-445A-913B-0A8B41B28514.html">37.4.2 I2C Host Mode Operation</a></li><li>37.4.2.3 Start Condition Timing</li></ol>
+  <div class="sib"><span>← <a href="GUID-F9FC65EE-A139-4C91-B508-5B24574998AC.html" rel="prev">Host Clock Timing</a></span><span><a href="GUID-5723B13D-5A12-4AB6-9EBE-D415361E1E57.html" rel="next">Acknowledge Sequence Timing</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977__GUID-E2AC499F-976D-477F-BA40-A489BC83A688" style="">37.4.2.3 Start Condition Timing</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">A Start condition is initiated by either writing to the Start (<a class="- topic/xref xref" href="GUID-BA7813D5-292E-46FB-B1DE-BED57339E767.html#BITFIELD_YPG_M34_LGB" title="Host Start (used only when MODE = 1xx)">S</a>) bit
+            (when <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_GT1_MKP_LGB" title="Address Buffer Disable">ABD</a> =
+                <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) or by writing to <a class="- topic/xref xref" href="GUID-F2A3862E-6A4A-4A03-8CE9-8393812B3E7C.html" title="I2CxTXB">I2CxTXB</a> (when ABD =
+                <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). When the Start condition is initiated, host hardware verifies
+            that the bus is Idle, then begins to count the number of <a class="- topic/xref xref" href="GUID-1104B90B-16AC-4A43-BC76-816D7C449473.html" title="I2CxCLK">I2CxCLK</a> periods as
+            determined by the Bus Free Time Status (<a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_ACT_ZLP_LGB" title="Bus Free Time Selection">BFRET</a>)
+            bits. Once the Bus Free Time period has been reached, hardware sets <a class="- topic/xref xref" href="GUID-2A56511C-9F9E-40F2-AD9C-00E97063F88B.html#GUID-967969A7-72DF-42E8-8CE4-4AD59A4CBE74" title="Bus Free Status(2)">BFRE</a> (BFRE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>), the Start condition is asserted on the
+            bus, which pulls the SDA line low, and the Start Condition Interrupt Flag (<a class="- topic/xref xref" href="GUID-635B6F99-040A-46E4-B25F-9C7A6D5BBE4D.html#BITFIELD_W3K_BQV_LGB" title="Start Condition Interrupt Flag(1)"><span><span>SCIF</span></span></a>) bit is set (SCIF = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>). Host hardware then waits one full SCL period
+                (T<sub class="+ topic/ph hi-d/sub ph sub">SCL</sub>) before pulling the SCL line low, signaling the end of the Start
+            condition. At this point, hardware loads the transmit shift register from either <a class="- topic/xref xref" href="GUID-E7CC5B44-63E1-40F0-8F67-30D643607BC5.html">I2CxADB0</a>/<a class="- topic/xref xref" href="GUID-51DC1914-5FC6-4DB6-849E-AC7B6E17D460.html" title="I2CxADB1">I2CxADB1</a> (ABD
+            = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>) or I2CxTXB (ABD = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>).</div>
+        <p class="- topic/p p">The figure below shows an example of a Start condition.</p>
+        <figure class="- topic/fig fig fignone" id="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977__FIG_VVG_4QM_KGB" data-ofbid="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977__FIG_VVG_4QM_KGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 37-32. <span id="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977__GUID-EDF6527F-A45E-4CEC-ABA4-B18B3A8AEFF4" class="fig--title">Start Condition Timing</span></span></figcaption>
+            
+            <span class=""><img class="- topic/image image" id="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977__IMAGE_UST_1NM_PGB" src="GUID-4EA59A8C-E317-40BF-963C-729C29E9713D-high.svg"/></span>
+        </figure>
+        <div class="- topic/note note important note_important" id="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565" data-ofbid="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977__GUID-F6E35D53-11F8-4A40-BC90-ABF86FDAC565"><span class="note__title">Important:</span> 
+            <ol class="- topic/ol ol" id="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977__OL_NKL_JMM_PGB" data-ofbid="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977__OL_NKL_JMM_PGB">
+                <li class="- topic/li li" id="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977__GUID-75CD36BB-53E9-4E23-B2DB-599BE9844772" data-ofbid="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977__GUID-75CD36BB-53E9-4E23-B2DB-599BE9844772">See the device data sheet for
+                    Start condition hold time parameters.</li>
+                <li class="- topic/li li" id="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977__GUID-E9E711F9-AD42-437F-842A-600F24A99078" data-ofbid="GUID-EEB06B1C-1F89-4668-BC1A-60960D590977__GUID-E9E711F9-AD42-437F-842A-600F24A99078">SDA hold times are configured via
+                    the <a class="- topic/xref xref" href="GUID-2C55EC08-A408-4665-8385-D60D8E442368.html#BITFIELD_FRF_NLP_LGB" title="SDA Hold Time Selection">SDAHT</a> bits.</li>
+            </ol>
+        </div>
+    </div>
+
+</body>
+</html>

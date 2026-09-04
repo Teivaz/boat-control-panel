@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>43.1.6 Result Formatting — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA.html"/>
+<link rel="next" href="GUID-88AEA9BE-34C2-44BE-A116-5DAB431A258C.html"/>
+<link rel="up" href="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0A4EB83-7AFA-48EA-A9F0-C7353283E0FF.html">43 ADC - Analog-to-Digital Converter with Computation and Context Module</a></li><li><a href="GUID-A4B12E3F-915F-4560-BB34-A94DF3A31E52.html">43.1 ADC Configuration</a></li><li>43.1.6 Result Formatting</li></ol>
+  <div class="sib"><span>← <a href="GUID-E5E2FEDE-9279-4EB2-8FF1-9B3A58413CEA.html" rel="prev">Interrupts</a></span><span><a href="GUID-88AEA9BE-34C2-44BE-A116-5DAB431A258C.html" rel="next">ADC Operation</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-271ECB8F-050A-4C81-86D4-94A6E902E3FC__GUID-8B7AAEE9-203D-40E3-9A52-107E8D384CE3" style="">43.1.6 Result Formatting</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-271ECB8F-050A-4C81-86D4-94A6E902E3FC__ID-42107-00000242" data-ofbid="GUID-271ECB8F-050A-4C81-86D4-94A6E902E3FC__ID-42107-00000242">The ADC conversion result can be supplied in
+            two formats, left justified or right justified. The <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-0000001A" title="ADC Results Format/Alignment Selection"><span><span>FM</span></span></a> bit controls the output format as shown in <a class="- topic/xref xref" href="#GUID-271ECB8F-050A-4C81-86D4-94A6E902E3FC__FIG_AYQ_Y1K_XGB"><span>Figure 43-3</span></a>.</p>
+        
+        <figure class="- topic/fig fig fignone" id="GUID-271ECB8F-050A-4C81-86D4-94A6E902E3FC__FIG_AYQ_Y1K_XGB" data-ofbid="GUID-271ECB8F-050A-4C81-86D4-94A6E902E3FC__FIG_AYQ_Y1K_XGB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 43-3. <span id="GUID-271ECB8F-050A-4C81-86D4-94A6E902E3FC__GUID-9AFF815F-3858-43FC-A769-AAE8A3E89D4E" class="fig--title">12-Bit ADC
+                Conversion Result Format</span></span></figcaption>
+            
+            <span class=""><iframe src="GUID-F3BC4AD7-E0DE-4A4D-92EC-678D6ED5B40E-high.pdf#toolbar=1" width="450" height="184.84559812210853"></iframe></span>
+        </figure>
+        <div class="- topic/note note important note_important" id="GUID-271ECB8F-050A-4C81-86D4-94A6E902E3FC__GUID-766995C0-93BA-4573-98D2-CB42DD6EB87B" data-ofbid="GUID-271ECB8F-050A-4C81-86D4-94A6E902E3FC__GUID-766995C0-93BA-4573-98D2-CB42DD6EB87B"><span class="note__title">Important:</span> Writes to the <a class="- topic/xref xref" href="GUID-03130209-3BF5-4D2A-B9B0-19A9E1A58C89.html" title="ADRES">ADRES</a> register pair are always right justified, regardless of the selected
+            format mode. Therefore, a data read after writing to ADRES when <a class="- topic/xref xref" href="GUID-21ADED8B-2ED6-4283-BF89-5FDCB45DCE76.html#ID-0000001A" title="ADC Results Format/Alignment Selection">FM</a> = <code class="+ topic/ph pr-d/codeph ph codeph">0</code> will be shifted left four places.</div>
+    </div>
+
+</body>
+</html>

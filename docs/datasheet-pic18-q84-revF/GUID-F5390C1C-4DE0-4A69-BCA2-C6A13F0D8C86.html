@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>35.16.3.1 Auto-Wake-Up Special Considerations — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907.html"/>
+<link rel="next" href="GUID-170B7BEC-5D31-4D5B-B3B7-8B4F40A32614.html"/>
+<link rel="up" href="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1F199BFF-C537-4C5A-9258-DADEDDF63A4B.html">35 UART - Universal Asynchronous Receiver Transmitter with Protocol Support</a></li><li><a href="GUID-5D554793-676E-4F0B-8022-67C65136118D.html">35.16 UART Baud Rate Generator</a></li><li><a href="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907.html">35.16.3 Auto Wake-on-Break</a></li><li>35.16.3.1 Auto-Wake-Up Special Considerations</li></ol>
+  <div class="sib"><span>← <a href="GUID-470DBA51-8DE6-4C61-8BF9-030AB2918907.html" rel="prev">Auto Wake-on-Break</a></span><span><a href="GUID-170B7BEC-5D31-4D5B-B3B7-8B4F40A32614.html" rel="next">Transmitting a Break</a> →</span></div>
+</nav>
+<h1 class="- topic/title title topictitle1" id="GUID-F5390C1C-4DE0-4A69-BCA2-C6A13F0D8C86__GUID-0924893E-81B8-4AD1-B26A-9A37C7E180AD" style="">35.16.3.1 Auto-Wake-Up Special Considerations</h1><div class="- topic/body body"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b"><u class="+ topic/ph hi-d/u ph u">Break Character</u></strong></p><p class="- topic/p p">To avoid character errors or character fragments during a wake-up event, all bits in the character causing the Wake event must be zero.</p><p class="- topic/p p">When the wake-up is enabled, the function works independent of the low time on the data stream. If the WUE bit is set and a valid nonzero character is received, the low time from the Start bit to the first rising edge will be interpreted as the wake-up event. The remaining bits of the character will be received as a fragmented character and subsequent characters can result in framing or overrun errors.</p><p class="- topic/p p">Therefore, the initial character of the transmission must be all zeros. This must be eleven or more bit times, 13 bit times recommended for LIN bus, or any number of bit times for standard RS-232 devices.</p><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b"><u class="+ topic/ph hi-d/u ph u">Oscillator Start-Up Time</u></strong></p><p class="- topic/p p">The oscillator start-up time must be considered, especially in applications using oscillators
+      with longer start-up intervals (i.e., LP, XT or HS/PLL modes). The Sync Break (or wake-up
+      signal) character must be of sufficient length and must be be followed by a sufficient
+      interval to allow enough time for the selected oscillator to start and provide proper
+      initialization of the UART.</p><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b"><u class="+ topic/ph hi-d/u ph u">The WUE Bit</u></strong></p><p class="- topic/p p">To ensure that no actual data are lost, check the RXIDL bit to verify that a receive operation is not in process before setting the WUE bit. If a receive operation is not occurring, the WUE bit may then be set just prior to entering the Sleep mode.</p></div>
+</body>
+</html>

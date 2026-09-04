@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>14.5 Windowed Watchdog Timer (WWDT) Reset — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-29993E62-3573-40C5-B1F7-2FC741920923.html"/>
+<link rel="next" href="GUID-F4AF3F12-5C05-4130-839C-C24B9E0C771B.html"/>
+<link rel="up" href="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-29469D04-0538-4D47-AD70-E21A51D51F2F.html">14 Resets</a></li><li>14.5 Windowed Watchdog Timer (WWDT) Reset</li></ol>
+  <div class="sib"><span>← <a href="GUID-29993E62-3573-40C5-B1F7-2FC741920923.html" rel="prev">MCLR Disabled</a></span><span><a href="GUID-F4AF3F12-5C05-4130-839C-C24B9E0C771B.html" rel="next">RESET Instruction</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-4A9CDF3C-B7E0-4E56-ABC3-EE4BFE27F138__GUID-C4A139C5-02D6-4150-BFCE-27AC8D469160" style="">14.5 Windowed Watchdog Timer (WWDT) Reset</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-4A9CDF3C-B7E0-4E56-ABC3-EE4BFE27F138__ID-42138-000002B4" data-ofbid="GUID-4A9CDF3C-B7E0-4E56-ABC3-EE4BFE27F138__ID-42138-000002B4">The Windowed Watchdog Timer generates a Reset if the firmware does
+            not issue a <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-4A9CDF3C-B7E0-4E56-ABC3-EE4BFE27F138__ID-42138-000002B5">CLRWDT</code> instruction within the
+            time-out period or window set. The <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-4A9CDF3C-B7E0-4E56-ABC3-EE4BFE27F138__ID-42138-000002B6">TO</span>
+            and <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-4A9CDF3C-B7E0-4E56-ABC3-EE4BFE27F138__ID-42138-000002B7">PD</span> bits in the STATUS register and
+            the <a class="- topic/xref xref" href="GUID-96AC33D5-0A2F-4CEF-BD33-7B4D9ED59493.html#ID-0000002F" title="WDT Reset Flag"><span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-4A9CDF3C-B7E0-4E56-ABC3-EE4BFE27F138__ID-42138-000002B8">RWDT</span></a> bit are
+            changed to indicate a WDT Reset. The <a class="- topic/xref xref" href="GUID-96AC33D5-0A2F-4CEF-BD33-7B4D9ED59493.html#ID-00000028" title="Watchdog Window Violation Flag"><span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-4A9CDF3C-B7E0-4E56-ABC3-EE4BFE27F138__ID-42138-000002B9">WDTWV</span></a> bit
+            indicates if the WDT Reset has occurred due to a time-out or a window violation.</p>
+    </div>
+
+</body>
+</html>

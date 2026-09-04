@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>26.8 Operation Examples — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-B74F7E86-4EB4-45C9-91B7-597023F74CDC.html"/>
+<link rel="next" href="GUID-1CC48BA7-A6F8-4E4A-8CC0-5A5B412F9B77.html"/>
+<link rel="up" href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-B0060759-A96E-4689-A79D-CE2AE49FAFD9.html">26 TMR2 - Timer2 Module</a></li><li>26.8 Operation Examples</li></ol>
+  <div class="sib"><span>← <a href="GUID-B74F7E86-4EB4-45C9-91B7-597023F74CDC.html" rel="prev">Operating Modes</a></span><span><a href="GUID-1CC48BA7-A6F8-4E4A-8CC0-5A5B412F9B77.html" rel="next">Software Gate Mode</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23__GUID-BC823949-000E-4898-AE9A-A087F0AFFE3D" style="">26.8 Operation Examples</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23__ID-42141-0000139B" data-ofbid="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23__ID-42141-0000139B">Unless otherwise specified, the following notes apply to the
+         following timing diagrams:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23__ID-42141-0000139C" data-ofbid="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23__ID-42141-0000139C">Both the prescaler and postscaler are set to 1:1 (both the <a class="- topic/xref xref" href="GUID-DB486ED1-905B-432E-9A30-459FFEFAD858.html#ID-0000011D" title="Timer Clock Prescale Select">CKPS</a> and <a class="- topic/xref xref" href="GUID-DB486ED1-905B-432E-9A30-459FFEFAD858.html#ID-0000012A" title="Timer Output Postscaler Select">OUTPS</a> bits).</li>
+         <li class="- topic/li li" id="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23__ID-42141-0000139E" data-ofbid="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23__ID-42141-0000139E">The diagrams illustrate any clock except F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4 and
+            show clock-sync delays of at least two full cycles for both ON and TMRx_ers. When using
+               F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>/4, the clock-sync delay is at least one instruction period for
+            TMRx_ers; ON applies in the next instruction period.</li>
+         <li class="- topic/li li" id="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23__ID-42141-000013A0" data-ofbid="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23__ID-42141-000013A0">ON and TMRx_ers are somewhat generalized, and clock-sync delays
+            may produce results that are slightly different than illustrated.</li>
+         <li class="- topic/li li" id="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23__GUID-4A845BFD-465C-4341-AEBE-8A03F73642F9" data-ofbid="GUID-163FDC8E-6CAC-4296-8B4D-73E945B70B23__GUID-4A845BFD-465C-4341-AEBE-8A03F73642F9">The PWM Duty Cycle and PWM output are
+            illustrated assuming that the timer is used for the PWM function of the CCP module as
+            described in the “<strong class="+ topic/ph hi-d/b ph b">PWM Overview</strong>” section in the “<strong class="+ topic/ph hi-d/b ph b">CCP - Capture/Compare/PWM
+               Module</strong>” chapter. The signals are not a part of the Timer2 module.</li>
+      </ul>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-1CC48BA7-A6F8-4E4A-8CC0-5A5B412F9B77.html">26.8.1 Software Gate Mode</a></li><li><a href="GUID-892EB897-ED7C-46FF-8D9E-5A2E8D5221DD.html">26.8.2 Hardware Gate Mode</a></li><li><a href="GUID-23B7D427-51B5-4C99-9210-91D688BC8273.html">26.8.3 Edge Triggered Hardware Limit Mode</a></li><li><a href="GUID-3D764BAC-5D69-48B0-A0F0-59F351CB954A.html">26.8.4 Level Triggered Hardware Limit Mode</a></li><li><a href="GUID-3AFB730D-BB78-40B0-909E-CCC8367D5F1A.html">26.8.5 Software Start One Shot Mode</a></li><li><a href="GUID-42671323-285D-42C8-AE05-6DFB5D743FA4.html">26.8.6 Edge Triggered One Shot Mode</a></li><li><a href="GUID-1F1C0A76-519D-44C3-B52A-3F01ADB313AB.html">26.8.7 Edge Triggered Hardware Limit One Shot Mode</a></li><li><a href="GUID-4F7E4ED0-2008-429C-972A-E171F29D79A1.html">26.8.8 Level Reset, Edge Triggered Hardware Limit One Shot Modes</a></li><li><a href="GUID-FF1CC232-5690-4F10-B02B-8C5D5683DC8A.html">26.8.9 Edge Triggered Monostable Modes</a></li><li><a href="GUID-E5B6BB06-2B5F-4921-97D9-1E06EEB2BA70.html">26.8.10 Level Triggered Hardware Limit One Shot Modes</a></li></ul>
+</nav>
+</body>
+</html>

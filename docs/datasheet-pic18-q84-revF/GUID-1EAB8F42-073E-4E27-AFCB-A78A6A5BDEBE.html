@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.9.2 Transmit FIFO Behavior — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-7400FD8E-1643-4862-969A-4DDF26890079.html"/>
+<link rel="next" href="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192.html"/>
+<link rel="up" href="GUID-18BE65DA-2E61-49D8-AAE7-AC56D4A9B739.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-18BE65DA-2E61-49D8-AAE7-AC56D4A9B739.html">38.9 FIFO Behavior</a></li><li>38.9.2 Transmit FIFO Behavior</li></ol>
+  <div class="sib"><span>← <a href="GUID-7400FD8E-1643-4862-969A-4DDF26890079.html" rel="prev">TEF Status Flags</a></span><span><a href="GUID-39E00A8C-B679-4BD1-8D43-8DE5E40FA192.html" rel="next">Receive FIFO Behavior</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__GUID-82B79CB3-FC88-4E25-9AFB-8D1C479454B7" style="">38.9.2 Transmit FIFO Behavior</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p">FIFO 1 is configured as a TX FIFO. CxFIFOCON1 is used to control the FIFO.
+            CxFIFOSTA1 contains the status flags and the FIFO Index bits (FIFOCI[4:0]). CxFIFOUA1
+            contains the user address of the next transmit message object to be loaded.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_PXK_5BP_P3B"><span>Figure 38-18</span></a> through <a class="- topic/xref xref" href="#GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_QHG_HCP_P3B"><span>Figure 38-23</span></a> illustrate how the status flags, user address and FIFO index are
+            updated for FIFO 1.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_PXK_5BP_P3B"><span>Figure 38-18</span></a> shows the status of FIFO 1 after Reset. Message objects, MO0 to MO4,
+            are empty. All status flags are set. The user address and the FIFO index point to
+            MO0.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_PXK_5BP_P3B" data-ofbid="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_PXK_5BP_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-18. <span id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__GUID-CC80D431-BC24-4DC2-BC2B-4DD141B5A272" class="fig--title">FIFO 1 - Initial State</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__IMAGE_QXK_5BP_P3B" src="GUID-CEA2314E-7EE6-4756-9916-D22F49868B9D-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_NF5_VBP_P3B"><span>Figure 38-19</span></a> illustrates the status of FIFO 1 after the first message (MSG0) is
+            loaded. MO0 now contains MSG0. The user application sets the UINC bit (CxFIFOCON1[8]),
+            which causes the FIFO head to advance. The user address now points to MO1. TFEIF is
+            cleared since the FIFO is no longer empty. The user application now sets TXREQ to
+            request the transmission of MSG0.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_NF5_VBP_P3B" data-ofbid="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_NF5_VBP_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-19. <span id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__GUID-5403B038-B0B0-4B9A-A1E6-4E6BBBB150FF" class="fig--title">FIFO 1 - First Message Loaded</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__IMAGE_OF5_VBP_P3B" src="GUID-B8DA675D-3D91-4B1B-9CE3-41EF22185A6D-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_OB3_YBP_P3B"><span>Figure 38-20</span></a> illustrates the status of FIFO 1 after MSG0 is transmitted. The FIFO
+            is empty again. TFEIF is set and TXREQ is cleared. FIFOCIx bits now point to MO1 with
+            user address 0x218.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_OB3_YBP_P3B" data-ofbid="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_OB3_YBP_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-20. <span id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__GUID-59FD8414-4B51-4CB7-AEFB-6480179BB241" class="fig--title">FIFO 1 - First Message Transmitted</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__IMAGE_PB3_YBP_P3B" src="GUID-6973FA4E-3FB5-412E-9841-4652E7B608EA-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_FBM_2CP_P3B"><span>Figure 38-21</span></a> illustrates the status of FIFO 1 after three more
+            messages are loaded: MSG1-MSG3. The user address now points to MO4. TFHIF is cleared
+            because the FIFO is now less than half empty.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_FBM_2CP_P3B" data-ofbid="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_FBM_2CP_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-21. <span id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__GUID-C53DC4DB-6E7A-4BB4-B01A-C265ACC1CEA3" class="fig--title">FIFO 1 - Three More Messages Loaded</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__IMAGE_GBM_2CP_P3B" src="GUID-C8FFFB42-ACEC-45E7-821F-15C052E591D7-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_NJF_GCP_P3B"><span>Figure 38-22</span></a> illustrates the status of FIFO 1 after two more messages are loaded:
+            MSG4 and MSG5. CxFIFOUA1 now points to MO1. All status flags are now cleared because the
+            FIFO is full. The user address and the FIFO index now point to MO1. The user application
+            now sets TXREQ to request the transmission of MSG1-MSG5.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_NJF_GCP_P3B" data-ofbid="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_NJF_GCP_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-22. <span id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__GUID-0F5E9CB2-5731-4BDF-BAEC-229264BB389B" class="fig--title">FIFO 1 - FIFO Fully
+                    Loaded</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__IMAGE_OJF_GCP_P3B" src="GUID-968C2DC1-10C2-437F-B7BC-5F4B5E0EA75F-high.svg"/></span>
+            </figure>
+        </div>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_QHG_HCP_P3B"><span>Figure 38-23</span></a> illustrates the status of FIFO 1 after MSG1-MSG5 are transmitted.
+            The FIFO is empty again. All status flags are set and TXREQ is cleared. The user address
+            and the FIFO index point to MO1 again.</p>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_QHG_HCP_P3B" data-ofbid="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__FIG_QHG_HCP_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-23. <span id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__GUID-64EB805F-F3E0-47EC-B60E-BCD715E73298" class="fig--title">FIFO 1 - FIFO Fully Transmitted</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-1EAB8F42-073E-4E27-AFCB-A78A6A5BDEBE__IMAGE_RHG_HCP_P3B" src="GUID-7D317D38-A4A6-47D2-8C38-FBACD1B9B1A1-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.3.3.2 Propagation Delay — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-EF399558-5812-4723-9B63-0E5969BC5426.html"/>
+<link rel="next" href="GUID-7D07131B-6085-413D-A85F-35899E920955.html"/>
+<link rel="up" href="GUID-1D45D3A2-247B-4C23-ACD6-4131BDF1900C.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-94047BFD-289A-405D-B618-F6D2403E2972.html">38.3 Configuration</a></li><li><a href="GUID-1D45D3A2-247B-4C23-ACD6-4131BDF1900C.html">38.3.3 CAN FD Bit Time Configuration</a></li><li>38.3.3.2 Propagation Delay</li></ol>
+  <div class="sib"><span>← <a href="GUID-EF399558-5812-4723-9B63-0E5969BC5426.html" rel="prev">Sample Point</a></span><span><a href="GUID-7D07131B-6085-413D-A85F-35899E920955.html" rel="next">Transmitter Delay Compensation (TDC)</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-07A72FEC-A3BF-4E8F-9780-FBEE206FCAFB__GUID-98F9B670-3DCC-4935-9C6D-822157EE3025" style="">38.3.3.2 Propagation Delay</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-07A72FEC-A3BF-4E8F-9780-FBEE206FCAFB__FIG_WVK_LC1_P3B"><span>Figure 38-4</span></a> illustrates the propagation delay between two CAN nodes
+            on the bus, assuming Node A is transmitting a CAN message. The transmitted bit will
+            propagate from the transmitting CAN Node A through the transmitting CAN transceiver,
+            over the CAN bus, through the receiving CAN transceiver and into the receiving CAN Node
+            B. During the arbitration phase of a CAN message, the transmitter samples the CAN bus
+            and checks if the transmitted bit matches the received bit. The transmitting node has to
+            place the sample point after the maximum propagation delay.</p>
+        <p class="- topic/p p"><a class="- topic/xref xref" href="#GUID-07A72FEC-A3BF-4E8F-9780-FBEE206FCAFB__EQUATION-FIGURE_UNX_HG1_P3B"><span>Equation 38-9</span></a> describes the maximum propagation delay; where t<sub class="+ topic/ph hi-d/sub ph sub">TXD
+                – RXD</sub> is the propagation = delay of the transceiver, a maximum of 255 ns
+            according to ISO11898-1:2015. T<sub class="+ topic/ph hi-d/sub ph sub">BUS</sub> is the delay on the CAN bus, which is
+            approximately 5 ns/m. The factor 2 comes from the worst-case when Node B starts
+            transmitting exactly when the bit from Node A arrives.</p>
+        <div class="- topic/p p">
+            <figure class="+ topic/fig equation-d/equation-figure fig equation-figure fignone" id="GUID-07A72FEC-A3BF-4E8F-9780-FBEE206FCAFB__EQUATION-FIGURE_UNX_HG1_P3B" data-ofbid="GUID-07A72FEC-A3BF-4E8F-9780-FBEE206FCAFB__EQUATION-FIGURE_UNX_HG1_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Equation 38-9. <span id="GUID-07A72FEC-A3BF-4E8F-9780-FBEE206FCAFB__GUID-3D1A8E73-B8F0-44CA-8030-5A7AF3055A17" class="fig--title">Maximum Propagation
+                    Delay</span></span></figcaption>
+                
+                <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:mchp="http://microchip.com" xmlns:table="http://dita-ot.sourceforge.net/ns/201007/dita-ot/table">
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi mathvariant="italic">T</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi mathvariant="italic">P</mi>
+                                    <mi mathvariant="italic">R</mi>
+                                    <mi mathvariant="italic">O</mi>
+                                    <mi mathvariant="italic">P</mi>
+                                </mrow>
+                            </msub>
+                            <mo mathvariant="italic">=</mo>
+                            <mn mathvariant="italic">2</mn>
+                            <mo mathvariant="italic">×</mo>
+                            <mrow>
+                                <mo mathvariant="italic">(</mo>
+                                <msub>
+                                    <mrow>
+                                        <mi mathvariant="italic">t</mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mi mathvariant="italic">T</mi>
+                                        <mi mathvariant="italic">X</mi>
+                                        <mi mathvariant="italic">D</mi>
+                                        <mo mathvariant="italic">−</mo>
+                                        <mi mathvariant="italic">R</mi>
+                                        <mi mathvariant="italic">X</mi>
+                                        <mi mathvariant="italic">D</mi>
+                                    </mrow>
+                                </msub>
+                                <mo mathvariant="italic">+</mo>
+                                <msub>
+                                    <mrow>
+                                        <mi mathvariant="italic">T</mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mi mathvariant="italic">B</mi>
+                                        <mi mathvariant="italic">U</mi>
+                                        <mi mathvariant="italic">S</mi>
+                                    </mrow>
+                                </msub>
+                                <mo mathvariant="italic">)</mo>
+                            </mrow>
+                        </mrow>
+                    </math>
+            </figure>
+        </div>
+        <div class="- topic/p p">
+            <figure class="- topic/fig fig fignone" id="GUID-07A72FEC-A3BF-4E8F-9780-FBEE206FCAFB__FIG_WVK_LC1_P3B" data-ofbid="GUID-07A72FEC-A3BF-4E8F-9780-FBEE206FCAFB__FIG_WVK_LC1_P3B"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 38-4. <span id="GUID-07A72FEC-A3BF-4E8F-9780-FBEE206FCAFB__GUID-3A8F44B9-564A-4B38-A06A-47B269C5B3F0" class="fig--title">Propagation Delay</span></span></figcaption>
+                
+                <span class=""><img class="- topic/image image" id="GUID-07A72FEC-A3BF-4E8F-9780-FBEE206FCAFB__IMAGE_XVK_LC1_P3B" src="GUID-C830E75C-66C2-40CE-B898-F09C3818E6F3-high.svg"/></span>
+            </figure>
+        </div>
+    </div>
+
+</body>
+</html>

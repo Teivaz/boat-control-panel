@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>7.2.1 ISR Priority &gt; Main Priority &gt; Peripheral Priority — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-09B8283F-6491-4F2B-A97F-64AEBE302567.html"/>
+<link rel="next" href="GUID-DAF4553A-55C1-4EFD-BCE1-CCD86E4DD5C0.html"/>
+<link rel="up" href="GUID-09B8283F-6491-4F2B-A97F-64AEBE302567.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-5C74FB40-11DB-4092-82DD-37308889AA97.html">7 PIC18 CPU</a></li><li><a href="GUID-09B8283F-6491-4F2B-A97F-64AEBE302567.html">7.2 Memory Access Scheme</a></li><li>7.2.1 ISR Priority &gt; Main Priority &gt; Peripheral Priority</li></ol>
+  <div class="sib"><span>← <a href="GUID-09B8283F-6491-4F2B-A97F-64AEBE302567.html" rel="prev">Memory Access Scheme</a></span><span><a href="GUID-DAF4553A-55C1-4EFD-BCE1-CCD86E4DD5C0.html" rel="next">Peripheral Priority &gt; ISR Priority &gt; Main Priority</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-4A1F5045-1590-4B8F-9E5F-74C45A26F081__GUID-E7E51BBD-3D75-4BDB-9DC9-F7ADD0523C60" style="">7.2.1 ISR Priority &gt; Main Priority &gt; Peripheral Priority</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">When the peripheral priority (e.g., DMA, Scanner) is lower than ISR and MAIN
+            priority, and the peripheral requires:</p>
+        <div class="- topic/p p">
+            <ol class="- topic/ol ol" id="GUID-4A1F5045-1590-4B8F-9E5F-74C45A26F081__OL_PFQ_CHG_5FB" data-ofbid="GUID-4A1F5045-1590-4B8F-9E5F-74C45A26F081__OL_PFQ_CHG_5FB">
+                <li class="- topic/li li" id="GUID-4A1F5045-1590-4B8F-9E5F-74C45A26F081__GUID-3350B565-8916-4F78-ADD2-939657BFB6EB" data-ofbid="GUID-4A1F5045-1590-4B8F-9E5F-74C45A26F081__GUID-3350B565-8916-4F78-ADD2-939657BFB6EB">Access to the Program Flash
+                    Memory, then the peripheral waits for an instruction cycle in which the CPU does
+                    not need to access the PFM (such as a branch instruction) and uses that cycle to
+                    do its own Program Flash Memory access, unless a PFM Read/Write operation is in
+                    progress.</li>
+                <li class="- topic/li li" id="GUID-4A1F5045-1590-4B8F-9E5F-74C45A26F081__GUID-D543976E-0760-4D5C-B3FF-1E0041AA8944" data-ofbid="GUID-4A1F5045-1590-4B8F-9E5F-74C45A26F081__GUID-D543976E-0760-4D5C-B3FF-1E0041AA8944">Access to the SFR/GPR, then the
+                    peripheral waits for an instruction cycle in which the CPU does not need to
+                    access the SFR/GPR (such as <code class="+ topic/ph pr-d/codeph ph codeph">MOVLW</code>, <code class="+ topic/ph pr-d/codeph ph codeph">CALL</code>,
+                        <code class="+ topic/ph pr-d/codeph ph codeph">NOP</code>) and uses that cycle to do its own SFR/GPR access.</li>
+                <li class="- topic/li li" id="GUID-4A1F5045-1590-4B8F-9E5F-74C45A26F081__GUID-AC79DCA4-F656-4978-84B6-69091EB94726" data-ofbid="GUID-4A1F5045-1590-4B8F-9E5F-74C45A26F081__GUID-AC79DCA4-F656-4978-84B6-69091EB94726">Access to the Data EEPROM, then
+                    the peripheral has access to Data EEPROM unless a Data EEPROM Read/Write
+                    operation is being performed.</li>
+            </ol>
+        </div>
+        <p class="- topic/p p">This results in the lowest throughput for the peripheral to access the memory and does so
+            without any impact on execution times.</p>
+    </div>
+
+</body>
+</html>

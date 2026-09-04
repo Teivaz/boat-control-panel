@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>32.6.2 Dead-Band Functionality in Full Bridge Mode — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-ED7253BC-EAE8-46FA-8B74-573A53AED09F.html"/>
+<link rel="next" href="GUID-02BFEFB4-65CE-4F19-BD84-A6D591607D40.html"/>
+<link rel="up" href="GUID-5C04399A-2325-4ADC-8B5A-800341DB32CE.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2679393F-C4DB-4ABD-A420-9E6652175168.html">32 CWG - Complementary Waveform Generator Module</a></li><li><a href="GUID-5C04399A-2325-4ADC-8B5A-800341DB32CE.html">32.6 Dead-Band Control</a></li><li>32.6.2 Dead-Band Functionality in Full Bridge Mode</li></ol>
+  <div class="sib"><span>← <a href="GUID-ED7253BC-EAE8-46FA-8B74-573A53AED09F.html" rel="prev">Dead-Band Functionality in Half Bridge Mode</a></span><span><a href="GUID-02BFEFB4-65CE-4F19-BD84-A6D591607D40.html" rel="next">Rising Edge and Reverse Dead Band</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-24D9C19F-3EAC-4F25-85EE-9D8AD33DBF20__GUID-7DEFE9E0-BFAF-43D5-96E2-503A63BF9292" style="">32.6.2 Dead-Band Functionality in Full Bridge
+        Mode</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p" id="GUID-24D9C19F-3EAC-4F25-85EE-9D8AD33DBF20__ID-42115-00000205" data-ofbid="GUID-24D9C19F-3EAC-4F25-85EE-9D8AD33DBF20__ID-42115-00000205">In Full Bridge mode, the dead-band counters are used when
+            undergoing a direction change. The MODE[0] bit can be set or cleared while the CWG is
+            running, allowing for changes from Forward to Reverse mode. The CWGxA and CWGxC signals
+            will change immediately upon the first rising input edge following a direction change,
+            but the modulated signals (CWGxB or CWGxD, depending on the direction of the change)
+            will experience a delay dictated by the dead-band counters.</p>
+    </div>
+
+</body>
+</html>

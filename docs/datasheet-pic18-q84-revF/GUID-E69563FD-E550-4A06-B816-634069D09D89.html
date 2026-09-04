@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.5.2 OSCCON1 — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-BB1B1B0D-D1AE-465F-AA78-726C8A0D4DF6.html"/>
+<link rel="next" href="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7.html"/>
+<link rel="up" href="GUID-C1498132-5FBC-414F-AC9D-CFFF65E4C262.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-C1498132-5FBC-414F-AC9D-CFFF65E4C262.html">12.5 Register Definitions: Oscillator Module</a></li><li>12.5.2 OSCCON1</li></ol>
+  <div class="sib"><span>← <a href="GUID-BB1B1B0D-D1AE-465F-AA78-726C8A0D4DF6.html" rel="prev">ACTCON</a></span><span><a href="GUID-FDC0C30E-AC51-435A-BF28-A6424841F3A7.html" rel="next">OSCCON2</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-E69563FD-E550-4A06-B816-634069D09D89__GUID-633695F1-84C0-4B19-BA73-63670729298B" style="">12.5.2  OSCCON1</h1><section id="GUID-DEE8669F-FAAE-40F4-A4DD-AC450CB4358B" class="- topic/section reference/section sidsc-register/registerDescription ">Oscillator Control
+            Register 1<div class="- topic/note note notype note_notype endnote" id="GUID-E69563FD-E550-4A06-B816-634069D09D89__GUID-D0D384D8-5845-4B5F-B0D8-3164A16AA138" data-ofbid="GUID-E69563FD-E550-4A06-B816-634069D09D89__GUID-D0D384D8-5845-4B5F-B0D8-3164A16AA138"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-E69563FD-E550-4A06-B816-634069D09D89__OL_YPD_MPH_ZGB" data-ofbid="GUID-E69563FD-E550-4A06-B816-634069D09D89__OL_YPD_MPH_ZGB">
+                    <li class="- topic/li li" id="GUID-E69563FD-E550-4A06-B816-634069D09D89__GUID-E4B453BF-5348-4521-982F-7A08F5770B66" data-ofbid="GUID-E69563FD-E550-4A06-B816-634069D09D89__GUID-E4B453BF-5348-4521-982F-7A08F5770B66">The default value is
+                        determined by the RSTOSC Configuration bits. See the Reset Oscillator
+                        (RSTOSC) selection table for the RSTOSC selections.</li>
+                    <li class="- topic/li li" id="GUID-E69563FD-E550-4A06-B816-634069D09D89__GUID-EF6970D9-F00F-443D-975C-9F51EC67633A" data-ofbid="GUID-E69563FD-E550-4A06-B816-634069D09D89__GUID-EF6970D9-F00F-443D-975C-9F51EC67633A">If NOSC is written with a
+                        reserved value, the operation is ignored and neither NOSC nor NDIV is
+                        written.</li>
+                    <li class="- topic/li li" id="GUID-E69563FD-E550-4A06-B816-634069D09D89__GUID-FAE87533-FF3D-4C17-9F7C-550208CC84F5" data-ofbid="GUID-E69563FD-E550-4A06-B816-634069D09D89__GUID-FAE87533-FF3D-4C17-9F7C-550208CC84F5">When CSWEN =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, these bits are read-only and cannot be changed from
+                        the RSTOSC value.</li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>OSCCON1</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x0AD</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-E69563FD-E550-4A06-B816-634069D09D89__GUID-2B5619A8-1D59-41DF-B50D-66791A5BF852" data-ofbid="GUID-E69563FD-E550-4A06-B816-634069D09D89__GUID-2B5619A8-1D59-41DF-B50D-66791A5BF852"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-E69563FD-E550-4A06-B816-634069D09D89"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="3">NOSC[2:0]</td><td class="- topic/entry entry align-center colsep-0 rowsep-0" colspan="4">NDIV[3:0]</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">f</td><td class="- topic/entry entry colsep-0 rowsep-0">f</td><td class="- topic/entry entry colsep-0 rowsep-0">f</td><td class="- topic/entry entry colsep-0 rowsep-0">q</td><td class="- topic/entry entry colsep-0 rowsep-0">q</td><td class="- topic/entry entry colsep-0 rowsep-0">q</td><td class="- topic/entry entry colsep-0 rowsep-0">q</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-DEE8669F-FAAE-40F4-A4DD-AC450CB4358B" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-48A84485-060C-4613-A0AC-66D5C2971513__GUID-CE8E4600-163A-462C-BB7C-6C2578944FE6" id="GUID-48A84485-060C-4613-A0AC-66D5C2971513">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-48A84485-060C-4613-A0AC-66D5C2971513__GUID-CE8E4600-163A-462C-BB7C-6C2578944FE6" style=""> Bits 6:4 – NOSC[2:0] <span>
+            New Oscillator Source Request<strong class="+ topic/ph hi-d/b ph b"><sup class="+ topic/ph hi-d/sup ph sup">(<a class="- topic/xref xref" href="#GUID-E69563FD-E550-4A06-B816-634069D09D89__GUID-E4B453BF-5348-4521-982F-7A08F5770B66">1</a>,<a class="- topic/xref xref" href="#GUID-E69563FD-E550-4A06-B816-634069D09D89__GUID-EF6970D9-F00F-443D-975C-9F51EC67633A">2</a>,<a class="- topic/xref xref" href="#GUID-E69563FD-E550-4A06-B816-634069D09D89__GUID-FAE87533-FF3D-4C17-9F7C-550208CC84F5">3</a>)</sup></strong>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-48A84485-060C-4613-A0AC-66D5C2971513__GUID-0285DE39-570C-463A-A8D7-83F3A161EF38" data-ofbid="GUID-48A84485-060C-4613-A0AC-66D5C2971513__GUID-0285DE39-570C-463A-A8D7-83F3A161EF38">Requests a new
+                oscillator source per the <a class="- topic/xref xref" href="GUID-EE6A06F4-A04B-4D85-BA51-9C9047654FE5.html#GUID-EE6A06F4-A04B-4D85-BA51-9C9047654FE5__SECTION_ETP_PQT_DHB">NOSC/COSC Clock Source Selection
+                Table</a>.</section>
+            
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GHR_WSL_YGB__GUID-AB64006E-B51E-4223-845C-4633BACC60B1" id="GHR_WSL_YGB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GHR_WSL_YGB__GUID-AB64006E-B51E-4223-845C-4633BACC60B1" style=""> Bits 3:0 – NDIV[3:0] <span>New Divider
+            Selection Request</span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GHR_WSL_YGB__GUID-FC1C6BF7-54B0-49F4-B821-002B47D5F56E" data-ofbid="GHR_WSL_YGB__GUID-FC1C6BF7-54B0-49F4-B821-002B47D5F56E">Requests the new
+                postscaler division ratio per the <a class="- topic/xref xref" href="GUID-EE6A06F4-A04B-4D85-BA51-9C9047654FE5.html#GUID-EE6A06F4-A04B-4D85-BA51-9C9047654FE5__SECTION_SMN_1RT_DHB">NDIV/CDIV Clock Divider Selection
+                Table</a>.</section>
+            
+        </div>
+    </article>
+                
+                    The default value is
+                        determined by the RSTOSC Configuration bits. See the Reset Oscillator
+                        (RSTOSC) selection table for the RSTOSC selections.
+                    If NOSC is written with a
+                        reserved value, the operation is ignored and neither NOSC nor NDIV is
+                        written.
+                    When CSWEN =
+                            0, these bits are read-only and cannot be changed from
+                        the RSTOSC value.
+                
+            
+</body>
+</html>

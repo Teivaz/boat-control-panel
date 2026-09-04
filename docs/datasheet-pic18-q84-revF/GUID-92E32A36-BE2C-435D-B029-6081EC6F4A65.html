@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>9.5.3.3 Operations by FSRs on FSRs — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596.html"/>
+<link rel="next" href="GUID-31BCEB2D-AAEB-4339-9CB8-C9EE861A5F38.html"/>
+<link rel="up" href="GUID-24755C96-A501-40D0-B59F-23E781F10FCB.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-2BAB2696-5102-45C6-8EF2-0812A58B9EC7.html">9 Memory Organization</a></li><li><a href="GUID-D6ED03D2-3DA7-4418-9192-E7A83494ECF4.html">9.5 Data Addressing Modes</a></li><li><a href="GUID-24755C96-A501-40D0-B59F-23E781F10FCB.html">9.5.3 Indirect Addressing</a></li><li>9.5.3.3 Operations by FSRs on FSRs</li></ol>
+  <div class="sib"><span>← <a href="GUID-610BB08E-B599-41C7-AF6D-2C2253EA8596.html" rel="prev">FSR Registers and POSTINC, POSTDEC, PREINC and PLUSW</a></span><span><a href="GUID-31BCEB2D-AAEB-4339-9CB8-C9EE861A5F38.html" rel="next">Data Memory and the Extended Instruction Set</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-92E32A36-BE2C-435D-B029-6081EC6F4A65__GUID-4709CE0C-40E4-4CA7-9877-610288B7CBC3" style="">9.5.3.3 Operations by FSRs on FSRs</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-92E32A36-BE2C-435D-B029-6081EC6F4A65__ID-42129-00006604" data-ofbid="GUID-92E32A36-BE2C-435D-B029-6081EC6F4A65__ID-42129-00006604">Indirect Addressing operations that target other FSRs or virtual
+         registers represent special cases. For example, using an FSR to point to one of the virtual
+         registers will not result in successful operations. As a specific case, assume that
+         FSR0H:FSR0L contains the address of INDF1. Attempts to read the value of the INDF1 using
+         INDF0 as an operand will return 00h. Attempts to write to INDF1 using INDF0 as the operand
+         will result in a <code class="+ topic/ph pr-d/codeph ph codeph">NOP</code>. </p>
+      <p class="- topic/p p" id="GUID-92E32A36-BE2C-435D-B029-6081EC6F4A65__ID-42129-00006607" data-ofbid="GUID-92E32A36-BE2C-435D-B029-6081EC6F4A65__ID-42129-00006607">On the other hand, using the virtual registers to write to an FSR
+         pair may not occur as planned. In these cases, the value will be written to the FSR pair
+         but without any incrementing or decrementing. Thus, writing to either the INDF2 or POSTDEC2
+         register will write the same value to FSR2H:FSR2L.</p>
+      <p class="- topic/p p" id="GUID-92E32A36-BE2C-435D-B029-6081EC6F4A65__ID-42129-00006608" data-ofbid="GUID-92E32A36-BE2C-435D-B029-6081EC6F4A65__ID-42129-00006608">Since the FSRs are physical registers mapped in the SFR space, they
+         can be manipulated through all direct operations. Users need to proceed cautiously when
+         working on these registers, particularly if their code uses Indirect Addressing.</p>
+      <p class="- topic/p p" id="GUID-92E32A36-BE2C-435D-B029-6081EC6F4A65__ID-42129-00006609" data-ofbid="GUID-92E32A36-BE2C-435D-B029-6081EC6F4A65__ID-42129-00006609">Similarly, operations by Indirect Addressing are permitted on all
+         other SFRs. Users need to exercise the appropriate caution that they do not inadvertently
+         change settings that might affect the operation of the device.</p>
+   </div>
+
+</body>
+</html>

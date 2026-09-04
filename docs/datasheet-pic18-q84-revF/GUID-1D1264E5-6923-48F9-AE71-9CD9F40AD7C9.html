@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>47.2 Extended Instruction Set — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-54799049-3B54-4BCD-BAE5-3CE57D3A4720.html"/>
+<link rel="next" href="GUID-49603BDB-3066-43B9-B233-59DDA6BCA79C.html"/>
+<link rel="up" href="GUID-136E7F45-6464-4E35-80B5-A6E3A67AD53F.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-136E7F45-6464-4E35-80B5-A6E3A67AD53F.html">47 Instruction Set Summary</a></li><li>47.2 Extended Instruction Set</li></ol>
+  <div class="sib"><span>← <a href="GUID-54799049-3B54-4BCD-BAE5-3CE57D3A4720.html" rel="prev">Standard Instruction Set </a></span><span><a href="GUID-49603BDB-3066-43B9-B233-59DDA6BCA79C.html" rel="next">Extended Instruction Syntax</a> →</span></div>
+</nav>
+
+	<h1 class="- topic/title title topictitle1" id="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__GUID-B6F0C055-E356-4D7E-BF3E-EB48161C7F7D" style="">47.2 Extended Instruction Set</h1>
+	<div class="- topic/body concept/conbody body conbody">
+		<p class="- topic/p p" id="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-00003706" data-ofbid="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-00003706">In addition to the standard instruction set, PIC18 devices also provide
+			an optional extension to the core CPU functionality. The added features include additional
+			instructions that augment Indirect and Indexed Addressing operations and the implementation of
+			Indexed Literal Offset Addressing mode for many of the standard PIC18 instructions.</p>
+		<p class="- topic/p p" id="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-0000370B" data-ofbid="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-0000370B">The additional features of the extended instruction set are disabled by
+			default. To enable them, users must set the XINST Configuration bit.</p>
+		<p class="- topic/p p" id="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-0000370C" data-ofbid="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-0000370C">The instructions in the extended set can all be classified as literal
+			operations, which either manipulate the File Select registers or use them for Indexed
+			Addressing. Two of the standard instructions, <code class="+ topic/ph pr-d/codeph ph codeph">ADDFSR</code> and
+				<code class="+ topic/ph pr-d/codeph ph codeph">SUBFSR</code>, each have an additional special instantiation for using
+			FSR2 as extended instructions. These versions (<code class="+ topic/ph pr-d/codeph ph codeph">ADDULNK</code> and
+				<code class="+ topic/ph pr-d/codeph ph codeph">SUBULNK</code>) allow for automatic return after execution.</p>
+		<p class="- topic/p p" id="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-00003711" data-ofbid="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-00003711">The extended instructions are specifically implemented to optimize
+			re-entrant program code (that is, code that is recursive or that uses a software stack) written
+			in high-level languages, particularly C. Among other things, they allow users working in
+			high-level languages to perform certain operations on data structures more efficiently. These
+			include:</p>
+		<ul class="- topic/ul ul">
+			<li class="- topic/li li" id="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-00003712" data-ofbid="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-00003712">Dynamic allocation and deallocation of software stack space when
+				entering and leaving subroutines</li>
+			<li class="- topic/li li" id="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-00003714" data-ofbid="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-00003714">Function pointer invocation</li>
+			<li class="- topic/li li" id="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-00003716" data-ofbid="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-00003716">Software Stack Pointer manipulation</li>
+			<li class="- topic/li li" id="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-00003718" data-ofbid="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-00003718">Manipulation of variables located in a software stack</li>
+		</ul>
+		<p class="- topic/p p" id="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-0000371A" data-ofbid="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-0000371A">A summary of the instructions in the extended instruction set is
+provided in <a class="- topic/xref xref" href="GUID-49603BDB-3066-43B9-B233-59DDA6BCA79C.html">Extended
+Instruction Syntax</a>. Detailed descriptions are provided in <a class="- topic/xref xref" href="GUID-107198FB-0958-40E8-BFC7-F00F3E1A2661.html">Extended Instruction Set</a>. The
+opcode field descriptions in <a class="- topic/xref xref" href="GUID-F578D6BE-40F4-46B3-AC67-E077BAD23F94.html#GUID-F578D6BE-40F4-46B3-AC67-E077BAD23F94__ID-42120-00000066"><span>Table 47-1</span></a> apply to both the standard and extended PIC18 instruction sets.</p>
+		<div class="- topic/note note important note_important" id="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-00003724" data-ofbid="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__ID-42120-00003724"><span class="note__title">Important:</span> 
+<ul class="- topic/ul ul" id="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__UL_Y4X_413_MXB" data-ofbid="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__UL_Y4X_413_MXB">
+<li class="- topic/li li" id="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__GUID-DFED3C0C-E50C-4CBF-92C7-F62E923E56DC" data-ofbid="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__GUID-DFED3C0C-E50C-4CBF-92C7-F62E923E56DC">The instruction set extension and the Indexed Literal Offset Addressing mode were designed for
+optimizing applications written in C; the user may likely never use these instructions directly in
+assembler. The syntax for these commands is provided as a reference for users who may be reviewing
+code that has been generated by a compiler.</li>
+<li class="- topic/li li" id="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__GUID-59C12BC0-2EA6-4F0D-AC19-4BB8DB5096CD" data-ofbid="GUID-1D1264E5-6923-48F9-AE71-9CD9F40AD7C9__GUID-59C12BC0-2EA6-4F0D-AC19-4BB8DB5096CD">Enabling the PIC18 instruction set extension may cause legacy applications to behave erratically
+or fail entirely. Refer to <a class="- topic/xref xref" href="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672.html">Byte-Oriented and Bit-Oriented Instructions in Indexed Literal Offset Mode</a> for details.</li>
+</ul>
+</div>
+	</div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-49603BDB-3066-43B9-B233-59DDA6BCA79C.html">47.2.1 Extended Instruction Syntax</a></li><li><a href="GUID-107198FB-0958-40E8-BFC7-F00F3E1A2661.html">47.2.2 Extended Instruction Set</a></li><li><a href="GUID-2B71EC94-2B31-4545-93D8-CB3D5AD16672.html">47.2.3 Byte-Oriented and Bit-Oriented Instructions in Indexed Literal Offset Mode</a></li><li><a href="GUID-1CCF23CB-4FA5-4227-9302-ECA4AA20708C.html">47.2.4 Considerations when Enabling the Extended Instruction Set</a></li><li><a href="GUID-1FA544A4-1A4F-4C34-A418-28CAE9CDA5AE.html">47.2.5 Special Considerations with Microchip MPLAB® IDE Tools</a></li></ul>
+</nav>
+</body>
+</html>

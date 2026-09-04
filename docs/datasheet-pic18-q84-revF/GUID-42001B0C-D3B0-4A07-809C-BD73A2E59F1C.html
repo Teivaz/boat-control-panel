@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.3 UTMR Prescaler — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-1B6BBB62-379D-4C37-91B0-0834ABA11866.html"/>
+<link rel="next" href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html"/>
+<link rel="up" href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li>28.3 UTMR Prescaler</li></ol>
+  <div class="sib"><span>← <a href="GUID-1B6BBB62-379D-4C37-91B0-0834ABA11866.html" rel="prev">Clock Source Selection</a></span><span><a href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html" rel="next">UTMR Operation</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-42001B0C-D3B0-4A07-809C-BD73A2E59F1C__GUID-7BBD207F-1470-46F4-AB38-F347EE695912" style="">28.3 UTMR Prescaler</h1>
+    <div class="- topic/body body">
+        <p class="- topic/p p">The UTMR module has a fully programmable 8-bit prescaler, allowing division of the clock
+            input by 1 to 256. The prescaler register <a class="- topic/xref xref" href="GUID-BEC22E8B-FBE2-4D4F-B47E-D928DD664431.html" title="TUxyPS">TUxyPS</a> is
+            programmed with the desired prescaler value minus one. For example, for a 10:1 prescaler
+            value, the TUxyPS register is loaded with <code class="+ topic/ph pr-d/codeph ph codeph">0x09</code>. The internal prescaler
+            counter is not directly readable or writable; however, the prescaler counter is cleared
+            upon a Reset of the TUxyTMR counter register. See <a class="- topic/xref xref" href="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB.html#GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__FIG_C5J_2TP_WLB"><span>Figure 28-4</span></a> and <a class="- topic/xref xref" href="GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB.html#GUID-75CBD855-DC91-48B3-BE8D-D5E44D7A9ECB__GUID-E3341B35-113B-4987-8234-18594B978BAA"><span>Figure 28-5</span></a> for examples of how the counter timing works with respect to a
+            prescaler.</p>
+    </div>
+
+</body>
+</html>

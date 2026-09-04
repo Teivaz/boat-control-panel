@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>29 CCP - Capture/Compare/PWM Module — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-C47966E9-1F0D-4087-998F-4D2B84A4E87E.html"/>
+<link rel="next" href="GUID-67CCFC50-2FE7-420F-A27D-98C128458F6D.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li>29 CCP - Capture/Compare/PWM Module</li></ol>
+  <div class="sib"><span>← <a href="GUID-C47966E9-1F0D-4087-998F-4D2B84A4E87E.html" rel="prev">Register Summary - Universal Timer</a></span><span><a href="GUID-67CCFC50-2FE7-420F-A27D-98C128458F6D.html" rel="next">CCP Module Configuration</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96__GUID-E22EBEBF-A456-4D82-A618-0AB42771CBD9" style="">29 CCP - Capture/Compare/PWM Module</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96__ID-42109-00000004" data-ofbid="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96__ID-42109-00000004">The Capture/Compare/PWM module is a peripheral that allows the user
+         to time and control different events and to generate Pulse-Width Modulation (PWM) signals.
+         In Capture mode, the peripheral allows the timing of the duration of an event. The Compare
+         mode allows the user to trigger an external event when a predetermined amount of time has
+         expired. The PWM mode can generate Pulse-Width Modulated signals of varying frequency and
+         duty cycle.</p>
+      <p class="- topic/p p" id="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96__ID-42109-00000005" data-ofbid="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96__ID-42109-00000005">Each individual CCP module can select the timer source that controls
+         the module. The default timer selection is Timer1 when using Capture/Compare mode and
+         Timer2 when using PWM mode in the CCPx module.</p>
+      <p class="- topic/p p" id="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96__ID-42109-0000000E" data-ofbid="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96__ID-42109-0000000E">Note that the Capture/Compare mode operation is described with
+         respect to Timer1 and the PWM mode operation is described with respect to Timer2 in the
+         following sections.</p>
+      <p class="- topic/p p" id="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96__ID-42109-0000000F" data-ofbid="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96__ID-42109-0000000F">The Capture and Compare functions are identical for all CCP modules.</p>
+      <div class="- topic/note note important note_important" id="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96__GUID-6B5C83F4-3E12-4192-9734-9505EADED685" data-ofbid="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96__GUID-6B5C83F4-3E12-4192-9734-9505EADED685"><span class="note__title">Important:</span> In devices with more
+         than one CCP module, it is very important to pay close attention to the register names
+         used. Throughout this section, the prefix “CCPx” is used as a generic replacement for
+         specific numbering. A number placed where the “x” is in the prefix is used to distinguish
+         between separate modules. For example, CCP1CON and CCP2CON control the same operational
+         aspects of two completely different CCP modules.</div>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-67CCFC50-2FE7-420F-A27D-98C128458F6D.html">29.1 CCP Module Configuration</a></li><li><a href="GUID-839CC945-31E4-4AE3-B8C8-3E251FCB7063.html">29.2 Capture Mode</a></li><li><a href="GUID-E68F5F81-0619-4A5F-BC53-04F818F40944.html">29.3 Compare Mode</a></li><li><a href="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE.html">29.4 PWM Overview</a></li><li><a href="GUID-8D14290C-571C-49C4-8081-F36B06EA042B.html">29.5 Register Definitions: CCP Control</a></li><li><a href="GUID-B165BBF0-F3C4-4326-A3CE-9551C762BC04.html">29.6 Register Summary - CCP Control</a></li></ul>
+</nav>
+</body>
+</html>

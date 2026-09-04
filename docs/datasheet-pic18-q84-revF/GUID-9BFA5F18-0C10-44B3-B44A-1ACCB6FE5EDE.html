@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>29.4 PWM Overview — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-9DB92477-1080-40DF-BA49-D2D696DD20B2.html"/>
+<link rel="next" href="GUID-C148635E-2BAC-4402-A159-F2C3B83BB78A.html"/>
+<link rel="up" href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-4E998C50-4E72-4BAB-AB7C-1D829B0B7C96.html">29 CCP - Capture/Compare/PWM Module</a></li><li>29.4 PWM Overview</li></ol>
+  <div class="sib"><span>← <a href="GUID-9DB92477-1080-40DF-BA49-D2D696DD20B2.html" rel="prev">Compare During Sleep</a></span><span><a href="GUID-C148635E-2BAC-4402-A159-F2C3B83BB78A.html" rel="next">Standard PWM Operation</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE__GUID-964EA4A2-CACD-40F2-80A1-EBBEFECD0A6B" style="">29.4 PWM Overview</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE__ID-42109-0000068D" data-ofbid="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE__ID-42109-0000068D">Pulse-Width Modulation (PWM) is a scheme that controls power to a
+         load by switching quickly between fully ON and fully OFF states. The PWM signal resembles a
+         square wave where the high portion of the signal is considered the ON state and the low
+         portion of the signal is considered the OFF state. The high portion, also known as the
+         pulse width, can vary in time and is defined in steps. A larger number of steps applied,
+         which lengthens the pulse width, also supplies more power to the load. Lowering the number
+         of steps applied, which shortens the pulse width, supplies less power. The PWM period is
+         defined as the duration of one complete cycle or the total amount of ON and OFF time
+         combined.</p>
+      <p class="- topic/p p" id="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE__ID-42109-0000068E" data-ofbid="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE__ID-42109-0000068E">PWM resolution defines the maximum number of steps that can be
+         present in a single PWM period. A higher resolution allows for more precise control of the
+         power applied to the load.</p>
+      <p class="- topic/p p" id="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE__ID-42109-0000068F" data-ofbid="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE__ID-42109-0000068F">The term duty cycle describes the proportion of the ON time to the
+         OFF time and is expressed in percentages, where 0% is fully OFF and 100% is fully ON. A
+         lower duty cycle corresponds to less power applied and a higher duty cycle corresponds to
+         more power applied. The figure below shows a typical waveform of the PWM signal.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE__ID-42109-000006AA" data-ofbid="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE__ID-42109-000006AA"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 29-3. <span id="GUID-9BFA5F18-0C10-44B3-B44A-1ACCB6FE5EDE__GUID-BB9ECDB3-7B24-465C-8CDB-02715342AC1A" class="fig--title">CCP PWM Output Signal</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-D8E4AE64-19C2-4AE0-98F4-C8791E7DB6AF-high.pdf#toolbar=1" width="450" height="195.7142857142857"></iframe></span>
+      </figure>
+   </div>
+
+<nav class="children"><strong>Subtopics</strong>
+  <ul><li><a href="GUID-C148635E-2BAC-4402-A159-F2C3B83BB78A.html">29.4.1 Standard PWM Operation</a></li><li><a href="GUID-E22640C2-4F4F-46B2-BA30-26A4A289A935.html">29.4.2 Setup for PWM Operation</a></li><li><a href="GUID-51BE6410-F96B-4539-9DAF-342E747FBF2A.html">29.4.3 Timer2 Timer Resource</a></li><li><a href="GUID-21367A4C-87E5-4D72-97BB-0BE2A5179C03.html">29.4.4 PWM Period</a></li><li><a href="GUID-BA8D82BC-8F34-44F8-8E88-A871EAB5E90C.html">29.4.5 PWM Duty Cycle</a></li><li><a href="GUID-945E0F3E-3F33-4C8F-B057-B2956F4FA16B.html">29.4.6 PWM Resolution</a></li><li><a href="GUID-288FE082-A611-45C4-B82E-939C3CCF8003.html">29.4.7 Operation in Sleep Mode</a></li><li><a href="GUID-8D9214B7-9FDC-43D6-97CA-BCD32352E840.html">29.4.8 Changes in System Clock Frequency</a></li><li><a href="GUID-4C47505D-19F9-4BB5-A6A2-855FF207A741.html">29.4.9 Effects of Reset</a></li></ul>
+</nav>
+</body>
+</html>

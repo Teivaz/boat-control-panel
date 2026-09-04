@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>12.5.9 FSCMCON — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-49394B12-4B55-44B1-85A7-19080285149B.html"/>
+<link rel="next" href="GUID-C0C93B7C-6907-4D89-BA05-576AC1E7FB04.html"/>
+<link rel="up" href="GUID-C1498132-5FBC-414F-AC9D-CFFF65E4C262.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-1296CC8A-36B8-4631-8B05-DA41D49D4AC4.html">12 OSC - Oscillator Module (With Fail-Safe Clock Monitor)</a></li><li><a href="GUID-C1498132-5FBC-414F-AC9D-CFFF65E4C262.html">12.5 Register Definitions: Oscillator Module</a></li><li>12.5.9 FSCMCON</li></ol>
+  <div class="sib"><span>← <a href="GUID-49394B12-4B55-44B1-85A7-19080285149B.html" rel="prev">OSCEN</a></span><span><a href="GUID-C0C93B7C-6907-4D89-BA05-576AC1E7FB04.html" rel="next">Register Summary - Oscillator Module</a> →</span></div>
+</nav>
+<h1 class="- topic/title reference/title sidsc-register/registerName title registerName topictitle1" id="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-2EFB5757-9394-49C3-869A-C092093DFB4F" style="">12.5.9  FSCMCON</h1><section id="GUID-123B60A7-4143-4CCC-AE0D-39FEB55C43D5" class="- topic/section reference/section sidsc-register/registerDescription ">Fail-Safe Clock Monitor
+            Control and Status Register<div class="- topic/note note notype note_notype endnote" id="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-9D098C21-D85C-4D46-93E0-E4F2C24B55A2" data-ofbid="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-9D098C21-D85C-4D46-93E0-E4F2C24B55A2"><span class="note__title">Note:</span> 
+                <ol class="- topic/ol ol" id="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-BF030E33-94C0-49A4-8435-280F469A0450" data-ofbid="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-BF030E33-94C0-49A4-8435-280F469A0450">
+                    <li class="- topic/li li" id="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-B73C9EFA-CF05-4EB0-B752-ED0BEF7263EA" data-ofbid="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-B73C9EFA-CF05-4EB0-B752-ED0BEF7263EA">This bit is used to
+                        demonstrate that FSCM can detect clock failure; the bit must be cleared for
+                        normal operation.</li>
+                    <li class="- topic/li li" id="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-2C3BCC86-B54E-4E2E-90BC-8213941BA44C" data-ofbid="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-2C3BCC86-B54E-4E2E-90BC-8213941BA44C">This bit will not be cleared
+                        by hardware upon clock recovery; the bit must be cleared by the user.</li>
+                </ol>
+            </div></section><table class="mchip-registerproperties"><tbody><tr><td style="font-weight:bold;">Name: </td><td>FSCMCON</td></tr><tr><td style="font-weight:bold;">Address: </td><td>0x458</td></tr></tbody></table><p><p class="- topic/p reference/p sidsc-register/registerBriefDescription p registerBriefDescription" id="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-B31E9157-67A9-4ED2-9468-B251A799CB16" data-ofbid="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-B31E9157-67A9-4ED2-9468-B251A799CB16"></p></p><article class="- topic/topic reference/reference topic reference nested1 register" aria-labelledby="ariaid-title2" id="GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC"><div class="- topic/body reference/refbody body refbody"><div class="table-container"><table class="- topic/table table register frame-none" data-cols="10"><caption></caption><colgroup><col/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col style="width:12.5%"/><col/></colgroup><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Bit </td><td class="- topic/entry entry colsep-0 rowsep-0">7</td><td class="- topic/entry entry colsep-0 rowsep-0">6</td><td class="- topic/entry entry colsep-0 rowsep-0">5</td><td class="- topic/entry entry colsep-0 rowsep-0">4</td><td class="- topic/entry entry colsep-0 rowsep-0">3</td><td class="- topic/entry entry colsep-0 rowsep-0">2</td><td class="- topic/entry entry colsep-0 rowsep-0">1</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry reserved colsep-0 rowsep-0"> </td><td class="- topic/entry entry align-center colsep-0 rowsep-0">FSCMSFI</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">FSCMSEV</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">FSCMPFI</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">FSCMPEV</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">FSCMFFI</td><td class="- topic/entry entry align-center colsep-0 rowsep-0">FSCMFEV</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0">Access </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0">R/W</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr><tr class="- topic/row"><td class="- topic/entry entry reset colsep-0 rowsep-0">Reset </td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0"></td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0">0</td><td class="- topic/entry entry colsep-0 rowsep-0"> </td></tr></tbody></table></div></div></article><section id="GUID-123B60A7-4143-4CCC-AE0D-39FEB55C43D5" class="- topic/section reference/section sidsc-register/registerDescription "></section><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="GUID-4EDD23AC-DFCB-404C-B688-CA4F651DAC64__GUID-FC69B7DA-3ECF-4434-9FC3-4DEC2B41DAAC" id="GUID-4EDD23AC-DFCB-404C-B688-CA4F651DAC64">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="GUID-4EDD23AC-DFCB-404C-B688-CA4F651DAC64__GUID-FC69B7DA-3ECF-4434-9FC3-4DEC2B41DAAC" style=""> Bit 5 – FSCMSFI <span>
+            SOSC Fail-Safe Clock Monitor Fault Injection<sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b"><a class="- topic/xref xref" href="#GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-B73C9EFA-CF05-4EB0-B752-ED0BEF7263EA">(1)</a></strong></sup>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="GUID-4EDD23AC-DFCB-404C-B688-CA4F651DAC64__GUID-61398436-36CC-49C5-9C33-7227E12FE268" data-ofbid="GUID-4EDD23AC-DFCB-404C-B688-CA4F651DAC64__GUID-61398436-36CC-49C5-9C33-7227E12FE268"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-4EDD23AC-DFCB-404C-B688-CA4F651DAC64__GUID-8CB50633-7AAB-45EB-835D-894F70F6BE40">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-4EDD23AC-DFCB-404C-B688-CA4F651DAC64__GUID-00273C89-9A40-4C0D-9C12-38D749FFCB8D">SOSC
+                        FSCM clock input is blocked; FSCM will time-out</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="GUID-4EDD23AC-DFCB-404C-B688-CA4F651DAC64__GUID-DF6613E0-ADB1-407A-B793-964AE4C9DB4A">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="GUID-4EDD23AC-DFCB-404C-B688-CA4F651DAC64__GUID-86D09837-9A3E-44D3-8593-7E3B7E19DFFB">SOSC
+                        FSCM clock input is enabled; FSCM functions as
+                        indicated</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="DBC_JBQ_BKB__GUID-08089107-504A-4F82-BD4E-3EA4ECCAADC9" id="DBC_JBQ_BKB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="DBC_JBQ_BKB__GUID-08089107-504A-4F82-BD4E-3EA4ECCAADC9" style=""> Bit 4 – FSCMSEV <span>
+            SOSC Fail-Safe Clock Monitor Status<sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b"><a class="- topic/xref xref" href="#GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-2C3BCC86-B54E-4E2E-90BC-8213941BA44C">(2)</a></strong></sup>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="DBC_JBQ_BKB__GUID-08F5A1DF-EC66-43C7-9E4B-09887909E45C" data-ofbid="DBC_JBQ_BKB__GUID-08F5A1DF-EC66-43C7-9E4B-09887909E45C"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="DBC_JBQ_BKB__GUID-7518E70F-EBDC-4BB1-93F2-AC58C4E527ED">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="DBC_JBQ_BKB__GUID-0E894C8B-6577-4860-B194-188E81A544E1">SOSC
+                        clock showed a failure</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="DBC_JBQ_BKB__GUID-CBBF7913-5B32-4EB6-B9B9-13C88F284A4A">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="DBC_JBQ_BKB__GUID-9C7742E1-112F-4188-B0A4-9B3030DF4E5C">FSCM is
+                        detecting SOSC input clocks, or the bit was cleared by the
+                        user</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_FXT_VCQ_BKB__GUID-B1020B9D-81F2-4F77-AD2C-7F8E2F9BEA44" id="BITFIELD_FXT_VCQ_BKB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_FXT_VCQ_BKB__GUID-B1020B9D-81F2-4F77-AD2C-7F8E2F9BEA44" style=""> Bit 3 – FSCMPFI <span>
+            Primary Oscillator Fail-Safe Clock Monitor Fault Injection<sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b"><a class="- topic/xref xref" href="#GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-B73C9EFA-CF05-4EB0-B752-ED0BEF7263EA">(1)</a></strong></sup>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_FXT_VCQ_BKB__BITFIELDDESCRIPTION_GXT_VCQ_BKB" data-ofbid="BITFIELD_FXT_VCQ_BKB__BITFIELDDESCRIPTION_GXT_VCQ_BKB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_FXT_VCQ_BKB__BITFIELDVALUES_IXT_VCQ_BKB" data-ofbid="BITFIELD_FXT_VCQ_BKB__BITFIELDVALUES_IXT_VCQ_BKB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_FXT_VCQ_BKB__GUID-D130BD40-3861-4A37-8EA5-FADD786C13BA">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_FXT_VCQ_BKB__GUID-4FB46BC7-6114-440D-B755-58D20E895F16">Primary Oscillator FSCM clock input is blocked; FSCM
+                        will time-out</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_FXT_VCQ_BKB__GUID-9300F34E-F54D-4E81-B3C9-BA036F54CEF1">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_FXT_VCQ_BKB__GUID-102F95B9-3BB5-4799-AACD-73EC0373F24C">Primary Oscillator FSCM clock input is enabled; FSCM
+                        functions as indicated</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_ZX3_YCQ_BKB__GUID-6D037762-1331-4E3F-85CC-6C08699EF251" id="BITFIELD_ZX3_YCQ_BKB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_ZX3_YCQ_BKB__GUID-6D037762-1331-4E3F-85CC-6C08699EF251" style=""> Bit 2 – FSCMPEV <span>
+            Primary Oscillator Fail-Safe Clock Monitor Status<sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b"><a class="- topic/xref xref" href="#GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-2C3BCC86-B54E-4E2E-90BC-8213941BA44C">(2)</a></strong></sup>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_ZX3_YCQ_BKB__BITFIELDDESCRIPTION_AY3_YCQ_BKB" data-ofbid="BITFIELD_ZX3_YCQ_BKB__BITFIELDDESCRIPTION_AY3_YCQ_BKB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_ZX3_YCQ_BKB__BITFIELDVALUES_CY3_YCQ_BKB" data-ofbid="BITFIELD_ZX3_YCQ_BKB__BITFIELDVALUES_CY3_YCQ_BKB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_ZX3_YCQ_BKB__GUID-E9478A6A-127A-4DF4-825E-240C049DFB9A">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_ZX3_YCQ_BKB__GUID-5967AD62-436D-45EF-AD2B-66D7F633C9B9">Primary
+                        Oscillator clock showed a failure</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_ZX3_YCQ_BKB__GUID-DD3848C6-8AD1-480F-B3D9-95AB2B08DF65">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_ZX3_YCQ_BKB__GUID-3F5949B3-DEDC-4C0D-873B-DF242E6A063D">FSCM is
+                        detecting primary oscillator input clocks, or the bit was cleared by the
+                        user</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_TTW_CDQ_BKB__GUID-099D6FAF-C690-4390-869F-1BD503F92464" id="BITFIELD_TTW_CDQ_BKB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_TTW_CDQ_BKB__GUID-099D6FAF-C690-4390-869F-1BD503F92464" style=""> Bit 1 – FSCMFFI <span>
+            FOSC Fail-Safe Clock Monitor Fault Injection<sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b"><a class="- topic/xref xref" href="#GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-B73C9EFA-CF05-4EB0-B752-ED0BEF7263EA">(1)</a></strong></sup>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_TTW_CDQ_BKB__BITFIELDDESCRIPTION_UTW_CDQ_BKB" data-ofbid="BITFIELD_TTW_CDQ_BKB__BITFIELDDESCRIPTION_UTW_CDQ_BKB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_TTW_CDQ_BKB__BITFIELDVALUES_WTW_CDQ_BKB" data-ofbid="BITFIELD_TTW_CDQ_BKB__BITFIELDVALUES_WTW_CDQ_BKB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_TTW_CDQ_BKB__GUID-B6C068EA-69E5-4A96-AEF4-D518FE2A1680">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_TTW_CDQ_BKB__GUID-6572D637-5255-4DCA-A3CE-5DF455A0BEED">F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> FSCM clock input is blocked; FSCM will
+                        time-out</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_TTW_CDQ_BKB__GUID-93B03B55-77C0-4860-B588-EA4599302485">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_TTW_CDQ_BKB__GUID-F1407F44-48F8-4667-A1D6-8A329413DF03">F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> FSCM clock input is enabled; FSCM functions as
+                        indicated</td>
+                </tr></tbody></table>
+        </div>
+    </article><article class="- topic/topic reference/reference sidsc-bitField/bitField topic reference bitField nested1" aria-labelledby="BITFIELD_XTW_CDQ_BKB__GUID-55E96E2E-BA30-4F76-AAD4-7929FD2F6285" id="BITFIELD_XTW_CDQ_BKB">
+        <h2 class="- topic/title reference/title sidsc-bitField/bitFieldName title bitFieldName topictitle2" id="BITFIELD_XTW_CDQ_BKB__GUID-55E96E2E-BA30-4F76-AAD4-7929FD2F6285" style=""> Bit 0 – FSCMFEV <span>
+            FOSC Fail-Safe Clock Monitor Status<sup class="+ topic/ph hi-d/sup ph sup"><strong class="+ topic/ph hi-d/b ph b"><a class="- topic/xref xref" href="#GUID-C79AA5AD-ED51-460C-A23A-F30BB589BDDC__GUID-2C3BCC86-B54E-4E2E-90BC-8213941BA44C">(2)</a></strong></sup>
+        </span></h2>
+        
+        <div class="- topic/body reference/refbody sidsc-bitField/bitFieldBody body refbody bitFieldBody">
+            <section class="- topic/section reference/section sidsc-bitField/bitFieldDescription section bitFieldDescription" id="BITFIELD_XTW_CDQ_BKB__BITFIELDDESCRIPTION_YTW_CDQ_BKB" data-ofbid="BITFIELD_XTW_CDQ_BKB__BITFIELDDESCRIPTION_YTW_CDQ_BKB"></section>
+            
+            <table class="- topic/simpletable dataTableDomain/dataTable sidsc-bitField/bitFieldValues simpletable dataTable bitFieldValues" id="BITFIELD_XTW_CDQ_BKB__BITFIELDVALUES_A5W_CDQ_BKB" data-ofbid="BITFIELD_XTW_CDQ_BKB__BITFIELDVALUES_A5W_CDQ_BKB"><colgroup><col style="width:50%"/><col style="width:50%"/></colgroup><thead><tr><th class="- topic/stentry stentry">Value</th><th class="- topic/stentry stentry">Description</th></tr></thead><tbody><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_XTW_CDQ_BKB__GUID-572622CD-9D45-497C-94D9-2C08D61F275D">1</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_XTW_CDQ_BKB__GUID-7DFD66F3-10A7-434B-8AB0-E3B775860770">F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> clock showed a failure</td>
+                </tr><tr class="- topic/strow dataTableDomain/dataRow sidsc-bitField/bitFieldValueGroup strow dataRow bitFieldValueGroup">
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValue stentry dataEntry bitFieldValue" id="BITFIELD_XTW_CDQ_BKB__GUID-04CAEE0E-FB0A-470B-8365-829E71734070">0</td>
+                    <td class="- topic/stentry dataTableDomain/dataEntry sidsc-bitField/bitFieldValueDescription stentry dataEntry bitFieldValueDescription" id="BITFIELD_XTW_CDQ_BKB__GUID-AAED35AE-84D6-4CC6-9223-29224427B59C">FSCM is
+                        detecting F<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub> input clocks, or the bit was cleared by the
+                        user</td>
+                </tr></tbody></table>
+        </div>
+    </article>
+                
+                    This bit is used to
+                        demonstrate that FSCM can detect clock failure; the bit must be cleared for
+                        normal operation.
+                    This bit will not be cleared
+                        by hardware upon clock recovery; the bit must be cleared by the user.
+                
+            
+</body>
+</html>

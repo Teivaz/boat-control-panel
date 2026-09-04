@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>15.5.1 CLRWDT Considerations (Windowed Mode) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3.html"/>
+<link rel="next" href="GUID-44255F7A-1E27-49A8-A86D-B86C0D221594.html"/>
+<link rel="up" href="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-3FCA7A4B-FA75-4BC0-B0F5-B8AA689D6C80.html">15 WWDT - Windowed Watchdog Timer</a></li><li><a href="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3.html">15.5 Clearing the Watchdog Timer</a></li><li>15.5.1 CLRWDT Considerations (Windowed Mode)</li></ol>
+  <div class="sib"><span>← <a href="GUID-4D774DEE-4F02-490F-8902-AF67FA6C22C3.html" rel="prev">Clearing the Watchdog Timer</a></span><span><a href="GUID-44255F7A-1E27-49A8-A86D-B86C0D221594.html" rel="next">Operation During Sleep</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-55AA16B1-076D-44E3-917D-785B1C4788C6__GUID-7905460B-6C46-49FF-9BB0-88085FFF18D7" style="">15.5.1 CLRWDT Considerations (Windowed Mode)</h1>
+<div class="- topic/body body">
+        <p class="- topic/p p">When in Windowed mode, the WWDT must be armed before a
+                                <code class="+ topic/ph pr-d/codeph ph codeph">CLRWDT</code> instruction will clear the timer. This is
+                        performed by reading the <a class="- topic/xref xref" href="GUID-928F7E9B-3D02-40EC-AB34-06E396FC2D3D.html#GUID-928F7E9B-3D02-40EC-AB34-06E396FC2D3D" title="WDTCON0">WDTCON0</a> register. Executing a
+                                <code class="+ topic/ph pr-d/codeph ph codeph">CLRWDT</code> instruction without performing such an
+                        arming action will trigger a window violation regardless of whether the
+                        window is open or not. See <a class="- topic/xref xref" href="GUID-44255F7A-1E27-49A8-A86D-B86C0D221594.html#GUID-44255F7A-1E27-49A8-A86D-B86C0D221594__ID-42142-0000046B"><span>Table 15-2</span></a> for more information.</p>
+    </div>
+
+</body>
+</html>

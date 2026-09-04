@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>17.2.2 Wake-Up Using Interrupts — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-236895B1-6931-4C63-937F-02D53E8A1158.html"/>
+<link rel="next" href="GUID-DBACCDFF-E710-403E-9D4E-23395C209DFB.html"/>
+<link rel="up" href="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-80B84C9D-CAA5-4196-8EA2-9C7F1B12C2C0.html">17 Power-Saving Modes</a></li><li><a href="GUID-A7E5098A-F957-4A2B-8333-1581D7A40EEC.html">17.2 Sleep Mode</a></li><li>17.2.2 Wake-Up Using Interrupts</li></ol>
+  <div class="sib"><span>← <a href="GUID-236895B1-6931-4C63-937F-02D53E8A1158.html" rel="prev">Wake-Up from Sleep</a></span><span><a href="GUID-DBACCDFF-E710-403E-9D4E-23395C209DFB.html" rel="next">Low-Power Sleep Mode</a> →</span></div>
+</nav>
+
+   <h1 class="- topic/title title topictitle1" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__GUID-272F7EBB-09A6-4A07-A70D-521050645828" style="">17.2.2 Wake-Up Using Interrupts</h1>
+   <div class="- topic/body concept/conbody body conbody">
+      <p class="- topic/p p" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000A4" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000A4">When global interrupts are disabled (GIE cleared) and any interrupt source, with the exception of the clock switch interrupt, has both its interrupt enable bit and interrupt flag bit set, one of the following will occur:</p>
+      <ul class="- topic/ul ul">
+         <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000A5" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000A5">If the interrupt occurs before the execution of a
+               <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction:<ul class="- topic/ul ul">
+               <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000A9" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000A9">The <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction will execute as a
+                     <code class="+ topic/ph pr-d/codeph ph codeph">NOP</code></li>
+               <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000AD" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000AD">WDT and WDT prescaler will not be cleared</li>
+               <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000AF" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000AF">The <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000B1">TO</span> bit
+                  of the STATUS register will not be set</li>
+               <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000B2" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000B2">The <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000B4">PD</span> bit
+                  of the STATUS register will not be cleared</li>
+            </ul></li>
+         <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000B5" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000B5">If the interrupt occurs during or after the execution of a
+               <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction:<ul class="- topic/ul ul">
+               <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000B9" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000B9">The <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction will be completely
+                  executed</li>
+               <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000BC" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000BC">Device will immediately wake up from Sleep</li>
+               <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000BE" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000BE">WDT and WDT prescaler will be cleared</li>
+               <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000C0" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000C0">The <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000C2">TO</span> bit
+                  of the STATUS register will be set</li>
+               <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000C3" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000C3">The <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000C5">PD</span> bit
+                  of the STATUS register will be cleared</li>
+            </ul></li>
+      </ul>
+      <p class="- topic/p p" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000C6" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000C6">In the event where flag bits were checked before executing a
+            <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction, it may be possible for flag bits to become set
+         before the <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction completes. To determine whether a
+            <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction executed, test the <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000CA">PD</span> bit. If the <span class="+ topic/ph sidscDomain-d/active-low ph active-low" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000CB">PD</span> bit is
+         set, the <code class="+ topic/ph pr-d/codeph ph codeph">SLEEP</code> instruction was executed as a <code class="+ topic/ph pr-d/codeph ph codeph" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__ID-42139-000000CD">NOP</code>.</p>
+      <figure class="- topic/fig fig fignone" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__FIG_CQ3_2BG_BHB" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__FIG_CQ3_2BG_BHB"><figcaption class="- topic/title title figcap"><span class="figtitleprefix fig--title-label">Figure 17-2. <span id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__GUID-8D5ACC9F-032C-4889-8738-CAE0DE391860" class="fig--title">Wake-Up from Sleep through
+            Interrupt</span></span></figcaption>
+         
+         <span class=""><iframe src="GUID-8AE8A35D-F5A4-43AC-997C-85FD72481786-high.pdf#toolbar=1" width="482.25" height="213.75"></iframe></span>
+      </figure>
+      <div class="- topic/note note notype note_notype" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__GUID-C3B22D35-D17E-4BC4-9BC0-D543D130BED4" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__GUID-C3B22D35-D17E-4BC4-9BC0-D543D130BED4"><span class="note__title">Note:</span> 
+         <ol class="- topic/ol ol" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__OL_G4K_BLR_P1B" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__OL_G4K_BLR_P1B">
+            <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__GUID-C0FE48B5-FBD8-40E3-9BBB-BCE1FCAC1ABB" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__GUID-C0FE48B5-FBD8-40E3-9BBB-BCE1FCAC1ABB">External clock - High, Medium, Low
+               mode assumed.</li>
+            <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__GUID-7E56D01C-99F0-461D-B11C-FE4A1209790C" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__GUID-7E56D01C-99F0-461D-B11C-FE4A1209790C">CLKOUT is shown here for timing
+               reference.</li>
+            <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__GUID-FAEAA7B9-0909-4E99-B247-85C354F38A35" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__GUID-FAEAA7B9-0909-4E99-B247-85C354F38A35">T<sub class="+ topic/ph hi-d/sub ph sub">OST</sub> = 1024
+                  T<sub class="+ topic/ph hi-d/sub ph sub">OSC</sub>. This delay does not apply to EC and INTOSC Oscillator modes.</li>
+            <li class="- topic/li li" id="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__GUID-38E9F5AB-31BB-4488-A145-96AC526344C5" data-ofbid="GUID-113F0247-2958-4313-A0FB-FE0D6207A438__GUID-38E9F5AB-31BB-4488-A145-96AC526344C5">GIE = <code class="+ topic/ph pr-d/codeph ph codeph">1</code> assumed. In
+               this case after wake-up, the processor calls the ISR at <code class="+ topic/ph pr-d/codeph ph codeph">0x0004</code>. If
+               GIE = <code class="+ topic/ph pr-d/codeph ph codeph">0</code>, execution will continue in-line.</li>
+         </ol>
+      </div>
+   </div>
+
+</body>
+</html>

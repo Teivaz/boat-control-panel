@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>28.4.5.3 Stop Event — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907.html"/>
+<link rel="next" href="GUID-D1F7014F-A181-4D45-95B1-B19202FE7C4C.html"/>
+<link rel="up" href="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-7D8DC0AB-61A4-425B-88F0-EECD5D14E846.html">28 UTMR - Universal Timer Module</a></li><li><a href="GUID-43EDC99C-2C52-448D-825C-F980F714814D.html">28.4 UTMR Operation</a></li><li><a href="GUID-0F1EBD6A-1C7F-4345-BB25-CA143D2EA2AF.html">28.4.5 Start, Stop and Reset Events</a></li><li>28.4.5.3 Stop Event</li></ol>
+  <div class="sib"><span>← <a href="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907.html" rel="prev">Reset Event</a></span><span><a href="GUID-D1F7014F-A181-4D45-95B1-B19202FE7C4C.html" rel="next">Hardware Limit Mode</a> →</span></div>
+</nav>
+
+    <h1 class="- topic/title title topictitle1" id="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-3C8E8CF6-A88B-4736-B223-5F13C060A23D" style="">28.4.5.3 Stop Event</h1>
+    <div class="- topic/body body">
+        <div class="- topic/p p">The stop event for the counter/timer stop is selected using the <a class="- topic/xref xref" href="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A.html#ID-00000021" title="Counter Stop Condition Select(4,8,9,10,11)">STOP</a> bits in the TUxyHLT register. The available options
+            include:</div>
+        <ol class="- topic/ol ol" id="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__OL_JDT_SRK_43B" data-ofbid="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__OL_JDT_SRK_43B">
+            <li class="- topic/li li" id="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-EAB6F849-11A0-44C3-AB7E-76CB10F09F45" data-ofbid="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-EAB6F849-11A0-44C3-AB7E-76CB10F09F45">No hardware Stop: The counter/timer
+                runs continuously until the <a class="- topic/xref xref" href="GUID-33CE3D33-5EBD-4C5B-8CBD-14AF2048C986.html#ID-00000005" title="Timer Enable(1,2)">ON</a> bit is cleared. Neither the ERS signal nor a PR register
+                match will stop the counter/timer. This is the software-controlled stop option. The
+                current counter value is captured in the TUxyCR capture register at every rising
+                edge of ERS signal, in which case the TUxyCR capture register must be read before
+                the event of a second ERS rising or the captured data will be overwritten by the
+                second rising event. When the <a class="- topic/xref xref" href="GUID-C8D1FB06-4BF9-41CD-AF01-0048B1581E1A.html#ID-00000005" title="ERS Polarity Selection">EPOL</a> bit is set, the polarity is inverted and the counter
+                value is captured at every falling edge of ERS signal instead.</li>
+            <li class="- topic/li li" id="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-AA0D6CAA-E55B-417A-A1D9-B7FFC3368EBF" data-ofbid="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-AA0D6CAA-E55B-417A-A1D9-B7FFC3368EBF">Either edge of the ERS signal
+                (edge-triggered): The counter/timer stops at the event of either the rising or
+                falling edge of the ERS signal and the counter value is captured in the TUxyCR
+                capture register. See <a class="- topic/xref xref" href="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907.html#GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__FIG_YRN_CLV_WLB"><span>Figure 28-10</span></a> for an example of rising ERS edge Start and either ERS edge Stop
+                condition.</li>
+            <li class="- topic/li li" id="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-760C7590-0B40-406B-84A5-4A6E618F9D32" data-ofbid="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-760C7590-0B40-406B-84A5-4A6E618F9D32">Rising edge of the ERS signal
+                (edge-triggered): The counter/timer stops at the event of a rising edge of the ERS
+                signal and the counter value is captured in the TUxyCR capture register. When the
+                EPOL bit is set, the polarity is inverted and the counter/timer stops at the falling
+                edge of the ERS signal.</li>
+            <li class="- topic/li li" id="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-FFD147C8-A470-4CDF-916C-5A9821405599" data-ofbid="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-FFD147C8-A470-4CDF-916C-5A9821405599">At period match: The counter/timer
+                stops when the TUxyTMR counter register is equal to the TUxyPR period register and
+                the counter value is captured in the TUxyCR capture register. See <a class="- topic/xref xref" href="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907.html#GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__FIG_PF5_HLV_WLB"><span>Figure 28-11</span></a> for an example of Stop at PR match.</li>
+        </ol>
+        <div class="- topic/p p">
+            <div class="- topic/note note important note_important" id="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-8EBFD8BF-7829-4D6E-B885-1956779BC151" data-ofbid="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-8EBFD8BF-7829-4D6E-B885-1956779BC151"><span class="note__title">Important:</span> 
+                <ol class="- topic/ol ol" id="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__OL_YDM_P5V_3LB" data-ofbid="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__OL_YDM_P5V_3LB">
+                    <li class="- topic/li li" id="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-A16FAB8E-D5F0-4356-91EA-E9F4E5896289" data-ofbid="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-A16FAB8E-D5F0-4356-91EA-E9F4E5896289">In the event of coincidental start and stop events, and RUN =
+                            <code class="+ topic/ph pr-d/codeph ph codeph">0</code>; the start event takes precedence, timer capture and
+                        CIF interrupt are blocked, and OSEN is ignored. See <a class="- topic/xref xref" href="GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907.html#GUID-E134BABB-B99C-4B10-BCB8-4D7D62851907__FIG_VKK_Y3R_S3B"><span>Figure 28-8</span></a> for a coincidental start and stop event at
+                        ERS rising edge. If RUN = <code class="+ topic/ph pr-d/codeph ph codeph">1</code>, then the stop event is
+                        ignored, but will still cause a capture.</li>
+                    <li class="- topic/li li" id="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-369ADF1A-0603-49CA-9794-5948A7926C42" data-ofbid="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-369ADF1A-0603-49CA-9794-5948A7926C42">If Reset and Stop are coincident, the captured value is the value prior to
+                        the Reset and the counter will stop at zero.</li>
+                    <li class="- topic/li li" id="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-FA32EB5C-304E-41CA-A46A-0216463C0504" data-ofbid="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-FA32EB5C-304E-41CA-A46A-0216463C0504">After stopping, the start
+                        edge detector needs up to 3 timer clock periods to resume, and any
+                        overlapping stop events may be ignored in that interval.</li>
+                    <li class="- topic/li li" id="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-70F396EB-3F73-447A-B7AB-DD866B9C2CB4" data-ofbid="GUID-A0D57AB5-909A-46BF-9972-621A49224C58__GUID-70F396EB-3F73-447A-B7AB-DD866B9C2CB4">If the counter is not running
+                        (no start has occurred), a stop event will have no side effects, such as
+                        capturing data.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

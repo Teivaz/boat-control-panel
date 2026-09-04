@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>38.11.1.3 Transmit FIFO Interrupts (TFIF) — PIC18-Q84 Data Sheet (Rev. F)</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="prev" href="GUID-3DF3B9E9-B11F-4509-BB4A-35A8872F26AB.html"/>
+<link rel="next" href="GUID-612D6DEB-F184-4E96-B8CA-C2E98509B8B3.html"/>
+<link rel="up" href="GUID-E84F6F7C-8A43-425D-BD4C-3BF6D52B7772.html"/>
+</head>
+<body>
+<nav class="meta">
+  <ol><li><a href="index.html">Contents</a></li><li><a href="GUID-521D408E-C3B3-4C50-AC72-B3A208CFD638.html">38 CAN FD - Controller Area Network, Flexible Data-Rate</a></li><li><a href="GUID-CF10B3D7-8BD7-4874-884A-056D46E8A197.html">38.11 Interrupts</a></li><li><a href="GUID-E84F6F7C-8A43-425D-BD4C-3BF6D52B7772.html">38.11.1 FIFO Individual Interrupts</a></li><li>38.11.1.3 Transmit FIFO Interrupts (TFIF)</li></ol>
+  <div class="sib"><span>← <a href="GUID-3DF3B9E9-B11F-4509-BB4A-35A8872F26AB.html" rel="prev">Receive FIFO Interrupts (RFIF)</a></span><span><a href="GUID-612D6DEB-F184-4E96-B8CA-C2E98509B8B3.html" rel="next">Receive FIFO Overrun Interrupt (RXOVIF)</a> →</span></div>
+</nav>
+
+<h1 class="- topic/title title topictitle1" id="GUID-CE7FF9DF-BA05-465E-8D56-16301A364565__GUID-9A8662D1-DF62-49FB-86B5-C1B097183BBA" style="">38.11.1.3 Transmit FIFO Interrupts (TFIF)</h1>
+<div class="- topic/body concept/conbody body conbody">
+        <div class="- topic/p p">The transmit FIFO interrupts occur when there is a change in the status of
+            the transmit FIFO. There are three interrupt sources:<ul class="- topic/ul ul" id="GUID-CE7FF9DF-BA05-465E-8D56-16301A364565__UL_YBS_Q2J_Q3B" data-ofbid="GUID-CE7FF9DF-BA05-465E-8D56-16301A364565__UL_YBS_Q2J_Q3B">
+                <li class="- topic/li li" id="GUID-CE7FF9DF-BA05-465E-8D56-16301A364565__GUID-C3A9D78A-8F35-4879-9465-1057B74A508E" data-ofbid="GUID-CE7FF9DF-BA05-465E-8D56-16301A364565__GUID-C3A9D78A-8F35-4879-9465-1057B74A508E">Transmit FIFO Not Full Interrupt Flag (TFNIF)</li>
+                <li class="- topic/li li" id="GUID-CE7FF9DF-BA05-465E-8D56-16301A364565__GUID-514E6C5C-90CF-4FE5-BD7A-028965556D29" data-ofbid="GUID-CE7FF9DF-BA05-465E-8D56-16301A364565__GUID-514E6C5C-90CF-4FE5-BD7A-028965556D29">Transmit FIFO Half Empty Interrupt Flag (TFHIF)</li>
+                <li class="- topic/li li" id="GUID-CE7FF9DF-BA05-465E-8D56-16301A364565__GUID-F00440E1-1DEE-4F3F-8191-C624DEF85C15" data-ofbid="GUID-CE7FF9DF-BA05-465E-8D56-16301A364565__GUID-F00440E1-1DEE-4F3F-8191-C624DEF85C15">Transmit FIFO Empty Interrupt Flag (TFEIF)</li>
+            </ul></div>
+        <p class="- topic/p p">All three interrupts can be enabled individually. The interrupts cannot be cleared by the
+            application; they will be cleared when the condition of the FIFO terminates.</p>
+        <p class="- topic/p p">The three interrupt sources are OR’d together and reflected in the
+            C1TXIF[31:1] flags.</p>
+    </div>
+
+</body>
+</html>
