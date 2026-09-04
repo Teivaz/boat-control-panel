@@ -409,7 +409,11 @@ void comm_parse_test_echo(uint8_t* data, CommTestEcho* echo) {
 
 uint8_t comm_build_test_read(CommMessage* msg, uint8_t value) {
     msg->id = COMM_TEST_READ;
-    msg->raw[1] = value; /* single write-phase value byte */
+    /* raw[] is the payload union, so raw[0] is the first byte *after* the id —
+     * the same slot msg->config.address and msg->button_trigger.button_id
+     * occupy.  Writing raw[1] put the value one byte too far and
+     * comm_finalize then overwrote it with the CRC. */
+    msg->raw[0] = value; /* single write-phase value byte */
     return comm_finalize(msg, 1);
 }
 

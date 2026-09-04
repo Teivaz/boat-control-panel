@@ -193,8 +193,14 @@ typedef struct {
  * "Channel state" = the voltage observed downstream of each relay's fuse
  * (read via the relay-output mux). A relay can be commanded ON yet have
  * its channel read 0 if the fuse is blown.
+ *
+ * `packed` for the same reason CommMessage carries it: the uint16_t members
+ * would otherwise get a padding byte after `device_address` on a host with
+ * alignment requirements, making sizeof 8 and shifting every subsequent
+ * wire byte. XC8 already packs by default so this is a no-op there — it only
+ * matters when the library is compiled for the host test suite.
  */
-typedef struct {
+typedef struct __attribute__((packed)) {
     uint8_t device_address;
     uint16_t prev_channels; /* bit N = channel N */
     uint16_t current_channels;
