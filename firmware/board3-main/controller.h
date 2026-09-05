@@ -1,6 +1,7 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
+#include "i2c.h"
 #include "libcomm.h"
 #include "nav_lights.h"
 #include "rtc.h"
@@ -17,6 +18,11 @@ void controller_init(TaskController* ctrl);
 void controller_on_button_changed(uint8_t sender, uint8_t button_id, uint8_t pressed, CommButtonMode mode);
 void controller_on_channel_changed(uint8_t sender, uint16_t prev_channels, uint16_t curr_channels,
                                    uint8_t prev_sensors, uint8_t curr_sensors);
+
+/* Adopter-callback forwarders — called from comm.c when an outbound write
+ * settles.  Main-loop context. */
+void controller_on_relay_state_completion(I2cResult result);
+void controller_on_config_completion(I2cResult result);
 
 /* Adopter-callback forwarders — called from comm.c when protocol read
  * responses arrive.  Main-loop context.  NULL pointer means I2C error. */

@@ -1,5 +1,6 @@
 #include "display_text.h"
 
+#include "comm.h"
 #include "config.h"
 #include "config_mode.h"
 #include "controller.h"
@@ -331,6 +332,11 @@ static void render_config_offset(u8g2_t* g) {
 static void refresh_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
+
+    /* XXX DIAGNOSTIC — TEMPORARY, REMOVE ME. Proves the scheduler is still
+     * running; readable at config 0x20/0x21. */
+    comm_tick_liveness();
+    TRACE(TRACE_DISPLAY_REFRESH);
 
     u8g2_t* g = display_u8g2();
     u8g2_ClearBuffer(g);

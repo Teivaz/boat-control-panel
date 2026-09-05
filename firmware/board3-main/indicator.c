@@ -3,6 +3,7 @@
 #include "config.h"
 #include "config_mode.h"
 #include "controller.h"
+#include "libcomm.h"
 #include "rgbled.h"
 #include "task_ids.h"
 
@@ -85,6 +86,7 @@ static void render_config(void) {
 }
 
 static void refresh_task(TaskId id, void* ctx) {
+    TRACE(TRACE_INDICATOR_REFRESH);
     (void)id;
     (void)ctx;
 

@@ -32,6 +32,3 @@ void i2c_pins_init(void) {
     I2C1SDAPPS = 0x14; /* RC4 -> SDA1 */
     RC4PPS = 0x38;
 }
-
-void i2c_bus_recover(void) {
-}

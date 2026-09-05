@@ -39,8 +39,6 @@ static void build_side_effect(uint8_t side, CommButtonEffect* out);
 static uint8_t side_address(uint8_t side);
 static uint8_t effects_differ(const CommButtonEffect* a, const CommButtonEffect* b);
 static void refresh_task(TaskId id, void* ctx);
-static void on_effect_done_l(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
-static void on_effect_done_r(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
 
 void button_fx_init(TaskController* ctrl) {
     for (uint8_t s = 0; s < BUTTON_FX_SIDES; s++) {
@@ -183,29 +181,20 @@ static void refresh_task(TaskId id, void* ctx) {
             continue;
         }
         inflight_effect[side] = tx_effect[side];
-        I2cCompletion cb = (side == 0) ? on_effect_done_l : on_effect_done_r;
         inflight[side] = 1;
-        if (comm_send_button_effect(side_address(side), &inflight_effect[side], cb, 0) != I2C_RESULT_OK) {
+        if (comm_send_button_effect(side_address(side), &inflight_effect[side]) != I2C_RESULT_OK) {
             inflight[side] = 0;
         }
     }
 }
 
-static void on_effect_done_l(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx) {
-    (void)result;
-    (void)rx;
-    (void)rx_len;
-    (void)ctx;
-    /* Completion fires on write success; final-retry failure is silent. */
-    prev_effect[0] = inflight_effect[0];
-    inflight[0] = 0;
-}
-
-static void on_effect_done_r(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx) {
-    (void)result;
-    (void)rx;
-    (void)rx_len;
-    (void)ctx;
-    prev_effect[1] = inflight_effect[1];
-    inflight[1] = 0;
+void button_fx_on_effect_completion(I2cResult result, uint8_t addr) {
+    uint8_t side = (addr == COMM_ADDRESS_BUTTON_BOARD_L) ? 0 : 1;
+    /* Latch the sent value as the new baseline only when it actually
+     * landed. On failure the baseline stays put, so the next refresh tick
+     * sees the same delta and resubmits. */
+    if (result == I2C_RESULT_OK) {
+        prev_effect[side] = inflight_effect[side];
+    }
+    inflight[side] = 0;
 }

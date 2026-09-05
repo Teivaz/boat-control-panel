@@ -154,7 +154,6 @@ static void poll_levels_task(TaskId id, void* ctx);
 static void poll_sensors_task(TaskId id, void* ctx);
 static void poll_channels_task(TaskId id, void* ctx);
 static void poll_rtc_task(TaskId id, void* ctx);
-static void on_relay_state_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
 static void on_rtc_read_done(uint8_t ok, const RtcTime* t, void* ctx);
 static ActionEffect apply_action(const ButtonAction* a);
 static void recompute_target(void);
@@ -246,6 +245,7 @@ static void apply_channel_observation(uint16_t curr_c) {
 }
 
 void controller_on_button_changed(uint8_t sender, uint8_t button_id, uint8_t pressed, CommButtonMode mode) {
+    TRACE(TRACE_BUTTON_CHANGED);
     const uint8_t should_trigger = (mode == COMM_BUTTON_MODE_RELEASE) || (mode == COMM_BUTTON_MODE_HOLD) ||
                                    (mode == COMM_BUTTON_MODE_CHANGE && pressed);
     if (button_id >= 7 || !should_trigger) {
@@ -557,21 +557,18 @@ static void retry_task(TaskId id, void* ctx) {
 
     relay_inflight_value = snapshot;
     relay_inflight = 1;
-    if (comm_send_relay_state(snapshot, on_relay_state_done, 0) != I2C_RESULT_OK) {
+    if (comm_send_relay_state(snapshot) != I2C_RESULT_OK) {
         relay_inflight = 0;
     }
 }
 
-static void on_relay_state_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx) {
-    (void)result;
-    (void)rx;
-    (void)rx_len;
-    (void)ctx;
-    /* Clear the dirty flag if the value we actually sent still matches
-     * the current target — a producer could have bumped it while the
-     * transaction was in flight. */
+void controller_on_relay_state_completion(I2cResult result) {
+    /* Clear the dirty flag if the write landed and the value we actually
+     * sent still matches the current target — a producer could have bumped
+     * it while the transaction was in flight. A failed write leaves the
+     * flag set so retry_task resubmits. */
     INTERRUPT_PUSH;
-    if (relay_target == relay_inflight_value) {
+    if (result == I2C_RESULT_OK && relay_target == relay_inflight_value) {
         relay_dirty = 0;
     }
     INTERRUPT_POP;
@@ -708,7 +705,6 @@ static struct {
 
 static void on_set_time_write_done(uint8_t ok, void* ctx);
 static void on_set_time_refresh_done(uint8_t ok, const RtcTime* t, void* ctx);
-static void on_ui_config_write_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
 
 void controller_set_time(uint8_t hour, uint8_t minute, ControllerOpCompletion cb, void* ctx) {
     ui_op.op_cb = cb;
@@ -771,7 +767,7 @@ void controller_on_config_read_response(const uint8_t* value) {
 void controller_write_switching_config(uint8_t address, uint8_t value, ControllerOpCompletion cb, void* ctx) {
     ui_op.op_cb = cb;
     ui_op.ctx = ctx;
-    if (comm_send_config(COMM_ADDRESS_SWITCHING, address, value, on_ui_config_write_done, 0) != I2C_RESULT_OK) {
+    if (comm_send_config(COMM_ADDRESS_SWITCHING, address, value) != I2C_RESULT_OK) {
         ui_op.op_cb = 0;
         if (cb) {
             cb(0, ctx);
@@ -779,16 +775,11 @@ void controller_write_switching_config(uint8_t address, uint8_t value, Controlle
     }
 }
 
-static void on_ui_config_write_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx) {
-    (void)result;
-    (void)rx;
-    (void)rx_len;
-    (void)ctx;
-    /* Completion fires only on success; final-retry failure is silent. */
+void controller_on_config_completion(I2cResult result) {
     ControllerOpCompletion cb = ui_op.op_cb;
     void* user_ctx = ui_op.ctx;
     ui_op.op_cb = 0;
     if (cb) {
-        cb(1, user_ctx);
+        cb((uint8_t)(result == I2C_RESULT_OK), user_ctx);
     }
 }

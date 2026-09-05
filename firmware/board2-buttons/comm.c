@@ -25,7 +25,7 @@ static volatile uint8_t q_head;
 static volatile uint8_t q_tail;
 
 static void retry_task(TaskId id, void* ctx);
-static void apply_button_effect(const CommButtonEffect* eff);
+static void apply_button_effect(CommButtonEffect* eff);
 
 uint8_t comm_address(void) {
     return PORTBbits.RB0 == 0 ? COMM_ADDRESS_BUTTON_BOARD_L : COMM_ADDRESS_BUTTON_BOARD_R;
@@ -54,7 +54,7 @@ static void retry_task(TaskId id, void* ctx) {
     while (q_head != q_tail) {
         I2cResult res = comm_send_button_changed(
             queue[q_head].button_id, queue[q_head].pressed,
-            (CommButtonMode)queue[q_head].mode, 0, 0);
+            (CommButtonMode)queue[q_head].mode);
         if (res != I2C_RESULT_OK) {
             break;
         }
@@ -67,15 +67,15 @@ static void retry_task(TaskId id, void* ctx) {
  * ============================================================================
  */
 
-void comm_on_button_effect_received(const CommButtonEffect* effect) {
+void comm_on_button_effect_received(CommButtonEffect* effect) {
     apply_button_effect(effect);
 }
 
-void comm_on_button_trigger_received(const CommButtonTrigger* trigger) {
+void comm_on_button_trigger_received(CommButtonTrigger* trigger) {
     button_set_trigger(trigger->button_id, trigger->config);
 }
 
-void comm_on_config_received(const CommConfig* config) {
+void comm_on_config_received(CommConfig* config) {
     config_write_byte(config->address, config->value);
 }
 
@@ -83,24 +83,25 @@ void comm_on_reset(void) {
     RESET();
 }
 
-void comm_on_button_changed_received(const CommButtonChanged* event) {
+void comm_on_button_changed_received(CommButtonChanged* event) {
     (void)event;
 }
-void comm_on_relay_state_received(const CommRelayState* state) {
+void comm_on_relay_state_received(CommRelayState* state) {
     (void)state;
 }
-void comm_on_channel_changed_received(const CommChannelChanged* event) {
+void comm_on_channel_changed_received(CommChannelChanged* event) {
     (void)event;
 }
-void comm_on_level_mode_received(const CommLevelMode* mode) {
+void comm_on_level_mode_received(CommLevelMode* mode) {
     (void)mode;
 }
 
 /* ============================================================================
- * Adopter callbacks: incoming read-request handlers (main-loop context)
+ * Adopter callbacks: incoming read-request handlers (ISR context)
  *
- * Update the client TX buffer so the response is ready for the next
- * read from this device.
+ * Called from sync_cold_rx_dispatch inside I2C1_ISR, so they must not
+ * block: comm_respond stages the reply before the master's read-phase
+ * address arrives.
  * ============================================================================
  */
 
@@ -111,7 +112,7 @@ void comm_on_button_state_read_requested(void) {
 
 void comm_on_button_trigger_read_requested(uint8_t button_id) {
     CommTriggerConfig cfg = button_get_trigger(button_id);
-    uint8_t raw = *(const uint8_t*)&cfg;
+    uint8_t raw = *(uint8_t*)&cfg;
     comm_respond(&raw, 1);
 }
 
@@ -134,39 +135,101 @@ void comm_on_sensors_read_requested(void) {
 }
 
 /* ============================================================================
+ * Adopter callbacks: write completion handlers (main-loop context)
+ *
+ * Button board only initiates button_changed writes and does not react
+ * to the completion.  All others are unused.
+ * ============================================================================
+ */
+
+void comm_on_reset_completion(I2cResult result, uint8_t addr) {
+    (void)result;
+    (void)addr;
+}
+void comm_on_config_completion(I2cResult result, uint8_t addr, uint8_t config_addr, uint8_t value) {
+    (void)result;
+    (void)addr;
+    (void)config_addr;
+    (void)value;
+}
+void comm_on_button_effect_completion(I2cResult result, uint8_t addr, CommButtonEffect* effect) {
+    (void)result;
+    (void)addr;
+    (void)effect;
+}
+void comm_on_button_changed_completion(I2cResult result, uint8_t button_id, uint8_t pressed, CommButtonMode mode) {
+    (void)result;
+    (void)button_id;
+    (void)pressed;
+    (void)mode;
+}
+void comm_on_button_trigger_completion(I2cResult result, uint8_t addr, uint8_t button_id, CommTriggerConfig config) {
+    (void)result;
+    (void)addr;
+    (void)button_id;
+    (void)config;
+}
+void comm_on_relay_state_completion(I2cResult result, uint16_t relays) {
+    (void)result;
+    (void)relays;
+}
+void comm_on_channel_changed_completion(I2cResult result, uint16_t prev_channels, uint16_t current_channels,
+                                        uint8_t prev_sensors, uint8_t current_sensors) {
+    (void)result;
+    (void)prev_channels;
+    (void)current_channels;
+    (void)prev_sensors;
+    (void)current_sensors;
+}
+void comm_on_level_mode_completion(I2cResult result, CommMeterMode mode_0, CommMeterMode mode_1) {
+    (void)result;
+    (void)mode_0;
+    (void)mode_1;
+}
+
+/* ============================================================================
  * Adopter callbacks: read response handlers (main-loop context)
  *
  * Button board does not initiate reads — empty stubs.
  * ============================================================================
  */
 
-void comm_on_button_state_read_response(uint8_t addr, CommButtonState* state) {
+void comm_on_button_state_read_response(I2cResult result, uint8_t addr, CommButtonState* state) {
+    (void)result;
     (void)addr;
     (void)state;
 }
-void comm_on_button_trigger_read_response(uint8_t addr, CommTriggerConfig* config) {
+void comm_on_button_trigger_read_response(I2cResult result, uint8_t addr, CommTriggerConfig* config) {
+    (void)result;
     (void)addr;
     (void)config;
 }
-void comm_on_relay_state_read_response(CommRelayState* state) {
+void comm_on_relay_state_read_response(I2cResult result, CommRelayState* state) {
+    (void)result;
     (void)state;
 }
-void comm_on_channel_state_read_response(CommChannelState* state) {
+void comm_on_channel_state_read_response(I2cResult result, CommChannelState* state) {
+    (void)result;
     (void)state;
 }
-void comm_on_battery_read_response(CommBattery* battery) {
+void comm_on_battery_read_response(I2cResult result, CommBattery* battery) {
+    (void)result;
     (void)battery;
 }
-void comm_on_levels_read_response(CommLevels* levels) {
+void comm_on_levels_read_response(I2cResult result, CommLevels* levels) {
+    (void)result;
     (void)levels;
 }
-void comm_on_level_mode_read_response(CommLevelMode* mode) {
+void comm_on_level_mode_read_response(I2cResult result, CommLevelMode* mode) {
+    (void)result;
     (void)mode;
 }
-void comm_on_sensors_read_response(CommSensors* sensors) {
+void comm_on_sensors_read_response(I2cResult result, CommSensors* sensors) {
+    (void)result;
     (void)sensors;
 }
-void comm_on_config_read_response(uint8_t addr, uint8_t* value) {
+void comm_on_config_read_response(I2cResult result, uint8_t addr, uint8_t* value) {
+    (void)result;
     (void)addr;
     (void)value;
 }
@@ -176,7 +239,7 @@ void comm_on_config_read_response(uint8_t addr, uint8_t* value) {
  * ============================================================================
  */
 
-static void apply_button_effect(const CommButtonEffect* eff) {
+static void apply_button_effect(CommButtonEffect* eff) {
     for (uint8_t i = 0; i < LED_EFFECT_COUNT; i++) {
         CommButtonOutputEffect out;
         if (comm_button_effect_get(eff, i, &out) == 0) {

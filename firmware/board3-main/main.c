@@ -1,3 +1,5 @@
+#define _XTAL_FREQ 64000000UL
+
 #include "button_fx.h"
 #include "comm.h"
 #include "config.h"
@@ -78,7 +80,134 @@ static void tick_init(void) {
     INTERRUPT_POP;
 }
 
+/* XXX DIAGNOSTIC — TEMPORARY, REMOVE ME.
+ *
+ * Blink the latched reset cause at boot, readable with no I2C bridge and no
+ * display. A *count* rather than a colour, because indicator.c drives these
+ * same LEDs and its own output collides with any colour scheme: render_normal
+ * paints active nav lights white, render_error paints them red. It never
+ * blinks a deliberate count, and this runs before init() so nothing else is
+ * touching the LEDs yet.
+ *
+ * Every restart replays the blinks, so a reset loop is unmistakable: the
+ * pattern repeats instead of happening once at power-up.
+ *
+ *   1  !BOR    brown-out          (expected on a power-off)
+ *   2  !POR    power-on
+ *   3  !RMCLR  MCLR / programmer
+ *   4  !RI     software RESET — comm_on_reset, or an __asm("RESET") stub in
+ *              interrupt.c firing on an unclaimed vector
+ *   5  STKOVF  hardware stack overflow
+ *   6  STKUNF  stack underflow
+ *   7          none of the above — re-entered main() with no reset recorded,
+ *              i.e. a wild jump */
+static void show_reset_cause(uint8_t cause) {
+    RGBLedData leds[5];
+    uint8_t n;
+    if (cause & 0x80) {
+        n = 5;
+    } else if (cause & 0x40) {
+        n = 6;
+    } else if (!(cause & 0x04)) {
+        n = 4;
+    } else if (!(cause & 0x08)) {
+        n = 3;
+    } else if (!(cause & 0x01)) {
+        n = 1;
+    } else if (!(cause & 0x02)) {
+        n = 2;
+    } else {
+        n = 7;
+    }
+
+    rgbled_init();
+    /* Dark lead-in so the first blink is unambiguous. */
+    for (uint8_t i = 0; i < 5; i++) {
+        leds[i].red = 0;
+        leds[i].green = 0;
+        leds[i].blue = 0;
+    }
+    rgbled_set(leds, 5);
+    for (uint8_t d = 0; d < 10; d++) {
+        __delay_ms(100);
+    }
+
+    for (uint8_t blink = 0; blink < n; blink++) {
+        for (uint8_t i = 0; i < 5; i++) {
+            leds[i].red = 0x30;
+            leds[i].green = 0x00;
+            leds[i].blue = 0x30;
+        }
+        rgbled_set(leds, 5);
+        for (uint8_t d = 0; d < 3; d++) {
+            __delay_ms(100);
+        }
+        for (uint8_t i = 0; i < 5; i++) {
+            leds[i].red = 0;
+            leds[i].green = 0;
+            leds[i].blue = 0;
+        }
+        rgbled_set(leds, 5);
+        for (uint8_t d = 0; d < 3; d++) {
+            __delay_ms(100);
+        }
+    }
+    /* Trailing gap so a repeat (reset loop) reads as a separate group. */
+    for (uint8_t d = 0; d < 8; d++) {
+        __delay_ms(100);
+    }
+}
+
+/* XXX DIAGNOSTIC — TEMPORARY, REMOVE ME.
+ *
+ * Second blink group, in cyan: the region the board was executing when the PC
+ * went wild. Read after the purple reset-cause group, separated by a long gap.
+ *
+ *   1 i2c_poll (main)          2 (unused)         3 I2C1_ISR
+ *   4 I2C1TX_ISR               5 I2C1RX_ISR       6 I2C1E_ISR
+ *   7 client-RX sync dispatch (ISR)               8 cold_rx_dispatch (main)
+ *   9 controller_on_button_changed (main)        10 display refresh (main)
+ *  11 indicator refresh (main) */
+static void show_trace(uint8_t n) {
+    RGBLedData leds[5];
+    for (uint8_t d = 0; d < 15; d++) {
+        __delay_ms(100);
+    }
+    if (n > 20) {
+        n = 20; /* uninitialised persistent RAM on the very first power-up */
+    }
+    for (uint8_t blink = 0; blink < n; blink++) {
+        for (uint8_t i = 0; i < 5; i++) {
+            leds[i].red = 0x00;
+            leds[i].green = 0x30;
+            leds[i].blue = 0x30;
+        }
+        rgbled_set(leds, 5);
+        for (uint8_t d = 0; d < 3; d++) {
+            __delay_ms(100);
+        }
+        for (uint8_t i = 0; i < 5; i++) {
+            leds[i].red = 0;
+            leds[i].green = 0;
+            leds[i].blue = 0;
+        }
+        rgbled_set(leds, 5);
+        for (uint8_t d = 0; d < 3; d++) {
+            __delay_ms(100);
+        }
+    }
+    for (uint8_t d = 0; d < 8; d++) {
+        __delay_ms(100);
+    }
+}
+
 void main(void) {
+    /* XXX DIAGNOSTIC — TEMPORARY, REMOVE ME. Latch PCON0 before anything
+     * can disturb it; readable at config 0x22 and shown as an LED colour. */
+    comm_reset_cause_latch();
+    show_reset_cause(comm_reset_cause());
+    show_trace(g_trace);
+    TRACE(0);
     init();
 
     CommButtonEffect effect;

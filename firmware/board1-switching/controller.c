@@ -184,7 +184,7 @@ static void retry_task(TaskId id, void* ctx) {
         INTERRUPT_POP;
     }
 
-    if (comm_send_channel_changed(prev_c, curr_c, prev_s, curr_s, 0, 0) != I2C_RESULT_OK) {
+    if (comm_send_channel_changed(prev_c, curr_c, prev_s, curr_s) != I2C_RESULT_OK) {
         return;
     }
 

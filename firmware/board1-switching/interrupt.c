@@ -29,20 +29,16 @@ void interrupt_init(void) {
     IPR12 = 0; IPR13 = 0; IPR14 = 0; IPR15 = 0;
     IPR7bits.I2C1IP = 1;
     IPR7bits.I2C1EIP = 1;
+    IPR7bits.I2C1TXIP = 1;
+    IPR7bits.I2C1RXIP = 1;
 
     INTCON0bits.GIEL = 1;
     GIE = 1; /* = GIEH in priority mode */
 }
 
 /* Unused vectors reset the device. Owned vectors are defined alongside the
- * peripheral they serve: TMR0 in main.c, IOC in sensors.c, I2C1 in i2c.c,
- * AD in adc.c. */
-void __interrupt(irq(I2C1RX), base(8)) I2C1RX_ISR(void) {
-    __asm("RESET");
-}
-void __interrupt(irq(I2C1TX), base(8)) I2C1TX_ISR(void) {
-    __asm("RESET");
-}
+ * peripheral they serve: TMR0 in main.c, IOC in sensors.c, the four I2C1
+ * vectors in i2c.c, AD in adc.c. */
 void __interrupt(irq(SWINT), base(8)) SWINT_ISR(void) {
     __asm("RESET");
 }

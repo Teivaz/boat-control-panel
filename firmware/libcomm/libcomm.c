@@ -92,11 +92,14 @@ static uint8_t expected_body_len(uint8_t id) {
         case COMM_LEVEL_MODE_READ:      return 0;
         case COMM_SENSORS_READ:         return 0;
         case COMM_CONFIG_READ:          return 1; /* address byte */
+        case COMM_TEST_ECHO:            return (uint8_t)sizeof(CommTestEcho);
+        case COMM_TEST_ECHO_RESPONSE:   return (uint8_t)sizeof(CommTestEcho);
+        case COMM_TEST_READ:            return 1; /* value byte (write phase) */
         default:                        return 0xFF;
     }
 }
 
-uint8_t comm_can_parse(const uint8_t* data, uint8_t len) {
+uint8_t comm_can_parse(uint8_t* data, uint8_t len) {
     /* Shape: [id] [body...] [crc]. Minimum is 2 bytes (id + crc). */
     if (len < 2) {
         return 0;
@@ -116,13 +119,13 @@ uint8_t comm_can_parse(const uint8_t* data, uint8_t len) {
  * ============================================================================
  */
 
-uint8_t comm_build_button_effect(CommMessage* msg, const CommButtonEffect* effect) {
+uint8_t comm_build_button_effect(CommMessage* msg, CommButtonEffect* effect) {
     msg->id = COMM_BUTTON_EFFECT;
     msg->button_effect = *effect;
     return comm_finalize(msg, (uint8_t)sizeof(CommButtonEffect));
 }
 
-void comm_parse_button_effect(const uint8_t* data, CommButtonEffect* effect) {
+void comm_parse_button_effect(uint8_t* data, CommButtonEffect* effect) {
     effect->outputs_76 = data[0];
     effect->outputs_54 = data[1];
     effect->outputs_32 = data[2];
@@ -143,7 +146,7 @@ uint8_t comm_build_button_changed(CommMessage* msg, uint8_t button_id, uint8_t p
     return comm_finalize(msg, (uint8_t)sizeof(CommButtonChanged));
 }
 
-void comm_parse_button_changed(const uint8_t* data, CommButtonChanged* event) {
+void comm_parse_button_changed(uint8_t* data, CommButtonChanged* event) {
     event->device_address = data[0];
     event->button_id = data[1] & 0x07;
     event->pressed = (data[1] >> 3) & 0x01;
@@ -160,7 +163,7 @@ uint8_t comm_build_button_state_read(CommMessage* msg) {
     return comm_finalize_precomputed(msg, CRC8_BUTTON_STATE_READ);
 }
 
-void comm_parse_button_state_response(const uint8_t* data, CommButtonState* state) {
+void comm_parse_button_state_response(uint8_t* data, CommButtonState* state) {
     state->current_state = data[0];
 }
 
@@ -182,12 +185,12 @@ uint8_t comm_build_button_trigger_read(CommMessage* msg, uint8_t button_id) {
     return comm_finalize(msg, 1);
 }
 
-void comm_parse_button_trigger_write(const uint8_t* data, CommButtonTrigger* trigger) {
+void comm_parse_button_trigger_write(uint8_t* data, CommButtonTrigger* trigger) {
     trigger->button_id = data[0] & 0x07;
     *(uint8_t*)&trigger->config = data[1];
 }
 
-void comm_parse_button_trigger_response(const uint8_t* data, CommTriggerConfig* config) {
+void comm_parse_button_trigger_response(uint8_t* data, CommTriggerConfig* config) {
     *(uint8_t*)config = data[0];
 }
 
@@ -229,11 +232,11 @@ uint8_t comm_build_relay_state_read(CommMessage* msg) {
     return comm_finalize_precomputed(msg, CRC8_RELAY_STATE_READ);
 }
 
-void comm_parse_relay_state_write(const uint8_t* data, CommRelayState* state) {
+void comm_parse_relay_state_write(uint8_t* data, CommRelayState* state) {
     state->relays = (uint16_t)data[0] | ((uint16_t)data[1] << 8);
 }
 
-void comm_parse_relay_state_response(const uint8_t* data, CommRelayState* state) {
+void comm_parse_relay_state_response(uint8_t* data, CommRelayState* state) {
     state->relays = (uint16_t)data[0] | ((uint16_t)data[1] << 8);
 }
 
@@ -253,7 +256,7 @@ uint8_t comm_build_channel_changed(CommMessage* msg, uint16_t prev_channels, uin
     return comm_finalize(msg, (uint8_t)sizeof(CommChannelChanged));
 }
 
-void comm_parse_channel_changed(const uint8_t* data, CommChannelChanged* event) {
+void comm_parse_channel_changed(uint8_t* data, CommChannelChanged* event) {
     event->device_address = data[0];
     event->prev_channels = (uint16_t)data[1] | ((uint16_t)data[2] << 8);
     event->current_channels = (uint16_t)data[3] | ((uint16_t)data[4] << 8);
@@ -271,7 +274,7 @@ uint8_t comm_build_channel_state_read(CommMessage* msg) {
     return comm_finalize_precomputed(msg, CRC8_CHANNEL_STATE_READ);
 }
 
-void comm_parse_channel_state_response(const uint8_t* data, CommChannelState* state) {
+void comm_parse_channel_state_response(uint8_t* data, CommChannelState* state) {
     state->channels = (uint16_t)data[0] | ((uint16_t)data[1] << 8);
 }
 
@@ -286,7 +289,7 @@ uint8_t comm_build_battery_read(CommMessage* msg) {
     return comm_finalize_precomputed(msg, CRC8_BATTERY_READ);
 }
 
-void comm_parse_battery_response(const uint8_t* data, CommBattery* battery) {
+void comm_parse_battery_response(uint8_t* data, CommBattery* battery) {
     battery->voltage = (uint16_t)data[0] | ((uint16_t)data[1] << 8);
 }
 
@@ -300,7 +303,7 @@ uint8_t comm_build_levels_read(CommMessage* msg) {
     return comm_finalize_precomputed(msg, CRC8_LEVELS_READ);
 }
 
-void comm_parse_levels_response(const uint8_t* data, CommLevels* levels) {
+void comm_parse_levels_response(uint8_t* data, CommLevels* levels) {
     levels->level_0 = data[0];
     levels->level_1 = data[1];
 }
@@ -322,11 +325,11 @@ uint8_t comm_build_level_mode_read(CommMessage* msg) {
     return comm_finalize_precomputed(msg, CRC8_LEVEL_MODE_READ);
 }
 
-void comm_parse_level_mode_write(const uint8_t* data, CommLevelMode* mode) {
+void comm_parse_level_mode_write(uint8_t* data, CommLevelMode* mode) {
     *(uint8_t*)mode = data[0] & 0x0F;
 }
 
-void comm_parse_level_mode_response(const uint8_t* data, CommLevelMode* mode) {
+void comm_parse_level_mode_response(uint8_t* data, CommLevelMode* mode) {
     *(uint8_t*)mode = data[0] & 0x0F;
 }
 
@@ -340,7 +343,7 @@ uint8_t comm_build_sensors_read(CommMessage* msg) {
     return comm_finalize_precomputed(msg, CRC8_SENSORS_READ);
 }
 
-void comm_parse_sensors_response(const uint8_t* data, CommSensors* sensors) {
+void comm_parse_sensors_response(uint8_t* data, CommSensors* sensors) {
     sensors->sensors = data[0] & 0x07;
 }
 
@@ -367,16 +370,58 @@ uint8_t comm_build_config_read(CommMessage* msg, uint8_t address) {
     return comm_finalize(msg, 1);
 }
 
-void comm_parse_config_write(const uint8_t* data, CommConfig* config) {
+void comm_parse_config_write(uint8_t* data, CommConfig* config) {
     config->address = data[0];
     config->value = data[1];
 }
 
-void comm_parse_config_read_request(const uint8_t* data, uint8_t* address) {
+void comm_parse_config_read_request(uint8_t* data, uint8_t* address) {
     *address = data[0];
 }
 
-void comm_parse_config_response(const uint8_t* data, uint8_t* value) {
+void comm_parse_config_response(uint8_t* data, uint8_t* value) {
+    *value = data[0];
+}
+
+/* ============================================================================
+ * test_echo (0x0C) / test_echo_response (0x0D) / test_read (0x8C) — diagnostics
+ * ============================================================================
+ */
+
+uint8_t comm_build_test_echo(CommMessage* msg, uint8_t address, uint8_t value) {
+    msg->id = COMM_TEST_ECHO;
+    msg->test_echo.address = address;
+    msg->test_echo.value = value;
+    return comm_finalize(msg, (uint8_t)sizeof(CommTestEcho));
+}
+
+uint8_t comm_build_test_echo_response(CommMessage* msg, uint8_t address, uint8_t value) {
+    msg->id = COMM_TEST_ECHO_RESPONSE;
+    msg->test_echo.address = address;
+    msg->test_echo.value = value;
+    return comm_finalize(msg, (uint8_t)sizeof(CommTestEcho));
+}
+
+void comm_parse_test_echo(uint8_t* data, CommTestEcho* echo) {
+    echo->address = data[0];
+    echo->value = data[1];
+}
+
+uint8_t comm_build_test_read(CommMessage* msg, uint8_t value) {
+    msg->id = COMM_TEST_READ;
+    /* raw[] is the payload union, so raw[0] is the first byte *after* the id —
+     * the same slot msg->config.address and msg->button_trigger.button_id
+     * occupy.  Writing raw[1] put the value one byte too far and
+     * comm_finalize then overwrote it with the CRC. */
+    msg->raw[0] = value; /* single write-phase value byte */
+    return comm_finalize(msg, 1);
+}
+
+void comm_parse_test_read_request(uint8_t* data, uint8_t* value) {
+    *value = data[0];
+}
+
+void comm_parse_test_read_response(uint8_t* data, uint8_t* value) {
     *value = data[0];
 }
 
@@ -409,7 +454,7 @@ int8_t comm_button_effect_set(CommButtonEffect* effect, uint8_t output_index, Co
     return 0;
 }
 
-int8_t comm_button_effect_get(const CommButtonEffect* effect, uint8_t output_index, CommButtonOutputEffect* value) {
+int8_t comm_button_effect_get(CommButtonEffect* effect, uint8_t output_index, CommButtonOutputEffect* value) {
     if (effect == 0 || output_index > 7 || value == 0) {
         return -1;
     }

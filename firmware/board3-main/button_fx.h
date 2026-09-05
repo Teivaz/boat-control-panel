@@ -1,6 +1,7 @@
 #ifndef BUTTON_FX_H
 #define BUTTON_FX_H
 
+#include "i2c.h"
 #include "task.h"
 
 #include <stdint.h>
@@ -26,5 +27,9 @@ uint8_t button_fx_is_error(uint8_t side, uint8_t button_idx);
 void button_fx_clear(uint8_t side, uint8_t button_idx);
 void button_fx_notify_press(uint8_t side, uint8_t button_idx, uint16_t expected_mask, uint16_t expected_value);
 void button_fx_on_channel_state(uint16_t channels);
+
+/* An outbound button_effect write settled; `addr` identifies the side.
+ * Forwarded from comm_on_button_effect_completion in comm.c. */
+void button_fx_on_effect_completion(I2cResult result, uint8_t addr);
 
 #endif /* BUTTON_FX_H */

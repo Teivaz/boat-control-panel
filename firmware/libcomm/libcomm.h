@@ -13,6 +13,29 @@
     GIE = 0
 #define INTERRUPT_POP GIE = (__bit)_gie_state
 
+/* XXX DIAGNOSTIC — TEMPORARY, REMOVE ME (with every TRACE() call site and the
+ * blink-out in board3-main/main.c).
+ *
+ * Localises a wild jump: the board re-enters main() with no PCON0 flag set,
+ * so there is no hardware reset and RAM therefore survives. __persistent
+ * keeps this out of the startup clear, so whatever region was last entered
+ * before the PC went wild is still readable on the next pass through main().
+ * Defined in i2c.c so every board links exactly one copy. */
+extern __persistent uint8_t g_trace;
+#define TRACE(n) (g_trace = (uint8_t)(n))
+
+#define TRACE_MAIN_POLL 1
+#define TRACE_TASK_POLL 2
+#define TRACE_ISR_I2C1 3
+#define TRACE_ISR_TX 4
+#define TRACE_ISR_RX 5
+#define TRACE_ISR_ERR 6
+#define TRACE_CLIENT_RX_SYNC 7
+#define TRACE_COLD_RX_DISPATCH 8
+#define TRACE_BUTTON_CHANGED 9
+#define TRACE_DISPLAY_REFRESH 10
+#define TRACE_INDICATOR_REFRESH 11
+
 /* ============================================================================
  * Device Addresses
  * ============================================================================
@@ -56,6 +79,11 @@ typedef enum {
     COMM_LEVEL_MODE_READ = COMM_LEVEL_MODE | 0x80,         /* 0x8A */
     COMM_SENSORS_READ = 0x8B,                              /* main -> switching    */
     COMM_CONFIG_READ = COMM_CONFIG | 0x80,                 /* 0x8E */
+
+    /* Test / diagnostic commands (handled by every device, see libcomm_interface) */
+    COMM_TEST_ECHO = 0x0C,          /* any -> any (write); receiver replies test_echo_response */
+    COMM_TEST_ECHO_RESPONSE = 0x0D, /* receiver -> requester (write) */
+    COMM_TEST_READ = 0x8C,          /* any -> any (read); read phase echoes the write-phase value */
 } CommId;
 
 /* ============================================================================
@@ -188,8 +216,14 @@ typedef struct {
  * "Channel state" = the voltage observed downstream of each relay's fuse
  * (read via the relay-output mux). A relay can be commanded ON yet have
  * its channel read 0 if the fuse is blown.
+ *
+ * `packed` for the same reason CommMessage carries it: the uint16_t members
+ * would otherwise get a padding byte after `device_address` on a host with
+ * alignment requirements, making sizeof 8 and shifting every subsequent
+ * wire byte. XC8 already packs by default so this is a no-op there — it only
+ * matters when the library is compiled for the host test suite.
  */
-typedef struct {
+typedef struct __attribute__((packed)) {
     uint8_t device_address;
     uint16_t prev_channels; /* bit N = channel N */
     uint16_t current_channels;
@@ -234,6 +268,16 @@ typedef struct {
     uint8_t value;
 } CommConfig;
 
+/** test_echo (0x0C) / test_echo_response (0x0D) payload: 2 bytes.
+ *  Diagnostic round-trip.  `address` always carries the *sender's* own
+ *  address: the requester sends test_echo with its address + a value; the
+ *  receiver replies with test_echo_response carrying its own address and the
+ *  same value.  The requester thus learns which device answered. */
+typedef struct {
+    uint8_t address; /* sender's own I2C address */
+    uint8_t value;   /* arbitrary value, echoed back unchanged */
+} CommTestEcho;
+
 /* ============================================================================
  * Universal Message Envelope
  * ============================================================================
@@ -266,6 +310,7 @@ typedef struct __attribute__((packed)) {
         CommLevelMode level_mode;           /* 0x0A: 1 byte  */
         CommSensors sensors;                /* 0x8B: 1 byte  */
         CommConfig config;                  /* 0x0E: 2 bytes */
+        CommTestEcho test_echo;             /* 0x0C/0x0D: 2 bytes */
         uint8_t raw[8];                     /* 7 payload bytes + 1 CRC */
     };
 } CommMessage;
@@ -287,7 +332,7 @@ uint8_t comm_address(void);
  */
 
 /* button_effect (0x01) — main -> button board */
-uint8_t comm_build_button_effect(CommMessage* msg, const CommButtonEffect* effect);
+uint8_t comm_build_button_effect(CommMessage* msg, CommButtonEffect* effect);
 
 /* button_changed (0x02) — button board -> main; device_address is filled from
  * comm_address() */
@@ -342,6 +387,18 @@ uint8_t comm_build_config(CommMessage* msg, uint8_t address, uint8_t value);
 /* config_read (0x8E) — main -> any; write phase carries the address byte */
 uint8_t comm_build_config_read(CommMessage* msg, uint8_t address);
 
+/* test_echo (0x0C) — any -> any; `address` is the requester's own address
+ * (where the receiver sends the matching test_echo_response) */
+uint8_t comm_build_test_echo(CommMessage* msg, uint8_t address, uint8_t value);
+
+/* test_echo_response (0x0D) — receiver -> requester; `address` is the
+ * responder's own address so the requester learns who replied */
+uint8_t comm_build_test_echo_response(CommMessage* msg, uint8_t address, uint8_t value);
+
+/* test_read (0x8C) — any -> any; write phase carries the value the read phase
+ * echoes back */
+uint8_t comm_build_test_read(CommMessage* msg, uint8_t value);
+
 /* ============================================================================
  * Inbound payload parsers
  *
@@ -351,25 +408,28 @@ uint8_t comm_build_config_read(CommMessage* msg, uint8_t address);
  * ============================================================================
  */
 
-uint8_t comm_can_parse(const uint8_t* data, uint8_t len);
+uint8_t comm_can_parse(uint8_t* data, uint8_t len);
 
-void comm_parse_button_effect(const uint8_t* data, CommButtonEffect* effect);
-void comm_parse_button_changed(const uint8_t* data, CommButtonChanged* event);
-void comm_parse_button_state_response(const uint8_t* data, CommButtonState* state);
-void comm_parse_button_trigger_write(const uint8_t* data, CommButtonTrigger* trigger);
-void comm_parse_button_trigger_response(const uint8_t* data, CommTriggerConfig* config);
-void comm_parse_relay_state_write(const uint8_t* data, CommRelayState* state);
-void comm_parse_relay_state_response(const uint8_t* data, CommRelayState* state);
-void comm_parse_channel_changed(const uint8_t* data, CommChannelChanged* event);
-void comm_parse_channel_state_response(const uint8_t* data, CommChannelState* state);
-void comm_parse_battery_response(const uint8_t* data, CommBattery* battery);
-void comm_parse_levels_response(const uint8_t* data, CommLevels* levels);
-void comm_parse_level_mode_write(const uint8_t* data, CommLevelMode* mode);
-void comm_parse_level_mode_response(const uint8_t* data, CommLevelMode* mode);
-void comm_parse_sensors_response(const uint8_t* data, CommSensors* sensors);
-void comm_parse_config_write(const uint8_t* data, CommConfig* config);
-void comm_parse_config_read_request(const uint8_t* data, uint8_t* address);
-void comm_parse_config_response(const uint8_t* data, uint8_t* value);
+void comm_parse_button_effect(uint8_t* data, CommButtonEffect* effect);
+void comm_parse_button_changed(uint8_t* data, CommButtonChanged* event);
+void comm_parse_button_state_response(uint8_t* data, CommButtonState* state);
+void comm_parse_button_trigger_write(uint8_t* data, CommButtonTrigger* trigger);
+void comm_parse_button_trigger_response(uint8_t* data, CommTriggerConfig* config);
+void comm_parse_relay_state_write(uint8_t* data, CommRelayState* state);
+void comm_parse_relay_state_response(uint8_t* data, CommRelayState* state);
+void comm_parse_channel_changed(uint8_t* data, CommChannelChanged* event);
+void comm_parse_channel_state_response(uint8_t* data, CommChannelState* state);
+void comm_parse_battery_response(uint8_t* data, CommBattery* battery);
+void comm_parse_levels_response(uint8_t* data, CommLevels* levels);
+void comm_parse_level_mode_write(uint8_t* data, CommLevelMode* mode);
+void comm_parse_level_mode_response(uint8_t* data, CommLevelMode* mode);
+void comm_parse_sensors_response(uint8_t* data, CommSensors* sensors);
+void comm_parse_config_write(uint8_t* data, CommConfig* config);
+void comm_parse_config_read_request(uint8_t* data, uint8_t* address);
+void comm_parse_config_response(uint8_t* data, uint8_t* value);
+void comm_parse_test_echo(uint8_t* data, CommTestEcho* echo); /* test_echo + test_echo_response */
+void comm_parse_test_read_request(uint8_t* data, uint8_t* value);
+void comm_parse_test_read_response(uint8_t* data, uint8_t* value);
 
 /* ============================================================================
  * button_effect helpers
@@ -378,7 +438,7 @@ void comm_parse_config_response(const uint8_t* data, uint8_t* value);
 
 void comm_button_effect_init(CommButtonEffect* effect);
 int8_t comm_button_effect_set(CommButtonEffect* effect, uint8_t output_index, CommButtonOutputEffect value);
-int8_t comm_button_effect_get(const CommButtonEffect* effect, uint8_t output_index, CommButtonOutputEffect* value);
+int8_t comm_button_effect_get(CommButtonEffect* effect, uint8_t output_index, CommButtonOutputEffect* value);
 
 /* ============================================================================
  * button_trigger helpers

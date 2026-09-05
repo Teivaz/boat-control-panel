@@ -1,13 +1,9 @@
-#define _XTAL_FREQ 64000000UL
-
 #include "i2c_board.h"
 
 #include "i2c.h"
 #include "libcomm.h"
 
 #include <xc.h>
-
-#define I2C_RECOVER_HALF_US 5
 
 void i2c_pins_init(void) {
     LATBbits.LATB1 = 1;
@@ -38,7 +34,4 @@ void i2c_pins_init(void) {
     RB2PPS = 0x37;
     I2C1SDAPPS = 0x09; /* RB1 -> SDA1 */
     RB1PPS = 0x38;
-}
-
-void i2c_bus_recover(void) {
 }

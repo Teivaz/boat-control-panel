@@ -2,6 +2,8 @@
 
 #include "display.h"
 
+#include "libcomm.h" /* INTERRUPT_PUSH / INTERRUPT_POP */
+
 #include <xc.h>
 
 /* Pin assignments from board3-main/readme.md:
@@ -21,11 +23,20 @@
 
 static u8g2_t u8g2;
 
+/* The strobe is masked against interrupts: board 3 services I2C at high
+ * priority from the same core that bit-bangs this bus, and !WR must not be
+ * left low across an ISR — the panel latches on the rising edge, so a
+ * stretched low pulse corrupts the byte. The I2C driver takes an interrupt
+ * per byte, which makes that collision routine rather than rare. The window
+ * is four instructions, so the added latency for the I2C vectors is well
+ * inside what the peripheral absorbs by clock-stretching. */
 static void bus_write(uint8_t byte) {
+    INTERRUPT_PUSH;
     LATC = byte;
     WR_PIN = 0;   /* !WR low — data setup window */
     __asm("NOP"); /* >= 60 ns low pulse (single NOP at 64 MHz is ~62.5 ns) */
     WR_PIN = 1;   /* !WR rising edge latches the byte */
+    INTERRUPT_POP;
 }
 
 static void gpio_init(void) {

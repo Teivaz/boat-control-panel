@@ -1,7 +1,6 @@
 #include "rtc.h"
 
 #include "i2c.h"
-#include "i2c_board.h"
 #include "libcomm.h"
 
 /* Single in-flight DS3231 transaction. Both read and write callers are
@@ -16,7 +15,7 @@ typedef enum {
 
 static struct {
     RtcOp op;
-    uint8_t attempt; /* 0 = first, 1 = post-bus-recover retry */
+    uint8_t attempt; /* 0 = first, 1 = retry */
     /* Per-op state */
     uint8_t read_reg; /* RTC register pointer (0x00) for the write phase */
     uint8_t write_buf[4];
@@ -31,8 +30,8 @@ static struct {
 
 static void start_read(void);
 static void start_write(void);
-static void on_read_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
-static void on_write_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx);
+static void on_read_done(I2cResult result, uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t* rx, uint8_t rx_len);
+static void on_write_done(I2cResult result, uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t* rx, uint8_t rx_len);
 static inline uint8_t bcd_to_bin(uint8_t bcd) {
     return (uint8_t)((bcd >> 4) * 10 + (bcd & 0x0F));
 }
@@ -72,8 +71,8 @@ void rtc_write_time(uint8_t hour, uint8_t minute, RtcWriteCompletion cb, void* c
 
 static void start_read(void) {
     state.read_reg = 0x00;
-    if (i2c_submit(COMM_ADDRESS_RTC, &state.read_reg, 1, 7, on_read_done, 0) != I2C_RESULT_OK) {
-        on_read_done(I2C_RESULT_QUEUE_FULL, 0, 0, 0);
+    if (i2c_submit(COMM_ADDRESS_RTC, &state.read_reg, 1, 7, on_read_done) != I2C_RESULT_OK) {
+        on_read_done(I2C_RESULT_QUEUE_FULL, COMM_ADDRESS_RTC, 0, 0, 0, 0);
     }
 }
 
@@ -84,21 +83,22 @@ static void start_write(void) {
     state.write_buf[1] = bin_to_bcd(0);
     state.write_buf[2] = bin_to_bcd(state.write_minute);
     state.write_buf[3] = (uint8_t)(bin_to_bcd(state.write_hour) & 0x3F);
-    if (i2c_submit(COMM_ADDRESS_RTC, state.write_buf, sizeof(state.write_buf), 0, on_write_done, 0) != I2C_RESULT_OK) {
-        on_write_done(I2C_RESULT_QUEUE_FULL, 0, 0, 0);
+    if (i2c_submit(COMM_ADDRESS_RTC, state.write_buf, sizeof(state.write_buf), 0, on_write_done) != I2C_RESULT_OK) {
+        on_write_done(I2C_RESULT_QUEUE_FULL, COMM_ADDRESS_RTC, 0, 0, 0, 0);
     }
 }
 
 /* I2cCompletion conveys success via the result parameter. For reads,
  * rx_len < 7 also indicates a short/failed response. */
-static void on_read_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx) {
-    (void)ctx;
+static void on_read_done(I2cResult result, uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t* rx, uint8_t rx_len) {
+    (void)addr;
+    (void)tx;
+    (void)tx_len;
     if (result != I2C_RESULT_OK || rx_len < 7) {
         if (state.attempt == 0) {
-            /* DS3231 can be left holding SDA low if a transaction is
-             * aborted mid-byte — clock it free and retry once. */
+            /* A transaction aborted mid-byte can leave the DS3231 out of
+             * step with us; one resubmit is enough to resynchronise. */
             state.attempt = 1;
-            i2c_bus_recover();
             start_read();
             return;
         }
@@ -131,10 +131,12 @@ static void on_read_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ct
     }
 }
 
-static void on_write_done(I2cResult result, uint8_t* rx, uint8_t rx_len, void* ctx) {
+static void on_write_done(I2cResult result, uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t* rx, uint8_t rx_len) {
+    (void)addr;
+    (void)tx;
+    (void)tx_len;
     (void)rx;
     (void)rx_len;
-    (void)ctx;
     RtcWriteCompletion cb = state.cb.write;
     void* user_ctx = state.ctx;
     state.op = RTC_OP_NONE;

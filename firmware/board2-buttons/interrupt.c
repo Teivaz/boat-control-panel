@@ -17,8 +17,16 @@ void interrupt_init(void) {
 
     /* Interrupt priorities: I2C events preempt everything else so the
      * client RX / TX path stays responsive. Clear all IPRs to low first,
-     * then promote the two I2C vectors. In priority mode GIE/GIEH gates
-     * high-priority interrupts and GIEL gates low; both must be set. */
+     * then promote the four I2C vectors. In priority mode GIE/GIEH gates
+     * high-priority interrupts and GIEL gates low; both must be set.
+     *
+     * All four must be promoted HERE, not in i2c_init: main.c calls
+     * i2c_init first, so the wholesale IPR7 = 0 above would wipe anything
+     * the driver set. The driver declares all four vectors high_priority,
+     * and it relies on none of them being able to preempt another -- if
+     * TX/RX are left low while I2C1/I2C1E are high, I2C1_ISR preempts the
+     * byte movers mid-update and the declared priority no longer matches
+     * how the hardware dispatches them. */
     INTCON0bits.IPEN = 1;
     IPR0 = 0; IPR1 = 0; IPR2 = 0;  IPR3 = 0;
     IPR4 = 0; IPR5 = 0; IPR6 = 0;  IPR7 = 0;
@@ -26,6 +34,8 @@ void interrupt_init(void) {
     IPR12 = 0; IPR13 = 0; IPR14 = 0; IPR15 = 0;
     IPR7bits.I2C1IP = 1;
     IPR7bits.I2C1EIP = 1;
+    IPR7bits.I2C1TXIP = 1;
+    IPR7bits.I2C1RXIP = 1;
 
     INTCON0bits.GIEL = 1;
     GIE = 1; /* = GIEH in priority mode */

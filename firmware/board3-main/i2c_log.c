@@ -20,6 +20,7 @@ void i2c_log_init(void) {
      * stable symbol in case boot wiring wants a hook in the future. */
 }
 
+#if I2C_LOG_VISIBLE
 static uint8_t crc_valid(const I2cLogEntry* e) {
     /* CR/CT frames store payload + trailing CRC; anything <2 bytes can't be
      * framed, so fail closed. */
@@ -29,19 +30,38 @@ static uint8_t crc_valid(const I2cLogEntry* e) {
     return (uint8_t)(comm_crc8(e->data, (uint8_t)(e->len - 1u)) == e->data[e->len - 1u]);
 }
 
-static const char* kind_label(const I2cLogEntry* e) {
-    switch (e->kind) {
-        case I2C_LOG_CR: return crc_valid(e) ? "CR+" : "CR-";
-        case I2C_LOG_CT: return crc_valid(e) ? "CT+" : "CT-";
-        case I2C_LOG_WA: return "W+";
-        case I2C_LOG_WN: return "W-";
-        /* R+ requires both I2C-level ACK (set by the ISR on successful Stop)
-         * AND CRC match on the response payload.  A corrupt response with
-         * an I2C-level ACK is shown as R- so the log matches what
-         * on_*_read_done actually delivered (NULL → caller saw failure). */
-        case I2C_LOG_RA: return crc_valid(e) ? "R+" : "R-";
-        case I2C_LOG_RN: return "R-";
-        default:         return "??";
+/* Two characters: phase, then how it ended.  The entry carries kind and
+ * result independently, so the two axes are formatted independently and
+ * the caller reads them off as a pair.
+ *
+ *   c/t  client received / client responded
+ *   w/r  host write phase / host read phase
+ *
+ *   ' '  bus-level ACK on every byte, and the framed CRC checks out
+ *   '!'  bus-level ACK on every byte, but the CRC does not match — the
+ *        peer answered with the wrong content, typically a stale
+ *        g_client_tx leaking through or a torn shadow read
+ *   B N T Q A  busy, NACK, bus time-out, queue full, bad argument */
+static char phase_char(uint8_t kind) {
+    switch (kind) {
+        case I2C_LOG_CR: return 'c';
+        case I2C_LOG_CT: return 't';
+        case I2C_LOG_W:  return 'w';
+        case I2C_LOG_R:  return 'r';
+        default:         return '?';
+    }
+}
+
+static char result_char(const I2cLogEntry* e) {
+    switch (e->result) {
+        case I2C_RESULT_OK:         return crc_valid(e) ? ' ' : '!';
+        case I2C_RESULT_BUSY:       return 'B';
+        case I2C_RESULT_NACK:       return 'N';
+        case I2C_RESULT_TIMEOUT:    return 'T';
+        case I2C_RESULT_QUEUE_FULL: return 'Q';
+        case I2C_RESULT_BAD_ARG:    return 'A';
+        case I2C_RESULT_BAD_CRC:    return '!';
+        default:                    return '?';
     }
 }
 
@@ -56,11 +76,13 @@ static uint8_t append_hex(char* out, uint8_t pos, uint8_t v) {
 }
 
 static void format_entry(char* out, const I2cLogEntry* e) {
-    const char* label = kind_label(e);
     uint8_t pos = 0;
-    while (*label && pos < LOG_TEXT_MAX) {
-        out[pos++] = *label++;
-    }
+    /* Per-transaction id (hex, wraps at 0xFF) — the W and R entries of a
+     * write-then-read share an id, so the eye can pair them visually. */
+    pos = append_hex(out, pos, e->req_id);
+    out[pos++] = ' ';
+    out[pos++] = phase_char(e->kind);
+    out[pos++] = result_char(e);
     /* CR / CT don't carry a separate peer address (CR embeds the sender in
      * its payload, CT uses addr=0); host ops prefix the target addr. */
     if (e->kind != I2C_LOG_CR && e->kind != I2C_LOG_CT) {
@@ -73,8 +95,10 @@ static void format_entry(char* out, const I2cLogEntry* e) {
     }
     out[pos] = '\0';
 }
+#endif /* I2C_LOG_VISIBLE */
 
 void i2c_log_render(u8g2_t* g) {
+#if I2C_LOG_VISIBLE
     I2cLogEntry snapshot[LOG_MAX_LINES];
     uint8_t count = i2c_log_snapshot(snapshot, LOG_MAX_LINES);
 
@@ -90,4 +114,7 @@ void i2c_log_render(u8g2_t* g) {
 
     /* Leave font restored for subsequent draws. */
     u8g2_SetFont(g, u8g2_font_unifont_tr);
+#else
+    (void)g;
+#endif
 }
