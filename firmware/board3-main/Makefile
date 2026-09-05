@@ -55,6 +55,10 @@ CFLAGS = \
     -I$(LIBCOMM_DIR) \
     -I$(U8G2_DIR)
 
+# Appended by build.sh for a debug configuration (__DEBUG plus the
+# -mdebugger reservation). Empty for a production build.
+CFLAGS += $(EXTRA_CFLAGS)
+
 DEPS      = $(OBJS:.p1=.d)
 U8G2_DEPS = $(U8G2_OBJS:.p1=.d)
 

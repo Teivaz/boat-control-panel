@@ -52,6 +52,9 @@ static void init(void) {
 
     /* Interrupts enabled last. */
     interrupt_init();
+
+    /* Only now is it safe to answer on the bus - see i2c_start(). */
+    i2c_start();
 }
 
 void __interrupt(low_priority, irq(TMR0), base(8)) TMR0_ISR(void) {

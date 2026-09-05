@@ -31,6 +31,10 @@ CFLAGS = \
     -MMD \
     $(DEFS)
 
+# Appended by build.sh for a debug configuration (__DEBUG plus the
+# -mdebugger reservation). Empty for a production build.
+CFLAGS += $(EXTRA_CFLAGS)
+
 DEPS = $(OBJS:.p1=.d)
 
 # ── Targets ───────────────────────────────────────────────────────────────────

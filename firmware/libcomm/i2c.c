@@ -385,7 +385,21 @@ void i2c_init(uint8_t addr) {
     i2c_dma_init();
     i2c_dma_client_rx();
     i2c_dma_client_tx();
+}
 
+/* Bring the peripheral on the bus.  Split from i2c_init because enabling it
+ * makes this device start ACKing its address immediately, and an address
+ * matched before the ISRs can run leaves the peripheral clock-stretching for
+ * a receive that software never services.  Nothing then releases SCL and the
+ * whole bus stops - every board on it, not just this one.
+ *
+ * The window is not theoretical: every board enables I2C early in init() and
+ * calls interrupt_init() last, so anything slow in between - seeding EEPROM
+ * defaults, for instance - widens it to tens of milliseconds while other
+ * masters are polling.
+ *
+ * Call once, after interrupt_init(). */
+void i2c_start(void) {
     I2C1CON0bits.EN = 1;
 }
 

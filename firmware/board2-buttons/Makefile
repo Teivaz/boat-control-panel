@@ -48,6 +48,10 @@ CFLAGS = \
     -MMD \
     -I$(LIBCOMM_DIR)
 
+# Appended by build.sh for a debug configuration (__DEBUG plus the
+# -mdebugger reservation). Empty for a production build.
+CFLAGS += $(EXTRA_CFLAGS)
+
 DEPS = $(OBJS:.p1=.d)
 
 LDFLAGS = \

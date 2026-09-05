@@ -46,6 +46,9 @@ static void init(void) {
 
     /* Interrupts enabled last. */
     interrupt_init();
+
+    /* Only now is it safe to answer on the bus - see i2c_start(). */
+    i2c_start();
 }
 
 /* TMR0 in 8-bit mode clocked from Fosc/4 with /128 prescaler gives

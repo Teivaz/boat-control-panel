@@ -149,8 +149,14 @@ void i2c_set_sync_cold_rx_handler(I2cSyncColdRxHandler handler);
 uint8_t i2c_log_snapshot(I2cLogEntry* out, uint8_t capacity);
 
 /* One-time hardware init.  Configures I2C1 at 400 kHz.
- * Caller must have set up pins and oscillator beforehand. */
+ * Caller must have set up pins and oscillator beforehand.  Leaves the
+ * peripheral off the bus - call i2c_start() once interrupts are enabled. */
 void i2c_init(uint8_t client_addr);
+
+/* Bring the peripheral on the bus.  Call once, after interrupt_init(): an
+ * address matched while the ISRs are still masked will stretch SCL
+ * indefinitely and wedge the bus for every device on it. */
+void i2c_start(void);
 
 /* Set the data that the client is expected to transmit */
 I2cResult i2c_set_client_tx(uint8_t* tx, uint8_t tx_len);
