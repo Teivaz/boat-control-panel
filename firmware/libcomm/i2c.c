@@ -65,9 +65,6 @@ typedef enum {
     FSM_CLIENT_RX,
 } FSMState;
 
-/* XXX DIAGNOSTIC — TEMPORARY, REMOVE ME. See TRACE() in libcomm.h. */
-__persistent uint8_t g_trace;
-
 static I2cCompletion g_cold_rx = 0;
 static I2cSyncColdRxHandler g_sync_cold_rx = 0;
 
@@ -469,7 +466,6 @@ void i2c_start(void) {
 /* ── Main-loop poll ─────────────────────────────────────────────────── */
 
 void i2c_poll(void) {
-    TRACE(TRACE_MAIN_POLL);
     I2cCompletion callback = 0;
     uint8_t addr = 0;
     uint8_t tx[I2C_TX_MAX];
@@ -628,7 +624,6 @@ static void prepend_completed_task(uint8_t addr, const volatile uint8_t* rx, uin
  * that (or CLRBF) is the only thing that clears the read-only flag.
  */
 void __interrupt(high_priority, irq(I2C1TX), base(8)) I2C1TX_ISR(void) {
-    TRACE(TRACE_ISR_TX);
     switch (g_fsm) {
         case FSM_HOST_TX: {
             MessageTask* task = &g_queue[g_q_active];
@@ -661,7 +656,6 @@ void __interrupt(high_priority, irq(I2C1TX), base(8)) I2C1TX_ISR(void) {
  * business receiving right now.
  */
 void __interrupt(high_priority, irq(I2C1RX), base(8)) I2C1RX_ISR(void) {
-    TRACE(TRACE_ISR_RX);
     uint8_t b = I2C1RXB;
     switch (g_fsm) {
         case FSM_HOST_RX: {
@@ -689,7 +683,6 @@ void __interrupt(high_priority, irq(I2C1RX), base(8)) I2C1RX_ISR(void) {
 /* ── Protocol event vector ──────────────────────────────────────────── */
 
 void __interrupt(high_priority, irq(I2C1), base(8)) I2C1_ISR(void) {
-    TRACE(TRACE_ISR_I2C1);
     /* Byte counter reached zero — all planned bytes have been transferred. */
     if (I2C1PIEbits.CNTIE && I2C1PIRbits.CNTIF) {
         I2C1PIRbits.CNTIF = 0;
@@ -697,10 +690,25 @@ void __interrupt(high_priority, irq(I2C1), base(8)) I2C1_ISR(void) {
         return;
     }
 
-    /* Address match, on the 8th falling SCL edge of a matching address. */
-    if (I2C1PIEbits.ADRIE && I2C1PIRbits.ADRIF) {
-        I2C1PIRbits.ADRIF = 0;
-        isr_on_address();
+    /* A transaction's terminating event is checked before the address that
+     * may follow it, because on the wire it happened first and only one
+     * flag is serviced per entry.
+     *
+     * This is load-bearing for client reads.  A write-then-read puts
+     * Restart and the read-phase address a few microseconds apart, so both
+     * RSCIF and ADRIF are routinely pending together.  isr_on_restart is
+     * what runs on_client_rx_complete -> the sync dispatcher ->
+     * comm_respond, i.e. it is what stages the reply; isr_on_address is
+     * what consumes it.  Servicing the address first finds g_client_tx_len
+     * still 0 and NACKs the read, so the host gets a zero-length response
+     * and every read fails while writes are unaffected.
+     *
+     * Returning after one flag is fine: the vector re-fires immediately
+     * while any other flag is still set, and the client is stretching via
+     * CSTR throughout, so there is no deadline. */
+    if (I2C1PIEbits.RSCIE && I2C1PIRbits.RSCIF) {
+        I2C1PIRbits.RSCIF = 0;
+        isr_on_restart();
         return;
     }
 
@@ -710,9 +718,10 @@ void __interrupt(high_priority, irq(I2C1), base(8)) I2C1_ISR(void) {
         return;
     }
 
-    if (I2C1PIEbits.RSCIE && I2C1PIRbits.RSCIF) {
-        I2C1PIRbits.RSCIF = 0;
-        isr_on_restart();
+    /* Address match, on the 8th falling SCL edge of a matching address. */
+    if (I2C1PIEbits.ADRIE && I2C1PIRbits.ADRIF) {
+        I2C1PIRbits.ADRIF = 0;
+        isr_on_address();
         return;
     }
 }
@@ -885,13 +894,29 @@ static void on_client_rx_complete(void) {
      *
      * This pointer is called from this one vector and no other — see the
      * "one function pointer, one vector" rule in ../../CLAUDE.md. */
-    TRACE(TRACE_CLIENT_RX_SYNC);
     if (g_sync_cold_rx && g_sync_cold_rx((uint8_t*)g_client_rx, received) == 0) {
         return;
     }
 
     /* A client does not learn the sender's address from the bus; use 0. */
     prepend_completed_task(0x00, g_client_rx, received);
+}
+
+/* Take any received byte the RX vector has not serviced yet.
+ *
+ * The final byte's RXIF and the transaction's PCIF can be pending at the
+ * same moment, and all four I2C vectors share one priority level, so the
+ * hardware vector order — not arrival order — decides which runs first.
+ * When Stop wins, the last byte is still sitting in RXB and completing the
+ * task here would drop it.  For a framed response that byte is the CRC, so
+ * the loss is not partial data but a read that always fails validation.
+ *
+ * Reading I2CxRXB is also what clears RXBF (§37.3.10), so draining here
+ * leaves the buffer in the state enter_client expects. */
+static void drain_rx(MessageTask* task) {
+    while (I2C1STAT1bits.RXBF && g_rx_pos < task->rx_len) {
+        task->rx[g_rx_pos++] = I2C1RXB;
+    }
 }
 
 static void isr_on_stop(void) {
@@ -908,6 +933,7 @@ static void isr_on_stop(void) {
             break;
 
         case FSM_HOST_RX:
+            drain_rx(task);
             /* g_rx_pos, not task->rx_len: log what the wire delivered. */
             log_append(I2C_LOG_R, I2C_RESULT_OK, task->addr, task->req_id, task->rx, g_rx_pos);
             g_fsm = FSM_IDLE;
@@ -963,7 +989,6 @@ static void isr_on_restart(void) {
  * i2c_poll dispatches the failed task.
  */
 void __interrupt(high_priority, irq(I2C1E), base(8)) I2C1_ERROR_ISR(void) {
-    TRACE(TRACE_ISR_ERR);
     if (I2C1ERRbits.NACKIF) {
         I2C1ERRbits.NACKIF = 0;
         isr_on_nack();

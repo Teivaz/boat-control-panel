@@ -66,52 +66,8 @@ void comm_on_button_state_read_requested(void) {
 void comm_on_button_trigger_read_requested(uint8_t button_id) {
     (void)button_id;
 }
-/* XXX DIAGNOSTIC — TEMPORARY, REMOVE ME (with comm.h decls, the main.c latch
- * call and the display_text tick).
- *
- * Liveness counter read at 0x20 (low) / 0x21 (high). Free-running from boot,
- * so a decrease between two reads means the board restarted, and a value
- * that stops advancing means it hung. 16-bit at the display refresh rate
- * wraps in ~55 minutes, well outside a test run — an 8-bit counter's wrap is
- * indistinguishable from a restart. */
-#define DIAG_UPTIME_LO 0x20
-#define DIAG_UPTIME_HI 0x21
-#define DIAG_RESET_CAUSE 0x22
-
-static uint16_t g_uptime;
-
-/* PCON0 as it stood at boot, before anything could disturb it, then re-armed
- * so the next event is visible. Only meaningful when 0x20/0x21 confirm a
- * restart actually happened.
- *   bit7 STKOVF  bit6 STKUNF          set by the event
- *   bit3 !RMCLR  bit2 !RI  bit1 !POR  bit0 !BOR   cleared by the event */
-static uint8_t g_reset_cause;
-
-void comm_reset_cause_latch(void) {
-    g_reset_cause = PCON0;
-    PCON0 = 0x3F;
-}
-
-uint8_t comm_reset_cause(void) {
-    return g_reset_cause;
-}
-
-void comm_tick_liveness(void) {
-    g_uptime++;
-}
-
 void comm_on_config_read_requested(uint8_t address) {
-    uint8_t v;
-    if (address == DIAG_UPTIME_LO) {
-        v = (uint8_t)(g_uptime & 0xFFu);
-    } else if (address == DIAG_UPTIME_HI) {
-        v = (uint8_t)(g_uptime >> 8);
-    } else if (address == DIAG_RESET_CAUSE) {
-        v = g_reset_cause;
-    } else {
-        v = config_read_byte(address);
-    }
-    comm_respond(&v, 1);
+    (void)address;
 }
 void comm_on_relay_state_read_requested(void) {
 }

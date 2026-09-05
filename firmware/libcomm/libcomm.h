@@ -13,28 +13,6 @@
     GIE = 0
 #define INTERRUPT_POP GIE = (__bit)_gie_state
 
-/* XXX DIAGNOSTIC — TEMPORARY, REMOVE ME (with every TRACE() call site and the
- * blink-out in board3-main/main.c).
- *
- * Localises a wild jump: the board re-enters main() with no PCON0 flag set,
- * so there is no hardware reset and RAM therefore survives. __persistent
- * keeps this out of the startup clear, so whatever region was last entered
- * before the PC went wild is still readable on the next pass through main().
- * Defined in i2c.c so every board links exactly one copy. */
-extern __persistent uint8_t g_trace;
-#define TRACE(n) (g_trace = (uint8_t)(n))
-
-#define TRACE_MAIN_POLL 1
-#define TRACE_TASK_POLL 2
-#define TRACE_ISR_I2C1 3
-#define TRACE_ISR_TX 4
-#define TRACE_ISR_RX 5
-#define TRACE_ISR_ERR 6
-#define TRACE_CLIENT_RX_SYNC 7
-#define TRACE_COLD_RX_DISPATCH 8
-#define TRACE_BUTTON_CHANGED 9
-#define TRACE_DISPLAY_REFRESH 10
-#define TRACE_INDICATOR_REFRESH 11
 
 /* ============================================================================
  * Device Addresses

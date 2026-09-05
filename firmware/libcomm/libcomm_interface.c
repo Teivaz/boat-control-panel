@@ -387,7 +387,6 @@ static uint8_t sync_cold_rx_dispatch(uint8_t* data, uint8_t len) {
 }
 
 static void cold_rx_dispatch(I2cResult result, uint8_t addr, uint8_t* tx, uint8_t tx_len, uint8_t* data, uint8_t len) {
-    TRACE(TRACE_COLD_RX_DISPATCH);
     (void)result;
     (void)addr;
     (void)tx;
