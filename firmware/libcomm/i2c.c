@@ -830,9 +830,17 @@ static void isr_on_count_zero(void) {
                 I2C1ADB1 = (uint8_t)((task->addr << 1) | 0b1);
                 I2C1CNTH = 0;
                 I2C1CNTL = task->rx_len;
-                I2C1CON0bits.RSEN = 0;
                 I2C1CON1bits.ACKCNT = 1;
                 byte_irq(0, 1);
+                /* RSEN stays 1 across this write: it is what makes the
+                 * hardware hold MDR and emit a Restart rather than a Stop.
+                 * Clearing it here — before the module has acted on S —
+                 * retires the pending Restart and the write phase ends in a
+                 * Stop instead, which is what made every read return zero
+                 * bytes (seen directly on the analyser: "addr W, data, ACK,
+                 * Stop" with no repeated start).  isr_on_restart clears RSEN
+                 * once the Restart is on the wire, so the terminal read byte
+                 * still auto-Stops instead of parking on MDR. */
                 I2C1CON0bits.S = 1; /* Restart */
             } else {
                 g_fsm = FSM_IDLE;
@@ -959,9 +967,15 @@ static void isr_on_restart(void) {
     switch (g_fsm) {
         case FSM_IDLE:
         case FSM_HOST_TX:
+            break;
+
         case FSM_HOST_RX:
             /* Our own Restart between the write and read phases; the state
-             * change was already made in isr_on_count_zero. */
+             * change was already made in isr_on_count_zero.  Now that the
+             * Restart is on the wire, drop RSEN so the 9th falling of the
+             * terminal read byte auto-issues Stop rather than parking on MDR
+             * and hanging the bus until BTO. */
+            I2C1CON0bits.RSEN = 0;
             break;
 
         case FSM_CLIENT_RX:

@@ -1,0 +1,234 @@
+#!/usr/bin/env python3
+"""Passive I2C bus sniffer for the boat panel, on a Hantek 6022BL (or any
+fx2lafw-compatible logic analyser).
+
+Captures with sigrok-cli, decodes I2C, then annotates each transaction with
+libcomm semantics: board names, command names, CRC validation, and
+write-then-read pairing.  Read-only — the 6022BL has no output drivers.  Use
+tools/inspector to *drive* the bus.
+
+    ./i2csniff                    capture 1 s and print transactions
+    ./i2csniff -t 3               capture 3 s
+    ./i2csniff --raw              also print the raw sigrok annotations
+    ./i2csniff --scl D1 --sda D0  override probe channels
+
+Default probes are SCL=D1, SDA=D0, which is how the bench is wired.  If the
+decode comes out as nonsense, the two are almost certainly swapped.
+"""
+
+import argparse
+import re
+import subprocess
+import sys
+
+BOARDS = {
+    0x40: "main",
+    0x42: "sw",
+    0x44: "btnL",
+    0x45: "btnL2",
+    0x46: "btnR",
+    0x47: "btnR2",
+    0x68: "rtc",
+}
+
+# Command id -> (name, payload length of the *request* frame body).  Mirrors
+# expected_body_len() in libcomm/libcomm.c; read commands (MSB set) carry a
+# request body of 0 unless they select something.
+COMMANDS = {
+    0x01: "button_effect",
+    0x02: "button_changed",
+    0x04: "button_trigger",
+    0x05: "relay_state",
+    0x06: "channel_changed",
+    0x0A: "level_mode",
+    0x0C: "test_echo",
+    0x0D: "test_echo_response",
+    0x0E: "config",
+    0x0F: "reset",
+    0x83: "button_state_read",
+    0x84: "button_trigger_read",
+    0x85: "relay_state_read",
+    0x87: "channel_state_read",
+    0x88: "battery_read",
+    0x89: "levels_read",
+    0x8A: "level_mode_read",
+    0x8B: "sensors_read",
+    0x8C: "test_read",
+    0x8E: "config_read",
+}
+
+
+def crc8(data):
+    """CRC-8/ROHC: poly 0x07, init 0xFF — matches libcomm's comm_crc8."""
+    crc = 0xFF
+    for byte in data:
+        crc ^= byte
+        for _ in range(8):
+            crc = ((crc << 1) ^ 0x07) & 0xFF if crc & 0x80 else (crc << 1) & 0xFF
+    return crc
+
+
+class Transaction:
+    """One Start..Stop group, which may contain a repeated start."""
+
+    def __init__(self):
+        self.phases = []  # list of dicts: addr, rw, bytes, nacks
+        self.restart = False
+        self.truncated = False
+
+    def add_phase(self, addr, rw):
+        self.phases.append({"addr": addr, "rw": rw, "bytes": [], "nacks": 0})
+
+
+def capture(samplerate, samples, scl, sda, driver):
+    cmd = [
+        "sigrok-cli", "-d", driver,
+        "--config", f"samplerate={samplerate}",
+        "--samples", str(samples),
+        "-P", f"i2c:scl={scl}:sda={sda}",
+        "-A", "i2c=start:repeat-start:stop:ack:nack:"
+              "address-write:address-read:data-write:data-read",
+    ]
+    proc = subprocess.run(cmd, capture_output=True, text=True)
+    if proc.returncode != 0:
+        sys.exit(f"sigrok-cli failed:\n{proc.stderr.strip()}")
+    return proc.stdout.splitlines()
+
+
+ANNOT = re.compile(r"^i2c-1:\s+(.*)$")
+
+
+def parse(lines):
+    """Fold sigrok's annotation stream into transactions."""
+    transactions = []
+    cur = None
+    for line in lines:
+        m = ANNOT.match(line)
+        if not m:
+            continue
+        text = m.group(1).strip()
+
+        if text == "Start":
+            cur = Transaction()
+            transactions.append(cur)
+        elif text == "Start repeat":
+            if cur:
+                cur.restart = True
+        elif text == "Stop":
+            cur = None
+        elif cur is None:
+            # Traffic that began before the capture window opened.
+            continue
+        elif text.startswith("Address write: "):
+            cur.add_phase(int(text.split(": ")[1], 16), "W")
+        elif text.startswith("Address read: "):
+            cur.add_phase(int(text.split(": ")[1], 16), "R")
+        elif text.startswith("Data write: ") or text.startswith("Data read: "):
+            if cur.phases:
+                cur.phases[-1]["bytes"].append(int(text.split(": ")[1], 16))
+        elif text == "NACK":
+            if cur.phases:
+                cur.phases[-1]["nacks"] += 1
+    return transactions
+
+
+def board(addr):
+    return BOARDS.get(addr, f"0x{addr:02X}")
+
+
+def describe(txn):
+    """One line per transaction, in protocol terms."""
+    if not txn.phases:
+        return None
+
+    write = next((p for p in txn.phases if p["rw"] == "W"), None)
+    read = next((p for p in txn.phases if p["rw"] == "R"), None)
+
+    if write is None:
+        # A read with no write phase in the same Start..Stop group.  On this
+        # bus that means the requester issued Stop-then-Start instead of a
+        # repeated start, so the read arrived as its own transaction — worth
+        # flagging, because it is not atomic against other masters.
+        parts = [f"{board(read['addr']):>5} {'(read, split txn)':<20}",
+                 "R[" + " ".join(f"{b:02X}" for b in read["bytes"]) + "]"]
+        if len(read["bytes"]) >= 2:
+            body, sent = read["bytes"][:-1], read["bytes"][-1]
+            parts.append("crc:ok" if crc8(body) == sent else "crc:BAD")
+        parts.append("<-- no repeated start")
+        return "  ".join(parts)
+
+    parts = []
+    cmd_id = write["bytes"][0] if write["bytes"] else None
+    name = COMMANDS.get(cmd_id, f"0x{cmd_id:02X}" if cmd_id is not None else "?")
+
+    parts.append(f"{board(write['addr']):>5} {name:<20}")
+    parts.append("W[" + " ".join(f"{b:02X}" for b in write["bytes"]) + "]")
+
+    # Request framing: id + body + CRC.  Flag a bad CRC outright — it means
+    # the receiver will drop the frame in comm_can_parse.
+    if len(write["bytes"]) >= 2:
+        body, sent = write["bytes"][:-1], write["bytes"][-1]
+        parts.append("crc:ok " if crc8(body) == sent else "crc:BAD")
+    else:
+        parts.append("       ")
+
+    is_read = cmd_id is not None and (cmd_id & 0x80)
+
+    if read:
+        parts.append("R[" + " ".join(f"{b:02X}" for b in read["bytes"]) + "]")
+        if len(read["bytes"]) >= 2:
+            body, sent = read["bytes"][:-1], read["bytes"][-1]
+            parts.append("crc:ok" if crc8(body) == sent else "crc:BAD")
+        elif not read["bytes"]:
+            parts.append("*** no data returned ***")
+    elif is_read:
+        # The whole point of this tool: a read command whose read phase never
+        # happened.  Distinguishes "responder said nothing" from "requester
+        # never asked".
+        parts.append("*** NO RESTART — read phase never issued ***")
+
+    if write["nacks"] or (read and read["nacks"] > 1):
+        parts.append("NACK")
+
+    return "  ".join(parts)
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Annotated I2C sniffer for the boat panel")
+    ap.add_argument("-t", "--seconds", type=float, default=1.0, help="capture duration (default 1)")
+    ap.add_argument("-r", "--samplerate", default="4m", help="sigrok samplerate (default 4m)")
+    ap.add_argument("--scl", default="D1", help="SCL channel (default D1)")
+    ap.add_argument("--sda", default="D0", help="SDA channel (default D0)")
+    ap.add_argument("-d", "--driver", default="fx2lafw", help="sigrok driver (default fx2lafw)")
+    ap.add_argument("--raw", action="store_true", help="also dump raw sigrok annotations")
+    args = ap.parse_args()
+
+    hz = float(args.samplerate.rstrip("mMkK"))
+    if args.samplerate[-1] in "mM":
+        hz *= 1e6
+    elif args.samplerate[-1] in "kK":
+        hz *= 1e3
+    samples = int(hz * args.seconds)
+
+    print(f"capturing {args.seconds}s at {args.samplerate} (SCL={args.scl} SDA={args.sda})...",
+          file=sys.stderr)
+    lines = capture(args.samplerate, samples, args.scl, args.sda, args.driver)
+    if args.raw:
+        print("\n".join(lines))
+        print("-" * 70)
+
+    transactions = parse(lines)
+    shown = 0
+    for txn in transactions:
+        line = describe(txn)
+        if line:
+            print(line)
+            shown += 1
+    print(f"\n{shown} transaction(s)", file=sys.stderr)
+    if not shown:
+        print("no I2C traffic decoded — check probe channels (try --scl D0 --sda D1)",
+              file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()
