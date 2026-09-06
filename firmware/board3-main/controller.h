@@ -37,6 +37,10 @@ void controller_on_config_read_response(const uint8_t* value);
  * keeps it off the deep inbound-message call chain. */
 uint16_t controller_button_channel_mask(uint8_t side, uint8_t idx);
 
+/* Issue a due DS3231 read. Call from main's loop, not from a task — see the
+ * definition for the hardware-stack reason. */
+void controller_poll_rtc(void);
+
 /* State queries for UI / display layers. */
 uint8_t controller_power_on(void);
 NavMode controller_nav_mode(void);
