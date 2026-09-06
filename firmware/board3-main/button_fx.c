@@ -118,16 +118,33 @@ void button_fx_on_channel_state(uint16_t channels) {
     for (uint8_t side = 0; side < BUTTON_FX_SIDES; side++) {
         for (uint8_t b = 0; b < BUTTON_FX_BUTTONS_PER_SIDE; b++) {
             Slot* s = (Slot*)&slots[side][b];
-            /* Both PENDING and ERROR converge back to IDLE once the bus
-             * agrees with what was asked for. Previously only PENDING was
-             * considered, so a slot that had timed out stayed red for as long
-             * as the panel was up — even after the channel reached the
-             * requested state — until the user pressed that button again. */
-            if (s->state != FX_PENDING && s->state != FX_ERROR) {
-                continue;
+            if (s->expected_mask == 0) {
+                continue; /* button not mapped to a channel — always dark */
             }
-            if ((channels & s->expected_mask) == s->expected_value) {
-                s->state = FX_IDLE;
+            const uint8_t matches = ((channels & s->expected_mask) == s->expected_value);
+
+            if (matches) {
+                /* Both PENDING and ERROR converge back to IDLE once the bus
+                 * agrees with what was asked for. Considering only PENDING
+                 * left a slot that had timed out red for as long as the panel
+                 * was up — even after the channel reached the requested state
+                 * — until the user pressed that button again. */
+                if (s->state != FX_IDLE) {
+                    s->state = FX_IDLE;
+                    s->deadline_ticks = 0;
+                }
+            } else if (s->state == FX_IDLE && s->expected_value != 0) {
+                /* A channel that was on and settled has stopped reading
+                 * voltage — a blown fuse or a lost supply. That is the same
+                 * fault as a press that never took effect, so it renders the
+                 * same way. Without this a settled slot never re-examined
+                 * itself and kept showing solid white on a dead channel.
+                 *
+                 * Only asserted when the channel was asked to be on: the
+                 * inverse (commanded off but reading voltage) is not a fault
+                 * this panel can act on, and flagging it would light buttons
+                 * for channels the user has deliberately switched off. */
+                s->state = FX_ERROR;
                 s->deadline_ticks = 0;
             }
         }
