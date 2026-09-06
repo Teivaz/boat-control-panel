@@ -153,6 +153,7 @@ static void poll_battery_task(TaskId id, void* ctx);
 static void poll_levels_task(TaskId id, void* ctx);
 static void poll_sensors_task(TaskId id, void* ctx);
 static void poll_channels_task(TaskId id, void* ctx);
+static void poll_rtc_task(TaskId id, void* ctx);
 static void on_rtc_read_done(uint8_t ok, const RtcTime* t, void* ctx);
 static ActionEffect apply_action(const ButtonAction* a);
 static void recompute_target(void);
@@ -163,8 +164,6 @@ static volatile uint8_t rtc_valid;
 
 static volatile uint8_t relay_inflight;
 static volatile uint8_t rtc_inflight;
-static volatile uint8_t rtc_due;
-static uint8_t rtc_divider;
 static volatile uint16_t relay_inflight_value;
 
 /* Staleness counters: incremented each poll tick (POLL_TICK_MS), reset
@@ -222,8 +221,7 @@ void controller_init(TaskController* ctrl) {
      * of the five interrupt vectors nest on top, so adding main-context depth
      * appears to overflow it (STVREN then resets). Re-enable only after that
      * headroom is understood — the clock display stays frozen until then. */
-    /* The RTC is polled from main's loop via controller_poll_rtc(), not from
-     * a task: see that function for why. */
+    // task_controller_add(ctrl, TASK_POLL_RTC, RTC_TICK_MS, poll_rtc_task, 0);
 }
 
 /* ============================================================================
@@ -569,11 +567,6 @@ static void retry_task(TaskId id, void* ctx) {
         }
     }
 
-    if (++rtc_divider >= (1000u / RETRY_TICK_MS)) {
-        rtc_divider = 0;
-        rtc_due = 1;
-    }
-
     if (!relay_dirty || relay_inflight) {
         return;
     }
@@ -692,6 +685,16 @@ void controller_on_sensors_response(const CommSensors* sns) {
     }
 }
 
+static void poll_rtc_task(TaskId id, void* ctx) {
+    (void)id;
+    (void)ctx;
+    if (rtc_inflight) {
+        return;
+    }
+    rtc_inflight = 1;
+    rtc_read(on_rtc_read_done, 0);
+}
+
 static void on_rtc_read_done(uint8_t ok, const RtcTime* t, void* ctx) {
     (void)ctx;
     if (ok) {
@@ -800,27 +803,4 @@ void controller_on_config_completion(I2cResult result) {
     if (cb) {
         cb((uint8_t)(result == I2C_RESULT_OK), user_ctx);
     }
-}
-
-/* Issue the DS3231 read, called from main's loop rather than from a task.
- *
- * Depth, not preference, decides this. XC8 measures main at 23 hardware stack
- * levels of the PIC18's 31, and the whole of that comes from
- * i2c_poll -> cold_rx_dispatch -> the protocol handlers. Hanging the RTC read
- * off a task callback added a level to that same maximum and the board began
- * executing at the reset vector within a few button presses -- PCON0's STKOVF
- * came back set after being explicitly cleared, so it was a real stack
- * overflow, not a wild jump. Reached from main directly the chain is only a
- * few levels deep, so it fits under the existing maximum instead of extending
- * it. retry_task only sets the due flag, which costs nothing. */
-void controller_poll_rtc(void) {
-    if (!rtc_due) {
-        return;
-    }
-    rtc_due = 0;
-    if (rtc_inflight) {
-        return;
-    }
-    rtc_inflight = 1;
-    rtc_read(on_rtc_read_done, 0);
 }

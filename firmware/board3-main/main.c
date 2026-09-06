@@ -90,6 +90,5 @@ void main(void) {
     while (1) {
         i2c_poll();
         task_controller_poll(&ctrl);
-        controller_poll_rtc();
     }
 }
