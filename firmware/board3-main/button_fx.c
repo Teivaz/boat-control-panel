@@ -8,7 +8,12 @@
 #include <xc.h>
 
 #define TICK_MS 10u
-#define TIMEOUT_MS 100u
+/* Must exceed the time it takes for a channel observation to arrive: the
+ * switching board's channel_changed push, or failing that the channel_state
+ * poll at POLL_TICK_MS (200 ms). The previous 100 ms was shorter than the
+ * poll itself, so a press that was working perfectly still timed out to
+ * FX_ERROR and flashed red. */
+#define TIMEOUT_MS 1000u
 
 typedef enum {
     FX_IDLE = 0,
@@ -83,9 +88,11 @@ void button_fx_notify_press(uint8_t side, uint8_t idx, uint16_t mask, uint16_t v
     Slot* s = (Slot*)&slots[side][idx];
     s->expected_mask = mask;
     s->expected_value = (uint16_t)(value & mask);
-    /* Fast-path: if the bus already shows channel voltage matching the
-     * requested state there is nothing to wait for. */
-    if ((last_channels & mask) == s->expected_value) {
+    /* Switching off transitions instantly, and the fast path covers the case
+     * where the bus already shows the requested state — neither has anything
+     * to wait for, and pending on them only created a deadline that could
+     * expire into a spurious red. */
+    if (s->expected_value == 0 || (last_channels & mask) == s->expected_value) {
         s->state = FX_IDLE;
         s->deadline_ticks = 0;
     } else {
@@ -99,7 +106,12 @@ void button_fx_on_channel_state(uint16_t channels) {
     for (uint8_t side = 0; side < BUTTON_FX_SIDES; side++) {
         for (uint8_t b = 0; b < BUTTON_FX_BUTTONS_PER_SIDE; b++) {
             Slot* s = (Slot*)&slots[side][b];
-            if (s->state != FX_PENDING) {
+            /* Both PENDING and ERROR converge back to IDLE once the bus
+             * agrees with what was asked for. Previously only PENDING was
+             * considered, so a slot that had timed out stayed red for as long
+             * as the panel was up — even after the channel reached the
+             * requested state — until the user pressed that button again. */
+            if (s->state != FX_PENDING && s->state != FX_ERROR) {
                 continue;
             }
             if ((channels & s->expected_mask) == s->expected_value) {

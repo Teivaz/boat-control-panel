@@ -1,0 +1,146 @@
+#!/usr/bin/env python3
+"""Drive a button scenario and check the resulting LED effects.
+
+Injects button presses with tools/inspector (a real I2C master) while
+capturing the bus with tools/i2csniff, then decodes the button_effect frames
+board 3 sends so the expected LED state is asserted rather than eyeballed.
+
+    ./buttontest power             press Power, expect L0 solid white
+    ./buttontest relay L2          press L2 (autopilot), expect L2 solid white
+    ./buttontest relay L1          press L1 (instruments, disconnected)
+                                   -- expect L1 flashing red after the timeout
+    ./buttontest watch 10          just watch for 10 s and decode what is sent
+
+Bench wiring assumption for the "expected" column: autopilot is wired to
+power (so its channel reads voltage), instruments is left disconnected (so
+its channel never does).
+"""
+
+import argparse
+import re
+import subprocess
+import sys
+import os
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+INSPECTOR = os.path.join(HERE, "..", "inspector", "inspector")
+SNIFF = os.path.join(HERE, "i2csniff")
+
+# Button board L outputs, in the order controller.c's left_actions maps them.
+L_BUTTONS = {
+    0: "L0 power",
+    1: "L1 instruments",
+    2: "L2 autopilot",
+    3: "L3 nav steaming",
+    4: "L4 nav running",
+    5: "L5 nav anchoring",
+    6: "L6 inverter",
+}
+
+MODES = {0: "off", 1: "solid", 2: "flashing", 3: "pulsing"}
+COLORS = {0: "white", 1: "red", 2: "green", 3: "blue"}
+
+
+def decode_effect(payload):
+    """CommButtonEffect wire order is outputs_76, 54, 32, 10; each byte packs
+    two outputs, high nibble = odd output. Each nibble is CCMM."""
+    if len(payload) < 4:
+        return None
+    outputs = {}
+    for byte, (hi, lo) in zip(payload[:4], [(7, 6), (5, 4), (3, 2), (1, 0)]):
+        for idx, nib in ((lo, byte & 0x0F), (hi, (byte >> 4) & 0x0F)):
+            mode = nib & 0x03
+            color = (nib >> 2) & 0x03
+            outputs[idx] = (MODES[mode], COLORS[color])
+    return outputs
+
+
+def render(outputs):
+    lines = []
+    for idx in sorted(L_BUTTONS):
+        mode, color = outputs.get(idx, ("?", "?"))
+        state = "dark" if mode == "off" else f"{mode} {color}"
+        lines.append(f"    {L_BUTTONS[idx]:<18} {state}")
+    return "\n".join(lines)
+
+
+def run(cmd, retries=40):
+    """The CP2112 bridge drops commands intermittently — a single attempt
+    silently does nothing and the test then reports 'no frames', which reads
+    as a firmware fault rather than a tooling one. Retry until the command
+    actually reaches the bus."""
+    for attempt in range(1, retries + 1):
+        out = subprocess.run(cmd, capture_output=True, text=True)
+        blob = out.stdout + out.stderr
+        if "usb error" not in blob and "no I2C bridge" not in blob:
+            if attempt > 1:
+                print(f"  (bridge needed {attempt} attempts)", file=sys.stderr)
+            return blob
+    sys.exit("inspector could not reach the bus after "
+             f"{retries} attempts — replug the CP2112")
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Button behaviour test")
+    ap.add_argument("action", choices=["power", "relay", "watch"])
+    ap.add_argument("target", nargs="?", default="10",
+                    help="button (e.g. L2) for 'relay', or seconds for 'watch'")
+    ap.add_argument("-t", "--seconds", type=float, default=12.0)
+    args = ap.parse_args()
+
+    press = None
+    if args.action == "power":
+        press = ("l", "0")
+    elif args.action == "relay":
+        m = re.fullmatch(r"[lL](\d)", args.target)
+        if not m:
+            sys.exit("relay target must look like L2")
+        press = ("l", m.group(1))
+    else:
+        args.seconds = float(args.target)
+
+    # Capture across the whole scenario: the press, the relay write, the
+    # channel confirmation, and the button_effect that follows.
+    sniff = subprocess.Popen([SNIFF, "-t", str(args.seconds), "-r", "2m", "--raw"],
+                             stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
+    if press:
+        side, idx = press
+        print(f"pressing {side.upper()}{idx} ...", file=sys.stderr)
+        run([INSPECTOR, "main", "button", side, idx, "1", "change"])
+    out, _ = sniff.communicate()
+
+    # Pull every button_effect frame board 3 sent to the L board, in order.
+    frames = []
+    cur, addr = [], None
+    for line in out.splitlines():
+        m = re.match(r"^i2c-1:\s+Address write: ([0-9A-F]{2})", line)
+        if m:
+            addr, cur = int(m.group(1), 16), []
+            continue
+        m = re.match(r"^i2c-1:\s+Data write: ([0-9A-F]{2})", line)
+        if m and addr is not None:
+            cur.append(int(m.group(1), 16))
+            continue
+        if line.strip().endswith("Stop") and addr == 0x44 and cur and cur[0] == 0x01:
+            frames.append(cur[1:-1])  # strip command id and CRC
+            addr, cur = None, []
+
+    if not frames:
+        print("no button_effect frames seen — board 3 sent no LED update.")
+        print("If a press was injected, the press path is broken; if not, the")
+        print("LEDs were already in the requested state (no diff to send).")
+        return
+
+    print(f"\n{len(frames)} button_effect frame(s) to the L board; final state:\n")
+    outputs = decode_effect(frames[-1])
+    if outputs:
+        print(render(outputs))
+    print("\nexpected, per the bench wiring:")
+    print("    channel off               dark")
+    print("    channel turning on        pulsing white")
+    print("    on, voltage present       solid white")
+    print("    on, no voltage read       flashing red")
+
+
+if __name__ == "__main__":
+    main()

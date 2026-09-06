@@ -542,6 +542,13 @@ static void retry_task(TaskId id, void* ctx) {
         if (++power_pending_ticks >= POWER_PENDING_TIMEOUT_TICKS) {
             power_state = PWR_ERROR;
             power_pending_ticks = 0;
+        } else {
+            /* Ask for the confirmation rather than waiting for the channel
+             * poll: while the panel is off that poll runs at 5 s, which is
+             * longer than this 2 s deadline, and the switching board has
+             * nothing to push when the channel is already in the commanded
+             * state. Without this the power button times out to PWR_ERROR. */
+            comm_send_channel_state_read();
         }
     }
 
