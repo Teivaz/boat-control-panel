@@ -31,6 +31,12 @@ BOARDS = {
     0x68: "rtc",
 }
 
+# Addresses that speak libcomm. The DS3231 at 0x68 is a plain I2C device with
+# its own register map, so libcomm's command names and trailing-CRC framing do
+# not apply to it — checking them there produced a permanent, meaningless
+# "crc:BAD" on every RTC read.
+LIBCOMM_ADDRS = {0x40, 0x42, 0x44, 0x45, 0x46, 0x47}
+
 # Command id -> (name, payload length of the *request* frame body).  Mirrors
 # expected_body_len() in libcomm/libcomm.c; read commands (MSB set) carry a
 # request body of 0 unless they select something.
@@ -161,12 +167,15 @@ def describe(txn):
     cmd_id = write["bytes"][0] if write["bytes"] else None
     name = COMMANDS.get(cmd_id, f"0x{cmd_id:02X}" if cmd_id is not None else "?")
 
+    libcomm = write["addr"] in LIBCOMM_ADDRS
+    if not libcomm:
+        name = "(raw i2c)"
     parts.append(f"{board(write['addr']):>5} {name:<20}")
     parts.append("W[" + " ".join(f"{b:02X}" for b in write["bytes"]) + "]")
 
     # Request framing: id + body + CRC.  Flag a bad CRC outright — it means
     # the receiver will drop the frame in comm_can_parse.
-    if len(write["bytes"]) >= 2:
+    if libcomm and len(write["bytes"]) >= 2:
         body, sent = write["bytes"][:-1], write["bytes"][-1]
         parts.append("crc:ok " if crc8(body) == sent else "crc:BAD")
     else:
@@ -176,7 +185,7 @@ def describe(txn):
 
     if read:
         parts.append("R[" + " ".join(f"{b:02X}" for b in read["bytes"]) + "]")
-        if len(read["bytes"]) >= 2:
+        if libcomm and len(read["bytes"]) >= 2:
             body, sent = read["bytes"][:-1], read["bytes"][-1]
             parts.append("crc:ok" if crc8(body) == sent else "crc:BAD")
         elif not read["bytes"]:

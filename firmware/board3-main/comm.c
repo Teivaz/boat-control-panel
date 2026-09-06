@@ -66,8 +66,13 @@ void comm_on_button_state_read_requested(void) {
 void comm_on_button_trigger_read_requested(uint8_t button_id) {
     (void)button_id;
 }
+/* Serve the main board's own config over the protocol, as boards 1 and 2 do.
+ * This was an empty stub, so it never staged a response and every config_read
+ * addressed to the main board came back empty — the nav-enabled mask and even
+ * the universal device-id / revision bytes were unreadable over the bus. */
 void comm_on_config_read_requested(uint8_t address) {
-    (void)address;
+    uint8_t v = config_read_byte(address);
+    comm_respond(&v, 1);
 }
 void comm_on_relay_state_read_requested(void) {
 }

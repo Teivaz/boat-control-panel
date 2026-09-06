@@ -209,6 +209,18 @@ void controller_init(TaskController* ctrl) {
     task_controller_add(ctrl, TASK_POLL_LEVELS, POLL_TICK_MS, poll_levels_task, 0);
     task_controller_add(ctrl, TASK_POLL_SENSORS, POLL_TICK_MS, poll_sensors_task, 0);
     task_controller_add(ctrl, TASK_POLL_CHANNELS, POLL_TICK_MS, poll_channels_task, 0);
+    /* RTC polling stays off, and not for want of hardware: the DS3231 is
+     * fitted and answers correctly (register 0 returns live, incrementing
+     * BCD time on the analyser, and rtc_valid goes to 1). Enabling this task
+     * resets the board within a few button presses — verified with a
+     * pass-count breakpoint on controller_init.
+     *
+     * It is the third call path to do that: the wholesale wip button_fx port
+     * and a per-button fan-out from recompute_target both did the same. This
+     * firmware sits at 22 of the PIC18's 31 hardware stack levels before any
+     * of the five interrupt vectors nest on top, so adding main-context depth
+     * appears to overflow it (STVREN then resets). Re-enable only after that
+     * headroom is understood — the clock display stays frozen until then. */
     // task_controller_add(ctrl, TASK_POLL_RTC, RTC_TICK_MS, poll_rtc_task, 0);
 }
 
