@@ -379,40 +379,43 @@ uint8_t controller_sensors_stale(void) {
     return sensors_age >= STALE_THRESHOLD;
 }
 
-uint8_t controller_button_base_on(uint8_t side, uint8_t button_idx) {
-    /* Buttons per-side are 0..6. */
-    if (button_idx >= 7) {
-        return 0;
-    }
-
-    const ButtonAction* table = 0;
-    if (side == 0) {
-        table = left_actions;
-    } else if (side == 1) {
-        table = right_actions;
-    } else {
-        return 0;
-    }
-
-    const ButtonAction* action = &table[button_idx];
-    switch (action->kind) {
-        case ACTION_TOGGLE_POWER:
-            return (uint8_t)(power_state == PWR_ON);
-        case ACTION_TOGGLE_RELAY: {
-            uint16_t bit = (uint16_t)(1u << action->param);
-            return (uint8_t)((relay_target & bit) != 0);
-        }
-        case ACTION_TOGGLE_NAV_MODE:
-            return (uint8_t)(nav_mode == action->param);
-        default:
-            return 0;
-    }
-}
-
 /* ============================================================================
  * Action logic
  * ============================================================================
  */
+
+/* Channel mask a button's light should track, derived from the same action
+ * tables the press dispatch uses, so the button-to-channel mapping exists in
+ * one place rather than a parallel hand-written list.
+ *
+ * The three nav buttons are compound: each owns the whole nav-light group,
+ * but only while its own mode is selected. An unselected nav button reports
+ * mask 0, which button_fx renders as dark and never as an error; the selected
+ * one tracks every nav channel, so its feedback follows the lights actually
+ * energised rather than the button that was pressed. */
+uint16_t controller_button_channel_mask(uint8_t side, uint8_t idx) {
+    if (idx >= 7) {
+        return 0;
+    }
+    const ButtonAction* a;
+    if (side == 0) {
+        a = &left_actions[idx];
+    } else if (side == 1) {
+        a = &right_actions[idx];
+    } else {
+        return 0;
+    }
+    switch (a->kind) {
+        case ACTION_TOGGLE_POWER:
+            return (uint16_t)(1u << RELAY_MAIN);
+        case ACTION_TOGGLE_RELAY:
+            return (uint16_t)(1u << a->param);
+        case ACTION_TOGGLE_NAV_MODE:
+            return (nav_mode == a->param) ? NAV_MASK_BITS : 0;
+        default:
+            return 0;
+    }
+}
 
 static ActionEffect apply_action(const ButtonAction* a) {
     ActionEffect eff = {0, 0};

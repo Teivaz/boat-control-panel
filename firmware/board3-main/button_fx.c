@@ -81,24 +81,36 @@ void button_fx_clear(uint8_t side, uint8_t idx) {
     slots[side][idx].expected_value = 0;
 }
 
-void button_fx_notify_press(uint8_t side, uint8_t idx, uint16_t mask, uint16_t value) {
-    if (side >= BUTTON_FX_SIDES || idx >= BUTTON_FX_BUTTONS_PER_SIDE) {
+/* Record what `side`/`idx` should converge to. Shared by the press fast-path
+ * and the periodic pull in refresh_task, and idempotent: an unchanged
+ * expectation leaves the slot alone, so re-asserting it every tick neither
+ * restarts a pending deadline nor clears a legitimate error. */
+static void track(uint8_t side, uint8_t idx, uint16_t mask, uint16_t value) {
+    Slot* s = (Slot*)&slots[side][idx];
+    uint16_t v = (uint16_t)(value & mask);
+    if (s->expected_mask == mask && s->expected_value == v) {
         return;
     }
-    Slot* s = (Slot*)&slots[side][idx];
     s->expected_mask = mask;
-    s->expected_value = (uint16_t)(value & mask);
+    s->expected_value = v;
     /* Switching off transitions instantly, and the fast path covers the case
      * where the bus already shows the requested state — neither has anything
      * to wait for, and pending on them only created a deadline that could
      * expire into a spurious red. */
-    if (s->expected_value == 0 || (last_channels & mask) == s->expected_value) {
+    if (v == 0 || (last_channels & mask) == v) {
         s->state = FX_IDLE;
         s->deadline_ticks = 0;
     } else {
         s->state = FX_PENDING;
         s->deadline_ticks = (uint8_t)(TIMEOUT_MS / TICK_MS);
     }
+}
+
+void button_fx_notify_press(uint8_t side, uint8_t idx, uint16_t mask, uint16_t value) {
+    if (side >= BUTTON_FX_SIDES || idx >= BUTTON_FX_BUTTONS_PER_SIDE) {
+        return;
+    }
+    track(side, idx, mask, value);
 }
 
 void button_fx_on_channel_state(uint16_t channels) {
@@ -148,8 +160,9 @@ static void build_side_effect(uint8_t side, CommButtonEffect* out) {
             fx.mode = COMM_EFFECT_MODE_PULSATING;
             fx.color = COMM_EFFECT_COLOR_WHITE;
         } else {
+            const Slot* s = (const Slot*)&slots[side][b];
             fx.color = COMM_EFFECT_COLOR_WHITE;
-            fx.mode = controller_button_base_on(side, b) ? COMM_EFFECT_MODE_ENABLED : COMM_EFFECT_MODE_DISABLED;
+            fx.mode = (s->expected_mask & s->expected_value) ? COMM_EFFECT_MODE_ENABLED : COMM_EFFECT_MODE_DISABLED;
         }
         (void)comm_button_effect_set(out, b, fx);
     }
@@ -158,6 +171,19 @@ static void build_side_effect(uint8_t side, CommButtonEffect* out) {
 static void refresh_task(TaskId id, void* ctx) {
     (void)id;
     (void)ctx;
+
+    /* Refresh every button's expectation from the commanded relay target.
+     * Pulling here rather than only on press is what lets an untouched button
+     * show a fault — a channel that loses voltage on its own now goes red —
+     * and it keeps the compound nav buttons following the lights actually
+     * energised. Pulling from this task rather than pushing from
+     * recompute_target keeps it off the deep inbound-message call chain. */
+    const uint16_t target = controller_relay_target();
+    for (uint8_t side = 0; side < BUTTON_FX_SIDES; side++) {
+        for (uint8_t b = 0; b < BUTTON_FX_BUTTONS_PER_SIDE; b++) {
+            track(side, b, controller_button_channel_mask(side, b), target);
+        }
+    }
 
     /* Age any pending slot towards the error state. The read-modify-write on
      * s->state must be atomic against on_channel_state, which can transition

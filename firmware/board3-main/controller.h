@@ -32,6 +32,11 @@ void controller_on_sensors_response(const CommSensors* sensors);
 void controller_on_channel_state_response(const CommChannelState* state);
 void controller_on_config_read_response(const uint8_t* value);
 
+/* Channel mask a button's feedback tracks (0 = not mapped, render dark).
+ * button_fx pulls this each tick rather than the controller pushing it, which
+ * keeps it off the deep inbound-message call chain. */
+uint16_t controller_button_channel_mask(uint8_t side, uint8_t idx);
+
 /* State queries for UI / display layers. */
 uint8_t controller_power_on(void);
 NavMode controller_nav_mode(void);
@@ -51,8 +56,6 @@ uint8_t controller_sensors(void);
 uint8_t controller_battery_stale(void);
 uint8_t controller_levels_stale(void);
 uint8_t controller_sensors_stale(void);
-
-uint8_t controller_button_base_on(uint8_t side, uint8_t button_idx);
 
 /* Last time read from the DS3231. Returns 1 if the shadow has been
  * populated by at least one successful poll, 0 otherwise. */
